@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'Plate.dart';
 import 'store_page_detail.dart';
-
 
 void main() {
   runApp(StorePage_Run());
@@ -48,6 +48,15 @@ class _StorePageState extends State<StorePage> {
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              // Status bar color
+              statusBarColor: Colors.white,
+
+              // Status bar brightness (optional)
+              statusBarIconBrightness:
+                  Brightness.dark, // For Android (dark icons)
+              statusBarBrightness: Brightness.light, // For iOS (dark icons)
+            ),
             leading: Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(
@@ -163,7 +172,6 @@ class _StorePageState extends State<StorePage> {
                                           "assets/images/dot.png",
                                         ),
                                         color: Colors.black,
-               
                                       ),
                                     ),
                                   ],
@@ -183,11 +191,7 @@ class _StorePageState extends State<StorePage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0)),
                         child: InkWell(
-                          onTap: () {
-
-
-                          
-                          },
+                          onTap: () {},
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

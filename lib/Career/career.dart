@@ -38,15 +38,15 @@ class _CareerState extends State<Career> {
             appBarTheme: AppBarTheme(color: Palette.kToDark)),
         home: Scaffold(
           appBar: AppBar(
-            //    systemOverlayStyle: SystemUiOverlayStyle(
-            //   // Status bar color
-            //   statusBarColor: Palette.kToDark,
+               systemOverlayStyle: SystemUiOverlayStyle(
+              // Status bar color
+              statusBarColor: Palette.kToDark,
 
-            //   // Status bar brightness (optional)
-            //   statusBarIconBrightness:
-            //       Brightness.dark, // For Android (dark icons)
-            //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
-            // ),
+              // Status bar brightness (optional)
+              statusBarIconBrightness:
+                  Brightness.dark, // For Android (dark icons)
+              statusBarBrightness: Brightness.light, // For iOS (dark icons)
+            ),
             backgroundColor: Palette.kToDark,
             elevation: 0,
             title: InkWell(

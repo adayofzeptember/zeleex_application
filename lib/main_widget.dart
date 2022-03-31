@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:zeleex_application/cart.dart';
@@ -35,6 +36,15 @@ class _Main_WidgetState extends State<Main_Widget> {
         ),
         home: Scaffold(
           appBar: AppBar(
+                        systemOverlayStyle: SystemUiOverlayStyle(
+              // Status bar color
+              statusBarColor: Palette.kToDark,
+
+              // Status bar brightness (optional)
+              statusBarIconBrightness:
+                  Brightness.dark, // For Android (dark icons)
+              statusBarBrightness: Brightness.light, // For iOS (dark icons)
+            ),
               leading: Builder(
                 builder: (context) => IconButton(
                   icon: SizedBox(
