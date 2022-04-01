@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:zeleex_application/cart.dart';
+import 'package:zeleex_application/profile.dart';
 import 'Career/career.dart';
 import 'Plate.dart';
 import 'aboutus.dart';
@@ -36,15 +37,15 @@ class _Main_WidgetState extends State<Main_Widget> {
         ),
         home: Scaffold(
           appBar: AppBar(
-                        systemOverlayStyle: SystemUiOverlayStyle(
-              // Status bar color
-              statusBarColor: Palette.kToDark,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                // Status bar color
+                statusBarColor: Palette.kToDark,
 
-              // Status bar brightness (optional)
-              statusBarIconBrightness:
-                  Brightness.dark, // For Android (dark icons)
-              statusBarBrightness: Brightness.light, // For iOS (dark icons)
-            ),
+                // Status bar brightness (optional)
+                statusBarIconBrightness:
+                    Brightness.dark, // For Android (dark icons)
+                statusBarBrightness: Brightness.light, // For iOS (dark icons)
+              ),
               leading: Builder(
                 builder: (context) => IconButton(
                   icon: SizedBox(
@@ -566,12 +567,21 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text(
-                                        "ดูโปรไฟล์",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 165, 162, 162),
-                                            fontFamily: 'Kanit'),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProfilePage()));
+                                        },
+                                        child: Text(
+                                          "ดูโปรไฟล์",
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 165, 162, 162),
+                                              fontFamily: 'Kanit'),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -802,7 +812,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                                 ),
                               ],
                             ),
-                            
                           ),
                         ],
                       ),

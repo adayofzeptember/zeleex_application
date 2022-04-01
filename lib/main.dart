@@ -8,12 +8,8 @@ void main() {
   runApp(const First_Page());
 }
 
-
-
 class First_Page extends StatelessWidget {
-  
   const First_Page({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +17,6 @@ class First_Page extends StatelessWidget {
       home: main_Icon(),
     );
   }
-  
 }
 
 class main_Icon extends StatelessWidget {

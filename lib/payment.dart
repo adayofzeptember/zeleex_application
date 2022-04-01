@@ -197,7 +197,8 @@ class _Payment_widgetState extends State<Payment_widget> {
                                         ))
                                   ],
                                 ),
-                              )),
+                              ))
+                              ,
                         ),
                         SizedBox(
                           height: 20,

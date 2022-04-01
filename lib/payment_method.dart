@@ -236,7 +236,6 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
                               SvgPicture.asset(
                                 'assets/images/banks.svg',
                               ),
-
                               SizedBox(
                                 width: 10,
                               ),
@@ -290,7 +289,7 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
                           ),
                           Row(
                             children: [
-                                                            Image.asset('assets/images/bankapp.png'),
+                              Image.asset('assets/images/bankapp.png'),
 
                               // SvgPicture.asset(
                               //   'assets/images/banks.svg',
