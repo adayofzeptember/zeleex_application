@@ -49,13 +49,7 @@ class _StorePageState extends State<StorePage> {
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
-              // Status bar color
               statusBarColor: Colors.white,
-
-              // Status bar brightness (optional)
-              statusBarIconBrightness:
-                  Brightness.dark, // For Android (dark icons)
-              statusBarBrightness: Brightness.light, // For iOS (dark icons)
             ),
             leading: Builder(
               builder: (context) => IconButton(

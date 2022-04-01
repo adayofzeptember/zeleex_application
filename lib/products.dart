@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
@@ -46,6 +47,9 @@ class _pd_widgetState extends State<pd_widget> {
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+            ),
             leading: Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(

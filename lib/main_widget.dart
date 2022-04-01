@@ -141,9 +141,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                             decoration: BoxDecoration(
                                 color: Color.fromARGB(249, 255, 255, 255)),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(0.0),
                               child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
+                                  padding: const EdgeInsets.all(0.0),
                                   child: Column(
                                     children: [
                                       Row(
@@ -154,8 +154,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                              20,
-                                              0,
+                                              10,
+                                              10,
                                               0,
                                               0,
                                             ),
@@ -168,19 +168,23 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   fontSize: 20),
                                             ),
                                           ),
-                                          Container(
-                                            padding: EdgeInsets.all(15.0),
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF10C19F),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                            ),
-                                            child: Text(
-                                              "ดูทั้งหมด",
-                                              style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      255, 255, 255, 1)),
-                                              textAlign: TextAlign.center,
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 10, 10, 0),
+                                            child: Container(
+                                              padding: EdgeInsets.all(10.0),
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFF10C19F),
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                              ),
+                                              child: Text(
+                                                "ดูทั้งหมด",
+                                                style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        255, 255, 255, 1)),
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
                                           )
                                         ],
@@ -323,6 +327,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 10,
+                                      )
                                     ],
                                   )),
                             ),
@@ -334,9 +341,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                             decoration: BoxDecoration(
                                 color: Color.fromARGB(249, 255, 255, 255)),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(0.0),
                               child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
+                                  padding: const EdgeInsets.all(0.0),
                                   child: Column(
                                     children: [
                                       Row(
@@ -347,8 +354,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                              20,
-                                              0,
+                                              10,
+                                              10,
                                               0,
                                               0,
                                             ),
@@ -361,23 +368,28 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   fontSize: 20),
                                             ),
                                           ),
-                                          Container(
-                                            padding: EdgeInsets.all(15.0),
-                                            decoration: BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 16, 193, 159),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                            ),
-                                            child: Text(
-                                              "ดูทั้งหมด",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                              textAlign: TextAlign.center,
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 10, 10, 0),
+                                            child: Container(
+                                              padding: EdgeInsets.all(10.0),
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFF10C19F),
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                              ),
+                                              child: Text(
+                                                "ดูทั้งหมด",
+                                                style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        255, 255, 255, 1)),
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
                                           )
                                         ],
                                       ),
+                                      // in cloumn
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -386,9 +398,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         child: SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
-                                            // main axis (rows or columns)
+                                            //main axis (rows or columns)
+
                                             // crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
+                                            children: [
                                               Card(
                                                 child: Padding(
                                                   padding:
@@ -410,7 +423,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        "Product 1",
+                                                        "Cattles1",
                                                       ),
                                                       SizedBox(
                                                         height: 3,
@@ -450,7 +463,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        "Product 2",
+                                                        "Cattles2",
                                                       ),
                                                       SizedBox(
                                                         height: 3,
@@ -484,19 +497,20 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                 Radius.circular(
                                                                     5)),
                                                         child: Image.asset(
-                                                            'assets/images/pd2.png'),
+                                                          'assets/images/pd3.png',
+                                                        ),
                                                       ),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        "Product 3",
+                                                        "Cattles3",
                                                       ),
                                                       SizedBox(
                                                         height: 3,
                                                       ),
                                                       Text(
-                                                        "฿ 250",
+                                                        "฿ 90",
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -513,6 +527,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 10,
+                                      )
                                     ],
                                   )),
                             ),

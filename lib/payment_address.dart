@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'Plate.dart';
-import 'package:js/js.dart';
 
 import 'address_edit.dart';
 import 'payment.dart';
