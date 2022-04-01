@@ -15,8 +15,6 @@ class PaymentMethodPage extends StatelessWidget {
     return MaterialApp(
       home: PaymentMethod_widget(),
     );
-
-    
   }
 }
 
@@ -44,7 +42,7 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
             children: [
               InkWell(
                 onTap: () {
-                   Navigator.pushReplacement(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => PaymentPage(),
@@ -127,6 +125,10 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
                           ),
                           Row(
                             children: [
+                              //  SvgPicture.asset(
+                              //   'assets/images/visa.svg',
+                              //   width: 40,
+                              // ),
                               Image.asset('assets/images/visagroup.png'),
                               SizedBox(
                                 width: 10,
@@ -234,6 +236,7 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
                               SvgPicture.asset(
                                 'assets/images/banks.svg',
                               ),
+
                               SizedBox(
                                 width: 10,
                               ),
@@ -247,9 +250,7 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
                       )),
                 ),
               ),
-
-
-                 Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: InkWell(
                   onTap: () {},
@@ -289,9 +290,11 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
                           ),
                           Row(
                             children: [
-                              SvgPicture.asset(
-                                'assets/images/banks.svg',
-                              ),
+                                                            Image.asset('assets/images/bankapp.png'),
+
+                              // SvgPicture.asset(
+                              //   'assets/images/banks.svg',
+                              // ),
                               SizedBox(
                                 width: 10,
                               ),

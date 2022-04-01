@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/payment_confirm.dart';
 import 'Plate.dart';
 import 'cart.dart';
 import 'payment_address.dart';
 import 'payment_method.dart';
-
 
 void main(List<String> args) {
   runApp(PaymentPage());
@@ -15,8 +15,6 @@ class PaymentPage extends StatelessWidget {
   const PaymentPage({Key? key}) : super(key: key);
 
   @override
-
-  
   Widget build(BuildContext context) {
     return MaterialApp(home: Payment_widget());
   }
@@ -1102,7 +1100,12 @@ class _Payment_widgetState extends State<Payment_widget> {
                             ),
                             InkWell(
                               onTap: () {
-                                print("object");
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentConfirmPage(),
+                                  ),
+                                );
                               },
                               child: Container(
                                 // alignment: Alignment.center,

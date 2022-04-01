@@ -87,6 +87,7 @@ class _CareerState extends State<Career> {
               0,
             ),
             child: Column(
+              
               children: [
                 Row(
                   children: [
