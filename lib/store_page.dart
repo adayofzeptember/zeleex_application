@@ -78,7 +78,7 @@ class _StorePageState extends State<StorePage> {
                 ),
                 Text(
                   "ร้านค้า",
-                  style: TextStyle(color: Palette.kToDark),
+                  style: TextStyle(color: Palette.kToDark,fontWeight: FontWeight.bold),
                 ),
                 Container(
                   child: Row(
@@ -96,477 +96,496 @@ class _StorePageState extends State<StorePage> {
               ],
             )),
         body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                Wrap(
-                  spacing: 4.0,
-                  runSpacing: 8.0,
-                  children: <Widget>[
-                    Container(
-                      width: 190,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => StoreDetailPage(),
-                                ));
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => mainPage(),
-                            //   ),
-                            // );
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5)),
-                                  child: Image.asset(
-                                    'assets/images/store1.png',
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                child: Text(
-                                  "ศรีไพศาลอาหารสัตว์",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                child: Row(
+          child: Column(
+            children: [
+      
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+                child: Wrap(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "assets/images/store_pin.png",
-                                      ),
-                                      color: Palette.kToDark,
-                                    ),
                                     Container(
-                                      width: 100,
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: Image.asset(
+                                            'assets/images/store1.png',
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 5, 0, 0),
                                       child: Text(
-                                        "จ.สุราษฎ์ธานี",
-                                        style:
-                                            TextStyle(color: Palette.kToDark),
+                                        "ศรีไพศาลอาหารสัตว์",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51)),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dot.png",
-                                        ),
-                                        color: Colors.black,
+                                          15, 0, 10, 0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/pinstore.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "จ. จันทบุรี",
+                                              style: TextStyle(
+                                                  color: Palette.kToDark),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
+                                    SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/star.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text("5.0")
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 8,
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: Image.asset(
+                                            'assets/images/store2.png',
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 5, 0, 0),
+                                      child: Text(
+                                        "โกศินการเกษตร",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51)),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 0, 10, 0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/pinstore.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "จ. เชียงใหม่",
+                                              style: TextStyle(
+                                                  color: Palette.kToDark),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/star.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text("5.0")
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      width: 190,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5)),
-                                  child: Image.asset(
-                                    'assets/images/store2.png',
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                child: Text(
-                                  "โกสินทร์ การเกษตร",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                child: Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "assets/images/store_pin.png",
-                                      ),
-                                      color: Palette.kToDark,
-                                    ),
                                     Container(
-                                      width: 100,
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: Image.asset(
+                                            'assets/images/store3.png',
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 5, 0, 0),
                                       child: Text(
-                                        "จ.เชียงใหม่",
-                                        style:
-                                            TextStyle(color: Palette.kToDark),
+                                        "บริษัท นิวเจนแมน จำกัด",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51)),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dot.png",
-                                        ),
-                                        color: Colors.black,
+                                          15, 0, 10, 0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/pinstore.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "จ. นครราชสีมา",
+                                              style: TextStyle(
+                                                  color: Palette.kToDark),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
+                                    SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/star.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text("5.0")
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 8,
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: Image.asset(
+                                            'assets/images/store4.png',
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 5, 0, 0),
+                                      child: Text(
+                                        "บีม Pet SHop",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51)),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 0, 10, 0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/pinstore.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "จ. เชียงใหม่",
+                                              style: TextStyle(
+                                                  color: Palette.kToDark),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/star.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text("5.0")
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      width: 190,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5)),
-                                  child: Image.asset(
-                                    'assets/images/store3.png',
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                child: Text(
-                                  "บริษัท นิวเจนแมน",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                child: Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "assets/images/store_pin.png",
-                                      ),
-                                      color: Palette.kToDark,
-                                    ),
                                     Container(
-                                      width: 100,
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: Image.asset(
+                                            'assets/images/store5.png',
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 5, 0, 0),
                                       child: Text(
-                                        "จ.นครราชสีมา",
-                                        style:
-                                            TextStyle(color: Palette.kToDark),
+                                        "บริษัท นิวเจนแมน จำกัด",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51)),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dot.png",
-                                        ),
-                                        color: Colors.black,
+                                          15, 0, 10, 0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/pinstore.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "จ. นครราชสีมา",
+                                              style: TextStyle(
+                                                  color: Palette.kToDark),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
+                                    SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/star.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text("5.0")
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 8,
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      width: 190,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5)),
-                                  child: Image.asset(
-                                    'assets/images/store4.png',
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                child: Text(
-                                  "บีมเพ็ทช็อป",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                child: Row(
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "assets/images/store_pin.png",
-                                      ),
-                                      color: Palette.kToDark,
-                                    ),
                                     Container(
-                                      width: 100,
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: Image.asset(
+                                            'assets/images/store6.png',
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          15, 5, 0, 0),
                                       child: Text(
-                                        "จ.จันทบุรี",
-                                        style:
-                                            TextStyle(color: Palette.kToDark),
+                                        "เชียงพัง การเกษตร  ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51)),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dot.png",
-                                        ),
-                                        color: Colors.black,
+                                          15, 0, 10, 0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/pinstore.svg'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "จ. อุดรธานี",
+                                              style: TextStyle(
+                                                  color: Palette.kToDark),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 190,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5)),
-                                  child: Image.asset(
-                                    'assets/images/store5.png',
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                child: Text(
-                                  "จั๋งดุ๋ การเกษตร",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                child: Row(
-                                  children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "assets/images/store_pin.png",
-                                      ),
-                                      color: Palette.kToDark,
-                                    ),
-                                    Container(
-                                      width: 100,
-                                      child: Text(
-                                        "จ.นนทบุรี",
-                                        style:
-                                            TextStyle(color: Palette.kToDark),
-                                      ),
-                                    ),
+                                    SizedBox(height: 5),
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dot.png",
-                                        ),
-                                        color: Colors.black,
+                                      padding: const EdgeInsets.only(right: 0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/newstore.svg'),
+                                        ],
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 8,
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      width: 190,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5)),
-                                  child: Image.asset(
-                                    'assets/images/store6.png',
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                child: Text(
-                                  "เชียงพังการเกษตร",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                child: Row(
-                                  children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "assets/images/store_pin.png",
-                                      ),
-                                      color: Palette.kToDark,
-                                    ),
-                                    Container(
-                                      width: 100,
-                                      child: Text(
-                                        "จ.อุดรธานี",
-                                        style:
-                                            TextStyle(color: Palette.kToDark),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dot.png",
-                                        ),
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 190,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(5)),
-                                  child: Image.asset(
-                                    'assets/images/store4.png',
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                child: Text(
-                                  "บีมเพ็ทช็อป",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                child: Row(
-                                  children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "assets/images/store_pin.png",
-                                      ),
-                                      color: Palette.kToDark,
-                                    ),
-                                    Container(
-                                      width: 100,
-                                      child: Text(
-                                        "จ.จันทบุรี",
-                                        style:
-                                            TextStyle(color: Palette.kToDark),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dot.png",
-                                        ),
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
         drawer: Theme(

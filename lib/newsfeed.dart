@@ -77,7 +77,7 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
                 ),
                 Text(
                   "นิวส์ฟีด",
-                  style: TextStyle(color: Palette.kToDark),
+                  style: TextStyle(color: Palette.kToDark, fontWeight: FontWeight.bold),
                 ),
                 Container(
                   child: Row(
@@ -96,7 +96,7 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
             )),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(5,5,5,25),
             child: Column(
               children: [
                 Container(

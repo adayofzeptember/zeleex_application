@@ -88,7 +88,7 @@ class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
             )),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.fromLTRB(5,5,5,20),
             child: Column(
               children: [
                 Container(
@@ -174,7 +174,10 @@ class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
                               "กรวัฒน์ วีนิล",
                               textAlign: TextAlign.start,
                               style: TextStyle(fontWeight: FontWeight.bold),
-                            )
+                            ),
+                              SizedBox(
+                              height: 10,
+                            ),
                           ],
                         ),
                       )

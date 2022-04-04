@@ -97,13 +97,15 @@ class _Main_PageState extends State<Main_Page> {
         home: Scaffold(
           body: _widgetsPages.elementAt(_index),
           bottomNavigationBar: Container(
-            height: 90,
+            height: 80,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30), topLeft: Radius.circular(30)),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+                    color: Color.fromARGB(52, 0, 0, 0),
+                    spreadRadius: 0,
+                    blurRadius: 10),
               ],
             ),
             child: ClipRRect(

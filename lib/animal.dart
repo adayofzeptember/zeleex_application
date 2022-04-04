@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'Plate.dart';
+
+
 void main(List<String> args) {
   runApp(Animals_Page());
 }
@@ -17,7 +18,6 @@ class Animals_Page extends StatelessWidget {
     );
   }
 }
-
 
 class animals_widget extends StatefulWidget {
   animals_widget({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class _animals_widgetState extends State<animals_widget> {
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
+            systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.white,
             ),
             leading: Builder(
@@ -73,7 +73,8 @@ class _animals_widgetState extends State<animals_widget> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: Text("สัตว์", style: TextStyle(color: Palette.kToDark)),
+                  child:
+                      Text("สัตว์", style: TextStyle(fontWeight: FontWeight.bold,color: Palette.kToDark)),
                 ),
                 Container(
                   child: Row(
@@ -86,10 +87,7 @@ class _animals_widgetState extends State<animals_widget> {
                       SizedBox(
                         width: 10,
                       ),
-                      SvgPicture.asset(
-                        'assets/images/cart123.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
-                      )
+                 
                     ],
                   ),
                 )
@@ -99,7 +97,7 @@ class _animals_widgetState extends State<animals_widget> {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Container(
                 color: Colors.white,
@@ -171,133 +169,20 @@ class _animals_widgetState extends State<animals_widget> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: Column(
+      
+
+
+             Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+                child: Wrap(
                   children: [
-                    Wrap(
-                      spacing: 4.0,
-                      runSpacing: 8.0,
-                      children: <Widget>[
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/anm5.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: Color.fromARGB(
-                                              255, 130, 130, 130)),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 8900",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/anm2.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                        color: Color.fromARGB(255, 51, 51, 51),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 890",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 190,
-                          child: Card(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
                             child: Column(
@@ -351,10 +236,12 @@ class _animals_widgetState extends State<animals_widget> {
                               ],
                             ),
                           ),
+                          ),
                         ),
-                        Container(
-                          width: 190,
-                          child: Card(
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
                             child: Column(
@@ -365,7 +252,7 @@ class _animals_widgetState extends State<animals_widget> {
                                         topLeft: Radius.circular(5),
                                         topRight: Radius.circular(5)),
                                     child: Image.asset(
-                                      'assets/images/anm4.png',
+                                      'assets/images/anm2.png',
                                     )),
                                 Padding(
                                   padding:
@@ -374,9 +261,10 @@ class _animals_widgetState extends State<animals_widget> {
                                     child: Text(
                                       "จ้าวทศพล (YZ116) แบรนด์ดี",
                                       style: TextStyle(
-                                        color: Color.fromARGB(255, 51, 51, 51),
-                                        fontSize: 13,
-                                      ),
+                                          fontSize: 13,
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -388,10 +276,9 @@ class _animals_widgetState extends State<animals_widget> {
                                     child: Text(
                                       "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
                                       style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
-                                      ),
+                                          fontSize: 10,
+                                          color: Color.fromARGB(
+                                              255, 130, 130, 130)),
                                     ),
                                   ),
                                 ),
@@ -408,10 +295,76 @@ class _animals_widgetState extends State<animals_widget> {
                               ],
                             ),
                           ),
+                          ),
                         ),
-                        Container(
-                          width: 190,
-                          child: Card(
+                      ],
+                    ),
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        topRight: Radius.circular(5)),
+                                    child: Image.asset(
+                                      'assets/images/anm2.png',
+                                    )),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                  child: Container(
+                                    child: Text(
+                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                  child: Container(
+                                    height: 30,
+                                    child: Text(
+                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Color.fromARGB(
+                                              255, 130, 130, 130)),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                                    child: Text(
+                                      "฿ 890",
+                                      style: TextStyle(color: Colors.red),
+                                    )),
+                                SizedBox(
+                                  height: 8,
+                                )
+                              ],
+                            ),
+                          ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
                             child: Column(
@@ -446,10 +399,9 @@ class _animals_widgetState extends State<animals_widget> {
                                     child: Text(
                                       "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
                                       style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
-                                      ),
+                                          fontSize: 10,
+                                          color: Color.fromARGB(
+                                              255, 130, 130, 130)),
                                     ),
                                   ),
                                 ),
@@ -466,10 +418,17 @@ class _animals_widgetState extends State<animals_widget> {
                               ],
                             ),
                           ),
+                          ),
                         ),
-                        Container(
-                          width: 190,
-                          child: Card(
+                      ],
+                    ),
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
                             child: Column(
@@ -480,7 +439,7 @@ class _animals_widgetState extends State<animals_widget> {
                                         topLeft: Radius.circular(5),
                                         topRight: Radius.circular(5)),
                                     child: Image.asset(
-                                      'assets/images/anm2.png',
+                                      'assets/images/anm1.png',
                                     )),
                                 Padding(
                                   padding:
@@ -504,10 +463,9 @@ class _animals_widgetState extends State<animals_widget> {
                                     child: Text(
                                       "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
                                       style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
-                                      ),
+                                          fontSize: 10,
+                                          color: Color.fromARGB(
+                                              255, 130, 130, 130)),
                                     ),
                                   ),
                                 ),
@@ -524,245 +482,323 @@ class _animals_widgetState extends State<animals_widget> {
                               ],
                             ),
                           ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        topRight: Radius.circular(5)),
+                                    child: Image.asset(
+                                      'assets/images/anm1.png',
+                                    )),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                  child: Container(
+                                    child: Text(
+                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                  child: Container(
+                                    height: 30,
+                                    child: Text(
+                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Color.fromARGB(
+                                              255, 130, 130, 130)),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                                    child: Text(
+                                      "฿ 890",
+                                      style: TextStyle(color: Colors.red),
+                                    )),
+                                SizedBox(
+                                  height: 8,
+                                )
+                              ],
+                            ),
+                          ),
+                          ),
                         ),
                       ],
                     ),
+               
+                  
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),
- drawer: Theme(
-              data: Theme.of(context).copyWith(
-                canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
-              ),
-              child: Container(
-                width: 250,
-                child: Drawer(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      20,
-                      0,
-                      0,
-                      0,
-                    ),
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                child: Icon(Icons.person),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Name Surname",
-                                        style: TextStyle(color: Palette.kToDark, fontFamily: 'Kanit' )),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "ดูโปรไฟล์",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 165, 162, 162),
-                                          fontFamily: 'Kanit'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Icon(
-                                Icons.settings,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/new/home.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text(
-                                  "หน้าหลัก",
-                                  style: TextStyle(color: Colors.white, fontFamily: 'Kanit' ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/new/about.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text("เกี่ยวกับเรา",
-                                    style: TextStyle(color: Colors.white, fontFamily: 'Kanit' ),
-                              ),
-                              )],
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text("ภายในร้าน",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 165, 162, 162), fontFamily: 'Kanit' )),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/new/tab4.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: Text("สัตว์",
-                                    style: TextStyle(color: Colors.white, fontFamily: 'Kanit' )),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/new/tab5.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text("สินค้า",
-                                    style: TextStyle(color: Colors.white)),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              print("object");
-                            },
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/new/tab2.svg',
-                                  color: Colors.white,
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                  child: Text("ร้านค้า",
-                                      style: TextStyle(color: Colors.white, fontFamily: 'Kanit' )),
-                                ),
-                              ],
+        drawer: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
+            ),
+            child: Container(
+              width: 250,
+              child: Drawer(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    20,
+                    0,
+                    0,
+                    0,
+                  ),
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              child: Icon(Icons.person),
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Name Surname",
+                                      style: TextStyle(
+                                          color: Palette.kToDark,
+                                          fontFamily: 'Kanit')),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "ดูโปรไฟล์",
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 165, 162, 162),
+                                        fontFamily: 'Kanit'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.settings,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/home.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              child: Text(
+                                "หน้าหลัก",
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: 'Kanit'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/about.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              child: Text(
+                                "เกี่ยวกับเรา",
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: 'Kanit'),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text("ภายในร้าน",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 165, 162, 162),
+                                fontFamily: 'Kanit')),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/tab4.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Text("สัตว์",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Kanit')),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/tab5.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              child: Text("สินค้า",
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Row(
                             children: [
                               SvgPicture.asset(
-                                'assets/images/new/tab6.svg',
+                                'assets/images/new/tab2.svg',
                                 color: Colors.white,
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text("น้ำเชื้อ",
-                                    style: TextStyle(color: Colors.white, fontFamily: 'Kanit' )),
+                                child: Text("ร้านค้า",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Kanit')),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text("การช่วยเหลือ",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 165, 162, 162), fontFamily: 'Kanit' )),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Row(
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/tab6.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              child: Text("น้ำเชื้อ",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Kanit')),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text("การช่วยเหลือ",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 165, 162, 162),
+                                fontFamily: 'Kanit')),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/help2.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              child: Text("ศูนย์ช่วยเหลือ",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Kanit')),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/us.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              child: Text("ร่วมงานกับเรา",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Kanit')),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 100,
+                        ),
+                        Divider(color: Color.fromARGB(255, 165, 162, 162)),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                          child: Row(
                             children: [
                               SvgPicture.asset(
-                                'assets/images/new/help2.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text("ศูนย์ช่วยเหลือ",
-                                    style: TextStyle(color: Colors.white, fontFamily: 'Kanit' )),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/new/us.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text("ร่วมงานกับเรา",
-                                    style: TextStyle(color: Colors.white, fontFamily: 'Kanit' )),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 100,
-                          ),
-                          Divider(color: Color.fromARGB(255, 165, 162, 162)),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
                                 'assets/images/new/logout.svg',
                                 color: Colors.white,
                               ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                  child: Text("ออกจากระบบ",
-                                      style: TextStyle(color: Colors.white, fontFamily: 'Kanit' )),
-                                ),
-                              ],
-                            ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text("ออกจากระบบ",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Kanit')),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              )),
+              ),
+            )),
       ),
     );
   }

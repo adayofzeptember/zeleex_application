@@ -75,8 +75,8 @@ class _semens_widgetState extends State<semens_widget> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: Text("น้ำเชื้ออ",
-                      style: TextStyle(color: Palette.kToDark)),
+                  child: Text("น้ำเชื้อ",
+                      style: TextStyle(color: Palette.kToDark,fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   child: Row(
@@ -102,7 +102,7 @@ class _semens_widgetState extends State<semens_widget> {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Container(
                 color: Colors.white,
@@ -174,360 +174,375 @@ class _semens_widgetState extends State<semens_widget> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: Column(
+     
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+                child: Wrap(
                   children: [
-                    Wrap(
-                      spacing: 4.0,
-                      runSpacing: 8.0,
-                      children: <Widget>[
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/semens1.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: Image.asset(
+                                        'assets/images/semens6.png',
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      child: Text(
+                                        "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
+                                  Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 890",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/semens2.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 30,
+                                      child: Text(
+                                        "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(
+                                                255, 130, 130, 130)),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 890",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ 890",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/semens6.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: Image.asset(
+                                        'assets/images/semens3.png',
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      child: Text(
+                                        "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
+                                  Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 890",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/semens3.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 30,
+                                      child: Text(
+                                        "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(
+                                                255, 130, 130, 130)),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 890",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ 890",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/semens2.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: Color.fromARGB(
-                                              255, 130, 130, 130)),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: Image.asset(
+                                        'assets/images/semens1.png',
+                                      )),
+                                  Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 890",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 190,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: Image.asset(
-                                      'assets/images/semens1.png',
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    child: Text(
-                                      "จ้าวทศพล (YZ116) แบรนด์ดี",
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                  child: Container(
-                                    height: 30,
-                                    child: Text(
-                                      "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      child: Text(
+                                        "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
+                                  Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "฿ 890",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 8,
-                                )
-                              ],
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 30,
+                                      child: Text(
+                                        "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(
+                                                255, 130, 130, 130)),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ 890",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: Image.asset(
+                                        'assets/images/semens1.png',
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      child: Text(
+                                        "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 30,
+                                      child: Text(
+                                        "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(
+                                                255, 130, 130, 130)),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ 890",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: Image.asset(
+                                        'assets/images/semens3.png',
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      child: Text(
+                                        "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 30,
+                                      child: Text(
+                                        "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(
+                                                255, 130, 130, 130)),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ 890",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: Image.asset(
+                                        'assets/images/semens3.png',
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      child: Text(
+                                        "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 30,
+                                      child: Text(
+                                        "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(
+                                                255, 130, 130, 130)),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ 890",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -535,7 +550,7 @@ class _semens_widgetState extends State<semens_widget> {
                     ),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),

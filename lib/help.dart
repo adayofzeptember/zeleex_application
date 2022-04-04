@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/main_widget.dart';
 
-
 import 'Plate.dart';
 
 void main(List<String> args) {
@@ -70,14 +69,15 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
                 InkWell(
                     splashColor: Colors.amber,
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => mainpageWidget_only()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => mainpageWidget_only()));
                     },
                     child: SvgPicture.asset('assets/images/xcircle.svg')),
               ],
             ),
           ),
-          
           body: SingleChildScrollView(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
