@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:zeleex_application/login.dart';
 import 'dart:io';
 import 'Plate.dart';
 import 'main_page.dart';
 
 //MediaQuery.of(context).size.height * 0.25
+
 void main() {
   runApp(WelcomePage());
 }
@@ -76,7 +76,7 @@ class SecondPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     child: Text(
-                      "หน้าหลัก(จัดวางสำหรับทดสอบ)",
+                      "หน้าหลัก ",
                       style: TextStyle(color: Colors.white, fontSize: 15),
                       textAlign: TextAlign.center,
                     ),
@@ -98,7 +98,7 @@ class SecondPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     child: Text(
-                      "ล็อคอิน(จัดวางสำหรับทดสอบ)",
+                      "ล็อคอิน",
                       style: TextStyle(color: Colors.white, fontSize: 15),
                       textAlign: TextAlign.center,
                     ),

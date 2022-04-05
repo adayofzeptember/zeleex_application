@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
-
+import 'package:zeleex_application/from%20Profile/likes.dart';
 import 'Plate.dart';
 import 'cart.dart';
 import 'payment_address.dart';
@@ -356,7 +356,7 @@ class _Profile_widgetState extends State<Profile_widget> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PaymentAddressPage(),
+                  builder: (context) => LikesPage(),
                 ),
               );
             },

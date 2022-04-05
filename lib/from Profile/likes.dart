@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
+import 'package:zeleex_application/from%20Profile/likes_product_widget.dart';
 import 'package:zeleex_application/from%20Profile/wait_payment_widget.dart';
 import '../Plate.dart';
 import 'package:flutter/services.dart';
 
-class BuyingList extends StatelessWidget {
-  const BuyingList({Key? key}) : super(key: key);
+void main(List<String> args) {
+  runApp(LikesPage());
+}
+
+class LikesPage extends StatelessWidget {
+  const LikesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +21,19 @@ class BuyingList extends StatelessWidget {
         primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),
       ),
-      home: BuyingList_widget(),
+      home: Likes_widget(),
     );
   }
 }
 
-class BuyingList_widget extends StatefulWidget {
-  BuyingList_widget({Key? key}) : super(key: key);
+class Likes_widget extends StatefulWidget {
+  Likes_widget({Key? key}) : super(key: key);
 
   @override
-  State<BuyingList_widget> createState() => _BuyingList_widgetState();
+  State<Likes_widget> createState() => _Likes_widgetState();
 }
 
-class _BuyingList_widgetState extends State<BuyingList_widget> {
+class _Likes_widgetState extends State<Likes_widget> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -50,7 +55,7 @@ class _BuyingList_widgetState extends State<BuyingList_widget> {
                   ),
                 ),
                 Text(
-                  "รายการสั่งซื้อ",
+                  "สิ่งที่ถูกใจ",
                   style: TextStyle(color: Colors.white),
                 ),
                 Icon(
@@ -72,26 +77,26 @@ class _BuyingList_widgetState extends State<BuyingList_widget> {
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("รอการชำระเงิน"),
+                      child: Text("สัตว์"),
                     ),
                   ),
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("เตรียมจัดส่ง"),
+                      child: Text("สินค้า"),
                     ),
                   ),
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("ระหว่างการขนส่ง"),
+                      child: Text("น้ำเชื้อ"),
                     ),
                   ),
                 ]),
           ),
           body: TabBarView(children: [
-            Wait_Payment(),
-            Icon(Icons.movie),
+            Icon(Icons.book),
+            LikesProduct(),
             Icon(Icons.games),
           ]),
         ));
