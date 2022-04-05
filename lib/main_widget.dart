@@ -111,43 +111,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                     ),
                     Column(
                       children: [
-                        // Container(
-                        //   height: 36,
-                        //   child: TextField(
-                        //     maxLines: 1,
-                        //     style: TextStyle(fontSize: 17),
-                        //     textAlignVertical: TextAlignVertical.center,
-                        //     decoration: InputDecoration(
-                        //       filled: true,
-                        //     suffixIcon: Container(
-                        //         alignment: Alignment.center,
-                        //         padding: EdgeInsets.fromLTRB(00, 5, 00, 5),
-                        //         decoration: BoxDecoration(
-                        //           color: Colors.teal,
-                        //           borderRadius: BorderRadius.circular(40.0),
-                        //         ),
-                        //         child: Text(
-                        //           "ค้นหา",
-                        //           style: TextStyle(
-                        //               color: Color.fromRGBO(255, 255, 255, 1)),
-                        //           textAlign: TextAlign.center,
-                        //         ),
-                        //       ),
-                            
-                        //       prefixIcon: Icon(Icons.search,
-                        //           color: Theme.of(context).iconTheme.color),
-                        //       border: OutlineInputBorder(
-                        //           borderSide: BorderSide.none,
-                        //           borderRadius:
-                        //               BorderRadius.all(Radius.circular(30))),
-                        //       fillColor: Theme.of(context)
-                        //           .inputDecorationTheme
-                        //           .fillColor,
-                        //       contentPadding: EdgeInsets.zero,
-                        //       hintText: 'Search',
-                        //     ),
-                        //   ),
-                        // ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
                           child: Container(

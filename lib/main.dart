@@ -13,15 +13,17 @@ class First_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Palette.kToDark),
+           theme: ThemeData(
+        fontFamily: 'Kanit',
+        primarySwatch: Palette.kToDark,
+        appBarTheme: AppBarTheme(color: Palette.kToDark),
+      ),
       home: main_Icon(),
     );
   }
 }
-
 class main_Icon extends StatelessWidget {
   const main_Icon({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

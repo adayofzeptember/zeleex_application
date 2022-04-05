@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
-
-
 import 'Plate.dart';
 import 'store_page_detail_product.dart';
 
@@ -14,7 +11,6 @@ void main(List<String> args) {
 
 class Store_ProductDetail extends StatelessWidget {
   const Store_ProductDetail({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +173,7 @@ class _store_productsDetail_widgetState
                         width: 10,
                       ),
                       Container(
-                          color: Color.fromARGB(117, 0, 0, 0),
+                        color: Color.fromARGB(117, 0, 0, 0),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SvgPicture.asset('assets/images/cart123.svg',
@@ -282,14 +278,11 @@ class _store_productsDetail_widgetState
                           )
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
                     ],
                   )),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
               color: Colors.white,
@@ -371,16 +364,12 @@ class _store_productsDetail_widgetState
                         ],
                       ),
                     ),
-                    Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                    )
                   ],
                 ),
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
               width: double.infinity,
@@ -408,57 +397,54 @@ class _store_productsDetail_widgetState
                           TextStyle(color: Color.fromARGB(255, 130, 130, 130)),
                     ),
                     SizedBox(
-                      height: 100,
+                      height: 20,
                     ),
                   ],
                 ),
               ),
             ),
-            // FloatingActionButton(
-            //   onPressed: () {
-            //     // Add your onPressed code here!
-            //   },
-            //   child: const Icon(Icons.navigation),
-            // ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: 200,
+              width: double.infinity,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "คะแนนรีวิวสินค้า",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 51, 51, 51),
+                              fontSize: 20),
+                        ),
+                        Text("ทั้งหมด >",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 130, 130, 130)))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Text("(5.0)"),
+                        SizedBox(width: 5,),
+                        SvgPicture.asset('assets/images/groupStar.svg'),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         )),
-        // bottomNavigationBar: Container(
-        //   height: 90,
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.only(
-        //         topRight: Radius.circular(0), topLeft: Radius.circular(0)),
-        //     boxShadow: [
-        //       BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
-        //     ],
-        //   ),
-        //   child: BottomNavigationBar(
-        //     currentIndex: 0,
-        //     onTap: _onItemTapped,
-        //     type: BottomNavigationBarType.fixed,
-        //     items: <BottomNavigationBarItem>[
-        //       BottomNavigationBarItem(
-        //         icon: Row(
-        //           children: [SvgPicture.asset('assets/images/cart123.svg'), Text("data")],
-        //         ),
-        //         label: 'นิวส์ฟีด',
-        //       ),
-        //       BottomNavigationBarItem(
-        //         activeIcon: SizedBox(
-        //           child: SvgPicture.asset(
-        //             "assets/images/new/tab2.svg",
-        //             color: Palette.kToDark,
-        //           ),
-        //         ),
-        //         icon: SizedBox(
-        //           child: SvgPicture.asset(
-        //             "assets/images/new/tab2.svg",
-        //           ),
-        //         ),
-        //         label: 'ร้านค้า',
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

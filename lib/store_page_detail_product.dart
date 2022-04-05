@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 import 'Plate.dart';
 import 'store_page_detail.dart';
 import 'store_page_detail_productDetail.dart';
@@ -12,7 +11,6 @@ void main() {
 
 class StoreDetailProductPage extends StatelessWidget {
   const StoreDetailProductPage({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +73,8 @@ class _storeDetail_product_widgetState
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => StoreDetailPage()),
+                      MaterialPageRoute(
+                          builder: (context) => StoreDetailPage()),
                     );
                   },
                   child: Container(
@@ -126,7 +125,7 @@ class _storeDetail_product_widgetState
                   Stack(
                     children: [
                       Container(
-                     child: Image.asset('assets/images/image11.png'),
+                        child: Image.asset('assets/images/image11.png'),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 80, 8, 0),

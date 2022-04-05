@@ -73,8 +73,11 @@ class _pd_widgetState extends State<pd_widget> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child:
-                      Text("สินค้า", style: TextStyle(color: Palette.kToDark,fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "สินค้า",
+                    style: TextStyle(
+                        color: Palette.kToDark, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Container(
                   child: Row(
@@ -172,7 +175,6 @@ class _pd_widgetState extends State<pd_widget> {
                   ),
                 ),
               ),
-             
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
                 child: Wrap(
@@ -368,7 +370,8 @@ class _pd_widgetState extends State<pd_widget> {
                           ),
                         ),
                       ],
-                    ),Row(
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(

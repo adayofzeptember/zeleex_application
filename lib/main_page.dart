@@ -103,9 +103,7 @@ class _Main_PageState extends State<Main_Page> {
                   topRight: Radius.circular(30), topLeft: Radius.circular(30)),
               boxShadow: [
                 BoxShadow(
-                    color: Color.fromARGB(52, 0, 0, 0),
-                    spreadRadius: 0,
-                    blurRadius: 10),
+                    color: Colors.black38, spreadRadius: 0, blurRadius: 10),
               ],
             ),
             child: ClipRRect(
