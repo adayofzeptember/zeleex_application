@@ -6,35 +6,20 @@ import 'store_page.dart';
 import 'store_page_detail_cattle.dart';
 import 'store_page_detail_product.dart';
 
-void main() {
-  runApp(StoreDetailPage());
-}
-
-class StoreDetailPage extends StatelessWidget {
-  const StoreDetailPage({Key? key}) : super(key: key);
+class Store_Detail extends StatefulWidget {
+  Store_Detail({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: storeDetail_widget(),
-    );
-  }
+  State<Store_Detail> createState() => _Store_DetailState();
 }
 
-class storeDetail_widget extends StatefulWidget {
-  storeDetail_widget({Key? key}) : super(key: key);
-
-  @override
-  State<storeDetail_widget> createState() => _storeDetail_widgetState();
-}
-
-class _storeDetail_widgetState extends State<storeDetail_widget> {
+class _Store_DetailState extends State<Store_Detail> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Kanit',
-          primarySwatch: Colors.teal,
+          primarySwatch: Colors.red,
           appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
       home: Scaffold(
         floatingActionButton: Padding(
@@ -52,7 +37,7 @@ class _storeDetail_widgetState extends State<storeDetail_widget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => StoreDetailProductPage()),
+                          builder: (context) => Store_ProductPage()),
                     )
                   },
                   child: Container(
@@ -91,7 +76,7 @@ class _storeDetail_widgetState extends State<storeDetail_widget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => StoreDetailCattlesPage()),
+                          builder: (context) => Store_CattlePage()),
                     )
                   },
                   child: Row(
@@ -112,87 +97,67 @@ class _storeDetail_widgetState extends State<storeDetail_widget> {
             ],
           ),
         ),
-        extendBodyBehindAppBar: true,
         appBar: AppBar(
-            backgroundColor: Colors.transparent,
             leading: Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(
-                  child: Container(
-                    color: Color.fromARGB(117, 0, 0, 0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ImageIcon(
-                        AssetImage(
-                          "assets/images/menu-61.png",
-                        ),
-                        color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ImageIcon(
+                      AssetImage(
+                        "assets/images/menu-61.png",
                       ),
+                      color: Color.fromARGB(255, 51, 51, 51),
                     ),
                   ),
                 ),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
             ),
-            elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // ImageIcon(
-                //           AssetImage(
-                //             "assets/images/menu-61.png",
-                //           ),
-                //         ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => StorePage_Run()),
-                    );
+                    Navigator.pop(context);
                   },
-                  child: Container(
-                    color: Color.fromARGB(117, 0, 0, 0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Color.fromARGB(255, 51, 51, 51),
                     ),
                   ),
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      Container(
-                          color: Color.fromARGB(117, 0, 0, 0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                              'assets/images/sort.svg',
-                              color: Colors.white,
-                            ),
-                          )),
-                      SizedBox(
-                        width: 10,
+                Text("ร้านค้า",
+                    style: TextStyle(
+                        color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(
+                        'assets/images/sort.svg',
+                        color: Color.fromARGB(255, 51, 51, 51),
                       ),
-                      Container(
-                          color: Color.fromARGB(117, 0, 0, 0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                              'assets/images/cart123.svg',
-                              color: Colors.white,
-                            ),
-                          ))
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(
+                        'assets/images/cart123.svg',
+                        color: Color.fromARGB(255, 51, 51, 51),
+                      ),
+                    )
+                  ],
                 )
               ],
             )),
         body: SingleChildScrollView(
           child: Column(
             children: [
+              // SizedBox(
+              //   height: 10,
+              // ),
               Column(
                 children: [
                   Stack(
@@ -237,7 +202,7 @@ class _storeDetail_widgetState extends State<storeDetail_widget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  "ศรีไพศาลอาหารสัตว์-เกษตรภัณฑ์xxx",
+                                                  "ศรีไพศาลอาหารสัตว์-เกษตรภัณฑ์",
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold)),
@@ -404,6 +369,9 @@ class _storeDetail_widgetState extends State<storeDetail_widget> {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 70,
+                  )
                 ],
               ),
             ],

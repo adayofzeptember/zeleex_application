@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../Plate.dart';
 
-void main(List<String> args) {
-  runApp(Career_Detail());
-}
 
 class Career_Detail extends StatefulWidget {
   Career_Detail({Key? key}) : super(key: key);
@@ -19,12 +15,7 @@ class _Career_DetailState extends State<Career_Detail> {
   @override
   Widget build(BuildContext context) {
     
-    return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
-          appBarTheme: AppBarTheme(color: Palette.kToDark)),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           //  systemOverlayStyle: SystemUiOverlayStyle(
           //   // Status bar color
@@ -35,6 +26,7 @@ class _Career_DetailState extends State<Career_Detail> {
           //       Brightness.dark, // For Android (dark icons)
           //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
           // ),
+          automaticallyImplyLeading: false,
           backgroundColor: Palette.kToDark,
           elevation: 0,
           title: Row(
@@ -294,7 +286,7 @@ class _Career_DetailState extends State<Career_Detail> {
             ],
           ),
         )),
-      ),
+    
     );
   }
 }

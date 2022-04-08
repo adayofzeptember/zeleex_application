@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,38 +8,23 @@ void main(List<String> args) {
   runApp(NewsFeedPage());
 }
 
-class NewsFeedPage extends StatelessWidget {
-  const NewsFeedPage({Key? key}) : super(key: key);
+class NewsFeedPage extends StatefulWidget {
+  NewsFeedPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: newsFeed_widget());
-  }
+  State<NewsFeedPage> createState() => _NewsFeedPageState();
 }
 
-
-class newsFeed_widget extends StatefulWidget {
-  newsFeed_widget({Key? key}) : super(key: key);
-
-  @override
-  State<newsFeed_widget> createState() => _newsFeed_widgetState();
-}
-
-class _newsFeed_widgetState extends State<newsFeed_widget> {
-  
+class _NewsFeedPageState extends State<NewsFeedPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
           appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-            ),
             leading: Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(
@@ -59,13 +43,8 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      // we'll look at ColorDetailPage later
-                      builder: (context) => NewsFeedDetailPage(),
+                      builder: (context) => NewsFeedPage_Detail(),
                     ));
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => NewsFeedPage()));
                   },
                   child: Visibility(
                     visible: false,
@@ -77,7 +56,8 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
                 ),
                 Text(
                   "นิวส์ฟีด",
-                  style: TextStyle(color: Palette.kToDark, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Palette.kToDark, fontWeight: FontWeight.bold),
                 ),
                 Container(
                   child: Row(
@@ -89,7 +69,6 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
                         'assets/images/cart123.svg',
                         color: Color.fromARGB(255, 51, 51, 51),
                       ),
-                      
                     ],
                   ),
                 )
@@ -97,7 +76,7 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
             )),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(5,5,5,25),
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 25),
             child: Column(
               children: [
                 Container(
@@ -107,16 +86,7 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
                     child: InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => NewsFeedDetailPage()));
-                        // Navigator.pushAndRemoveUntil(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (_) => NewsFeedDetailPage()),
-                        //     (route) => false);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => NewsFeedDetailPage()));
+                            builder: (context) => NewsFeedPage_Detail()));
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -579,4 +549,3 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
     );
   }
 }
-

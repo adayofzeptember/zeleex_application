@@ -3,31 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'Plate.dart';
 import 'store_page_detail_product.dart';
 
-//backgroundColor: Colors.transparent,
-
-void main(List<String> args) {
-  runApp(Store_ProductDetail());
-}
-
-class Store_ProductDetail extends StatelessWidget {
-  const Store_ProductDetail({Key? key}) : super(key: key);
+class Store_Product_Detail extends StatefulWidget {
+  Store_Product_Detail({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return (MaterialApp(home: store_productsDetail_widget()));
-  }
+  State<Store_Product_Detail> createState() => _Store_Product_DetailState();
 }
 
-class store_productsDetail_widget extends StatefulWidget {
-  store_productsDetail_widget({Key? key}) : super(key: key);
-
-  @override
-  State<store_productsDetail_widget> createState() =>
-      _store_productsDetail_widgetState();
-}
-
-class _store_productsDetail_widgetState
-    extends State<store_productsDetail_widget> {
+class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int index = 0;
   void _onItemTapped(int index2) {
     setState(() {
@@ -53,12 +36,7 @@ class _store_productsDetail_widgetState
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
-          appBarTheme: AppBarTheme(color: Colors.white)),
-      home: Scaffold(
+    return  Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         floatingActionButton: Padding(
           padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
@@ -117,74 +95,62 @@ class _store_productsDetail_widgetState
             ],
           ),
         ),
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: SizedBox(
-                  child: Container(
-                      color: Color.fromARGB(117, 0, 0, 0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SvgPicture.asset('assets/images/menu.svg',
-                            color: Colors.white),
-                      )),
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: SizedBox(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ImageIcon(
+                    AssetImage(
+                      "assets/images/menu-61.png",
+                    ),
+                    color: Color.fromARGB(255, 51, 51, 51),
+                  ),
                 ),
-                onPressed: () => Scaffold.of(context).openDrawer(),
               ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StoreDetailProductPage()),
-                    );
-                  },
-                  child: Container(
-                    color: Color.fromARGB(117, 0, 0, 0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Color.fromARGB(255, 51, 51, 51),
+                  ),
+                ),
+              ),
+              Text("สินค้า",
+                  style: TextStyle(
+                      color: Palette.kToDark, fontWeight: FontWeight.bold)),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset(
+                      'assets/images/sort.svg',
+                      color: Color.fromARGB(255, 51, 51, 51),
                     ),
                   ),
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      Container(
-                          color: Color.fromARGB(117, 0, 0, 0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                              'assets/images/sort.svg',
-                              color: Colors.white,
-                            ),
-                          )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        color: Color.fromARGB(117, 0, 0, 0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset('assets/images/cart123.svg',
-                              color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            )),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset(
+                      'assets/images/cart123.svg',
+                      color: Color.fromARGB(255, 51, 51, 51),
+                    ),
+                  )
+                ],
+              )
+            ],
+          )),
         body: SingleChildScrollView(
             child: Column(
           children: [
@@ -435,8 +401,11 @@ class _store_productsDetail_widgetState
                     Row(
                       children: [
                         Text("(5.0)"),
-                        SizedBox(width: 5,),
+                        SizedBox(
+                          width: 5,
+                        ),
                         SvgPicture.asset('assets/images/groupStar.svg'),
+              
                       ],
                     )
                   ],
@@ -445,7 +414,7 @@ class _store_productsDetail_widgetState
             ),
           ],
         )),
-      ),
+     
     );
   }
 }

@@ -10,8 +10,6 @@ void main(List<String> args) {
 class AboutUs extends StatelessWidget {
   const AboutUs({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,8 +26,9 @@ class AboutUs extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                          // Navigator.pushReplacement(context,
-                          // MaterialPageRoute(builder: (context) => mainpageWidget_ony()));
+                    Navigator.pop(context);
+                    // Navigator.pushReplacement(context,
+                    // MaterialPageRoute(builder: (context) => mainpageWidget_ony()));
                   },
                   child: Icon(
                     Icons.arrow_back_ios,
@@ -56,28 +55,6 @@ class AboutUs extends StatelessWidget {
                     SizedBox(
                       height: 50,
                     ),
-                    // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
-                    // FlutterToggleTab(
-                    //   // width in percent, to set full width just set to 100
-                    //   width: 90,
-                    //   borderRadius: 0,
-                    //   height: 50,
-
-                    //   selectedTextStyle: TextStyle(
-
-                    //       color: Colors.white,
-                    //       fontSize: 18,
-                    //       fontWeight: FontWeight.w700),
-                    //   unSelectedTextStyle: TextStyle(
-                    //       color: Colors.black87,
-                    //       fontSize: 14,
-                    //       fontWeight: FontWeight.w500),
-                    //   labels: ["Tab A (10)", "Tab B (6)", "Tab C (9)"],
-                    //   selectedLabelIndex: (index) {
-                    //     print("Selected Index $index");
-                    //   },
-                    //   selectedIndex: 0,
-                    // ),
                     Image.asset('assets/images/aboutus.png'),
                     SizedBox(
                       height: 30,
@@ -90,7 +67,6 @@ class AboutUs extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                       child: Text(

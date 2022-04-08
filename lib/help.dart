@@ -5,29 +5,15 @@ import 'package:zeleex_application/main_widget.dart';
 
 import 'Plate.dart';
 
-void main(List<String> args) {
-  runApp(HelpCenter());
-}
 
-class HelpCenter extends StatelessWidget {
-  const HelpCenter({Key? key}) : super(key: key);
+class HelpCenterPage extends StatefulWidget {
+  HelpCenterPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HelpCenter_widget(),
-    );
-  }
+  State<HelpCenterPage> createState() => _HelpCenterPageState();
 }
 
-class HelpCenter_widget extends StatefulWidget {
-  HelpCenter_widget({Key? key}) : super(key: key);
-
-  @override
-  State<HelpCenter_widget> createState() => _HelpCenter_widgetState();
-}
-
-class _HelpCenter_widgetState extends State<HelpCenter_widget> {
+class _HelpCenterPageState extends State<HelpCenterPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -37,19 +23,14 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
           currentFocus.unfocus();
         }
       },
-      child: MaterialApp(
-        theme: ThemeData(
-            fontFamily: 'Kanit',
-            primarySwatch: Palette.kToDark,
-            appBarTheme: AppBarTheme(color: Colors.white)),
-        home: Scaffold(
+      child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-         
-            // systemOverlayStyle: SystemUiOverlayStyle(
-            //   // Status bar color
-            //   statusBarColor: Colors.white,
-            // ),
+            automaticallyImplyLeading: false,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              // Status bar color
+              statusBarColor: Colors.white,
+            ),
             backgroundColor: Colors.white,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,12 +49,13 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
                       fontWeight: FontWeight.bold),
                 ),
                 InkWell(
-                    splashColor: Colors.amber,
+                   
                     onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => mainpageWidget_only()));
+                      Navigator.pop(context);
+                      // Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => Main_Widget()));
                     },
                     child: SvgPicture.asset('assets/images/xcircle.svg')),
               ],
@@ -83,36 +65,38 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      height: 70,
-                      width: double.infinity,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search...',
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Palette.kToDark,
-                            size: 30,
-                          ),
-                          hintStyle: TextStyle(color: Palette.kToDark),
-                          fillColor: Colors.white70,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 230, 228, 228),
-                                width: 0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 0),
-                          ),
+              SizedBox(height: 10,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    height: 60,
+                    width: double.infinity,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Palette.kToDark,
+                          size: 20,
                         ),
-                      ))),
+                        hintStyle: TextStyle(color: Palette.kToDark),
+                        fillColor: Colors.white70,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 230, 228, 228),
+                              width: 0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 0),
+                        ),
+                      ),
+                    )),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 10, 0, 15),
                 child: Text(
@@ -273,7 +257,7 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
             ],
           )),
         ),
-      ),
-    );
+      );
+   
   }
 }

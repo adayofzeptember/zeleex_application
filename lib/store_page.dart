@@ -5,23 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'Plate.dart';
 import 'store_page_detail.dart';
 
-void main() {
-  runApp(StorePage_Run());
-}
-
-class StorePage_Run extends StatelessWidget {
-  const StorePage_Run({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return (MaterialApp(
-        // theme: ThemeData(
-        //     primarySwatch: Colors.grey,
-        //     appBarTheme:
-        //         AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
-        home: StorePage()));
-  }
-}
 
 class StorePage extends StatefulWidget {
   StorePage({Key? key}) : super(key: key);
@@ -104,7 +87,6 @@ class _StorePageState extends State<StorePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-      
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
                 child: Wrap(
@@ -123,7 +105,7 @@ class _StorePageState extends State<StorePage> {
                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => StoreDetailPage(),
+                                          builder: (context) => Store_Detail(),
                                         ),
                                       );
                                 },

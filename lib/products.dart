@@ -4,29 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'Plate.dart';
 
-void main(List<String> args) {
-  runApp(Product_Page());
-}
 
-class Product_Page extends StatelessWidget {
-  const Product_Page({Key? key}) : super(key: key);
+
+class ProductPage extends StatefulWidget {
+  ProductPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: pd_widget(),
-    );
-  }
+  State<ProductPage> createState() => _ProductPageState();
 }
 
-class pd_widget extends StatefulWidget {
-  pd_widget({Key? key}) : super(key: key);
-
-  @override
-  State<pd_widget> createState() => _pd_widgetState();
-}
-
-class _pd_widgetState extends State<pd_widget> {
+class _ProductPageState extends State<ProductPage> {
   int index = 4;
   void _onItemTapped(int index2) {
     setState(() {

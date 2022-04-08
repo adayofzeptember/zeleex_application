@@ -6,37 +6,19 @@ import 'package:zeleex_application/Career/career_detail.dart';
 import 'package:zeleex_application/main_widget.dart';
 import '../Plate.dart';
 
-void main() {
-  runApp(Career_Page());
+
+class CareerPage extends StatefulWidget {
+  CareerPage({Key? key}) : super(key: key);
+  @override
+  State<CareerPage> createState() => _CareerPageState();
 }
 
-class Career_Page extends StatelessWidget {
-  const Career_Page({Key? key}) : super(key: key);
-
+class _CareerPageState extends State<CareerPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Career(),
-    );
-  }
-}
-
-class Career extends StatefulWidget {
-  Career({Key? key}) : super(key: key);
-  @override
-  State<Career> createState() => _CareerState();
-}
-
-class _CareerState extends State<Career> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-            fontFamily: 'Kanit',
-            primarySwatch: Palette.kToDark,
-            appBarTheme: AppBarTheme(color: Palette.kToDark)),
-        home: Scaffold(
+    return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             systemOverlayStyle: SystemUiOverlayStyle(
               // Status bar color
               statusBarColor: Palette.kToDark,
@@ -50,10 +32,7 @@ class _CareerState extends State<Career> {
             elevation: 0,
             title: InkWell(
               onTap: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => mainpageWidget_only()));
+                Navigator.pop(context);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -244,7 +223,7 @@ class _CareerState extends State<Career> {
                 ),
               ],
             ),
-          ),
+        
         ));
   }
 }

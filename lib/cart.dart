@@ -8,30 +8,15 @@ import 'payment.dart';
 
 // width: double.infinity,
 // width: MediaQuery.of(context).size.width,
-void main(List<String> args) {
-  runApp(CartPage());
-}
 
-class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
-
+class CartPage extends StatefulWidget {
+  CartPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Cart_widget(),
-    );
-  }
+  State<CartPage> createState() => _CartPageState();
 }
 
-class Cart_widget extends StatefulWidget {
-  Cart_widget({Key? key}) : super(key: key);
-
-  @override
-  State<Cart_widget> createState() => _Cart_widgetState();
-}
-
-class _Cart_widgetState extends State<Cart_widget> {
+class _CartPageState extends State<CartPage> {
   bool isChecked = false;
   int _counter = 0;
   void _pluss() {
@@ -59,7 +44,6 @@ class _Cart_widgetState extends State<Cart_widget> {
       home: Scaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
-            // Status bar color
             statusBarColor: Palette.kToDark,
           ),
           backgroundColor: Palette.kToDark,
@@ -69,12 +53,13 @@ class _Cart_widgetState extends State<Cart_widget> {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => mainpageWidget_only(),
-                    ),
-                  );
+                  Navigator.pop(context);
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => Main_Widget(),
+                  //   ),
+                  // );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -100,7 +85,6 @@ class _Cart_widgetState extends State<Cart_widget> {
           child: Column(
             children: [
               Slidable(
-                   
                 endActionPane: ActionPane(
                   motion: BehindMotion(),
                   dismissible: DismissiblePane(onDismissed: () {
@@ -113,7 +97,6 @@ class _Cart_widgetState extends State<Cart_widget> {
                       foregroundColor: Colors.white,
                       icon: Icons.delete,
                       label: 'ลบ',
-                      
                     ),
                   ],
                 ),
@@ -183,10 +166,10 @@ class _Cart_widgetState extends State<Cart_widget> {
                                     });
                                   }),
                             ),
-              
+
                             // width: double.infinity,
                             // width: MediaQuery.of(context).size.width,
-              
+
                             Image.asset(
                               'assets/images/cart_pd.png',
                               width: 90,
@@ -198,7 +181,8 @@ class _Cart_widgetState extends State<Cart_widget> {
                             Expanded(
                               child: Container(
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Row(
                                       mainAxisAlignment:
@@ -253,8 +237,8 @@ class _Cart_widgetState extends State<Cart_widget> {
                                                       },
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(
-                                                                8.0),
+                                                            const EdgeInsets
+                                                                .all(8.0),
                                                         child: SvgPicture.asset(
                                                           'assets/images/minus.svg',
                                                           width: 20,
@@ -268,10 +252,12 @@ class _Cart_widgetState extends State<Cart_widget> {
                                                   width: 30,
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Text(
                                                       "${_counter}",
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold),
@@ -301,8 +287,8 @@ class _Cart_widgetState extends State<Cart_widget> {
                                                       },
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(
-                                                                8.0),
+                                                            const EdgeInsets
+                                                                .all(8.0),
                                                         child: SvgPicture.asset(
                                                           'assets/images/pluss.svg',
                                                           width: 20,
@@ -782,4 +768,5 @@ class _Cart_widgetState extends State<Cart_widget> {
     );
   }
 }
+
 void doNothing(BuildContext context) {}

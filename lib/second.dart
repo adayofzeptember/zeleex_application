@@ -8,22 +8,6 @@ import 'main_page.dart';
 
 //MediaQuery.of(context).size.height * 0.25
 
-void main() {
-  runApp(WelcomePage());
-}
-
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Kanit'),
-      home: SecondPage(),
-    );
-  }
-}
-
 class SecondPage extends StatefulWidget {
   SecondPage({Key? key}) : super(key: key);
 
@@ -34,9 +18,9 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   @override
   void initState() {
-    // TODO: implement initState
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
     super.initState();
   }
 
@@ -44,7 +28,6 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-     
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Container(
@@ -79,13 +62,11 @@ class _SecondPageState extends State<SecondPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => mainPage(),
-                      ),
-                    );
-                  }, // Handle your callback
+                    //Navigator.of(context, rootNavigator: true).pop(context);
+                    // Navigator.pop(context);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Main_Page()));
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.7,
                     padding: EdgeInsets.all(15.0),

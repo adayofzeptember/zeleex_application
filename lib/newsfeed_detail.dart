@@ -3,43 +3,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'Plate.dart';
 import 'newsfeed.dart';
 
-void main() {
-  runApp(NewsFeedDetailPage());
+class NewsFeedPage_Detail extends StatefulWidget {
+  NewsFeedPage_Detail({Key? key}) : super(key: key);
+
+  @override
+  State<NewsFeedPage_Detail> createState() => _NewsFeedPage_Detail();
 }
 
-class NewsFeedDetailPage extends StatelessWidget {
-  const NewsFeedDetailPage({Key? key}) : super(key: key);
-
-
-
+class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
   @override
   Widget build(BuildContext context) {
-
-    
-    return MaterialApp(
-      home: newsFeedDetail_widget(),
-    );
-  }
-}
-
-class newsFeedDetail_widget extends StatefulWidget {
-  newsFeedDetail_widget({Key? key}) : super(key: key);
-
-  @override
-  State<newsFeedDetail_widget> createState() => _newsFeedDetail_widget();
-}
-
-class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Kanit',
-          primarySwatch: Colors.teal,
-          appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
-      home: Scaffold(
+    return  Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
+          backgroundColor: Colors.white,
             leading: Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(
@@ -57,10 +34,7 @@ class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NewsFeedPage()));
+                    Navigator.pop(context);
                   },
                   child: Icon(
                     Icons.arrow_back_ios,
@@ -69,7 +43,7 @@ class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
                 ),
                 Text(
                   "นิวส์ฟีด",
-                  style: TextStyle(color: Palette.kToDark),
+                  style: TextStyle(color: Palette.kToDark, fontWeight: FontWeight.bold),
                 ),
                 Container(
                   child: Row(
@@ -88,7 +62,7 @@ class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
             )),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(5,5,5,20),
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 20),
             child: Column(
               children: [
                 Container(
@@ -175,7 +149,7 @@ class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
                               textAlign: TextAlign.start,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                              SizedBox(
+                            SizedBox(
                               height: 10,
                             ),
                           ],
@@ -188,7 +162,7 @@ class _newsFeedDetail_widget extends State<newsFeedDetail_widget> {
             ),
           ),
         ),
-      ),
+      
     );
   }
 }

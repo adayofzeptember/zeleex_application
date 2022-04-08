@@ -1,33 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'Plate.dart';
 
-void main(List<String> args) {
-  runApp(Semens_Page());
-}
 
-class Semens_Page extends StatelessWidget {
-  const Semens_Page({Key? key}) : super(key: key);
+class SemensPage extends StatefulWidget {
+  SemensPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: semens_widget(),
-    );
-  }
+  State<SemensPage> createState() => _SemensPageState();
 }
 
-class semens_widget extends StatefulWidget {
-  semens_widget({Key? key}) : super(key: key);
-
-  @override
-  State<semens_widget> createState() => _semens_widgetState();
-}
-
-class _semens_widgetState extends State<semens_widget> {
+class _SemensPageState extends State<SemensPage> {
   int index = 5;
   void _onItemTapped(int index2) {
     setState(() {

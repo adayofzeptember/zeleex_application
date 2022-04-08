@@ -52,12 +52,13 @@ class _Profile_widgetState extends State<Profile_widget> {
           children: [
             InkWell(
               onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => mainpageWidget_only(),
-                  ),
-                );
+                Navigator.pop(context);
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => Main_Widget(),
+                //   ),
+                // );
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
