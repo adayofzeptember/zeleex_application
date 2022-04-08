@@ -89,6 +89,7 @@ class _newsFeed_widgetState extends State<newsFeed_widget> {
                         'assets/images/cart123.svg',
                         color: Color.fromARGB(255, 51, 51, 51),
                       ),
+                      
                     ],
                   ),
                 )

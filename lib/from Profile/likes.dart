@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:zeleex_application/from%20Profile/likes_product_widget.dart';
 import 'package:zeleex_application/from%20Profile/wait_payment_widget.dart';
+import 'package:zeleex_application/profile.dart';
 import '../Plate.dart';
 import 'package:flutter/services.dart';
 
@@ -47,7 +48,12 @@ class _Likes_widgetState extends State<Likes_widget> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.of(context, rootNavigator: true).pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
+                      ),
+                    );
                   },
                   child: Icon(
                     Icons.arrow_back_ios,

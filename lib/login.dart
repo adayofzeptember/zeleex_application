@@ -23,33 +23,28 @@ class LoginPage2 extends StatelessWidget {
 
 class LoginPage_widget extends StatefulWidget {
   LoginPage_widget({Key? key}) : super(key: key);
- 
 
   @override
   State<LoginPage_widget> createState() => _LoginPage_widgetState();
 }
 
 class _LoginPage_widgetState extends State<LoginPage_widget> {
- 
-  
-  
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
             appBar: AppBar(
-              //           systemOverlayStyle: SystemUiOverlayStyle(
-              //   // Status bar color
-              //   statusBarColor: Palette.kToDark,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                // Status bar color
 
-              //   // Status bar brightness (optional)
-              //   statusBarIconBrightness:
-              //       Brightness.dark, // For Android (dark icons)
-              //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
-              // ),
+                statusBarColor: Palette.kToDark,
+
+                // Status bar brightness (optional)
+                statusBarIconBrightness:
+                    Brightness.dark, // For Android (dark icons)
+                statusBarBrightness: Brightness.light, // For iOS (dark icons)
+              ),
               title: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Center(
@@ -187,7 +182,7 @@ class _LoginPage_widgetState extends State<LoginPage_widget> {
                                   ),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      primary: Palette.kToDark,
+                                        primary: Palette.kToDark,
                                         elevation: 0,
                                         // side: BorderSide(color: Colors.red),
                                         shape: RoundedRectangleBorder(
@@ -283,9 +278,7 @@ class _LoginPage_widgetState extends State<LoginPage_widget> {
                                           borderRadius:
                                               BorderRadius.circular(15),
                                         )),
-                                    onPressed: () {
-                              
-                                    },
+                                    onPressed: () {},
                                     child: Padding(
                                       padding: const EdgeInsets.all(20.0),
                                       child: Container(
@@ -345,7 +338,6 @@ class _LoginPage_widgetState extends State<LoginPage_widget> {
                                     height: 15,
                                   ),
 
-                                  
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         elevation: 0,

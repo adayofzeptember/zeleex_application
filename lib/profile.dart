@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/from%20Profile/likes.dart';
+import 'package:zeleex_application/main_page.dart';
+import 'package:zeleex_application/main_widget.dart';
 import 'Plate.dart';
 import 'cart.dart';
 import 'payment_address.dart';
@@ -50,12 +52,12 @@ class _Profile_widgetState extends State<Profile_widget> {
           children: [
             InkWell(
               onTap: () {
-                // Navigator.pushReplacement(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => PaymentPage(),
-                //   ),
-                // );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => mainpageWidget_only(),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -97,30 +99,30 @@ class _Profile_widgetState extends State<Profile_widget> {
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30))),
             child: Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20, bottom: 30),
+              padding: const EdgeInsets.only(top: 10, left: 20, bottom: 30),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 50,
-                    width: 70,
+                    height: MediaQuery.of(context).size.height * 0.05,
+                    width: MediaQuery.of(context).size.height * 0.05,
                     child: CircleAvatar(
                       backgroundColor: Color.fromARGB(255, 255, 255, 255),
                       child: Icon(
                         Icons.person,
-                        color: Color.fromARGB(255, 202, 5, 5),
+                        color: Palette.kToDark,
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                    padding: const EdgeInsets.fromLTRB(8, 0, 5, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Name Surname",
                             style: TextStyle(
                                 fontFamily: 'Kanit',
-                                fontSize: 20,
+                                fontSize: 15,
                                 color: Colors.white)),
                         SizedBox(
                           height: 5,
@@ -128,8 +130,10 @@ class _Profile_widgetState extends State<Profile_widget> {
                         Text(
                           "แก้ไขโปรไฟล์ >",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 51, 51, 51),
-                              fontFamily: 'Kanit'),
+                            color: Color.fromARGB(255, 51, 51, 51),
+                            fontFamily: 'Kanit',
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
@@ -154,19 +158,22 @@ class _Profile_widgetState extends State<Profile_widget> {
                     Text("การสั่งซื้อ",
                         style: TextStyle(
                             color: Color.fromARGB(255, 51, 51, 51),
-                            fontSize: 15)),
+                            fontSize: MediaQuery.of(context).size.height * 0.015)),
                   ],
                 ),
                 Text(
-                  "ประัติการสั่งซื้อ >",
-                  style: TextStyle(color: Color.fromARGB(255, 130, 130, 130)),
+                  "ประวัติการสั่งซื้อ >",
+                  style: TextStyle(color: Color.fromARGB(255, 130, 130, 130),   fontSize: MediaQuery.of(context).size.height * 0.015),
                 )
               ],
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -183,10 +190,10 @@ class _Profile_widgetState extends State<Profile_widget> {
                       children: [
                         SvgPicture.asset(
                           'assets/images/wallet.svg',
-                          height: 40,
+                          height: MediaQuery.of(context).size.height * 0.035,
                         ),
                         SizedBox(
-                          height: 1,
+                          height: 3,
                         ),
                         Text(
                           "ที่ต้องชำระ",
@@ -204,10 +211,10 @@ class _Profile_widgetState extends State<Profile_widget> {
                     children: [
                       SvgPicture.asset(
                         'assets/images/box.svg',
-                        height: 40,
+                        height: MediaQuery.of(context).size.height * 0.035,
                       ),
                       SizedBox(
-                        height: 1,
+                        height: 3,
                       ),
                       Text(
                         "เตรียมจัดส่ง",
@@ -224,10 +231,10 @@ class _Profile_widgetState extends State<Profile_widget> {
                     children: [
                       SvgPicture.asset(
                         'assets/images/shipp.svg',
-                        height: 40,
+                        height: MediaQuery.of(context).size.height * 0.035,
                       ),
                       SizedBox(
-                        height: 1,
+                        height: 3,
                       ),
                       Text(
                         "กำลังจัดส่ง",
@@ -244,10 +251,10 @@ class _Profile_widgetState extends State<Profile_widget> {
                     children: [
                       SvgPicture.asset(
                         'assets/images/score.svg',
-                        height: 40,
+                        height: MediaQuery.of(context).size.height * 0.035,
                       ),
                       SizedBox(
-                        height: 1,
+                        height: 3,
                       ),
                       Text(
                         "ให้คะแนน",
@@ -290,7 +297,7 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "ที่อยู่สำหรับจัดส่ง",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -306,11 +313,14 @@ class _Profile_widgetState extends State<Profile_widget> {
                               children: [
                                 Text(
                                   "ชวันธร วีรจรรยาพันธ์",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                        fontSize: MediaQuery.of(context).size.height * 0.015),
                                 ),
                                 Text(
                                   "\t (ค่าเริ่มต้น)",
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(
+                                      color: Colors.red,   fontSize: MediaQuery.of(context).size.height * 0.015),
                                 ),
                                 SizedBox(
                                   width: 15,
@@ -332,8 +342,8 @@ class _Profile_widgetState extends State<Profile_widget> {
                             child: Text(
                               "087-571-2533",
                               style: TextStyle(
-                                color: Color.fromARGB(255, 130, 130, 130),
-                              ),
+                                  color: Color.fromARGB(255, 130, 130, 130),
+                                    fontSize: MediaQuery.of(context).size.height * 0.015),
                             ),
                           )),
                       Padding(
@@ -343,6 +353,7 @@ class _Profile_widgetState extends State<Profile_widget> {
                             child: Text(
                               "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
                               style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height * 0.015,
                                 color: Color.fromARGB(255, 130, 130, 130),
                               ),
                             ),
@@ -380,7 +391,7 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "สิ่งที่ถูกใจ >",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -400,7 +411,7 @@ class _Profile_widgetState extends State<Profile_widget> {
                     )),
                 onPressed: () {},
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(13.0),
                   child: Container(
                     width: double.infinity,
                     child: Row(
@@ -456,7 +467,7 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "นโยบายความเป็นส่วนตัว >",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -495,7 +506,7 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "ศูนย์ช่วยเหลือ >",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -534,7 +545,7 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "ร่วมงานกับเรา >",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),

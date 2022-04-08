@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../Plate.dart';
 
-class Wait_Payment extends StatefulWidget {
-  Wait_Payment({Key? key}) : super(key: key);
+class History_Success extends StatefulWidget {
+  History_Success({Key? key}) : super(key: key);
 
   @override
-  State<Wait_Payment> createState() => _Wait_PaymentState();
+  State<History_Success> createState() => _History_SuccessState();
 }
 
-class _Wait_PaymentState extends State<Wait_Payment> {
+class _History_SuccessState extends State<History_Success> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -47,19 +47,10 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                               ),
                             ],
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              color: Color.fromARGB(155, 236, 137, 130),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Text(
-                                "ที่ต้องชำระเงิน",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
+                          Text(
+                            "สำเร็จ",
+                            style:
+                                TextStyle(color: Palette.kToDark, fontSize: 10),
                           )
                         ],
                       ),
@@ -123,7 +114,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                    "x1",
+                                                    "จำนวน: 1",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         fontWeight:
@@ -149,37 +140,28 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                     ],
                   ),
                 ),
-                Divider(
-                  color: Color.fromARGB(255, 216, 216, 216),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text("คำสั่งซื้อทั้งหมด (จำนวน 1): "),
-                    Text(
-                      " ฿1,335",
-                      style: TextStyle(color: Palette.kToDark),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    )
-                  ],
-                ),
-                Divider(
-                  color: Color.fromARGB(255, 216, 216, 216),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text("1 สินค้า, รวมทั้งสิ้น: "),
+                      Text(
+                        " ฿1,335",
+                        style: TextStyle(color: Palette.kToDark),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      )
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("กรุณาชำระเงินก่อนวันที่ 20-03-2022"),
-                          Text("ช่องทาง ตัดบัญชีธนาคาร")
-                        ],
-                      ),
+              
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             elevation: 0,
@@ -196,7 +178,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Text(
-                              "ชำระเงินตอนนี้",
+                              "ให้คะแนน",
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -209,6 +191,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
             ),
           ),
         ),
+        SizedBox(height: 5,)
       ],
     );
   }

@@ -63,7 +63,7 @@ class _StorePageState extends State<StorePage> {
               ),
             ),
             elevation: 0,
-            title: Row(
+              title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
@@ -76,20 +76,26 @@ class _StorePageState extends State<StorePage> {
                     ),
                   ),
                 ),
-                Text(
-                  "ร้านค้า",
-                  style: TextStyle(color: Palette.kToDark,fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text("ร้านค้า",
+                      style: TextStyle(color: Palette.kToDark,fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      SvgPicture.asset(
+                        'assets/images/sort.svg',
+                        color: Color.fromARGB(255, 51, 51, 51),
+                      ),
                       SizedBox(
                         width: 10,
                       ),
                       SvgPicture.asset(
                         'assets/images/cart123.svg',
                         color: Color.fromARGB(255, 51, 51, 51),
-                      ),
+                      )
                     ],
                   ),
                 )
@@ -113,7 +119,14 @@ class _StorePageState extends State<StorePage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0)),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                   Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => StoreDetailPage(),
+                                        ),
+                                      );
+                                },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -134,7 +147,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "ศรีไพศาลอาหารสัตว์",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold,      fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -152,7 +165,7 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. จันทบุรี",
-                                              style: TextStyle(
+                                              style: TextStyle( fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -212,7 +225,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "โกศินการเกษตร",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold, fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -230,7 +243,7 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. เชียงใหม่",
-                                              style: TextStyle(
+                                              style: TextStyle( fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -295,7 +308,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "บริษัท นิวเจนแมน จำกัด",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold, fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -313,7 +326,7 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. นครราชสีมา",
-                                              style: TextStyle(
+                                              style: TextStyle( fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -373,7 +386,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "บีม Pet SHop",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold, fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -391,7 +404,7 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. เชียงใหม่",
-                                              style: TextStyle(
+                                              style: TextStyle( fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -456,7 +469,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "บริษัท นิวเจนแมน จำกัด",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold, fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -474,7 +487,7 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. นครราชสีมา",
-                                              style: TextStyle(
+                                              style: TextStyle( fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -533,7 +546,7 @@ class _StorePageState extends State<StorePage> {
                                           15, 5, 0, 0),
                                       child: Text(
                                         "เชียงพัง การเกษตร  ",
-                                        style: TextStyle(
+                                        style: TextStyle( fontSize: 13,
                                             fontWeight: FontWeight.bold,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
@@ -552,7 +565,7 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. อุดรธานี",
-                                              style: TextStyle(
+                                              style: TextStyle( fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),

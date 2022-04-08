@@ -10,7 +10,6 @@ void main() {
   runApp(Career_Page());
 }
 
-
 class Career_Page extends StatelessWidget {
   const Career_Page({Key? key}) : super(key: key);
 
@@ -38,7 +37,7 @@ class _CareerState extends State<Career> {
             appBarTheme: AppBarTheme(color: Palette.kToDark)),
         home: Scaffold(
           appBar: AppBar(
-               systemOverlayStyle: SystemUiOverlayStyle(
+            systemOverlayStyle: SystemUiOverlayStyle(
               // Status bar color
               statusBarColor: Palette.kToDark,
 
@@ -87,7 +86,6 @@ class _CareerState extends State<Career> {
               0,
             ),
             child: Column(
-              
               children: [
                 Row(
                   children: [
@@ -112,48 +110,6 @@ class _CareerState extends State<Career> {
                 SizedBox(
                   height: 20,
                 ),
-                // ElevatedButton(
-                //   style: ElevatedButton.styleFrom(
-                //       elevation: 0,
-                //       side:
-                //           BorderSide(color: Color.fromARGB(255, 231, 231, 231)),
-                //       primary: Colors.white,
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(15),
-                //       )),
-                //   onPressed: () {
-                //     Navigator.push(
-                //       context,
-                //       new MaterialPageRoute(
-                //         builder: (context) => new Career_Detail(),
-                //       ),
-                //     );
-                //   },
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(20.0),
-                //     child: Container(
-                //         width: double.infinity,
-                //         alignment: Alignment.center,
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.start,
-                //           children: [
-                //             // SizedBox(
-                //             //   width: 10,
-                //             // ),
-                //             SvgPicture.asset('assets/images/gg.svg'),
-                //             SizedBox(
-                //               width: 30,
-                //             ),
-                //             Text(
-                //               "ดำเนินการต่อด้วยบัญชี Google",
-                //               style: TextStyle(
-                //                   color: Color.fromARGB(255, 51, 51, 51),
-                //                   fontSize: 15),
-                //             ),
-                //           ],
-                //         )),
-                //   ),
-                // ),
                 InkWell(
                   onTap: () {
                     Navigator.push(
@@ -177,7 +133,8 @@ class _CareerState extends State<Career> {
                             "ครีเอทีฟ (1 ตำแหน่ง)",
                             style: TextStyle(
                                 color: Palette.kToDark,
-                                fontSize: 15,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.035,
                                 fontWeight: FontWeight.bold),
                           ),
                           Container(
@@ -221,7 +178,8 @@ class _CareerState extends State<Career> {
                             "เจ้าหน้าที่ฟาร์มโคนม (2 ตำแหน่ง)",
                             style: TextStyle(
                                 color: Palette.kToDark,
-                                fontSize: 15,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.035,
                                 fontWeight: FontWeight.bold),
                           ),
                           Container(
@@ -265,7 +223,8 @@ class _CareerState extends State<Career> {
                             "เจ้าหน้าที่การตลาด (1 ตำแหน่ง)",
                             style: TextStyle(
                                 color: Palette.kToDark,
-                                fontSize: 15,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.035,
                                 fontWeight: FontWeight.bold),
                           ),
                           Container(

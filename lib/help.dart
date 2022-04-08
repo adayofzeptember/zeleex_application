@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/main_widget.dart';
 
-
 import 'Plate.dart';
 
 void main(List<String> args) {
@@ -46,6 +45,7 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
         home: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+         
             // systemOverlayStyle: SystemUiOverlayStyle(
             //   // Status bar color
             //   statusBarColor: Colors.white,
@@ -70,14 +70,15 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
                 InkWell(
                     splashColor: Colors.amber,
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => mainpageWidget_only()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => mainpageWidget_only()));
                     },
                     child: SvgPicture.asset('assets/images/xcircle.svg')),
               ],
             ),
           ),
-          
           body: SingleChildScrollView(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,8 +91,11 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Search...',
-                          prefixIcon:
-                              Icon(Icons.search, color: Palette.kToDark),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Palette.kToDark,
+                            size: 30,
+                          ),
                           hintStyle: TextStyle(color: Palette.kToDark),
                           fillColor: Colors.white70,
                           enabledBorder: OutlineInputBorder(
@@ -108,9 +112,7 @@ class _HelpCenter_widgetState extends State<HelpCenter_widget> {
                                 BorderSide(color: Colors.grey, width: 0),
                           ),
                         ),
-                      )
-                      )
-                      ),
+                      ))),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 10, 0, 15),
                 child: Text(

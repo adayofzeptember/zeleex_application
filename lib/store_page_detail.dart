@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 import 'Plate.dart';
 import 'store_page.dart';
 import 'store_page_detail_cattle.dart';
@@ -98,7 +97,10 @@ class _storeDetail_widgetState extends State<storeDetail_widget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset('assets/images/malfoot.svg', color: Colors.white ,),
+                      SvgPicture.asset(
+                        'assets/images/malfoot.svg',
+                        color: Colors.white,
+                      ),
                       SizedBox(
                         width: 5,
                       ),
@@ -107,7 +109,6 @@ class _storeDetail_widgetState extends State<storeDetail_widget> {
                   ),
                 ),
               ),
-              
             ],
           ),
         ),

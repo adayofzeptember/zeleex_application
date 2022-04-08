@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/login.dart';
 import 'dart:io';
@@ -23,15 +24,32 @@ class WelcomePage extends StatelessWidget {
   }
 }
 
-class SecondPage extends StatelessWidget {
-  const SecondPage({Key? key}) : super(key: key);
+class SecondPage extends StatefulWidget {
+  SecondPage({Key? key}) : super(key: key);
+
+  @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+     
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 1,
           decoration: const BoxDecoration(
               image: DecorationImage(
             image: AssetImage(
@@ -69,8 +87,8 @@ class SecondPage extends StatelessWidget {
                     );
                   }, // Handle your callback
                   child: Container(
-                    width: 300,
-                    padding: EdgeInsets.all(20.0),
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    padding: EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
                       color: Palette.kToDark,
                       borderRadius: BorderRadius.circular(30.0),
@@ -91,14 +109,14 @@ class SecondPage extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => LoginPage2()));
                   }, // Handle your callback
                   child: Container(
-                    width: 300,
+                    width: MediaQuery.of(context).size.width * 0.7,
                     padding: EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
                       color: Palette.kToDark,
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     child: Text(
-                      "ล็อคอิน",
+                      "ล็อคอิน (ไว้ทดสอบไปส่วนเข้าสู่ระบบ)",
                       style: TextStyle(color: Colors.white, fontSize: 15),
                       textAlign: TextAlign.center,
                     ),

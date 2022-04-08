@@ -112,7 +112,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                     Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
@@ -188,313 +188,326 @@ class _Main_WidgetState extends State<Main_Widget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 30, 10, 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: 60,
-                                    height: 60,
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      child: SvgPicture.asset(
-                                        'assets/images/cow.svg',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text(
-                                    "โคเนื้อ",
-                                    style: TextStyle(fontSize: 12),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: 60,
-                                    height: 60,
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      child: SvgPicture.asset(
-                                        'assets/images/cowmilk.svg',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text("โคนม", style: TextStyle(fontSize: 12))
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: 60,
-                                    height: 60,
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      child: SvgPicture.asset(
-                                        'assets/images/buff.svg',
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text("กระบือ", style: TextStyle(fontSize: 12))
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: 60,
-                                    height: 60,
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      child: SvgPicture.asset(
-                                        'assets/images/cum.svg',
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text("น้ำเชื้อ",
-                                      style: TextStyle(fontSize: 12))
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: 60,
-                                    height: 60,
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      child: SvgPicture.asset(
-                                        'assets/images/thing.svg',
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text("อุปกรณ์",
-                                      style: TextStyle(fontSize: 12))
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: 60,
-                                    height: 60,
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      child: SvgPicture.asset(
-                                        'assets/images/food.svg',
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text("อาหารและยา",
-                                      style: TextStyle(fontSize: 12))
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(249, 255, 255, 255)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Padding(
-                                  padding: const EdgeInsets.all(0.0),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                              10,
-                                              10,
-                                              0,
-                                              0,
-                                            ),
-                                            child: Text(
-                                              "โคและกระบือ",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 51, 51, 51),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 10, 10, 0),
-                                            child: Container(
-                                              padding: EdgeInsets.all(10.0),
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFF10C19F),
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                              ),
-                                              child: Text(
-                                                "ดูทั้งหมด",
-                                                style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        255, 255, 255, 1)),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      // in cloumn
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Container(
-                                        width: double.infinity,
-                                        child: Row(
-                                          //main axis (rows or columns)
-
-                                          // crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Card(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                                      child: Image.asset(
-                                                          'assets/images/cattles1.png'),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      "Cattles1",
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "฿ 170,000",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 255, 17, 0)),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            Card(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                                      child: Image.asset(
-                                                          'assets/images/cattles2.png'),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      "Cattles2",
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "฿ 100,000",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 255, 17, 0)),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            Card(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                                      child: Image.asset(
-                                                        'assets/images/cattles3.png',
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      "Cattles3",
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "฿ 90,000",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 255, 17, 0)),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 60,
+                                      height: 60,
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        child: SvgPicture.asset(
+                                          'assets/images/cow.svg',
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      )
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      "โคเนื้อ",
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 60,
+                                      height: 60,
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        child: SvgPicture.asset(
+                                          'assets/images/cowmilk.svg',
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text("โคนม", style: TextStyle(fontSize: 12))
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 60,
+                                      height: 60,
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        child: SvgPicture.asset(
+                                          'assets/images/buff.svg',
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text("กระบือ",
+                                        style: TextStyle(fontSize: 12))
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 60,
+                                      height: 60,
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        child: SvgPicture.asset(
+                                          'assets/images/cum.svg',
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text("น้ำเชื้อ",
+                                        style: TextStyle(fontSize: 12))
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 60,
+                                      height: 60,
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        child: SvgPicture.asset(
+                                          'assets/images/thing.svg',
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text("อุปกรณ์",
+                                        style: TextStyle(fontSize: 12))
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 60,
+                                      height: 60,
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        child: SvgPicture.asset(
+                                          'assets/images/food.svg',
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text("อาหารและยา",
+                                        style: TextStyle(fontSize: 12))
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                          child: Container(
+                            decoration: BoxDecoration(),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        10,
+                                        10,
+                                        0,
+                                        0,
+                                      ),
+                                      child: Text(
+                                        "โคและกระบือ",
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.02),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 10, 10, 0),
+                                      child: Container(
+                                        padding: EdgeInsets.all(10.0),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF10C19F),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        child: Text(
+                                          "ดูทั้งหมด",
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  255, 255, 255, 1)),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                // in cloumn
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: Row(
+                                    children: [
+                                      Card(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            5)),
+                                                child: Image.asset(
+                                                    'assets/images/cattles1.png'),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Cattles1",
+                                              ),
+                                              SizedBox(
+                                                height: 3,
+                                              ),
+                                              Text(
+                                                "฿ 170,000",
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 255, 17, 0)),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Card(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            5)),
+                                                child: Image.asset(
+                                                    'assets/images/cattles2.png'),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Cattles2",
+                                              ),
+                                              SizedBox(
+                                                height: 3,
+                                              ),
+                                              Text(
+                                                "฿ 100,000",
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 255, 17, 0)),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Card(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            5)),
+                                                child: Image.asset(
+                                                  'assets/images/cattles3.png',
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Cattles3",
+                                              ),
+                                              SizedBox(
+                                                height: 3,
+                                              ),
+                                              Text(
+                                                "฿ 90,000",
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 255, 17, 0)),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ],
-                                  )),
+                                  ),
+                                ),
+                               
+                              ],
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(249, 255, 255, 255)),
+                            decoration: BoxDecoration(),
                             child: Padding(
                               padding: const EdgeInsets.all(0.0),
                               child: Padding(
@@ -505,7 +518,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
@@ -520,7 +533,11 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   color: Color.fromARGB(
                                                       255, 51, 51, 51),
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          0.02),
                                             ),
                                           ),
                                           Padding(
@@ -546,7 +563,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       ),
                                       // in cloumn
                                       SizedBox(
-                                        height: 20,
+                                        height: 5,
                                       ),
                                       Container(
                                         width: double.infinity,

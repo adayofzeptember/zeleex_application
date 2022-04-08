@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import 'package:zeleex_application/from%20Profile/wait_payment_widget.dart';
-import 'package:zeleex_application/profile.dart';
-import '../Plate.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:zeleex_application/history/history_success.dart';
+import '../Plate.dart';
+import '../from Profile/wait_payment_widget.dart';
 
-class BuyingList extends StatelessWidget {
-  const BuyingList({Key? key}) : super(key: key);
+void main(List<String> args) {
+  runApp(HistoryPage());
+}
+
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,25 +20,28 @@ class BuyingList extends StatelessWidget {
         primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),
       ),
-      home: BuyingList_widget(),
+      home: History_widget(),
     );
   }
 }
 
-class BuyingList_widget extends StatefulWidget {
-  BuyingList_widget({Key? key}) : super(key: key);
+class History_widget extends StatefulWidget {
+  History_widget({Key? key}) : super(key: key);
 
   @override
-  State<BuyingList_widget> createState() => _BuyingList_widgetState();
+  State<History_widget> createState() => _History_widgetState();
 }
 
-class _BuyingList_widgetState extends State<BuyingList_widget> {
+class _History_widgetState extends State<History_widget> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Palette.kToDark,
+            ),
             backgroundColor: Palette.kToDark,
             elevation: 0,
             title: Row(
@@ -43,13 +49,7 @@ class _BuyingList_widgetState extends State<BuyingList_widget> {
               children: [
                 InkWell(
                   onTap: () {
-                         Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(),
-                        ),
-                      );
-                    // Navigator.of(context, rootNavigator: true).pop(context);
+                    Navigator.of(context, rootNavigator: true).pop(context);
                   },
                   child: Icon(
                     Icons.arrow_back_ios,
@@ -57,7 +57,7 @@ class _BuyingList_widgetState extends State<BuyingList_widget> {
                   ),
                 ),
                 Text(
-                  "รายการสั่งซื้อ",
+                  "ประวัติการสั่งซื้อ",
                   style: TextStyle(color: Colors.white),
                 ),
                 Icon(
@@ -79,28 +79,50 @@ class _BuyingList_widgetState extends State<BuyingList_widget> {
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("รอการชำระเงิน"),
+                      child: Text("สั่งซื้อสำเร็จ"),
                     ),
                   ),
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("เตรียมจัดส่ง"),
+                      child: Text("ยกเลิกสินค้า"),
                     ),
                   ),
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("ระหว่างการขนส่ง"),
+                      child: Text("คืนสินค้า/คืนเงิน"),
                     ),
                   ),
                 ]),
           ),
-          body: TabBarView(children: [
-            Wait_Payment(),
-            Icon(Icons.movie),
-            Icon(Icons.games),
-          ]),
+          body: TabBarView(
+            children: [
+              History_Success(),
+              History_Success(),
+              Slidable(
+                
+                endActionPane: ActionPane(
+                  motion: BehindMotion(),
+                  dismissible: DismissiblePane(onDismissed: () {
+                    doNothing(context);
+                  }),
+                  children: [
+                    SlidableAction(
+                      onPressed: doNothing,
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: 'ลบ',
+                    ),
+                  ],
+                ),
+                child: ListTile(title: Text('Slide me')),
+              ),
+            ],
+          ),
         ));
   }
 }
+
+void doNothing(BuildContext context) {}
