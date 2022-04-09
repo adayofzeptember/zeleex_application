@@ -4,11 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:zeleex_application/cart.dart';
+import 'package:zeleex_application/main%206%20pages/animal.dart';
+import 'package:zeleex_application/main%206%20pages/products.dart';
 import 'package:zeleex_application/profile.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
+import '../login.dart';
 
 class Main_Widget extends StatefulWidget {
   Main_Widget({Key? key}) : super(key: key);
@@ -24,13 +27,9 @@ class _Main_WidgetState extends State<Main_Widget> {
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
-            // Status bar color
             statusBarColor: Palette.kToDark,
-
-            // Status bar brightness (optional)
-            statusBarIconBrightness:
-                Brightness.dark, // For Android (dark icons)
-            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
           ),
           leading: Builder(
             builder: (context) => IconButton(
@@ -46,11 +45,6 @@ class _Main_WidgetState extends State<Main_Widget> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // ImageIcon(
-              //           AssetImage(
-              //             "assets/images/menu-61.png",
-              //           ),
-              //         ),
               InkWell(
                 onTap: () {},
                 child: Visibility(
@@ -85,15 +79,10 @@ class _Main_WidgetState extends State<Main_Widget> {
           children: [
             Stack(
               children: [
-                Container(
-                  height: 190,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20)),
-                    color: Palette.kToDark,
-                  ),
-                ),
+              CustomPaint(
+                        painter: ShapesPainter(),
+                        child: Container(height:  MediaQuery.of(context).size.height * 0.25),
+                      ),
                 Column(
                   children: [
                     Padding(
@@ -117,7 +106,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   width: 5,
                                 ),
                                 Text(
-                                  "serch for cattles...",
+                                  "search for cattles...",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 130, 130, 130),
                                   ),
@@ -157,10 +146,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                         children: [
                           Image.asset(
                             'assets/images/slide1.png',
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                           Image.asset(
-                            'assets/images/slide1.png',
+                            'assets/images/anm2.png',
                             fit: BoxFit.fill,
                           ),
                           Image.asset(
@@ -334,14 +323,18 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 10, 10, 0),
-                                  child: Container(
-                                    padding: EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFF10C19F),
-                                      borderRadius: BorderRadius.circular(5.0),
-                                    ),
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Palette.kToDark, elevation: 0),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => AnimalsPage(),
+                                        ),
+                                      );
+                                    },
                                     child: Text(
                                       "ดูทั้งหมด",
                                       style: TextStyle(
@@ -501,15 +494,21 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 10, 10, 0),
-                                        child: Container(
-                                          padding: EdgeInsets.all(10.0),
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF10C19F),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                          ),
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Palette.kToDark,
+                                              elevation: 0),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductPage(),
+                                              ),
+                                            );
+                                          },
                                           child: Text(
                                             "ดูทั้งหมด",
                                             style: TextStyle(

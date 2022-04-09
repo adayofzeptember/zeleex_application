@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/login.dart';
 import 'dart:io';
 import 'Plate.dart';
-import 'main_page.dart';
+import 'main 6 pages/main_page.dart';
 
 //MediaQuery.of(context).size.height * 0.25
 
@@ -28,7 +28,7 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Container(
@@ -107,28 +107,34 @@ class _SecondPageState extends State<SecondPage> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 2,
+                  height: 10,
                 ),
-                InkWell(
-                  onTap: () {
+
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Palette.kToDark,
+                      elevation: 0,
+                      // side: BorderSide(color: Colors.red),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      )),
+                  onPressed: () {
                     Navigator.push(context,
                         CupertinoPageRoute(builder: (context) {
-                      return LoginPage2();
+                      return LoginPage();
                     }));
                     // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LoginPage2()));
-                  }, // Handle your callback
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    padding: EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                      color: Palette.kToDark,
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: Text(
-                      "ล็อคอิน (ทดสอบไปส่วนเข้าสู่ระบบ)",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                      textAlign: TextAlign.center,
+                    //
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "หน้าเข้าสู่ระบบ (ทดสอบเท่านั้น ของจริงเอาออก)",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
                     ),
                   ),
                 ),

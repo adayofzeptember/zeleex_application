@@ -3,23 +3,9 @@ import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'Plate.dart';
 import 'register.dart';
 
-void main(List<String> args) {
-  runApp(TermsCondition());
-}
-
-class TermsCondition extends StatelessWidget {
-  const TermsCondition({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TermsConditon_widget(),
-    );
-  }
-}
 
 
-test1() {
+TermsWidget() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.start,
@@ -47,7 +33,7 @@ test1() {
   );
 }
 
-test2() {
+ConditionWidget() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.start,
@@ -77,26 +63,21 @@ test2() {
   );
 }
 
-class TermsConditon_widget extends StatefulWidget {
-  TermsConditon_widget({Key? key}) : super(key: key);
+class TermsConditon extends StatefulWidget {
+  TermsConditon({Key? key}) : super(key: key);
 
   @override
-  State<TermsConditon_widget> createState() => _TermsConditon_widgetState();
+  State<TermsConditon> createState() => _TermsConditonState();
 }
 
-class _TermsConditon_widgetState extends State<TermsConditon_widget> {
+class _TermsConditonState extends State<TermsConditon> {
   var startedIndex = 0;
 
-  List<Widget> _widgetsPages = [test1(), test2()];
+  List<Widget> _widgetsPages = [TermsWidget(), ConditionWidget()];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-            fontFamily: 'Kanit',
-            primarySwatch: Palette.kToDark,
-            appBarTheme: AppBarTheme(color: Palette.kToDark)),
-        home: Scaffold(
+    return Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(0),
             child: AppBar(
@@ -115,10 +96,7 @@ class _TermsConditon_widgetState extends State<TermsConditon_widget> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterPage()));
+                          Navigator.pop(context);
                         },
                         child: Icon(
                           Icons.arrow_back_ios,
@@ -166,6 +144,6 @@ class _TermsConditon_widgetState extends State<TermsConditon_widget> {
               ],
             ),
           ),
-        ));
+        );
   }
 }

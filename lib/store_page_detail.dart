@@ -22,6 +22,7 @@ class _Store_DetailState extends State<Store_Detail> {
           primarySwatch: Colors.red,
           appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
       home: Scaffold(
+        backgroundColor: Color.fromARGB(255, 242, 242, 242),
         floatingActionButton: Padding(
           padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
           child: Row(

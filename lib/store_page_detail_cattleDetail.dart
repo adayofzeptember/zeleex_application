@@ -160,13 +160,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold)),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/sort.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
-                  ),
+               
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SvgPicture.asset(
@@ -238,7 +232,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
           Container(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: [
                   SizedBox(
@@ -254,9 +248,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                       children: [
                         Text("ศรีไพศาลอาหารสัตว์-เกษตรภัณฑ์",
                             style: TextStyle(fontWeight: FontWeight.bold)),
-                        SizedBox(
-                          height: 5,
-                        ),
+                       
                         Row(
                           children: [
                             ImageIcon(
@@ -273,9 +265,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                       
                         Row(
                           children: [
                             ImageIcon(
@@ -333,10 +323,10 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [SvgPicture.asset('assets/images/vec.svg')],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [SvgPicture.asset('assets/images/vec.svg')],
+                  // ),
                   Text(
                     "รายละเอียดสัตว์",
                     style: TextStyle(

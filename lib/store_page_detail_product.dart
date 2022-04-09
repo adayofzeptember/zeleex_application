@@ -16,6 +16,7 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
           backgroundColor: Colors.white,
           leading: Builder(

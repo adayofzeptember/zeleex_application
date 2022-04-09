@@ -9,7 +9,7 @@ import 'package:zeleex_application/main%206%20pages/products.dart';
 import 'package:zeleex_application/main%206%20pages/semens.dart';
 import 'package:zeleex_application/main%206%20pages/store_page.dart';
 
-import 'Plate.dart';
+import '../Plate.dart';
 
 // หลักมาก หลักรวม
 void main() {

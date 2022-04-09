@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/Plate.dart';
-import 'package:zeleex_application/main_page.dart';
+import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
 
 void main() {

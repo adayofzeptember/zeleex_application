@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/from%20Profile/likes.dart';
-import 'package:zeleex_application/main_page.dart';
-import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'Plate.dart';
 import 'cart.dart';
 import 'payment_address.dart';

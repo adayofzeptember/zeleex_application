@@ -6,53 +6,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/register.dart';
 import 'Plate.dart';
 
-void main(List<String> args) {
-  runApp(LoginPage2());
-}
-
-class LoginPage2 extends StatelessWidget {
-  const LoginPage2({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage_widget(),
-    );
-  }
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class LoginPage_widget extends StatefulWidget {
-  LoginPage_widget({Key? key}) : super(key: key);
-
-  @override
-  State<LoginPage_widget> createState() => _LoginPage_widgetState();
-}
-
-class _LoginPage_widgetState extends State<LoginPage_widget> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
             appBar: AppBar(
-              systemOverlayStyle: SystemUiOverlayStyle(
-                // Status bar color
-
-                statusBarColor: Palette.kToDark,
-
-                // Status bar brightness (optional)
-                statusBarIconBrightness:
-                    Brightness.dark, // For Android (dark icons)
-                statusBarBrightness: Brightness.light, // For iOS (dark icons)
-              ),
-              title: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: Center(
-                    child: Text(
-                  '',
-                  style: TextStyle(color: Colors.white, fontSize: 30),
-                )),
-              ),
+              title: Center(
+                  child: Text(
+                '',
+                style: TextStyle(color: Colors.white, fontSize: 30),
+              )),
               backgroundColor: Palette.kToDark,
               elevation: 0,
             ),
@@ -61,28 +33,24 @@ class _LoginPage_widgetState extends State<LoginPage_widget> {
                 children: [
                   Stack(
                     children: [
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //     color: Palette.kToDark,
-                      //     borderRadius: BorderRadius.only(
-                      //         bottomLeft: Radius.circular(200),
-                      //         bottomRight: Radius.circular(200)),
-                      //   ),
-                      //   height: 100,
-                      // ),
                       CustomPaint(
                         painter: ShapesPainter(),
-                        child: Container(height: 100),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height * 0.1),
                       ),
-
                       Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              SvgPicture.asset(
-                                'assets/images/left.svg',
-                                color: Color.fromARGB(255, 255, 255, 255),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: SvgPicture.asset(
+                                  'assets/images/left.svg',
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                ),
                               ),
                               Text(
                                 "เข้าสู่ระบบ",
@@ -350,12 +318,7 @@ class _LoginPage_widgetState extends State<LoginPage_widget> {
                                               BorderRadius.circular(15),
                                         )),
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => RegisterPage(),
-                                        ),
-                                      );
+                                   
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(20.0),

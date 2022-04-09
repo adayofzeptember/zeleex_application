@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,31 +6,15 @@ import 'Plate.dart';
 import 'login.dart';
 import 'terms.dart';
 
-void main(List<String> args) {
-  runApp(RegisterPage_widget());
-}
 
-
-
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: RegisterPage_widget(),
-    );
-  }
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class RegisterPage_widget extends StatefulWidget {
-  RegisterPage_widget({Key? key}) : super(key: key);
-
-  @override
-  State<RegisterPage_widget> createState() => _RegisterPage_widgetState();
-}
-
-class _RegisterPage_widgetState extends State<RegisterPage_widget> {
+class _RegisterPageState extends State<RegisterPage> {
   bool isChecked = false;
   @override
   Color getColor(Set<MaterialState> states) {
@@ -48,10 +31,9 @@ class _RegisterPage_widgetState extends State<RegisterPage_widget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
-        home: Scaffold(
+    return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               // systemOverlayStyle: SystemUiOverlayStyle(
               //   // Status bar color
               //   statusBarColor: Palette.kToDark,
@@ -90,7 +72,7 @@ class _RegisterPage_widgetState extends State<RegisterPage_widget> {
 
                       CustomPaint(
                         painter: ShapesPainter(),
-                        child: Container(height: 100),
+                        child: Container(height:  MediaQuery.of(context).size.height * 0.1),
                       ),
 
                       Column(
@@ -100,10 +82,7 @@ class _RegisterPage_widgetState extends State<RegisterPage_widget> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginPage2()));
+                                  Navigator.pop(context);
                                 },
                                 child: SvgPicture.asset(
                                   'assets/images/left.svg',
@@ -313,7 +292,7 @@ class _RegisterPage_widgetState extends State<RegisterPage_widget> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (contetx) =>
-                                                      TermsCondition()));
+                                                      TermsConditon()));
                                         },
                                         child: Text(
                                           "นโยบายความเป็นส่วนตัว",
@@ -340,7 +319,7 @@ class _RegisterPage_widgetState extends State<RegisterPage_widget> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      TermsCondition()));
+                                                      TermsConditon()));
                                         },
                                         child: Text(
                                           "เงื่อนไขการให้บริการ",
@@ -376,12 +355,8 @@ class _RegisterPage_widgetState extends State<RegisterPage_widget> {
                                                     BorderRadius.circular(15),
                                               )),
                                           onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      LoginPage2()),
-                                            );
+                                            Navigator.pop(context)
+                                            ;
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.all(20.0),
@@ -439,6 +414,6 @@ class _RegisterPage_widgetState extends State<RegisterPage_widget> {
                   )
                 ],
               ),
-            )));
+            ));
   }
 }
