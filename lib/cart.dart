@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/main_widget.dart';
+import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'Plate.dart';
 import 'payment.dart';
 
@@ -54,12 +54,6 @@ class _CartPageState extends State<CartPage> {
               InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Main_Widget(),
-                  //   ),
-                  // );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),

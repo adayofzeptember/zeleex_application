@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/animal.dart';
+import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'Plate.dart';
 import 'store_page_detail_cattle.dart';
 

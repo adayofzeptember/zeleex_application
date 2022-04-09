@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'Plate.dart';
-import 'store_page_detail.dart';
+import '../Plate.dart';
+import '../store_page_detail.dart';
 
 
 class StorePage extends StatefulWidget {

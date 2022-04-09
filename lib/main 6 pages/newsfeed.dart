@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'Plate.dart';
-import 'newsfeed_detail.dart';
+import '../Plate.dart';
+import '../newsfeed_detail.dart';
 
 void main(List<String> args) {
   runApp(NewsFeedPage());
@@ -25,6 +25,9 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
+                systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+            ),
             leading: Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(

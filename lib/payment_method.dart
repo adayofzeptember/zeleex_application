@@ -1,40 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'Plate.dart';
 import 'payment.dart';
 
-void main(List<String> args) {
-  runApp(PaymentMethodPage());
+
+
+class Payment_Method extends StatefulWidget {
+  Payment_Method ({Key? key}) : super(key: key);
+
+  @override
+  State<Payment_Method > createState() => _Payment_MethodState();
 }
 
-class PaymentMethodPage extends StatelessWidget {
-  const PaymentMethodPage({Key? key}) : super(key: key);
-
+class _Payment_MethodState extends State<Payment_Method > {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: PaymentMethod_widget(),
-    );
-  }
-}
-
-class PaymentMethod_widget extends StatefulWidget {
-  PaymentMethod_widget({Key? key}) : super(key: key);
-
-  @override
-  State<PaymentMethod_widget> createState() => _PaymentMethod_widgetState();
-}
-
-class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
-          appBarTheme: AppBarTheme(color: Palette.kToDark)),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+            systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Palette.kToDark,
+          ),
           backgroundColor: Palette.kToDark,
           elevation: 0.0,
           title: Row(
@@ -42,12 +29,7 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PaymentPage(),
-                    ),
-                  );
+                  Navigator.pop(context);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -310,7 +292,7 @@ class _PaymentMethod_widgetState extends State<PaymentMethod_widget> {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

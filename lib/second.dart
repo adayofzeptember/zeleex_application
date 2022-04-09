@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -60,34 +61,62 @@ class _SecondPageState extends State<SecondPage> {
                 SizedBox(
                   height: 30,
                 ),
-                InkWell(
-                  onTap: () {
-                    //Navigator.of(context, rootNavigator: true).pop(context);
-                    // Navigator.pop(context);
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Palette.kToDark,
+                      elevation: 0,
+                      // side: BorderSide(color: Colors.red),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      )),
+                  onPressed: () {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Main_Page()));
                   },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    padding: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Palette.kToDark,
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: Text(
-                      "หน้าหลัก ",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                      textAlign: TextAlign.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "หน้าหลัก",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
                     ),
                   ),
                 ),
+                // InkWell(
+                //   onTap: () {
+                //     //Navigator.of(context, rootNavigator: true).pop(context);
+                //     // Navigator.pop(context);
+                //     Navigator.pushReplacement(context,
+                //         MaterialPageRoute(builder: (context) => Main_Page()));
+                //   },
+                //   child: Container(
+                //     width: MediaQuery.of(context).size.width * 0.7,
+                //     padding: EdgeInsets.all(15.0),
+                //     decoration: BoxDecoration(
+                //       color: Palette.kToDark,
+                //       borderRadius: BorderRadius.circular(30.0),
+                //     ),
+                //     child: Text(
+                //       "หน้าหลัก ",
+                //       style: TextStyle(color: Colors.white, fontSize: 15),
+                //       textAlign: TextAlign.center,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: 2,
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage2()));
+                        CupertinoPageRoute(builder: (context) {
+                      return LoginPage2();
+                    }));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => LoginPage2()));
                   }, // Handle your callback
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.7,
@@ -97,7 +126,7 @@ class _SecondPageState extends State<SecondPage> {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     child: Text(
-                      "ล็อคอิน (ไว้ทดสอบไปส่วนเข้าสู่ระบบ)",
+                      "ล็อคอิน (ทดสอบไปส่วนเข้าสู่ระบบ)",
                       style: TextStyle(color: Colors.white, fontSize: 15),
                       textAlign: TextAlign.center,
                     ),

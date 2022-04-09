@@ -46,6 +46,8 @@ android {
         applicationId "com.example.zeleex_application"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
+        // minSdkVersion 21z
+        // targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

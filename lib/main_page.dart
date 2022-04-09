@@ -2,12 +2,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/animal.dart';
-import 'package:zeleex_application/main_widget.dart';
-import 'package:zeleex_application/newsfeed.dart';
-import 'package:zeleex_application/products.dart';
-import 'package:zeleex_application/semens.dart';
-import 'package:zeleex_application/store_page.dart';
+import 'package:zeleex_application/main%206%20pages/animal.dart';
+import 'package:zeleex_application/main%206%20pages/main_widget.dart';
+import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
+import 'package:zeleex_application/main%206%20pages/products.dart';
+import 'package:zeleex_application/main%206%20pages/semens.dart';
+import 'package:zeleex_application/main%206%20pages/store_page.dart';
 
 import 'Plate.dart';
 

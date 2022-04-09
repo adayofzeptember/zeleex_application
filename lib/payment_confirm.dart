@@ -3,34 +3,22 @@ import 'package:flutter/services.dart';
 import 'Plate.dart';
 import 'payment.dart';
 
-void main(List<String> args) {
-  runApp(PaymentConfirmPage());
+
+
+
+class Payment_Confirm extends StatefulWidget {
+  Payment_Confirm({Key? key}) : super(key: key);
+
+  @override
+  State<Payment_Confirm> createState() => _Payment_ConfirmState();
 }
 
-class PaymentConfirmPage extends StatelessWidget {
-  const PaymentConfirmPage({Key? key}) : super(key: key);
-
+class _Payment_ConfirmState extends State<Payment_Confirm> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: PaymentConfirm_widget(),
-    );
-  }
-}
-
-class PaymentConfirm_widget extends StatefulWidget {
-  PaymentConfirm_widget({Key? key}) : super(key: key);
-
-  @override
-  State<PaymentConfirm_widget> createState() => _PaymentConfirm_widgetState();
-}
-
-class _PaymentConfirm_widgetState extends State<PaymentConfirm_widget> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           systemOverlayStyle: SystemUiOverlayStyle(
             // Status bar color
             statusBarColor: Palette.kToDark,
@@ -42,12 +30,7 @@ class _PaymentConfirm_widgetState extends State<PaymentConfirm_widget> {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PaymentPage(),
-                    ),
-                  );
+                  Navigator.pop(context);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -139,7 +122,9 @@ class _PaymentConfirm_widgetState extends State<PaymentConfirm_widget> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           )),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Container(
@@ -161,7 +146,7 @@ class _PaymentConfirm_widgetState extends State<PaymentConfirm_widget> {
             ),
           ],
         ),
-      ),
+     
     );
   }
 }

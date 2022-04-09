@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'Plate.dart';
-import 'store_page.dart';
+import 'main 6 pages/store_page.dart';
 import 'store_page_detail_cattle.dart';
 import 'store_page_detail_product.dart';
 

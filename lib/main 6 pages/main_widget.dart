@@ -5,10 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/profile.dart';
-import 'Career/career.dart';
-import 'Plate.dart';
-import 'aboutus.dart';
-import 'help.dart';
+import '../Career/career.dart';
+import '../Plate.dart';
+import '../aboutus.dart';
+import '../help.dart';
 
 class Main_Widget extends StatefulWidget {
   Main_Widget({Key? key}) : super(key: key);
@@ -683,7 +683,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.white,
-                              child: Icon(Icons.person, color: Palette.kToDark,),
+                              child: Icon(
+                                Icons.person,
+                                color: Palette.kToDark,
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),

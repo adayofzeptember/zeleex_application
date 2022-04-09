@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'Plate.dart';
-import 'newsfeed.dart';
+import 'main 6 pages/newsfeed.dart';
 
 class NewsFeedPage_Detail extends StatefulWidget {
   NewsFeedPage_Detail({Key? key}) : super(key: key);

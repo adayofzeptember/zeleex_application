@@ -4,43 +4,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/from%20Profile/likes.dart';
 import 'package:zeleex_application/main_page.dart';
-import 'package:zeleex_application/main_widget.dart';
+import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'Plate.dart';
 import 'cart.dart';
 import 'payment_address.dart';
 
-void main(List<String> args) {
-  runApp(ProfilePage());
-}
-
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  ProfilePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Kanit',
-        primarySwatch: Palette.kToDark,
-        appBarTheme: AppBarTheme(color: Palette.kToDark),
-      ),
-      home: Profile_widget(),
-    );
-  }
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class Profile_widget extends StatefulWidget {
-  Profile_widget({Key? key}) : super(key: key);
-
-  @override
-  State<Profile_widget> createState() => _Profile_widgetState();
-}
-
-class _Profile_widgetState extends State<Profile_widget> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         systemOverlayStyle: SystemUiOverlayStyle(
           // Status bar color
           statusBarColor: Palette.kToDark,
@@ -53,12 +34,6 @@ class _Profile_widgetState extends State<Profile_widget> {
             InkWell(
               onTap: () {
                 Navigator.pop(context);
-                // Navigator.pushReplacement(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => Main_Widget(),
-                //   ),
-                // );
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -75,7 +50,7 @@ class _Profile_widgetState extends State<Profile_widget> {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => CartPage(),
@@ -159,12 +134,15 @@ class _Profile_widgetState extends State<Profile_widget> {
                     Text("การสั่งซื้อ",
                         style: TextStyle(
                             color: Color.fromARGB(255, 51, 51, 51),
-                            fontSize: MediaQuery.of(context).size.height * 0.015)),
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.015)),
                   ],
                 ),
                 Text(
                   "ประวัติการสั่งซื้อ >",
-                  style: TextStyle(color: Color.fromARGB(255, 130, 130, 130),   fontSize: MediaQuery.of(context).size.height * 0.015),
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 130, 130, 130),
+                      fontSize: MediaQuery.of(context).size.height * 0.015),
                 )
               ],
             ),
@@ -274,7 +252,7 @@ class _Profile_widgetState extends State<Profile_widget> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PaymentAddressPage(),
+                  builder: (context) => Payment_Address(),
                 ),
               );
             },
@@ -298,7 +276,9 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "ที่อยู่สำหรับจัดส่ง",
                             style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.015,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -316,12 +296,17 @@ class _Profile_widgetState extends State<Profile_widget> {
                                   "ชวันธร วีรจรรยาพันธ์",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                        fontSize: MediaQuery.of(context).size.height * 0.015),
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.015),
                                 ),
                                 Text(
                                   "\t (ค่าเริ่มต้น)",
                                   style: TextStyle(
-                                      color: Colors.red,   fontSize: MediaQuery.of(context).size.height * 0.015),
+                                      color: Colors.red,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.015),
                                 ),
                                 SizedBox(
                                   width: 15,
@@ -344,7 +329,8 @@ class _Profile_widgetState extends State<Profile_widget> {
                               "087-571-2533",
                               style: TextStyle(
                                   color: Color.fromARGB(255, 130, 130, 130),
-                                    fontSize: MediaQuery.of(context).size.height * 0.015),
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.015),
                             ),
                           )),
                       Padding(
@@ -354,7 +340,8 @@ class _Profile_widgetState extends State<Profile_widget> {
                             child: Text(
                               "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
                               style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height * 0.015,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.015,
                                 color: Color.fromARGB(255, 130, 130, 130),
                               ),
                             ),
@@ -392,7 +379,9 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "สิ่งที่ถูกใจ >",
                             style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.015,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -439,12 +428,7 @@ class _Profile_widgetState extends State<Profile_widget> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PaymentAddressPage(),
-                ),
-              );
+      
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -468,7 +452,9 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "นโยบายความเป็นส่วนตัว >",
                             style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.015,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -478,12 +464,7 @@ class _Profile_widgetState extends State<Profile_widget> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PaymentAddressPage(),
-                ),
-              );
+       
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -507,7 +488,9 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "ศูนย์ช่วยเหลือ >",
                             style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.015,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -517,12 +500,7 @@ class _Profile_widgetState extends State<Profile_widget> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PaymentAddressPage(),
-                ),
-              );
+           
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -546,7 +524,9 @@ class _Profile_widgetState extends State<Profile_widget> {
                           Text(
                             "ร่วมงานกับเรา >",
                             style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height * 0.015, fontWeight: FontWeight.bold),
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.015,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),

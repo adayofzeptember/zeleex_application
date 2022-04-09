@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
-import 'Plate.dart';
+import '../Plate.dart';
 
 
-class AnimalsPage extends StatefulWidget {
-  AnimalsPage({Key? key}) : super(key: key);
+class SemensPage extends StatefulWidget {
+  SemensPage({Key? key}) : super(key: key);
 
   @override
-  State<AnimalsPage> createState() => _AnimalsPageState();
+  State<SemensPage> createState() => _SemensPageState();
 }
 
-class _AnimalsPageState extends State<AnimalsPage> {
-  int index = 3;
+class _SemensPageState extends State<SemensPage> {
+  int index = 5;
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;
@@ -24,10 +23,11 @@ class _AnimalsPageState extends State<AnimalsPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Palette.kToDark,
           fontFamily: 'Kanit',
+          primarySwatch: Palette.kToDark,
           appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
       home: Scaffold(
+        // drawer: MyDrawyer(),
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
@@ -59,9 +59,8 @@ class _AnimalsPageState extends State<AnimalsPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: Text("สัตว์",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Palette.kToDark)),
+                  child: Text("น้ำเชื้อ",
+                      style: TextStyle(color: Palette.kToDark,fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   child: Row(
@@ -74,6 +73,10 @@ class _AnimalsPageState extends State<AnimalsPage> {
                       SizedBox(
                         width: 10,
                       ),
+                      SvgPicture.asset(
+                        'assets/images/cart123.svg',
+                        color: Color.fromARGB(255, 51, 51, 51),
+                      )
                     ],
                   ),
                 )
@@ -108,7 +111,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                             child: Text(
                               "โคนม",
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 130, 130, 130),
+                                  color: Colors.grey,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
@@ -145,7 +148,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                           child: Text(
                             "กระบือ",
                             style: TextStyle(
-                                color: Color.fromARGB(255, 130, 130, 130),
+                                color: Colors.grey,
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
@@ -155,6 +158,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                   ),
                 ),
               ),
+     
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
                 child: Wrap(
@@ -163,70 +167,60 @@ class _AnimalsPageState extends State<AnimalsPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Store_Cattle_Detail(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: 10,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5)),
-                                        child: Image.asset(
-                                          'assets/images/anm2.png',
-                                        )),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        child: Text(
-                                          "จ้าวทศพล (YZ116) แบรนด์ดี 1",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color.fromARGB(
-                                                  255, 51, 51, 51),
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                          child: Container(
+                            width: 10,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: Image.asset(
+                                        'assets/images/semens6.png',
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      child: Text(
+                                        "จ้าวทศพล (YZ116) แบรนด์ดี",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        height: 30,
-                                        child: Text(
-                                          "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Color.fromARGB(
-                                                  255, 130, 130, 130)),
-                                        ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 30,
+                                      child: Text(
+                                        "ทีเด็ดพ่อพันธุ์บราห์มัน จ้าวทศพล (YZ116) แบรนด์ดี พันธุกรรมระดับโลก",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(
+                                                255, 130, 130, 130)),
                                       ),
                                     ),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 0, 0),
-                                        child: Text(
-                                          "฿ 890",
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    SizedBox(
-                                      height: 8,
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ 890",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
                               ),
                             ),
                           ),
@@ -245,7 +239,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
                                       child: Image.asset(
-                                        'assets/images/anm2.png',
+                                        'assets/images/semens3.png',
                                       )),
                                   Padding(
                                     padding:
@@ -309,7 +303,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
                                       child: Image.asset(
-                                        'assets/images/anm2.png',
+                                        'assets/images/semens1.png',
                                       )),
                                   Padding(
                                     padding:
@@ -368,7 +362,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
                                       child: Image.asset(
-                                        'assets/images/anm1.png',
+                                        'assets/images/semens1.png',
                                       )),
                                   Padding(
                                     padding:
@@ -432,7 +426,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
                                       child: Image.asset(
-                                        'assets/images/anm1.png',
+                                        'assets/images/semens3.png',
                                       )),
                                   Padding(
                                     padding:
@@ -491,7 +485,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
                                       child: Image.asset(
-                                        'assets/images/anm1.png',
+                                        'assets/images/semens3.png',
                                       )),
                                   Padding(
                                     padding:
@@ -681,7 +675,9 @@ class _AnimalsPageState extends State<AnimalsPage> {
                           height: 20,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            print("object");
+                          },
                           child: Row(
                             children: [
                               SvgPicture.asset(
