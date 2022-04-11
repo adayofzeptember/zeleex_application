@@ -27,10 +27,13 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            systemOverlayStyle: SystemUiOverlayStyle(
-              // Status bar color
-              statusBarColor: Colors.white,
-            ),
+          
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.dark,
+            statusBarColor: Colors.white,
+
+          ),
             backgroundColor: Colors.white,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -5,40 +5,22 @@ import 'package:zeleex_application/history/history_success.dart';
 import '../Plate.dart';
 import '../from Profile/wait_payment_widget.dart';
 
-void main(List<String> args) {
-  runApp(HistoryPage());
-}
 
-class HistoryPage extends StatelessWidget {
-  const HistoryPage({Key? key}) : super(key: key);
+class HistoryPage extends StatefulWidget {
+  HistoryPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Kanit',
-        primarySwatch: Palette.kToDark,
-        appBarTheme: AppBarTheme(color: Palette.kToDark),
-      ),
-      home: History_widget(),
-    );
-  }
+  State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class History_widget extends StatefulWidget {
-  History_widget({Key? key}) : super(key: key);
-
-  @override
-  State<History_widget> createState() => _History_widgetState();
-}
-
-class _History_widgetState extends State<History_widget> {
+class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Palette.kToDark,
             ),

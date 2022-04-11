@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'package:zeleex_application/main%206%20pages/products.dart';
@@ -26,14 +27,16 @@ class _Main_WidgetState extends State<Main_Widget> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
+                //systemOverlayStyle: SystemUiOverlayStyle.dark, // 1
+    
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Palette.kToDark,
-            statusBarIconBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
+            statusBarColor: Palette.kToDark,
+
           ),
           leading: Builder(
             builder: (context) => IconButton(
-              
               icon: SizedBox(
                   child: SvgPicture.asset(
                 'assets/images/menu.svg',
@@ -80,10 +83,11 @@ class _Main_WidgetState extends State<Main_Widget> {
           children: [
             Stack(
               children: [
-              CustomPaint(
-                        painter: ShapesPainter(),
-                        child: Container(height:  MediaQuery.of(context).size.height * 0.25),
-                      ),
+                CustomPaint(
+                  painter: ShapesPainter(),
+                  child: Container(
+                      height: MediaQuery.of(context).size.height * 0.27),
+                ),
                 Column(
                   children: [
                     Padding(
@@ -292,6 +296,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                     style: TextStyle(fontSize: 12))
                               ],
                             ),
+                        
                           ],
                         ),
                       ),
@@ -521,7 +526,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       )
                                     ],
                                   ),
-                                  // in cloumn
                                   SizedBox(
                                     height: 5,
                                   ),
@@ -656,7 +660,7 @@ class _Main_WidgetState extends State<Main_Widget> {
           ],
         ),
       ),
-           drawer: Theme(
+      drawer: Theme(
           data: Theme.of(context).copyWith(
             canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
           ),
@@ -679,11 +683,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                       ),
                       InkWell(
                         onTap: () {
-                           Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfilePage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfilePage()));
                         },
                         child: Row(
                           children: [
@@ -709,8 +712,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   Text(
                                     "ดูโปรไฟล์",
                                     style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 165, 162, 162),
+                                        color:
+                                            Color.fromARGB(255, 165, 162, 162),
                                         fontFamily: 'Kanit'),
                                   ),
                                 ],
@@ -940,7 +943,6 @@ class _Main_WidgetState extends State<Main_Widget> {
               ),
             ),
           )),
-     
     );
   }
 }

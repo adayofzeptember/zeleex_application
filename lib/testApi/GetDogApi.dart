@@ -1,25 +1,26 @@
-// import 'dart:convert';
-// //ช่อง ก้อง
-// GetDogs getDogsFromJson(String str) => GetDogs.fromJson(json.decode(str));
+import 'dart:convert';
 
-// String getDogsToJson(GetDogs data) => json.encode(data.toJson());
+//ช่อง ก้อง
+GetDogs getDogsFromJson(String str) => GetDogs.fromJson(json.decode(str));
 
-// class GetDogs {
-//     GetDogs({
-//        required this.message,
-//        required this.status,
-//     });
+String getDogsToJson(GetDogs data) => json.encode(data.toJson());
 
-//     String message;
-//     String status;
+class GetDogs {
+  GetDogs({
+    required this.message,
+    required this.status,
+  });
 
-//     factory GetDogs.fromJson(Map<String, dynamic> json) => GetDogs(
-//         message: json["message"] == null ? null : json["message"],
-//         status: json["status"] == null ? null : json["status"],
-//     );
+  String message;
+  String status;
 
-//     Map<String, dynamic> toJson() => {
-//         "message": message == null ? null : message,
-//         "status": status == null ? null : status,
-//     };
-// }
+  factory GetDogs.fromJson(Map<String, dynamic> json) => GetDogs(
+        message: json["message"] == null ? null : json["message"],
+        status: json["status"] == null ? null : json["status"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "message": message == null ? null : message,
+        "status": status == null ? null : status,
+      };
+}

@@ -1,22 +1,24 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as Http;
 
 class MessageTell {
-  String status = "";
-  String mess = "";
+  String statusCode = " ";
+  String mess = " ";
+  String timeStamp = " ";
 
-  MessageTell({required this.status, required this.mess});
+  MessageTell({required this.statusCode, required this.mess, required this.timeStamp});
 
-  MessageTell.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    mess = json['responseStatus'];
+  factory MessageTell.fromJson(Map<String, dynamic> json) {
+    statusCode = json['responseCode'];
+    mess = json['responseMessage'];
+    timeStamp = json['serverDatetime'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['responseStatus'] = this.mess;
+    data['responseCode'] = statusCode;
+    data['responseMessage'] = mess;
+    data['serverDatetime'] = this.timeStamp;
     return data;
   }
 }

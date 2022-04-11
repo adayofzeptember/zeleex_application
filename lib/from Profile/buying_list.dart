@@ -23,6 +23,13 @@ class _BuyingListPageState extends State<BuyingListPage> {
         child: Scaffold(
        
           appBar: AppBar(
+            
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.light,
+            statusBarColor: Palette.kToDark,
+
+          ),
             automaticallyImplyLeading: false,
             backgroundColor: Palette.kToDark,
             elevation: 0,

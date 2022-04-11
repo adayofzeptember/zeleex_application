@@ -5,6 +5,7 @@ import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/from%20Profile/likes.dart';
 import 'package:zeleex_application/help.dart';
+import 'package:zeleex_application/history/history.dart';
 import 'package:zeleex_application/terms.dart';
 import 'Plate.dart';
 import 'cart.dart';
@@ -24,7 +25,8 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         systemOverlayStyle: SystemUiOverlayStyle(
-          // Status bar color
+                       statusBarIconBrightness: Brightness.light,
+                          statusBarBrightness: Brightness.light,
           statusBarColor: Palette.kToDark,
         ),
         backgroundColor: Palette.kToDark,
@@ -139,11 +141,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                 MediaQuery.of(context).size.height * 0.015)),
                   ],
                 ),
-                Text(
-                  "ประวัติการสั่งซื้อ >",
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 130, 130, 130),
-                      fontSize: MediaQuery.of(context).size.height * 0.015),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HistoryPage()));
+                  },
+                  child: Text(
+                    "ประวัติการสั่งซื้อ >",
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 130, 130, 130),
+                        fontSize: MediaQuery.of(context).size.height * 0.015),
+                  ),
                 )
               ],
             ),

@@ -39,10 +39,10 @@ class _main_IconState extends State<main_Icon> {
   @override
   initState() {
     super.initState();
-    LoadAndGo();
+    Load_AndGo();
   }
 
-  Future<void> LoadAndGo() async {
+  Future<void> Load_AndGo() async {
     await Future.delayed(const Duration(seconds: 2), () {
       // PageRouteBuilder(
       //     pageBuilder: (BuildContext context, Animation<double> animation,

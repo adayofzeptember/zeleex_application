@@ -36,6 +36,8 @@ class _ProductPageState extends State<ProductPage> {
         appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.white,
+                            statusBarIconBrightness: Brightness.dark,
+                          statusBarBrightness: Brightness.dark
             ),
             leading: Builder(
               builder: (context) => IconButton(

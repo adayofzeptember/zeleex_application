@@ -31,8 +31,9 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-            ),
+                statusBarColor: Colors.white,
+                statusBarIconBrightness: Brightness.dark,
+                statusBarBrightness: Brightness.dark),
             leading: Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(
@@ -116,7 +117,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text("Name TestSurename",
+                                      Text("Zep Chawantest",
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 51, 51, 51),

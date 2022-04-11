@@ -36,6 +36,8 @@ class _AnimalsPageState extends State<AnimalsPage> {
         appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.white,
+                            statusBarIconBrightness: Brightness.dark,
+                          statusBarBrightness: Brightness.dark
             ),
             leading: Builder(
               builder: (context) => IconButton(
@@ -97,26 +99,20 @@ class _AnimalsPageState extends State<AnimalsPage> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            print("object");
-                            //MediaQuery.of(context).size.height * 0.25
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Text(
-                              "โคนม",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          padding: EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Text(
+                            "โคนม",
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                         SizedBox(
@@ -622,7 +618,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                           height: 50,
                         ),
                         InkWell(
-                             onTap: () {
+                          onTap: () {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
