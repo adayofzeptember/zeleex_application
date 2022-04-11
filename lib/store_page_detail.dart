@@ -122,12 +122,9 @@ class _Store_DetailState extends State<Store_Detail> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Color.fromARGB(255, 51, 51, 51),
                   ),
                 ),
                 Text("ร้านค้า",
@@ -135,19 +132,11 @@ class _Store_DetailState extends State<Store_Detail> {
                         color: Palette.kToDark, fontWeight: FontWeight.bold)),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(
-                        'assets/images/sort.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
-                      ),
+                    SvgPicture.asset(
+                      'assets/images/sort.svg',
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(
-                        'assets/images/cart123.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
-                      ),
+                    SvgPicture.asset(
+                      'assets/images/cart123.svg',
                     )
                   ],
                 )
@@ -212,11 +201,10 @@ class _Store_DetailState extends State<Store_Detail> {
                                               ),
                                               Row(
                                                 children: [
-                                                  ImageIcon(
-                                                    AssetImage(
-                                                      "assets/images/store_pin.png",
-                                                    ),
-                                                    color: Colors.grey,
+                                                  SvgPicture.asset(
+                                                      'assets/images/pinnew.svg'),
+                                                  SizedBox(
+                                                    width: 10,
                                                   ),
                                                   Container(
                                                     width: 200,
@@ -234,14 +222,18 @@ class _Store_DetailState extends State<Store_Detail> {
                                               ),
                                               Row(
                                                 children: [
-                                                  ImageIcon(
-                                                    AssetImage(
-                                                      "assets/images/phone.png",
-                                                    ),
-                                                    color: Colors.grey,
+                                                  SvgPicture.asset(
+                                                      'assets/images/callnew.svg'),
+                                                  // ImageIcon(
+                                                  //   AssetImage(
+                                                  //     "assets/images/phone.png",
+                                                  //   ),
+                                                  //   color: Colors.grey,
+                                                  // ),
+                                                  SizedBox(
+                                                    width: 10,
                                                   ),
                                                   Container(
-                                                    width: 200,
                                                     child: Text(
                                                       "081 235 1234",
                                                       style: TextStyle(
@@ -268,7 +260,11 @@ class _Store_DetailState extends State<Store_Detail> {
                                           15, 0, 0, 0),
                                       child: Row(
                                         children: [
-                                          Image.asset("assets/images/star.png"),
+                                          SvgPicture.asset(
+                                              'assets/images/star.svg'),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
                                           Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
                                           SizedBox(
                                             width: 10,

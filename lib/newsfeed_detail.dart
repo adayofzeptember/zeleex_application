@@ -71,7 +71,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 40, 15, 0),
+                        padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
                         child: Text(
                           "เลี้ยงโคเนื้อครบวงจร",
                           style: TextStyle(

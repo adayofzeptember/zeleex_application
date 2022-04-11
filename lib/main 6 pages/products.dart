@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:zeleex_application/store_page_detail_productDetail.dart';
+import '../Career/career.dart';
 import '../Plate.dart';
-
-
+import '../aboutus.dart';
+import '../help.dart';
+import '../profile.dart';
+import 'main_page.dart';
 
 class ProductPage extends StatefulWidget {
   ProductPage({Key? key}) : super(key: key);
@@ -72,14 +75,12 @@ class _ProductPageState extends State<ProductPage> {
                     children: [
                       SvgPicture.asset(
                         'assets/images/sort.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       SvgPicture.asset(
                         'assets/images/cart123.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
                       )
                     ],
                   ),
@@ -104,9 +105,10 @@ class _ProductPageState extends State<ProductPage> {
                         InkWell(
                           onTap: () {
                             print("object");
+                            //MediaQuery.of(context).size.height * 0.25
                           },
                           child: Container(
-                            width: 150,
+                            width: MediaQuery.of(context).size.width * 0.35,
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
@@ -116,6 +118,7 @@ class _ProductPageState extends State<ProductPage> {
                               "อุปกรณ์",
                               style: TextStyle(
                                   color: Colors.grey,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
@@ -125,7 +128,7 @@ class _ProductPageState extends State<ProductPage> {
                           width: 10,
                         ),
                         Container(
-                          width: 150,
+                          width: MediaQuery.of(context).size.width * 0.35,
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             color: Palette.kToDark,
@@ -135,7 +138,8 @@ class _ProductPageState extends State<ProductPage> {
                             "อาหารและยา",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -143,7 +147,7 @@ class _ProductPageState extends State<ProductPage> {
                           width: 10,
                         ),
                         Container(
-                          width: 150,
+                          width: MediaQuery.of(context).size.width * 0.35,
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -152,6 +156,7 @@ class _ProductPageState extends State<ProductPage> {
                           child: Text(
                             "น้ำเชื้อและตัวอ่อน",
                             style: TextStyle(
+                                fontSize: 12,
                                 color: Color.fromARGB(255, 130, 130, 130),
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
@@ -170,10 +175,17 @@ class _ProductPageState extends State<ProductPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Container(
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Store_Product_Detail()));
+                              },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -481,76 +493,106 @@ class _ProductPageState extends State<ProductPage> {
                         SizedBox(
                           height: 50,
                         ),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              child: Icon(Icons.person),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Name Surname",
-                                      style: TextStyle(
-                                          color: Palette.kToDark,
-                                          fontFamily: 'Kanit')),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "ดูโปรไฟล์",
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 165, 162, 162),
-                                        fontFamily: 'Kanit'),
-                                  ),
-                                ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfilePage()));
+                          },
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                child: Icon(
+                                  Icons.person,
+                                  color: Palette.kToDark,
+                                ),
                               ),
-                            ),
-                            Icon(
-                              Icons.settings,
-                              color: Colors.white,
-                            )
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Name Surname",
+                                        style: TextStyle(
+                                            color: Palette.kToDark,
+                                            fontFamily: 'Kanit')),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "ดูโปรไฟล์",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 165, 162, 162),
+                                          fontFamily: 'Kanit'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Icon(
+                                Icons.settings,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 50,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/home.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text(
-                                "หน้าหลัก",
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Kanit'),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Main_Page(),
                               ),
-                            ),
-                          ],
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/home.svg',
+                                color: Colors.white,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text(
+                                  "หน้าหลัก",
+                                  style: TextStyle(
+                                      color: Colors.white, fontFamily: 'Kanit'),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/about.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text(
-                                "เกี่ยวกับเรา",
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Kanit'),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AboutUs()));
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/about.svg',
+                                color: Colors.white,
                               ),
-                            )
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text(
+                                  "เกี่ยวกับเรา",
+                                  style: TextStyle(
+                                      color: Colors.white, fontFamily: 'Kanit'),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 30,
@@ -589,7 +631,9 @@ class _ProductPageState extends State<ProductPage> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                               child: Text("สินค้า",
-                                  style: TextStyle(color: Colors.white)),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Kanit')),
                             ),
                           ],
                         ),
@@ -644,38 +688,54 @@ class _ProductPageState extends State<ProductPage> {
                         SizedBox(
                           height: 30,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/help2.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text("ศูนย์ช่วยเหลือ",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Kanit')),
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HelpCenterPage()));
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/help2.svg',
+                                color: Colors.white,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text("ศูนย์ช่วยเหลือ",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Kanit')),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/us.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text("ร่วมงานกับเรา",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Kanit')),
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CareerPage()));
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/us.svg',
+                                color: Colors.white,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text("ร่วมงานกับเรา",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Kanit')),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 100,

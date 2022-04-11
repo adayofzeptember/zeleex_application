@@ -100,13 +100,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
           leading: Builder(
             builder: (context) => IconButton(
               icon: SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ImageIcon(
-                    AssetImage(
-                      "assets/images/menu-61.png",
-                    ),
-                    color: Color.fromARGB(255, 51, 51, 51),
+                child: ImageIcon(
+                  AssetImage(
+                    "assets/images/menu-61.png",
                   ),
                 ),
               ),
@@ -120,12 +116,8 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
+                child: Icon(
+                  Icons.arrow_back_ios,
                 ),
               ),
               Text("สินค้า",
@@ -133,19 +125,11 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold)),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/sort.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  SvgPicture.asset(
+                    'assets/images/sort.svg',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/cart123.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  SvgPicture.asset(
+                    'assets/images/cart123.svg',
                   )
                 ],
               )

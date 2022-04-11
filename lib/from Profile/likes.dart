@@ -7,40 +7,24 @@ import 'package:zeleex_application/profile.dart';
 import '../Plate.dart';
 import 'package:flutter/services.dart';
 
-void main(List<String> args) {
-  runApp(LikesPage());
-}
 
-class LikesPage extends StatelessWidget {
-  const LikesPage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Kanit',
-        primarySwatch: Palette.kToDark,
-        appBarTheme: AppBarTheme(color: Palette.kToDark),
-      ),
-      home: Likes_widget(),
-    );
-  }
-}
 
-class Likes_widget extends StatefulWidget {
-  Likes_widget({Key? key}) : super(key: key);
+class LikesPage extends StatefulWidget {
+  LikesPage({Key? key}) : super(key: key);
 
   @override
-  State<Likes_widget> createState() => _Likes_widgetState();
+  State<LikesPage> createState() => _LikesPageState();
 }
 
-class _Likes_widgetState extends State<Likes_widget> {
+class _LikesPageState extends State<LikesPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Palette.kToDark,
             elevation: 0,
             title: Row(
@@ -48,12 +32,7 @@ class _Likes_widgetState extends State<Likes_widget> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
-                      ),
-                    );
+                    Navigator.pop(context);
                   },
                   child: Icon(
                     Icons.arrow_back_ios,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'Plate.dart';
@@ -19,6 +20,11 @@ class AboutUs extends StatelessWidget {
             appBarTheme: AppBarTheme(color: Palette.kToDark)),
         home: Scaffold(
           appBar: AppBar(
+                systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Palette.kToDark,
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
+          ),
             backgroundColor: Palette.kToDark,
             elevation: 0,
             title: Row(

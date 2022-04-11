@@ -6,36 +6,24 @@ import 'package:zeleex_application/profile.dart';
 import '../Plate.dart';
 import 'package:flutter/services.dart';
 
-class BuyingList extends StatelessWidget {
-  const BuyingList({Key? key}) : super(key: key);
+
+
+class BuyingListPage extends StatefulWidget {
+  BuyingListPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Kanit',
-        primarySwatch: Palette.kToDark,
-        appBarTheme: AppBarTheme(color: Palette.kToDark),
-      ),
-      home: BuyingList_widget(),
-    );
-  }
+  State<BuyingListPage> createState() => _BuyingListPageState();
 }
 
-class BuyingList_widget extends StatefulWidget {
-  BuyingList_widget({Key? key}) : super(key: key);
-
-  @override
-  State<BuyingList_widget> createState() => _BuyingList_widgetState();
-}
-
-class _BuyingList_widgetState extends State<BuyingList_widget> {
+class _BuyingListPageState extends State<BuyingListPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
+       
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Palette.kToDark,
             elevation: 0,
             title: Row(
@@ -43,12 +31,7 @@ class _BuyingList_widgetState extends State<BuyingList_widget> {
               children: [
                 InkWell(
                   onTap: () {
-                         Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(),
-                        ),
-                      );
+                       Navigator.pop(context);
                     // Navigator.of(context, rootNavigator: true).pop(context);
                   },
                   child: Icon(

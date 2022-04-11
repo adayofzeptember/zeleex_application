@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/help.dart';
+import 'package:zeleex_application/main%206%20pages/main_page.dart';
+import '../Career/career.dart';
 import '../Plate.dart';
+import '../aboutus.dart';
+import '../profile.dart';
 
 
 class SemensPage extends StatefulWidget {
@@ -68,14 +73,12 @@ class _SemensPageState extends State<SemensPage> {
                     children: [
                       SvgPicture.asset(
                         'assets/images/sort.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       SvgPicture.asset(
-                        'assets/images/cart123.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
+                        'assets/images/shopping-cart.svg',
                       )
                     ],
                   ),
@@ -538,31 +541,43 @@ class _SemensPageState extends State<SemensPage> {
             ],
           ),
         ),
-        drawer: Theme(
-            data: Theme.of(context).copyWith(
-              canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
-            ),
-            child: Container(
-              width: 250,
-              child: Drawer(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    20,
-                    0,
-                    0,
-                    0,
-                  ),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Row(
+              drawer: Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
+          ),
+          child: Container(
+            width: 250,
+            child: Drawer(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  20,
+                  0,
+                  0,
+                  0,
+                ),
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 50,
+                      ),
+                      InkWell(
+                        onTap: () {
+                           Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfilePage()));
+                        },
+                        child: Row(
                           children: [
                             CircleAvatar(
-                              child: Icon(Icons.person),
+                              backgroundColor: Colors.white,
+                              child: Icon(
+                                Icons.person,
+                                color: Palette.kToDark,
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
@@ -579,8 +594,8 @@ class _SemensPageState extends State<SemensPage> {
                                   Text(
                                     "ดูโปรไฟล์",
                                     style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 165, 162, 162),
+                                        color: Color.fromARGB(
+                                            255, 165, 162, 162),
                                         fontFamily: 'Kanit'),
                                   ),
                                 ],
@@ -592,10 +607,20 @@ class _SemensPageState extends State<SemensPage> {
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Row(
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      InkWell(
+                           onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Main_Page(),
+                              ),
+                            );
+                          },
+                        child: Row(
                           children: [
                             SvgPicture.asset(
                               'assets/images/new/home.svg',
@@ -611,10 +636,18 @@ class _SemensPageState extends State<SemensPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AboutUs()));
+                        },
+                        child: Row(
                           children: [
                             SvgPicture.asset(
                               'assets/images/new/about.svg',
@@ -630,99 +663,106 @@ class _SemensPageState extends State<SemensPage> {
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text("ภายในร้าน",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 165, 162, 162),
-                                fontFamily: 'Kanit')),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/tab4.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Text("สัตว์",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Kanit')),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/tab5.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text("สินค้า",
-                                  style: TextStyle(color: Colors.white)),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print("object");
-                          },
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/new/tab2.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text("ร้านค้า",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Kanit')),
-                              ),
-                            ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text("ภายในร้าน",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 165, 162, 162),
+                              fontFamily: 'Kanit')),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/new/tab4.svg',
+                            color: Colors.white,
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            child: Text("สัตว์",
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: 'Kanit')),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/new/tab5.svg',
+                            color: Colors.white,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                            child: Text("สินค้า",
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: 'Kanit')),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          print("object");
+                        },
+                        child: Row(
                           children: [
                             SvgPicture.asset(
-                              'assets/images/new/tab6.svg',
+                              'assets/images/new/tab2.svg',
                               color: Colors.white,
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text("น้ำเชื้อ",
+                              child: Text("ร้านค้า",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Kanit')),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text("การช่วยเหลือ",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 165, 162, 162),
-                                fontFamily: 'Kanit')),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/new/tab6.svg',
+                            color: Colors.white,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                            child: Text("น้ำเชื้อ",
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: 'Kanit')),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text("การช่วยเหลือ",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 165, 162, 162),
+                              fontFamily: 'Kanit')),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HelpCenterPage()));
+                        },
+                        child: Row(
                           children: [
                             SvgPicture.asset(
                               'assets/images/new/help2.svg',
@@ -737,10 +777,18 @@ class _SemensPageState extends State<SemensPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CareerPage()));
+                        },
+                        child: Row(
                           children: [
                             SvgPicture.asset(
                               'assets/images/new/us.svg',
@@ -755,37 +803,38 @@ class _SemensPageState extends State<SemensPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 100,
+                      ),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Divider(color: Color.fromARGB(255, 165, 162, 162)),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/logout.svg',
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                              child: Text("ออกจากระบบ",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Kanit')),
+                            ),
+                          ],
                         ),
-                        Divider(color: Color.fromARGB(255, 165, 162, 162)),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/new/logout.svg',
-                                color: Colors.white,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                child: Text("ออกจากระบบ",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Kanit')),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )),
+            ),
+          )),
       ),
     );
   }

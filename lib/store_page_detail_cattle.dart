@@ -16,8 +16,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        appBar: AppBar(
+      appBar: AppBar(
           backgroundColor: Colors.white,
           leading: Builder(
             builder: (context) => IconButton(
@@ -35,7 +34,6 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
-     
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -43,12 +41,8 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
+                child: Icon(
+                  Icons.arrow_back_ios,
                 ),
               ),
               Text("หมวดหมู่สัตว์",
@@ -56,19 +50,11 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold)),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/sort.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  SvgPicture.asset(
+                    'assets/images/sort.svg',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/cart123.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  SvgPicture.asset(
+                    'assets/images/cart123.svg',
                   )
                 ],
               )
@@ -256,6 +242,9 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   color: Colors.white,
                   width: double.infinity,
@@ -268,9 +257,10 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                           InkWell(
                             onTap: () {
                               print("object");
+                              //MediaQuery.of(context).size.height * 0.25
                             },
                             child: Container(
-                              width: 150,
+                              width: MediaQuery.of(context).size.width * 0.35,
                               padding: EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey),
@@ -279,42 +269,8 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                               child: Text(
                                 "โคนม",
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 130, 130, 130),
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          // Container(
-                          //   padding: EdgeInsets.all(10.0),
-                          //   decoration: BoxDecoration(
-                          //     color: Palette.kToDark,
-                          //     borderRadius: BorderRadius.circular(30.0),
-                          //   ),
-                          //   child: ElevatedButton(
-
-                          //     onPressed: () {},
-                          //     child: Text("data"),
-                          //   ),
-                          // ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {});
-                            },
-                            child: Container(
-                              width: 150,
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                color: Palette.kToDark,
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child: Text(
-                                "โคเนื้อ",
-                                style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.grey,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               ),
@@ -324,15 +280,35 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                             width: 10,
                           ),
                           Container(
-                            width: 150,
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              color: Palette.kToDark,
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: Text(
+                              "โคเนื้อ",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.35,
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Text(
-                              "กระบือ",
+                              "อาหารและยา",
                               style: TextStyle(
+                                  fontSize: 12,
                                   color: Color.fromARGB(255, 130, 130, 130),
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,

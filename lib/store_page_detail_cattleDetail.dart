@@ -147,12 +147,9 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Color.fromARGB(255, 51, 51, 51),
                 ),
               ),
               Text("หมวดหมู่สัตว์",
@@ -161,12 +158,8 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               Row(
                 children: [
                
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/cart123.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  SvgPicture.asset(
+                    'assets/images/cart123.svg',
                   )
                 ],
               )

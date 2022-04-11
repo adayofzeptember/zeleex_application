@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/help.dart';
+import 'package:zeleex_application/main%206%20pages/main_page.dart';
+import 'package:zeleex_application/profile.dart';
 
+import '../Career/career.dart';
 import '../Plate.dart';
+import '../aboutus.dart';
 import '../store_page_detail.dart';
-
 
 class StorePage extends StatefulWidget {
   StorePage({Key? key}) : super(key: key);
@@ -46,7 +50,7 @@ class _StorePageState extends State<StorePage> {
               ),
             ),
             elevation: 0,
-              title: Row(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
@@ -60,9 +64,10 @@ class _StorePageState extends State<StorePage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Text("ร้านค้า",
-                      style: TextStyle(color: Palette.kToDark,fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          color: Palette.kToDark, fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   child: Row(
@@ -70,15 +75,14 @@ class _StorePageState extends State<StorePage> {
                     children: [
                       SvgPicture.asset(
                         'assets/images/sort.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
                       ),
                       SizedBox(
                         width: 10,
                       ),
-                      SvgPicture.asset(
-                        'assets/images/cart123.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
-                      )
+                      // SvgPicture.asset(
+                      //   'assets/images/cart123.svg',
+                      //   color: Color.fromARGB(255, 51, 51, 51),
+                      // )
                     ],
                   ),
                 )
@@ -102,12 +106,12 @@ class _StorePageState extends State<StorePage> {
                                   borderRadius: BorderRadius.circular(5.0)),
                               child: InkWell(
                                 onTap: () {
-                                   Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Store_Detail(),
-                                        ),
-                                      );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Store_Detail(),
+                                    ),
+                                  );
                                 },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +133,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "ศรีไพศาลอาหารสัตว์",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,      fontSize: 13,
+                                            fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -147,7 +151,8 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. จันทบุรี",
-                                              style: TextStyle( fontSize: 13,
+                                              style: TextStyle(
+                                                  fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -207,7 +212,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "โกศินการเกษตร",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold, fontSize: 13,
+                                            fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -225,7 +230,8 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. เชียงใหม่",
-                                              style: TextStyle( fontSize: 13,
+                                              style: TextStyle(
+                                                  fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -290,7 +296,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "บริษัท นิวเจนแมน จำกัด",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold, fontSize: 13,
+                                            fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -308,7 +314,8 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. นครราชสีมา",
-                                              style: TextStyle( fontSize: 13,
+                                              style: TextStyle(
+                                                  fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -368,7 +375,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "บีม Pet SHop",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold, fontSize: 13,
+                                            fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -386,7 +393,8 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. เชียงใหม่",
-                                              style: TextStyle( fontSize: 13,
+                                              style: TextStyle(
+                                                  fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -451,7 +459,7 @@ class _StorePageState extends State<StorePage> {
                                       child: Text(
                                         "บริษัท นิวเจนแมน จำกัด",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold, fontSize: 13,
+                                            fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -469,7 +477,8 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. นครราชสีมา",
-                                              style: TextStyle( fontSize: 13,
+                                              style: TextStyle(
+                                                  fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -528,8 +537,8 @@ class _StorePageState extends State<StorePage> {
                                           15, 5, 0, 0),
                                       child: Text(
                                         "เชียงพัง การเกษตร  ",
-                                        style: TextStyle( fontSize: 13,
-                                            fontWeight: FontWeight.bold,
+                                        style: TextStyle(
+                                            fontSize: 13,
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51)),
                                       ),
@@ -547,7 +556,8 @@ class _StorePageState extends State<StorePage> {
                                           Container(
                                             child: Text(
                                               "จ. อุดรธานี",
-                                              style: TextStyle( fontSize: 13,
+                                              style: TextStyle(
+                                                  fontSize: 13,
                                                   color: Palette.kToDark),
                                             ),
                                           ),
@@ -604,76 +614,106 @@ class _StorePageState extends State<StorePage> {
                         SizedBox(
                           height: 50,
                         ),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              child: Icon(Icons.person),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Name Surname",
-                                      style: TextStyle(
-                                          color: Palette.kToDark,
-                                          fontFamily: 'Kanit')),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "ดูโปรไฟล์",
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 165, 162, 162),
-                                        fontFamily: 'Kanit'),
-                                  ),
-                                ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfilePage()));
+                          },
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                child: Icon(
+                                  Icons.person,
+                                  color: Palette.kToDark,
+                                ),
                               ),
-                            ),
-                            Icon(
-                              Icons.settings,
-                              color: Colors.white,
-                            )
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Name Surname",
+                                        style: TextStyle(
+                                            color: Palette.kToDark,
+                                            fontFamily: 'Kanit')),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "ดูโปรไฟล์",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 165, 162, 162),
+                                          fontFamily: 'Kanit'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Icon(
+                                Icons.settings,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 50,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/home.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text(
-                                "หน้าหลัก",
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Kanit'),
+                        InkWell(
+                             onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Main_Page(),
                               ),
-                            ),
-                          ],
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/home.svg',
+                                color: Colors.white,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text(
+                                  "หน้าหลัก",
+                                  style: TextStyle(
+                                      color: Colors.white, fontFamily: 'Kanit'),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/about.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text(
-                                "เกี่ยวกับเรา",
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Kanit'),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AboutUs()));
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/about.svg',
+                                color: Colors.white,
                               ),
-                            )
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text(
+                                  "เกี่ยวกับเรา",
+                                  style: TextStyle(
+                                      color: Colors.white, fontFamily: 'Kanit'),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 30,
@@ -712,7 +752,9 @@ class _StorePageState extends State<StorePage> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                               child: Text("สินค้า",
-                                  style: TextStyle(color: Colors.white)),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Kanit')),
                             ),
                           ],
                         ),
@@ -767,38 +809,54 @@ class _StorePageState extends State<StorePage> {
                         SizedBox(
                           height: 30,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/help2.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text("ศูนย์ช่วยเหลือ",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Kanit')),
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HelpCenterPage()));
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/help2.svg',
+                                color: Colors.white,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text("ศูนย์ช่วยเหลือ",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Kanit')),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/images/new/us.svg',
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                              child: Text("ร่วมงานกับเรา",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Kanit')),
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CareerPage()));
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/new/us.svg',
+                                color: Colors.white,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Text("ร่วมงานกับเรา",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Kanit')),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 100,

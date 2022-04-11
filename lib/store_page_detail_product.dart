@@ -16,7 +16,6 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
           backgroundColor: Colors.white,
           leading: Builder(
@@ -42,12 +41,9 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Color.fromARGB(255, 51, 51, 51),
                 ),
               ),
               Text("สินค้าในร้าน",
@@ -55,19 +51,11 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold)),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/sort.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  SvgPicture.asset(
+                    'assets/images/sort.svg',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/images/cart123.svg',
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
+                  SvgPicture.asset(
+                    'assets/images/cart123.svg',
                   )
                 ],
               )
@@ -255,76 +243,79 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
                     )
                   ],
                 ),
-                Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              print("object");
-                            },
-                            child: Container(
-                              width: 150,
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child: Text(
-                                "อุปกรณ์",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 150,
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              color: Palette.kToDark,
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Text(
-                              "อาหารและยา",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 150,
+                SizedBox(height: 10),
+         Container(
+                color: Colors.white,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            print("object");
+                            //MediaQuery.of(context).size.height * 0.25
+                          },
+                          child: Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Text(
-                              "น้ำเชื้อและตัวอ่อน",
+                              "อุปกรณ์",
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 130, 130, 130),
+                                  color: Colors.grey, fontSize: 12,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          padding: EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: Palette.kToDark,
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Text(
+                            "อาหารและยา",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          padding: EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Text(
+                            "น้ำเชื้อและตัวอ่อน",
+                            style: TextStyle(
+                               fontSize: 12,
+                                color: Color.fromARGB(255, 130, 130, 130),
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
+              ),
                 SizedBox(
                   height: 10,
                 ),

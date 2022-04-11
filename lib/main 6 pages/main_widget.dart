@@ -33,6 +33,7 @@ class _Main_WidgetState extends State<Main_Widget> {
           ),
           leading: Builder(
             builder: (context) => IconButton(
+              
               icon: SizedBox(
                   child: SvgPicture.asset(
                 'assets/images/menu.svg',
@@ -655,7 +656,7 @@ class _Main_WidgetState extends State<Main_Widget> {
           ],
         ),
       ),
-      drawer: Theme(
+           drawer: Theme(
           data: Theme.of(context).copyWith(
             canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
           ),
@@ -677,7 +678,13 @@ class _Main_WidgetState extends State<Main_Widget> {
                         height: 50,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                           Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfilePage()));
+                        },
                         child: Row(
                           children: [
                             CircleAvatar(
@@ -699,21 +706,12 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfilePage()));
-                                    },
-                                    child: Text(
-                                      "ดูโปรไฟล์",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 165, 162, 162),
-                                          fontFamily: 'Kanit'),
-                                    ),
+                                  Text(
+                                    "ดูโปรไฟล์",
+                                    style: TextStyle(
+                                        color: Color.fromARGB(
+                                            255, 165, 162, 162),
+                                        fontFamily: 'Kanit'),
                                   ),
                                 ],
                               ),
@@ -942,6 +940,7 @@ class _Main_WidgetState extends State<Main_Widget> {
               ),
             ),
           )),
+     
     );
   }
 }

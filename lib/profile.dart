@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/from%20Profile/likes.dart';
+import 'package:zeleex_application/help.dart';
+import 'package:zeleex_application/terms.dart';
 import 'Plate.dart';
 import 'cart.dart';
 import 'payment_address.dart';
@@ -159,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BuyingList(),
+                          builder: (context) => BuyingListPage(),
                         ),
                       );
                     },
@@ -426,7 +429,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           InkWell(
             onTap: () {
-      
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TermsConditon()));
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -462,7 +466,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           InkWell(
             onTap: () {
-       
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HelpCenterPage()));
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -498,7 +503,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           InkWell(
             onTap: () {
-           
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CareerPage()));
             },
             child: Container(
                 decoration: BoxDecoration(
