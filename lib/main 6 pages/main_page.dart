@@ -358,96 +358,92 @@ class _Main_PageState extends State<Main_Page> {
             BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
           ],
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
-          child: BottomNavigationBar(
-            currentIndex: _index,
-            onTap: _onItemTapped,
-            type: BottomNavigationBarType.fixed,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                activeIcon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab1.svg",
-                    color: Palette.kToDark,
-                  ),
-                ),
-                icon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab1.svg",
-                  ),
-                ),
-                label: 'นิวส์ฟีด',
-              ),
-              BottomNavigationBarItem(
-                activeIcon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab2.svg",
-                    color: Palette.kToDark,
-                  ),
-                ),
-                icon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab2.svg",
-                  ),
-                ),
-                label: 'ร้านค้า',
-              ),
-              BottomNavigationBarItem(
-                activeIcon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab3.svg",
-                    color: Palette.kToDark,
-                  ),
-                ),
-                icon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab3.svg",
-                  ),
-                ),
-                label: 'หน้าหลัก',
-              ),
-              BottomNavigationBarItem(
-                icon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab4.svg",
-                  ),
-                ),
-                activeIcon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab4.svg",
-                    color: Palette.kToDark,
-                  ),
-                ),
-                label: 'สัตว์',
-              ),
-              BottomNavigationBarItem(
-                activeIcon: SvgPicture.asset(
-                  "assets/images/new/tab5.svg",
+        child: BottomNavigationBar(
+          currentIndex: _index,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              activeIcon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab1.svg",
                   color: Palette.kToDark,
                 ),
-                icon: SvgPicture.asset(
-                  "assets/images/new/tab5.svg",
-                ),
-                label: 'สินค้า',
               ),
-              BottomNavigationBarItem(
-                activeIcon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab6.svg",
-                    color: Palette.kToDark,
-                  ),
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab1.svg",
                 ),
-                icon: SizedBox(
-                  child: SvgPicture.asset(
-                    "assets/images/new/tab6.svg",
-                  ),
+              ),
+              label: 'นิวส์ฟีด',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab2.svg",
+                  color: Palette.kToDark,
                 ),
-                label: 'น้ำเชื้อ',
-              )
-            ],
-          ),
+              ),
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab2.svg",
+                ),
+              ),
+              label: 'ร้านค้า',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab3.svg",
+                  color: Palette.kToDark,
+                ),
+              ),
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab3.svg",
+                ),
+              ),
+              label: 'หน้าหลัก',
+            ),
+            BottomNavigationBarItem(
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab4.svg",
+                ),
+              ),
+              activeIcon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab4.svg",
+                  color: Palette.kToDark,
+                ),
+              ),
+              label: 'สัตว์',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: SvgPicture.asset(
+                "assets/images/new/tab5.svg",
+                color: Palette.kToDark,
+              ),
+              icon: SvgPicture.asset(
+                "assets/images/new/tab5.svg",
+              ),
+              label: 'สินค้า',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab6.svg",
+                  color: Palette.kToDark,
+                ),
+              ),
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  "assets/images/new/tab6.svg",
+                ),
+              ),
+              label: 'น้ำเชื้อ',
+            )
+          ],
         ),
       ),
     );

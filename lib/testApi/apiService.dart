@@ -8,7 +8,7 @@ class MessageTell {
 
   MessageTell({required this.statusCode, required this.mess, required this.timeStamp});
 
-  factory MessageTell.fromJson(Map<String, dynamic> json) {
+  MessageTell.fromJson(Map<String, dynamic> json) {
     statusCode = json['responseCode'];
     mess = json['responseMessage'];
     timeStamp = json['serverDatetime'];
@@ -16,7 +16,7 @@ class MessageTell {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['responseCode'] = statusCode;
+    data['responseCode'] = this.statusCode;
     data['responseMessage'] = mess;
     data['serverDatetime'] = this.timeStamp;
     return data;
@@ -24,12 +24,6 @@ class MessageTell {
 }
 
 class DogService {
-  // static randomDog() {
-  //   var url = "https://dog.ceo/api/breeds/image/random";
-  //   Http.get(Uri.parse(url)).then((res) {
-  //     print(res.body);
-  //   });
-  // }
   static Future<MessageTell> randomDog() async {
     var url = "https://sanboxapi.zeleex.com/api/animals/4";
     var response = await Http.get(Uri.parse(url));

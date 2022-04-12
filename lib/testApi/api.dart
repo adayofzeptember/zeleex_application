@@ -93,9 +93,7 @@ class _Api_widgetState extends State<Api_widget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Text(msg.mess),
-                        // Text("zeleex res code: "+msg.statusCode),
-                        // Text(msg.timeStamp),
+                          Text("${msg.mess}")
                       ],
                     );
                     // return Image.network(

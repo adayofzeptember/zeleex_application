@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'Plate.dart';
@@ -12,6 +13,7 @@ class Store_Cattle_Detail extends StatefulWidget {
 }
 
 class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
+  bool pressed = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {},
                 child: Container(
-              
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -123,23 +124,12 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
       //   ],
       // ),
       appBar: AppBar(
+          automaticallyImplyLeading: false,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark),
           backgroundColor: Colors.white,
-          leading: Builder(
-            builder: (context) => IconButton(
-              icon: SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ImageIcon(
-                    AssetImage(
-                      "assets/images/menu-61.png",
-                    ),
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
-                ),
-              ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -157,7 +147,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold)),
               Row(
                 children: [
-               
                   SvgPicture.asset(
                     'assets/images/cart123.svg',
                   )
@@ -241,7 +230,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                       children: [
                         Text("ศรีไพศาลอาหารสัตว์-เกษตรภัณฑ์",
                             style: TextStyle(fontWeight: FontWeight.bold)),
-                       
                         Row(
                           children: [
                             ImageIcon(
@@ -258,7 +246,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                             ),
                           ],
                         ),
-                       
                         Row(
                           children: [
                             ImageIcon(
@@ -269,25 +256,41 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                             ),
                             Row(
                               children: [
+                                ImageIcon(
+                                  AssetImage(
+                                    "assets/images/phone.png",
+                                  ),
+                                  color: Colors.grey,
+                                ),
                                 Text(
                                   "081 235 1234",
                                   style: TextStyle(color: Colors.grey),
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(25, 0, 0, 0),
-                                  child: Container(
-                                    width: 80,
-                                    padding: EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      color: Palette.kToDark,
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: Text(
-                                      "ติดตาม",
-                                      style: TextStyle(color: Colors.white),
-                                      textAlign: TextAlign.center,
-                                    ),
+                                SizedBox(width: 5,),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      primary: pressed
+                                          ? Palette.kToDark
+                                          : Color.fromARGB(255, 204, 204, 204),
+                                      elevation: 0),
+                                  onPressed: () {
+                                    setState(() {
+                                      pressed = !pressed;
+                                    });
+                                  },
+                                  //         style: pressed
+                                  // ? TextStyle(
+                                  //     color: Colors.black)
+                                  // : TextStyle(
+                                  //     color: Color.fromARGB(255, 229, 233, 229)),
+                                  child: Text(
+                                    pressed ? "ติดตาม" : "ติดตามแล้ว",
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromRGBO(255, 255, 255, 1)),
                                   ),
                                 ),
                               ],
@@ -340,7 +343,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                     height: 5,
                   ),
                   Image.asset('assets/images/brazil.png'),
-                   SizedBox(
+                  SizedBox(
                     height: 80,
                   ),
                 ],

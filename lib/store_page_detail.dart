@@ -14,6 +14,8 @@ class Store_Detail extends StatefulWidget {
 }
 
 class _Store_DetailState extends State<Store_Detail> {
+  bool pressed = true;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -99,49 +101,49 @@ class _Store_DetailState extends State<Store_Detail> {
           ),
         ),
         appBar: AppBar(
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: SizedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ImageIcon(
-                      AssetImage(
-                        "assets/images/menu-61.png",
-                      ),
-                      color: Color.fromARGB(255, 51, 51, 51),
-                    ),
-                  ),
-                ),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+            // leading: Builder(
+            //   builder: (context) => IconButton(
+            //     icon: SizedBox(
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: ImageIcon(
+            //           AssetImage(
+            //             "assets/images/menu-61.png",
+            //           ),
+            //           color: Color.fromARGB(255, 51, 51, 51),
+            //         ),
+            //       ),
+            //     ),
+            //     onPressed: () => Scaffold.of(context).openDrawer(),
+            //   ),
+            // ),
+            title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Color.fromARGB(255, 51, 51, 51),
               ),
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Text("ร้านค้า",
+                style: TextStyle(
+                    color: Palette.kToDark, fontWeight: FontWeight.bold)),
+            Row(
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
+                SvgPicture.asset(
+                  'assets/images/sort.svg',
                 ),
-                Text("ร้านค้า",
-                    style: TextStyle(
-                        color: Palette.kToDark, fontWeight: FontWeight.bold)),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/sort.svg',
-                    ),
-                    SvgPicture.asset(
-                      'assets/images/cart123.svg',
-                    )
-                  ],
+                SvgPicture.asset(
+                  'assets/images/cart123.svg',
                 )
               ],
-            )),
+            )
+          ],
+        )),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -269,24 +271,36 @@ class _Store_DetailState extends State<Store_Detail> {
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          InkWell(
-                                            onTap: () {
-                                              print("object");
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                shape:
+                                                    RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30),
+                                                ),
+                                                primary: pressed 
+                                                ? Palette.kToDark
+                                                : Color.fromARGB(255, 204, 204, 204),
+                                                
+                                                elevation: 0),
+                                            onPressed: () {
+                                              setState(() {
+                                                pressed = !pressed;
+                                              });
                                             },
-                                            child: Container(
-                                              width: 70,
-                                              padding: EdgeInsets.all(10.0),
-                                              decoration: BoxDecoration(
-                                                color: Palette.kToDark,
-                                                borderRadius:
-                                                    BorderRadius.circular(30.0),
-                                              ),
-                                              child: Text(
-                                                "ติดตาม",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                                textAlign: TextAlign.center,
-                                              ),
+                                            //         style: pressed
+                                            // ? TextStyle(
+                                            //     color: Colors.black)
+                                            // : TextStyle(
+                                            //     color: Color.fromARGB(255, 229, 233, 229)),
+                                            child: Text(
+                                              pressed
+                                                  ? "ติดตาม"
+                                                  : "ติดตามแล้ว",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      255, 255, 255, 1)),
                                             ),
                                           ),
                                         ],

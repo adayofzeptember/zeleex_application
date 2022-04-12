@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'Plate.dart';
 import 'main 6 pages/newsfeed.dart';
@@ -16,18 +17,24 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
     return  Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
+             systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.dark,
+            statusBarColor: Colors.white,
+          ),
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: SizedBox(
-                  child: SvgPicture.asset(
-                    'assets/images/menu.svg',
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
-                ),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-            ),
+            // leading: Builder(
+            //   builder: (context) => IconButton(
+            //     icon: SizedBox(
+            //       child: SvgPicture.asset(
+            //         'assets/images/menu.svg',
+            //         color: Color.fromARGB(255, 51, 51, 51),
+            //       ),
+            //     ),
+            //     onPressed: () => Scaffold.of(context).openDrawer(),
+            //   ),
+            // ),
             elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +60,6 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                       ),
                       SvgPicture.asset(
                         'assets/images/cart123.svg',
-                        color: Color.fromARGB(255, 51, 51, 51),
                       ),
                     ],
                   ),

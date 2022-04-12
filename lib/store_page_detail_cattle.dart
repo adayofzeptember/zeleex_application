@@ -13,27 +13,30 @@ class Store_CattlePage extends StatefulWidget {
 }
 
 class _Store_CattlePageState extends State<Store_CattlePage> {
+  bool pressed = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-          leading: Builder(
-            builder: (context) => IconButton(
-              icon: SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ImageIcon(
-                    AssetImage(
-                      "assets/images/menu-61.png",
-                    ),
-                    color: Color.fromARGB(255, 51, 51, 51),
-                  ),
-                ),
-              ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ),
+          // leading: Builder(
+          //   builder: (context) => IconButton(
+          //     icon: SizedBox(
+          //       child: Padding(
+          //         padding: const EdgeInsets.all(8.0),
+          //         child: ImageIcon(
+          //           AssetImage(
+          //             "assets/images/menu-61.png",
+          //           ),
+          //           color: Color.fromARGB(255, 51, 51, 51),
+          //         ),
+          //       ),
+          //     ),
+          //     onPressed: () => Scaffold.of(context).openDrawer(),
+          //   ),
+          // ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -176,26 +179,38 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                         SizedBox(
                                           width: 10,
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            print("object");
-                                          },
-                                          child: Container(
-                                            width: 70,
-                                            padding: EdgeInsets.all(10.0),
-                                            decoration: BoxDecoration(
-                                              color: Palette.kToDark,
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                            ),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                shape:
+                                                    RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30),
+                                                ),
+                                                primary: pressed 
+                                                ? Palette.kToDark
+                                                : Color.fromARGB(255, 204, 204, 204),
+                                                
+                                                elevation: 0),
+                                            onPressed: () {
+                                              setState(() {
+                                                pressed = !pressed;
+                                              });
+                                            },
+                                            //         style: pressed
+                                            // ? TextStyle(
+                                            //     color: Colors.black)
+                                            // : TextStyle(
+                                            //     color: Color.fromARGB(255, 229, 233, 229)),
                                             child: Text(
-                                              "ติดตาม",
+                                              pressed
+                                                  ? "ติดตาม"
+                                                  : "ติดตามแล้ว",
                                               style: TextStyle(
-                                                  color: Colors.white),
-                                              textAlign: TextAlign.center,
+                                                  color: Color.fromRGBO(
+                                                      255, 255, 255, 1)),
                                             ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                   ),
