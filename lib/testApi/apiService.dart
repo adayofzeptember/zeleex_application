@@ -25,7 +25,7 @@ class MessageTell {
 
 class DogService {
   static Future<MessageTell> randomDog() async {
-    var url = "https://sanboxapi.zeleex.com/api/animals/4";
+    var url = "https://sanboxapi.zeleex.com/api/helps";
     var response = await Http.get(Uri.parse(url));
     MessageTell msg = MessageTell.fromJson(json.decode(response.body));
     //print(msg.mess);

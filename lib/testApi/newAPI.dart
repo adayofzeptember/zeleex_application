@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:zeleex_application/testApi/apiService.dart';
 import '../Plate.dart';
 import 'package:http/http.dart' as Http;
-
 import 'newAPI_service.dart';
 
 void main(List<String> args) {
@@ -36,11 +33,8 @@ class Api_widget extends StatefulWidget {
 }
 
 class _Api_widgetState extends State<Api_widget> {
-
-
   initState() {
     super.initState();
-
   }
 
   dispose() {
@@ -67,19 +61,19 @@ class _Api_widgetState extends State<Api_widget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-   
-
             FutureBuilder(
-                future: DogService.randomDog(),
+                future: NewAPI_TEST.randomDog(),
                 builder:
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.hasData) {
-                    MessageTell msg = snapshot.data;
+                    NewAPI msg = snapshot.data;
                     // print("snap = " + msg.mess);
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text("${msg.mess}")],
+                      children: [Text(msg.address!.geo!.lat.toString()),
+                      
+                      Text(msg.company!.name!.toString())],
                     );
                     // return Image.network(
                     //   msg.mess,

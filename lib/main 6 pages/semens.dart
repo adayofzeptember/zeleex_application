@@ -93,7 +93,7 @@ class _SemensPageState extends State<SemensPage> {
               SizedBox(
                 height: 5,
               ),
-              Container(
+                    Container(
                 color: Colors.white,
                 width: double.infinity,
                 child: Padding(
@@ -105,18 +105,20 @@ class _SemensPageState extends State<SemensPage> {
                         InkWell(
                           onTap: () {
                             print("object");
+                            //MediaQuery.of(context).size.height * 0.25
                           },
                           child: Container(
-                            width: 150,
+                            width: MediaQuery.of(context).size.width * 0.35,
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Text(
-                              "โคนม",
+                              "กระบือ",
                               style: TextStyle(
                                   color: Colors.grey,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
@@ -126,7 +128,7 @@ class _SemensPageState extends State<SemensPage> {
                           width: 10,
                         ),
                         Container(
-                          width: 150,
+                          width: MediaQuery.of(context).size.width * 0.35,
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             color: Palette.kToDark,
@@ -136,7 +138,8 @@ class _SemensPageState extends State<SemensPage> {
                             "โคเนื้อ",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -144,7 +147,7 @@ class _SemensPageState extends State<SemensPage> {
                           width: 10,
                         ),
                         Container(
-                          width: 150,
+                          width: MediaQuery.of(context).size.width * 0.35,
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -153,7 +156,8 @@ class _SemensPageState extends State<SemensPage> {
                           child: Text(
                             "กระบือ",
                             style: TextStyle(
-                                color: Colors.grey,
+                                fontSize: 12,
+                                color: Color.fromARGB(255, 130, 130, 130),
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),

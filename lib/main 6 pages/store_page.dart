@@ -1,10 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/profile.dart';
-
+import 'package:expandable/expandable.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
@@ -35,61 +37,74 @@ class _StorePageState extends State<StorePage> {
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
-            systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.white,
-                            statusBarIconBrightness: Brightness.dark,
-                          statusBarBrightness: Brightness.dark
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark),
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  'assets/images/menu.svg',
+                  color: Color.fromARGB(255, 51, 51, 51),
+                ),
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
             ),
-            leading: Builder(
+          ),
+          elevation: 0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {},
+                child: Visibility(
+                  visible: false,
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Text("ร้านค้า",
+                    style: TextStyle(
+                        color: Palette.kToDark, fontWeight: FontWeight.bold)),
+              ),
+
+              // Container(
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.end,
+              //     children: [
+              //       SvgPicture.asset(
+              //         'assets/images/sort.svg',
+              //       ),
+              //       SizedBox(
+              //         width: 10,
+              //       ),
+              //       // SvgPicture.asset(
+              //       //   'assets/images/cart123.svg',
+              //       //   color: Color.fromARGB(255, 51, 51, 51),
+              //       // )
+              //     ],
+              //   ),
+              // )
+            ],
+          ),
+          actions: [
+            Builder(
               builder: (context) => IconButton(
                 icon: SizedBox(
                   child: SvgPicture.asset(
-                    'assets/images/menu.svg',
-                    color: Color.fromARGB(255, 51, 51, 51),
+                    'assets/images/sort.svg',
                   ),
                 ),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
               ),
             ),
-            elevation: 0,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Visibility(
-                    visible: false,
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: Text("ร้านค้า",
-                      style: TextStyle(
-                          color: Palette.kToDark, fontWeight: FontWeight.bold)),
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/sort.svg',
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      // SvgPicture.asset(
-                      //   'assets/images/cart123.svg',
-                      //   color: Color.fromARGB(255, 51, 51, 51),
-                      // )
-                    ],
-                  ),
-                )
-              ],
-            )),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -595,6 +610,36 @@ class _StorePageState extends State<StorePage> {
             ],
           ),
         ),
+        endDrawer: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Colors.white, //desired color
+            ),
+            child: Container(
+              width: MediaQuery.of(context).size.height * 0.3,
+              child: Drawer(
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      20,
+                      0,
+                      0,
+                      0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                        ),
+                        Text("ค้นหาแบบละเอียด",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )),
+                        Card1(),
+              
+                      ],
+                    )),
+              ),
+            )),
         drawer: Theme(
             data: Theme.of(context).copyWith(
               canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
@@ -665,7 +710,7 @@ class _StorePageState extends State<StorePage> {
                           height: 50,
                         ),
                         InkWell(
-                             onTap: () {
+                          onTap: () {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -893,5 +938,282 @@ class _StorePageState extends State<StorePage> {
             )),
       ),
     );
+  }
+}
+
+class Card1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ExpandableNotifier(
+        child: Column(
+          children: <Widget>[
+            ScrollOnExpand(
+              scrollOnExpand: true,
+              scrollOnCollapse: false,
+              child: ExpandablePanel(
+                theme: const ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  tapBodyToCollapse: false,
+                ),
+                header: Text(
+                  "ประเภทร้านค้า", style: TextStyle(fontWeight: FontWeight.w500,color: Color.fromARGB(255, 131, 131, 131)),
+                ),
+                collapsed: Container(),
+                
+                expanded: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("ร้านค้าทั่วไป", style: TextStyle(fontWeight: FontWeight.w500,color: Color.fromARGB(255, 131, 131, 131))),
+                    SizedBox(height: 5,),
+                    Text("ร้านค้าส่งสัตว์", style: TextStyle(fontWeight: FontWeight.w500,color: Color.fromARGB(255, 131, 131, 131))),
+                             SizedBox(height: 5,),
+                    Text("บริการขนส่งน้ำเชื้อ", style: TextStyle(fontWeight: FontWeight.w500,color: Color.fromARGB(255, 131, 131, 131))),
+                    // for (var _ in Iterable.generate(5))
+                    //   Padding(
+                    //       padding: EdgeInsets.only(bottom: 10),
+                    //       child: Text(
+                    //         "loremIpsum",
+                    //         softWrap: true,
+                    //         overflow: TextOverflow.fade,
+                    //       )),
+                  ],
+                ),
+                builder: (_, collapsed, expanded) {
+                  return Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    child: Expandable(
+                      collapsed: collapsed,
+                      expanded: expanded,
+                      theme: const ExpandableThemeData(crossFadePoint: 0),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ));
+  }
+}
+
+// class Card2 extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     buildImg(Color color, double height) {
+//       return SizedBox(
+//           height: height,
+//           child: Container(
+//             decoration: BoxDecoration(
+//               color: color,
+//               shape: BoxShape.rectangle,
+//             ),
+//           ));
+//     }
+
+//     buildCollapsed1() {
+//       return Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: <Widget>[
+//             Padding(
+//               padding: EdgeInsets.all(10),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: <Widget>[
+//                   Text(
+//                     "Expandable",
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ]);
+//     }
+
+//     buildCollapsed2() {
+//       return buildImg(Colors.lightGreenAccent, 150);
+//     }
+
+//     buildCollapsed3() {
+//       return Container();
+//     }
+
+//     buildExpanded1() {
+//       return Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: <Widget>[
+//             Padding(
+//               padding: EdgeInsets.all(10),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: <Widget>[
+//                   Text(
+//                     "Expandable",
+//                   ),
+//                   Text(
+//                     "3 Expandable widgets",
+//                     style: Theme.of(context).textTheme.caption,
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ]);
+//     }
+
+//     buildExpanded2() {
+//       return Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: <Widget>[
+//           Row(
+//             children: <Widget>[
+//               Expanded(child: buildImg(Colors.lightGreenAccent, 100)),
+//               Expanded(child: buildImg(Colors.orange, 100)),
+//             ],
+//           ),
+//           Row(
+//             children: <Widget>[
+//               Expanded(child: buildImg(Colors.lightBlue, 100)),
+//               Expanded(child: buildImg(Colors.cyan, 100)),
+//             ],
+//           ),
+//         ],
+//       );
+//     }
+
+//     buildExpanded3() {
+//       return Padding(
+//         padding: EdgeInsets.all(10),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: <Widget>[
+//             Text(
+//               "loremIpsum",
+//               softWrap: true,
+//             ),
+//           ],
+//         ),
+//       );
+//     }
+
+//     return ExpandableNotifier(
+//         child: Padding(
+//       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+//       child: ScrollOnExpand(
+//         child: Card(
+//           clipBehavior: Clip.antiAlias,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: <Widget>[
+//               Expandable(
+//                 collapsed: buildCollapsed1(),
+//                 expanded: buildExpanded1(),
+//               ),
+//               Expandable(
+//                 collapsed: buildCollapsed2(),
+//                 expanded: buildExpanded2(),
+//               ),
+//               Expandable(
+//                 collapsed: buildCollapsed3(),
+//                 expanded: buildExpanded3(),
+//               ),
+//               Divider(
+//                 height: 1,
+//               ),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.start,
+//                 children: <Widget>[
+//                   Builder(
+//                     builder: (context) {
+//                       var controller =
+//                           ExpandableController.of(context, required: true)!;
+//                       return TextButton(
+//                         child: Text(
+//                           controller.expanded ? "COLLAPSE" : "EXPAND",
+//                           style: Theme.of(context)
+//                               .textTheme
+//                               .button!
+//                               .copyWith(color: Colors.deepPurple),
+//                         ),
+//                         onPressed: () {
+//                           controller.toggle();
+//                         },
+//                       );
+//                     },
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     ));
+//   }
+// }
+
+class Card3 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    buildItem(String label) {
+      return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Text(label),
+      );
+    }
+
+    buildList() {
+      return Column(
+        children: <Widget>[
+          for (var i in [1, 2, 3, 4]) buildItem("Item ${i}"),
+        ],
+      );
+    }
+
+    return ExpandableNotifier(
+        child: ScrollOnExpand(
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: <Widget>[
+                ExpandablePanel(
+                  theme: const ExpandableThemeData(
+                    headerAlignment: ExpandablePanelHeaderAlignment.center,
+                    tapBodyToExpand: true,
+                    tapBodyToCollapse: false,
+                    hasIcon: false,
+                  ),
+                  header: Container(
+                    color: Colors.indigoAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          ExpandableIcon(
+                            theme: const ExpandableThemeData(
+                              expandIcon: Icons.arrow_right,
+                              collapseIcon: Icons.arrow_drop_down,
+                              iconColor: Colors.white,
+                              iconSize: 28.0,
+                              iconRotationAngle: 3.414 / 2,
+                              iconPadding: EdgeInsets.only(right: 5),
+                              hasIcon: false,
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              "Items",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  collapsed: Container(),
+                  expanded: buildList(),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
