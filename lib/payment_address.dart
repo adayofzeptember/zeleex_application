@@ -8,8 +8,6 @@ import 'Plate.dart';
 import 'address_edit.dart';
 import 'payment.dart';
 
-
-
 class Payment_Address extends StatefulWidget {
   Payment_Address({Key? key}) : super(key: key);
 
