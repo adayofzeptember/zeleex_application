@@ -129,8 +129,6 @@ class NewAPI_TEST {
     var url = "https://jsonplaceholder.typicode.com/users/1";
     var response = await Http.get(Uri.parse(url));
     NewAPI msg = NewAPI.fromJson(json.decode(response.body));
-    //print(msg.mess);
-    //print(msg.status);
     return msg;
   }
 }

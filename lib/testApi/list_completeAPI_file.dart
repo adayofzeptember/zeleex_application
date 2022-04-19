@@ -19,9 +19,6 @@ class Data {
   }
 }
 
-class Gx{
-  
-}
 
 Future<List<Data>> fetchData() async {
   final response =
