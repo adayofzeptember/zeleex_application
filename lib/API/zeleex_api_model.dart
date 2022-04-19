@@ -48,7 +48,7 @@ class HelpCenter {
 
 class Data {
   int? currentPage;
-  List<DataDetail>? data;
+  List<Data2>? data2;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -63,7 +63,7 @@ class Data {
 
   Data(
       {this.currentPage,
-      this.data,
+      this.data2,
       this.firstPageUrl,
       this.from,
       this.lastPage,
@@ -79,9 +79,9 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = <DataDetail>[];
+      data2 = <Data2>[];
       json['data'].forEach((v) {
-        data!.add(new DataDetail.fromJson(v));
+        data2!.add(new Data2.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -105,8 +105,8 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['current_page'] = this.currentPage;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    if (this.data2 != null) {
+      data['data'] = this.data2!.map((v) => v.toJson()).toList();
     }
     data['first_page_url'] = this.firstPageUrl;
     data['from'] = this.from;
@@ -125,7 +125,7 @@ class Data {
   }
 }
 
-class DataDetail {
+class Data2 {
   int? id;
   String? title;
   String? status;
@@ -147,7 +147,7 @@ class DataDetail {
   int? subscribeCount;
   List<Types>? types;
 
-  DataDetail(
+  Data2(
       {this.id,
       this.title,
       this.status,
@@ -169,7 +169,7 @@ class DataDetail {
       this.subscribeCount,
       this.types});
 
-  DataDetail.fromJson(Map<String, dynamic> json) {
+  Data2.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     status = json['status'];
@@ -338,14 +338,15 @@ class Links {
   }
 }
 
+
 Future<List<Data>> fetchData555() async {
   final response =
       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/helps'));
 
   final jsonResponse = json.decode(response.body);
-
-  HelpCenter product = new HelpCenter.fromJson(jsonResponse);
-  print(product.data!.data![0]);
+  //jsonResponse.map((data) => new Data.fromJson(data)).toList();
+  HelpCenter product = HelpCenter.fromJson(jsonResponse);
+  print(product.data!.data2!.last.id);
 
   return [];
 }
