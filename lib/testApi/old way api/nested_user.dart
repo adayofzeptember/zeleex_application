@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../Plate.dart';
+import 'package:zeleex_application/Plate.dart';
 import 'package:http/http.dart' as Http;
 import 'nested_user_API.dart';
 

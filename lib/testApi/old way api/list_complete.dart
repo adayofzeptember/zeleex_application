@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:zeleex_application/API/zeleex_api_model.dart';
+import 'package:zeleex_application/testApi/old%20way%20api/list_completeAPI_file.dart';
 
-import '../Plate.dart';
+import '../../Plate.dart';
+
+
 
 void main() => runApp(MyApp());
 
@@ -15,11 +17,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future<List<HelpCenter>> futureData;
+  late Future<List<Data>> futureData;
+
   @override
   void initState() {
     super.initState();
-    futureData = fetchData5551();
+    futureData = fetchData();
   }
 
   @override
@@ -30,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),
       ),
+
       home: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -45,16 +49,16 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         body: Center(
-          child: FutureBuilder<List<HelpCenter>>(
+          child: FutureBuilder<List<Data>>(
             future: futureData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<HelpCenter>? data = snapshot.data;
+                List<Data>? data = snapshot.data;
                 return ListView.builder(
                     itemCount: data?.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        child: Text(data![index].serverDateTimeMS.toString()),
+                        child: Text(data![index].name),
                       );
                     });
               } else if (snapshot.hasError) {
