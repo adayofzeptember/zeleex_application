@@ -128,8 +128,7 @@ class Company {
 Future<List<User>> fetchData123() async {
   final response =
       await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
-  List jsonResponse = json.decode(response.body);
-   if (response.statusCode == 200) {
+  if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     print("success");
     return jsonResponse.map((data) => new User.fromJson(data)).toList();
