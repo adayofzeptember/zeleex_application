@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:zeleex_application/API/slider_api.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'package:zeleex_application/main%206%20pages/products.dart';
@@ -27,6 +28,13 @@ class Main_Widget extends StatefulWidget {
 
 class _Main_WidgetState extends State<Main_Widget> {
   @override
+  late Future<List<DataSlider>> futureData;
+  @override
+  void initState() {
+    super.initState();
+    futureData = fetch_SliderPics();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
@@ -83,7 +91,7 @@ class _Main_WidgetState extends State<Main_Widget> {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+          children: <Widget>[
             Stack(
               children: [
                 CustomPaint(
@@ -92,7 +100,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                       height: MediaQuery.of(context).size.height * 0.27),
                 ),
                 Column(
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Container(
@@ -143,35 +151,43 @@ class _Main_WidgetState extends State<Main_Widget> {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NewsFeedPage_Detail()));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ImageSlideshow(
-                          initialPage: 0,
-                          indicatorColor: Palette.kToDark,
-                          indicatorBackgroundColor: Colors.grey,
-                          autoPlayInterval: 3000,
-                          isLoop: true,
-                          children: [
-                            Image.asset(
-                              'assets/images/slide1.png',
-                              fit: BoxFit.fill,
-                            ),
-                            Image.asset(
-                              'assets/images/anm2.png',
-                              fit: BoxFit.fill,
-                            ),
-                            Image.asset(
-                              'assets/images/slide1.png',
-                              fit: BoxFit.fill,
-                            ),
-                          ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewsFeedPage_Detail()));
+                        },
+                        child: FutureBuilder<List<DataSlider>>(
+                          future: futureData,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              List<DataSlider>? data = snapshot.data;
+                              return ImageSlideshow(
+                                initialPage: 0,
+                                indicatorColor: Palette.kToDark,
+                                indicatorBackgroundColor: Colors.grey,
+                                autoPlayInterval: 3000,
+                                isLoop: true,
+                                children: [
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: data?.length,
+                                      itemBuilder: (BuildContext context, index) {
+                                        return Image.network(
+                                          data![index].imageMobile.toString(), height:200
+                                        );
+                                      })
+                                ],
+                              );
+                            } else if (snapshot.hasError) {
+                              return Text("${snapshot.error}");
+                            }
+                            // By default show a loading spinner.
+                            return CircularProgressIndicator();
+                          },
                         ),
                       ),
                     ),
