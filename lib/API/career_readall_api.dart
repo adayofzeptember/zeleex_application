@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class HelpCenter {
+class Career_ReadAll {
   String? responseCode;
   String? responseStatus;
   String? responseMessage;
@@ -12,7 +12,7 @@ class HelpCenter {
   String? serverDatetime;
   Data? data;
 
-  HelpCenter(
+  Career_ReadAll(
       {this.responseCode,
       this.responseStatus,
       this.responseMessage,
@@ -21,7 +21,7 @@ class HelpCenter {
       this.serverDatetime,
       this.data});
 
-  HelpCenter.fromJson(Map<String, dynamic> json) {
+  Career_ReadAll.fromJson(Map<String, dynamic> json) {
     responseCode = json['responseCode'];
     responseStatus = json['responseStatus'];
     responseMessage = json['responseMessage'];
@@ -48,7 +48,7 @@ class HelpCenter {
 
 class Data {
   int? currentPage;
-  List<Data2>? data2;
+  List<Data_Use>? data_use;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -63,7 +63,7 @@ class Data {
 
   Data(
       {this.currentPage,
-      this.data2,
+      this.data_use,
       this.firstPageUrl,
       this.from,
       this.lastPage,
@@ -79,9 +79,9 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data2 = <Data2>[];
+      data_use = <Data_Use>[];
       json['data'].forEach((v) {
-        data2!.add(new Data2.fromJson(v));
+        data_use!.add(new Data_Use.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -105,8 +105,8 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['current_page'] = this.currentPage;
-    if (this.data2 != null) {
-      data['data'] = this.data2!.map((v) => v.toJson()).toList();
+    if (this.data_use != null) {
+      data['data'] = this.data_use!.map((v) => v.toJson()).toList();
     }
     data['first_page_url'] = this.firstPageUrl;
     data['from'] = this.from;
@@ -125,36 +125,33 @@ class Data {
   }
 }
 
-class Data2 {
+class Data_Use {
   int? id;
   String? title;
   String? content;
   String? status;
   String? seoTitle;
   String? seoDescription;
-  int? helpCenterCategoryId;
   String? createdAt;
   String? updatedAt;
 
-  Data2(
+  Data_Use(
       {this.id,
       this.title,
       this.content,
       this.status,
       this.seoTitle,
       this.seoDescription,
-      this.helpCenterCategoryId,
       this.createdAt,
       this.updatedAt});
 
-  Data2.fromJson(Map<String, dynamic> json) {
+  Data_Use.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     content = json['content'];
     status = json['status'];
     seoTitle = json['seo_title'];
     seoDescription = json['seo_description'];
-    helpCenterCategoryId = json['help_center_category_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -167,7 +164,6 @@ class Data2 {
     data['status'] = this.status;
     data['seo_title'] = this.seoTitle;
     data['seo_description'] = this.seoDescription;
-    data['help_center_category_id'] = this.helpCenterCategoryId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;
@@ -195,36 +191,20 @@ class Links {
     return data;
   }
 }
-//HelpCenter product = HelpCenter.fromJson(jsonResponse);
-//print(product.data!.data2![2].seoTitle);
 
-Future<List<HelpCenter>> fetchData555() async {
+//ใช้ Data use เพราะเป็นตัวที่เก็บข้อมูลลิสต์
+Future<List<Data_Use>> fetch_career_readAll() async {
   final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/helps'));
-  final jsonResponse = json.decode(response.body);
-  HelpCenter product = HelpCenter.fromJson(jsonResponse);
-  print(product.data!.data2![0].content);
-
-  return [];
-}
-
-Future<List<Data2>> fetch_HelpCenter() async {
-  final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/helps'));
+      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/careers'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
-  print(jsonResponse['data']['data']);
+  //print(jsonResponse['data']['data']);
 
   if (response.statusCode == 200) {
     // List jsonResponse = json.decode(response.body);
-    return jsonCon.map((data) => new Data2.fromJson(data)).toList();
+    return jsonCon.map((data) => new Data_Use.fromJson(data)).toList();
   } else {
     throw Exception("error...");
   }
-}
-
-void main(List<String> args) {
-  //fetchData555();
-  fetch_HelpCenter();
 }

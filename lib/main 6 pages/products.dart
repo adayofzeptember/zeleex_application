@@ -18,6 +18,7 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   int index = 4;
+  
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/API/zeleex_api_model.dart';
+import 'package:zeleex_application/API/testApi/zeleex_api_model.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'Plate.dart';
 
@@ -34,10 +34,9 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.dark,
-            statusBarColor: Colors.white,
-          ),
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.light,
+              statusBarColor: Palette.kToDark),
           backgroundColor: Colors.white,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

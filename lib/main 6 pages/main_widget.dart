@@ -177,7 +177,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       itemCount: data?.length,
                                       itemBuilder: (BuildContext context, index) {
                                         return Image.network(
-                                          data![index].imageMobile.toString(), height:200
+                                          data![index].image.toString(),
                                         );
                                       })
                                 ],

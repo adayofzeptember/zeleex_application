@@ -12,6 +12,7 @@ class NewsFeedPage_Detail extends StatefulWidget {
 }
 
 class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
+  
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
