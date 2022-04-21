@@ -233,7 +233,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                     List<Data_Blog_Detail>? data = snapshot.data;
                     return Expanded(
                       child: ListView.builder(
-                          itemCount: data?.length,
+                          itemCount: 3,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 10),
@@ -241,7 +241,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                 color: Colors.white,
                                 child: InkWell(
                                   onTap: () {
-                            
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
@@ -257,11 +256,13 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         child: Row(
                                           children: [
                                             CircleAvatar(
-                                              backgroundColor: Palette.kToDark,
-                                              child: Icon(
-                                                Icons.person,
-                                                color: Colors.white,
-                                              ),
+                                              backgroundImage: NetworkImage(
+                                                  data![index]
+                                                      .image!
+                                                      .main
+                                                      .toString()),
+                                              backgroundColor:
+                                                  Colors.transparent,
                                             ),
                                             Padding(
                                               padding:
@@ -272,7 +273,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                      data![index]
+                                                      data[index]
                                                           .store!
                                                           .title
                                                           .toString(),
@@ -306,6 +307,10 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         height: 20,
                                       ),
                                       Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.25,
                                           width: double.infinity,
                                           child: Image.network(
                                             data[index].image!.main.toString(),
@@ -441,7 +446,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
               //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //             children: [
               //               Text(
-              //                 "เลี้ยงโคเนื้อครบวงจร",
+                              // "เลี้ยงโคเนื้อครบวงจร",
               //                 style: TextStyle(
               //                     color: Color.fromARGB(255, 51, 51, 51),
               //                     fontSize: 18,
