@@ -108,7 +108,7 @@ Future<List<DataSlider>> fetch_SliderPics() async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data'];
-  print(jsonResponse['data']);
+  //print(jsonResponse['data']);
 
   if (response.statusCode == 200) {
     // List jsonResponse = json.decode(response.body);

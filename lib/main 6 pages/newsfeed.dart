@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/blogs_readall_api.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
-
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
@@ -91,148 +90,17 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
               ],
             )),
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(5, 5, 5, 25),
+          padding: const EdgeInsets.fromLTRB(5, 5, 5,0),
           child: Column(
             children: <Widget>[
-              // FutureBuilder<List<Data_Blog_Detail>>(
-              //   future: future_blogs,
-              //   builder: (context, snapshot) {
-              //     if (snapshot.hasData) {
-              //       List<Data_Blog_Detail>? data = snapshot.data;
-              //       return Expanded(
-              //         child: ListView.builder(
-
-              //             physics: NeverScrollableScrollPhysics(),
-
-              //             itemCount: data?.length,
-              //             itemBuilder: (BuildContext context, int index) {
-              //               return Text(data![index].store!.address.toString());
-              //             }),
-              //       );
-              //     } else if (snapshot.hasError) {
-              //       return Text("${snapshot.error}");
-              //     }
-              //     // By default show a loading spinner.
-              //     return CircularProgressIndicator();
-              //   },
-              // ),
-              // Container(
-              //   color: Colors.white,
-              //   child: Padding(
-              //     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              //     child: InkWell(
-              //       onTap: () {
-              //         Navigator.of(context).push(MaterialPageRoute(
-              //             builder: (context) => NewsFeedPage_Detail()));
-              //       },
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: <Widget>[
-              //           Padding(
-              //             padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
-              //             child: Row(
-              //               children: [
-              //                 CircleAvatar(
-              //                   backgroundColor: Palette.kToDark,
-              //                   child: Icon(
-              //                     Icons.person,
-              //                     color: Colors.white,
-              //                   ),
-              //                 ),
-              //                 Padding(
-              //                   padding:
-              //                       const EdgeInsets.fromLTRB(10, 0, 5, 0),
-              //                   child: Column(
-              //                     crossAxisAlignment:
-              //                         CrossAxisAlignment.start,
-              //                     children: [
-              //                       Text("Zep Chawantest",
-              //                           style: TextStyle(
-              //                               color: Color.fromARGB(
-              //                                   255, 51, 51, 51),
-              //                               fontWeight: FontWeight.bold)),
-              //                       SizedBox(
-              //                         height: 5,
-              //                       ),
-              //                       Text(
-              //                         "16 ธ.ค. 2565  07:54 น.",
-              //                         style: TextStyle(
-              //                             fontSize: 10,
-              //                             color: Color.fromARGB(
-              //                                 255, 165, 162, 162)),
-              //                       ),
-              //                     ],
-              //                   ),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //           SizedBox(
-              //             height: 20,
-              //           ),
-              //           Container(
-              //             child: Image.asset('assets/images/newsfeed1.png'),
-              //           ),
-              //           SizedBox(
-              //             height: 20,
-              //           ),
-              //           Padding(
-              //             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              //             child: Row(
-              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //               children: [
-              //                 Text(
-              //                   "เลี้ยงโคเนื้อครบวงจร",
-              //                   style: TextStyle(
-              //                       color: Color.fromARGB(255, 51, 51, 51),
-              //                       fontSize: 18,
-              //                       fontWeight: FontWeight.bold),
-              //                 ),
-              //                 Container(
-              //                     child: Row(
-              //                   children: [
-              //                     SvgPicture.asset(
-              //                       'assets/images/love.svg',
-              //                     ),
-              //                     SizedBox(
-              //                       width: 10,
-              //                     ),
-              //                     SvgPicture.asset(
-              //                       'assets/images/sharefeed.svg',
-              //                     ),
-              //                   ],
-              //                 ))
-              //               ],
-              //             ),
-              //           ),
-              //           SizedBox(
-              //             height: 20,
-              //           ),
-              //           Padding(
-              //             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              //             child: Text(
-              //               "แต่ถ้าเลี้ยงแบบครบวงจร ภาครัฐจัดหาน้ำเชื้อจากพ่อแม่พันธุ์ชั้นดีเกษตรกรนำมาผสมพันธุ์ แล้วเลี้ยงอนุบาลส่งต่อให้เกษตรกรที่พอมีกำลังทรัพย์นำมาขุนต่อด้วยเทคโนโลยีสมัยใหม่ ให้ ได้เนื้อวัวเกรดพรีเมียมมีไขมันแทรก ไม่ต่างจากเนื้อจากต่างประเทศราคาแพง",
-              //               style: TextStyle(
-              //                   fontFamily: 'Kanit',
-              //                   color: Color.fromARGB(255, 130, 130, 130)),
-              //             ),
-              //           ),
-              //           SizedBox(
-              //             height: 20,
-              //           )
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
-              FutureBuilder<List<Data_Blog_Detail>>(
+           FutureBuilder<List<Data_Blog_Detail>>(
                 future: future_blogs,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<Data_Blog_Detail>? data = snapshot.data;
                     return Expanded(
                       child: ListView.builder(
+                          
                           itemCount: 3,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
@@ -381,9 +249,11 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                     return Text("${snapshot.error}");
                   }
                   // By default show a loading spinner.
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 },
               ),
+
+           
               // SizedBox(
               //   height: 10,
               // ),

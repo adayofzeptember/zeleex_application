@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:zeleex_application/API/home_getData_api.dart';
 import 'package:zeleex_application/API/slider_api.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
@@ -29,10 +30,15 @@ class Main_Widget extends StatefulWidget {
 class _Main_WidgetState extends State<Main_Widget> {
   @override
   late Future<List<DataSlider>> futureData;
+  late Future<List<AnimalCat01>> future_anmials_cat;
+  late Future<List<ProductCat01>> future_products_cat;
+
   @override
   void initState() {
     super.initState();
     futureData = fetch_SliderPics();
+    future_anmials_cat = fetch_Home_animals();
+    future_products_cat = fetch_Home_products();
   }
 
   Widget build(BuildContext context) {
@@ -175,7 +181,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: data?.length,
-                                      itemBuilder: (BuildContext context, index) {
+                                      itemBuilder:
+                                          (BuildContext context, index) {
                                         return Image.network(
                                           data![index].image.toString(),
                                         );
@@ -418,170 +425,107 @@ class _Main_WidgetState extends State<Main_Widget> {
                               height: 5,
                             ),
                             Container(
-                              width: double.infinity,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.240,
                               child: Row(
                                 children: [
-                                  //       Card(
-                                  //   child: Column(
-                                  //     crossAxisAlignment:
-                                  //         CrossAxisAlignment.start,
-                                  //     children: [
-                                  //       ClipRRect(
-                                  //         borderRadius: BorderRadius.only(
-                                  //             topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-                                  //         child: Image.asset(
-
-                                  //             'assets/images/cattles1.png'),
-                                  //       ),
-                                  //       Padding(
-                                  //         padding: const EdgeInsets.all(8.0),
-                                  //         child: Column(
-                                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             SizedBox(
-                                  //               height: 10,
-                                  //             ),
-                                  //             Text(
-                                  //               "Cattles1",
-                                  //             ),
-                                  //             SizedBox(
-                                  //               height: 3,
-                                  //             ),
-                                  //             Text(
-                                  //               "฿ 170,000",
-                                  //               style: TextStyle(
-                                  //                   color: Color.fromARGB(
-                                  //                       255, 255, 17, 0)),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       )
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  Card(
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Store_Cattle_Detail()));
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                              child: Image.asset(
-                                                  'assets/images/cattles1.png'),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Cattles1",
-                                            ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            Text(
-                                              "฿ 170,000",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 255, 17, 0)),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Store_Cattle_Detail()));
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                              child: Image.asset(
-                                                  'assets/images/cattles2.png'),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Cattles2",
-                                            ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            Text(
-                                              "฿ 100,000",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 255, 17, 0)),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Store_Cattle_Detail()));
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                              child: Image.asset(
-                                                'assets/images/cattles3.png',
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Cattles3",
-                                            ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            Text(
-                                              "฿ 90,000",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 255, 17, 0)),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                  FutureBuilder<List<AnimalCat01>>(
+                                    future: future_anmials_cat,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        List<AnimalCat01>? data = snapshot.data;
+                                        return Expanded(
+                                          child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              // shrinkWrap: true,
+                                              itemCount: data?.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Card(
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      print(
+                                                        data![index]
+                                                            .id
+                                                            .toString(),
+                                                      );
+                                                    },
+                                                    child: Column(
+                                                      children: [
+                                                        ClipRRect(
+                                                            borderRadius: BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        5)),
+                                                            child:
+                                                                Image.network(
+                                                              data![index]
+                                                                  .image!
+                                                                  .thumbnail
+                                                                  .toString(),
+                                                              fit: BoxFit.fill,
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.3,
+                                                            )),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                height: 40,
+                                                                width: 100,
+                                                                child: Text(
+                                                                  data[index]
+                                                                      .title
+                                                                      .toString(),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 3,
+                                                              ),
+                                                              Text(
+                                                                "฿ " +
+                                                                    data[index]
+                                                                        .price
+                                                                        .toString(),
+                                                                style: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            255,
+                                                                            17,
+                                                                            0)),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return Text("${snapshot.error}");
+                                      }
+                                      // By default show a loading spinner.
+                                      return CircularProgressIndicator();
+                                    },
                                   ),
                                 ],
                               ),
@@ -655,152 +599,263 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Container(
-                                    width: double.infinity,
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        //main axis (rows or columns)
-
-                                        // crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Card(
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Store_Product_Detail()));
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                                      child: Image.asset(
-                                                          'assets/images/pd1.png'),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      "Cattles1",
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "฿ 170",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 255, 17, 0)),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Card(
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Store_Product_Detail()));
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                                      child: Image.asset(
-                                                          'assets/images/pd2.png'),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      "Cattles2",
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "฿ 100",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 255, 17, 0)),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Card(
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Store_Product_Detail()));
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                                      child: Image.asset(
-                                                        'assets/images/pd3.png',
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      "Cattles3",
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      "฿ 90",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 255, 17, 0)),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                         Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.240,
+                                    child: Row(
+                                      children: [
+                                        FutureBuilder<List<ProductCat01>>(
+                                          future: future_products_cat,
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              List<ProductCat01>? data =
+                                                  snapshot.data;
+                                              return Expanded(
+                                                child: ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    // shrinkWrap: true,
+                                                    itemCount: data?.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Card(
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            print(
+                                                              data![index]
+                                                                  .id
+                                                                  .toString(),
+                                                            );
+                                                          },
+                                                          child: Column(
+                                                            children: [
+                                                              ClipRRect(
+                                                                  borderRadius: BorderRadius.only(
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              5),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              5)),
+                                                                  child: Image
+                                                                      .network(
+                                                                    data![index]
+                                                                        .image!
+                                                                        .thumbnail
+                                                                        .toString(),
+                                                                    fit: BoxFit
+                                                                        .fill,
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.3,
+                                                                  )),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      height:
+                                                                          40,
+                                                                      width:
+                                                                          100,
+                                                                      child:
+                                                                          Text(
+                                                                        data[index]
+                                                                            .title
+                                                                            .toString(),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 3,
+                                                                    ),
+                                                                    Text(
+                                                                      "฿ " +
+                                                                          data[index]
+                                                                              .price
+                                                                              .toString(),
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              255,
+                                                                              17,
+                                                                              0)),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                              );
+                                            } else if (snapshot.hasError) {
+                                              return Text("${snapshot.error}");
+                                            }
+                                            // By default show a loading spinner.
+                                            return CircularProgressIndicator();
+                                          },
+                                        ),
+                                      ],
                                     ),
                                   ),
+                                  // Container(
+                                  //   width: double.infinity,
+                                  //   child: SingleChildScrollView(
+                                  //     scrollDirection: Axis.horizontal,
+                                  //     child: Row(
+                                  //       //main axis (rows or columns)
+
+                                  //       // crossAxisAlignment: CrossAxisAlignment.start,
+                                  //       children: [
+                                  //         Card(
+                                  //           child: InkWell(
+                                  //             onTap: () {
+                                  //               Navigator.push(
+                                  //                   context,
+                                  //                   MaterialPageRoute(
+                                  //                       builder: (context) =>
+                                  //                           Store_Product_Detail()));
+                                  //             },
+                                  //             child: Padding(
+                                  //               padding:
+                                  //                   const EdgeInsets.all(8.0),
+                                  //               child: Column(
+                                  //                 crossAxisAlignment:
+                                  //                     CrossAxisAlignment.start,
+                                  //                 children: [
+                                  //                   ClipRRect(
+                                  //                     borderRadius:
+                                  //                         BorderRadius.all(
+                                  //                             Radius.circular(
+                                  //                                 5)),
+                                  //                     child: Image.asset(
+                                  //                         'assets/images/pd1.png'),
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 10,
+                                  //                   ),
+                                  //                   Text(
+                                  //                     "Cattles1",
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 3,
+                                  //                   ),
+                                  //                   Text(
+                                  //                     "฿ 170",
+                                  //                     style: TextStyle(
+                                  //                         color: Color.fromARGB(
+                                  //                             255, 255, 17, 0)),
+                                  //                   )
+                                  //                 ],
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //         Card(
+                                  //           child: InkWell(
+                                  //             onTap: () {
+                                  //               Navigator.push(
+                                  //                   context,
+                                  //                   MaterialPageRoute(
+                                  //                       builder: (context) =>
+                                  //                           Store_Product_Detail()));
+                                  //             },
+                                  //             child: Padding(
+                                  //               padding:
+                                  //                   const EdgeInsets.all(8.0),
+                                  //               child: Column(
+                                  //                 crossAxisAlignment:
+                                  //                     CrossAxisAlignment.start,
+                                  //                 children: [
+                                  //                   ClipRRect(
+                                  //                     borderRadius:
+                                  //                         BorderRadius.all(
+                                  //                             Radius.circular(
+                                  //                                 5)),
+                                  //                     child: Image.asset(
+                                  //                         'assets/images/pd2.png'),
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 10,
+                                  //                   ),
+                                  //                   Text(
+                                  //                     "Cattles2",
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 3,
+                                  //                   ),
+                                  //                   Text(
+                                  //                     "฿ 100",
+                                  //                     style: TextStyle(
+                                  //                         color: Color.fromARGB(
+                                  //                             255, 255, 17, 0)),
+                                  //                   )
+                                  //                 ],
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //         Card(
+                                  //           child: InkWell(
+                                  //             onTap: () {
+                                  //               Navigator.push(
+                                  //                   context,
+                                  //                   MaterialPageRoute(
+                                  //                       builder: (context) =>
+                                  //                           Store_Product_Detail()));
+                                  //             },
+                                  //             child: Padding(
+                                  //               padding:
+                                  //                   const EdgeInsets.all(8.0),
+                                  //               child: Column(
+                                  //                 crossAxisAlignment:
+                                  //                     CrossAxisAlignment.start,
+                                  //                 children: [
+                                  //                   ClipRRect(
+                                  //                     borderRadius:
+                                  //                         BorderRadius.all(
+                                  //                             Radius.circular(
+                                  //                                 5)),
+                                  //                     child: Image.asset(
+                                  //                       'assets/images/pd3.png',
+                                  //                     ),
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 10,
+                                  //                   ),
+                                  //                   Text(
+                                  //                     "Cattles3",
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 3,
+                                  //                   ),
+                                  //                   Text(
+                                  //                     "฿ 90",
+                                  //                     style: TextStyle(
+                                  //                         color: Color.fromARGB(
+                                  //                             255, 255, 17, 0)),
+                                  //                   )
+                                  //                 ],
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   SizedBox(
                                     height: 10,
                                   )

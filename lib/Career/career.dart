@@ -22,7 +22,6 @@ class _CareerPageState extends State<CareerPage> {
     fetched_data_career_readAll = fetch_career_readAll();
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -73,9 +72,9 @@ class _CareerPageState extends State<CareerPage> {
                 children: [
                   SvgPicture.asset('assets/images/career.svg',
                       color: Color.fromARGB(255, 51, 51, 51)),
-                      
-                      SizedBox(width: 5,),
-     
+                  SizedBox(
+                    width: 5,
+                  ),
                   Text(
                     "ตำแหน่งงาน",
                     style: TextStyle(
@@ -85,7 +84,8 @@ class _CareerPageState extends State<CareerPage> {
                           51,
                           51,
                         ),
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
                   )
                 ],
               ),
@@ -108,8 +108,7 @@ class _CareerPageState extends State<CareerPage> {
                                   Navigator.push(
                                     context,
                                     new MaterialPageRoute(
-                                      builder: (context) =>
-                                          new Career_Detail(),
+                                      builder: (context) => new Career_Detail(),
                                     ),
                                   );
                                 },
@@ -127,30 +126,29 @@ class _CareerPageState extends State<CareerPage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          data![index].title.toString() +"\t"+ "(${data[index].id.toString()} ตำแหน่ง)",
+                                          data![index].title.toString() +
+                                              "\t" +
+                                              "(${data[index].id.toString()} ตำแหน่ง)",
                                           style: TextStyle(
                                               color: Palette.kToDark,
-                                              fontSize:
-                                                  MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.035,
-                                              fontWeight:
-                                                  FontWeight.bold),
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.035,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         Container(
-                                          padding: EdgeInsets.fromLTRB(
-                                              15, 8, 15, 8),
+                                          padding:
+                                              EdgeInsets.fromLTRB(15, 8, 15, 8),
                                           decoration: BoxDecoration(
                                             color: Palette.kToDark,
                                             borderRadius:
-                                                BorderRadius.circular(
-                                                    30.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           child: Text(
                                             "รายละเอียด >",
-                                            style: TextStyle(
-                                                color: Colors.white),
+                                            style:
+                                                TextStyle(color: Colors.white),
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
@@ -158,7 +156,6 @@ class _CareerPageState extends State<CareerPage> {
                                     )),
                               ),
                             );
-                                
                           }),
                     );
                   } else if (snapshot.hasError) {
