@@ -10,7 +10,8 @@ import 'main 6 pages/main_page.dart';
 //MediaQuery.of(context).size.height * 0.25
 
 class SecondPage extends StatefulWidget {
-  SecondPage({Key? key}) : super(key: key);
+  String name = "";
+  SecondPage({Key? key,required this.name}) : super(key: key);
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -79,6 +80,7 @@ class _SecondPageState extends State<SecondPage> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       alignment: Alignment.center,
                       child: Text(
+                        // widget.name,
                         "หน้าหลัก",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
@@ -132,7 +134,7 @@ class _SecondPageState extends State<SecondPage> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       alignment: Alignment.center,
                       child: Text(
-                        "หน้าเข้าสู่ระบบ (ทดสอบเท่านั้น ของจริงเอาออก)",
+                        "ทดสอบหน้าเข้าสู่ระบบ",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),

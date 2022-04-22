@@ -62,12 +62,15 @@ class _main_IconState extends State<main_Icon> {
       //       );
       //     },
       //     transitionDuration: Duration(seconds: 3));
+      var x = "testTdddext";
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => SecondPage(),
+          builder: (context) => SecondPage(name: x,),
         ),
       );
+
+
     });
   }
 

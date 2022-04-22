@@ -524,7 +524,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         return Text("${snapshot.error}");
                                       }
                                       // By default show a loading spinner.
-                                      return CircularProgressIndicator();
+                                      return Center(
+                                          child: CircularProgressIndicator());
                                     },
                                   ),
                                 ],
@@ -599,7 +600,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                         Container(
+                                  Container(
                                     height: MediaQuery.of(context).size.height *
                                         0.240,
                                     child: Row(
@@ -704,7 +705,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                                               return Text("${snapshot.error}");
                                             }
                                             // By default show a loading spinner.
-                                            return CircularProgressIndicator();
+                                            return Center(
+                                                child:
+                                                    CircularProgressIndicator());
                                           },
                                         ),
                                       ],

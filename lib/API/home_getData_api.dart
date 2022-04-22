@@ -502,6 +502,3 @@ Future<List<ProductCat01>> fetch_Home_products() async {
   }
 }
 
-void main(List<String> args) {
-  fetch_Home_products();
-}
