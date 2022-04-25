@@ -190,7 +190,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                       gridDelegate:
                           new SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                            childAspectRatio: MediaQuery.of(context).size.width /
+                        childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.5),
                       ),
                       itemCount: snapshot.data?.length,
@@ -248,7 +248,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 5, 0, 0),
                                         child: Text(
-                                          "฿ "+data[index].price.toString(),
+                                          "฿ " + data[index].price.toString(),
                                           style: TextStyle(color: Colors.red),
                                         )),
                                     SizedBox(

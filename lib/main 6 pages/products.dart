@@ -190,7 +190,8 @@ class _ProductPageState extends State<ProductPage> {
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
 
-                        mainAxisExtent: MediaQuery.of(context).size.height * 0.32,
+                        mainAxisExtent:
+                            MediaQuery.of(context).size.height * 0.32,
                       ),
                       itemCount: snapshot.data?.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -207,10 +208,8 @@ class _ProductPageState extends State<ProductPage> {
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
                                       child: Image.network(
-                                        data![index]
-                                            .image!
-                                            .thumbnail
-                                            .toString(),
+                                        data![index].image!.thumbnail.toString(),                                              fit: BoxFit.fill,
+
                                       )),
                                   Padding(
                                     padding:
@@ -218,7 +217,7 @@ class _ProductPageState extends State<ProductPage> {
                                     child: Container(
                                       height: 40,
                                       child: Text(
-                                       data[index].title.toString(),
+                                        data[index].title.toString(),
                                         style: TextStyle(
                                           fontSize: 13,
                                           color:
@@ -231,7 +230,7 @@ class _ProductPageState extends State<ProductPage> {
                                       padding: const EdgeInsets.fromLTRB(
                                           10, 5, 0, 0),
                                       child: Text(
-                                        "฿ "+data[index].price.toString(),
+                                        "฿ " + data[index].price.toString(),
                                         style: TextStyle(color: Colors.red),
                                       )),
                                   SizedBox(
@@ -240,63 +239,6 @@ class _ProductPageState extends State<ProductPage> {
                                 ],
                               ),
                             ),
-                            // Card(
-                            //   shape: RoundedRectangleBorder(
-                            //       borderRadius: BorderRadius.circular(5.0)),
-                            //   child: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.start,
-                            //     children: [
-                            //       ClipRRect(
-                            //           borderRadius: BorderRadius.only(
-                            //               topLeft: Radius.circular(5),
-                            //               topRight: Radius.circular(5)),
-                            //           child: Image.network(
-                            //             data![index]
-                            //                 .image!
-                            //                 .thumbnail
-                            //                 .toString(),
-                            //           )),
-                            //       Padding(
-                            //         padding:
-                            //             const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                            //         child: Container(
-                            //           child: Text(
-                            //             data[index].title.toString(),
-                            //             style: TextStyle(
-                            //                 color:
-                            //                     Color.fromARGB(255, 51, 51, 51),
-                            //                 fontSize: 13,
-                            //                 fontWeight: FontWeight.bold),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       Padding(
-                            //         padding:
-                            //             const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                            //         child: Container(
-                            //           height: 30,
-                            //           child: Text(
-                            //             data[index].description.toString(),
-                            //             style: TextStyle(
-                            //                 fontSize: 10,
-                            //                 color: Color.fromARGB(
-                            //                     255, 130, 130, 130)),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       Padding(
-                            //           padding: const EdgeInsets.fromLTRB(
-                            //               10, 5, 0, 0),
-                            //           child: Text(
-                            //             data[index].price.toString(),
-                            //             style: TextStyle(color: Colors.red),
-                            //           )),
-                            //       SizedBox(
-                            //         height: 8,
-                            //       )
-                            //     ],
-                            //   ),
-                            // ),
                           ],
                         );
                       },

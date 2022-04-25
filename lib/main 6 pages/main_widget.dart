@@ -524,7 +524,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         return Text("${snapshot.error}");
                                       }
                                       // By default show a loading spinner.
-                                      return Center(
+                                      return Padding(
+                                          padding: EdgeInsets.only(left: 100),
                                           child: CircularProgressIndicator());
                                     },
                                   ),
@@ -705,9 +706,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                                               return Text("${snapshot.error}");
                                             }
                                             // By default show a loading spinner.
-                                            return Center(
-                                                child:
-                                                    CircularProgressIndicator());
+                                            return Padding(
+                                              padding: const EdgeInsets.only(left: 200),
+                                              child: CircularProgressIndicator(),
+                                            );
                                           },
                                         ),
                                       ],

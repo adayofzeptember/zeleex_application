@@ -551,7 +551,6 @@ Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
-  print(jsonResponse['data']['data']);
 
   if (response.statusCode == 200) {
     // List jsonResponse = json.decode(response.body);

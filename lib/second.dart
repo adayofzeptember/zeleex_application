@@ -11,7 +11,7 @@ import 'main 6 pages/main_page.dart';
 
 class SecondPage extends StatefulWidget {
   String name = "";
-  SecondPage({Key? key,required this.name}) : super(key: key);
+  SecondPage({Key? key, required this.name}) : super(key: key);
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -29,7 +29,6 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Container(
@@ -72,7 +71,11 @@ class _SecondPageState extends State<SecondPage> {
                       )),
                   onPressed: () {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Main_Page()));
+                        CupertinoPageRoute(builder: (context) {
+                      return Main_Page();
+                    }));
+                    // Navigator.pushReplacement(context,
+                    //     MaterialPageRoute(builder: (context) => Main_Page()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
