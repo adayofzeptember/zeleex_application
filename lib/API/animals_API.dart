@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 class Animals_All {
   String? responseCode;
   String? responseStatus;
@@ -29,7 +28,8 @@ class Animals_All {
     sessionID = json['sessionID'];
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;  }
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -147,29 +147,28 @@ class Data_Animal_ReadAll {
   Species? species;
   //Store? store;
 
-  Data_Animal_ReadAll(
-      {this.id,
-      this.title,
-      this.status,
-      this.content,
-      this.storeId,
-      this.speciesId,
-      this.speciesType,
-      this.sold,
-      this.seoTitle,
-      this.seoDescription,
-      this.price,
-      this.reads,
-      this.description,
-      this.createdAt,
-      this.updatedAt,
-      this.image,
-      this.images,
-      this.categories,
-      this.species,
+  Data_Animal_ReadAll({
+    this.id,
+    this.title,
+    this.status,
+    this.content,
+    this.storeId,
+    this.speciesId,
+    this.speciesType,
+    this.sold,
+    this.seoTitle,
+    this.seoDescription,
+    this.price,
+    this.reads,
+    this.description,
+    this.createdAt,
+    this.updatedAt,
+    this.image,
+    this.images,
+    this.categories,
+    this.species,
     //  this.store
-      
-      });
+  });
 
   Data_Animal_ReadAll.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -187,7 +186,9 @@ class Data_Animal_ReadAll {
     description = json['description'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    image = json['image'] != null ? new Image_forAnimal.fromJson(json['image']) : null;
+    image = json['image'] != null
+        ? new Image_forAnimal.fromJson(json['image'])
+        : null;
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
@@ -202,7 +203,7 @@ class Data_Animal_ReadAll {
     }
     species =
         json['species'] != null ? new Species.fromJson(json['species']) : null;
-   // store = json['store'] != null ? new Store.fromJson(json['store']) : null;
+    // store = json['store'] != null ? new Store.fromJson(json['store']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -524,101 +525,13 @@ Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
-  print(jsonResponse['data']['data']);
 
   if (response.statusCode == 200) {
-    // List jsonResponse = json.decode(response.body);
-    return jsonCon.map((data) => new Data_Animal_ReadAll.fromJson(data)).toList();
+    return jsonCon
+        .map((data) => new Data_Animal_ReadAll.fromJson(data))
+        .toList();
   } else {
     throw Exception("error...");
   }
 }
 
-
-void main(List<String> args) {
-  fetch_AnimalPage_readAll();
-}
-//  late Future<List<Data_Animal_ReadAll>> future_animal_page;
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     future_animal_page = fetch_AnimalPage_readAll();
-//   }
-
-//   @override
-      // FutureBuilder<List<Data_Animal_ReadAll>>(
-      //           future: future_animal_page,
-      //           builder: (context, snapshot) {
-      //             if (snapshot.hasData) {
-      //               List<Data_Animal_ReadAll>? data = snapshot.data;
-      //               return Expanded(
-      //                 child: ListView.builder(
-      //                     scrollDirection: Axis.horizontal,
-      //                     shrinkWrap: true,
-      //                     itemCount: data?.length,
-      //                     itemBuilder: (BuildContext context, int index) {
-      //                       return Card(
-      //                         child: InkWell(
-      //                           onTap: () {
-      //                             print(
-      //                               data![index].id.toString(),
-      //                             );
-      //                           },
-      //                           child: Column(
-      //                             children: [
-      //                               ClipRRect(
-      //                                   borderRadius: BorderRadius.only(
-      //                                       topLeft: Radius.circular(5),
-      //                                       topRight: Radius.circular(5)),
-      //                                   child: Image.network(
-      //                                     data![index]
-      //                                         .image!
-      //                                         .thumbnail
-      //                                         .toString(),
-      //                                     fit: BoxFit.fill,
-      //                                     width: MediaQuery.of(context)
-      //                                             .size
-      //                                             .width *
-      //                                         0.3,
-      //                                   )),
-      //                               Padding(
-      //                                 padding: const EdgeInsets.all(8.0),
-      //                                 child: Column(
-      //                                   crossAxisAlignment:
-      //                                       CrossAxisAlignment.start,
-      //                                   mainAxisAlignment:
-      //                                       MainAxisAlignment.start,
-      //                                   children: [
-      //                                     SizedBox(
-      //                                       height: 40,
-      //                                       width: 100,
-      //                                       child: Text(
-      //                                         data[index].title.toString(),
-      //                                       ),
-      //                                     ),
-      //                                     SizedBox(
-      //                                       height: 3,
-      //                                     ),
-      //                                     Text(
-      //                                       "฿ " + data[index].price.toString(),
-      //                                       style: TextStyle(
-      //                                           color: Color.fromARGB(
-      //                                               255, 255, 17, 0)),
-      //                                     ),
-      //                                   ],
-      //                                 ),
-      //                               )
-      //                             ],
-      //                           ),
-      //                         ),
-      //                       );
-      //                     }),
-      //               );
-      //             } else if (snapshot.hasError) {
-      //               return Text("${snapshot.error}");
-      //             }
-      //             // By default show a loading spinner.
-      //             return Center(child: CircularProgressIndicator());
-      //           },
-      //         ),

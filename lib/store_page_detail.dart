@@ -147,9 +147,7 @@ class _Store_DetailState extends State<Store_Detail> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              // SizedBox(
-              //   height: 10,
-              // ),
+              
               Column(
                 children: [
                   Stack(

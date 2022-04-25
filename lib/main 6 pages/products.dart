@@ -193,15 +193,15 @@ class _ProductPageState extends State<ProductPage> {
                       itemBuilder: (BuildContext context, int index) {
                         return Wrap(
                           children: <Widget>[
-                            InkWell(
-                              onTap: () {
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                     onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
                                         Store_Product_Detail()));
                               },
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
