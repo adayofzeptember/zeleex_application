@@ -35,14 +35,10 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
-          appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         appBar: AppBar(
+          backgroundColor: Colors.white,
             systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: Colors.white,
                 statusBarIconBrightness: Brightness.dark,
@@ -197,46 +193,56 @@ class _ProductPageState extends State<ProductPage> {
                       itemBuilder: (BuildContext context, int index) {
                         return Wrap(
                           children: <Widget>[
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: Image.network(
-                                        data![index].image!.thumbnail.toString(),                                              fit: BoxFit.fill,
-
-                                      )),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                    child: Container(
-                                      height: 40,
-                                      child: Text(
-                                        data[index].title.toString(),
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        Store_Product_Detail()));
+                              },
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(5),
+                                            topRight: Radius.circular(5)),
+                                        child: Image.network(
+                                          data![index]
+                                              .image!
+                                              .thumbnail
+                                              .toString(),
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 5, 0),
+                                      child: Container(
+                                        height: 40,
+                                        child: Text(
+                                          data[index].title.toString(),
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 0, 0),
-                                      child: Text(
-                                        "฿ " + data[index].price.toString(),
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
+                                    Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 5, 0, 0),
+                                        child: Text(
+                                          "฿ " + data[index].price.toString(),
+                                          style: TextStyle(color: Colors.red),
+                                        )),
+                                    SizedBox(
+                                      height: 8,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -855,7 +861,7 @@ class _ProductPageState extends State<ProductPage> {
                 ),
               ),
             )),
-      ),
+      
     );
   }
 }

@@ -445,6 +445,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                 return Card(
                                                   child: InkWell(
                                                     onTap: () {
+                                                      Navigator.of(context).push(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  Store_Cattle_Detail()));
                                                       print(
                                                         data![index]
                                                             .id
@@ -624,11 +628,12 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                       return Card(
                                                         child: InkWell(
                                                           onTap: () {
-                                                            print(
-                                                              data![index]
-                                                                  .id
-                                                                  .toString(),
-                                                            );
+                                                            Navigator.of(
+                                                                    context)
+                                                                .push(MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            NewsFeedPage_Detail()));
                                                           },
                                                           child: Column(
                                                             children: [
@@ -707,8 +712,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                                             }
                                             // By default show a loading spinner.
                                             return Padding(
-                                              padding: const EdgeInsets.only(left: 200),
-                                              child: CircularProgressIndicator(),
+                                              padding: const EdgeInsets.only(
+                                                  left: 200),
+                                              child:
+                                                  CircularProgressIndicator(),
                                             );
                                           },
                                         ),

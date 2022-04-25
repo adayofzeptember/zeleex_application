@@ -25,17 +25,6 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
           ),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-            // leading: Builder(
-            //   builder: (context) => IconButton(
-            //     icon: SizedBox(
-            //       child: SvgPicture.asset(
-            //         'assets/images/menu.svg',
-            //         color: Color.fromARGB(255, 51, 51, 51),
-            //       ),
-            //     ),
-            //     onPressed: () => Scaffold.of(context).openDrawer(),
-            //   ),
-            // ),
             elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

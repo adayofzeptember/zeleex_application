@@ -42,7 +42,7 @@ class _main_IconState extends State<main_Icon> {
   }
 
   Future<void> Load_AndGo() async {
-    await Future.delayed(const Duration(seconds: 2), () {
+    await Future.delayed(const Duration(seconds: 3), () {
       // PageRouteBuilder(
       //     pageBuilder: (BuildContext context, Animation<double> animation,
       //         Animation<double> secondaryAnimation) {
