@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/API/animals_API.dart';
+import 'package:zeleex_application/API/products_API.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
@@ -18,11 +20,17 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   int index = 4;
-  
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;
     });
+  }
+
+  late Future<List<Data_Products_ReadAll>> future_ProductsData;
+  @override
+  void initState() {
+    future_ProductsData = fetch_ProductPage_readAll();
+    super.initState();
   }
 
   @override
@@ -89,66 +97,26 @@ class _ProductPageState extends State<ProductPage> {
                 )
               ],
             )),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                color: Colors.white,
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            print("object");
-                            //MediaQuery.of(context).size.height * 0.25
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Text(
-                              "อุปกรณ์",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.35,
-                          padding: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            color: Palette.kToDark,
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Text(
-                            "อาหารและยา",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
+        body: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              color: Colors.white,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          print("object");
+                          //MediaQuery.of(context).size.height * 0.25
+                        },
+                        child: Container(
                           width: MediaQuery.of(context).size.width * 0.35,
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
@@ -156,82 +124,79 @@ class _ProductPageState extends State<ProductPage> {
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           child: Text(
-                            "น้ำเชื้อและตัวอ่อน",
+                            "อุปกรณ์",
                             style: TextStyle(
+                                color: Colors.grey,
                                 fontSize: 12,
-                                color: Color.fromARGB(255, 130, 130, 130),
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: Palette.kToDark,
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        child: Text(
+                          "อาหารและยา",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        child: Text(
+                          "น้ำเชื้อและตัวอ่อdน",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 130, 130, 130),
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-                child: Wrap(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Store_Product_Detail()));
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: Image.asset(
-                                        'assets/images/product1.png',
-                                      )),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                    child: Container(
-                                      height: 40,
-                                      child: Text(
-                                        "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 0, 0),
-                                      child: Text(
-                                        "฿ 890",
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: 10,
-                            child: Card(
+            ),
+
+            FutureBuilder<List<Data_Products_ReadAll>>(
+              future: future_ProductsData,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Data_Products_ReadAll>? data = snapshot.data;
+                  return Expanded(
+                    child: GridView.builder(
+                      gridDelegate:
+                          new SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        // childAspectRatio: MediaQuery.of(context).size.width /
+                        //     (MediaQuery.of(context).size.height / 1.55),
+
+                        mainAxisExtent: MediaQuery.of(context).size.height * 0.32,
+                      ),
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Wrap(
+                          children: <Widget>[
+                            Card(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0)),
                               child: Column(
@@ -241,8 +206,11 @@ class _ProductPageState extends State<ProductPage> {
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
-                                      child: Image.asset(
-                                        'assets/images/product2.png',
+                                      child: Image.network(
+                                        data![index]
+                                            .image!
+                                            .thumbnail
+                                            .toString(),
                                       )),
                                   Padding(
                                     padding:
@@ -250,9 +218,9 @@ class _ProductPageState extends State<ProductPage> {
                                     child: Container(
                                       height: 40,
                                       child: Text(
-                                        "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
+                                       data[index].title.toString(),
                                         style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 13,
                                           color:
                                               Color.fromARGB(255, 51, 51, 51),
                                         ),
@@ -263,7 +231,7 @@ class _ProductPageState extends State<ProductPage> {
                                       padding: const EdgeInsets.fromLTRB(
                                           10, 5, 0, 0),
                                       child: Text(
-                                        "฿ 890",
+                                        "฿ "+data[index].price.toString(),
                                         style: TextStyle(color: Colors.red),
                                       )),
                                   SizedBox(
@@ -272,207 +240,382 @@ class _ProductPageState extends State<ProductPage> {
                                 ],
                               ),
                             ),
-                          ),
-                        ),
-                      ],
+                            // Card(
+                            //   shape: RoundedRectangleBorder(
+                            //       borderRadius: BorderRadius.circular(5.0)),
+                            //   child: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     children: [
+                            //       ClipRRect(
+                            //           borderRadius: BorderRadius.only(
+                            //               topLeft: Radius.circular(5),
+                            //               topRight: Radius.circular(5)),
+                            //           child: Image.network(
+                            //             data![index]
+                            //                 .image!
+                            //                 .thumbnail
+                            //                 .toString(),
+                            //           )),
+                            //       Padding(
+                            //         padding:
+                            //             const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                            //         child: Container(
+                            //           child: Text(
+                            //             data[index].title.toString(),
+                            //             style: TextStyle(
+                            //                 color:
+                            //                     Color.fromARGB(255, 51, 51, 51),
+                            //                 fontSize: 13,
+                            //                 fontWeight: FontWeight.bold),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Padding(
+                            //         padding:
+                            //             const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                            //         child: Container(
+                            //           height: 30,
+                            //           child: Text(
+                            //             data[index].description.toString(),
+                            //             style: TextStyle(
+                            //                 fontSize: 10,
+                            //                 color: Color.fromARGB(
+                            //                     255, 130, 130, 130)),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Padding(
+                            //           padding: const EdgeInsets.fromLTRB(
+                            //               10, 5, 0, 0),
+                            //           child: Text(
+                            //             data[index].price.toString(),
+                            //             style: TextStyle(color: Colors.red),
+                            //           )),
+                            //       SizedBox(
+                            //         height: 8,
+                            //       )
+                            //     ],
+                            //   ),
+                            // ),
+                          ],
+                        );
+                      },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: Image.asset(
-                                        'assets/images/product3.png',
-                                      )),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                    child: Container(
-                                      height: 40,
-                                      child: Text(
-                                        "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 0, 0),
-                                      child: Text(
-                                        "฿ 890",
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: 10,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: Image.asset(
-                                        'assets/images/product4.png',
-                                      )),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                    child: Container(
-                                      height: 40,
-                                      child: Text(
-                                        "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 0, 0),
-                                      child: Text(
-                                        "฿ 890",
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: Image.asset(
-                                        'assets/images/product5.png',
-                                      )),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                    child: Container(
-                                      height: 40,
-                                      child: Text(
-                                        "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 0, 0),
-                                      child: Text(
-                                        "฿ 890",
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: 10,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: Image.asset(
-                                        'assets/images/product6.png',
-                                      )),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                    child: Container(
-                                      height: 40,
-                                      child: Text(
-                                        "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 0, 0),
-                                      child: Text(
-                                        "฿ 890",
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                // By default show a loading spinner.
+                return Padding(
+                  padding: const EdgeInsets.only(top: 100),
+                  child: Container(
+                      child: Center(child: CircularProgressIndicator())),
+                );
+              },
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+            //   child: Wrap(
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Expanded(
+            //             child: Card(
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: BorderRadius.circular(5.0)),
+            //               child: InkWell(
+            //                 onTap: () {
+            //                   Navigator.push(
+            //                       context,
+            //                       MaterialPageRoute(
+            //                           builder: (context) =>
+            //                               Store_Product_Detail()));
+            //                 },
+            //                 child: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     ClipRRect(
+            //                         borderRadius: BorderRadius.only(
+            //                             topLeft: Radius.circular(5),
+            //                             topRight: Radius.circular(5)),
+            //                         child: Image.asset(
+            //                           'assets/images/product1.png',
+            //                         )),
+            //                     Padding(
+            //                       padding:
+            //                           const EdgeInsets.fromLTRB(10, 5, 5, 0),
+            //                       child: Container(
+            //                         height: 40,
+            //                         child: Text(
+            //                           "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
+            //                           style: TextStyle(
+            //                             fontSize: 10,
+            //                             color:
+            //                                 Color.fromARGB(255, 51, 51, 51),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Padding(
+            //                         padding: const EdgeInsets.fromLTRB(
+            //                             10, 5, 0, 0),
+            //                         child: Text(
+            //                           "฿ 890",
+            //                           style: TextStyle(color: Colors.red),
+            //                         )),
+            //                     SizedBox(
+            //                       height: 8,
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //           Expanded(
+            //             child: Container(
+            //               width: 10,
+            //               child: Card(
+            //                 shape: RoundedRectangleBorder(
+            //                     borderRadius: BorderRadius.circular(5.0)),
+            //                 child: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     ClipRRect(
+            //                         borderRadius: BorderRadius.only(
+            //                             topLeft: Radius.circular(5),
+            //                             topRight: Radius.circular(5)),
+            //                         child: Image.asset(
+            //                           'assets/images/product2.png',
+            //                         )),
+            //                     Padding(
+            //                       padding:
+            //                           const EdgeInsets.fromLTRB(10, 5, 5, 0),
+            //                       child: Container(
+            //                         height: 40,
+            //                         child: Text(
+            //                           "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
+            //                           style: TextStyle(
+            //                             fontSize: 10,
+            //                             color:
+            //                                 Color.fromARGB(255, 51, 51, 51),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Padding(
+            //                         padding: const EdgeInsets.fromLTRB(
+            //                             10, 5, 0, 0),
+            //                         child: Text(
+            //                           "฿ 890",
+            //                           style: TextStyle(color: Colors.red),
+            //                         )),
+            //                     SizedBox(
+            //                       height: 8,
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Expanded(
+            //             child: Container(
+            //               child: Card(
+            //                 shape: RoundedRectangleBorder(
+            //                     borderRadius: BorderRadius.circular(5.0)),
+            //                 child: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     ClipRRect(
+            //                         borderRadius: BorderRadius.only(
+            //                             topLeft: Radius.circular(5),
+            //                             topRight: Radius.circular(5)),
+            //                         child: Image.asset(
+            //                           'assets/images/product3.png',
+            //                         )),
+            //                     Padding(
+            //                       padding:
+            //                           const EdgeInsets.fromLTRB(10, 5, 5, 0),
+            //                       child: Container(
+            //                         height: 40,
+            //                         child: Text(
+            //                           "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
+            //                           style: TextStyle(
+            //                             fontSize: 10,
+            //                             color:
+            //                                 Color.fromARGB(255, 51, 51, 51),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Padding(
+            //                         padding: const EdgeInsets.fromLTRB(
+            //                             10, 5, 0, 0),
+            //                         child: Text(
+            //                           "฿ 890",
+            //                           style: TextStyle(color: Colors.red),
+            //                         )),
+            //                     SizedBox(
+            //                       height: 8,
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //           Expanded(
+            //             child: Container(
+            //               width: 10,
+            //               child: Card(
+            //                 shape: RoundedRectangleBorder(
+            //                     borderRadius: BorderRadius.circular(5.0)),
+            //                 child: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     ClipRRect(
+            //                         borderRadius: BorderRadius.only(
+            //                             topLeft: Radius.circular(5),
+            //                             topRight: Radius.circular(5)),
+            //                         child: Image.asset(
+            //                           'assets/images/product4.png',
+            //                         )),
+            //                     Padding(
+            //                       padding:
+            //                           const EdgeInsets.fromLTRB(10, 5, 5, 0),
+            //                       child: Container(
+            //                         height: 40,
+            //                         child: Text(
+            //                           "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
+            //                           style: TextStyle(
+            //                             fontSize: 10,
+            //                             color:
+            //                                 Color.fromARGB(255, 51, 51, 51),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Padding(
+            //                         padding: const EdgeInsets.fromLTRB(
+            //                             10, 5, 0, 0),
+            //                         child: Text(
+            //                           "฿ 890",
+            //                           style: TextStyle(color: Colors.red),
+            //                         )),
+            //                     SizedBox(
+            //                       height: 8,
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Expanded(
+            //             child: Container(
+            //               child: Card(
+            //                 shape: RoundedRectangleBorder(
+            //                     borderRadius: BorderRadius.circular(5.0)),
+            //                 child: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     ClipRRect(
+            //                         borderRadius: BorderRadius.only(
+            //                             topLeft: Radius.circular(5),
+            //                             topRight: Radius.circular(5)),
+            //                         child: Image.asset(
+            //                           'assets/images/product5.png',
+            //                         )),
+            //                     Padding(
+            //                       padding:
+            //                           const EdgeInsets.fromLTRB(10, 5, 5, 0),
+            //                       child: Container(
+            //                         height: 40,
+            //                         child: Text(
+            //                           "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
+            //                           style: TextStyle(
+            //                             fontSize: 10,
+            //                             color:
+            //                                 Color.fromARGB(255, 51, 51, 51),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Padding(
+            //                         padding: const EdgeInsets.fromLTRB(
+            //                             10, 5, 0, 0),
+            //                         child: Text(
+            //                           "฿ 890",
+            //                           style: TextStyle(color: Colors.red),
+            //                         )),
+            //                     SizedBox(
+            //                       height: 8,
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //           Expanded(
+            //             child: Container(
+            //               width: 10,
+            //               child: Card(
+            //                 shape: RoundedRectangleBorder(
+            //                     borderRadius: BorderRadius.circular(5.0)),
+            //                 child: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     ClipRRect(
+            //                         borderRadius: BorderRadius.only(
+            //                             topLeft: Radius.circular(5),
+            //                             topRight: Radius.circular(5)),
+            //                         child: Image.asset(
+            //                           'assets/images/product6.png',
+            //                         )),
+            //                     Padding(
+            //                       padding:
+            //                           const EdgeInsets.fromLTRB(10, 5, 5, 0),
+            //                       child: Container(
+            //                         height: 40,
+            //                         child: Text(
+            //                           "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
+            //                           style: TextStyle(
+            //                             fontSize: 10,
+            //                             color:
+            //                                 Color.fromARGB(255, 51, 51, 51),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Padding(
+            //                         padding: const EdgeInsets.fromLTRB(
+            //                             10, 5, 0, 0),
+            //                         child: Text(
+            //                           "฿ 890",
+            //                           style: TextStyle(color: Colors.red),
+            //                         )),
+            //                     SizedBox(
+            //                       height: 8,
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // )
+          ],
         ),
         drawer: Theme(
             data: Theme.of(context).copyWith(

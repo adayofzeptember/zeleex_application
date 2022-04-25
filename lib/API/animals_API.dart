@@ -29,8 +29,7 @@ class Animals_All {
     sessionID = json['sessionID'];
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

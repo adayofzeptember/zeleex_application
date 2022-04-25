@@ -8,8 +8,7 @@ import 'package:zeleex_application/second.dart';
 
 void main() {
   runApp(
-    const First_Page(),
-  );
+    const First_Page());
 }
 
 class First_Page extends StatelessWidget {
