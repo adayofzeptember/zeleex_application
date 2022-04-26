@@ -140,7 +140,7 @@ class _StorePageState extends State<StorePage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Store_Detail(),
+                                      builder: (context) => Store_Detail(storeID: data![index].id.toString(),),
                                     ),
                                   );
                                 },

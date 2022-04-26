@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Store_ReadAll {
+class Store_Detail {
   String? responseCode;
   String? responseStatus;
   String? responseMessage;
   String? sessionID;
   int? serverDateTimeMS;
   String? serverDatetime;
-  Data? data;
+  Data_Store? data;
 
-  Store_ReadAll(
+  Store_Detail(
       {this.responseCode,
       this.responseStatus,
       this.responseMessage,
@@ -21,14 +21,14 @@ class Store_ReadAll {
       this.serverDatetime,
       this.data});
 
-  Store_ReadAll.fromJson(Map<String, dynamic> json) {
+  Store_Detail.fromJson(Map<String, dynamic> json) {
     responseCode = json['responseCode'];
     responseStatus = json['responseStatus'];
     responseMessage = json['responseMessage'];
     sessionID = json['sessionID'];
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data_Store.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -46,86 +46,7 @@ class Store_ReadAll {
   }
 }
 
-class Data {
-  int? currentPage;
-  List<Data_Store_ReadALL>? data;
-  String? firstPageUrl;
-  int? from;
-  int? lastPage;
-  String? lastPageUrl;
-  List<Links>? links;
-  String? nextPageUrl;
-  String? path;
-  int? perPage;
-  Null? prevPageUrl;
-  int? to;
-  int? total;
-
-  Data(
-      {this.currentPage,
-      this.data,
-      this.firstPageUrl,
-      this.from,
-      this.lastPage,
-      this.lastPageUrl,
-      this.links,
-      this.nextPageUrl,
-      this.path,
-      this.perPage,
-      this.prevPageUrl,
-      this.to,
-      this.total});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    currentPage = json['current_page'];
-    if (json['data'] != null) {
-      data = <Data_Store_ReadALL>[];
-      json['data'].forEach((v) {
-        data!.add(new Data_Store_ReadALL.fromJson(v));
-      });
-    }
-    firstPageUrl = json['first_page_url'];
-    from = json['from'];
-    lastPage = json['last_page'];
-    lastPageUrl = json['last_page_url'];
-    if (json['links'] != null) {
-      links = <Links>[];
-      json['links'].forEach((v) {
-        links!.add(new Links.fromJson(v));
-      });
-    }
-    nextPageUrl = json['next_page_url'];
-    path = json['path'];
-    perPage = json['per_page'];
-    prevPageUrl = json['prev_page_url'];
-    to = json['to'];
-    total = json['total'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['current_page'] = this.currentPage;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    data['first_page_url'] = this.firstPageUrl;
-    data['from'] = this.from;
-    data['last_page'] = this.lastPage;
-    data['last_page_url'] = this.lastPageUrl;
-    if (this.links != null) {
-      data['links'] = this.links!.map((v) => v.toJson()).toList();
-    }
-    data['next_page_url'] = this.nextPageUrl;
-    data['path'] = this.path;
-    data['per_page'] = this.perPage;
-    data['prev_page_url'] = this.prevPageUrl;
-    data['to'] = this.to;
-    data['total'] = this.total;
-    return data;
-  }
-}
-
-class Data_Store_ReadALL {
+class Data_Store {
   int? id;
   String? title;
   String? status;
@@ -139,15 +60,15 @@ class Data_Store_ReadALL {
   int? userId;
   String? createdAt;
   String? updatedAt;
-  Image_Stores? image;
-  Image_Stores? imageCover;
+  Image_for_store? image;
+  Image_for_store? imageCover;
   int? productCount;
   int? animalCount;
   int? blogCount;
   int? subscribeCount;
   List<Types>? types;
 
- Data_Store_ReadALL(
+  Data_Store(
       {this.id,
       this.title,
       this.status,
@@ -169,7 +90,7 @@ class Data_Store_ReadALL {
       this.subscribeCount,
       this.types});
 
-  Data_Store_ReadALL.fromJson(Map<String, dynamic> json) {
+  Data_Store.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     status = json['status'];
@@ -183,9 +104,11 @@ class Data_Store_ReadALL {
     userId = json['user_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    image = json['image'] != null ? new Image_Stores.fromJson(json['image']) : null;
+    image = json['image'] != null
+        ? new Image_for_store.fromJson(json['image'])
+        : null;
     imageCover = json['image_cover'] != null
-        ? new Image_Stores.fromJson(json['image_cover'])
+        ? new Image_for_store.fromJson(json['image_cover'])
         : null;
     productCount = json['product_count'];
     animalCount = json['animal_count'];
@@ -231,13 +154,13 @@ class Data_Store_ReadALL {
   }
 }
 
-class Image_Stores {
+class Image_for_store {
   String? main;
   String? thumbnail;
 
-  Image_Stores({this.main, this.thumbnail});
+  Image_for_store({this.main, this.thumbnail});
 
-  Image_Stores.fromJson(Map<String, dynamic> json) {
+  Image_for_store.fromJson(Map<String, dynamic> json) {
     main = json['main'];
     thumbnail = json['thumbnail'];
   }
@@ -316,43 +239,16 @@ class Pivot {
   }
 }
 
-class Links {
-  String? url;
-  String? label;
-  bool? active;
-
-  Links({this.url, this.label, this.active});
-
-  Links.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    label = json['label'];
-    active = json['active'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['label'] = this.label;
-    data['active'] = this.active;
-    return data;
-  }
-}
-
-
-Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
-  final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/stores'));
-
+Future<Data_Store> fetchStore_ByID() async {
+  var url = "https://sanboxapi.zeleex.com/api/stores/1";
+  var response = await http.get(Uri.parse(url));
   var jsonResponse = json.decode(response.body);
-  List jsonCon = jsonResponse['data']['data'];
-  
-  if (response.statusCode == 200) {
-    // List jsonResponse = json.decode(response.body);
-    return jsonCon
-        .map((data) => new Data_Store_ReadALL.fromJson(data))
-        .toList();
-  } else {
-    throw Exception("error...");
-  }
+  var jsonCon = jsonResponse['data'];
+  Data_Store msg = Data_Store.fromJson(jsonCon);
+  //print(msg.id.toString() + "  " + msg.title.toString());
+  return msg;
 }
 
+void main(List<String> args) {
+  fetchStore_ByID();
+}

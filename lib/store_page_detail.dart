@@ -7,7 +7,8 @@ import 'store_page_detail_cattle.dart';
 import 'store_page_detail_product.dart';
 
 class Store_Detail extends StatefulWidget {
-  Store_Detail({Key? key}) : super(key: key);
+  String storeID = "";
+  Store_Detail({Key? key, required this.storeID}) : super(key: key);
 
   @override
   State<Store_Detail> createState() => _Store_DetailState();
@@ -15,7 +16,6 @@ class Store_Detail extends StatefulWidget {
 
 class _Store_DetailState extends State<Store_Detail> {
   bool pressed = true;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

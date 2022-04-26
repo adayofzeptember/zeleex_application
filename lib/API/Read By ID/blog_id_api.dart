@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
-
-import 'nested_example.dart';
+import '../nested_example.dart';
 
 class Blog_Detail {
   String? responseCode;
@@ -153,27 +152,23 @@ class Image_Blog {
     return data;
   }
 }
-// var url = "https://sanboxapi.zeleex.com/api/blogs/4";
-// var response = await http.get(Uri.parse(url));
-// print(response.body);
-// Future<Blog> randomBlog() async {
-//   var url = "https://sanboxapi.zeleex.com/api/blogs/1";
-//   var response = await http.get(Uri.parse(url));
-//   print(response.body);
 
-//   Blog msg = Blog.fromJson(json.decode(response.body));
-//   print(msg.title.toString());
-//   return msg;
-// }
 
-// Future<Blog> randomBlog() async {
-//   var url = "https://sanboxapi.zeleex.com/api/blogs/1";
-//   var response = await http.get(Uri.parse(url));
-//   var jsonResponse = json.decode(response.body);
-//   var jsonCon = jsonResponse['data']['blog'];
-//   Blog msg = Blog.fromJson(jsonCon);
-//   //print(msg.title.toString());
-//   return msg;
-// }
+
+
+
+
+
+
+
+  Future<Blog> fetchBlog_ByIDxxxxxx() async {
+    var url = "https://sanboxapi.zeleex.com/api/blogs/1";
+    var response = await http.get(Uri.parse(url));
+    var jsonResponse = json.decode(response.body);
+    var jsonCon = jsonResponse['data']['blog'];
+    Blog msg = Blog.fromJson(jsonCon);
+
+    return msg;
+  }
 
 
