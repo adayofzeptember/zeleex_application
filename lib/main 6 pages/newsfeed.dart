@@ -212,7 +212,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   Padding(
                                     padding:

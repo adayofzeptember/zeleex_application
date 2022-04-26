@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
 
-import 'nested_user_API.dart';
+import 'nested_example.dart';
 
 class Blog_Detail {
   String? responseCode;
@@ -75,6 +76,7 @@ class Blog {
   String? seoTitle;
   String? seoDescription;
   int? reads;
+  Image_Blog? image;
   int? storeId;
   String? createdAt;
   String? updatedAt;
@@ -105,6 +107,9 @@ class Blog {
     seoTitle = json['seo_title'];
     seoDescription = json['seo_description'];
     reads = json['reads'];
+    image =
+        json['image'] != null ? new Image_Blog.fromJson(json['image']) : null;
+
     storeId = json['store_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -120,9 +125,31 @@ class Blog {
     data['seo_title'] = this.seoTitle;
     data['seo_description'] = this.seoDescription;
     data['reads'] = this.reads;
+    if (this.image != null) {
+      data['image'] = this.image!.toJson();
+    }
     data['store_id'] = this.storeId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class Image_Blog {
+  String? main;
+  String? thumbnail;
+
+  Image_Blog({this.main, this.thumbnail});
+
+  Image_Blog.fromJson(Map<String, dynamic> json) {
+    main = json['main'];
+    thumbnail = json['thumbnail'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['main'] = this.main;
+    data['thumbnail'] = this.thumbnail;
     return data;
   }
 }
@@ -139,19 +166,14 @@ class Blog {
 //   return msg;
 // }
 
-Future<Blog> randomBlog() async {
-  var url = "https://sanboxapi.zeleex.com/api/blogs/2";
-  var response = await http.get(Uri.parse(url));
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data']['blog'];
-  Blog msg = Blog.fromJson(jsonCon);
-  print(msg.title.toString());
-  return msg;
-}
+// Future<Blog> randomBlog() async {
+//   var url = "https://sanboxapi.zeleex.com/api/blogs/1";
+//   var response = await http.get(Uri.parse(url));
+//   var jsonResponse = json.decode(response.body);
+//   var jsonCon = jsonResponse['data']['blog'];
+//   Blog msg = Blog.fromJson(jsonCon);
+//   //print(msg.title.toString());
+//   return msg;
+// }
 
 
-
-void main(List<String> args) {
-  randomBlog();
-  
-}
