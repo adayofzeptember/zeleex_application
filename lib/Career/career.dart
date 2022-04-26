@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/API/career_readall_api.dart';
 import 'package:zeleex_application/Career/career_detail.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
-import '../API/blogs_readall_api.dart';
+
+import '../API/Read All/career_readall_api.dart';
 import '../Plate.dart';
 
 class CareerPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class _CareerPageState extends State<CareerPage> {
 
 
   @override
-  late Future<List<Data_Use>> fetched_data_career_readAll;
+  late Future<List<Data_Read_Careers>> fetched_data_career_readAll;
   @override
   void initState() {
     super.initState();
@@ -97,11 +97,11 @@ class _CareerPageState extends State<CareerPage> {
               SizedBox(
                 height: 15,
               ),
-              FutureBuilder<List<Data_Use>>(
+              FutureBuilder<List<Data_Read_Careers>>(
                 future: fetched_data_career_readAll,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<Data_Use>? data = snapshot.data;
+                    List<Data_Read_Careers>? data = snapshot.data;
                     return Expanded(
                       child: ListView.builder(
                           itemCount: data?.length,

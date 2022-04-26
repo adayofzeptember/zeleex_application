@@ -4,10 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:zeleex_application/API/home_getData_api.dart';
-import 'package:zeleex_application/API/slider_api.dart';
+import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
+import 'package:zeleex_application/API/Read%20All/slider_api.dart';
+
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
+import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
 import 'package:zeleex_application/main%206%20pages/products.dart';
 import 'package:zeleex_application/main%206%20pages/semens.dart';
 import 'package:zeleex_application/newsfeed_detail.dart';
@@ -164,7 +166,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NewsFeedPage_Detail()));
+                                  builder: (context) => NewsFeedPage()));
                         },
                         child: FutureBuilder<List<DataSlider>>(
                           future: futureData,
@@ -633,7 +635,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                 .push(MaterialPageRoute(
                                                                     builder:
                                                                         (context) =>
-                                                                            NewsFeedPage_Detail()));
+                                                                            Store_Product_Detail()));
                                                           },
                                                           child: Column(
                                                             children: [

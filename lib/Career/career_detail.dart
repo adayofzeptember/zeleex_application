@@ -3,10 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../API/blogs_readall_api.dart';
+
+import '../API/Read All/career_readall_api.dart';
 import '../Plate.dart';
-
-
+import 'package:http/http.dart' as http;
 
 class Career_Detail extends StatefulWidget {
   String gotText = "";
@@ -17,20 +17,24 @@ class Career_Detail extends StatefulWidget {
 }
 
 class _Career_DetailState extends State<Career_Detail> {
-  Future<List<Data_Blog_Detail>> testID() async {
-    var x = widget.gotText.toString();
+  Future<Data_Read_Careers> career_fetchByID() async {
+    var blogID = widget.gotText.toString();
+    var url = "https://sanboxapi.zeleex.com/api/careers/" + blogID;
+    var response = await http.get(Uri.parse(url));
+    Data_Read_Careers careerDetail =
+        Data_Read_Careers.fromJson(json.decode(response.body));
+    return careerDetail;
+  }
 
-    final response =
-        await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/blogs/'));
+  @override
+  void initState() {
+    super.initState();
+  }
 
-    var jsonResponse = json.decode(response.body);
-    List jsonCon = jsonResponse['data']['data'];
-    //print(jsonCon);
-    if (response.statusCode == 200) {
-      return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
-    } else {
-      throw Exception("error...");
-    }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -74,6 +78,29 @@ class _Career_DetailState extends State<Career_Detail> {
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(20.0),
+        // child: FutureBuilder(
+        //     future: career_ByID(),
+        //     builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        //       if (snapshot.hasData) {
+        //         NewAPI msg = snapshot.data;
+        //         // print("snap = " + msg.mess);
+        //         return Column(
+        //           mainAxisAlignment: MainAxisAlignment.start,
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           children: [
+        //             Text(msg.address!.geo!.lat.toString()),
+        //             Text(msg.company!.name!.toString())
+        //           ],
+        //         );
+        //         // return Image.network(
+        //         //   msg.mess,
+        //         //   width: 300,
+        //         //   height: 200,
+        //         // );
+        //       } else {
+        //         return CircularProgressIndicator();
+        //       }
+        //     }),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

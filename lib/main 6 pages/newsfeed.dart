@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/API/blogs_readall_api.dart';
+import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
+import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
-import '../API/home_getData_api.dart';
+
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
@@ -39,7 +40,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.white,
               statusBarIconBrightness: Brightness.dark,
@@ -59,18 +60,11 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => NewsFeedPage_Detail(),
-                  ));
-                },
-                child: Visibility(
-                  visible: false,
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  ),
+              Visibility(
+                visible: false,
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
                 ),
               ),
               Text(
@@ -101,8 +95,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
         child: Column(children: <Widget>[
- 
-
           FutureBuilder<List<Data_Blog_Detail>>(
             future: future_blogs,
             builder: (context, snapshot) {
@@ -117,7 +109,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                           child: InkWell(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => NewsFeedPage_Detail()));
+                                  builder: (context) => NewsFeedPage_Detail(blogID: data![index].id.toString(),)));
                             },
                             child: Container(
                               color: Colors.white,
@@ -226,7 +218,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                     padding:
                                         const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                     child: Text(
-                                      data[index].content.toString(),
+                                      data[index].seoDescription.toString(),
                                       // "แต่ถ้าเลี้ยงแบบครบวงจร ภาครัฐจัดหาน้ำเชื้อจากพ่อแม่พันธุ์ชั้นดีเกษตรกรนำมาผสมพันธุ์ แล้วเลี้ยงอนุบาลส่งต่อให้เกษตรกรที่พอมีกำลังทรัพย์นำมาขุนต่อด้วยเทคโนโลยีสมัยใหม่ ให้ ได้เนื้อวัวเกรดพรีเมียมมีไขมันแทรก ไม่ต่างจากเนื้อจากต่างประเทศราคาแพง",
                                       style: TextStyle(
                                         fontFamily: 'Kanit',

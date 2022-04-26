@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/API/animals_API.dart';
-import 'package:zeleex_application/API/products_API.dart';
+import 'package:zeleex_application/API/Read%20All/products_API.dart';
+
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
 import '../Career/career.dart';
 import '../Plate.dart';

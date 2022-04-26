@@ -195,21 +195,8 @@ class Links {
     return data;
   }
 }
-//HelpCenter product = HelpCenter.fromJson(jsonResponse);
-//print(product.data!.data2![2].seoTitle);
-
-// Future<List<HelpCenter>> fetchData555() async {
-//   final response =
-//       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/helps'));
-//   final jsonResponse = json.decode(response.body);
-//   HelpCenter product = HelpCenter.fromJson(jsonResponse);
-//   print(product.data!.data2![0].content);
-
-//   return [];
-// }
 
 Future<List<Data2>> fetch_HelpCenter() async {
-  
   final response =
       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/helps'));
 
@@ -224,4 +211,3 @@ Future<List<Data2>> fetch_HelpCenter() async {
     throw Exception("error...");
   }
 }
-

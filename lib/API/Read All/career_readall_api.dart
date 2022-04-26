@@ -48,7 +48,7 @@ class Career_ReadAll {
 
 class Data {
   int? currentPage;
-  List<Data_Use>? data_use;
+  List<Data_Read_Careers>? data_use;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -79,9 +79,9 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data_use = <Data_Use>[];
+      data_use = <Data_Read_Careers>[];
       json['data'].forEach((v) {
-        data_use!.add(new Data_Use.fromJson(v));
+        data_use!.add(new Data_Read_Careers.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -125,7 +125,7 @@ class Data {
   }
 }
 
-class Data_Use {
+class Data_Read_Careers {
   int? id;
   String? title;
   String? content;
@@ -135,7 +135,7 @@ class Data_Use {
   String? createdAt;
   String? updatedAt;
 
-  Data_Use(
+  Data_Read_Careers(
       {this.id,
       this.title,
       this.content,
@@ -145,7 +145,7 @@ class Data_Use {
       this.createdAt,
       this.updatedAt});
 
-  Data_Use.fromJson(Map<String, dynamic> json) {
+ Data_Read_Careers.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     content = json['content'];
@@ -193,17 +193,15 @@ class Links {
 }
 
 //ใช้ Data use เพราะเป็นตัวที่เก็บข้อมูลลิสต์
-Future<List<Data_Use>> fetch_career_readAll() async {
+Future<List<Data_Read_Careers>> fetch_career_readAll() async {
   final response =
       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/careers'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
-  //print(jsonResponse['data']['data']);
 
   if (response.statusCode == 200) {
-    // List jsonResponse = json.decode(response.body);
-    return jsonCon.map((data) => new Data_Use.fromJson(data)).toList();
+    return jsonCon.map((data) => new Data_Read_Careers.fromJson(data)).toList();
   } else {
     throw Exception("error...");
   }
