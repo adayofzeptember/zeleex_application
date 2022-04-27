@@ -252,7 +252,8 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                   height: 50,
                                   width: 50,
                                   child: CircleAvatar(
-                                    backgroundImage: NetworkImage(thisAnimal.image!.thumbnail.toString()),
+                                    backgroundImage: NetworkImage(
+                                        thisAnimal.image!.thumbnail.toString()),
                                     backgroundColor: Colors.transparent,
                                   ),
                                 ),
@@ -267,17 +268,15 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          ImageIcon(
-                                            AssetImage(
-                                              "assets/images/store_pin.png",
-                                            ),
-                                            color: Colors.grey,
+                                          SvgPicture.asset(
+                                            'assets/images/pincat.svg',
                                           ),
+                                          SizedBox(width: 10),
                                           Container(
                                             child: Text(
-                                              thisAnimal.store!.address.toString(),
+                                              thisAnimal.store!.address
+                                                  .toString(),
                                               style:
                                                   TextStyle(color: Colors.grey),
                                             ),
@@ -285,28 +284,29 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                         ],
                                       ),
                                       Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          ImageIcon(
-                                            AssetImage(
-                                              "assets/images/phone.png",
-                                            ),
-                                            color: Colors.grey,
-                                          ),
-                                          Text(
-                                            thisAnimal.store!.phone.toString(),
-                                            style: TextStyle(
-                                                color: Colors.grey),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/images/telcat.svg',
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text(
+                                                thisAnimal.store!.phone.toString(),
+                                                style:
+                                                    TextStyle(color: Colors.grey),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                            ],
                                           ),
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                                shape:
-                                                    RoundedRectangleBorder(
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          30),
+                                                      BorderRadius.circular(30),
                                                 ),
                                                 primary: pressed
                                                     ? Palette.kToDark
@@ -324,9 +324,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                             // : TextStyle(
                                             //     color: Color.fromARGB(255, 229, 233, 229)),
                                             child: Text(
-                                              pressed
-                                                  ? "ติดตาม"
-                                                  : "ติดตามแล้ว",
+                                              pressed ? "ติดตาม" : "ติดตามแล้ว",
                                               style: TextStyle(
                                                   color: Color.fromRGBO(
                                                       255, 255, 255, 1)),
@@ -337,10 +335,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                     ],
                                   ),
                                 ),
-                                Icon(
-                                  Icons.settings,
-                                  color: Colors.white,
-                                )
+                             
                               ],
                             ),
                           ),

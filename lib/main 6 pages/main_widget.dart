@@ -298,7 +298,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       backgroundColor:
                                           Color.fromARGB(255, 255, 255, 255),
                                       child: SvgPicture.asset(
-                                        'assets/images/cum.svg',
+                                        'assets/images/cum2.svg',
                                         fit: BoxFit.fitWidth,
                                       ),
                                     ),

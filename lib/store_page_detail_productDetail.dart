@@ -45,8 +45,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   }
 
   Future<Product> fetch_Product_ByID() async {
-    var url = "https://sanboxapi.zeleex.com/api/products/"+widget.productID.toString();
+    var url = "https://sanboxapi.zeleex.com/api/products/" +
         widget.productID.toString();
+    widget.productID.toString();
     var response = await http.get(Uri.parse(url));
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['product'];
@@ -114,7 +115,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
         ),
       ),
       appBar: AppBar(
-        elevation: 0,
+          elevation: 0,
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           systemOverlayStyle: SystemUiOverlayStyle(
@@ -266,22 +267,21 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                         Container(
                           color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                            padding: const EdgeInsets.all(10.0),
                             child: Row(
                               children: [
                                 SizedBox(
                                   height: 50,
                                   width: 50,
                                   child: CircleAvatar(
-                                    backgroundImage: NetworkImage(thisProduct
-                                        .store!.image!.thumbnail
-                                        .toString()),
+                                    backgroundImage: NetworkImage(
+                                        thisProduct.store!.image!.main.toString()),
                                     backgroundColor: Colors.transparent,
                                   ),
                                 ),
                                 Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      const EdgeInsets.fromLTRB(10, 0, 5, 0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -289,19 +289,12 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                       Text(thisProduct.store!.title.toString(),
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
                                       Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
                                         children: [
-                                          ImageIcon(
-                                            AssetImage(
-                                              "assets/images/store_pin.png",
-                                            ),
-                                            color: Colors.grey,
+                                          SvgPicture.asset(
+                                            'assets/images/pincat.svg',
                                           ),
+                                          SizedBox(width: 10),
                                           Container(
                                             child: Text(
                                               thisProduct.store!.address
@@ -313,15 +306,15 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                         ],
                                       ),
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
                                         children: [
-                                          ImageIcon(
-                                            AssetImage(
-                                              "assets/images/phone.png",
-                                            ),
-                                            color: Colors.grey,
-                                          ),
                                           Row(
                                             children: [
+                                              SvgPicture.asset(
+                                                'assets/images/telcat.svg',
+                                              ),
+                                              SizedBox(width: 10),
                                               Text(
                                                 thisProduct.store!.phone
                                                     .toString(),
@@ -329,37 +322,38 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                     color: Colors.grey),
                                               ),
                                               SizedBox(
-                                                width: 10,
-                                              ),
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                    ),
-                                                    primary: pressed
-                                                        ? Palette.kToDark
-                                                        : Color.fromARGB(
-                                                            255, 204, 204, 204),
-                                                    elevation: 0),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    pressed = !pressed;
-                                                  });
-                                                },
-                                                child: Text(
-                                                  pressed
-                                                      ? "ติดตาม"
-                                                      : "ติดตามแล้ว",
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          255, 255, 255, 1)),
-                                                ),
+                                                width: 5,
                                               ),
                                             ],
-                                          )
+                                          ),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                primary: pressed
+                                                    ? Palette.kToDark
+                                                    : Color.fromARGB(
+                                                        255, 204, 204, 204),
+                                                elevation: 0),
+                                            onPressed: () {
+                                              setState(() {
+                                                pressed = !pressed;
+                                              });
+                                            },
+                                            //         style: pressed
+                                            // ? TextStyle(
+                                            //     color: Colors.black)
+                                            // : TextStyle(
+                                            //     color: Color.fromARGB(255, 229, 233, 229)),
+                                            child: Text(
+                                              pressed ? "ติดตาม" : "ติดตามแล้ว",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      255, 255, 255, 1)),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -463,8 +457,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                     child: Center(child: CircularProgressIndicator()),
                   );
                 }
-              }
-              ),
+              }),
         ],
       )),
     );
