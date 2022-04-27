@@ -24,7 +24,6 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['blog'];
     Blog msg = Blog.fromJson(jsonCon);
-
     return msg;
   }
 

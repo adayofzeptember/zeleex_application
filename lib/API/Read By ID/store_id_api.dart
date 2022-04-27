@@ -245,7 +245,7 @@ Future<Data_Store> fetchStore_ByID() async {
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data'];
   Data_Store msg = Data_Store.fromJson(jsonCon);
-  //print(msg.id.toString() + "  " + msg.title.toString());
+  print(msg.id.toString() + "  " + msg.title.toString());
   return msg;
 }
 

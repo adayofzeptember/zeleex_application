@@ -796,16 +796,12 @@ class ProductOutStores {
   }
 }
 
-Future<Product> fetchPD() async {
-  var url = "https://sanboxapi.zeleex.com/api/products/1";
-  var response = await http.get(Uri.parse(url));
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data']['product'];
-  Product msg = Product.fromJson(jsonCon);
-  print(msg.title.toString() + "  " + msg.price.toString());
-  return msg;
-}
-
-void main(List<String> args) {
-  fetchPD();
-}
+// Future<Product> fetch_Product_ByID() async {
+//   var url = "https://sanboxapi.zeleex.com/api/products/1";
+//   var response = await http.get(Uri.parse(url));
+//   var jsonResponse = json.decode(response.body);
+//   var jsonCon = jsonResponse['data']['product'];
+//   Product msg = Product.fromJson(jsonCon);
+//   //print(msg.store.id);
+//   return msg;
+// }
