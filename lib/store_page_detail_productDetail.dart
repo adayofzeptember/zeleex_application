@@ -158,8 +158,10 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                   return Container(
                     child: Column(
                       children: <Widget>[
-                        Image.network(
-                          thisProduct.image!.thumbnail.toString(),
+                        SizedBox(
+                          child: Image.network(
+                            thisProduct.image!.thumbnail.toString(),
+                          ),
                         ),
                         Container(
                           color: Colors.white,

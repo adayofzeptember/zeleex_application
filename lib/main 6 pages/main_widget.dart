@@ -168,7 +168,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                               MaterialPageRoute(
                                   builder: (context) => NewsFeedPage()));
                         },
-                        child: FutureBuilder<List<DataSlider>>(
+                        child: 
+                        
+                        FutureBuilder<List<DataSlider>>(
                           future: futureData,
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
@@ -630,12 +632,14 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                       return Card(
                                                         child: InkWell(
                                                           onTap: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .push(MaterialPageRoute(
+                                                            Navigator.of(context).push(
+                                                                MaterialPageRoute(
                                                                     builder:
                                                                         (context) =>
-                                                                            Store_Product_Detail()));
+                                                                            Store_Product_Detail(
+                                                                              productName: data![index].title.toString(),
+                                                                              productID: data[index].id.toString(),
+                                                                            )));
                                                           },
                                                           child: Column(
                                                             children: [
