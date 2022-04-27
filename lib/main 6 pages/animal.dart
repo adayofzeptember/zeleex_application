@@ -36,7 +36,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
   }
 
   bool pressed = true;
-    bool pressed2 = true;
+  bool pressed2 = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,7 +175,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
               ),
             ),
           ),
-          
+
           // Expanded(
           //   child: GridView.builder(
           //     shrinkWrap: true,
@@ -217,7 +217,10 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            Store_Cattle_Detail(),
+                                            Store_Cattle_Detail(
+                                          animalID: data![index].id.toString(),
+                                          animalName: data[index].title.toString(),
+                                        ),
                                       ));
                                   // Navigator.push(
                                   //     MaterialPageRoute(
