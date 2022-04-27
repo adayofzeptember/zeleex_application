@@ -61,7 +61,7 @@ class _main_IconState extends State<main_Icon> {
       //       );
       //     },
       //     transitionDuration: Duration(seconds: 3));
-      var x = "testTdddedfdfxt";
+      var x = "TTT";
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
