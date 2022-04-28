@@ -42,13 +42,14 @@ class _Store_DetailState extends State<Store_Detail> {
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 150,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: FloatingActionButton(
+                  heroTag: "btn1",
                   backgroundColor: Colors.white,
                   shape:
                       BeveledRectangleBorder(borderRadius: BorderRadius.zero),
@@ -86,8 +87,9 @@ class _Store_DetailState extends State<Store_Detail> {
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
-                width: 150,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: FloatingActionButton(
+                  heroTag: "bt1",
                   backgroundColor: Palette.kToDark,
                   shape:
                       BeveledRectangleBorder(borderRadius: BorderRadius.zero),
@@ -362,11 +364,12 @@ class _Store_DetailState extends State<Store_Detail> {
                                         Container(
                                           height: 20,
                                           child: Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  15, 5, 0, 0),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      15, 5, 0, 0),
                                               child: ListView.builder(
-                                                scrollDirection: Axis.horizontal,
-                                             
+                                                  scrollDirection:
+                                                      Axis.horizontal,
                                                   itemCount:
                                                       thisStore_notCoverIMG
                                                           .types!.length,
@@ -375,12 +378,16 @@ class _Store_DetailState extends State<Store_Detail> {
                                                           int index) {
                                                     return Row(
                                                       children: [
-                                                        
                                                         Text(
-                                                            thisStore_notCoverIMG
-                                                                .types![index]
-                                                                .title
-                                                                .toString()+", ", style: TextStyle(color: Palette.kToDark),),
+                                                          thisStore_notCoverIMG
+                                                                  .types![index]
+                                                                  .title
+                                                                  .toString() +
+                                                              ", ",
+                                                          style: TextStyle(
+                                                              color: Palette
+                                                                  .kToDark),
+                                                        ),
                                                       ],
                                                     );
                                                   })),

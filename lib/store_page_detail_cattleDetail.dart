@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 class Store_Cattle_Detail extends StatefulWidget {
   String? animalID = "";
   String? animalName = "";
+  
   Store_Cattle_Detail({Key? key, this.animalID, this.animalName})
       : super(key: key);
 
@@ -18,7 +19,7 @@ class Store_Cattle_Detail extends StatefulWidget {
   State<Store_Cattle_Detail> createState() => _Store_Cattle_DetailState();
 }
 
-class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
+class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> { 
   Future<Animal> fetch_Animal_ByID() async {
     var url = "https://sanboxapi.zeleex.com/api/animals/" +
         widget.animalID.toString();
@@ -30,7 +31,11 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
     return msg;
   }
 
+
+
   bool pressed = true;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +47,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
             Container(
               width: 150,
               child: FloatingActionButton(
+                     heroTag: "btn1",
                 backgroundColor: Palette.kToDark,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {},
@@ -73,6 +79,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               width: 150,
               child: FloatingActionButton(
+                     heroTag: "btndd1",
                 backgroundColor: Colors.cyan,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {},

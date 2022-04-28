@@ -67,6 +67,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
             Container(
               width: 150,
               child: FloatingActionButton(
+                     heroTag: "btn1",
                 backgroundColor: Colors.white,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {print("object")},
@@ -96,6 +97,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               width: 150,
               child: FloatingActionButton(
+                     heroTag: "btsdqwn1",
                 backgroundColor: Palette.kToDark,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {print("object")},

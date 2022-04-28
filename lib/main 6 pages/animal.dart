@@ -7,6 +7,7 @@ import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
+import 'package:intl/intl.dart';
 import '../profile.dart';
 import 'main_page.dart';
 
@@ -273,7 +274,11 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 5, 0, 0),
                                         child: Text(
-                                          "฿ " + data[index].price.toString(),
+                                          "฿ " +       NumberFormat(
+                                                                            "#,###")
+                                                                        .format(int.parse(data[index]
+                                                                            .price
+                                                                            .toString())),
                                           style: TextStyle(color: Colors.red),
                                         )),
                                     SizedBox(

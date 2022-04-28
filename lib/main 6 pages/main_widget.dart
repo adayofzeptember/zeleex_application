@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/API/Read%20All/slider_api.dart';
@@ -79,7 +80,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                 ),
               ),
               Text(
-                "หน้าหลัก",
+                NumberFormat("#,###").format(123456789),
                 style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.bold),
@@ -168,9 +169,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                               MaterialPageRoute(
                                   builder: (context) => NewsFeedPage()));
                         },
-                        child: 
-                        
-                        FutureBuilder<List<DataSlider>>(
+                        child: FutureBuilder<List<DataSlider>>(
                           future: futureData,
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
@@ -437,6 +436,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                     future: future_anmials_cat,
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
+                                        var oneK = NumberFormat("#,###");
                                         List<AnimalCat01>? data = snapshot.data;
                                         return Expanded(
                                           child: ListView.builder(
@@ -476,6 +476,11 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                   .thumbnail
                                                                   .toString(),
                                                               fit: BoxFit.fill,
+                                                              height: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.3,
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size
@@ -508,9 +513,11 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                               ),
                                                               Text(
                                                                 "฿ " +
-                                                                    data[index]
-                                                                        .price
-                                                                        .toString(),
+                                                                    NumberFormat(
+                                                                            "#,###")
+                                                                        .format(int.parse(data[index]
+                                                                            .price
+                                                                            .toString())),
                                                                 style: TextStyle(
                                                                     color: Color
                                                                         .fromARGB(
@@ -659,6 +666,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                         .toString(),
                                                                     fit: BoxFit
                                                                         .fill,
+                                                                    height: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.3,
                                                                     width: MediaQuery.of(context)
                                                                             .size
                                                                             .width *
