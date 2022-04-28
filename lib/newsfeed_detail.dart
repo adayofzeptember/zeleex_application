@@ -82,11 +82,11 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.hasData) {
                       Blog blog = snapshot.data;
-      
+
                       return Container(
                         color: Colors.white,
                         child: Column(
-                          children: <Widget> [
+                          children: <Widget>[
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
                               child: Row(
@@ -109,7 +109,8 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     blog.updatedAt.toString(),
@@ -136,7 +137,10 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                               height: 20,
                             ),
                             // Image.asset('assets/images/cows1.png'),
-                            Image.network(blog.image!.main.toString(), fit: BoxFit.cover, ),
+                            Image.network(
+                              blog.image!.main.toString(),
+                              fit: BoxFit.cover,
+                            ),
                             SizedBox(
                               height: 10,
                             ),
@@ -146,25 +150,26 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                   blog.seoDescription.toString(),
+                                    blog.seoDescription.toString(),
                                   ),
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                    child: Image.asset('assets/images/cows2.png'),
+                                    child:
+                                        Image.asset('assets/images/cows2.png'),
                                   ),
-                                     Text(
-                                   blog.content.toString(),
+                                  Text(
+                                    blog.content.toString(),
                                   ),
                                   Image.asset('assets/images/man.png'),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  
                                   Text(
-                                     blog.seoTitle.toString(),
+                                    blog.seoTitle.toString(),
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                     height: 10,

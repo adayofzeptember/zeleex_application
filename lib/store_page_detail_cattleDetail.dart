@@ -179,214 +179,213 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
                   Animal thisAnimal = snapshot.data;
-                  return Container(
-                    child: Column(
-                      children: <Widget>[
-                        Image.network(thisAnimal.image!.main.toString()),
-                        Container(
-                          color: Colors.white,
-                          child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "${thisAnimal.title}",
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                            fontSize: 20),
-                                      ),
-                                      SvgPicture.asset('assets/images/love.svg')
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "฿ ${thisAnimal.price}",
-                                        style: TextStyle(
-                                            color: Colors.red[400],
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "฿ ${thisAnimal.price}",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 130, 130, 130),
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  SvgPicture.asset(
-                                      'assets/images/groupStar.svg'),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              )),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 50,
-                                  width: 50,
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        thisAnimal.image!.thumbnail.toString()),
-                                    backgroundColor: Colors.transparent,
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(thisAnimal.store!.title.toString(),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/images/pincat.svg',
-                                          ),
-                                          SizedBox(width: 10),
-                                          Container(
-                                            child: Text(
-                                              thisAnimal.store!.address
-                                                  .toString(),
-                                              style:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/images/telcat.svg',
-                                              ),
-                                              SizedBox(width: 10),
-                                              Text(
-                                                thisAnimal.store!.phone.toString(),
-                                                style:
-                                                    TextStyle(color: Colors.grey),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                            ],
-                                          ),
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                ),
-                                                primary: pressed
-                                                    ? Palette.kToDark
-                                                    : Color.fromARGB(
-                                                        255, 204, 204, 204),
-                                                elevation: 0),
-                                            onPressed: () {
-                                              setState(() {
-                                                pressed = !pressed;
-                                              });
-                                            },
-                                            //         style: pressed
-                                            // ? TextStyle(
-                                            //     color: Colors.black)
-                                            // : TextStyle(
-                                            //     color: Color.fromARGB(255, 229, 233, 229)),
-                                            child: Text(
-                                              pressed ? "ติดตาม" : "ติดตามแล้ว",
-                                              style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      255, 255, 255, 1)),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                             
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                  return Column(
+                    //! container คลุม column
+                    children: <Widget>[
+                      Image.network(thisAnimal.image!.main.toString()),
+                      Container(
+                        color: Colors.white,
+                        child: Padding(
+                            padding: const EdgeInsets.all(15.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.end,
-                                //   children: [SvgPicture.asset('assets/images/vec.svg')],
-                                // ),
-                                Text(
-                                  "รายละเอียดสัตว์",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51),
-                                      fontSize: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${thisAnimal.title}",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontSize: 20),
+                                    ),
+                                    SvgPicture.asset('assets/images/love.svg')
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "฿ ${thisAnimal.price}",
+                                      style: TextStyle(
+                                          color: Colors.red[400],
+                                          fontSize: 20),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "฿ ${thisAnimal.price}",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 130, 130, 130),
+                                          decoration:
+                                              TextDecoration.lineThrough),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Text(
-                                  thisAnimal.description.toString(),
-                                  style: TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 130, 130, 130)),
-                                ),
+                                SvgPicture.asset(
+                                    'assets/images/groupStar.svg'),
                                 SizedBox(
-                                  height: 15,
-                                ),
-                                Image.asset('assets/images/brazil.png'),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Image.asset('assets/images/brazil.png'),
-                                SizedBox(
-                                  height: 80,
+                                  height: 10,
                                 ),
                               ],
-                            ),
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      thisAnimal.image!.thumbnail.toString()),
+                                  backgroundColor: Colors.transparent,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(thisAnimal.store!.title.toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/images/pincat.svg',
+                                        ),
+                                        SizedBox(width: 10),
+                                        Container(
+                                          child: Text(
+                                            thisAnimal.store!.address
+                                                .toString(),
+                                            style:
+                                                TextStyle(color: Colors.grey),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/images/telcat.svg',
+                                            ),
+                                            SizedBox(width: 10),
+                                            Text(
+                                              thisAnimal.store!.phone.toString(),
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                          ],
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              primary: pressed
+                                                  ? Palette.kToDark
+                                                  : Color.fromARGB(
+                                                      255, 204, 204, 204),
+                                              elevation: 0),
+                                          onPressed: () {
+                                            setState(() {
+                                              pressed = !pressed;
+                                            });
+                                          },
+                                          //         style: pressed
+                                          // ? TextStyle(
+                                          //     color: Colors.black)
+                                          // : TextStyle(
+                                          //     color: Color.fromARGB(255, 229, 233, 229)),
+                                          child: Text(
+                                            pressed ? "ติดตาม" : "ติดตามแล้ว",
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    255, 255, 255, 1)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                           
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.end,
+                              //   children: [SvgPicture.asset('assets/images/vec.svg')],
+                              // ),
+                              Text(
+                                "รายละเอียดสัตว์",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 51, 51, 51),
+                                    fontSize: 20),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                thisAnimal.description.toString(),
+                                style: TextStyle(
+                                    color:
+                                        Color.fromARGB(255, 130, 130, 130)),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Image.asset('assets/images/brazil.png'),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Image.asset('assets/images/brazil.png'),
+                              SizedBox(
+                                height: 80,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 } else {
                   return Padding(

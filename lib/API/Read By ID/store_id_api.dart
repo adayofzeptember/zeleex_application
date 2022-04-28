@@ -239,16 +239,11 @@ class Pivot {
   }
 }
 
-Future<Data_Store> fetchStore_ByID() async {
-  var url = "https://sanboxapi.zeleex.com/api/stores/1";
-  var response = await http.get(Uri.parse(url));
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data'];
-  Data_Store msg = Data_Store.fromJson(jsonCon);
-  print(msg.id.toString() + "  " + msg.title.toString());
-  return msg;
-}
-
-void main(List<String> args) {
-  fetchStore_ByID();
-}
+// Future<Data_Store> fetchStore_ByID() async {
+//   var url = "https://sanboxapi.zeleex.com/api/stores/1";
+//   var response = await http.get(Uri.parse(url));
+//   var jsonResponse = json.decode(response.body);
+//   var jsonCon = jsonResponse['data'];
+//   Data_Store msg = Data_Store.fromJson(jsonCon);
+//   return msg;
+// }

@@ -7,8 +7,7 @@ import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
 
 void main() {
-  runApp(
-    const First_Page());
+  runApp(const First_Page());
 }
 
 class First_Page extends StatelessWidget {
@@ -46,11 +45,11 @@ class _main_IconState extends State<main_Icon> {
       // PageRouteBuilder(
       //     pageBuilder: (BuildContext context, Animation<double> animation,
       //         Animation<double> secondaryAnimation) {
-      //       return SecondPage();
+      //       return SecondPage(); 
       //     },
       //     transitionsBuilder: (BuildContext context,
-      //         Animation<double> animation,
-      //         Animation<double> secondaryAnimation,
+      //           Animation<double> animation,
+      //       Animation<double> secondaryAnimation,
       //         Widget child) {
       //       return SlideTransition(
       //         position: Tween<Offset>(
@@ -65,11 +64,11 @@ class _main_IconState extends State<main_Icon> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => SecondPage(name: x,),
+          builder: (context) => SecondPage(
+            name: x,
+          ),
         ),
       );
-
-
     });
   }
 
