@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -210,13 +211,42 @@ class _ProductPageState extends State<ProductPage> {
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
-                                      child: Image.network(
-                                        data![index]
-                                            .image!
-                                            .thumbnail
-                                            .toString(),
-                                        fit: BoxFit.fill,
-                                      )),
+                                      child: 
+                                      CachedNetworkImage(
+                                      imageUrl: data![index]
+                                          .image!
+                                          .thumbnail
+                                          .toString(),
+                                      fit: BoxFit.fill,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Container(
+                                        color:
+                                            Color.fromARGB(255, 142, 142, 142),
+                                        // height: 200,
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              141,
+                                                              141,
+                                                              141))),
+                                                  width: double.infinity,
+                                                  height: double.infinity,
+                                                  alignment: Alignment.center,
+                                                  child: Text("ไม่พบรูปภาพ")),
+                                    ),
+                                      // Image.network(
+                                      //   data![index]
+                                      //       .image!
+                                      //       .thumbnail
+                                      //       .toString(),
+                                      //   fit: BoxFit.fill,
+                                      // )
+                                      ),
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(10, 5, 5, 0),
