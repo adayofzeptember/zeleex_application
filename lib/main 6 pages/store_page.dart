@@ -190,9 +190,12 @@ class _StorePageState extends State<StorePage> {
                                           width: 5,
                                         ),
                                         Container(
+                                          height: 40,
+                                          width: 100,
                                           child: Text(
                                             data[index].address.toString(),
                                             style: TextStyle(
+
                                                 fontSize: 13,
                                                 color: Palette.kToDark),
                                           ),

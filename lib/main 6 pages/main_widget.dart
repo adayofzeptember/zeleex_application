@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -80,7 +81,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                 ),
               ),
               Text(
-                NumberFormat("#,###").format(123456789),
+                "หน้าหลัก",
                 style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.bold),
@@ -372,6 +373,15 @@ class _Main_WidgetState extends State<Main_Widget> {
                         ),
                       ),
                     ),
+
+                    // CachedNetworkImage(
+                    //   imageUrl: "http://via.placeholder.com/350x150",
+
+                    //   progressIndicatorBuilder:
+                    //       (context, url, downloadProgress) =>
+                    //         Container(color: Color.fromARGB(255, 110, 109, 109), height: 200,),
+                    //   errorWidget: (context, url, error) => Icon(Icons.error),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                       child: Container(
@@ -392,7 +402,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   child: Text(
                                     "โคและกระบือ",
                                     style: TextStyle(
-                                        color: Color.fromARGB(255, 51, 51, 51),
+                                        color: Color.fromARGB(255, 51, 50, 51),
                                         fontWeight: FontWeight.bold,
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -462,31 +472,69 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                     child: Column(
                                                       children: [
                                                         ClipRRect(
-                                                            borderRadius: BorderRadius.only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        5),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        5)),
-                                                            child:
-                                                                Image.network(
-                                                              data![index]
-                                                                  .image!
-                                                                  .thumbnail
-                                                                  .toString(),
-                                                              fit: BoxFit.fill,
-                                                              height: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.3,
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.3,
-                                                            )),
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          5),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          5)),
+                                                          child:
+                                                              //     Image.network(
+                                                              //   data![index]
+                                                              //       .image!
+                                                              //       .thumbnail
+                                                              //       .toString(),
+                                                              //   fit: BoxFit.fill,
+                                                              //   height: MediaQuery.of(
+                                                              //               context)
+                                                              //           .size
+                                                              //           .width *
+                                                              //       0.3,
+                                                              //   width: MediaQuery.of(
+                                                              //               context)
+                                                              //           .size
+                                                              //           .width *
+                                                              //       0.3,
+                                                              // )
+
+                                                              CachedNetworkImage(
+                                                            imageUrl:
+                                                                data![index]
+                                                                    .image!
+                                                                    .thumbnail
+                                                                    .toString(),
+                                                            fit: BoxFit.fill,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.3,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.3,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Container(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      142,
+                                                                      142,
+                                                                      142),
+                                                              height: 200,
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                          ),
+                                                        ),
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -539,9 +587,12 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         return Text("${snapshot.error}");
                                       }
                                       // By default show a loading spinner.
-                                      return Padding(
-                                          padding: EdgeInsets.only(left: 200),
-                                          child: CircularProgressIndicator());
+                                      // return Container(
+                                      //   width: double.infinity,
+                                      //   height: 200,
+                                      //   color: Colors.amber,
+                                      // );
+                                      return Container();
                                     },
                                   ),
                                 ],
@@ -658,23 +709,61 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                       topRight:
                                                                           Radius.circular(
                                                                               5)),
-                                                                  child: Image
-                                                                      .network(
-                                                                    data![index]
-                                                                        .image!
-                                                                        .thumbnail
-                                                                        .toString(),
-                                                                    fit: BoxFit
-                                                                        .fill,
-                                                                    height: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.3,
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.3,
-                                                                  )),
+                                                                  child:
+                                                                          CachedNetworkImage(
+                                                            imageUrl:
+                                                                data![index]
+                                                                    .image!
+                                                                    .thumbnail
+                                                                    .toString(),
+                                                            fit: BoxFit.fill,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.3,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.3,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Container(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      192,
+                                                                      192,
+                                                                      192),
+                                                              height: 200,
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                          ),
+                                                                  //  Image
+                                                                  //     .network(
+                                                                  //   data![index]
+                                                                  //       .image!
+                                                                  //       .thumbnail
+                                                                  //       .toString(),
+                                                                  //   fit: BoxFit
+                                                                  //       .fill,
+                                                                  //   // height: MediaQuery.of(context)
+                                                                  //   //         .size
+                                                                  //   //         .height *
+                                                                  //   //     0.05,
+                                                                  //   width: MediaQuery.of(context)
+                                                                  //           .size
+                                                                  //           .width *
+                                                                  //       0.3,
+                                                                  // )
+                                                                  
+                                                                  ),
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
@@ -727,13 +816,13 @@ class _Main_WidgetState extends State<Main_Widget> {
                                             } else if (snapshot.hasError) {
                                               return Text("${snapshot.error}");
                                             }
-                                            // By default show a loading spinner.
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 200),
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            );
+                                            return Container();
+                                            // return Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       left: 200),
+                                            //   child:
+                                            //       CircularProgressIndicator(),
+                                            // );
                                           },
                                         ),
                                       ],

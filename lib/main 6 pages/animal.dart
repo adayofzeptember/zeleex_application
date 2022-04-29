@@ -220,7 +220,8 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                         builder: (context) =>
                                             Store_Cattle_Detail(
                                           animalID: data![index].id.toString(),
-                                          animalName: data[index].title.toString(),
+                                          animalName:
+                                              data[index].title.toString(),
                                         ),
                                       ));
                                   // Navigator.push(
@@ -274,11 +275,11 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 5, 0, 0),
                                         child: Text(
-                                          "฿ " +       NumberFormat(
-                                                                            "#,###")
-                                                                        .format(int.parse(data[index]
-                                                                            .price
-                                                                            .toString())),
+                                          "฿ " +
+                                              NumberFormat("#,###,###").format(
+                                                  int.parse(data[index]
+                                                      .price
+                                                      .toString())),
                                           style: TextStyle(color: Colors.red),
                                         )),
                                     SizedBox(

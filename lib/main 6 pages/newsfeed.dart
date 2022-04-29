@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,13 +6,17 @@ import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
-
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
 import '../newsfeed_detail.dart';
 import '../profile.dart';
+//future_blogs = fetch_Blog_readAll();
 
 void main(List<String> args) {
   runApp(NewsFeedPage());
@@ -25,14 +30,41 @@ class NewsFeedPage extends StatefulWidget {
 }
 
 class _NewsFeedPageState extends State<NewsFeedPage> {
+  final controller = ScrollController();
+  var perPage = 2;
+  bool hasMore = true;
   late Future<List<Data_Blog_Detail>> future_blogs;
-  late Future<List<ProductCat01>> future_products_cat;
+
   void initState() {
-    future_blogs = fetch_Blog_readAll();
-
-    future_products_cat = fetch_Home_products();
-
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        fetch_Blog_readAll();
+        setState(() {
+          perPage++;
+        });
+      }
+    });
     super.initState();
+  }
+
+  Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
+    var limit = 2;
+    final response = await http.get(Uri.parse(
+        'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
+            perPage.toString()));
+    var jsonResponse = json.decode(response.body);
+    List jsonCon = jsonResponse['data']['data'];
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -96,145 +128,174 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
         padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
         child: Column(children: <Widget>[
           FutureBuilder<List<Data_Blog_Detail>>(
-            future: future_blogs,
+            future: fetch_Blog_readAll(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Data_Blog_Detail>? data = snapshot.data;
                 return Expanded(
                   child: ListView.builder(
-                      itemCount: data?.length,
+                      controller: controller,
+                      itemCount: data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => NewsFeedPage_Detail(blogID: data![index].id.toString(),)));
-                            },
-                            child: Container(
-                              color: Colors.white,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 20, 0, 0),
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              data![index]
-                                                  .image!
-                                                  .main
-                                                  .toString()),
-                                          backgroundColor: Colors.transparent,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              10, 0, 5, 0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
+                        if (index < data.length) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => NewsFeedPage_Detail(
+                                          blogID: data[index].id.toString(),
+                                        )));
+                              },
+                              child: Container(
+                                color: Colors.white,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 20, 0, 0),
+                                      child: Row(
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                data[index]
+                                                    .image!
+                                                    .main
+                                                    .toString()),
+                                            backgroundColor: Colors.transparent,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 5, 0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    data[index]
+                                                        .store!
+                                                        .title
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 51, 51, 51),
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
                                                   data[index]
-                                                      .store!
-                                                      .title
+                                                      .createdAt
                                                       .toString(),
                                                   style: TextStyle(
+                                                      fontSize: 10,
                                                       color: Color.fromARGB(
-                                                          255, 51, 51, 51),
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                data[index]
-                                                    .createdAt
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    color: Color.fromARGB(
-                                                        255, 165, 162, 162)),
-                                              ),
-                                            ],
+                                                          255, 165, 162, 162)),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Container(
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.25,
                                       width: double.infinity,
-                                      child: Image.network(
-                                        data[index].image!.main.toString(),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            data[index].image!.main.toString(),
                                         fit: BoxFit.cover,
-                                      )),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          data[index].title.toString(),
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 51, 51, 51),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                Container(
+                                          color: Color.fromARGB(
+                                              255, 142, 142, 142),
+                                          height: 200,
                                         ),
-                                        Container(
-                                            child: Row(
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/images/love.svg',
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            SvgPicture.asset(
-                                              'assets/images/sharefeed.svg',
-                                            ),
-                                          ],
-                                        ))
-                                      ],
+                                        errorWidget: (context, url, error) =>
+                                            Center(
+                                          child: Text("ไม่พบรูปภาพ"),
+                                        ),
+                                      ),
+
+                                      // Image.network(
+                                      //   data[index].image!.main.toString(),
+                                      //   fit: BoxFit.cover,
+                                      // )
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                    child: Text(
-                                      data[index].seoDescription.toString(),
-                                      // "แต่ถ้าเลี้ยงแบบครบวงจร ภาครัฐจัดหาน้ำเชื้อจากพ่อแม่พันธุ์ชั้นดีเกษตรกรนำมาผสมพันธุ์ แล้วเลี้ยงอนุบาลส่งต่อให้เกษตรกรที่พอมีกำลังทรัพย์นำมาขุนต่อด้วยเทคโนโลยีสมัยใหม่ ให้ ได้เนื้อวัวเกรดพรีเมียมมีไขมันแทรก ไม่ต่างจากเนื้อจากต่างประเทศราคาแพง",
-                                      style: TextStyle(
-                                        fontFamily: 'Kanit',
-                                        color:
-                                            Color.fromARGB(255, 130, 130, 130),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 0, 10, 0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            data[index].title.toString(),
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 51, 51, 51),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Container(
+                                              child: Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/images/love.svg',
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/images/sharefeed.svg',
+                                              ),
+                                            ],
+                                          ))
+                                        ],
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 0, 10, 0),
+                                      child: Text(
+                                        data[index].seoDescription.toString(),
+                                        // "แต่ถ้าเลี้ยงแบบครบวงจร ภาครัฐจัดหาน้ำเชื้อจากพ่อแม่พันธุ์ชั้นดีเกษตรกรนำมาผสมพันธุ์ แล้วเลี้ยงอนุบาลส่งต่อให้เกษตรกรที่พอมีกำลังทรัพย์นำมาขุนต่อด้วยเทคโนโลยีสมัยใหม่ ให้ ได้เนื้อวัวเกรดพรีเมียมมีไขมันแทรก ไม่ต่างจากเนื้อจากต่างประเทศราคาแพง",
+                                        style: TextStyle(
+                                          fontFamily: 'Kanit',
+                                          color: Color.fromARGB(
+                                              255, 130, 130, 130),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          return Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: hasMore
+                                  ? Center(child: CircularProgressIndicator())
+                                  : Text("data"));
+                        }
                       }),
                 );
               } else if (snapshot.hasError) {
@@ -247,11 +308,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
               );
             },
           ),
-          SizedBox(
-            height: 10,
-          ),
 
-          // FutureBuilder<List<ProductCat01>>(
+          // FuturesBuilder<List<ProductCat01>>(
           //   future: future_products_cat,
           //   builder: (context, snapshot) {
           //     if (snapshot.hasData) {

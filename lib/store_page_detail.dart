@@ -57,7 +57,9 @@ class _Store_DetailState extends State<Store_Detail> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Store_ProductPage()),
+                          builder: (context) => Store_ProductPage(
+                                storeID: widget.storeID,
+                              )),
                     )
                   },
                   child: Container(
@@ -123,7 +125,7 @@ class _Store_DetailState extends State<Store_Detail> {
             //   builder: (context) => IconButton(
             //     icon: SizedBox(
             //       child: Padding(
-            //         padding: const EdgeInsets.all(8.0),
+            //         paddin g: const EdgeInsets.all(8.0),
             //         child: ImageIcon(
             //           AssetImage(
             //             "assets/images/menu-61.png",
@@ -152,9 +154,9 @@ class _Store_DetailState extends State<Store_Detail> {
                     color: Palette.kToDark, fontWeight: FontWeight.bold)),
             Row(
               children: [
-                SvgPicture.asset(
-                  'assets/images/sort.svg',
-                ),
+                // SvgPicture.asset(
+                //   'assets/images/sort.svg',
+                // ),
                 SvgPicture.asset(
                   'assets/images/cart123.svg',
                 )
@@ -318,7 +320,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                               SvgPicture.asset(
                                                   'assets/images/star.svg'),
                                               SizedBox(
-                                                width: 10,
+                                                width: 5,
                                               ),
                                               Text(
                                                   " 5.0 คะแนน | 5.2K ผู้ติดตาม"),
@@ -360,19 +362,20 @@ class _Store_DetailState extends State<Store_Detail> {
                                             ],
                                           ),
                                         ),
-                                        //! แก้ไขเพิ่มเติม
-                                        Container(
-                                          height: 20,
-                                          child: Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      15, 5, 0, 0),
+                                   //! แก้ไขเพิ่มเติม
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(15,5,0,0),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text("ประเภทร้านค้า "),
+                                            Container(
+                                              height: 20,
                                               child: ListView.builder(
+                                                shrinkWrap: true,
                                                   scrollDirection:
                                                       Axis.horizontal,
-                                                  itemCount:
-                                                      thisStore_notCoverIMG
-                                                          .types!.length,
+                                                  itemCount: thisStore_notCoverIMG
+                                                      .types!.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
@@ -390,8 +393,11 @@ class _Store_DetailState extends State<Store_Detail> {
                                                         ),
                                                       ],
                                                     );
-                                                  })),
+                                                  }),
+                                            ),
+                                          ],
                                         ),
+                                      ),
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -569,7 +575,7 @@ class _Store_DetailState extends State<Store_Detail> {
                       //                             BorderRadius.circular(30),
                       //                       ),
                       //                       primary: pressed
-                      //                           ? Palette.kToDark
+                      //                            Palette.kToDark
                       //                           : Color.fromARGB(
                       //                               255, 204, 204, 204),
                       //                       elevation: 0),
