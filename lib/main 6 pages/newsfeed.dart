@@ -117,12 +117,14 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                 },
                 child: Container(
                   child: Row(
+                    
                     children: [
                       SizedBox(
                         width: 10,
                       ),
                       SvgPicture.asset(
-                        'assets/images/cart123.svg',
+                        
+                        'assets/images/cart123.svg', color: Colors.white,
                       ),
                     ],
                   ),
