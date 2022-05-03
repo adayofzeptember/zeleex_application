@@ -42,13 +42,15 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
     });
     super.initState();
   }
-  Future refresh() async{
+
+  Future refresh() async {
     setState(() {
       perPage = 2;
     });
-
+    
     fetch_Blog_readAll();
   }
+
   Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
     final response = await http.get(Uri.parse(
         'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
@@ -117,14 +119,13 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                 },
                 child: Container(
                   child: Row(
-                    
                     children: [
                       SizedBox(
                         width: 10,
                       ),
                       SvgPicture.asset(
-                        
-                        'assets/images/cart123.svg', color: Colors.white,
+                        'assets/images/cart123.svg',
+                        color: Colors.white,
                       ),
                     ],
                   ),
@@ -160,7 +161,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                 child: Container(
                                   color: Colors.white,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
@@ -191,9 +193,15 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                               ),
                                               errorWidget:
                                                   (context, url, error) =>
-                                                      Icon(Icons.error),
+                                                      CircleAvatar(
+                                                child: Icon(
+                                                  Icons.person,
+                                                  color: Palette.kToDark,
+                                                ),
+                                                backgroundColor: Color.fromARGB(255, 224, 224, 224),
+                                              ),
                                             ),
-                  
+
                                             // CircleAvatar(
                                             //   backgroundImage: NetworkImage(
                                             //       data[index]
@@ -203,30 +211,13 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                             //   backgroundColor: Colors.transparent,
                                             // ),
 
-
-
                                             //!-------------------------------------------------------------------------------------
-
-
-
-                                          
-
-
-
-
-
-
-
-
-
-
-
-
 
                                             //*---------------------------------------------------------------------------------
                                             Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  10, 0, 5, 0),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      10, 0, 5, 0),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -251,7 +242,10 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                     style: TextStyle(
                                                         fontSize: 10,
                                                         color: Color.fromARGB(
-                                                            255, 165, 162, 162)),
+                                                            255,
+                                                            165,
+                                                            162,
+                                                            162)),
                                                   ),
                                                 ],
                                               ),
@@ -262,19 +256,21 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                       //SizedBox.expand(),
+                                      //SizedBox.expand(),
                                       Container(
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.25,
                                         width: double.infinity,
                                         child: CachedNetworkImage(
-                                          imageUrl:
-                                              data[index].image!.main.toString(),
+                                          imageUrl: data[index]
+                                              .image!
+                                              .main
+                                              .toString(),
                                           fit: BoxFit.cover,
-                                          progressIndicatorBuilder:
-                                              (context, url, downloadProgress) =>
-                                                  Container(
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Container(
                                             color: Color.fromARGB(
                                                 255, 142, 142, 142),
                                             height: 200,
@@ -295,11 +291,11 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   alignment: Alignment.center,
-                                                  child: Text("ไม่พบรูปภาพ")),
+                                                  child: Text("ไม่พบรูปภาพของบล็อก")),
                                             ),
                                           ),
                                         ),
-                  
+
                                         // Image.network(
                                         //   data[index].image!.main.toString(),
                                         //   fit: BoxFit.cover,
@@ -365,12 +361,12 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                               ),
                             );
                           } else {
-                            // return Container();
-                            return Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: hasMore
-                                    ? Center(child: CircularProgressIndicator())
-                                    : Text("data"));
+                            return Container();
+                            // return Padding(
+                            //     padding: const EdgeInsets.only(top: 10),
+                            //     child: hasMore
+                            //         ? Center(child: CircularProgressIndicator())
+                            //         : Text("data"));
                           }
                         }),
                   ),
@@ -378,7 +374,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
               } else if (snapshot.hasError) {
                 return Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ");
               }
-              
+
               return Padding(
                 padding: const EdgeInsets.only(top: 150),
                 child: Center(child: CircularProgressIndicator()),

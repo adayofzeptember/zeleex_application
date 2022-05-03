@@ -48,7 +48,7 @@ class _Main_PageState extends State<Main_Page> {
     Main_Widget(),
     AnimalsPage(),
     ProductPage(),
-    SemensPage()
+    ProfilePage()
   ];
 
   int _index = 2;
@@ -431,17 +431,20 @@ class _Main_PageState extends State<Main_Page> {
             ),
             BottomNavigationBarItem(
               activeIcon: SizedBox(
-                child: SvgPicture.asset(
-                  "assets/images/new/tab6.svg",
-                  color: Palette.kToDark,
-                ),
+                child: Icon(Icons.person, color: Palette.kToDark,),
+                // child: SvgPicture.asset(
+                //   "assets/images/new/tab6.svg",
+                //   color: Palette.kToDark,
+                // ),
               ),
               icon: SizedBox(
-                child: SvgPicture.asset(
-                  "assets/images/new/tab6.svg",
-                ),
+                                child: Icon(Icons.person, color: Color.fromARGB(255 , 141, 141, 141),),
+
+                // child: SvgPicture.asset(
+                //   "assets/images/new/tab6.svg",
+                // ),
               ),
-              label: 'น้ำเชื้อ',
+              label: 'โปรไฟล์',
             ),
             
           ],
