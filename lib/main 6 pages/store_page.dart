@@ -84,7 +84,7 @@ class _StorePageState extends State<StorePage> {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        elevation: 0,
+  
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -102,21 +102,21 @@ class DataSlider {
     return data;
   }
 }
-Future<List<DataSlider>> fetch_SliderPics() async {
-  final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/sliders'));
+// Future<List<DataSlider>> fetch_SliderPics() async {
+//   final response =
+//       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/sliders'));
 
-  var jsonResponse = json.decode(response.body);
-  List jsonCon = jsonResponse['data'];
-  //print(jsonResponse['data']);
+//   var jsonResponse = json.decode(response.body);
+//   List jsonCon = jsonResponse['data'];
+//   //print(jsonResponse['data']);
 
-  if (response.statusCode == 200) {
-    // List jsonResponse = json.decode(response.body);
-    return jsonCon.map((data) => new DataSlider.fromJson(data)).toList();
-  } else {
-    throw Exception("error...");
-  }
-}
+//   if (response.statusCode == 200) {
+//     // List jsonResponse = json.decode(response.body);
+//     return jsonCon.map((data) => new DataSlider.fromJson(data)).toList();
+//   } else {
+//     throw Exception("error...");
+//   }
+// }
 
 // void main(List<String> args) {
 //   //fetchData555();

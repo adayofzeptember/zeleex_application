@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/API/Read%20All/slider_api.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
@@ -36,6 +38,26 @@ class _Main_WidgetState extends State<Main_Widget> {
   late Future<List<DataSlider>> futureData;
   late Future<List<AnimalCat01>> future_anmials_cat;
   late Future<List<ProductCat01>> future_products_cat;
+  int activeIndex = 0;
+  int countIMG = 0;
+
+  Future<List<DataSlider>> fetch_SliderPics() async {
+    final response =
+        await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/sliders'));
+
+    var jsonResponse = json.decode(response.body);
+
+    List jsonCon = jsonResponse['data'];
+    print(jsonCon.length);
+    setState(() {
+      countIMG = jsonCon.length;
+    });
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => new DataSlider.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
+  }
 
   @override
   void initState() {
@@ -59,7 +81,7 @@ class _Main_WidgetState extends State<Main_Widget> {
           leading: Builder(
             builder: (context) => IconButton(
               icon: Visibility(
-            visible: false,
+                visible: false,
                 child: SizedBox(
                     child: SvgPicture.asset(
                   'assets/images/menu.svg',
@@ -164,6 +186,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                         ),
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
@@ -178,38 +201,72 @@ class _Main_WidgetState extends State<Main_Widget> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               List<DataSlider>? data = snapshot.data;
-                              return ImageSlideshow(
-                                initialPage: 0,
-   //uuhjghgvllk 
-
-  
-
-                                indicatorColor: Palette.kToDark,
-                                indicatorBackgroundColor: Colors.grey,
-                                autoPlayInterval: 3000,
-                                isLoop: true,
-                                children: [
-                                  ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: data?.length,
-                                      itemBuilder:
-                                          (BuildContext context, index) {
-                                        return Image.network(
-                                          
-                                          data![index].image.toString(),
-                                        );
-                                      })
-                                ],
-                              );
+                              return CarouselSlider.builder(
+                                  itemCount: data?.length,
+                                  itemBuilder:
+                                      (BuildContext, index, realIndex) {
+                                    return Container(
+                                      height: 40,
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 3.0),
+                                      decoration: BoxDecoration(
+                                          color: Color.fromARGB(
+                                              197, 199, 199, 199)),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            data![index].image!.toString(),
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                Container(
+                                          color: Color.fromARGB(
+                                              197, 199, 199, 199),
+                                          height: 200,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 5, left: 5),
+                                          child: Center(
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            141,
+                                                            141,
+                                                            141))),
+                                                width: double.infinity,
+                                                height: double.infinity,
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                    "ไม่พบรูปภาพของบล็อก")),
+                                          ),
+                                        ),
+                                      ),
+                                    ); 
+                                  },
+                                  options: CarouselOptions(
+                                      enlargeCenterPage: true,
+                                      viewportFraction: 1,
+                                      autoPlay: true,
+                                      reverse: true,
+                                      autoPlayInterval: Duration(seconds: 1),
+                                      autoPlayAnimationDuration: Duration(seconds: 2),
+                                      onPageChanged: (index, reason) =>
+                                          setState(
+                                            (() => activeIndex = index),
+                                          )));
                             } else if (snapshot.hasError) {
                               return Text("${snapshot.error}");
                             }
-                            // By default show a loading spinner.
                             return CircularProgressIndicator();
                           },
                         ),
                       ),
                     ),
+
+                    buildIndcator(),
+
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Padding(
@@ -710,68 +767,68 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                           child: Column(
                                                             children: [
                                                               ClipRRect(
-                                                                  borderRadius: BorderRadius.only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              5),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              5)),
-                                                                  child:
-                                                                          CachedNetworkImage(
-                                                            imageUrl:
-                                                                data![index]
-                                                                    .image!
-                                                                    .thumbnail
-                                                                    .toString(),
-                                                            fit: BoxFit.fill,
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.3,
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.3,
-                                                            progressIndicatorBuilder:
-                                                                (context, url,
-                                                                        downloadProgress) =>
-                                                                    Container(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      192,
-                                                                      192,
-                                                                      192),
-                                                              height: 200,
-                                                            ),
-                                                            errorWidget:
-                                                                (context, url,
-                                                                        error) =>
-                                                                    Icon(Icons
-                                                                        .error),
-                                                          ),
-                                                                  //  Image
-                                                                  //     .network(
-                                                                  //   data![index]
-                                                                  //       .image!
-                                                                  //       .thumbnail
-                                                                  //       .toString(),
-                                                                  //   fit: BoxFit
-                                                                  //       .fill,
-                                                                  //   // height: MediaQuery.of(context)
-                                                                  //   //         .size
-                                                                  //   //         .height *
-                                                                  //   //     0.05,
-                                                                  //   width: MediaQuery.of(context)
-                                                                  //           .size
-                                                                  //           .width *
-                                                                  //       0.3,
-                                                                  // )
-                                                                  
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            5),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            5)),
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  imageUrl: data![
+                                                                          index]
+                                                                      .image!
+                                                                      .thumbnail
+                                                                      .toString(),
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                  height: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.3,
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.3,
+                                                                  progressIndicatorBuilder: (context,
+                                                                          url,
+                                                                          downloadProgress) =>
+                                                                      Container(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            192,
+                                                                            192,
+                                                                            192),
+                                                                    height: 200,
                                                                   ),
+                                                                  errorWidget: (context,
+                                                                          url,
+                                                                          error) =>
+                                                                      Icon(Icons
+                                                                          .error),
+                                                                ),
+                                                                //  Image
+                                                                //     .network(
+                                                                //   data![index]
+                                                                //       .image!
+                                                                //       .thumbnail
+                                                                //       .toString(),
+                                                                //   fit: BoxFit
+                                                                //       .fill,
+                                                                //   // height: MediaQuery.of(context)
+                                                                //   //         .size
+                                                                //   //         .height *
+                                                                //   //     0.05,
+                                                                //   width: MediaQuery.of(context)
+                                                                //           .size
+                                                                //           .width *
+                                                                //       0.3,
+                                                                // )
+                                                              ),
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
@@ -1282,4 +1339,14 @@ class _Main_WidgetState extends State<Main_Widget> {
       //     )),
     );
   }
+
+  Widget buildIndcator() => AnimatedSmoothIndicator(
+        activeIndex: activeIndex,
+        count: countIMG,
+        effect: ScrollingDotsEffect(
+            dotWidth: 5,
+            dotHeight: 5,
+            dotColor: Colors.grey,
+            activeDotColor: Palette.kToDark),
+      );
 }
