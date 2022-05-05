@@ -29,7 +29,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   final controller = ScrollController();
   var perPage = 2; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
-  late Future<List<Data_Blog_Detail>> future_blogs;
+//late Future<List<Data_Blog_Detail>> future_blogs;
+
 
   void initState() {
     fetch_Blog_readAll();
@@ -56,7 +57,9 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
         'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
             perPage.toString()));
     var jsonResponse = json.decode(response.body);
+
     List jsonCon = jsonResponse['data']['data'];
+
     if (response.statusCode == 200) {
       if (jsonCon.length < 1) {
         setState(() {
@@ -64,7 +67,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
         });
       }
       return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
-    } else {
+    } 
+    else {
       throw Exception("error...");
     }
   }

@@ -519,19 +519,19 @@ class Links {
   }
 }
 
-Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
-  final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/animals'));
+// Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
+//   final response =
+//       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/animals'));
 
-  var jsonResponse = json.decode(response.body);
-  List jsonCon = jsonResponse['data']['data'];
+//   var jsonResponse = json.decode(response.body);
+//   List jsonCon = jsonResponse['data']['data'];
 
-  if (response.statusCode == 200) {
-    return jsonCon
-        .map((data) => new Data_Animal_ReadAll.fromJson(data))
-        .toList();
-  } else {
-    throw Exception("error...");
-  }
-}
+//   if (response.statusCode == 200) {
+//     return jsonCon
+//         .map((data) => new Data_Animal_ReadAll.fromJson(data))
+//         .toList();
+//   } else {
+//     throw Exception("error...");
+//   }
+// }
 

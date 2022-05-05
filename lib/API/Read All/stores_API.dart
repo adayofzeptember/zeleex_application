@@ -339,20 +339,20 @@ class Links {
 }
 
 
-Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
-  final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/stores'));
+// Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
+//   final response =
+//       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/stores'));
 
-  var jsonResponse = json.decode(response.body);
-  List jsonCon = jsonResponse['data']['data'];
+//   var jsonResponse = json.decode(response.body);
+//   List jsonCon = jsonResponse['data']['data'];
   
-  if (response.statusCode == 200) {
-    // List jsonResponse = json.decode(response.body);
-    return jsonCon
-        .map((data) => new Data_Store_ReadALL.fromJson(data))
-        .toList();
-  } else {
-    throw Exception("error...");
-  }
-}
+//   if (response.statusCode == 200) {
+//     // List jsonResponse = json.decode(response.body);
+//     return jsonCon
+//         .map((data) => new Data_Store_ReadALL.fromJson(data))
+//         .toList();
+//   } else {
+//     throw Exception("error...");
+//   }
+// }
 

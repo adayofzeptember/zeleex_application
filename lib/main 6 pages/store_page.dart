@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,19 +24,40 @@ class StorePage extends StatefulWidget {
 }
 
 class _StorePageState extends State<StorePage> {
-  int index = 1;
-  void _onItemTapped(int index2) {
-    setState(() {
-      index = index2;
+  final controller = ScrollController();
+  var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
+  bool hasMore = true;
+  void initState() {
+    fetch_StorePage_readAll();
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        setState(() {
+          hasMore = false;
+          perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
+        });
+      }
     });
+    super.initState();
   }
 
-  late Future<List<Data_Store_ReadALL>> future_stores;
-  @override
-  void initState() {
-    future_stores = fetch_StorePage_readAll();
-    // TODO: implement initState
-    super.initState();
+  Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
+    final response = await http.get(Uri.parse(
+        'https://sanboxapi.zeleex.com/api/stores?per_page=' +
+            perPage.toString()));
+    var jsonResponse = json.decode(response.body);
+
+    List jsonCon = jsonResponse['data']['data'];
+
+    if (response.statusCode == 200) {
+      if (jsonCon.length < 1) {
+        setState(() {
+          hasMore = false;
+        });
+      }
+      return jsonCon.map((data) => Data_Store_ReadALL.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
   }
 
   @override
@@ -113,121 +137,167 @@ class _StorePageState extends State<StorePage> {
       body: Column(
         children: <Widget>[
           FutureBuilder<List<Data_Store_ReadALL>>(
-            future: future_stores,
+            future: fetch_StorePage_readAll(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Data_Store_ReadALL>? data = snapshot.data;
                 return Expanded(
-                  child: GridView.builder(
-                    gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      // childAspectRatio: MediaQuery.of(context).size.width /
-                      //     (MediaQuery.of(context).size.height / 1.55),
+                  child: RawScrollbar(
+                    controller: controller,
+                    thumbColor: Palette.kToDark,
+                    radius: Radius.circular(50),
+                    thickness: 5,
+                    child: GridView.builder(
+                      controller: controller,
+                      gridDelegate:
+                          new SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        // childAspectRatio: MediaQuery.of(context).size.width /
+                        //     (MediaQuery.of(context).size.height / 1.55),
 
-                      mainAxisExtent: MediaQuery.of(context).size.height * 0.32,
-                    ),
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Wrap(
-                        children: <Widget>[
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Store_Detail(
-                                            storeID: data![index].id.toString(),
-                                            storeName:
-                                                data[index].title.toString(),
-                                          )),
-                                );
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5)),
-                                        child: Image.network(
-                                          data![index]
-                                              .image!
-                                              .thumbnail
-                                              .toString(),
-                                          fit: BoxFit.fill,
-                                        )),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                    child: Text(
-                                      data[index].title.toString(),
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51)),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        15, 10, 10, 0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: SvgPicture.asset(
-                                              'assets/images/pinstore.svg'),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Container(
-                                          height: 40,
-                                          width: 100,
-                                          child: Text(
-                                            data[index].address.toString(),
-                                            style: TextStyle(
-
-                                                fontSize: 13,
-                                                color: Palette.kToDark),
+                        mainAxisExtent:
+                            MediaQuery.of(context).size.height * 0.355,
+                      ),
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index < snapshot.data!.length) {
+                          return Wrap(
+                            children: <Widget>[
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0)),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Store_Detail(
+                                                storeID:
+                                                    data![index].id.toString(),
+                                                storeName: data[index]
+                                                    .title
+                                                    .toString(),
+                                              )),
+                                    );
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: double.infinity,
+                                        child: 
+                                                         ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: CachedNetworkImage(
+                                            imageUrl: data![index]
+                                                .image!
+                                                .thumbnail
+                                                .toString(),
+                                            fit: BoxFit.fill,
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                Container(
+                                              color: Color.fromARGB(
+                                                  255, 142, 142, 142),
+                                              // height: 200,
+                                            ),
+                                            errorWidget:
+                                                (context, url, error) => Center(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              218,
+                                                              41,
+                                                              41))),
+                                                  alignment: Alignment.center,
+                                                  child: Text("ไม่พบรูปภาพ")),
+                                            ),
                                           ),
+                                          // Image.network(
+                                          //   data![index]
+                                          //       .image!
+                                          //       .thumbnail
+                                          //       .toString(),
+                                          //   fit: BoxFit.fill,
+                                          // )
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SvgPicture.asset(
-                                            'assets/images/star.svg'),
-                                        SizedBox(
-                                          width: 5,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            15, 5, 0, 0),
+                                        child: Text(
+                                          data[index].title.toString(),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Color.fromARGB(
+                                                  255, 51, 51, 51)),
                                         ),
-                                        Text("5.0")
-                                      ],
-                                    ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            15, 10, 10, 0),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: SvgPicture.asset(
+                                                  'assets/images/pinstore.svg'),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              height: 40,
+                                              width: 100,
+                                              child: Text(
+                                                data[index].address.toString(),
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: Palette.kToDark),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            SvgPicture.asset(
+                                                'assets/images/star.svg'),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text("5.0")
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
+                            ],
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
                   ),
                 );
               } else if (snapshot.hasError) {

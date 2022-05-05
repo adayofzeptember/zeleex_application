@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/Read%20All/products_API.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
@@ -14,24 +15,53 @@ import 'main_page.dart';
 
 class ProductPage extends StatefulWidget {
   ProductPage({Key? key}) : super(key: key);
-
   @override
   State<ProductPage> createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
-  int index = 4;
-  void _onItemTapped(int index2) {
-    setState(() {
-      index = index2;
+  final controller = ScrollController();
+  var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
+  bool hasMore = true;
+  void initState() {
+    fetch_ProductPage_readAll();
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        setState(() {
+             hasMore = false;
+          perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
+        });
+      }
     });
+    super.initState();
   }
 
-  late Future<List<Data_Products_ReadAll>> future_ProductsData;
+  Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
+    final response = await http.get(Uri.parse(
+        'https://sanboxapi.zeleex.com/api/products?per_page=' +
+            perPage.toString()));
+    var jsonResponse = json.decode(response.body);
+
+    List jsonCon = jsonResponse['data']['data'];
+
+    if (response.statusCode == 200) {
+      if (jsonCon.length < 1) {
+        setState(() {
+         // hasMore = false;
+        });
+      }
+      return jsonCon
+          .map((data) => Data_Products_ReadAll.fromJson(data))
+          .toList();
+    } else {
+      throw Exception("error...");
+    }
+  }
+
   @override
-  void initState() {
-    future_ProductsData = fetch_ProductPage_readAll();
-    super.initState();
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -175,111 +205,129 @@ class _ProductPageState extends State<ProductPage> {
           ),
 
           FutureBuilder<List<Data_Products_ReadAll>>(
-            future: future_ProductsData,
+            future: fetch_ProductPage_readAll(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Data_Products_ReadAll>? data = snapshot.data;
                 return Expanded(
-                  child: GridView.builder(
-                    // controller: ScrollController(),
-                    gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      // childAspectRatio: MediaQuery.of(context).size.width /
-                      //     (MediaQuery.of(context).size.height / 1.55),
-
-                      mainAxisExtent: MediaQuery.of(context).size.height * 0.32,
-                    ),
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Wrap(
-                        children: <Widget>[
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Store_Product_Detail(
-                                          productName:
-                                              data![index].title.toString(),
-                                          productID: data[index].id.toString(),
-                                        )));
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: 
-                                      CachedNetworkImage(
-                                      imageUrl: data![index]
-                                          .image!
-                                          .thumbnail
-                                          .toString(),
-                                      fit: BoxFit.fill,
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
-                                              Container(
-                                        color:
-                                            Color.fromARGB(255, 142, 142, 142),
-                                        // height: 200,
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              141,
-                                                              141,
-                                                              141))),
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  alignment: Alignment.center,
-                                                  child: Text("ไม่พบรูปภาพ")),
-                                    ),
-                                      // Image.network(
-                                      //   data![index]
-                                      //       .image!
-                                      //       .thumbnail
-                                      //       .toString(),
-                                      //   fit: BoxFit.fill,
-                                      // )
-                                      ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
-                                    child: Container(
-                                      height: 40,
-                                      child: Text(
-                                        data[index].title.toString(),
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
+                  child: RawScrollbar(
+                    controller: controller,
+                       thumbColor: Palette.kToDark,
+                    radius: Radius.circular(50),
+                    thickness: 5,
+                    child: GridView.builder(
+                      controller: controller,
+                      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        // childAspectRatio: MediaQuery.of(context).size.width /
+                        //     (MediaQuery.of(context).size.height / 1.55),
+                  
+                        mainAxisExtent: MediaQuery.of(context).size.height * 0.32,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index < data!.length) {
+                          return Container(
+                            child: Wrap(
+                              children: <Widget>[
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              Store_Product_Detail(
+                                                productName:
+                                                    data[index].title.toString(),
+                                                productID:
+                                                    data[index].id.toString(),
+                                              )));
+                                    },
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: CachedNetworkImage(
+                                            imageUrl: data[index]
+                                                .image!
+                                                .thumbnail
+                                                .toString(),
+                                            fit: BoxFit.fill,
+                                            progressIndicatorBuilder:
+                                                (context, url, downloadProgress) =>
+                                                    Container(
+                                              color: Color.fromARGB(
+                                                  255, 142, 142, 142),
+                                              // height: 200,
+                                            ),
+                                            errorWidget: (context, url, error) =>
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Color.fromARGB(
+                                                                255,
+                                                                141,
+                                                                141,
+                                                                141))),
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    alignment: Alignment.center,
+                                                    child: Text("ไม่พบรูปภาพ")),
+                                          ),
+                                          // Image.network(
+                                          //   data![index]
+                                          //       .image!
+                                          //       .thumbnail
+                                          //       .toString(),
+                                          //   fit: BoxFit.fill,
+                                          // )
                                         ),
-                                      ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 5, 5, 0),
+                                          child: Container(
+                                            height: 40,
+                                            child: Text(
+                                              data[index].title.toString(),
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color:
+                                                    Color.fromARGB(255, 51, 51, 51),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 5, 0, 0),
+                                            child: Text(
+                                              "฿ " + data[index].price.toString(),
+                                              style: TextStyle(color: Colors.red),
+                                            )),
+                                        SizedBox(
+                                          height: 8,
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 0, 0),
-                                      child: Text(
-                                        "฿ " + data[index].price.toString(),
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  )
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      );
-                    },
+                          );
+                        } else {
+                          return 
+                           Container();
+                          
+                          // hasMore
+                          //     ? Center(child: CircularProgressIndicator())
+                          //     : Text("data");
+                        }
+                      },
+                    ),
                   ),
                 );
               } else if (snapshot.hasError) {

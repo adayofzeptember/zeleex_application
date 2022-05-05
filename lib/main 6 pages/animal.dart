@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,22 +22,49 @@ class AnimalsPage extends StatefulWidget {
 }
 
 class _AnimalsPageState extends State<AnimalsPage> {
-  int index = 3;
-  void _onItemTapped(int index2) {
-    setState(() {
-      index = index2;
-    });
-  }
-
-  List<bool> isSelected = [true, false, false];
-
-  late Future<List<Data_Animal_ReadAll>> future_animal_page;
-  @override
+  final controller = ScrollController();
+  var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
+  bool hasMore = true;
   void initState() {
-    // TODO: implement initState
+    fetch_AnimalPage_readAll();
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        setState(() {
+          hasMore = false;
+          perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
+        });
+      }
+    });
     super.initState();
-    future_animal_page = fetch_AnimalPage_readAll();
   }
+
+  Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
+    final response = await http.get(Uri.parse(
+        'https://sanboxapi.zeleex.com/api/animals?per_page=' +
+            perPage.toString()));
+    var jsonResponse = json.decode(response.body);
+
+    List jsonCon = jsonResponse['data']['data'];
+
+    if (response.statusCode == 200) {
+      if (jsonCon.length < 2) {
+        setState(() {
+          // hasMore = false;
+        });
+      }
+      return jsonCon.map((data) => Data_Animal_ReadAll.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
+  }
+
+  // late Future<List<Data_Animal_ReadAll>> future_animal_page;
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   future_animal_page = fetch_AnimalPage_readAll();
+  // }
 
   bool pressed = true;
   bool pressed2 = true;
@@ -177,122 +207,144 @@ class _AnimalsPageState extends State<AnimalsPage> {
             ),
           ),
 
-          // Expanded(
-          //   child: GridView.builder(
-          //     shrinkWrap: true,
-          //     itemCount: 100,
-          //     gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-          //       crossAxisCount: 2,
-          //       childAspectRatio: 1,
-          //     ),
-          //     itemBuilder: (BuildContext context, int index) {
-          //       return Center(child: Text("Item $index"));
-          //     },
-          //   ),
-          // ),
-
           FutureBuilder<List<Data_Animal_ReadAll>>(
-            future: future_animal_page,
+            future: fetch_AnimalPage_readAll(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Data_Animal_ReadAll>? data = snapshot.data;
                 return Expanded(
-                  child: GridView.builder(
-                    gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: MediaQuery.of(context).size.width /
-                          (MediaQuery.of(context).size.height / 1.5),
-                    ),
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Wrap(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            Store_Cattle_Detail(
-                                          animalID: data![index].id.toString(),
-                                          animalName:
+                  child: RawScrollbar(
+                    controller: controller,
+                    thumbColor: Palette.kToDark,
+                    radius: Radius.circular(50),
+                    thickness: 5,
+                    child: GridView.builder(
+                      controller: controller,
+                      gridDelegate:
+                      
+                          new SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: MediaQuery.of(context).size.width /
+                            (MediaQuery.of(context).size.height / 1.5),
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index < snapshot.data!.length) {
+                          return Wrap(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                Store_Cattle_Detail(
+                                              animalID:
+                                                  data![index].id.toString(),
+                                              animalName:
+                                                  data[index].title.toString(),
+                                            ),
+                                          ));
+                                      // Navigator.push(
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             Store_Cattle_Detail()));
+                                    },
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: CachedNetworkImage(
+                                            imageUrl: data![index]
+                                                .image!
+                                                .thumbnail
+                                                .toString(),
+                                            fit: BoxFit.fill,
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                Container(
+                                              color: Color.fromARGB(
+                                                  255, 142, 142, 142),
+                                              // height: 200,
+                                            ),
+                                            errorWidget:
+                                                (context, url, error) => Icon(Icons.abc)
+                                          ),
+                                          // Image.network(
+                                          //   data![index]
+                                          //       .image!
+                                          //       .thumbnail
+                                          //       .toString(),
+                                          //   fit: BoxFit.fill,
+                                          // )
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 5, 5, 0),
+                                          child: Container(
+                                            child: Text(
                                               data[index].title.toString(),
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 51, 51, 51),
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
                                         ),
-                                      ));
-                                  // Navigator.push(
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             Store_Cattle_Detail()));
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5)),
-                                        child: Image.network(
-                                          data![index]
-                                              .image!
-                                              .thumbnail
-                                              .toString(),
-                                          fit: BoxFit.fill,
-                                        )),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        child: Text(
-                                          data[index].title.toString(),
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 51, 51, 51),
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 5, 5, 0),
+                                          child: Container(
+                                            height: 30,
+                                            child: Text(
+                                              data[index]
+                                                  .description
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Color.fromARGB(
+                                                      255, 130, 130, 130)),
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                        Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 5, 0, 0),
+                                            child: Text(
+                                              "฿ " +
+                                                  NumberFormat("#,###,###")
+                                                      .format(int.parse(
+                                                          data[index]
+                                                              .price
+                                                              .toString())),
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            )),
+                                        SizedBox(
+                                          height: 8,
+                                        )
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        height: 30,
-                                        child: Text(
-                                          data[index].description.toString(),
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Color.fromARGB(
-                                                  255, 130, 130, 130)),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 0, 0),
-                                        child: Text(
-                                          "฿ " +
-                                              NumberFormat("#,###,###").format(
-                                                  int.parse(data[index]
-                                                      .price
-                                                      .toString())),
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    SizedBox(
-                                      height: 8,
-                                    )
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
+                            ],
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
                   ),
                 );
               } else if (snapshot.hasError) {
