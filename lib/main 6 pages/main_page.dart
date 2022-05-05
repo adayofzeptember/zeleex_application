@@ -435,6 +435,7 @@ class _Main_PageState extends State<Main_Page> {
                 // child: SvgPicture.asset(
                 //   "assets/images/new/tab6.svg",
                 //   color: Palette.kToDark,
+                //   color; Dark (-) importer ICon(Main')
                 // ),
               ),
               icon: SizedBox(

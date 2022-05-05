@@ -27,7 +27,7 @@ class NewsFeedPage extends StatefulWidget {
 
 class _NewsFeedPageState extends State<NewsFeedPage> {
   final controller = ScrollController();
-  var perPage = 2;
+  var perPage = 2; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   late Future<List<Data_Blog_Detail>> future_blogs;
 
@@ -36,7 +36,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
-          perPage = perPage + 2;
+          perPage = perPage + 2;    //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
       }
     });

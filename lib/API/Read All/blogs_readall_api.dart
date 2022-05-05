@@ -434,7 +434,7 @@ class Links {
     return data;
   }
 }
-
+   
 // Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
 //   final response =
 //       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/blogs'));

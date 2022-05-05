@@ -52,7 +52,7 @@ class _main_IconState extends State<main_Icon> {
       //         Widget child) {
       //       return SlideTransition(
       //         position: Tween<Offset>(
-      //           begin: Offset(-1.0, 0.0),
+      //           begin: Offset(-1.0, 0.0),     dfsdfpriif(elsecontroleerpordict)
       //           end: Offset(0.0, 0.0),
       //         ).animate(animation),
       //         child: child,

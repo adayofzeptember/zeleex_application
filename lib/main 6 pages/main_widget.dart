@@ -177,6 +177,10 @@ class _Main_WidgetState extends State<Main_Widget> {
                               List<DataSlider>? data = snapshot.data;
                               return ImageSlideshow(
                                 initialPage: 0,
+   //uuhjghgvllk 
+
+  
+
                                 indicatorColor: Palette.kToDark,
                                 indicatorBackgroundColor: Colors.grey,
                                 autoPlayInterval: 3000,
@@ -188,6 +192,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       itemBuilder:
                                           (BuildContext context, index) {
                                         return Image.network(
+                                          
                                           data![index].image.toString(),
                                         );
                                       })
