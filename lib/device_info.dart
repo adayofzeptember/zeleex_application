@@ -8,9 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'Plate.dart';
 
-void main() {
-  runApp(const HomePage());
-}
+// void main() {
+//   runApp(const HomePage());
+// }
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
