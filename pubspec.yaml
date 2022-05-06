@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  package_info_plus: ^1.4.2
+
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
@@ -37,9 +39,10 @@ dependencies:
   intl: ^0.17.0
   cached_network_image: ^3.2.0
   carousel_slider: ^4.1.1
-  
-
+  device_info_plus: ^3.2.3
   flutter_switch: ^0.3.2
+
+
   expandable: ^5.0.1
   infinite_scroll_pagination: ^3.1.0 
   dotted_border: ^2.0.0+2
@@ -49,7 +52,7 @@ dependencies:
 
 
 flutter_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
   image_path: "assets/icon/icon.png"
 
@@ -80,6 +83,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/new/
+    - assets/icon/icon.png
 
    
 

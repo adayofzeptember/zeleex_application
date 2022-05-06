@@ -117,6 +117,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                       MaterialPageRoute(builder: (context) => CartPage()));
                 },
                 child: SvgPicture.asset(
+                    
                   'assets/images/cart123.svg',
                   color: Color.fromARGB(255, 255, 255, 255),
                 ),
@@ -248,10 +249,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   options: CarouselOptions(
                                       enlargeCenterPage: true,
                                       viewportFraction: 1,
-                                      autoPlay: true,
-                                      reverse: true,
-                                      autoPlayInterval: Duration(seconds: 1),
-                                      autoPlayAnimationDuration: Duration(seconds: 2),
+                                      autoPlay: true,                                   
+                                      autoPlayInterval: Duration(seconds: 3),
+                                      autoPlayAnimationDuration: Duration(seconds: 3),
                                       onPageChanged: (index, reason) =>
                                           setState(
                                             (() => activeIndex = index),
