@@ -18,15 +18,6 @@ class NewsFeedPage_Detail extends StatefulWidget {
 }
 
 class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
-  // Future<Blog> fetchBlog_ByID() async {
-  //   var url = "https://sanboxapi.zeleex.com/api/blogs/" + widget.blogID;
-  //   var response = await http.get(Uri.parse(url));
-  //   var jsonResponse = json.decode(response.body);
-  //   var jsonCon = jsonResponse['data']['blog'];
-  //   Blog msg = Blog.fromJson(jsonCon);
-  //   return msg;
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

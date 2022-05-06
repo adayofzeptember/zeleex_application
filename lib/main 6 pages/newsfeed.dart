@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,48 +31,60 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   final controller = ScrollController();
   var perPage = 2; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
-//late Future<List<Data_Blog_Detail>> future_blogs;
-
+  // List jsonCon = [];
 
   void initState() {
     fetch_Blog_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
-          perPage = perPage + 2;    //*เลื่อนลง + เพิ่มที่ละ 2 items
+          perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
       }
     });
     super.initState();
   }
 
-  Future refresh() async {
-    setState(() {
-      perPage = 2;
-    });
-    
-    fetch_Blog_readAll();
-  }
+  // Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
+  //   final response = await http.get(Uri.parse(
+  //       'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
+  //           perPage.toString()));
+  //   var jsonResponse = json.decode(response.body);
+  //   List jsonCon = jsonResponse['data']['data'];
+
+  //   if (response.statusCode == 200) {
+  //     if (jsonCon.length < perPage) {
+  //       setState(() {
+  //         hasMore = false;
+  //       });
+  //     }
+  //     return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
+  //   } else {
+  //     throw Exception("error...");
+  //   }
+  // }
 
   Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
     final response = await http.get(Uri.parse(
         'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
             perPage.toString()));
     var jsonResponse = json.decode(response.body);
-
     List jsonCon = jsonResponse['data']['data'];
-
-    if (response.statusCode == 200) {
-      if (jsonCon.length < 1) {
-        setState(() {
-          hasMore = false;
-        });
-      }
-      return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
-    } 
-    else {
-      throw Exception("error...");
+    if (jsonCon.length < perPage) {
+      setState(() {
+        hasMore = false;
+      });
     }
+    return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
+  }
+
+  Future refresh() async {
+    setState(() {
+      perPage = 2;
+      hasMore = true;
+    });
+
+    await fetch_Blog_readAll();
   }
 
   @override
@@ -93,7 +107,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
             builder: (context) => IconButton(
               icon: SizedBox(
                 child: Visibility(
-            visible: false,
+                  visible: false,
                   child: SvgPicture.asset(
                     'assets/images/menu.svg',
                     color: Color.fromARGB(255, 51, 51, 51),
@@ -190,7 +204,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                   shape: BoxShape.circle,
                                                   image: DecorationImage(
                                                       image: imageProvider,
-                                                      fit: BoxFit.cover),
+                                                      fit: BoxFit.cover),  
+                                                      
                                                 ),
                                               ),
                                               placeholder: (context, url) =>
@@ -205,22 +220,10 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                   Icons.person,
                                                   color: Palette.kToDark,
                                                 ),
-                                                backgroundColor: Color.fromARGB(255, 224, 224, 224),
+                                                backgroundColor: Color.fromARGB(
+                                                    255, 224, 224, 224),
                                               ),
                                             ),
-
-                                            // CircleAvatar(
-                                            //   backgroundImage: NetworkImage(
-                                            //       data[index]
-                                            //           .image!
-                                            //           .main
-                                            //           .toString()),
-                                            //   backgroundColor: Colors.transparent,
-                                            // ),
-
-                                            //!-------------------------------------------------------------------------------------
-
-                                            //*---------------------------------------------------------------------------------
                                             Padding(
                                               padding:
                                                   const EdgeInsets.fromLTRB(
@@ -298,7 +301,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   alignment: Alignment.center,
-                                                  child: Text("ไม่พบรูปภาพของบล็อก")),
+                                                  child: Text(
+                                                      "ไม่พบรูปภาพของบล็อก")),
                                             ),
                                           ),
                                         ),
@@ -368,12 +372,21 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                               ),
                             );
                           } else {
-                            return Container();
-                            // return Padding(
-                            //     padding: const EdgeInsets.only(top: 10),
-                            //     child: hasMore
-                            //         ? Center(child: CircularProgressIndicator())
-                            //         : Text("data"));
+                            return hasMore
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 10),
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 10),
+                                    child: Center(
+                                      child: Text("no more data feed!", style: TextStyle(color: Palette.kToDark) ),
+                                    ),
+                                  );
                           }
                         }),
                   ),

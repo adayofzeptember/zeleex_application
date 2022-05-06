@@ -6,11 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'Plate.dart';
+import '../Plate.dart';
 
-// void main() {
-//   runApp(const HomePage());
-// }
+void main() {
+  runApp(const HomePage());
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-
+  String appVersion = "";
   Map<String, dynamic> _deviceData = <String, dynamic>{};
 
   @override
@@ -49,10 +49,11 @@ class _HomePageState extends State<HomePage> {
       };
     }
 
-    if (!mounted) return;
+    //if (!mounted) return;
 
     setState(() {
       _deviceData = deviceData;
+      appVersion = version;
     });
     print(deviceData['Android Version']);
     print(appName);
@@ -110,33 +111,43 @@ class _HomePageState extends State<HomePage> {
                     : '',
           ),
         ),
-        body: ListView(
-          children: _deviceData.keys.map(
-            (String property) {
-              return Row(
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      property,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                      child: Container(
-                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                    child: Text(
-                      '${_deviceData[property]}',
-                      maxLines: 10,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  )),
-                ],
-              );
-            },
-          ).toList(),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,    
+          
+          children: <Widget>[
+            Text("app version"+appVersion),
+            Expanded(
+              child: ListView(
+                children: _deviceData.keys.map(
+                  (String property) {
+                    return Row(
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            property,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            child: Container(
+                          padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                          child: Text(
+                            '${_deviceData[property]}',
+                            maxLines: 10,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )),
+                      ],
+                    );
+                  },
+                ).toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );

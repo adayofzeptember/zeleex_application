@@ -250,7 +250,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       enlargeCenterPage: true,
                                       viewportFraction: 1,
                                       autoPlay: true,                                   
-                                      autoPlayInterval: Duration(seconds: 3),
+                                      autoPlayInterval: Duration(seconds: 4),
                                       autoPlayAnimationDuration: Duration(seconds: 3),
                                       onPageChanged: (index, reason) =>
                                           setState(
