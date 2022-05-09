@@ -45,24 +45,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
     super.initState();
   }
 
-  // Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
-  //   final response = await http.get(Uri.parse(
-  //       'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
-  //           perPage.toString()));
-  //   var jsonResponse = json.decode(response.body);
-  //   List jsonCon = jsonResponse['data']['data'];
-
-  //   if (response.statusCode == 200) {
-  //     if (jsonCon.length < perPage) {
-  //       setState(() {
-  //         hasMore = false;
-  //       });
-  //     }
-  //     return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
-  //   } else {
-  //     throw Exception("error...");
-  //   }
-  // }
 
   Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
     final response = await http.get(Uri.parse(
@@ -371,7 +353,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                 ),
                               ),
                             );
-                          } else {
+                          } 
+                          else {
                             return hasMore
                                 ? Padding(
                                     padding: const EdgeInsets.only(
@@ -384,7 +367,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                     padding: const EdgeInsets.only(
                                         top: 5, bottom: 10),
                                     child: Center(
-                                      child: Text("no more data feed!", style: TextStyle(color: Palette.kToDark) ),
+                                      child: Text("...", style: TextStyle(color: Palette.kToDark) ),
                                     ),
                                   );
                           }
@@ -400,187 +383,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                 child: Center(child: CircularProgressIndicator()),
               );
             },
-          ),
-
-          // FuturesBuilder<List<ProductCat01>>(
-          //   future: future_products_cat,
-          //   builder: (context, snapshot) {
-          //     if (snapshot.hasData) {
-          //       List<ProductCat01>? data = snapshot.data;
-          //       return Expanded(
-          //         child: ListView.builder(
-          //             scrollDirection: Axis.horizontal,
-          //             // shrinkWrap: true,
-          //             itemCount: data?.length,
-          //             itemBuilder: (BuildContext context, int index) {
-          //               return Card(
-          //                 child: InkWell(
-          //                   onTap: () {
-          //                     Navigator.of(context).push(MaterialPageRoute(
-          //                         builder: (context) =>
-          //                             NewsFeedPage_Detail()));
-          //                   },
-          //                   child: Column(
-          //                     children: [
-          //                       ClipRRect(
-          //                           borderRadius: BorderRadius.only(
-          //                               topLeft: Radius.circular(5),
-          //                               topRight: Radius.circular(5)),
-          //                           child: Image.network(
-          //                             data![index]
-          //                                 .image!
-          //                                 .thumbnail
-          //                                 .toString(),
-          //                             fit: BoxFit.fill,
-          //                             width:
-          //                                 MediaQuery.of(context).size.width *
-          //                                     0.3,
-          //                           )),
-          //                       Padding(
-          //                         padding: const EdgeInsets.all(8.0),
-          //                         child: Column(
-          //                           crossAxisAlignment:
-          //                               CrossAxisAlignment.start,
-          //                           mainAxisAlignment:
-          //                               MainAxisAlignment.start,
-          //                           children: [
-          //                             SizedBox(
-          //                               height: 40,
-          //                               width: 100,
-          //                               child: Text(
-          //                                 data[index].title.toString(),
-          //                               ),
-          //                             ),
-          //                             SizedBox(
-          //                               height: 3,
-          //                             ),
-          //                             Text(
-          //                               "฿ " + data[index].price.toString(),
-          //                               style: TextStyle(
-          //                                   color: Color.fromARGB(
-          //                                       255, 255, 17, 0)),
-          //                             ),
-          //                           ],
-          //                         ),
-          //                       )
-          //                     ],
-          //                   ),
-          //                 ),
-          //               );
-          //             }),
-          //       );
-          //     } else if (snapshot.hasError) {
-          //       return Text("${snapshot.error}");
-          //     }
-          //     // By default show a loading spinner.
-          //     return Padding(
-          //       padding: const EdgeInsets.only(left: 200),
-          //       child: CircularProgressIndicator(),
-          //     );
-          //   },
-          // ),
-
-          // Container(
-          //   color: Colors.white,
-          //   child: Padding(
-          //     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: <Widget>[
-          //         Padding(
-          //           padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
-          //           child: Row(
-          //             children: [
-          //               CircleAvatar(
-          //                 backgroundColor: Palette.kToDark,
-          //                 child: Icon(
-          //                   Icons.person,
-          //                   color: Colors.white,
-          //                 ),
-          //               ),
-          //               Padding(
-          //                 padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-          //                 child: Column(
-          //                   crossAxisAlignment: CrossAxisAlignment.start,
-          //                   children: [
-          //                     Text("Name Surename",
-          //                         style: TextStyle(
-          //                             color: Color.fromARGB(255, 51, 51, 51),
-          //                             fontWeight: FontWeight.bold)),
-          //                     SizedBox(
-          //                       height: 5,
-          //                     ),
-          //                     Text(
-          //                       "16 ธ.ค. 2565  07:54 น.",
-          //                       style: TextStyle(
-          //                           fontSize: 10,
-          //                           color:
-          //                               Color.fromARGB(255, 165, 162, 162)),
-          //                     ),
-          //                   ],
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         SizedBox(
-          //           height: 20,
-          //         ),
-          //         Container(
-          //           child: Image.asset('assets/images/feed2.png'),
-          //         ),
-          //         SizedBox(
-          //           height: 20,
-          //         ),
-          //         Padding(
-          //           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: [
-          //               Text(
-          //                 "เลี้ยงโคเนื้อครบวงจร",
-          //                 style: TextStyle(
-          //                     color: Color.fromARGB(255, 51, 51, 51),
-          //                     fontSize: 18,
-          //                     fontWeight: FontWeight.bold),
-          //               ),
-          //               Container(
-          //                   child: Row(
-          //                 children: [
-          //                   SvgPicture.asset(
-          //                     'assets/images/love.svg',
-          //                   ),
-          //                   SizedBox(
-          //                     width: 10,
-          //                   ),
-          //                   SvgPicture.asset(
-          //                     'assets/images/sharefeed.svg',
-          //                   ),
-          //                 ],
-          //               ))
-          //             ],
-          //           ),
-          //         ),
-          //         SizedBox(
-          //           height: 20,
-          //         ),
-          //         Padding(
-          //           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          //           child: Text(
-          //             "แต่ถ้าเลี้ยงแบบครบวงจร ภาครัฐจัดหาน้ำเชื้อจากพ่อแม่พันธุ์ชั้นดีเกษตรกรนำมาผสมพันธุ์ แล้วเลี้ยงอนุบาลส่งต่อให้เกษตรกรที่พอมีกำลังทรัพย์นำมาขุนต่อด้วยเทคโนโลยีสมัยใหม่ ให้ ได้เนื้อวัวเกรดพรีเมียมมีไขมันแทรก ไม่ต่างจากเนื้อจากต่างประเทศราคาแพง",
-          //             style: TextStyle(
-          //               fontFamily: 'Kanit',
-          //               color: Color.fromARGB(255, 130, 130, 130),
-          //             ),
-          //           ),
-          //         ),
-          //         SizedBox(
-          //           height: 20,
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // )
+          ) 
         ]),
       ),
       // drawer: Theme(

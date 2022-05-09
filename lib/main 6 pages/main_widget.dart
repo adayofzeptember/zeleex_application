@@ -49,6 +49,7 @@ class _Main_WidgetState extends State<Main_Widget> {
 
     List jsonCon = jsonResponse['data'];
     print(jsonCon.length);
+
     setState(() {
       countIMG = jsonCon.length;
     });
@@ -117,7 +118,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                       MaterialPageRoute(builder: (context) => CartPage()));
                 },
                 child: SvgPicture.asset(
-                    
                   'assets/images/cart123.svg',
                   color: Color.fromARGB(255, 255, 255, 255),
                 ),
@@ -138,8 +138,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                 Column(
                   children: <Widget>[
                     Padding(
+                    
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Container(
+                      child: Container( 
                         height: 40,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -244,14 +245,15 @@ class _Main_WidgetState extends State<Main_Widget> {
                                           ),
                                         ),
                                       ),
-                                    ); 
+                                    );
                                   },
                                   options: CarouselOptions(
                                       enlargeCenterPage: true,
-                                      viewportFraction: 1,
-                                      autoPlay: true,                                   
+                                      //  viewportFraction: 1,
+                                      autoPlay: true,
                                       autoPlayInterval: Duration(seconds: 4),
-                                      autoPlayAnimationDuration: Duration(seconds: 3),
+                                      autoPlayAnimationDuration:
+                                          Duration(seconds: 3),
                                       onPageChanged: (index, reason) =>
                                           setState(
                                             (() => activeIndex = index),

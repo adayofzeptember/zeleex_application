@@ -74,7 +74,7 @@ class _StorePageState extends State<StorePage> {
           builder: (context) => IconButton(
             icon: SizedBox(
               child: Visibility(
-            visible: false,
+                visible: false,
                 child: SvgPicture.asset(
                   'assets/images/menu.svg',
                   color: Color.fromARGB(255, 51, 51, 51),
@@ -84,7 +84,6 @@ class _StorePageState extends State<StorePage> {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-  
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -132,7 +131,8 @@ class _StorePageState extends State<StorePage> {
                   'assets/images/sort.svg',
                 ),
               ),
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              // onPressed: () => Scaffold.of(context).openEndDrawer(),
             ),
           ),
         ],
@@ -157,7 +157,6 @@ class _StorePageState extends State<StorePage> {
                         crossAxisCount: 2,
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
-
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.355,
                       ),
@@ -189,8 +188,7 @@ class _StorePageState extends State<StorePage> {
                                     children: [
                                       Container(
                                         width: double.infinity,
-                                        child: 
-                                                         ClipRRect(
+                                        child: ClipRRect(
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(5),
                                               topRight: Radius.circular(5)),

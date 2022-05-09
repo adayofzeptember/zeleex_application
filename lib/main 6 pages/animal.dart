@@ -23,14 +23,13 @@ class AnimalsPage extends StatefulWidget {
 
 class _AnimalsPageState extends State<AnimalsPage> {
   final controller = ScrollController();
-  var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
+  var perPage = 8; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   void initState() {
     fetch_AnimalPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
-          hasMore = false;
           perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
       }
@@ -47,9 +46,9 @@ class _AnimalsPageState extends State<AnimalsPage> {
     List jsonCon = jsonResponse['data']['data'];
 
     if (response.statusCode == 200) {
-      if (jsonCon.length < 2) {
+      if (jsonCon.length < perPage) {
         setState(() {
-           hasMore = false;
+          hasMore = false;
         });
       }
       return jsonCon.map((data) => Data_Animal_ReadAll.fromJson(data)).toList();
@@ -57,7 +56,6 @@ class _AnimalsPageState extends State<AnimalsPage> {
       throw Exception("error...");
     }
   }
-
 
   bool pressed = true;
   bool pressed2 = true;
@@ -222,9 +220,9 @@ class _AnimalsPageState extends State<AnimalsPage> {
                         childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.5),
                       ),
-                      itemCount: snapshot.data!.length,
+                      itemCount: data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
-                        if (index < snapshot.data!.length) {
+                        if (index < data.length) {
                           return Wrap(
                             children: [
                               Container(
@@ -240,15 +238,11 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                             builder: (context) =>
                                                 Store_Cattle_Detail(
                                               animalID:
-                                                  data![index].id.toString(),
+                                                  data[index].id.toString(),
                                               animalName:
                                                   data[index].title.toString(),
                                             ),
                                           ));
-                                      // Navigator.push(
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //             Store_Cattle_Detail()));
                                     },
                                     child: Column(
                                       crossAxisAlignment:
@@ -259,7 +253,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                               topLeft: Radius.circular(5),
                                               topRight: Radius.circular(5)),
                                           child: CachedNetworkImage(
-                                              imageUrl: data![index]
+                                              imageUrl: data[index]
                                                   .image!
                                                   .thumbnail
                                                   .toString(),
@@ -274,19 +268,24 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                                       ),
                                               errorWidget:
                                                   (context, url, error) =>
-                                                      Icon(Icons.abc)),
-                                          // Image.network(
-                                          //   data![index]
-                                          //       .image!
-                                          //       .thumbnail
-                                          //       .toString(),
-                                          //   fit: BoxFit.fill,
-                                          // )
-                                        ),
+                                                      Center(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              218,
+                                                              41,
+                                                              41))),
+                                                  alignment: Alignment.center,
+                                                  child: Text("ไม่พบรูปภาพ")),
+                                            ),
+                                        )),
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                               10, 5, 5, 0),
                                           child: Container(
+                                            height: 20,
                                             child: Text(
                                               data[index].title.toString(),
                                               style: TextStyle(
@@ -337,7 +336,21 @@ class _AnimalsPageState extends State<AnimalsPage> {
                             ],
                           );
                         } else {
-                          return Container();
+                          return hasMore
+                              ? Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Center(
+                                    child: Text("...",
+                                        style:
+                                            TextStyle(color: Palette.kToDark)),
+                                  ),
+                                );
                         }
                       },
                     ),
@@ -346,7 +359,6 @@ class _AnimalsPageState extends State<AnimalsPage> {
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
-              // By default show a loading spinner.
               return Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: Container(
@@ -355,7 +367,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
             },
           ),
 
-          //   Wrap(
+          //   Wrap(      
           //     spacing: 0.0,
           //     runSpacing: 0.0,
           //     children: <Widget>[

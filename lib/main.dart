@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
-
+//หน้าเปิดแอป
 void main() {
   runApp(const First_Page());
 }
@@ -24,6 +24,7 @@ class First_Page extends StatelessWidget {
     ); 
   }
 }
+
 
 class main_Icon extends StatefulWidget {
   main_Icon({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _main_IconState extends State<main_Icon> {
       //     transitionDuration: Duration(seconds: 3));
       var x = "TTT";
       Navigator.pushReplacement(
-        context,
+        context,  
         MaterialPageRoute(
           builder: (context) => SecondPage(
             name: x,

@@ -28,7 +28,7 @@ class _ProductPageState extends State<ProductPage> {
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
-             hasMore = false;
+          hasMore = false;
           perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
       }
@@ -47,7 +47,7 @@ class _ProductPageState extends State<ProductPage> {
     if (response.statusCode == 200) {
       if (jsonCon.length < 1) {
         setState(() {
-         // hasMore = false;
+           hasMore = false;
         });
       }
       return jsonCon
@@ -77,7 +77,7 @@ class _ProductPageState extends State<ProductPage> {
           leading: Builder(
             builder: (context) => IconButton(
               icon: Visibility(
-            visible: false,
+                visible: false,
                 child: SizedBox(
                     child: SvgPicture.asset(
                   'assets/images/menu.svg',
@@ -215,17 +215,19 @@ class _ProductPageState extends State<ProductPage> {
                 return Expanded(
                   child: RawScrollbar(
                     controller: controller,
-                       thumbColor: Palette.kToDark,
+                    thumbColor: Palette.kToDark,
                     radius: Radius.circular(50),
                     thickness: 5,
                     child: GridView.builder(
                       controller: controller,
-                      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          new SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
-                  
-                        mainAxisExtent: MediaQuery.of(context).size.height * 0.32,
+
+                        mainAxisExtent:
+                            MediaQuery.of(context).size.height * 0.32,
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -237,17 +239,20 @@ class _ProductPageState extends State<ProductPage> {
                                     borderRadius: BorderRadius.circular(5.0)),
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            Store_Product_Detail(
-                                              productName:
-                                                  data[index].title.toString(),
-                                              productID:
-                                                  data[index].id.toString(),
-                                            )));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Store_Product_Detail(
+                                                  productName: data[index]
+                                                      .title
+                                                      .toString(),
+                                                  productID:
+                                                      data[index].id.toString(),
+                                                )));
                                   },
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.only(
@@ -259,9 +264,9 @@ class _ProductPageState extends State<ProductPage> {
                                               .thumbnail
                                               .toString(),
                                           fit: BoxFit.fill,
-                                          progressIndicatorBuilder:
-                                              (context, url, downloadProgress) =>
-                                                  Container(
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Container(
                                             color: Color.fromARGB(
                                                 255, 142, 142, 142),
                                             // height: 200,
@@ -297,8 +302,8 @@ class _ProductPageState extends State<ProductPage> {
                                             data[index].title.toString(),
                                             style: TextStyle(
                                               fontSize: 13,
-                                              color:
-                                                  Color.fromARGB(255, 51, 51, 51),
+                                              color: Color.fromARGB(
+                                                  255, 51, 51, 51),
                                             ),
                                           ),
                                         ),
@@ -321,11 +326,10 @@ class _ProductPageState extends State<ProductPage> {
                           );
                         } else {
                           return 
-                           Container();
-                          
-                          // hasMore
-                          //     ? Center(child: CircularProgressIndicator())
-                          //     : Text("data");
+
+                          hasMore
+                              ? Center(child: CircularProgressIndicator())
+                              : Text("data");
                         }
                       },
                     ),
