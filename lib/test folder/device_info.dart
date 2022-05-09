@@ -7,7 +7,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../Plate.dart';
-
+      // 'version.securityPatch': build.version.securityPatch,
+      // 'version.sdkInt': build.version.sdkInt,
+      // 'version.release': build.version.release,
+      // 'version.previewSdkInt': build.version.previewSdkInt,
+      // 'version.incremental': build.version.incremental,
+      // 'version.codename': build.version.codename,
+      // 'version.baseOS': build.version.baseOS,
+      // 'board': build.board,
+      // 'bootloader': build.bootloader,
+      // 'brand': build.brand,
+      // 'device': build.device,
+      // 'display': build.display,
+      // 'fingerprint': build.fingerprint,
+      // 'hardware': build.hardware,
+      // 'host': build.host,
+      // 'id': build.id,
+      // 'manufacturer': build.manufacturer,
+      // 'model': build.model,
+      // 'product': build.product,
+      // 'supported32BitAbis': build.supported32BitAbis,
+      // 'supported64BitAbis': build.supported64BitAbis,
+      // 'supportedAbis': build.supportedAbis,
+      // 'tags': build.tags,
+      // 'type': build.type,
+      // 'isPhysicalDevice': build.isPhysicalDevice,
+      // 'androidId': build.androidId,
+      // 'systemFeatures': build.systemFeatures,
 void main() {
   runApp(const HomePage());
 }
@@ -66,9 +92,9 @@ class _HomePageState extends State<HomePage> {
     return <String, dynamic>{
       //'version.sdkInt': build.version.sdkInt,
       'Android Version': build.version.release,
-      'brand': build.brand,
+     
       'device': build.device,
-      //'id': build.id,
+      'device id': build.id,
       'model': build.model,
       'androidId': build.androidId,
     };
@@ -104,11 +130,11 @@ class _HomePageState extends State<HomePage> {
             statusBarColor: Palette.kToDark,
           ),
           title: Text(
-            Platform.isAndroid
-                ? 'Android Device Info'
-                : Platform.isIOS
-                    ? 'iOS Device Info'
-                    : '',
+            "test"            // Platform.isAndroid
+            //     ? 'Android Device Info'
+            //     : Platform.isIOS
+            //         ? 'iOS Device Info'
+            //         : '',
           ),
         ),
         body: Column(
@@ -116,7 +142,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,    
           
           children: <Widget>[
-            Text("app version"+appVersion),
+            Text("zeleex เวอร์ชั่น: "+appVersion),
             Expanded(
               child: ListView(
                 children: _deviceData.keys.map(
