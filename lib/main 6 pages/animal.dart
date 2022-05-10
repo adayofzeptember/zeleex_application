@@ -215,7 +215,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                     child: GridView.builder(
                       controller: controller,
                       gridDelegate:
-                          new SliverGridDelegateWithFixedCrossAxisCount(
+                          SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.5),

@@ -17,6 +17,7 @@ import '../profile.dart';
 // หลักมาก หลักรวม
 void main() {
   runApp(Main_Page());
+  
 }
 
 class Main_Page extends StatefulWidget {

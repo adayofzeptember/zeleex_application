@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
+import 'package:zeleex_application/test%20folder/device_info.dart';
 //หน้าเปิดแอป
 void main() {
   runApp(const First_Page());
@@ -39,6 +40,7 @@ class _main_IconState extends State<main_Icon> {
     super.initState();
     Load_AndGo();
   }
+  
 
   Future<void> Load_AndGo() async {
     await Future.delayed(const Duration(seconds: 3), () {

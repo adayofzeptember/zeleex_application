@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,7 +12,7 @@ import 'package:http/http.dart' as http;
 class Store_Cattle_Detail extends StatefulWidget {
   String? animalID = "";
   String? animalName = "";
-  
+
   Store_Cattle_Detail({Key? key, this.animalID, this.animalName})
       : super(key: key);
 
@@ -19,7 +20,7 @@ class Store_Cattle_Detail extends StatefulWidget {
   State<Store_Cattle_Detail> createState() => _Store_Cattle_DetailState();
 }
 
-class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> { 
+class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
   Future<Animal> fetch_Animal_ByID() async {
     var url = "https://sanboxapi.zeleex.com/api/animals/" +
         widget.animalID.toString();
@@ -31,10 +32,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
     return msg;
   }
 
-
-
   bool pressed = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +45,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
             Container(
               width: 150,
               child: FloatingActionButton(
-                     heroTag: "btn1",
+                heroTag: "btn1",
                 backgroundColor: Palette.kToDark,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {},
@@ -79,7 +77,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               width: 150,
               child: FloatingActionButton(
-                     heroTag: "btndd1",
+                heroTag: "btndd1",
                 backgroundColor: Colors.cyan,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {},
@@ -189,7 +187,28 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                   return Column(
                     //! container คลุม column
                     children: <Widget>[
-                      Image.network(thisAnimal.image!.main.toString()),
+                      CachedNetworkImage(
+                        imageUrl: thisAnimal.image!.main.toString(),
+                        fit: BoxFit.cover,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Container(
+                          color: Color.fromARGB(255, 142, 142, 142),
+                          height: 400,
+                        ),
+                        errorWidget: (context, url, error) => Padding(
+                          padding: const EdgeInsets.only(right: 5, left: 5),
+                          child: Center(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Color.fromARGB(
+                                            255, 141, 141, 141))),
+                                alignment: Alignment.center,
+                                child: Text("ไม่พบรูปภาพของบล็อก")),
+                          ),
+                        ),
+                      ),
+                      // Image.network(thisAnimal.image!.main.toString()),
                       Container(
                         color: Colors.white,
                         child: Padding(
@@ -219,8 +238,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                     Text(
                                       "฿ ${thisAnimal.price}",
                                       style: TextStyle(
-                                          color: Colors.red[400],
-                                          fontSize: 20),
+                                          color: Colors.red[400], fontSize: 20),
                                     ),
                                     SizedBox(
                                       width: 10,
@@ -238,8 +256,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                SvgPicture.asset(
-                                    'assets/images/groupStar.svg'),
+                                SvgPicture.asset('assets/images/groupStar.svg'),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -265,11 +282,9 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(thisAnimal.store!.title.toString(),
                                         style: TextStyle(
@@ -300,7 +315,8 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                             ),
                                             SizedBox(width: 10),
                                             Text(
-                                              thisAnimal.store!.phone.toString(),
+                                              thisAnimal.store!.phone
+                                                  .toString(),
                                               style:
                                                   TextStyle(color: Colors.grey),
                                             ),
@@ -342,7 +358,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                   ],
                                 ),
                               ),
-                           
                             ],
                           ),
                         ),
@@ -374,8 +389,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                               Text(
                                 thisAnimal.description.toString(),
                                 style: TextStyle(
-                                    color:
-                                        Color.fromARGB(255, 130, 130, 130)),
+                                    color: Color.fromARGB(255, 130, 130, 130)),
                               ),
                               SizedBox(
                                 height: 15,

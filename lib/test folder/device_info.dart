@@ -119,8 +119,7 @@ class _HomePageState extends State<HomePage> {
       // 'androidId': build.androidId,
       // 'systemFeatures': build.systemFeatures,
       'version.sdkInt': build.version.sdkInt,
-      'Android Version': build.version.release,
-      
+      'Android Version': build.version.release,     
       'version.release': build.version.release,
       'device': build.device,
       'device id': build.id,
@@ -193,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             '${_deviceData[property]}',
                             maxLines: 10,
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.ellipsis
                           ),
                         )),
                       ],
