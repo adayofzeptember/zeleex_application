@@ -120,14 +120,14 @@ class Company {
     data['name'] = this.name;
     data['catchPhrase'] = this.catchPhrase;
     data['bs'] = this.bs;
+
     return data;
   }
 }
 
- Future<NewAPI> randomDog() async {
-    var url = "https://jsonplaceholder.typicode.com/users/1";
-    var response = await Http.get(Uri.parse(url));
-    NewAPI msg = NewAPI.fromJson(json.decode(response.body));
-    return msg;
-  }
-
+Future<NewAPI> randomDog() async {
+  var url = "https://jsonplaceholder.typicode.com/users/1";
+  var response = await Http.get(Uri.parse(url));
+  NewAPI msg = NewAPI.fromJson(json.decode(response.body));
+  return msg;
+}

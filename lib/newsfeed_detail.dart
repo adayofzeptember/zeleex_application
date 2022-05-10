@@ -12,11 +12,9 @@ import 'package:http/http.dart' as http;
 class NewsFeedPage_Detail extends StatefulWidget {
   String blogID = "";
   NewsFeedPage_Detail({Key? key, required this.blogID}) : super(key: key);
-
   @override
   State<NewsFeedPage_Detail> createState() => _NewsFeedPage_Detail();
 }
-
 class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
   @override
   Widget build(BuildContext context) {
@@ -73,7 +71,6 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.hasData) {
                       Blog blog = snapshot.data;
-
                       return Container(
                         color: Colors.white,
                         child: Column(
@@ -89,7 +86,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                                         fontSize: 20,
                                         color: Color.fromARGB(255, 51, 51, 51)),
                                   ),
-                                ],
+                                ]
                               ),
                             ),
                             Padding(
@@ -171,7 +168,8 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                           ],
                         ),
                       );
-                    } else {
+                    } 
+                    else {
                       return Padding(
                         padding: const EdgeInsets.only(top: 50),
                         child: Center(child: CircularProgressIndicator()),
