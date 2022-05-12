@@ -30,7 +30,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
-          perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
+          perPage = perPage + 4; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
       }
     });
@@ -91,7 +91,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                   'assets/images/menu.svg',
                   color: Color.fromARGB(255, 51, 51, 51),
                 )),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: ()   => Scaffold.of(context).openDrawer(),
               ),
             ),
           ),
@@ -351,7 +351,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                           return hasMore
                               ? Container(
                                   alignment: Alignment.center,
-                                  child: Text("dataก"),
+                                  child: CircularProgressIndicator(),
                                 )
                               : Padding(
                                   padding: const EdgeInsets.only(top: 5),

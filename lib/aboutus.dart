@@ -20,11 +20,11 @@ class AboutUs extends StatelessWidget {
             appBarTheme: AppBarTheme(color: Palette.kToDark)),
         home: Scaffold(
           appBar: AppBar(
-                systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Palette.kToDark,
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.light,
-          ),
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Palette.kToDark,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
+            ),
             backgroundColor: Palette.kToDark,
             elevation: 0,
             title: Row(

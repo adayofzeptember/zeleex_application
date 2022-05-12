@@ -338,7 +338,6 @@ class _ProductPageState extends State<ProductPage> {
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
-              // By default show a loading spinner.
               return Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: Container(

@@ -306,7 +306,7 @@ class _StorePageState extends State<StorePage> {
                           return hasMore
                               ? Container(
                                   alignment: Alignment.center,
-                                  child: Text("dataก"),
+                                  child: CircularProgressIndicator(),
                                 )
                               : Padding(
                                   padding: const EdgeInsets.only(top: 5),
