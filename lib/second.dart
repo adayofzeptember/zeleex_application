@@ -31,7 +31,8 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SingleChildScrollView(
+      body: 
+      SingleChildScrollView(
         child: Container(
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 1,
@@ -39,8 +40,10 @@ class _SecondPageState extends State<SecondPage> {
               image: DecorationImage(
             image: AssetImage(
               'assets/images/BG.png',
-            ),
-          )),
+              
+            ), fit: BoxFit.cover
+          )
+          ),
           child: Center(
             child: Column(
               children: [
@@ -138,7 +141,7 @@ class _SecondPageState extends State<SecondPage> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       alignment: Alignment.center,
                       child: Text(
-                        "ทดสอบหน้าเข้าสู่ระบบ",
+                        "เข้าสู่ระบบ (สำหรับทดสอบ)",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),

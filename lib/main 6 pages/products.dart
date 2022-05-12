@@ -21,7 +21,7 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final controller = ScrollController();
-  var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
+  var perPage = 8; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   void initState() {
     fetch_ProductPage_readAll();
@@ -47,7 +47,7 @@ class _ProductPageState extends State<ProductPage> {
     if (response.statusCode == 200) {
       if (jsonCon.length < 1) {
         setState(() {
-           hasMore = false;
+          hasMore = false;
         });
       }
       return jsonCon
@@ -227,109 +227,116 @@ class _ProductPageState extends State<ProductPage> {
                         //     (MediaQuery.of(context).size.height / 1.55),
 
                         mainAxisExtent:
-                            MediaQuery.of(context).size.height * 0.32,
+                            MediaQuery.of(context).size.height * 0.322,
                       ),
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data!.length) {
-                          return Wrap(
-                            children: <Widget>[
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Store_Product_Detail(
-                                                  productName: data[index]
-                                                      .title
-                                                      .toString(),
-                                                  productID:
-                                                      data[index].id.toString(),
-                                                )));
-                                  },
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5)),
-                                        child: CachedNetworkImage(
-                                          imageUrl: data[index]
-                                              .image!
-                                              .thumbnail
-                                              .toString(),
-                                          fit: BoxFit.fill,
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
+                          return Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Store_Product_Detail(
+                                          productName:
+                                              data[index].title.toString(),
+                                          productID: data[index].id.toString(),
+                                        )));
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        topRight: Radius.circular(5)),
+                                    child: CachedNetworkImage(
+                                      imageUrl: data[index]
+                                          .image!
+                                          .thumbnail
+                                          .toString(),
+                                      fit: BoxFit.fill,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
                                               Container(
-                                            color: Color.fromARGB(
-                                                255, 142, 142, 142),
-                                            // height: 200,
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              141,
-                                                              141,
-                                                              141))),
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  alignment: Alignment.center,
-                                                  child: Text("ไม่พบรูปภาพ")),
-                                        ),
-                                        // Image.network(
-                                        //   data![index]
-                                        //       .image!
-                                        //       .thumbnail
-                                        //       .toString(),
-                                        //   fit: BoxFit.fill,
-                                        // )
+                                        color:
+                                            Color.fromARGB(255, 142, 142, 142),
+                                        // height: 200,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 5, 0),
-                                        child: Container(
-                                          height: 40,
-                                          child: Text(
-                                            data[index].title.toString(),
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color.fromARGB(
-                                                  255, 51, 51, 51),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
+                                      errorWidget: (context, url, error) =>
+                                          Center(
+                                        child: Padding(
                                           padding: const EdgeInsets.fromLTRB(
-                                              10, 5, 0, 0),
-                                          child: Text(
-                                            "฿ " + data[index].price.toString(),
-                                            style: TextStyle(color: Colors.red),
-                                          )),
-                                      SizedBox(
-                                        height: 8,
-                                      )
-                                    ],
+                                              3, 3, 3, 0),
+                                          child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.22,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 211, 204, 204),
+                                                          
+                                                          ),                                                             borderRadius: BorderRadius.all(Radius.circular(5))
+),
+                                              alignment: Alignment.center,
+                                              child: Text("ไม่พบรูปภาพ")),
+                                        ),
+                                      ),
+                                    ),
+                                    // Image.network(
+                                    //   data![index]
+                                    //       .image!
+                                    //       .thumbnail
+                                    //       .toString(),
+                                    //   fit: BoxFit.fill,
+                                    // )
                                   ),
-                                ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 5, 0),
+                                    child: Container(
+                                      height: 40,
+                                      child: Text(
+                                        data[index].title.toString(),
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 0, 0),
+                                      child: Text(
+                                        "฿ " + data[index].price.toString(),
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
                               ),
-                            ],
+                            ),
                           );
                         } else {
-                          return 
-
-                          hasMore
-                              ? Center(child: CircularProgressIndicator())
-                              : Text("data");
+                          return hasMore
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  child: Text("dataก"),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Center(
+                                    child: Text("...",
+                                        style:
+                                            TextStyle(color: Palette.kToDark)),
+                                  ),
+                                );
                         }
                       },
                     ),

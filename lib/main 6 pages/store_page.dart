@@ -32,7 +32,6 @@ class _StorePageState extends State<StorePage> {
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
-          hasMore = false;
           perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
       }
@@ -49,7 +48,7 @@ class _StorePageState extends State<StorePage> {
     List jsonCon = jsonResponse['data']['data'];
 
     if (response.statusCode == 200) {
-      if (jsonCon.length < 1) {
+      if (jsonCon.length < perPage) {
         setState(() {
           hasMore = false;
         });
@@ -65,6 +64,7 @@ class _StorePageState extends State<StorePage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
@@ -114,10 +114,10 @@ class _StorePageState extends State<StorePage> {
             //       SizedBox(
             //         width: 10,
             //       ),
-            //       // SvgPicture.asset(
-            //       //   'assets/images/cart123.svg',
-            //       //   color: Color.fromARGB(255, 51, 51, 51),
-            //       // )
+            // SvgPicture.asset(
+            //   'assets/images/cart123.svg',
+            //   color: Color.fromARGB(255, 51, 51, 51),
+            // )
             //     ],
             //   ),
             // )
@@ -139,6 +139,9 @@ class _StorePageState extends State<StorePage> {
       ),
       body: Column(
         children: <Widget>[
+          SizedBox(
+            height: 5,
+          ),
           FutureBuilder<List<Data_Store_ReadALL>>(
             future: fetch_StorePage_readAll(),
             builder: (context, snapshot) {
@@ -158,144 +161,161 @@ class _StorePageState extends State<StorePage> {
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
                         mainAxisExtent:
-                            MediaQuery.of(context).size.height * 0.355,
+                            MediaQuery.of(context).size.height * 0.36,
                       ),
-                      itemCount: snapshot.data?.length,
+                      itemCount: data!.length,
                       itemBuilder: (BuildContext context, int index) {
-                        if (index < snapshot.data!.length) {
-                          return Wrap(
-                            children: <Widget>[
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Store_Detail(
-                                                storeID:
-                                                    data![index].id.toString(),
-                                                storeName: data[index]
-                                                    .title
-                                                    .toString(),
-                                              )),
-                                    );
-                                  },
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: double.infinity,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
-                                          child: CachedNetworkImage(
-                                            imageUrl: data![index]
-                                                .image!
-                                                .thumbnail
-                                                .toString(),
-                                            fit: BoxFit.fill,
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
+                        if (index < data.length) {
+                          return Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Store_Detail(
+                                            storeID: data[index].id.toString(),
+                                            storeName:
+                                                data[index].title.toString(),
+                                          )),
+                                );
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5)),
+                                      child: CachedNetworkImage(
+                                        imageUrl: data[index]
+                                            .image!
+                                            .thumbnail
+                                            .toString(),
+                                        fit: BoxFit.fill,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
                                                 Container(
-                                              color: Color.fromARGB(
-                                                  255, 142, 142, 142),
-                                              // height: 200,
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) => Center(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              218,
-                                                              41,
-                                                              41))),
-                                                  alignment: Alignment.center,
-                                                  child: Text("ไม่พบรูปภาพ")),
-                                            ),
+                                          color: Color.fromARGB(
+                                              255, 142, 142, 142),
+                                          // height: 200,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                3, 3, 3, 0),
+                                            child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.22,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            211,
+                                                            204,
+                                                            204)),
+                                                            borderRadius: BorderRadius.all(Radius.circular(5))
+                                                            
+                                                            
+                                                            
+                                                            ),
+                                                alignment: Alignment.center,
+                                                child: Text("ไม่พบรูปภาพ")),
                                           ),
-                                          // Image.network(
-                                          //   data![index]
-                                          //       .image!
-                                          //       .thumbnail
-                                          //       .toString(),
-                                          //   fit: BoxFit.fill,
-                                          // )
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 5, 0, 0),
-                                        child: Text(
-                                          data[index].title.toString(),
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromARGB(
-                                                  255, 51, 51, 51)),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 10, 10, 0),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 5),
-                                              child: SvgPicture.asset(
-                                                  'assets/images/pinstore.svg'),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              width: 100,
-                                              child: Text(
-                                                data[index].address.toString(),
-                                                style: TextStyle(
-                                                    fontSize: 13,
-                                                    color: Palette.kToDark),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            SvgPicture.asset(
-                                                'assets/images/star.svg'),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text("5.0")
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      )
-                                    ],
+                                      // Image.network(
+                                      //   data![index]
+                                      //       .image!
+                                      //       .thumbnail
+                                      //       .toString(),
+                                      //   fit: BoxFit.fill,
+                                      // )
+                                    ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                    child: Text(
+                                      data[index].title.toString(),
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        15, 10, 10, 0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5),
+                                          child: SvgPicture.asset(
+                                              'assets/images/pinstore.svg'),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          height: 40,
+                                          width: 120,
+                                          child: Text(
+                                            data[index].address.toString(),
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                color: Palette.kToDark),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        SvgPicture.asset(
+                                            'assets/images/star.svg'),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("5.0")
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  )
+                                ],
                               ),
-                            ],
+                            ),
                           );
                         } else {
-                          return Container();
+                          // return Container();
+                          return hasMore
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  child: Text("dataก"),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Center(
+                                    child: Text("...",
+                                        style:
+                                            TextStyle(color: Palette.kToDark)),
+                                  ),
+                                );
                         }
                       },
                     ),

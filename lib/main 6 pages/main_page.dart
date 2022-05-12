@@ -430,21 +430,13 @@ class _Main_PageState extends State<Main_Page> {
               ),
               label: 'สินค้า',
             ),
-            BottomNavigationBarItem(
-              activeIcon: SizedBox(
-                child: Icon(Icons.person, color: Palette.kToDark,),
-                // child: SvgPicture.asset(
-                //   "assets/images/new/tab6.svg",
-                //   color: Palette.kToDark,
-                //   color; Dark (-) importer ICon(Main')
-                // ),
+                   BottomNavigationBarItem(
+              activeIcon: SvgPicture.asset(
+                "assets/images/new/tab6.svg",
+                color: Palette.kToDark,
               ),
-              icon: SizedBox(
-                                child: Icon(Icons.person, color: Color.fromARGB(255 , 141, 141, 141),),
-
-                // child: SvgPicture.asset(
-                //   "assets/images/new/tab6.svg",
-                // ),
+              icon: SvgPicture.asset(
+                "assets/images/new/tab6.svg",
               ),
               label: 'โปรไฟล์',
             ),

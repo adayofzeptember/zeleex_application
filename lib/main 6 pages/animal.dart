@@ -37,6 +37,18 @@ class _AnimalsPageState extends State<AnimalsPage> {
     super.initState();
   }
 
+  Future<http.Response> createAlbum(String title) {
+    return http.post(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'title': title,
+      }),
+    );
+  }
+
   Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
     final response = await http.get(Uri.parse(
         'https://sanboxapi.zeleex.com/api/animals?per_page=' +
@@ -59,6 +71,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
 
   bool pressed = true;
   bool pressed2 = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +100,6 @@ class _AnimalsPageState extends State<AnimalsPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                onTap: () {},
                 child: Visibility(
                   visible: false,
                   child: Icon(
@@ -214,134 +226,132 @@ class _AnimalsPageState extends State<AnimalsPage> {
                     thickness: 5,
                     child: GridView.builder(
                       controller: controller,
-                      gridDelegate:
-                          SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: MediaQuery.of(context).size.width /
-                            (MediaQuery.of(context).size.height / 1.5),
+                            (MediaQuery.of(context).size.height / 1.45),
                       ),
                       itemCount: data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
-                          return Wrap(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                Store_Cattle_Detail(
-                                              animalID:
-                                                  data[index].id.toString(),
-                                              animalName:
-                                                  data[index].title.toString(),
-                                            ),
-                                          ));
-                                    },
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
-                                          child: CachedNetworkImage(
-                                              imageUrl: data[index]
-                                                  .image!
-                                                  .thumbnail
-                                                  .toString(),
-                                              fit: BoxFit.fill,
-                                              progressIndicatorBuilder:
-                                                  (context, url,
-                                                          downloadProgress) =>
-                                                      Container(
-                                                        color: Color.fromARGB(
-                                                            255, 142, 142, 142),
-                                                        // height: 200,
-                                                      ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      Center(
+                          return Container(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Store_Cattle_Detail(
+                                          animalID: data[index].id.toString(),
+                                          animalName:
+                                              data[index].title.toString(),
+                                        ),
+                                      ));
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(5),
+                                            topRight: Radius.circular(5)),
+                                        child: CachedNetworkImage(
+                                          imageUrl: data[index]
+                                              .image!
+                                              .thumbnail
+                                              .toString(),
+                                          fit: BoxFit.fill,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Container(
+                                            color: Color.fromARGB(
+                                                255, 142, 142, 142),
+                                            // height: 200,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Center(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      3, 3, 3, 0),
                                               child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.22,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: Color.fromARGB(
                                                               255,
-                                                              218,
-                                                              41,
-                                                              41))),
+                                                              211,
+                                                              204,
+                                                              204)),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5))),
                                                   alignment: Alignment.center,
                                                   child: Text("ไม่พบรูปภาพ")),
                                             ),
+                                          ),
                                         )),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              10, 5, 5, 0),
-                                          child: Container(
-                                            height: 20,
-                                            child: Text(
-                                              data[index].title.toString(),
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 51, 51, 51),
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 5, 0),
+                                      child: Container(
+                                        height: 20,
+                                        child: Text(
+                                          data[index].title.toString(),
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 51, 51, 51),
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              10, 5, 5, 0),
-                                          child: Container(
-                                            height: 30,
-                                            child: Text(
-                                              data[index]
-                                                  .description
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  color: Color.fromARGB(
-                                                      255, 130, 130, 130)),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                10, 5, 0, 0),
-                                            child: Text(
-                                              "฿ " +
-                                                  NumberFormat("#,###,###")
-                                                      .format(int.parse(
-                                                          data[index]
-                                                              .price
-                                                              .toString())),
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            )),
-                                        SizedBox(
-                                          height: 8,
-                                        )
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 5, 0),
+                                      child: Container(
+                                        height: 30,
+                                        child: Text(
+                                          data[index].description.toString(),
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Color.fromARGB(
+                                                  255, 130, 130, 130)),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 5, 0, 0),
+                                        child: Text(
+                                          "฿ " +
+                                              NumberFormat("#,###,###").format(
+                                                  int.parse(data[index]
+                                                      .price
+                                                      .toString())),
+                                          style: TextStyle(color: Colors.red),
+                                        )),
+                                    SizedBox(
+                                      height: 8,
+                                    )
+                                  ],
                                 ),
                               ),
-                            ],
+                            ),
                           );
                         } else {
                           return hasMore
-                              ? Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  child: Text("dataก"),
                                 )
                               : Padding(
                                   padding: const EdgeInsets.only(top: 5),
@@ -367,7 +377,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
             },
           ),
 
-          //   Wrap(      
+          //   Wrap(
           //     spacing: 0.0,
           //     runSpacing: 0.0,
           //     children: <Widget>[

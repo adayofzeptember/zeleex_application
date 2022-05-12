@@ -212,16 +212,14 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 3.0),
                                       decoration: BoxDecoration(
-                                          color: Color.fromARGB(
-                                              197, 199, 199, 199)),
+                                          color: Color.fromARGB(92, 98, 247, 155)),
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                            data![index].image!.toString(),
+                                            data![index].image!.toString(), 
                                         progressIndicatorBuilder:
                                             (context, url, downloadProgress) =>
                                                 Container(
-                                          color: Color.fromARGB(
-                                              197, 199, 199, 199),
+                                          color: Color.fromARGB(197, 253, 253, 253),
                                           height: 200,
                                         ),
                                         errorWidget: (context, url, error) =>
@@ -241,7 +239,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                 height: double.infinity,
                                                 alignment: Alignment.center,
                                                 child: Text(
-                                                    "ไม่พบรูปภาพของบล็อก")),
+                                                    "ไม่พบรูปภาพ")),
                                           ),
                                         ),
                                       ),
