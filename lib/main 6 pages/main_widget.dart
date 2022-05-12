@@ -212,7 +212,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 3.0),
                                       decoration: BoxDecoration(
-                                          color: Color.fromARGB(92, 98, 247, 155)),
+                                          color: Color.fromARGB(167, 216, 216, 216)),
                                       child: CachedNetworkImage(
                                         imageUrl:
                                             data![index].image!.toString(), 
@@ -252,7 +252,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       autoPlayInterval: Duration(seconds: 4),
                                       autoPlayAnimationDuration:
                                           Duration(seconds: 3),
-                                      onPageChanged: (index, reason) =>
+                                      onPageChanged: (  index, reason) =>
                                           setState(
                                             (() => activeIndex = index),
                                           )));

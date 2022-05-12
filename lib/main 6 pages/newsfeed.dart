@@ -259,7 +259,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                               .image!
                                               .main
                                               .toString(),
-                                          fit: BoxFit.cover,
+                                         // fit: BoxFit.fitWidth,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Container(

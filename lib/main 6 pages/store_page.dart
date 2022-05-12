@@ -163,7 +163,7 @@ class _StorePageState extends State<StorePage> {
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.36,
                       ),
-                      itemCount: data!.length,
+                      itemCount: data!.length+1,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
                           return Card(

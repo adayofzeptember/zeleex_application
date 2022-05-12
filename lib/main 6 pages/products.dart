@@ -193,7 +193,7 @@ class _ProductPageState extends State<ProductPage> {
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                       child: Text(
-                        "น้ำเชื้อและตัวอ่อdน",
+                        "น้ำเชื้อและตัวอ่อน",
                         style: TextStyle(
                             fontSize: 12,
                             color: Color.fromARGB(255, 130, 130, 130),
@@ -229,7 +229,7 @@ class _ProductPageState extends State<ProductPage> {
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.322,
                       ),
-                      itemCount: snapshot.data!.length + 1,
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data!.length) {
                           return Card(
@@ -329,14 +329,7 @@ class _ProductPageState extends State<ProductPage> {
                                   alignment: Alignment.center,
                                   child: Text("dataก"),
                                 )
-                              : Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: Center(
-                                    child: Text("...",
-                                        style:
-                                            TextStyle(color: Palette.kToDark)),
-                                  ),
-                                );
+                              : Container();
                         }
                       },
                     ),
