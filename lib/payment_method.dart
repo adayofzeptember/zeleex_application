@@ -25,7 +25,7 @@ class _Payment_MethodState extends State<Payment_Method > {
           backgroundColor: Palette.kToDark,
           elevation: 0.0,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+           mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
                 onTap: () {

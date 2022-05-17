@@ -45,7 +45,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
     super.initState();
   }
 
-
   Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
     final response = await http.get(Uri.parse(
         'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
@@ -186,8 +185,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                   shape: BoxShape.circle,
                                                   image: DecorationImage(
                                                       image: imageProvider,
-                                                      fit: BoxFit.cover),  
-                                                      
+                                                      fit: BoxFit.cover),
                                                 ),
                                               ),
                                               placeholder: (context, url) =>
@@ -259,7 +257,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                               .image!
                                               .main
                                               .toString(),
-                                         // fit: BoxFit.fitWidth,
+                                          // fit: BoxFit.fitWidth,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Container(
@@ -297,6 +295,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                       SizedBox(
                                         height: 20,
                                       ),
+                                      
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 0, 10, 0),
@@ -353,8 +352,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                 ),
                               ),
                             );
-                          } 
-                          else {
+                          } else {
                             return hasMore
                                 ? Padding(
                                     padding: const EdgeInsets.only(
@@ -367,7 +365,9 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                     padding: const EdgeInsets.only(
                                         top: 5, bottom: 10),
                                     child: Center(
-                                      child: Text("...", style: TextStyle(color: Palette.kToDark) ),
+                                      child: Text("...",
+                                          style: TextStyle(
+                                              color: Palette.kToDark)),
                                     ),
                                   );
                           }
@@ -383,7 +383,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                 child: Center(child: CircularProgressIndicator()),
               );
             },
-          ) 
+          )
         ]),
       ),
       // drawer: Theme(

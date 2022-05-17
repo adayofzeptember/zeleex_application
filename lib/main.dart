@@ -16,14 +16,14 @@ void main() {
   // runApp(const First_Page());
 }
 
-class First_Page extends StatelessWidget {
+class First_Page extends StatelessWidget { 
   const First_Page({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Kanit',
-        primarySwatch: Palette.kToDark,
+       primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),
       ),
       home: main_Icon(),
@@ -33,7 +33,6 @@ class First_Page extends StatelessWidget {
 
 class main_Icon extends StatefulWidget {
   main_Icon({Key? key}) : super(key: key);
-
   @override
   State<main_Icon> createState() => _main_IconState();
 }
@@ -47,6 +46,7 @@ class _main_IconState extends State<main_Icon> {
 
   Future<void> Load_AndGo() async {
     await Future.delayed(const Duration(seconds: 3), () {
+
       // PageRouteBuilder(
       //     pageBuilder: (BuildContext context, Animation<double> animation,
       //         Animation<double> secondaryAnimation) {
@@ -57,6 +57,7 @@ class _main_IconState extends State<main_Icon> {
       //       Animation<double> secondaryAnimation,
       //         Widget child) {
       //       return SlideTransition(
+       // The power of the sun in the plam of my hand
       //         position: Tween<Offset>(
       //           begin: Offset(-1.0, 0.0),     dfsdfpriif(elsecontroleerpordict)
       //           end: Offset(0.0, 0.0),
@@ -65,7 +66,7 @@ class _main_IconState extends State<main_Icon> {
       //       );
       //     },
       //     transitionDuration: Duration(seconds: 3));
-      var x = "TTT";
+      var x = "the power of the sun, in the palm of my hand.";
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -76,6 +77,8 @@ class _main_IconState extends State<main_Icon> {
       );
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {

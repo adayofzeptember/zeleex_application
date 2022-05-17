@@ -744,7 +744,6 @@ class _CartPageState extends State<CartPage> {
                                 padding: const EdgeInsets.all(20.0),
                                 child: Text(
                                   "ชำระเงิน",
-                                  
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),
