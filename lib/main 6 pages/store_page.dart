@@ -131,7 +131,7 @@ class _StorePageState extends State<StorePage> {
                   'assets/images/sort.svg',
                 ),
               ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
               // onPressed: () => Scaffold.of(context).openEndDrawer(),
             ),
           ),
@@ -163,7 +163,7 @@ class _StorePageState extends State<StorePage> {
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.36,
                       ),
-                      itemCount: data!.length+1,
+                      itemCount: data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
                           return Card(
@@ -220,11 +220,10 @@ class _StorePageState extends State<StorePage> {
                                                             211,
                                                             204,
                                                             204)),
-                                                            borderRadius: BorderRadius.all(Radius.circular(5))
-                                                            
-                                                            
-                                                            
-                                                            ),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                5))),
                                                 alignment: Alignment.center,
                                                 child: Text("ไม่พบรูปภาพ")),
                                           ),
@@ -336,7 +335,7 @@ class _StorePageState extends State<StorePage> {
       ),
       endDrawer: Theme(
           data: Theme.of(context).copyWith(
-            canvasColor: Colors.white, //desired color
+            canvasColor: Colors.white , //desired color
           ),
           child: Container(
             width: MediaQuery.of(context).size.height * 0.3,
@@ -359,303 +358,44 @@ class _StorePageState extends State<StorePage> {
                             fontWeight: FontWeight.bold,
                           )),
                       Card1(),
+                      Spacer(),
+                      Container(
+                        //height: double.infinity,
+                        alignment: Alignment.bottomCenter,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 20, bottom: 20),
+                            child: Row(children: <Widget>[
+                              Expanded(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        primary: Colors.white,
+                                        side: BorderSide(color: Palette.kToDark),
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        "รีเซ็ต",
+                                        style: TextStyle(color: Palette.kToDark),
+                                      ))),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text("ตกลง",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ))),
+                              )
+                            ]),
+                          ))
                     ],
                   )),
             ),
-          )),
-      // drawer: Theme(
-      //     data: Theme.of(context).copyWith(
-      //       canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
-      //     ),
-      //     child: Container(
-      //       width: 250,
-      //       child: Drawer(
-      //         child: Padding(
-      //           padding: const EdgeInsets.fromLTRB(
-      //             20,
-      //             0,
-      //             0,
-      //             0,
-      //           ),
-      //           child: Container(
-      //             child: Column(
-      //               crossAxisAlignment: CrossAxisAlignment.start,
-      //               children: <Widget>[
-      //                 SizedBox(
-      //                   height: 50,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => ProfilePage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       CircleAvatar(
-      //                         backgroundColor: Colors.white,
-      //                         child: Icon(
-      //                           Icons.person,
-      //                           color: Palette.kToDark,
-      //                         ),
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-      //                         child: Column(
-      //                           crossAxisAlignment: CrossAxisAlignment.start,
-      //                           children: [
-      //                             Text("Name Surname",
-      //                                 style: TextStyle(
-      //                                     color: Palette.kToDark,
-      //                                     fontFamily: 'Kanit')),
-      //                             SizedBox(
-      //                               height: 5,
-      //                             ),
-      //                             Text(
-      //                               "ดูโปรไฟล์",
-      //                               style: TextStyle(
-      //                                   color:
-      //                                       Color.fromARGB(255, 165, 162, 162),
-      //                                   fontFamily: 'Kanit'),
-      //                             ),
-      //                           ],
-      //                         ),
-      //                       ),
-      //                       Icon(
-      //                         Icons.settings,
-      //                         color: Colors.white,
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 50,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.pushReplacement(
-      //                       context,
-      //                       MaterialPageRoute(
-      //                         builder: (context) => Main_Page(),
-      //                       ),
-      //                     );
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/home.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text(
-      //                           "หน้าหลัก",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit'),
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => AboutUs()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/about.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text(
-      //                           "เกี่ยวกับเรา",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit'),
-      //                         ),
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Text("ภายในร้าน",
-      //                     style: TextStyle(
-      //                         color: Color.fromARGB(255, 165, 162, 162),
-      //                         fontFamily: 'Kanit')),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab4.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-      //                       child: Text("สัตว์",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab5.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                       child: Text("สินค้า",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     print("object");
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/tab2.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ร้านค้า",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab6.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                       child: Text("น้ำเชื้อ",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Text("การช่วยเหลือ",
-      //                     style: TextStyle(
-      //                         color: Color.fromARGB(255, 165, 162, 162),
-      //                         fontFamily: 'Kanit')),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => HelpCenterPage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/help2.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ศูนย์ช่วยเหลือ",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => CareerPage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/us.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ร่วมงานกับเรา",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 100,
-      //                 ),
-      //                 Divider(color: Color.fromARGB(255, 165, 162, 162)),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Padding(
-      //                   padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/logout.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ออกจากระบบ",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     )),
+          )
+          ),
     );
   }
 }
@@ -702,14 +442,6 @@ class Card1 extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: Color.fromARGB(255, 131, 131, 131))),
-                // for (var _ in Iterable.generate(5))
-                //   Padding(
-                //       padding: EdgeInsets.only(bottom: 10),
-                //       child: Text(
-                //         "loremIpsum",
-                //         softWrap: true,
-                //         overflow: TextOverflow.fade,
-                //       )),
               ],
             ),
             builder: (_, collapsed, expanded) {
@@ -729,225 +461,6 @@ class Card1 extends StatelessWidget {
   }
 }
 
-// class Card2 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     buildImg(Color color, double height) {
-//       return SizedBox(
-//           height: height,
-//           child: Container(
-//             decoration: BoxDecoration(
-//               color: color,
-//               shape: BoxShape.rectangle,
-//             ),
-//           ));
-//     }
 
-//     buildCollapsed1() {
-//       return Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Padding(
-//               padding: EdgeInsets.all(10),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: <Widget>[
-//                   Text(
-//                     "Expandable",
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ]);
-//     }
 
-//     buildCollapsed2() {
-//       return buildImg(Colors.lightGreenAccent, 150);
-//     }
-
-//     buildCollapsed3() {
-//       return Container();
-//     }
-
-//     buildExpanded1() {
-//       return Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Padding(
-//               padding: EdgeInsets.all(10),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: <Widget>[
-//                   Text(
-//                     "Expandable",
-//                   ),
-//                   Text(
-//                     "3 Expandable widgets",
-//                     style: Theme.of(context).textTheme.caption,
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ]);
-//     }
-
-//     buildExpanded2() {
-//       return Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: <Widget>[
-//           Row(
-//             children: <Widget>[
-//               Expanded(child: buildImg(Colors.lightGreenAccent, 100)),
-//               Expanded(child: buildImg(Colors.orange, 100)),
-//             ],
-//           ),
-//           Row(
-//             children: <Widget>[
-//               Expanded(child: buildImg(Colors.lightBlue, 100)),
-//               Expanded(child: buildImg(Colors.cyan, 100)),
-//             ],
-//           ),
-//         ],
-//       );
-//     }
-
-//     buildExpanded3() {
-//       return Padding(
-//         padding: EdgeInsets.all(10),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Text(
-//               "loremIpsum",
-//               softWrap: true,
-//             ),
-//           ],
-//         ),
-//       );
-//     }
-
-//     return ExpandableNotifier(
-//         child: Padding(
-//       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-//       child: ScrollOnExpand(
-//         child: Card(
-//           clipBehavior: Clip.antiAlias,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: <Widget>[
-//               Expandable(
-//                 collapsed: buildCollapsed1(),
-//                 expanded: buildExpanded1(),
-//               ),
-//               Expandable(
-//                 collapsed: buildCollapsed2(),
-//                 expanded: buildExpanded2(),
-//               ),
-//               Expandable(
-//                 collapsed: buildCollapsed3(),
-//                 expanded: buildExpanded3(),
-//               ),
-//               Divider(
-//                 height: 1,
-//               ),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.start,
-//                 children: <Widget>[
-//                   Builder(
-//                     builder: (context) {
-//                       var controller =
-//                           ExpandableController.of(context, required: true)!;
-//                       return TextButton(
-//                         child: Text(
-//                           controller.expanded ? "COLLAPSE" : "EXPAND",
-//                           style: Theme.of(context)
-//                               .textTheme
-//                               .button!
-//                               .copyWith(color: Colors.deepPurple),
-//                         ),
-//                         onPressed: () {
-//                           controller.toggle();
-//                         },
-//                       );
-//                     },
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     ));
-//   }
-// }
-
-class Card3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    buildItem(String label) {
-      return Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Text(label),
-      );
-    }
-
-    buildList() {
-      return Column(
-        children: <Widget>[
-          for (var i in [1, 2, 3, 4]) buildItem("Item ${i}"),
-        ],
-      );
-    }
-
-    return ExpandableNotifier(
-        child: ScrollOnExpand(
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          children: <Widget>[
-            ExpandablePanel(
-              theme: const ExpandableThemeData(
-                headerAlignment: ExpandablePanelHeaderAlignment.center,
-                tapBodyToExpand: true,
-                tapBodyToCollapse: false,
-                hasIcon: false,
-              ),
-              header: Container(
-                color: Colors.indigoAccent,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      ExpandableIcon(
-                        theme: const ExpandableThemeData(
-                          expandIcon: Icons.arrow_right,
-                          collapseIcon: Icons.arrow_drop_down,
-                          iconColor: Colors.white,
-                          iconSize: 28.0,
-                          iconRotationAngle: 3.414 / 2,
-                          iconPadding: EdgeInsets.only(right: 5),
-                          hasIcon: false,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Items",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              collapsed: Container(),
-              expanded: buildList(),
-            ),
-          ],
-        ),
-      ),
-    ));
-  }
-}
+// 

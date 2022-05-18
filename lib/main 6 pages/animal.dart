@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable/expandable.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,63 +78,65 @@ class _AnimalsPageState extends State<AnimalsPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.dark),
-          leading: Visibility(
-            visible: false,
-            child: Builder(
-              builder: (context) => IconButton(
-                icon: SizedBox(
-                    child: SvgPicture.asset(
-                  'assets/images/menu.svg',
-                  color: Color.fromARGB(255, 51, 51, 51),
-                )),
-                onPressed: ()   => Scaffold.of(context).openDrawer(),
-              ),
+        backgroundColor: Colors.white,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.dark),
+        leading: Visibility(
+          visible: false,
+          child: Builder(
+            builder: (context) => IconButton(
+              icon: SizedBox(
+                  child: SvgPicture.asset(
+                'assets/images/menu.svg',
+                color: Color.fromARGB(255, 51, 51, 51),
+              )),
+              onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
-          elevation: 0,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                child: Visibility(
-                  visible: false,
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  ),
+        ),
+        elevation: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              child: Visibility(
+                visible: false,
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: Text("สัตว์",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Palette.kToDark)),
-              ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/sort.svg',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ],
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Text("สัตว์",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Palette.kToDark)),
+            ),
+            Container()
+          ],
+        ),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  'assets/images/sort.svg',
                 ),
-              )
-            ],
-          )),
+              ),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              // onPressed: () => Scaffold.of(context).openEndDrawer(),
+            ),
+          ),
+        ],
+      ),
       body: Column(
         children: <Widget>[
           SizedBox(
             height: 5,
-          ),
+          ),    
           Container(
             color: Colors.white,
             width: double.infinity,
@@ -143,7 +146,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    InkWell(
+                    InkWell( 
                       onTap: () {
                         setState(() {
                           pressed = !pressed;
@@ -736,6 +739,195 @@ class _AnimalsPageState extends State<AnimalsPage> {
       //         ),
       //       ),
       //     )),
+      endDrawer: Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: Colors.white, //desired color
+          ),
+          child: Container(
+            width: MediaQuery.of(context).size.height * 0.3,
+            child: Drawer(
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    20,
+                    0,
+                    0,
+                    0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.07,
+                      ),
+                      Text("ค้นหาแบบละเอียด",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )),
+                      Card1(),
+                      Card2(),
+                      Spacer(),
+                      Container(
+                          //height: double.infinity,
+                          alignment: Alignment.bottomCenter,
+                          width: double.infinity,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(right: 20, bottom: 20),
+                            child: Row(children: <Widget>[
+                              Expanded(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        primary: Colors.white,
+                                        side:
+                                            BorderSide(color: Palette.kToDark),
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        "รีเซ็ต",
+                                        style:
+                                            TextStyle(color: Palette.kToDark),
+                                      ))),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text("ตกลง",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ))),
+                              )
+                            ]),
+                          ))
+                    ],
+                  )),
+            ),
+          )),
     );
+  }
+}
+
+class Card1 extends StatelessWidget {
+  bool press = true;
+  @override
+  Widget build(BuildContext context) {
+    return ExpandableNotifier(
+        child: Column(
+      children: <Widget>[
+        ScrollOnExpand(
+          scrollOnExpand: true,
+          scrollOnCollapse: false,
+          child: ExpandablePanel(
+            theme: const ExpandableThemeData(
+              headerAlignment: ExpandablePanelHeaderAlignment.center,
+              tapBodyToCollapse: false,
+            ),
+            header: Text(
+              "โคและกระบือ",
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(255, 131, 131, 131)),
+            ),
+            collapsed: Container(),
+            expanded: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("โคเนื้อ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 131, 131, 131))),
+                SizedBox(
+                  height: 5,
+                ),
+                Text("โคนม",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 131, 131, 131))),
+                SizedBox(
+                  height: 5,
+                ),
+                Text("กระบือ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 131, 131, 131))),
+              ],
+            ),
+            builder: (_, collapsed, expanded) {
+              return Padding(
+                padding: EdgeInsets.only(left: 10, right: 10, bottom: 0),
+                child: Expandable(
+                  collapsed: collapsed,
+                  expanded: expanded,
+                  theme: const ExpandableThemeData(crossFadePoint: 0),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    ));
+  }
+}
+
+class Card2 extends StatelessWidget { 
+  @override
+  Widget build(BuildContext context) {
+    return ExpandableNotifier(
+        child: Column(
+      children: <Widget>[
+        ScrollOnExpand(
+          scrollOnExpand: true,
+          scrollOnCollapse: false,
+          child: ExpandablePanel(
+            theme: const ExpandableThemeData(
+              headerAlignment: ExpandablePanelHeaderAlignment.center,
+              tapBodyToCollapse: false,
+            ),
+            header: Text(
+              "สัตว์ปีก",
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(255, 131, 131, 131)),
+            ),
+            collapsed: Container(),
+            expanded: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("ร้านค้าทั่วไป",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 131, 131, 131))),
+                SizedBox(
+                  height: 5,
+                ),
+                Text("ร้านค้าส่งสัตว์",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 131, 131, 131))),
+                SizedBox(
+                  height: 5,
+                ),
+                Text("บริการขนส่งน้ำเชื้อ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 131, 131, 131))),
+              ],
+            ),
+            builder: (_, collapsed, expanded) {
+              return Padding(
+                padding: EdgeInsets.only(left: 10, right: 10, bottom: 0),
+                child: Expandable(
+                  collapsed: collapsed,
+                  expanded: expanded,
+                  theme: const ExpandableThemeData(crossFadePoint: 0),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    ));
   }
 }
