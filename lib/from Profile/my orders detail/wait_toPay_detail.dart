@@ -4,14 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../Plate.dart';
 
-class Order_Sucess_Detail extends StatefulWidget {
-  Order_Sucess_Detail({Key? key}) : super(key: key);
+class Order_wait_Detail extends StatefulWidget {
+  Order_wait_Detail({Key? key}) : super(key: key);
 
   @override
-  State<Order_Sucess_Detail> createState() => _Order_Sucess_DetailState();
+  State<Order_wait_Detail> createState() => _Order_wait_DetailState();
 }
 
-class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
+class _Order_wait_DetailState extends State<Order_wait_Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +69,7 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                               topLeft: Radius.circular(20))),
                       width: double.infinity,
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                        padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -78,7 +78,7 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "คำสั่งซื้อจัดส่งสำเร็จ",
+                                  "คำสั่งซื้อรอการชำระเงิน",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -87,36 +87,10 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  "คำสั่งซื้อสำเร็จสมบูรณ์ โปรดให้คะแนน",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
                                 Row(
                                   children: [
                                     Text(
-                                      "ภายในวันที่",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "22-04-2022",
-                                      style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "คำสั่งซื้อสำเร็จวันที่",
+                                      "กรุณาชำระเงินก่อนวันที่",
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),
@@ -136,7 +110,7 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                               ],
                             ),
                             SvgPicture.asset(
-                              'assets/images/394.svg',
+                              'assets/images/wallet2.svg',
                             ),
                           ],
                         ),
@@ -470,14 +444,8 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                               ),
                               Row(
                                 children: [
-                                  Icon(
-                                    Icons.copy,
-                                    color: Palette.kToDark,
-                                    size: 15,
-                                  ),
-                                  SizedBox(
-                                    width: 2,
-                                  ),
+                                  Icon(Icons.copy, color: Palette.kToDark, size: 15,),
+                                  SizedBox(width: 2,),
                                   Text(
                                     "คัดลอก",
                                     style: TextStyle(
@@ -544,7 +512,7 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                                         ),
                                         onPressed: () {},
                                         child: Text(
-                                          "ติดต่อร้านค้า",
+                                          "ยกเลิกคำสั่งซื้อ",
                                           style:
                                               TextStyle(color: Palette.kToDark),
                                         ))),
@@ -554,7 +522,7 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                                 Expanded(
                                   child: ElevatedButton(
                                       onPressed: () {},
-                                      child: Text("ซื้ออีกครั้ง",
+                                      child: Text("ชำระเงินตอนนี้",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ))),
