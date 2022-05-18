@@ -5,10 +5,11 @@ import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/from%20Profile/likes.dart';
 import 'package:zeleex_application/help.dart';
-import 'package:zeleex_application/history/history.dart';
+
 import 'package:zeleex_application/terms.dart';
 import 'Plate.dart';
 import 'cart.dart';
+import 'from Profile/history/history.dart';
 import 'payment_address.dart';
 
 class ProfilePage extends StatefulWidget {

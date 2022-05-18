@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:zeleex_application/history/history_success.dart';
-import '../Plate.dart';
-import '../from Profile/wait_payment_widget.dart';
+
+import '../../Plate.dart';
+import 'history_success.dart';
 
 
 class HistoryPage extends StatefulWidget {
