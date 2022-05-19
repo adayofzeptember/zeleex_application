@@ -1,208 +1,76 @@
-import 'dart:async';
-import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
+import 'dart:html';
+
+import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import '../Plate.dart';
-      // 'version.securityPatch': build.version.securityPatch,
-      // 'version.sdkInt': build.version.sdkInt,
-      // 'version.release': build.version.release,
-      // 'version.previewSdkInt': build.version.previewSdkInt,
-      // 'version.incremental': build.version.incremental,
-      // 'version.codename': build.version.codename,
-      // 'version.baseOS': build.version.baseOS,
-      // 'board': build.board,
-      // 'bootloader': build.bootloader,
-      // 'brand': build.brand,
-      // 'device': build.device,
-      // 'display': build.display,
-      // 'fingerprint': build.fingerprint,
-      // 'hardware': build.hardware,
-      // 'host': build.host,
-      // 'id': build.id,
-      // 'manufacturer': build.manufacturer,
-      // 'model': build.model,
-      // 'product': build.product,
-      // 'supported32BitAbis': build.supported32BitAbis,
-      // 'supported64BitAbis': build.supported64BitAbis,
-      // 'supportedAbis': build.supportedAbis,
-      // 'tags': build.tags,
-      // 'type': build.type,
-      // 'isPhysicalDevice': build.isPhysicalDevice,
-      // 'androidId': build.androidId,
-      // 'systemFeatures': build.systemFeatures,
-      
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/Plate.dart';
+import 'package:zeleex_application/main%206%20pages/main_page.dart';
+import 'package:zeleex_application/second.dart';
+import 'package:zeleex_application/test%20folder/device_info.dart';
+
 void main() {
-  runApp(const HomePage());
+  runApp(const First_Page());
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-  String appVersion = "";
-  String appVERSIONx = "";
-  Map<String, dynamic> _deviceData = <String, dynamic>{};
- 
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    var deviceData = <String, dynamic>{};
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String appName = packageInfo.appName;
-    String packageName = packageInfo.packageName;
-    String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
-    try {
-      if (Platform.isAndroid) {
-        deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
-      } else if (Platform.isIOS) {
-        deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
-      }
-    } on PlatformException {
-      deviceData = <String, dynamic>{
-        'Error:': 'Failed to get platform version.'
-      };
-    }
-
-
-    setState(() {
-      _deviceData = deviceData;
-      appVersion = version;
-    });
-    print(deviceData['Android Version']);
-    print(appName);
-    print(packageName);
-    print(version);
-    print(buildNumber);
-  }
-
-  Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
-    return <String, dynamic>{
-      //       'version.securityPatch': build.version.securityPatch,
-      // 'version.sdkInt': build.version.sdkInt,
-      // 'version.release': build.version.release,
-      // 'version.previewSdkInt': build.version.previewSdkInt,
-      // 'version.incremental': build.version.incremental,
-      // 'version.codename': build.version.codename,
-      // 'version.baseOS': build.version.baseOS,
-      // 'board': build.board,
-      // 'bootloader': build.bootloader,
-      // 'brand': build.brand,
-      // 'device': build.device,
-      // 'display': build.display,
-      // 'fingerprint': build.fingerprint,
-      // 'hardware': build.hardware,
-      // 'host': build.host,
-      // 'id': build.id,
-      // id: buildandroids
-      // 'manufacturer': build.manufacturer,
-      // 'model': build.model,
-      // 'product': build.product,
-      // 'supported32BitAbis': build.supported32BitAbis,
-      // 'supported64BitAbis': build.supported64BitAbis,
-      // 'supportedAbis': build.supportedAbis,
-      // 'tags': build.tags,
-      // 'type': build.type,
-      // 'isPhysicalDevice': build.isPhysicalDevice,
-      // 'androidId': build.androidId,
-      // 'systemFeatures': build.systemFeatures,
-      'version.sdkInt': build.version.sdkInt,
-      'Android Version': build.version.release,     
-      'version.release': build.version.release,
-      'device': build.device,
-      'device id': build.id,
-      'model': build.model,
-      'androidId': build.androidId,
-    };
-  }
-
-  Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
-    return <String, dynamic>{
-      'name': data.name,
-      'systemName': data.systemName,
-      'systemVersion': data.systemVersion,
-      'model': data.model,
-      'localizedModel': data.localizedModel,
-      'identifierForVendor': data.identifierForVendor,
-      'isPhysicalDevice': data.isPhysicalDevice,
-      'utsname.sysname:': data.utsname.sysname,
-      'utsname.nodename:': data.utsname.nodename,
-      'utsname.release:': data.utsname.release,
-      'utsname.version:': data.utsname.version,
-      'utsname.machine:': data.utsname.machine,
-    };
-  }
-
+class First_Page extends StatelessWidget {
+  const First_Page({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Palette.kToDark,
-          elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.light,
-            statusBarColor: Palette.kToDark,
-          ),
-          title: Text(
-            "test"            // Platform.isAndroid
-            //     ? 'Android Device Info'
-            //     : Platform.isIOS
-            //         ? 'iOS Device Info'
-            //         : '',
-          ),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,    
-          
-          children: <Widget>[
-            Text("zeleex เวอร์ชั่น: "+appVersion),
-    
-            Expanded(
-              child: ListView(
-                children: _deviceData.keys.map(
-                  (String property) {
-                    return Row(
-                      children: <Widget>[
-                        Container(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            property,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                            child: Container(
-                          padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                          child: Text(
-                            '${_deviceData[property]}',
-                            maxLines: 10,
-                            overflow: TextOverflow.ellipsis
-                          ),
-                        )),
-                      ],
-                    );
-                  },
-                ).toList(),
-              ),
+      theme: ThemeData(
+        fontFamily: 'Kanit',
+        primarySwatch: Palette.kToDark,
+        appBarTheme: AppBarTheme(color: Palette.kToDark),
+      ),
+      home: main_Icon(),
+    );
+  }
+}
+
+class main_Icon extends StatefulWidget {
+  main_Icon({Key? key}) : super(key: key);
+  @override
+  State<main_Icon> createState() => _main_IconState();
+}
+
+class _main_IconState extends State<main_Icon> {
+  String choice = "";
+  int tag = 0;
+  List<String> options = [
+    'News',
+    'Entertainment',
+    'Politics',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 50,
             ),
+            ChipsChoice<int>.single(
+              value: tag,
+              onChanged: (val) => setState(() {
+                tag = val;
+                // print(val);
+                // print(tag);
+                choice = options[val].toString();
+                print(choice);
+              }),
+              choiceStyle: C2ChoiceStyle(color: Palette.kToDark
+              
+              ),
+              choiceItems: C2Choice.listFrom<int, String>(
+                source: options,
+                value: (i, v) => i,
+                label: (i, v) => v,
+              ),
+            )
           ],
         ),
       ),

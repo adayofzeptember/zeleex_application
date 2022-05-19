@@ -40,32 +40,16 @@ class main_Icon extends StatefulWidget {
 class _main_IconState extends State<main_Icon> {
   @override
   initState() {
+    //onResume
     super.initState();
+    
+    
     Load_AndGo();
+   
   }
 
   Future<void> Load_AndGo() async {
     await Future.delayed(const Duration(seconds: 3), () {
-
-      // PageRouteBuilder(
-      //     pageBuilder: (BuildContext context, Animation<double> animation,
-      //         Animation<double> secondaryAnimation) {
-      //       return SecondPage();
-      //     },
-      //     transitionsBuilder: (BuildContext context,
-      //           Animation<double> animation,
-      //       Animation<double> secondaryAnimation,
-      //         Widget child) {
-      //       return SlideTransition(
-       // The power of the sun in the plam of my hand
-      //         position: Tween<Offset>(
-      //           begin: Offset(-1.0, 0.0),     dfsdfpriif(elsecontroleerpordict)
-      //           end: Offset(0.0, 0.0),
-      //         ).animate(animation),
-      //         child: child,
-      //       );
-      //     },
-      //     transitionDuration: Duration(seconds: 3));
       var x = "the power of the sun, in the palm of my hand.";
       Navigator.pushReplacement(
         context,

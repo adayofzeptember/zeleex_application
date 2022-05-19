@@ -1,3 +1,5 @@
+import 'package:chips_choice/chips_choice.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,6 +23,12 @@ class Store_Product_Detail extends StatefulWidget {
 
 class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int index = 0;
+  int tag = 0;
+  List<String> options = [
+    'News',
+    'Entertainment',
+    'Politics',
+  ];
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;
@@ -67,7 +75,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
             Container(
               width: 150,
               child: FloatingActionButton(
-                     heroTag: "btn1",
+                heroTag: "btn1",
                 backgroundColor: Colors.white,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {print("object")},
@@ -97,10 +105,144 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               width: 150,
               child: FloatingActionButton(
-                     heroTag: "btsdqwn1",
+                heroTag: "btsdqwn1",
                 backgroundColor: Palette.kToDark,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-                onPressed: () => {print("object")},
+                onPressed: () => {
+                  showModalBottomSheet<dynamic>(
+                    // isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    )),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        //height: MediaQuery.of(context).size.height * 0.75,
+
+                        child: StatefulBuilder(builder:
+                            (BuildContext context, StateSetter stateSetter) {
+                          return Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 90,
+                                      height: 90,
+                                      child: Image.asset(
+                                        'assets/images/cart_pd.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Text(
+                                              "450",
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: 30,
+                                            ),
+                                            Text(
+                                              "฿1,300",
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 131, 131, 131),
+                                                  fontSize: 15,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Divider(
+                                      color:
+                                          Color.fromARGB(255, 206, 206, 206)),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'รุ่น',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontSize: 15),
+                                    )
+                                  ],
+                                ),
+                                ChipsChoice<int>.single(
+                                  value: tag,
+                                  onChanged: (val) => setState(() {
+                                    tag = val;
+                                    // print(val);
+                                    // print(tag);
+                                  }),
+                                  choiceStyle:
+                                      C2ChoiceStyle(color: Palette.kToDark),
+                                  choiceItems: C2Choice.listFrom<int, String>(
+                                    source: options,
+                                    value: (i, v) => i,
+                                    label: (i, v) => v,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Palette.kToDark,
+                                      elevation: 0,
+                                      // side: BorderSide(color: Colors.red),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      )),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "เพิ่มลงรถเข็น",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 15),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                      );
+                    },
+                  )
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -137,16 +279,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
               ),
               Text(widget.productName.toString(),
                   style: TextStyle(
-                      color: Palette.kToDark, fontWeight: FontWeight.bold)),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/sort.svg',
-                  ),
-                  SvgPicture.asset(
-                    'assets/images/cart123.svg',
-                  )
-                ],
+                      color: Palette.kToDark, fontWeight: FontWeight.bold, fontSize: 15)),
+              SvgPicture.asset(
+                'assets/images/cart123.svg',
               )
             ],
           )),
@@ -184,7 +319,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                 Color.fromARGB(255, 51, 51, 51),
                                             fontSize: 18),
                                       ),
-                                      SvgPicture.asset('assets/images/love.svg')
+                                      SvgPicture.asset('assets/images/love.svg', color: Colors.red)
                                     ],
                                   ),
                                   SizedBox(
@@ -264,7 +399,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                               )),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 3,
                         ),
                         Container(
                           color: Colors.white,
@@ -276,8 +411,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   height: 50,
                                   width: 50,
                                   child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        thisProduct.store!.image!.main.toString()),
+                                    backgroundImage: NetworkImage(thisProduct
+                                        .store!.image!.main
+                                        .toString()),
                                     backgroundColor: Colors.transparent,
                                   ),
                                 ),
@@ -366,46 +502,104 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 3,
                         ),
                         Container(
                           width: double.infinity,
                           color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.end,
-                                //   children: [
-                                //     SvgPicture.asset('assets/images/vec.svg')
-                                //   ],
-                                // ),
-                                Text(
-                                  "รายละเอียดสินค้า",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51),
-                                      fontSize: 20),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  thisProduct.description.toString(),
-                                  style: TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 130, 130, 130)),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                              ],
-                            ),
-                          ),
+                              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                              child: ExpandableNotifier(
+                                  child: Column(
+                                children: <Widget>[
+                                  ScrollOnExpand(
+                                    scrollOnExpand: true,
+                                    scrollOnCollapse: false,
+                                    child: ExpandablePanel(
+                                      theme: const ExpandableThemeData(
+                                        headerAlignment:
+                                            ExpandablePanelHeaderAlignment
+                                                .center,
+                                        tapBodyToCollapse: false,
+                                      ),
+                                      header: Text(
+                                        "รายละเอียดสินค้า",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 51, 51, 51),
+                                            fontSize: 20),
+                                      ),
+                                      collapsed: Container(),
+                                      expanded: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            thisProduct.description.toString(),
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 130, 130, 130)),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
+                                      builder: (_, collapsed, expanded) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 10, right: 10, bottom: 10),
+                                          child: Expandable(
+                                            collapsed: collapsed,
+                                            expanded: expanded,
+                                            theme: const ExpandableThemeData(
+                                                crossFadePoint: 0),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ))),
                         ),
+                        // Container(
+                        //   width: double.infinity,
+                        //   color: Colors.white,
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                        //     child: Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         // Row(
+                        //         //   mainAxisAlignment: MainAxisAlignment.end,
+                        //         //   children: [
+                        //         //     SvgPicture.asset('assets/images/vec.svg')
+                        //         //   ],
+                        //         // ),
+                        //         Text(
+                        //           "รายละเอียดสินค้า",
+                        //           style: TextStyle(
+                        //               color: Color.fromARGB(255, 51, 51, 51),
+                        //               fontSize: 20),
+                        //         ),
+                        //         SizedBox(
+                        //           height: 5,
+                        //         ),
+                        //         Text(
+                        //           thisProduct.description.toString(),
+                        //           style: TextStyle(
+                        //               color:
+                        //                   Color.fromARGB(255, 130, 130, 130)),
+                        //         ),
+                        //         SizedBox(
+                        //           height: 20,
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(
-                          height: 5,
+                          height: 3,
                         ),
                         Container(
                           height: 200,
@@ -465,3 +659,4 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     );
   }
 }
+

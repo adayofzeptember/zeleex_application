@@ -675,85 +675,80 @@ class _CartPageState extends State<CartPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 150,
-              ),
-              Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  color: Color.fromARGB(255, 240, 240, 240),
-                  height: 70,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                              checkColor: Colors.white,
-                              activeColor: Palette.kToDark,
-                              value: isChecked,
-                              onChanged: (value) {
-                                setState(() {
-                                  isChecked = value!;
-                                });
-                              }),
-                          Text("ทั้งหมด")
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("รวมทั้งหมด",
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 51, 51, 51))),
-                                      Text(
-                                        "฿ 1,990",
+              SizedBox(height: 10,),
+              Container(
+                alignment: Alignment.bottomCenter,
+                color: Color.fromARGB(255, 240, 240, 240),
+                height: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                            checkColor: Colors.white,
+                            activeColor: Palette.kToDark,
+                            value: isChecked,
+                            onChanged: (value) {
+                              setState(() {
+                                isChecked = value!;
+                              });
+                            }),
+                        Text("ทั้งหมด")
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          child: Row(
+                            children: [
+                              Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("รวมทั้งหมด",
                                         style: TextStyle(
-                                            fontSize: 25,
-                                            color: Palette.kToDark,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PaymentPage()));
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: double.infinity,
-                              color: Palette.kToDark,
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Text(
-                                  "ชำระเงิน",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51))),
+                                    Text(
+                                      "฿ 1,990",
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          color: Palette.kToDark,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
+                              )
+                            ],
+                          ),
+                        ),
+                        
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentPage()));
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: double.infinity,
+                            color: Palette.kToDark,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                "ชำระเงิน",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
                               ),
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               )
             ],
