@@ -39,8 +39,8 @@ class _SecondPageState extends State<SecondPage> {
           decoration: const BoxDecoration(
               image: DecorationImage(
             image: AssetImage(
-              'assets/images/BG.png',
-              
+             // 'assets/images/BG.png',
+              'assets/images/haha2.jpg',
             ), fit: BoxFit.cover
           )
           ),

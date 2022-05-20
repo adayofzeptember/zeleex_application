@@ -1,4 +1,4 @@
-import 'package:chips_choice/chips_choice.dart';
+//import 'package:chips_choice/chips_choice.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -109,139 +109,139 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 backgroundColor: Palette.kToDark,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {
-                  showModalBottomSheet<dynamic>(
-                    // isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    )),
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Container(
-                        //height: MediaQuery.of(context).size.height * 0.75,
+                  // showModalBottomSheet<dynamic>(
+                  //   // isScrollControlled: true,
+                  //   shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.vertical(
+                  //     top: Radius.circular(20),
+                  //   )),
+                  //   context: context,
+                  //   builder: (BuildContext context) {
+                  //     return Container(
+                  //       //height: MediaQuery.of(context).size.height * 0.75,
 
-                        child: StatefulBuilder(builder:
-                            (BuildContext context, StateSetter stateSetter) {
-                          return Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 90,
-                                      height: 90,
-                                      child: Image.asset(
-                                        'assets/images/cart_pd.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Text(
-                                              "450",
-                                              style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 30,
-                                            ),
-                                            Text(
-                                              "฿1,300",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 131, 131, 131),
-                                                  fontSize: 15,
-                                                  decoration: TextDecoration
-                                                      .lineThrough,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Divider(
-                                      color:
-                                          Color.fromARGB(255, 206, 206, 206)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      'รุ่น',
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontSize: 15),
-                                    )
-                                  ],
-                                ),
-                                ChipsChoice<int>.single(
-                                  value: tag,
-                                  onChanged: (val) => setState(() {
-                                    tag = val;
-                                    // print(val);
-                                    // print(tag);
-                                  }),
-                                  choiceStyle:
-                                      C2ChoiceStyle(color: Palette.kToDark),
-                                  choiceItems: C2Choice.listFrom<int, String>(
-                                    source: options,
-                                    value: (i, v) => i,
-                                    label: (i, v) => v,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Palette.kToDark,
-                                      elevation: 0,
-                                      // side: BorderSide(color: Colors.red),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      )),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "เพิ่มลงรถเข็น",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                      );
-                    },
-                  )
+                  //       child: StatefulBuilder(builder:
+                  //           (BuildContext context, StateSetter stateSetter) {
+                  //         return Padding(
+                  //           padding: const EdgeInsets.all(20.0),
+                  //           child: Column(
+                  //             children: [
+                  //               Row(
+                  //                 crossAxisAlignment: CrossAxisAlignment.center,
+                  //                 mainAxisAlignment: MainAxisAlignment.start,
+                  //                 children: [
+                  //                   SizedBox(
+                  //                     width: 90,
+                  //                     height: 90,
+                  //                     child: Image.asset(
+                  //                       'assets/images/cart_pd.png',
+                  //                       fit: BoxFit.cover,
+                  //                     ),
+                  //                   ),
+                  //                   SizedBox(
+                  //                     width: 10,
+                  //                   ),
+                  //                   Expanded(
+                  //                     child: Container(
+                  //                       child: Column(
+                  //                         crossAxisAlignment:
+                  //                             CrossAxisAlignment.stretch,
+                  //                         children: [
+                  //                           Text(
+                  //                             "450",
+                  //                             style: TextStyle(
+                  //                                 color: Colors.red,
+                  //                                 fontSize: 20,
+                  //                                 fontWeight: FontWeight.bold),
+                  //                           ),
+                  //                           SizedBox(
+                  //                             height: 30,
+                  //                           ),
+                  //                           Text(
+                  //                             "฿1,300",
+                  //                             style: TextStyle(
+                  //                                 color: Color.fromARGB(
+                  //                                     255, 131, 131, 131),
+                  //                                 fontSize: 15,
+                  //                                 decoration: TextDecoration
+                  //                                     .lineThrough,
+                  //                                 fontWeight: FontWeight.bold),
+                  //                           ),
+                  //                         ],
+                  //                       ),
+                  //                     ),
+                  //                   )
+                  //                 ],
+                  //               ),
+                  //               Padding(
+                  //                 padding: const EdgeInsets.only(top: 10),
+                  //                 child: Divider(
+                  //                     color:
+                  //                         Color.fromARGB(255, 206, 206, 206)),
+                  //               ),
+                  //               SizedBox(
+                  //                 height: 10,
+                  //               ),
+                  //               Row(
+                  //                 mainAxisAlignment: MainAxisAlignment.start,
+                  //                 children: <Widget>[
+                  //                   Text(
+                  //                     'รุ่น',
+                  //                     style: TextStyle(
+                  //                         color:
+                  //                             Color.fromARGB(255, 51, 51, 51),
+                  //                         fontSize: 15),
+                  //                   )
+                  //                 ],
+                  //               ),
+                  //               ChipsChoice<int>.single(
+                  //                 value: tag,
+                  //                 onChanged: (val) => setState(() {
+                  //                   tag = val;
+                  //                   // print(val);
+                  //                   // print(tag);
+                  //                 }),
+                  //                 choiceStyle:
+                  //                     C2ChoiceStyle(color: Palette.kToDark),
+                  //                 choiceItems: C2Choice.listFrom<int, String>(
+                  //                   source: options,
+                  //                   value: (i, v) => i,
+                  //                   label: (i, v) => v,
+                  //                 ),
+                  //               ),
+                  //               SizedBox(
+                  //                 height: 5,
+                  //               ),
+                  //               ElevatedButton(
+                  //                 style: ElevatedButton.styleFrom(
+                  //                     primary: Palette.kToDark,
+                  //                     elevation: 0,
+                  //                     // side: BorderSide(color: Colors.red),
+                  //                     shape: RoundedRectangleBorder(
+                  //                       borderRadius: BorderRadius.circular(5),
+                  //                     )),
+                  //                 onPressed: () {
+                  //                   Navigator.pop(context);
+                  //                 },
+                  //                 child: Padding(
+                  //                   padding: const EdgeInsets.all(10.0),
+                  //                   child: Container(
+                  //                     alignment: Alignment.center,
+                  //                     child: Text(
+                  //                       "เพิ่มลงรถเข็น",
+                  //                       style: TextStyle(
+                  //                           color: Colors.white, fontSize: 15),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         );
+                  //       }),
+                  //     );
+                  //   },
+                  // )
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

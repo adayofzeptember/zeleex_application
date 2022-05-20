@@ -12,7 +12,6 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(First_Page()));
-
   // runApp(const First_Page());
 }
 
@@ -42,8 +41,6 @@ class _main_IconState extends State<main_Icon> {
   initState() {
     //onResume
     super.initState();
-    
-    
     Load_AndGo();
    
   }
