@@ -1,79 +1,61 @@
-// import 'dart:html';
+class Login {
+  String? responseCode;
+  String? responseStatus;
+  String? responseMessage;
+  String? sessionID;
+  int? serverDateTimeMS;
+  String? serverDatetime;
+  Data? data;
 
-// import 'package:chips_choice/chips_choice.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:zeleex_application/Plate.dart';
-// import 'package:zeleex_application/main%206%20pages/main_page.dart';
-// import 'package:zeleex_application/second.dart';
-// import 'package:zeleex_application/test%20folder/device_info.dart';
+  Login(
+      {this.responseCode,
+      this.responseStatus,
+      this.responseMessage,
+      this.sessionID,
+      this.serverDateTimeMS,
+      this.serverDatetime,
+      this.data});
 
-// void main() {
-//   runApp(const First_Page());
-// }
+  Login.fromJson(Map<String, dynamic> json) {
+    responseCode = json['responseCode'];
+    responseStatus = json['responseStatus'];
+    responseMessage = json['responseMessage'];
+    sessionID = json['sessionID'];
+    serverDateTimeMS = json['serverDateTimeMS'];
+    serverDatetime = json['serverDatetime'];
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  }
 
-// class First_Page extends StatelessWidget {
-//   const First_Page({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       theme: ThemeData(
-//         fontFamily: 'Kanit',
-//         primarySwatch: Palette.kToDark,
-//         appBarTheme: AppBarTheme(color: Palette.kToDark),
-//       ),
-//       home: main_Icon(),
-//     );
-//   }
-// }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['responseCode'] = this.responseCode;
+    data['responseStatus'] = this.responseStatus;
+    data['responseMessage'] = this.responseMessage;
+    data['sessionID'] = this.sessionID;
+    data['serverDateTimeMS'] = this.serverDateTimeMS;
+    data['serverDatetime'] = this.serverDatetime;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
+}
 
-// class main_Icon extends StatefulWidget {
-//   main_Icon({Key? key}) : super(key: key);
-//   @override
-//   State<main_Icon> createState() => _main_IconState();
-// }
+class Data {
+  List<String>? email;
+  List<String>? password;
 
-// class _main_IconState extends State<main_Icon> {
-//   String choice = "";
-//   int tag = 0;
-//   List<String> options = [
-//     'News',
-//     'Entertainment',
-//     'Politics',
-//   ];
+  Data({this.email, this.password});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SingleChildScrollView(
-//         child: Column(
-//           children: [
-//             SizedBox(
-//               height: 50,
-//             ),
-//             ChipsChoice<int>.single(
-//               value: tag,
-//               onChanged: (val) => setState(() {
-//                 tag = val;
-//                 // print(val);
-//                 // print(tag);
-//                 choice = options[val].toString();
-//                 print(choice);
-//               }),
-//               choiceStyle: C2ChoiceStyle(color: Palette.kToDark
-              
-//               ),
-//               choiceItems: C2Choice.listFrom<int, String>(
-//                 source: options,
-//                 value: (i, v) => i,
-//                 label: (i, v) => v,
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  Data.fromJson(Map<String, dynamic> json) {
+    email = json['email'].cast<String>();
+    password = json['password'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['email'] = this.email;
+    data['password'] = this.password;
+    return data;
+  }
+}

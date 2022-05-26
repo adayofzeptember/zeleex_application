@@ -28,21 +28,17 @@ class LoginRequestModel {
       'email': email?.trim(),
       'password': password?.trim()
     };
-
     return map;
   }
 }
 
-
 Future<LoginResponseModel> loginLOL(LoginRequestModel requestModel) async {
-
   String urlPost = "https://reqres.in/api/login";
-  final response = await http.post(Uri.parse(urlPost), body: requestModel.toJson());
-  if(response.statusCode == 200 || response.statusCode == 400){
+  final response =
+      await http.post(Uri.parse(urlPost), body: requestModel.toJson());
+  if (response.statusCode == 200 || response.statusCode == 400) {
     return LoginResponseModel.fronJson(json.decode(response.body));
-  }else{
-   throw Exception("Failed to load data"); 
+  } else {
+    throw Exception("Failed to load data");
   }
-
-
 }

@@ -172,9 +172,19 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
+                                        
                                         if(formKey.currentState!.validate()){
                                           formKey.currentState?.save();
+                                          loginLOL(requestModel).then((value) => {
+                                            if(value.token.isNotEmpty){
+                                                print("success"+ value.token)
+                                            }else{
+                                              print(value.error)
+                                            }
+
+                                          });
                                           print(requestModel.toJson());
+                                          
                                         }
                                       },
                                       child: Padding(
