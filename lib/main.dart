@@ -6,7 +6,7 @@ import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/test%20folder/device_info.dart';
-
+ 
 //หน้าเปิดแอป
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,7 @@ class main_Icon extends StatefulWidget {
 class _main_IconState extends State<main_Icon> {
   @override
   initState() {
-    //onResume
+    //*onResume
     super.initState();
     Load_AndGo();
    
@@ -76,6 +76,8 @@ class _main_IconState extends State<main_Icon> {
                   height: MediaQuery.of(context).size.height * 0.25,
                   fit: BoxFit.cover),
             ],
+
+            
           ),
         ),
       ),

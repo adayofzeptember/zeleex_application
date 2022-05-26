@@ -1,3 +1,4 @@
+
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
+          key: scaffoldKey,
             appBar: AppBar(
               title: Center(
                   child: Text(
@@ -38,353 +43,288 @@ class _LoginPageState extends State<LoginPage> {
                         child: Container(
                             height: MediaQuery.of(context).size.height * 0.1),
                       ),
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: SvgPicture.asset(
-                                  'assets/images/left.svg',
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: SvgPicture.asset(
+                                    'assets/images/left.svg',
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                  ),
+                                ),
+                                Text(
+                                  "เข้าสู่ระบบ",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 30),
+                                ),
+                                Text(
+                                  ".",
+                                  style: TextStyle(
+                                      color: Palette.kToDark,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 80,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    TextField(
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.mail_outline),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        filled: true,
+                                        fillColor:
+                                            Color.fromARGB(255, 243, 238, 238),
+                                        border: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        labelText: 'อีเมล',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.lock_outline),
+                                        // suffixIcon:
+                                        //     Icon(Icons.remove_red_eye_sharp),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        filled: true,
+                                        fillColor:
+                                            Color.fromARGB(255, 243, 238, 238),
+                                        border: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        labelText: 'รหัสผ่าน',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        "ลืมรหัสผ่าน?",
+                                        style: TextStyle(
+                                            color: Palette.kToDark,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Palette.kToDark,
+                                          elevation: 0,
+                                          // side: BorderSide(color: Colors.red),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          )),
+                                      onPressed: () {
+                                        ;
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            "เข้าสู่ระบบ",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          side: BorderSide(
+                                              color: Palette.kToDark),
+                                          primary: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          )),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterPage(),
+                                          ),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            "สร้างบัญชีใหม่",
+                                            style: TextStyle(
+                                                color: Palette.kToDark,
+                                                fontSize: 15),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 70,
+                                    ),
+                                    Row(children: <Widget>[
+                                      Expanded(
+                                        child: new Container(
+                                            margin: const EdgeInsets.only(
+                                                left: 10.0, right: 20.0),
+                                            child: Divider(
+                                              color: Colors.black,
+                                              height: 36,
+                                            )),
+                                      ),
+                                      Text("หรือ"),
+                                      Expanded(
+                                        child: new Container(
+                                            margin: const EdgeInsets.only(
+                                                left: 20.0, right: 10.0),
+                                            child: Divider(
+                                              color: Colors.black,
+                                              height: 36,
+                                            )),
+                                      ),
+                                    ]),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          // side: BorderSide(color: Palette.kToDark),
+                                          primary: Colors.blue,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          )),
+                                      onPressed: () {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Container(
+                                            width: double.infinity,
+                                            alignment: Alignment.center,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                // SizedBox(
+                                                //   width: 10,
+                                                // ),
+                                                SvgPicture.asset(
+                                                    'assets/images/fb.svg'),
+                                                SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Text(
+                                                  "ดำเนินการต่อด้วย Facebook",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15),
+                                                ),
+                                              ],
+                                            )),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          side: BorderSide(
+                                              color: Color.fromARGB(
+                                                  255, 231, 231, 231)),
+                                          primary: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          )),
+                                      onPressed: () {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Container(
+                                            width: double.infinity,
+                                            alignment: Alignment.center,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                // SizedBox(
+                                                //   width: 10,
+                                                // ),
+                                                SvgPicture.asset(
+                                                    'assets/images/gg.svg'),
+                                                SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Text(
+                                                  "ดำเนินการต่อด้วยบัญชี Google",
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 51, 51, 51),
+                                                      fontSize: 15),
+                                                ),
+                                              ],
+                                            )),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Text(
-                                "เข้าสู่ระบบ",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 30),
-                              ),
-                              Text(
-                                "dd",
-                                style: TextStyle(
-                                    color: Palette.kToDark,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 80,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.mail_outline),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.white),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.white),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      filled: true,
-                                      fillColor:
-                                          Color.fromARGB(255, 243, 238, 238),
-                                      border: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      labelText: 'อีเมล',
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.lock_outline),
-                                      // suffixIcon:
-                                      //     Icon(Icons.remove_red_eye_sharp),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.white),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.white),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      filled: true,
-                                      fillColor:
-                                          Color.fromARGB(255, 243, 238, 238),
-                                      border: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      labelText: 'รหัสผ่าน',
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                    child: Text(
-                                      "ลืมรหัสผ่าน?",
-                                      style: TextStyle(
-                                          color: Palette.kToDark,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Palette.kToDark,
-                                        elevation: 0,
-                                        // side: BorderSide(color: Colors.red),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        )),
-                                    onPressed: () {
-                                      ;
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          "เข้าสู่ระบบ",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        elevation: 0,
-                                        side:
-                                            BorderSide(color: Palette.kToDark),
-                                        primary: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        )),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => RegisterPage(),
-                                        ),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          "สร้างบัญชีใหม่",
-                                          style: TextStyle(
-                                              color: Palette.kToDark,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 70,
-                                  ),
-
-                                  Row(children: <Widget>[
-                                    Expanded(
-                                      child: new Container(
-                                          margin: const EdgeInsets.only(
-                                              left: 10.0, right: 20.0),
-                                          child: Divider(
-                                            color: Colors.black,
-                                            height: 36,
-                                          )),
-                                    ),
-                                    Text("หรือ"),
-                                    Expanded(
-                                      child: new Container(
-                                          margin: const EdgeInsets.only(
-                                              left: 20.0, right: 10.0),
-                                          child: Divider(
-                                            color: Colors.black,
-                                            height: 36,
-                                          )),
-                                    ),
-                                  ]),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        elevation: 0,
-                                        // side: BorderSide(color: Palette.kToDark),
-                                        primary: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        )),
-                                    onPressed: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Container(
-                                          width: double.infinity,
-                                          alignment: Alignment.center,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              // SizedBox(
-                                              //   width: 10,
-                                              // ),
-                                              SvgPicture.asset(
-                                                  'assets/images/fb.svg'),
-                                              SizedBox(
-                                                width: 30,
-                                              ),
-                                              Text(
-                                                "ดำเนินการต่อด้วย Facebook",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15),
-                                              ),
-                                            ],
-                                          )),
-                                    ),
-                                  ),
-
-                                  // Container(
-                                  //     width: double.infinity,
-                                  //     padding: EdgeInsets.all(20.0),
-                                  //     decoration: BoxDecoration(
-                                  //       color: Colors.blue,
-                                  //       borderRadius: BorderRadius.circular(15.0),
-                                  //     ),
-                                  //     child: Row(
-                                  //       mainAxisAlignment:
-                                  //           MainAxisAlignment.start,
-                                  //       children: [
-                                  //         // SizedBox(
-                                  //         //   width: 10,
-                                  //         // ),
-                                  //         SvgPicture.asset(
-                                  //             'assets/images/fb.svg'),
-                                  //         SizedBox(
-                                  //           width: 30,
-                                  //         ),
-                                  //         Text(
-                                  //           "ดำเนินการต่อด้วย Facebook",
-                                  //           style: TextStyle(
-                                  //               color: Colors.white,
-                                  //               fontSize: 15),
-                                  //         ),
-                                  //       ],
-                                  //     )),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        elevation: 0,
-                                        side: BorderSide(
-                                            color: Color.fromARGB(
-                                                255, 231, 231, 231)),
-                                        primary: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        )),
-                                    onPressed: () {
-                                   
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Container(
-                                          width: double.infinity,
-                                          alignment: Alignment.center,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              // SizedBox(
-                                              //   width: 10,
-                                              // ),
-                                              SvgPicture.asset(
-                                                  'assets/images/gg.svg'),
-                                              SizedBox(
-                                                width: 30,
-                                              ),
-                                              Text(
-                                                "ดำเนินการต่อด้วยบัญชี Google",
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 51, 51, 51),
-                                                    fontSize: 15),
-                                              ),
-                                            ],
-                                          )),
-                                    ),
-                                  ),
-
-                                  // Container(
-                                  //     width: double.infinity,
-                                  //     padding: EdgeInsets.all(20.0),
-                                  //     decoration: BoxDecoration(
-                                  //       border: Border.all(
-                                  //           color: Color.fromARGB(
-                                  //               255, 238, 230, 230)),
-                                  //       color: Colors.white,
-                                  //       borderRadius: BorderRadius.circular(15.0),
-                                  //     ),
-                                  //     child: Row(
-                                  //       mainAxisAlignment:
-                                  //           MainAxisAlignment.start,
-                                  //       children: [
-                                  //         // SizedBox(
-                                  //         //   width: 10,
-                                  //         // ),
-                                  //         SvgPicture.asset(
-                                  //             'assets/images/gg.svg'),
-                                  //         SizedBox(
-                                  //           width: 30,
-                                  //         ),
-                                  //         Text(
-                                  //           "ดำเนินการต่อด้วยบัญชี Google",
-                                  //           style: TextStyle(
-                                  //               color: Color.fromARGB(
-                                  //                   255, 51, 51, 51),
-                                  //               fontSize: 15),
-                                  //         ),
-                                  //       ],
-                                  //     ))
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       )
                     ],
                   )
