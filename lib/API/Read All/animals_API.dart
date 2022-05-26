@@ -519,6 +519,8 @@ class Links {
   }
 }
 
+//*fetch(widget.id)
+
 // Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
 //   final response =
 //       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/animals'));

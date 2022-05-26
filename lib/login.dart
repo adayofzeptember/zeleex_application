@@ -1,9 +1,9 @@
-
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/register.dart';
 import 'Plate.dart';
 
@@ -16,14 +16,20 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  late LoginRequestModel requestModel;
+  bool isApiCallprocess = false;
+  @override
+
+  void initState() {
+    requestModel = new LoginRequestModel();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
-          key: scaffoldKey,
             appBar: AppBar(
               title: Center(
                   child: Text(
@@ -82,7 +88,10 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    TextField(
+                                    TextFormField(
+                                      onSaved: (input) =>
+                                          requestModel.email = input,
+                                      keyboardType: TextInputType.emailAddress,
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.mail_outline),
                                         focusedBorder: OutlineInputBorder(
@@ -111,6 +120,8 @@ class _LoginPageState extends State<LoginPage> {
                                       height: 15,
                                     ),
                                     TextFormField(
+                                      onSaved: (input) =>
+                                          requestModel.password = input,
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.lock_outline),
                                         // suffixIcon:
@@ -161,7 +172,10 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        ;
+                                        if(formKey.currentState!.validate()){
+                                          formKey.currentState?.save();
+                                          print(requestModel.toJson());
+                                        }
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
