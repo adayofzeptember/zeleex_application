@@ -12,7 +12,7 @@ import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
 import 'package:intl/intl.dart';
-import '../profile.dart';
+import '../from Profile/profile.dart';
 import 'main_page.dart';
 
 class AnimalsPage extends StatefulWidget {

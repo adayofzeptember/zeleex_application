@@ -17,7 +17,7 @@ import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
 import '../newsfeed_detail.dart';
-import '../profile.dart';
+import '../from Profile/profile.dart';
 //future_blogs = fetch_Blog_readAll();
 
 class NewsFeedPage extends StatefulWidget {

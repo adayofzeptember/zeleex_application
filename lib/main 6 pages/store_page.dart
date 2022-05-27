@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
-import 'package:zeleex_application/profile.dart';
+import 'package:zeleex_application/from%20Profile/profile.dart';
 import 'package:expandable/expandable.dart';
 import '../API/Read All/stores_API.dart';
 import '../Career/career.dart';

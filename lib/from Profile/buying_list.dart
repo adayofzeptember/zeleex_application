@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:zeleex_application/from%20Profile/wait_payment_widget.dart';
-import 'package:zeleex_application/profile.dart';
+import 'package:zeleex_application/from%20Profile/profile.dart';
 import '../Plate.dart';
 import 'package:flutter/services.dart';
 
-
+//?  หน้ารวม 3 tab ที่มาจาก 4 order progress จาก profile
 
 class BuyingListPage extends StatefulWidget {
-  BuyingListPage({Key? key}) : super(key: key);
+  int indexTab = 0;
+  BuyingListPage({Key? key, required this.indexTab}) : super(key: key);
 
   @override
   State<BuyingListPage> createState() => _BuyingListPageState();
@@ -19,17 +20,15 @@ class _BuyingListPageState extends State<BuyingListPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: widget.indexTab,
         length: 3,
         child: Scaffold(
-       
           appBar: AppBar(
-            
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.light,
-            statusBarColor: Palette.kToDark,
-
-          ),
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.light,
+              statusBarColor: Palette.kToDark,
+            ),
             automaticallyImplyLeading: false,
             backgroundColor: Palette.kToDark,
             elevation: 0,
@@ -38,7 +37,7 @@ class _BuyingListPageState extends State<BuyingListPage> {
               children: [
                 InkWell(
                   onTap: () {
-                       Navigator.pop(context);
+                    Navigator.pop(context);
                     // Navigator.of(context, rootNavigator: true).pop(context);
                   },
                   child: Icon(
@@ -88,8 +87,12 @@ class _BuyingListPageState extends State<BuyingListPage> {
           ),
           body: TabBarView(children: [
             Wait_Payment(),
-            Icon(Icons.movie),
-            Icon(Icons.games),
+            Center(
+              child: Text("data"),
+            ),
+            Center(
+              child: Text("data"),
+            )
           ]),
         ));
   }

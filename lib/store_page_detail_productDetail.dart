@@ -1,4 +1,5 @@
 //import 'package:chips_choice/chips_choice.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,11 +25,7 @@ class Store_Product_Detail extends StatefulWidget {
 class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int index = 0;
   int tag = 0;
-  List<String> options = [
-    'News',
-    'Entertainment',
-    'Politics',
-  ];
+
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;
@@ -109,139 +106,126 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 backgroundColor: Palette.kToDark,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {
-                  // showModalBottomSheet<dynamic>(
-                  //   // isScrollControlled: true,
-                  //   shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.vertical(
-                  //     top: Radius.circular(20),
-                  //   )),
-                  //   context: context,
-                  //   builder: (BuildContext context) {
-                  //     return Container(
-                  //       //height: MediaQuery.of(context).size.height * 0.75,
+                  showModalBottomSheet<dynamic>(
+                    // isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    )),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        //height: MediaQuery.of(context).size.height * 0.75,
 
-                  //       child: StatefulBuilder(builder:
-                  //           (BuildContext context, StateSetter stateSetter) {
-                  //         return Padding(
-                  //           padding: const EdgeInsets.all(20.0),
-                  //           child: Column(
-                  //             children: [
-                  //               Row(
-                  //                 crossAxisAlignment: CrossAxisAlignment.center,
-                  //                 mainAxisAlignment: MainAxisAlignment.start,
-                  //                 children: [
-                  //                   SizedBox(
-                  //                     width: 90,
-                  //                     height: 90,
-                  //                     child: Image.asset(
-                  //                       'assets/images/cart_pd.png',
-                  //                       fit: BoxFit.cover,
-                  //                     ),
-                  //                   ),
-                  //                   SizedBox(
-                  //                     width: 10,
-                  //                   ),
-                  //                   Expanded(
-                  //                     child: Container(
-                  //                       child: Column(
-                  //                         crossAxisAlignment:
-                  //                             CrossAxisAlignment.stretch,
-                  //                         children: [
-                  //                           Text(
-                  //                             "450",
-                  //                             style: TextStyle(
-                  //                                 color: Colors.red,
-                  //                                 fontSize: 20,
-                  //                                 fontWeight: FontWeight.bold),
-                  //                           ),
-                  //                           SizedBox(
-                  //                             height: 30,
-                  //                           ),
-                  //                           Text(
-                  //                             "฿1,300",
-                  //                             style: TextStyle(
-                  //                                 color: Color.fromARGB(
-                  //                                     255, 131, 131, 131),
-                  //                                 fontSize: 15,
-                  //                                 decoration: TextDecoration
-                  //                                     .lineThrough,
-                  //                                 fontWeight: FontWeight.bold),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.only(top: 10),
-                  //                 child: Divider(
-                  //                     color:
-                  //                         Color.fromARGB(255, 206, 206, 206)),
-                  //               ),
-                  //               SizedBox(
-                  //                 height: 10,
-                  //               ),
-                  //               Row(
-                  //                 mainAxisAlignment: MainAxisAlignment.start,
-                  //                 children: <Widget>[
-                  //                   Text(
-                  //                     'รุ่น',
-                  //                     style: TextStyle(
-                  //                         color:
-                  //                             Color.fromARGB(255, 51, 51, 51),
-                  //                         fontSize: 15),
-                  //                   )
-                  //                 ],
-                  //               ),
-                  //               ChipsChoice<int>.single(
-                  //                 value: tag,
-                  //                 onChanged: (val) => setState(() {
-                  //                   tag = val;
-                  //                   // print(val);
-                  //                   // print(tag);
-                  //                 }),
-                  //                 choiceStyle:
-                  //                     C2ChoiceStyle(color: Palette.kToDark),
-                  //                 choiceItems: C2Choice.listFrom<int, String>(
-                  //                   source: options,
-                  //                   value: (i, v) => i,
-                  //                   label: (i, v) => v,
-                  //                 ),
-                  //               ),
-                  //               SizedBox(
-                  //                 height: 5,
-                  //               ),
-                  //               ElevatedButton(
-                  //                 style: ElevatedButton.styleFrom(
-                  //                     primary: Palette.kToDark,
-                  //                     elevation: 0,
-                  //                     // side: BorderSide(color: Colors.red),
-                  //                     shape: RoundedRectangleBorder(
-                  //                       borderRadius: BorderRadius.circular(5),
-                  //                     )),
-                  //                 onPressed: () {
-                  //                   Navigator.pop(context);
-                  //                 },
-                  //                 child: Padding(
-                  //                   padding: const EdgeInsets.all(10.0),
-                  //                   child: Container(
-                  //                     alignment: Alignment.center,
-                  //                     child: Text(
-                  //                       "เพิ่มลงรถเข็น",
-                  //                       style: TextStyle(
-                  //                           color: Colors.white, fontSize: 15),
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         );
-                  //       }),
-                  //     );
-                  //   },
-                  // )
+                        child: StatefulBuilder(builder:
+                            (BuildContext context, StateSetter stateSetter) {
+                          return Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 90,
+                                      height: 90,
+                                      child: Image.asset(
+                                        'assets/images/cart_pd.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Text(
+                                              "450",
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: 30,
+                                            ),
+                                            Text(
+                                              "฿1,300",
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 131, 131, 131),
+                                                  fontSize: 15,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Divider(
+                                      color:
+                                          Color.fromARGB(255, 206, 206, 206)),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'รุ่น',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontSize: 15),
+                                    )
+                                  ],
+                                ),
+                                
+                               
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Palette.kToDark,
+                                      elevation: 0,
+                                      // side: BorderSide(color: Colors.red),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      )),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "เพิ่มลงรถเข็น",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 15),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                      );
+                    },
+                  )
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -279,7 +263,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
               ),
               Text(widget.productName.toString(),
                   style: TextStyle(
-                      color: Palette.kToDark, fontWeight: FontWeight.bold, fontSize: 15)),
+                      color: Palette.kToDark,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15)),
               SvgPicture.asset(
                 'assets/images/cart123.svg',
               )
@@ -297,8 +283,27 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(
-                          child: Image.network(
-                            thisProduct.image!.thumbnail.toString(),
+                          width: double.infinity,
+                          child: CachedNetworkImage(
+                            imageUrl: thisProduct.image!.main.toString(),
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) => Container(
+                              color: Color.fromARGB(255, 142, 142, 142),
+                              height: 400,
+                            ),
+                            errorWidget: (context, url, error) => Padding(
+                              padding: const EdgeInsets.only(right: 5, left: 5),
+                              child: Center(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 141, 141, 141))),
+                                    alignment: Alignment.center,
+                                    child: Text("ไม่พบรูปภาพของสินค้า")),
+                              ),
+                            ),
                           ),
                         ),
                         Container(
@@ -319,7 +324,8 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                 Color.fromARGB(255, 51, 51, 51),
                                             fontSize: 18),
                                       ),
-                                      SvgPicture.asset('assets/images/love.svg', color: Colors.red)
+                                      SvgPicture.asset('assets/images/love.svg',
+                                          color: Colors.red)
                                     ],
                                   ),
                                   SizedBox(
@@ -562,87 +568,8 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                 ],
                               ))),
                         ),
-                        // Container(
-                        //   width: double.infinity,
-                        //   color: Colors.white,
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                        //     child: Column(
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       children: [
-                        //         // Row(
-                        //         //   mainAxisAlignment: MainAxisAlignment.end,
-                        //         //   children: [
-                        //         //     SvgPicture.asset('assets/images/vec.svg')
-                        //         //   ],
-                        //         // ),
-                        //         Text(
-                        //           "รายละเอียดสินค้า",
-                        //           style: TextStyle(
-                        //               color: Color.fromARGB(255, 51, 51, 51),
-                        //               fontSize: 20),
-                        //         ),
-                        //         SizedBox(
-                        //           height: 5,
-                        //         ),
-                        //         Text(
-                        //           thisProduct.description.toString(),
-                        //           style: TextStyle(
-                        //               color:
-                        //                   Color.fromARGB(255, 130, 130, 130)),
-                        //         ),
-                        //         SizedBox(
-                        //           height: 20,
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
                         SizedBox(
                           height: 3,
-                        ),
-                        Container(
-                          height: 200,
-                          width: double.infinity,
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "คะแนนรีวิวสินค้า",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontSize: 20),
-                                    ),
-                                    Text("ทั้งหมด >",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 130, 130, 130)))
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Text("(5.0)"),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    SvgPicture.asset(
-                                        'assets/images/groupStar.svg'),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -654,9 +581,194 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                   );
                 }
               }),
+          Container(
+        
+            width: double.infinity,
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "คะแนนรีวิวสินค้า",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 51, 51, 51),
+                            fontSize: 20),
+                      ),
+                      Text("ทั้งหมด >",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 130, 130, 130)))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Text("(5.0)"),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      SvgPicture.asset('assets/images/groupStar.svg'),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+
+                  //! create another Future
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    Color.fromARGB(255, 192, 92, 92),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "ชื่อ นามสกุล",
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color:
+                                          Color.fromARGB(255, 131, 131, 131)),
+                                ),
+                                SvgPicture.asset(
+                                  'assets/images/groupStar.svg',
+                                  height: 10,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Text(
+                              "ดีมากครับ ทดสอบรีวิวววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว"),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/images/cart_pd2.png',
+                                width: 90,
+                                height: 90,
+                              ),
+                                 Image.asset(
+                                'assets/images/cart_pd2.png',
+                                width: 90,
+                                height: 90,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Divider(
+                              color: Color.fromARGB(255, 206, 206, 206)),
+                        ),
+                      ],
+                    ),
+                  ),
+                   Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    Color.fromARGB(255, 192, 92, 92),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "ชื่อ นามสกุล",
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color:
+                                          Color.fromARGB(255, 131, 131, 131)),
+                                ),
+                                SvgPicture.asset(
+                                  'assets/images/groupStar.svg',
+                                  height: 10,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Text(
+                              "ดีมากครับ ทดสอบรีวิวววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว"),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/images/cart_pd2.png',
+                                width: 90,
+                                height: 90,
+                              ),
+                                 Image.asset(
+                                'assets/images/cart_pd2.png',
+                                width: 90,
+                                height: 90,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Divider(
+                              color: Color.fromARGB(255, 206, 206, 206)),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
       )),
     );
   }
 }
-

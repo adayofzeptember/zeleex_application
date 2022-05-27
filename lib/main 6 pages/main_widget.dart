@@ -17,7 +17,7 @@ import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
 import 'package:zeleex_application/main%206%20pages/products.dart';
 import 'package:zeleex_application/main%206%20pages/semens.dart';
 import 'package:zeleex_application/newsfeed_detail.dart';
-import 'package:zeleex_application/profile.dart';
+import 'package:zeleex_application/from%20Profile/profile.dart';
 import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
 import '../Career/career.dart';

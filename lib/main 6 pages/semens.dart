@@ -6,7 +6,7 @@ import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
-import '../profile.dart';
+import '../from Profile/profile.dart';
 
 class SemensPage extends StatefulWidget {
   SemensPage({Key? key}) : super(key: key);

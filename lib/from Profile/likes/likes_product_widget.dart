@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../Plate.dart';
 
 class LikesProduct extends StatefulWidget {
   LikesProduct({Key? key}) : super(key: key);
@@ -38,7 +37,8 @@ class _LikesProductState extends State<LikesProduct> {
                                       topLeft: Radius.circular(5),
                                       topRight: Radius.circular(5)),
                                   child: Image.asset(
-                                    'assets/images/product1.png',
+                                    'assets/images/image21.png',
+                                    fit: BoxFit.fill,
                                   )),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
@@ -88,8 +88,7 @@ class _LikesProductState extends State<LikesProduct> {
                                       topLeft: Radius.circular(5),
                                       topRight: Radius.circular(5)),
                                   child: Image.asset(
-                                    'assets/images/product2.png',
-                                  )),
+               'assets/images/image21.png',                                  )),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
                                 child: Container(
@@ -143,8 +142,7 @@ class _LikesProductState extends State<LikesProduct> {
                                       topLeft: Radius.circular(5),
                                       topRight: Radius.circular(5)),
                                   child: Image.asset(
-                                    'assets/images/product5.png',
-                                  )),
+               'assets/images/image21.png',                                  )),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
                                 child: Container(
@@ -193,7 +191,7 @@ class _LikesProductState extends State<LikesProduct> {
                                       topLeft: Radius.circular(5),
                                       topRight: Radius.circular(5)),
                                   child: Image.asset(
-                                    'assets/images/product6.png',
+                          'assets/images/image21.png',
                                   )),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),

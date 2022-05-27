@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../Plate.dart';
-
+//? widget ที่เอาไปใส่ในแท็บ buying list 
 class Wait_Payment extends StatefulWidget {
   Wait_Payment({Key? key}) : super(key: key);
 
@@ -40,7 +40,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                                 width: 10,
                               ),
                               Text(
-                                "Zeleex Shop",
+                                "Zeleex Shop555",
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 51, 51, 51),
                                     fontWeight: FontWeight.bold),

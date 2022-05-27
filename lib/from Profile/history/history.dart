@@ -5,7 +5,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../Plate.dart';
 import 'history_success.dart';
 
-
 class HistoryPage extends StatefulWidget {
   HistoryPage({Key? key}) : super(key: key);
 
@@ -81,26 +80,14 @@ class _HistoryPageState extends State<HistoryPage> {
           body: TabBarView(
             children: [
               History_Success(),
-              History_Success(),
-              Slidable(
-                
-                endActionPane: ActionPane(
-                  motion: BehindMotion(),
-                  dismissible: DismissiblePane(onDismissed: () {
-                    doNothing(context);
-                  }),
-                  children: [
-                    SlidableAction(
-                      onPressed: doNothing,
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      icon: Icons.delete,
-                      label: 'ลบ',
-                    ),
-                  ],
-                ),
-                child: ListTile(title: Text('Slide me')),
-              ),
+              Center(
+                  child: Container(
+                child: Text("wait for Data"),
+              )),
+              Center(
+                  child: Container(
+                child: Text("wait for Data"),
+              )),
             ],
           ),
         ));

@@ -99,7 +99,7 @@ class _Store_DetailState extends State<Store_Detail> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Store_CattlePage()),
+                          builder: (context) => Store_CattlePage(  storeID: widget.storeID,)),
                     )
                   },
                   child: Row(

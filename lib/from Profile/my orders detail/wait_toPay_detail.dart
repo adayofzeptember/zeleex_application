@@ -488,7 +488,7 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
                               Text("รวมการสั่งซื้อ",
                                   style: TextStyle(fontSize: 20)),
                               Text(
-                                "฿2,455",
+                                "฿12,455",
                                 style: TextStyle(
                                     color: Palette.kToDark, fontSize: 20),
                               )

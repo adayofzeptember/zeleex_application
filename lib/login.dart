@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                                           formKey.currentState?.save();
                                           loginLOL(requestModel).then((value) => {
                                             if(value.token.isNotEmpty){
-                                                print("success"+ value.token)
+                                                print("success"+ value.token.toString())
                                             }else{
                                               print(value.error)
                                             }

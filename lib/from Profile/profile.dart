@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
-import 'package:zeleex_application/from%20Profile/likes.dart';
 import 'package:zeleex_application/help.dart';
 
 import 'package:zeleex_application/terms.dart';
-import 'Plate.dart';
-import 'cart.dart';
-import 'from Profile/history/history.dart';
-import 'payment_address.dart';
+import '../Plate.dart';
+import '../cart.dart';
+import 'history/history.dart';
+import 'likes/likes.dart';
+import '../payment_address.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -26,8 +26,8 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         systemOverlayStyle: SystemUiOverlayStyle(
-                       statusBarIconBrightness: Brightness.light,
-                          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.light,
           statusBarColor: Palette.kToDark,
         ),
         backgroundColor: Palette.kToDark,
@@ -36,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Visibility(
-            visible: false,
+              visible: false,
               child: InkWell(
                 onTap: () {
                   Navigator.pop(context);
@@ -174,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BuyingListPage(),
+                          builder: (context) => BuyingListPage(indexTab: 0,),
                         ),
                       );
                     },
@@ -199,62 +199,92 @@ class _ProfilePageState extends State<ProfilePage> {
                   SvgPicture.asset(
                     'assets/images/arrowright.svg',
                   ),
-                  Column(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/box.svg',
-                        height: MediaQuery.of(context).size.height * 0.035,
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        "เตรียมจัดส่ง",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontFamily: 'Kanit'),
-                      ),
-                    ],
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BuyingListPage(indexTab: 1),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/box.svg',
+                          height: MediaQuery.of(context).size.height * 0.035,
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text(
+                          "เตรียมจัดส่ง",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 130, 130, 130),
+                              fontFamily: 'Kanit'),
+                        ),
+                      ],
+                    ),
                   ),
                   SvgPicture.asset(
                     'assets/images/arrowright.svg',
                   ),
-                  Column(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/shipp.svg',
-                        height: MediaQuery.of(context).size.height * 0.035,
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        "กำลังจัดส่ง",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontFamily: 'Kanit'),
-                      ),
-                    ],
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BuyingListPage(indexTab: 2),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/shipp.svg',
+                          height: MediaQuery.of(context).size.height * 0.035,
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text(
+                          "กำลังจัดส่ง",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 130, 130, 130),
+                              fontFamily: 'Kanit'),
+                        ),
+                      ],
+                    ),
                   ),
                   SvgPicture.asset(
                     'assets/images/arrowright.svg',
                   ),
-                  Column(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/score.svg',
-                        height: MediaQuery.of(context).size.height * 0.035,
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        "ให้คะแนน",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontFamily: 'Kanit'),
-                      ),
-                    ],
+                      InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>HistoryPage(),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/score.svg',
+                          height: MediaQuery.of(context).size.height * 0.035,
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text(
+                          "ให้คะแนน",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 130, 130, 130),
+                              fontFamily: 'Kanit'),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

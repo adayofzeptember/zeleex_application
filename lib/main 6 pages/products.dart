@@ -10,7 +10,7 @@ import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
-import '../profile.dart';
+import '../from Profile/profile.dart';
 import 'main_page.dart';
 
 class ProductPage extends StatefulWidget {
@@ -45,7 +45,7 @@ class _ProductPageState extends State<ProductPage> {
     List jsonCon = jsonResponse['data']['data'];
 
     if (response.statusCode == 200) {
-      if (jsonCon.length < 1) {
+      if (jsonCon.length < perPage) {
         setState(() {
           hasMore = false;
         });
@@ -229,7 +229,7 @@ class _ProductPageState extends State<ProductPage> {
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.322,
                       ),
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data!.length) {
                           return Card(
@@ -276,23 +276,18 @@ class _ProductPageState extends State<ProductPage> {
                                                   0.22,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 211, 204, 204),
-                                                          
-                                                          ),                                                             borderRadius: BorderRadius.all(Radius.circular(5))
-),
+                                                    color: Color.fromARGB(
+                                                        255, 211, 204, 204),
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5))),
                                               alignment: Alignment.center,
                                               child: Text("ไม่พบรูปภาพ")),
                                         ),
                                       ),
                                     ),
                                     // Image.network(
-                                    //   data![index]
-                                    //       .image!
-                                    //       .thumbnail
-                                    //       .toString(),
-                                    //   fit: BoxFit.fill,
-                                    // )
                                   ),
                                   Padding(
                                     padding:
@@ -327,9 +322,16 @@ class _ProductPageState extends State<ProductPage> {
                           return hasMore
                               ? Container(
                                   alignment: Alignment.center,
-                                  child: Text("dataก"),
+                                  child: CircularProgressIndicator(),
                                 )
-                              : Container();
+                              : Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Center(
+                                    child: Text("...",
+                                        style:
+                                            TextStyle(color: Palette.kToDark)),
+                                  ),
+                                );
                         }
                       },
                     ),

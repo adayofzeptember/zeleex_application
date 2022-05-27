@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import 'package:zeleex_application/from%20Profile/likes_product_widget.dart';
+import 'package:zeleex_application/Plate.dart';
+import 'package:zeleex_application/from%20Profile/likes/likes_product_widget.dart';
 import 'package:zeleex_application/from%20Profile/wait_payment_widget.dart';
-import 'package:zeleex_application/profile.dart';
-import '../Plate.dart';
+import 'package:zeleex_application/from%20Profile/profile.dart';
 import 'package:flutter/services.dart';
-
-
-
 
 class LikesPage extends StatefulWidget {
   LikesPage({Key? key}) : super(key: key);
@@ -24,6 +21,10 @@ class _LikesPageState extends State<LikesPage> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+                  systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.light,
+              statusBarColor: Palette.kToDark),
             automaticallyImplyLeading: false,
             backgroundColor: Palette.kToDark,
             elevation: 0,
@@ -80,9 +81,13 @@ class _LikesPageState extends State<LikesPage> {
                 ]),
           ),
           body: TabBarView(children: [
-            Icon(Icons.book),
+            Center(
+              child: Text("wait for data"),
+            ),
             LikesProduct(),
-            Icon(Icons.games),
+            Center(
+              child: Text("wait for data"),
+            )
           ]),
         ));
   }

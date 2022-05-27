@@ -544,7 +544,7 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                                         ),
                                         onPressed: () {},
                                         child: Text(
-                                          "ติดต่อร้านค้า",
+                                          "ติดต่อร้านค้าที่นี่",
                                           style:
                                               TextStyle(color: Palette.kToDark),
                                         ))),
