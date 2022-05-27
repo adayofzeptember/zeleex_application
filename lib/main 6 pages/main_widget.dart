@@ -9,6 +9,7 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
+import 'package:zeleex_application/API/Read%20All/products_API.dart';
 import 'package:zeleex_application/API/Read%20All/slider_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/cart.dart';
@@ -38,8 +39,29 @@ class _Main_WidgetState extends State<Main_Widget> {
   late Future<List<DataSlider>> futureData;
   late Future<List<AnimalCat01>> future_anmials_cat;
   late Future<List<ProductCat01>> future_products_cat;
+  late Future<List<Data_Products_ReadAll>> future_products_All;
+
   int activeIndex = 0;
   int countIMG = 0;
+
+
+// Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
+//   final response =
+//       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/products'));
+
+//   var jsonResponse = json.decode(response.body);
+//   List jsonCon = jsonResponse['data']['data'];
+
+//   if (response.statusCode == 200) {
+//     // List jsonResponse = json.decode(response.body);
+//     return jsonCon
+//         .map((data) => new Data_Products_ReadAll.fromJson(data))
+//         .toList();
+//   } else {
+//     throw Exception("error...");
+//   }
+// }
+
 
   Future<List<DataSlider>> fetch_SliderPics() async {
     final response =
@@ -66,14 +88,13 @@ class _Main_WidgetState extends State<Main_Widget> {
     futureData = fetch_SliderPics();
     future_anmials_cat = fetch_Home_animals();
     future_products_cat = fetch_Home_products();
+
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
-          //systemOverlayStyle: SystemUiOverlayStyle.dark, // 1
-
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
@@ -138,9 +159,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                 Column(
                   children: <Widget>[
                     Padding(
-                    
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Container( 
+                      child: Container(
                         height: 40,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -212,14 +232,18 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 3.0),
                                       decoration: BoxDecoration(
-                                          color: Color.fromARGB(167, 216, 216, 216)),
+                                          color: Color.fromARGB(
+                                              167, 216, 216, 216)),
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                            data![index].image!.toString(), 
+                                            data![index].image!.toString(),
+                                        //fit: BoxFit.cover,
+
                                         progressIndicatorBuilder:
                                             (context, url, downloadProgress) =>
                                                 Container(
-                                          color: Color.fromARGB(197, 253, 253, 253),
+                                          color: Color.fromARGB(
+                                              197, 253, 253, 253),
                                           height: 200,
                                         ),
                                         errorWidget: (context, url, error) =>
@@ -238,8 +262,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                 width: double.infinity,
                                                 height: double.infinity,
                                                 alignment: Alignment.center,
-                                                child: Text(
-                                                    "ไม่พบรูปภาพ")),
+                                                child: Text("ไม่พบรูปภาพ")),
                                           ),
                                         ),
                                       ),
@@ -247,12 +270,12 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   },
                                   options: CarouselOptions(
                                       enlargeCenterPage: true,
-                                      //  viewportFraction: 1,
+                                      viewportFraction: 1,
                                       autoPlay: true,
-                                      autoPlayInterval: Duration(seconds: 4),
+                                      autoPlayInterval: Duration(seconds: 5),
                                       autoPlayAnimationDuration:
-                                          Duration(seconds: 3),
-                                      onPageChanged: (  index, reason) =>
+                                          Duration(seconds: 2),
+                                      onPageChanged: (index, reason) =>
                                           setState(
                                             (() => activeIndex = index),
                                           )));
@@ -344,7 +367,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                 Text("กระบือ", style: TextStyle(fontSize: 12))
                               ],
                             ),
-                        SizedBox(width: 15),
+                            SizedBox(width: 15),
                             InkWell(
                               onTap: () {
                                 Navigator.push(
@@ -437,14 +460,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                       ),
                     ),
 
-                    // CachedNetworkImage(
-                    //   imageUrl: "http://via.placeholder.com/350x150",
-
-                    //   progressIndicatorBuilder:
-                    //       (context, url, downloadProgress) =>
-                    //         Container(color: Color.fromARGB(255, 110, 109, 109), height: 200,),
-                    //   errorWidget: (context, url, error) => Icon(Icons.error),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                       child: Container(
@@ -544,24 +559,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                       .circular(
                                                                           5)),
                                                           child:
-                                                              //     Image.network(
-                                                              //   data![index]
-                                                              //       .image!
-                                                              //       .thumbnail
-                                                              //       .toString(),
-                                                              //   fit: BoxFit.fill,
-                                                              //   height: MediaQuery.of(
-                                                              //               context)
-                                                              //           .size
-                                                              //           .width *
-                                                              //       0.3,
-                                                              //   width: MediaQuery.of(
-                                                              //               context)
-                                                              //           .size
-                                                              //           .width *
-                                                              //       0.3,
-                                                              // )
-
                                                               CachedNetworkImage(
                                                             imageUrl:
                                                                 data![index]
@@ -665,386 +662,220 @@ class _Main_WidgetState extends State<Main_Widget> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    //   child: Container(
-                    //     decoration: BoxDecoration(),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(0.0),
-                    //       child: Padding(
-                    //           padding: const EdgeInsets.all(0.0),
-                    //           child: Column(
-                    //             children: [
-                    //               Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceBetween,
-                    //                 crossAxisAlignment:
-                    //                     CrossAxisAlignment.center,
-                    //                 children: [
-                    //                   Padding(
-                    //                     padding: const EdgeInsets.fromLTRB(
-                    //                       10,
-                    //                       10,
-                    //                       0,
-                    //                       0,
-                    //                     ),
-                    //                     child: Text(
-                    //                       "สินค้า",
-                    //                       style: TextStyle(
-                    //                           color: Color.fromARGB(
-                    //                               255, 51, 51, 51),
-                    //                           fontWeight: FontWeight.bold,
-                    //                           fontSize: MediaQuery.of(context)
-                    //                                   .size
-                    //                                   .height *
-                    //                               0.02),
-                    //                     ),
-                    //                   ),
-                    //                   Padding(
-                    //                     padding:
-                    //                         const EdgeInsets.only(right: 10),
-                    //                     child: ElevatedButton(
-                    //                       style: ElevatedButton.styleFrom(
-                    //                           primary: Palette.kToDark,
-                    //                           elevation: 0),
-                    //                       onPressed: () {
-                    //                         Navigator.push(
-                    //                           context,
-                    //                           MaterialPageRoute(
-                    //                             builder: (context) =>
-                    //                                 ProductPage(),
-                    //                           ),
-                    //                         );
-                    //                       },
-                    //                       child: Text(
-                    //                         "ดูทั้งหมด",
-                    //                         style: TextStyle(
-                    //                             color: Color.fromRGBO(
-                    //                                 255, 255, 255, 1)),
-                    //                         textAlign: TextAlign.center,
-                    //                       ),
-                    //                     ),
-                    //                   )
-                    //                 ],
-                    //               ),
-                    //               SizedBox(
-                    //                 height: 5,
-                    //               ),
-                    //               Container(
-                    //                 height: MediaQuery.of(context).size.height *
-                    //                     0.240,
-                    //                 child: Row(
-                    //                   children: [
-                    //                     FutureBuilder<List<ProductCat01>>(
-                    //                       future: future_products_cat,
-                    //                       builder: (context, snapshot) {
-                    //                         if (snapshot.hasData) {
-                    //                           List<ProductCat01>? data =
-                    //                               snapshot.data;
-                    //                           return Expanded(
-                    //                             child: ListView.builder(
-                    //                                 scrollDirection:
-                    //                                     Axis.horizontal,
-                    //                                 // shrinkWrap: true,
-                    //                                 itemCount: data?.length,
-                    //                                 itemBuilder:
-                    //                                     (BuildContext context,
-                    //                                         int index) {
-                    //                                   return Card(
-                    //                                     child: InkWell(
-                    //                                       onTap: () {
-                    //                                         Navigator.of(context).push(
-                    //                                             MaterialPageRoute(
-                    //                                                 builder:
-                    //                                                     (context) =>
-                    //                                                         Store_Product_Detail(
-                    //                                                           productName: data![index].title.toString(),
-                    //                                                           productID: data[index].id.toString(),
-                    //                                                         )));
-                    //                                       },
-                    //                                       child: Column(
-                    //                                         children: [
-                    //                                           ClipRRect(
-                    //                                             borderRadius: BorderRadius.only(
-                    //                                                 topLeft: Radius
-                    //                                                     .circular(
-                    //                                                         5),
-                    //                                                 topRight: Radius
-                    //                                                     .circular(
-                    //                                                         5)),
-                    //                                             child:
-                    //                                                 CachedNetworkImage(
-                    //                                               imageUrl: data![
-                    //                                                       index]
-                    //                                                   .image!
-                    //                                                   .thumbnail
-                    //                                                   .toString(),
-                    //                                               fit: BoxFit
-                    //                                                   .fill,
-                    //                                               height: MediaQuery.of(
-                    //                                                           context)
-                    //                                                       .size
-                    //                                                       .width *
-                    //                                                   0.3,
-                    //                                               width: MediaQuery.of(
-                    //                                                           context)
-                    //                                                       .size
-                    //                                                       .width *
-                    //                                                   0.3,
-                    //                                               progressIndicatorBuilder: (context,
-                    //                                                       url,
-                    //                                                       downloadProgress) =>
-                    //                                                   Container(
-                    //                                                 color: Color
-                    //                                                     .fromARGB(
-                    //                                                         255,
-                    //                                                         192,
-                    //                                                         192,
-                    //                                                         192),
-                    //                                                 height: 200,
-                    //                                               ),
-                    //                                               errorWidget: (context,
-                    //                                                       url,
-                    //                                                       error) =>
-                    //                                                   Icon(Icons
-                    //                                                       .error),
-                    //                                             ),
-                    //                                             //  Image
-                    //                                             //     .network(
-                    //                                             //   data![index]
-                    //                                             //       .image!
-                    //                                             //       .thumbnail
-                    //                                             //       .toString(),
-                    //                                             //   fit: BoxFit
-                    //                                             //       .fill,
-                    //                                             //   // height: MediaQuery.of(context)
-                    //                                             //   //         .size
-                    //                                             //   //         .height *
-                    //                                             //   //     0.05,
-                    //                                             //   width: MediaQuery.of(context)
-                    //                                             //           .size
-                    //                                             //           .width *
-                    //                                             //       0.3,
-                    //                                             // )
-                    //                                           ),
-                    //                                           Padding(
-                    //                                             padding:
-                    //                                                 const EdgeInsets
-                    //                                                         .all(
-                    //                                                     8.0),
-                    //                                             child: Column(
-                    //                                               crossAxisAlignment:
-                    //                                                   CrossAxisAlignment
-                    //                                                       .start,
-                    //                                               mainAxisAlignment:
-                    //                                                   MainAxisAlignment
-                    //                                                       .start,
-                    //                                               children: [
-                    //                                                 SizedBox(
-                    //                                                   height:
-                    //                                                       40,
-                    //                                                   width:
-                    //                                                       100,
-                    //                                                   child:
-                    //                                                       Text(
-                    //                                                     data[index]
-                    //                                                         .title
-                    //                                                         .toString(),
-                    //                                                   ),
-                    //                                                 ),
-                    //                                                 SizedBox(
-                    //                                                   height: 3,
-                    //                                                 ),
-                    //                                                 Text(
-                    //                                                   "฿ " +
-                    //                                                       data[index]
-                    //                                                           .price
-                    //                                                           .toString(),
-                    //                                                   style: TextStyle(
-                    //                                                       color: Color.fromARGB(
-                    //                                                           255,
-                    //                                                           255,
-                    //                                                           17,
-                    //                                                           0)),
-                    //                                                 ),
-                    //                                               ],
-                    //                                             ),
-                    //                                           )
-                    //                                         ],
-                    //                                       ),
-                    //                                     ),
-                    //                                   );
-                    //                                 }),
-                    //                           );
-                    //                         } else if (snapshot.hasError) {
-                    //                           return Text("${snapshot.error}");
-                    //                         }
-                    //                         return Container();
-                    //                         // return Padding(
-                    //                         //   padding: const EdgeInsets.only(
-                    //                         //       left: 200),
-                    //                         //   child:
-                    //                         //       CircularProgressIndicator(),
-                    //                         // );
-                    //                       },
-                    //                     ),
-                    //                   ],
-                    //                 ),
-                    //               ),
-                    //               // Container(
-                    //               //   width: double.infinity,
-                    //               //   child: SingleChildScrollView(
-                    //               //     scrollDirection: Axis.horizontal,
-                    //               //     child: Row(
-                    //               //       //main axis (rows or columns)
-
-                    //               //       // crossAxisAlignment: CrossAxisAlignment.start,
-                    //               //       children: [
-                    //               //         Card(
-                    //               //           child: InkWell(
-                    //               //             onTap: () {
-                    //               //               Navigator.push(
-                    //               //                   context,
-                    //               //                   MaterialPageRoute(
-                    //               //                       builder: (context) =>
-                    //               //                           Store_Product_Detail()));
-                    //               //             },
-                    //               //             child: Padding(
-                    //               //               padding:
-                    //               //                   const EdgeInsets.all(8.0),
-                    //               //               child: Column(
-                    //               //                 crossAxisAlignment:
-                    //               //                     CrossAxisAlignment.start,
-                    //               //                 children: [
-                    //               //                   ClipRRect(
-                    //               //                     borderRadius:
-                    //               //                         BorderRadius.all(
-                    //               //                             Radius.circular(
-                    //               //                                 5)),
-                    //               //                     child: Image.asset(
-                    //               //                         'assets/images/pd1.png'),
-                    //               //                   ),
-                    //               //                   SizedBox(
-                    //               //                     height: 10,
-                    //               //                   ),
-                    //               //                   Text(
-                    //               //                     "Cattles1",
-                    //               //                   ),
-                    //               //                   SizedBox(
-                    //               //                     height: 3,
-                    //               //                   ),
-                    //               //                   Text(
-                    //               //                     "฿ 170",
-                    //               //                     style: TextStyle(
-                    //               //                         color: Color.fromARGB(
-                    //               //                             255, 255, 17, 0)),
-                    //               //                   )
-                    //               //                 ],
-                    //               //               ),
-                    //               //             ),
-                    //               //           ),
-                    //               //         ),
-                    //               //         Card(
-                    //               //           child: InkWell(
-                    //               //             onTap: () {
-                    //               //               Navigator.push(
-                    //               //                   context,
-                    //               //                   MaterialPageRoute(
-                    //               //                       builder: (context) =>
-                    //               //                           Store_Product_Detail()));
-                    //               //             },
-                    //               //             child: Padding(
-                    //               //               padding:
-                    //               //                   const EdgeInsets.all(8.0),
-                    //               //               child: Column(
-                    //               //                 crossAxisAlignment:
-                    //               //                     CrossAxisAlignment.start,
-                    //               //                 children: [
-                    //               //                   ClipRRect(
-                    //               //                     borderRadius:
-                    //               //                         BorderRadius.all(
-                    //               //                             Radius.circular(
-                    //               //                                 5)),
-                    //               //                     child: Image.asset(
-                    //               //                         'assets/images/pd2.png'),
-                    //               //                   ),
-                    //               //                   SizedBox(
-                    //               //                     height: 10,
-                    //               //                   ),
-                    //               //                   Text(
-                    //               //                     "Cattles2",
-                    //               //                   ),
-                    //               //                   SizedBox(
-                    //               //                     height: 3,
-                    //               //                   ),
-                    //               //                   Text(
-                    //               //                     "฿ 100",
-                    //               //                     style: TextStyle(
-                    //               //                         color: Color.fromARGB(
-                    //               //                             255, 255, 17, 0)),
-                    //               //                   )
-                    //               //                 ],
-                    //               //               ),
-                    //               //             ),
-                    //               //           ),
-                    //               //         ),
-                    //               //         Card(
-                    //               //           child: InkWell(
-                    //               //             onTap: () {
-                    //               //               Navigator.push(
-                    //               //                   context,
-                    //               //                   MaterialPageRoute(
-                    //               //                       builder: (context) =>
-                    //               //                           Store_Product_Detail()));
-                    //               //             },
-                    //               //             child: Padding(
-                    //               //               padding:
-                    //               //                   const EdgeInsets.all(8.0),
-                    //               //               child: Column(
-                    //               //                 crossAxisAlignment:
-                    //               //                     CrossAxisAlignment.start,
-                    //               //                 children: [
-                    //               //                   ClipRRect(
-                    //               //                     borderRadius:
-                    //               //                         BorderRadius.all(
-                    //               //                             Radius.circular(
-                    //               //                                 5)),
-                    //               //                     child: Image.asset(
-                    //               //                       'assets/images/pd3.png',
-                    //               //                     ),
-                    //               //                   ),
-                    //               //                   SizedBox(
-                    //               //                     height: 10,
-                    //               //                   ),
-                    //               //                   Text(
-                    //               //                     "Cattles3",
-                    //               //                   ),
-                    //               //                   SizedBox(
-                    //               //                     height: 3,
-                    //               //                   ),
-                    //               //                   Text(
-                    //               //                     "฿ 90",
-                    //               //                     style: TextStyle(
-                    //               //                         color: Color.fromARGB(
-                    //               //                             255, 255, 17, 0)),
-                    //               //                   )
-                    //               //                 ],
-                    //               //               ),
-                    //               //             ),
-                    //               //           ),
-                    //               //         ),
-                    //               //       ],
-                    //               //     ),
-                    //               //   ),
-                    //               // ),
-                    //               SizedBox(
-                    //                 height: 10,
-                    //               )
-                    //             ],
-                    //           )),
-                    //     ),
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: Container(
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          10,
+                                          10,
+                                          0,
+                                          0,
+                                        ),
+                                        child: Text(
+                                          "สินค้า",
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 51, 51, 51),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.02),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Palette.kToDark,
+                                              elevation: 0),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductPage(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            "ดูทั้งหมด",
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    255, 255, 255, 1)),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.240,
+                                    child: Row(
+                                      children: [
+                                        FutureBuilder<List<Data_Products_ReadAll>>(
+                                          future: fetch_ProductPage_readAll(),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              List<Data_Products_ReadAll>? data =
+                                                  snapshot.data;
+                                              return Expanded(
+                                                child: ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    // shrinkWrap: true,
+                                                    itemCount: 5,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Card(
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            Navigator.of(context).push(
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            Store_Product_Detail(
+                                                                              productName: data![index].title.toString(),
+                                                                              productID: data[index].id.toString(),
+                                                                            )));
+                                                          },
+                                                          child: Column(
+                                                            children: [
+                                                              ClipRRect(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            5),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            5)),
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  imageUrl: data![
+                                                                          index]
+                                                                      .image!
+                                                                      .thumbnail
+                                                                      .toString(),
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                  height: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.3,
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.3,
+                                                                  progressIndicatorBuilder: (context,
+                                                                          url,
+                                                                          downloadProgress) =>
+                                                                      Container(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            192,
+                                                                            192,
+                                                                            192),
+                                                                    height: 200,
+                                                                  ),
+                                                                  errorWidget: (context,
+                                                                          url,
+                                                                          error) =>
+                                                                      Icon(Icons
+                                                                          .error),
+                                                                ),
+                                                              
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      height:
+                                                                          40,
+                                                                      width:
+                                                                          100,
+                                                                      child:
+                                                                          Text(
+                                                                        data[index]
+                                                                            .title
+                                                                            .toString(),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 3,
+                                                                    ),
+                                                                    Text(
+                                                                      "฿ " +
+                                                                          data[index]
+                                                                              .price
+                                                                              .toString(),
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              255,
+                                                                              17,
+                                                                              0)),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                              );
+                                            } else if (snapshot.hasError) {
+                                              return Text("${snapshot.error}");
+                                            }
+                                            return Container();
+                                     
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              
+                                  SizedBox(
+                                    height: 10,
+                                  )
+                                ],
+                              )),
+                        ),
+                      ),
+                    ),
                   ],
                 )
               ],
@@ -1053,341 +884,6 @@ class _Main_WidgetState extends State<Main_Widget> {
         ),
       ),
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      // drawer: Theme(
-      //     data: Theme.of(context).copyWith(
-      //       canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
-      //     ),
-      //     child: Container(
-      //       width: 250,
-      //       child: Drawer(
-      //         child: Padding(
-      //           padding: const EdgeInsets.fromLTRB(
-      //             20,
-      //             0,
-      //             0,
-      //             0,
-      //           ),
-      //           child: Container(
-      //             child: Column(
-      //               crossAxisAlignment: CrossAxisAlignment.start,
-      //               children: <Widget>[
-      //                 SizedBox(
-      //                   height: 50,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => ProfilePage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       CircleAvatar(
-      //                         backgroundColor: Colors.white,
-      //                         child: Icon(
-      //                           Icons.person,
-      //                           color: Palette.kToDark,
-      //                         ),
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-      //                         child: Column(
-      //                           crossAxisAlignment: CrossAxisAlignment.start,
-      //                           children: [
-      //                             Text("Name Surname",
-      //                                 style: TextStyle(
-      //                                     color: Palette.kToDark,
-      //                                     fontFamily: 'Kanit')),
-      //                             SizedBox(
-      //                               height: 5,
-      //                             ),
-      //                             Text(
-      //                               "ดูโปรไฟล์",
-      //                               style: TextStyle(
-      //                                   color:
-      //                                       Color.fromARGB(255, 165, 162, 162),
-      //                                   fontFamily: 'Kanit'),
-      //                             ),
-      //                           ],
-      //                         ),
-      //                       ),
-      //                       Icon(
-      //                         Icons.settings,
-      //                         color: Colors.white,
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 50,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/home.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                       child: Text(
-      //                         "หน้าหลัก",
-      //                         style: TextStyle(
-      //                             color: Colors.white, fontFamily: 'Kanit'),
-      //                       ),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => AboutUs()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/about.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text(
-      //                           "เกี่ยวกับเรา",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit'),
-      //                         ),
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Text("ภายในร้าน",
-      //                     style: TextStyle(
-      //                         color: Color.fromARGB(255, 165, 162, 162),
-      //                         fontFamily: 'Kanit')),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab4.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-      //                       child: Text("สัตว์",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab5.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                       child: Text("สินค้า",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     print("object");
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/tab2.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ร้านค้า",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab6.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                       child: Text("น้ำเชื้อ",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Text("การช่วยเหลือ",
-      //                     style: TextStyle(
-      //                         color: Color.fromARGB(255, 165, 162, 162),
-      //                         fontFamily: 'Kanit')),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => HelpCenterPage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/help2.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ศูนย์ช่วยเหลือ",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => CareerPage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/us.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ร่วมงานกับเรา",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 100,
-      //                 ),
-      //                 Divider(color: Color.fromARGB(255, 165, 162, 162)),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Padding(
-      //                   padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/logout.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ออกจากระบบ",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     )),
     );
   }
 

@@ -6,44 +6,59 @@ import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/test%20folder/device_info.dart';
- 
+
+//* runApp(const First_Page());
 //!หน้าเปิดแอป
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(First_Page()));
-  //* runApp(const First_Page());
 }
 
-class First_Page extends StatelessWidget { 
+class First_Page extends StatelessWidget {
   const First_Page({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Kanit',
-       primarySwatch: Palette.kToDark,
+        primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),
       ),
-      home: main_Icon(),
+      home: MainAndIcon(),
     );
   }
 }
 
-class main_Icon extends StatefulWidget {
-  main_Icon({Key? key}) : super(key: key);
+class MainAndIcon extends StatefulWidget {
+  MainAndIcon({Key? key}) : super(key: key);
   @override
-  State<main_Icon> createState() => _main_IconState();
+  State<MainAndIcon> createState() => _MainAndIconState();
 }
 
-class _main_IconState extends State<main_Icon> {
+class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
     //*onResume
     super.initState();
     Load_AndGo();
-   
   }
+
+// class main_Icon extends StatefulWidget {
+//   main_Icon({Key? key}) : super(key: key);
+//   @override
+//   State<main_Icon> createState() => _main_IconState();
+// }
+
+// class _main_IconState extends State<main_Icon> {
+//   @override
+//   initState() {
+//     //*onResume
+//     super.initState();
+//     Load_AndGo();
+
+//   }
 
   Future<void> Load_AndGo() async {
     await Future.delayed(const Duration(seconds: 3), () {
@@ -58,8 +73,6 @@ class _main_IconState extends State<main_Icon> {
       );
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +89,6 @@ class _main_IconState extends State<main_Icon> {
                   height: MediaQuery.of(context).size.height * 0.25,
                   fit: BoxFit.cover),
             ],
-
-            
           ),
         ),
       ),

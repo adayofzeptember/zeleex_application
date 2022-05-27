@@ -544,21 +544,19 @@ class Links {
     return data;
   }
 }
-//!6+2
-// Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
-//   //?per_page=
-//   final response =
-//       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/products'));
 
-//   var jsonResponse = json.decode(response.body);
-//   List jsonCon = jsonResponse['data']['data'];
+Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
+  final response =
+      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/products'));
 
-//   if (response.statusCode == 200) {
-//     // List jsonResponse = json.decode(response.body);
-//     return jsonCon
-//         .map((data) => new Data_Products_ReadAll.fromJson(data))
-//         .toList();
-//   } else {
-//     throw Exception("error...");
-//   }
-// }
+  var jsonResponse = json.decode(response.body);
+  List jsonCon = jsonResponse['data']['data'];
+
+  if (response.statusCode == 200) {
+    return jsonCon
+        .map((data) => new Data_Products_ReadAll.fromJson(data))
+        .toList();
+  } else {
+    throw Exception("error...");
+  }
+}

@@ -357,7 +357,7 @@ class _StorePageState extends State<StorePage> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           )),
-                      Card1(),
+                      sortMenu(),
                       Spacer(),
                       Container(
                         //height: double.infinity,
@@ -400,7 +400,7 @@ class _StorePageState extends State<StorePage> {
   }
 }
 
-class Card1 extends StatelessWidget {
+class sortMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
