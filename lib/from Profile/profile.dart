@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
-
 import 'package:zeleex_application/terms.dart';
 import '../Plate.dart';
 import '../cart.dart';
@@ -104,19 +103,29 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text("Name Surname",
                             style: TextStyle(
+                              fontWeight: FontWeight.bold,
                                 fontFamily: 'Kanit',
                                 fontSize: 15,
                                 color: Colors.white)),
                         SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          "แก้ไขโปรไฟล์ >",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 51, 51, 51),
-                            fontFamily: 'Kanit',
-                            fontSize: 12,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              "แก้ไขโปรไฟล์",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 51, 51, 51),
+                                fontFamily: 'Kanit',
+                                fontSize: 12,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 15,
+                            )
+                          ],
                         ),
                       ],
                     ),
@@ -150,11 +159,21 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HistoryPage()));
                   },
-                  child: Text(
-                    "ประวัติการสั่งซื้อ >",
-                    style: TextStyle(
+                  child: Row(
+                    children: [
+                      Text(
+                        "ประวัติการสั่งซื้อ",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 130, 130, 130),
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.015),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
                         color: Color.fromARGB(255, 130, 130, 130),
-                        fontSize: MediaQuery.of(context).size.height * 0.015),
+                        size: 15,
+                      )
+                    ],
                   ),
                 )
               ],
@@ -174,7 +193,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BuyingListPage(indexTab: 0,),
+                          builder: (context) => BuyingListPage(
+                            indexTab: 0,
+                          ),
                         ),
                       );
                     },
@@ -259,12 +280,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   SvgPicture.asset(
                     'assets/images/arrowright.svg',
                   ),
-                      InkWell(
+                  InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>HistoryPage(),
+                          builder: (context) => HistoryPage(),
                         ),
                       );
                     },
@@ -419,12 +440,21 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            "สิ่งที่ถูกใจ >",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.015,
-                                fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                "สิ่งที่ถูกใจ",
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.015,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 15,
+                              )
+                            ],
                           )
                         ],
                       ),
@@ -493,12 +523,20 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            "นโยบายความเป็นส่วนตัว >",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.015,
-                                fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                "นโยบายความเป็นส่วนตัว",
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height * 0.015,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                                      Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 15,
+                            )
+                            ],
                           )
                         ],
                       ),
@@ -530,12 +568,20 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(
                             width: 7,
                           ),
-                          Text(
-                            "ศูนย์ช่วยเหลือ >",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.015,
-                                fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                "ศูนย์ช่วยเหลือ",
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height * 0.015,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                                      Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 15,
+                            )
+                            ],
                           )
                         ],
                       ),
@@ -567,12 +613,19 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(
                             width: 7,
                           ),
-                          Text(
-                            "ร่วมงานกับเรา >",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.015,
-                                fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                "ร่วมงานกับเรา",
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height * 0.015,
+                                    fontWeight: FontWeight.bold),
+                              ),        Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 15,
+                            )
+                            ],
                           )
                         ],
                       ),

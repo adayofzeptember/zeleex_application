@@ -252,11 +252,21 @@ class _Order_Sucess_DetailState extends State<Order_Sucess_Detail> {
                                   ),
                                 ],
                               ),
-                              Text(
-                                "ไปหน้าร้านค้า >",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 51, 51, 51),
-                                    fontWeight: FontWeight.bold),
+                              Row(
+                                children: [
+                                  Text(
+                                    "ไปหน้าร้านค้า",
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 51, 51, 51),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                          Icon(
+                              Icons.arrow_forward_ios_rounded,
+                                                                      color: Color.fromARGB(255, 51, 51, 51),
+
+                              size: 15,
+                            )
+                                ],
                               ),
                             ],
                           ),

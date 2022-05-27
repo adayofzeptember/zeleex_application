@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
 import '../../Plate.dart';
 import 'history_success.dart';
 
@@ -21,8 +20,9 @@ class _HistoryPageState extends State<HistoryPage> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Palette.kToDark,
-            ),
+                statusBarIconBrightness: Brightness.light,
+                statusBarBrightness: Brightness.light,
+                statusBarColor: Palette.kToDark),
             backgroundColor: Palette.kToDark,
             elevation: 0,
             title: Row(
