@@ -19,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   late LoginRequestModel requestModel;
   bool isApiCallprocess = false;
   @override
-
   void initState() {
     requestModel = new LoginRequestModel();
     super.initState();
@@ -31,6 +30,10 @@ class _LoginPageState extends State<LoginPage> {
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
             appBar: AppBar(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarIconBrightness: Brightness.light,
+                  statusBarBrightness: Brightness.light,
+                  statusBarColor: Palette.kToDark),
               title: Center(
                   child: Text(
                 '',
@@ -39,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
               backgroundColor: Palette.kToDark,
               elevation: 0,
             ),
+            
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -172,19 +176,20 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        
-                                        if(formKey.currentState!.validate()){
+                                        if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
-                                          loginLOL(requestModel).then((value) => {
-                                            if(value.token.isNotEmpty){
-                                                print("success"+ value.token.toString())
-                                            }else{
-                                              print(value.error)
-                                            }
-
-                                          });
+                                          loginLOL(requestModel)
+                                              .then((value) => {
+                                                    if (value.token.isNotEmpty)
+                                                      {
+                                                        print("success" +
+                                                            value.token
+                                                                .toString())
+                                                      }
+                                                    else
+                                                      {print(value.error)}
+                                                  });
                                           print(requestModel.toJson());
-                                          
                                         }
                                       },
                                       child: Padding(

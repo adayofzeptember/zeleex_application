@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool isChecked = false;
   @override
+  
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
@@ -25,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (states.any(interactiveStates.contains)) {
       return Colors.blue;
     }
-    return Colors.grey;
+    return Palette.kToDark;
   }
 
   @override
@@ -33,15 +34,10 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          // systemOverlayStyle: SystemUiOverlayStyle(
-          //   // Status bar color
-          //   statusBarColor: Palette.kToDark,
-
-          //   // Status bar brightness (optional)
-          //   statusBarIconBrightness:
-          //       Brightness.dark, // For Android (dark icons)
-          //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
-          // ),
+          systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarIconBrightness: Brightness.light,
+                  statusBarBrightness: Brightness.light,
+                  statusBarColor: Palette.kToDark),
           title: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Center(
