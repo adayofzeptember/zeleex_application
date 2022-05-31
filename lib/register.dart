@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'Plate.dart';
 import 'login.dart';
 import 'terms.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
-
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -16,8 +14,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool isChecked = false;
   @override
-  
-  Color getColor(Set<MaterialState> states) {
+  Color getColor(Set<MaterialState> states) { 
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
       MaterialState.hovered,
@@ -35,9 +32,9 @@ class _RegisterPageState extends State<RegisterPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarIconBrightness: Brightness.light,
-                  statusBarBrightness: Brightness.light,
-                  statusBarColor: Palette.kToDark),
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.light,
+              statusBarColor: Palette.kToDark),
           title: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Center(
@@ -54,23 +51,11 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               Stack(
                 children: [
-                  // SvgPicture.asset('assets/images/cir14.svg')
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //     color: Palette.kToDark,
-                  //     borderRadius: BorderRadius.only(
-                  //         bottomLeft: Radius.circular(200),
-                  //         bottomRight: Radius.circular(200)),
-                  //   ),
-                  //   height: 100,
-                  // ),
-
                   CustomPaint(
                     painter: ShapesPainter(),
                     child: Container(
                         height: MediaQuery.of(context).size.height * 0.1),
                   ),
-
                   Column(
                     children: [
                       Row(
@@ -90,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           Text(
-                            "dd",
+                            "   ",
                             style: TextStyle(
                                 color: Palette.kToDark,
                                 fontSize: 30,
@@ -118,19 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           BorderSide(color: Colors.white),
                                       borderRadius: BorderRadius.circular(10)),
                                   // focusedBorder: OutlineInputBorder(
-                                  //   // borderSide:
-                                  //   //     BorderSide(color: Colors.white),
-                                  //   borderRadius: BorderRadius.circular(10.7),
-                                  // ),
-                                  // enabledBorder: OutlineInputBorder(
-                                  //   borderSide: BorderSide(
-                                  //       color: Colors.white, width: 0.0),
-                                  // ),
-                                  // enabledBorder: UnderlineInputBorder(
-                                  //   borderSide:
-                                  //       BorderSide(color: Colors.white),
-                                  //   borderRadius: BorderRadius.circular(25.7),
-                                  // ),
+                        
                                   filled: true,
                                   fillColor: Color.fromARGB(255, 243, 238, 238),
                                   border: OutlineInputBorder(
@@ -300,11 +273,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ],
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
+                            
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -383,3 +354,5 @@ class _RegisterPageState extends State<RegisterPage> {
         ));
   }
 }
+
+

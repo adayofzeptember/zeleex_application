@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/register.dart';
+import 'package:zeleex_application/test%20folder/request_email_model.dart';
 import 'Plate.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,11 +17,13 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
-  late LoginRequestModel requestModel;
+  //late LoginRequestModel requestModel;
+  late Request_Model requestModel;
+
   bool isApiCallprocess = false;
   @override
   void initState() {
-    requestModel = new LoginRequestModel();
+    requestModel = new Request_Model();
     super.initState();
   }
 
@@ -42,7 +45,6 @@ class _LoginPageState extends State<LoginPage> {
               backgroundColor: Palette.kToDark,
               elevation: 0,
             ),
-            
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -178,16 +180,15 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
-                                          loginLOL(requestModel)
+                                          login_zeleex(requestModel)
                                               .then((value) => {
-                                                    if (value.token.isNotEmpty)
+                                                    if (value.email!.isNotEmpty)
                                                       {
-                                                        print("success" +
-                                                            value.token
-                                                                .toString())
+                                                        print("yes"),
+
                                                       }
                                                     else
-                                                      {print(value.error)}
+                                                      {print("emty "+ value.toString())}
                                                   });
                                           print(requestModel.toJson());
                                         }

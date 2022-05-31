@@ -3,48 +3,48 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Animals_All {
-  String? responseCode;
-  String? responseStatus;
-  String? responseMessage;
-  String? sessionID;
-  int? serverDateTimeMS;
-  String? serverDatetime;
-  Data? data;
+// class Animals_All {
+//   String? responseCode;
+//   String? responseStatus;
+//   String? responseMessage;
+//   String? sessionID;
+//   int? serverDateTimeMS;
+//   String? serverDatetime;
+//   Data? data;
 
-  Animals_All(
-      {this.responseCode,
-      this.responseStatus,
-      this.responseMessage,
-      this.sessionID,
-      this.serverDateTimeMS,
-      this.serverDatetime,
-      this.data});
+//   Animals_All(
+//       {this.responseCode,
+//       this.responseStatus,
+//       this.responseMessage,
+//       this.sessionID,
+//       this.serverDateTimeMS,
+//       this.serverDatetime,
+//       this.data});
 
-  Animals_All.fromJson(Map<String, dynamic> json) {
-    responseCode = json['responseCode'];
-    responseStatus = json['responseStatus'];
-    responseMessage = json['responseMessage'];
-    sessionID = json['sessionID'];
-    serverDateTimeMS = json['serverDateTimeMS'];
-    serverDatetime = json['serverDatetime'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
+//   Animals_All.fromJson(Map<String, dynamic> json) {
+//     responseCode = json['responseCode'];
+//     responseStatus = json['responseStatus'];
+//     responseMessage = json['responseMessage'];
+//     sessionID = json['sessionID'];
+//     serverDateTimeMS = json['serverDateTimeMS'];
+//     serverDatetime = json['serverDatetime'];
+//     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['responseCode'] = this.responseCode;
-    data['responseStatus'] = this.responseStatus;
-    data['responseMessage'] = this.responseMessage;
-    data['sessionID'] = this.sessionID;
-    data['serverDateTimeMS'] = this.serverDateTimeMS;
-    data['serverDatetime'] = this.serverDatetime;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['responseCode'] = this.responseCode;
+//     data['responseStatus'] = this.responseStatus;
+//     data['responseMessage'] = this.responseMessage;
+//     data['sessionID'] = this.sessionID;
+//     data['serverDateTimeMS'] = this.serverDateTimeMS;
+//     data['serverDatetime'] = this.serverDatetime;
+//     if (this.data != null) {
+//       data['data'] = this.data!.toJson();
+//     }
+//     return data;
+//   }
+// }
 
 class Data {
   int? currentPage;
@@ -519,21 +519,21 @@ class Links {
   }
 }
 
-//*fetch(widget.id)
 
-// Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
-//   final response =
-//       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/animals'));
 
-//   var jsonResponse = json.decode(response.body);
-//   List jsonCon = jsonResponse['data']['data'];
+Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
+  final response =
+      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/animals'));
 
-//   if (response.statusCode == 200) {
-//     return jsonCon
-//         .map((data) => new Data_Animal_ReadAll.fromJson(data))
-//         .toList();
-//   } else {
-//     throw Exception("error...");
-//   }
-// }
+  var jsonResponse = json.decode(response.body);
+  List jsonCon = jsonResponse['data']['data'];
+
+  if (response.statusCode == 200) {
+    return jsonCon
+        .map((data) => new Data_Animal_ReadAll.fromJson(data))
+        .toList();
+  } else {
+    throw Exception("error...");
+  }
+}
 
