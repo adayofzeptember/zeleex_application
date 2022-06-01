@@ -8,7 +8,7 @@ import 'store_page_detail.dart';
 import 'store_page_detail_cattleDetail.dart';
 
 class Store_CattlePage extends StatefulWidget {
-    String storeID = "";
+  String storeID = "";
 
   Store_CattlePage({Key? key, required this.storeID}) : super(key: key);
 
@@ -27,11 +27,12 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
     Data_Store msg = Data_Store.fromJson(jsonCon);
     return msg;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,7 +67,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
               children: [
                 Stack(
                   children: [
-                             FutureBuilder(
+                    FutureBuilder(
                         future: fetchStore_ByID(),
                         builder: (BuildContext context,
                             AsyncSnapshot<dynamic> snapshot) {
@@ -81,7 +82,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                             );
                           }
                         }),
-                          FutureBuilder(
+                    FutureBuilder(
                         future: fetchStore_ByID(),
                         builder: (BuildContext context,
                             AsyncSnapshot<dynamic> snapshot) {
@@ -311,7 +312,6 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                             );
                           }
                         })
-              
                   ],
                 ),
                 SizedBox(
@@ -526,7 +526,6 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                               ),
                             ),
                           ),
-                  
                           Container(
                             width: 190,
                             child: Card(

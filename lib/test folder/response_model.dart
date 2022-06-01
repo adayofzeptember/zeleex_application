@@ -13,11 +13,13 @@ class ResponseModel {
   String? token;
   String? imageProfile;
   int? storeCheck;
+  //String? error;
 
   ResponseModel({
-    this.id,
-    this.name,
+    // this.id,
+    // this.name,
     this.email,
+    //this.error
     // this.emailVerifiedAt,
     // this.phone,
     // this.avatar,
@@ -30,12 +32,13 @@ class ResponseModel {
     // this.imageProfile,
     // this.storeCheck
   });
-
+  
   factory ResponseModel.fromJson(Map<String, dynamic> json) {
     return ResponseModel(
       // id: json["id"] != null ? json["id"] : "",
       // name: json["name"] != null ? json["name"] : "",
       email: json["email"] != null ? json["email"] : "",
+      //error: json["error"] != null ? json["error"] : "",
     );
   }
 }

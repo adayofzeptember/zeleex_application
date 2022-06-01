@@ -40,25 +40,10 @@ class MainAndIcon extends StatefulWidget {
 class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
-    //*onResume
+    //!onResume
     super.initState();
     Load_AndGo();
   }
-
-// class main_Icon extends StatefulWidget {
-//   main_Icon({Key? key}) : super(key: key);
-//   @override
-//   State<main_Icon> createState() => _main_IconState();
-// }
-
-// class _main_IconState extends State<main_Icon> {
-//   @override
-//   initState() {
-//     //*onResume
-//     super.initState();
-//     Load_AndGo();
-
-//   }
 
   Future<void> Load_AndGo() async {
     await Future.delayed(const Duration(seconds: 3), () {
@@ -83,9 +68,7 @@ class _MainAndIconState extends State<MainAndIcon> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // SvgPicture.asset('assets/images/newLogo.svg', width: 300, height: 300, fit: BoxFit.cover, color: Palette.kToDark,)
               Image.asset('assets/images/Frame.png',
-                  // width: 300,
                   height: MediaQuery.of(context).size.height * 0.25,
                   fit: BoxFit.cover),
             ],

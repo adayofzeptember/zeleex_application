@@ -184,11 +184,15 @@ class _LoginPageState extends State<LoginPage> {
                                               .then((value) => {
                                                     if (value.email!.isNotEmpty)
                                                       {
-                                                        print("yes"),
-
+                                                        print("success"),
+                                                        //print(value.toString())
+                                                        // instance of response
                                                       }
                                                     else
-                                                      {print("emty "+ value.toString())}
+                                                      {
+                                                        print("not success"),
+                                                        //print(value.toString()),
+                                                      }
                                                   });
                                           print(requestModel.toJson());
                                         }
@@ -288,9 +292,6 @@ class _LoginPageState extends State<LoginPage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               children: [
-                                                // SizedBox(
-                                                //   width: 10,
-                                                // ),
                                                 SvgPicture.asset(
                                                     'assets/images/fb.svg'),
                                                 SizedBox(
@@ -330,9 +331,6 @@ class _LoginPageState extends State<LoginPage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               children: [
-                                                // SizedBox(
-                                                //   width: 10,
-                                                // ),
                                                 SvgPicture.asset(
                                                     'assets/images/gg.svg'),
                                                 SizedBox(

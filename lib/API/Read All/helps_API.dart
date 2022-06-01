@@ -202,7 +202,7 @@ Future<List<Data2>> fetch_HelpCenter() async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
-  //print(jsonResponse['data']['data']);
+  //print(jsonResponse['data']['data'][1]);
 
   if (response.statusCode == 200) {
     // List jsonResponse = json.decode(response.body);
@@ -211,3 +211,8 @@ Future<List<Data2>> fetch_HelpCenter() async {
     throw Exception("error...");
   }
 }
+
+
+// void main(List<String> args) {
+//   fetch_HelpCenter();
+// }
