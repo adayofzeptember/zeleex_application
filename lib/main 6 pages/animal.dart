@@ -136,7 +136,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
         children: <Widget>[
           SizedBox(
             height: 5,
-          ),    
+          ),
           Container(
             color: Colors.white,
             width: double.infinity,
@@ -146,7 +146,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    InkWell( 
+                    InkWell(
                       onTap: () {
                         setState(() {
                           pressed = !pressed;
@@ -234,7 +234,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                         childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.45),
                       ),
-                      itemCount: data!.length + 1,
+                      itemCount: data!.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
                           return Container(
@@ -871,7 +871,7 @@ class Card1 extends StatelessWidget {
   }
 }
 
-class Card2 extends StatelessWidget { 
+class Card2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(

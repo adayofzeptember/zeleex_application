@@ -32,7 +32,6 @@ import '../login.dart';
 
 class Main_Widget extends StatefulWidget {
   Main_Widget({Key? key}) : super(key: key);
-
   @override
   State<Main_Widget> createState() => _Main_WidgetState();
 }
@@ -200,7 +199,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.05,
+                            height: MediaQuery.of(context).size.height * 0.057,
                             width: double.infinity,
                             child: TextField(
                               onSubmitted: (value) {
@@ -214,13 +213,13 @@ class _Main_WidgetState extends State<Main_Widget> {
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
-                                hintText: 'Search...',
+                                hintText: 'ค้นหา...',
                                 prefixIcon: Icon(
                                   Icons.search,
                                   color: Color.fromARGB(255, 161, 161, 161),
-                                  size: 30,
+                                  size: 25,
                                 ),
-                                hintStyle: TextStyle(color: Colors.white),
+                                //hintStyle: TextStyle(color: Palette.kToDark),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(60.0)),
@@ -250,7 +249,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       (BuildContext, index, realIndex) {
                                     return InkWell(
                                       onTap: (() {
-                                          launchUrlString(data![index].link.toString());
+                                        launchUrlString(
+                                            data![index].link.toString());
                                       }),
                                       child: Container(
                                         height: 40,
@@ -263,7 +263,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                           imageUrl:
                                               data![index].image!.toString(),
                                           //fit: BoxFit.cover,
-                                    
+
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Container(
@@ -281,7 +281,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   alignment: Alignment.center,
-                                                  child: Text("ไม่พบรูปภาพ")),
+                                                  child: Text("ข้อผิดพลาด: " +
+                                                      error.toString())),
                                             ),
                                           ),
                                         ),
@@ -310,253 +311,102 @@ class _Main_WidgetState extends State<Main_Widget> {
                       SizedBox(
                         height: 13,
                       ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.14,
-                        child: Row(
-                          children: [
-                            FutureBuilder<List<Data_Collection_Board>>(
-                              future: future_board,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  List<Data_Collection_Board>? data =
-                                      snapshot.data;
-                                  return Expanded(
-                                    child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        // shrinkWrap: true,
-                                        itemCount: data?.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return SizedBox(
-                                            height: 100,
-                                            width: 80,
-                                            child: Column(
-                                              children: [
-                                                CachedNetworkImage(
-                                                  imageUrl: data![index]
-                                                      .image!
-                                                      .main
-                                                      .toString(),
-                                                  imageBuilder: (context,
-                                                          imageProvider) =>
-                                                      Container(
-                                                    height: 80,
-                                                    width: 80,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                          image: imageProvider,
-                                                          fit: BoxFit.cover),
+
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.13,
+                          child: Row(
+                            children: [
+                              FutureBuilder<List<Data_Collection_Board>>(
+                                future: future_board,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    List<Data_Collection_Board>? data =
+                                        snapshot.data;
+                                    return Expanded(
+                                      child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          // shrinkWrap: true,
+                                          itemCount: data?.length,
+                                          itemBuilder:
+                                              (BuildContext context, int index) {
+                                            return Container(
+                                              height: 100,
+                                              width: 80,
+                                              child: Column(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 75,
+                                                    width: 70,
+                                                    child: CircleAvatar(
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: data![index]
+                                                            .image!
+                                                            .main
+                                                            .toString(),
+                                                        imageBuilder: (context,
+                                                                imageProvider) =>
+                                                            Container(
+                                                          height: 85,
+                                                          width: 85,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            image: DecorationImage(
+                                                                image:
+                                                                    imageProvider,
+                                                                fit:
+                                                                    BoxFit.cover),
+                                                          ),
+                                                        ),
+                                                        placeholder:
+                                                            (context, url) =>
+                                                                CircleAvatar(
+                                                          backgroundColor:
+                                                              Color.fromARGB(255,
+                                                                  141, 141, 141),
+                                                        ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            CircleAvatar(
+                                                          child: Icon(
+                                                            Icons.person,
+                                                            color:
+                                                                Palette.kToDark,
+                                                          ),
+                                                          backgroundColor:
+                                                              Color.fromARGB(255,
+                                                                  224, 224, 224),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                  placeholder: (context, url) =>
-                                                      CircleAvatar(
-                                                    backgroundColor:
-                                                        Color.fromARGB(
-                                                            255, 141, 141, 141),
-                                                  ),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          CircleAvatar(
-                                                    child: Icon(
-                                                      Icons.person,
-                                                      color: Palette.kToDark,
-                                                    ),
-                                                    backgroundColor:
-                                                        Color.fromARGB(
-                                                            255, 224, 224, 224),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 5),
-                                                Text(
-                                                  data[index].title.toString(),
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                )
-                                              ],
-                                            ),
-                                          );
-                                        }),
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return Text("${snapshot.error}");
-                                }
-                                return Container();
-                              },
-                            ),
-                          ],
+                                                  SizedBox(height: 5),
+                                                  Text(
+                                                    data[index].title.toString(),
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return Text("${snapshot.error}");
+                                  }
+                                  return Container();
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      // SingleChildScrollView(
-                      //   scrollDirection: Axis.horizontal,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                      //     child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //       children: [
-                      //         InkWell(
-                      //           onTap: () {
-                      //             Navigator.push(
-                      //                 context,
-                      //                 MaterialPageRoute(
-                      //                   builder: (context) => AnimalsPage(),
-                      //                 ));
-                      //           },
-                      //           child:
-                      // Column(
-                      //             children: [
-                      //               SizedBox(
-                      //                 width: 60,
-                      //                 height: 60,
-                      //                 child: CircleAvatar(
-                      //                   backgroundColor:
-                      //                       Color.fromARGB(255, 255, 255, 255),
-                      //                   child: SvgPicture.asset(
-                      //                     'assets/images/cow.svg',
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //               SizedBox(height: 5),
-                      //               Text(
-                      //                 "โคเนื้อ",
-                      //                 style: TextStyle(fontSize: 12),
-                      //               )
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         SizedBox(
-                      //           width: 15,
-                      //         ),
-                      //         Column(
-                      //           children: [
-                      //             SizedBox(
-                      //               width: 60,
-                      //               height: 60,
-                      //               child: CircleAvatar(
-                      //                 backgroundColor:
-                      //                     Color.fromARGB(255, 255, 255, 255),
-                      //                 child: SvgPicture.asset(
-                      //                   'assets/images/cowmilk.svg',
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             SizedBox(height: 5),
-                      //             Text("โคนม", style: TextStyle(fontSize: 12))
-                      //           ],
-                      //         ),
-                      //         SizedBox(
-                      //           width: 15,
-                      //         ),
-                      //         Column(
-                      //           children: [
-                      //             SizedBox(
-                      //               width: 60,
-                      //               height: 60,
-                      //               child: CircleAvatar(
-                      //                 backgroundColor:
-                      //                     Color.fromARGB(255, 255, 255, 255),
-                      //                 child: SvgPicture.asset(
-                      //                   'assets/images/buff.svg',
-                      //                   fit: BoxFit.fitWidth,
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             SizedBox(height: 5),
-                      //             Text("กระบือ", style: TextStyle(fontSize: 12))
-                      //           ],
-                      //         ),
-                      //         SizedBox(width: 15),
-                      //         InkWell(
-                      //           onTap: () {
-                      //             Navigator.push(
-                      //                 context,
-                      //                 MaterialPageRoute(
-                      //                     builder: (context) => SemensPage()));
-                      //           },
-                      //           child: Column(
-                      //             children: [
-                      //               SizedBox(
-                      //                 width: 60,
-                      //                 height: 60,
-                      //                 child: CircleAvatar(
-                      //                   backgroundColor:
-                      //                       Color.fromARGB(255, 255, 255, 255),
-                      //                   child: SvgPicture.asset(
-                      //                     'assets/images/cum2.svg',
-                      //                     fit: BoxFit.fitWidth,
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //               SizedBox(height: 5),
-                      //               Text("น้ำเชื้อ",
-                      //                   style: TextStyle(fontSize: 12))
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         SizedBox(
-                      //           width: 15,
-                      //         ),
-                      //         InkWell(
-                      //           onTap: () {
-                      //             Navigator.push(
-                      //                 context,
-                      //                 MaterialPageRoute(
-                      //                     builder: (context) => ProductPage()));
-                      //           },
-                      //           child: Column(
-                      //             children: [
-                      //               SizedBox(
-                      //                 width: 60,
-                      //                 height: 60,
-                      //                 child: CircleAvatar(
-                      //                   backgroundColor:
-                      //                       Color.fromARGB(255, 255, 255, 255),
-                      //                   child: SvgPicture.asset(
-                      //                     'assets/images/thing.svg',
-                      //                     fit: BoxFit.fitWidth,
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //               SizedBox(height: 5),
-                      //               Text("อุปกรณ์",
-                      //                   style: TextStyle(fontSize: 12))
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         SizedBox(
-                      //           width: 15,
-                      //         ),
-                      //         InkWell(
-                      //           onTap: () {
-                      //             Navigator.push(
-                      //                 context,
-                      //                 MaterialPageRoute(
-                      //                     builder: (context) => ProductPage()));
-                      //           },
-                      //           child: Column(
-                      //             children: [
-                      //               SizedBox(
-                      //                 width: 60,
-                      //                 height: 60,
-                      //                 child: CircleAvatar(
-                      //                   backgroundColor:
-                      //                       Color.fromARGB(255, 255, 255, 255),
-                      //                   child: SvgPicture.asset(
-                      //                     'assets/images/food.svg',
-                      //                     fit: BoxFit.fitWidth,
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //               SizedBox(height: 5),
-                      //               Text("อาหารและยา",
-                      //                   style: TextStyle(fontSize: 12))
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
+
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                         child: Container(

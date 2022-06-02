@@ -18,7 +18,7 @@ import '../aboutus.dart';
 import '../help.dart';
 import '../newsfeed_detail.dart';
 import '../from Profile/profile.dart';
-//future_blogs = fetch_Blog_readAll();
+
 
 class NewsFeedPage extends StatefulWidget {
   NewsFeedPage({Key? key}) : super(key: key);
@@ -352,7 +352,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                 ),
                               ),
                             );
-                          } else {
+                          } 
+                          else {
                             return hasMore
                                 ? Padding(
                                     padding: const EdgeInsets.only(
@@ -374,7 +375,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                         }),
                   ),
                 );
-              } else if (snapshot.hasError) {
+              } 
+              else if (snapshot.hasError) {
                 return Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ");
               }
 

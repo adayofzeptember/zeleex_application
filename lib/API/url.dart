@@ -1,0 +1,1 @@
+String zeleexAPI_URl = 'https://api.zeleex.com/api/';

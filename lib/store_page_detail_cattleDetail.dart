@@ -159,7 +159,13 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                         color: Color.fromARGB(
                                             255, 141, 141, 141))),
                                 alignment: Alignment.center,
-                                child: Text("ไม่พบรูปภาพของสัตว์")),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 300,
+                                    child: Center(child: Text("ไม่พบรูปภาพของสัตว์"))),
+                                )),
                           ),
                         ),
                       ),

@@ -523,7 +523,7 @@ class Links {
 
 Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
   final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/animals'));
+      await http.get(Uri.parse('https://api.zeleex.com/api/animals'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];

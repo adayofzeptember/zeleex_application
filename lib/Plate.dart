@@ -14,8 +14,6 @@ class Palette {
       700: const Color(0xff2e130e),//80% 
       800: const Color(0xff170907),//90% 
       900: const Color(0xff000000),//100% 
-
-      
     }, 
   ); 
 } // 

@@ -191,8 +191,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                     )
                                   ],
                                 ),
-                                
-                               
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -301,9 +299,30 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                             color: Color.fromARGB(
                                                 255, 141, 141, 141))),
                                     alignment: Alignment.center,
-                                    child: Text("ไม่พบรูปภาพของสินค้า")),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Container(
+                                          width: double.infinity,
+                                          height: 300,
+                                          child: Center(
+                                              child:
+                                                  Text("ไม่พบรูปภาพของสัตว์"))),
+                                    )),
                               ),
                             ),
+
+                            // errorWidget: (context, url, error) => Padding(
+                            //   padding: const EdgeInsets.only(right: 5, left: 5),
+                            //   child: Center(
+                            //     child: Container(
+                            //         decoration: BoxDecoration(
+                            //             border: Border.all(
+                            //                 color: Color.fromARGB(
+                            //                     255, 141, 141, 141))),
+                            //         alignment: Alignment.center,
+                            //         child: Text("ไม่พบรูปภาพของสินค้า")),
+                            //   ),
+                            // ),
                           ),
                         ),
                         Container(
@@ -582,7 +601,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 }
               }),
           Container(
-        
             width: double.infinity,
             color: Colors.white,
             child: Padding(
@@ -675,7 +693,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                 width: 90,
                                 height: 90,
                               ),
-                                 Image.asset(
+                              Image.asset(
                                 'assets/images/cart_pd2.png',
                                 width: 90,
                                 height: 90,
@@ -692,7 +710,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                       ],
                     ),
                   ),
-                   Container(
+                  Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -746,7 +764,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                 width: 90,
                                 height: 90,
                               ),
-                                 Image.asset(
+                              Image.asset(
                                 'assets/images/cart_pd2.png',
                                 width: 90,
                                 height: 90,

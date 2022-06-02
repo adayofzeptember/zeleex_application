@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zeleex_application/API/url.dart';
 
 class Board {
   String? responseCode;
@@ -119,7 +120,7 @@ class Image {
 
 Future<List<Data_Collection_Board>> fetch_collection_board() async {
   final response = await http
-      .get(Uri.parse('https://sanboxapi.zeleex.com/api/collection-boards'));
+      .get(Uri.parse(zeleexAPI_URl.toString()+'collection-boards'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data'];
