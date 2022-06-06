@@ -4,6 +4,8 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:html/parser.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/animal_id_API.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'Plate.dart';
@@ -23,9 +25,14 @@ class Store_Cattle_Detail extends StatefulWidget {
 
 class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
   Future<Animal> fetch_Animal_ByID() async {
-    var url = "https://sanboxapi.zeleex.com/api/animals/" +
-        widget.animalID.toString();
-    var response = await http.get(Uri.parse(url));
+    var url =
+        "https://api.zeleex.com/api/animals/" + widget.animalID.toString();
+    var response = await http.get(Uri.parse(url), headers: {
+      //'Accept: application/json'
+
+      'Content-Type': 'application/json',
+      'Charset': 'utf-8'
+    });
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['animal'];
     Animal msg = Animal.fromJson(jsonCon);
@@ -121,7 +128,9 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               ),
               Text(widget.animalName.toString(),
                   style: TextStyle(
-                      color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                      color: Palette.kToDark,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17)),
               Row(
                 children: [
                   SvgPicture.asset(
@@ -139,6 +148,8 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
                   Animal thisAnimal = snapshot.data;
+                  String getContent = thisAnimal.content.toString();
+                  var document555 = parse(getContent);
                   return Column(
                     //! container คลุม column
                     children: <Widget>[
@@ -162,9 +173,10 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Container(
-                                    width: double.infinity,
-                                    height: 300,
-                                    child: Center(child: Text("ไม่พบรูปภาพของสัตว์"))),
+                                      width: double.infinity,
+                                      height: 300,
+                                      child: Center(
+                                          child: Text("ไม่พบรูปภาพของสัตว์"))),
                                 )),
                           ),
                         ),
@@ -257,6 +269,10 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                         ),
                                         SizedBox(width: 10),
                                         Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.3,
                                           child: Text(
                                             thisAnimal.store!.address
                                                 .toString(),
@@ -302,11 +318,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                               pressed = !pressed;
                                             });
                                           },
-                                          //         style: pressed
-                                          // ? TextStyle(
-                                          //     color: Colors.black)
-                                          // : TextStyle(
-                                          //     color: Color.fromARGB(255, 229, 233, 229)),
+                                  
                                           child: Text(
                                             pressed ? "ติดตาม" : "ติดตามแล้ว",
                                             style: TextStyle(
@@ -327,63 +339,65 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                         height: 3,
                       ),
                       Container(
-                          width: double.infinity,
-                          color: Colors.white,
-                          child: Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                              child: ExpandableNotifier(
-                                  child: Column(
-                                children: <Widget>[
-                                  ScrollOnExpand(
-                                    scrollOnExpand: true,
-                                    scrollOnCollapse: false,
-                                    child: ExpandablePanel(
-                                      theme: const ExpandableThemeData(
-                                        headerAlignment:
-                                            ExpandablePanelHeaderAlignment
-                                                .center,
-                                        tapBodyToCollapse: false,
-                                      ),
-                                      header: Text(
-                                        "รายละเอียดสินค้า",
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                            fontSize: 20),
-                                      ),
-                                      collapsed: Container(),
-                                      expanded: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            thisAnimal.description.toString(),
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 130, 130, 130)),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                      builder: (_, collapsed, expanded) {
-                                        return Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 10, right: 10, bottom: 10),
-                                          child: Expandable(
-                                            collapsed: collapsed,
-                                            expanded: expanded,
-                                            theme: const ExpandableThemeData(
-                                                crossFadePoint: 0),
-                                          ),
-                                        );
-                                      },
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                            child: ExpandableNotifier(
+                                child: Column(
+                              children: <Widget>[
+                                ScrollOnExpand(
+                                  scrollOnExpand: true,
+                                  scrollOnCollapse: false,
+                                  child: ExpandablePanel(
+                                    theme: const ExpandableThemeData(
+                                      headerAlignment:
+                                          ExpandablePanelHeaderAlignment.center,
+                                      tapBodyToCollapse: false,
                                     ),
+                                    header: Text(
+                                      "รายละเอียดสินค้า",
+                                      style: TextStyle(
+                                          color: Palette.kToDark,
+                                          fontSize: 20),
+                                    ),
+                                    collapsed: Container(),
+                                    expanded: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        HtmlWidget(document555.outerHtml),
+                                        // Text(
+                                        //   thisAnimal.description.toString(),
+                                        //   style: TextStyle(
+                                        //       color: Color.fromARGB(
+                                        //           255, 130, 130, 130)),
+                                        // ),
+                                        SizedBox(
+                                          height: 80,
+                                        ),
+                                      ],
+                                    ),
+                                    builder: (_, collapsed, expanded) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 0, right: 0, bottom: 10),
+                                        child: Expandable(
+                                          collapsed: collapsed,
+                                          expanded: expanded,
+                                          theme: const ExpandableThemeData(
+                                              crossFadePoint: 0),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                ],
-                              ))),
-                        ),
+                                ),
+                              ],
+                            ))),
+                      ),
                     ],
                   );
                 } else {
@@ -392,10 +406,8 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                     child: Center(child: CircularProgressIndicator()),
                   );
                 }
+                
               }),
-
-              
-          
         ],
       )),
     );

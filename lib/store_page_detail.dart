@@ -207,7 +207,7 @@ class _Store_DetailState extends State<Store_Detail> {
                               Data_Store thisStore_notCoverIMG = snapshot.data;
                               String getContent =
                                   thisStore_notCoverIMG.content.toString();
-                              var document = parse('<body>Hello world! <a href="www.html5rocks.com">HTML5 rocks!');
+                              var document555 = parse(getContent);
 
                               return Container(
                                   child: Padding(
@@ -423,7 +423,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                         Divider(
                                             color: Color.fromARGB(
                                                 255, 165, 162, 162)),
-                                       HtmlWidget(document.outerHtml),
+                                       HtmlWidget(document555.outerHtml),
                                         // Padding(
                                         //   padding: const EdgeInsets.fromLTRB(
                                         //       0, 10, 0, 0),

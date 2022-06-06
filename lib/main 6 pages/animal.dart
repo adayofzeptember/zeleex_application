@@ -209,6 +209,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Data_Animal_All>? data = snapshot.data;
+
                 return Expanded(
                   child: RawScrollbar(
                     controller: controller,
@@ -225,6 +226,14 @@ class _AnimalsPageState extends State<AnimalsPage> {
                       itemCount: data!.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
+                          String isNull = data[index].description.toString();
+                          String animalDesc = "";
+                          if (isNull == 'null') {
+                            animalDesc = "ดูรายละเอียดเพิ่มเติม";
+                          } else {
+                            animalDesc = data[index].description.toString();
+                          }
+
                           return Container(
                             width: MediaQuery.of(context).size.width * 0.5,
                             child: Card(
@@ -232,6 +241,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                   borderRadius: BorderRadius.circular(5.0)),
                               child: InkWell(
                                 onTap: () {
+                                print(data[index].id.toString());
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -260,7 +270,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                                 .image!
                                                 .thumbnail
                                                 .toString(),
-                                     fit: BoxFit.fill,
+                                            fit: BoxFit.fill,
                                             progressIndicatorBuilder: (context,
                                                     url, downloadProgress) =>
                                                 Container(
@@ -319,9 +329,10 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                       child: Container(
                                         height: 30,
                                         child: Text(
-                                          data[index].description.toString(),
+                                          animalDesc.toString(),
+                                          // data[index].description.toString(),
                                           style: TextStyle(
-                                              fontSize: 10,
+                                              fontSize: 12,
                                               color: Color.fromARGB(
                                                   255, 130, 130, 130)),
                                         ),
