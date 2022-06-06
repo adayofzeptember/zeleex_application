@@ -15,7 +15,18 @@ class NewsFeedPage_Detail extends StatefulWidget {
   @override
   State<NewsFeedPage_Detail> createState() => _NewsFeedPage_Detail();
 }
+
 class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
+  Future<Blog> fetchBlog_ByID() async {
+    var url = "https://api.zeleex.com/api/blogs/" + widget.blogID;
+    var response = await http.get(Uri.parse(url));
+    var jsonResponse = json.decode(response.body);
+    var jsonCon = jsonResponse['data']['blog'];
+    Blog msg = Blog.fromJson(jsonCon);
+
+    return msg;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,18 +57,19 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                 style: TextStyle(
                     color: Palette.kToDark, fontWeight: FontWeight.bold),
               ),
-              Container(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    SvgPicture.asset(
-                      'assets/images/cart123.svg',
-                    ),
-                  ],
-                ),
-              )
+              Text("")
+              // Container(
+              //   child: Row(
+              //     children: [
+              //       SizedBox(
+              //         width: 10,
+              //       ),
+              //       SvgPicture.asset(
+              //         'assets/images/cart123.svg',
+              //       ),
+              //     ],
+              //   ),
+              // )
             ],
           )),
       body: SingleChildScrollView(
@@ -66,7 +78,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
           child: Column(
             children: <Widget>[
               FutureBuilder(
-                  future: fetchBlog_ByID(widget.blogID),
+                  future: fetchBlog_ByID(),
                   builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.hasData) {
@@ -76,18 +88,17 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    blog.title.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: Color.fromARGB(255, 51, 51, 51)),
-                                  ),
-                                ]
-                              ),
+                              padding:
+                                  const EdgeInsets.fromLTRB(15, 20, 15, 0),
+                              child: Row(children: [
+                                Text(
+                                  blog.title.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Color.fromARGB(255, 51, 51, 51)),
+                                ),
+                              ]),
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -140,16 +151,17 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                                   Text(
                                     blog.seoDescription.toString(),
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                    child:
-                                        Image.asset('assets/images/cows2.png'),
-                                  ),
-                                  Text(
-                                    blog.content.toString(),
-                                  ),
-                                  Image.asset('assets/images/man.png'),
+                                  // Padding(
+                                  //   padding:
+                                  //       const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  //   child:
+                                  //       Image.asset('assets/images/cows2.png'),
+                                  // ),
+                                  // Text(
+                                  //   blog.content.toString(),
+                                  // ),
+                                  //Image.asset('assets/images/man.png'),
+                                  
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -168,15 +180,13 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                           ],
                         ),
                       );
-                    } 
-                    else {
+                    } else {
                       return Padding(
                         padding: const EdgeInsets.only(top: 50),
                         child: Center(child: CircularProgressIndicator()),
                       );
                     }
                   }),
-          
             ],
           ),
         ),

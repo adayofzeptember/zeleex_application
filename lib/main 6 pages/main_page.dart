@@ -14,11 +14,6 @@ import '../aboutus.dart';
 import '../help.dart';
 import '../from Profile/profile.dart';
 
-// หลักมาก หลักรวม
-void main() {
-  runApp(Main_Page());
-  
-}
 
 class Main_Page extends StatefulWidget {
   Main_Page({Key? key}) : super(key: key);

@@ -153,12 +153,12 @@ class Image_Blog {
   }
 }
 
-Future<Blog> fetchBlog_ByID(String blogID) async {
-  var url = "https://sanboxapi.zeleex.com/api/blogs/" + blogID;
-  var response = await http.get(Uri.parse(url));
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data']['blog'];
-  Blog msg = Blog.fromJson(jsonCon);
+// Future<Blog> fetchBlog_ByID(String blogID) async {
+//   var url = "https://api.zeleex.com/api/blogs/" + blogID;
+//   var response = await http.get(Uri.parse(url));
+//   var jsonResponse = json.decode(response.body);
+//   var jsonCon = jsonResponse['data']['blog'];
+//   Blog msg = Blog.fromJson(jsonCon);
 
-  return msg;
-}
+//   return msg;
+// }

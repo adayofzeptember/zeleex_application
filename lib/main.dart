@@ -10,6 +10,7 @@ import 'package:zeleex_application/test%20folder/device_info.dart';
 //* runApp(const First_Page());
 //!หน้าเปิดแอป
 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

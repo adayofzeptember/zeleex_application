@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../API/Read All/career_readall_api.dart';
 import '../Plate.dart';
 import 'package:http/http.dart' as http;
@@ -21,8 +20,7 @@ class _Career_DetailState extends State<Career_Detail> {
     var blogID = widget.gotText.toString();
     var url = "https://sanboxapi.zeleex.com/api/careers/" + blogID;
     var response = await http.get(Uri.parse(url));
-    Data_Read_Careers careerDetail =
-        Data_Read_Careers.fromJson(json.decode(response.body));
+    Data_Read_Careers careerDetail = Data_Read_Careers.fromJson(json.decode(response.body));
     return careerDetail;
   }
 
@@ -33,7 +31,6 @@ class _Career_DetailState extends State<Career_Detail> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:intl/intl.dart';
@@ -196,6 +197,16 @@ class _Main_WidgetState extends State<Main_Widget> {
                       //     ),
                       //   ),
                       // ),
+                //       Html(
+                //         data: """
+                // <div>Follow<a class='sup'><sup>pl</sup></a> 
+                //   Below hr
+                //     <b>Bold</b>
+                // <h1>what was sent down to you from your Lord</h1>,
+                // and do not follow other guardians apart from Him. Little do 
+                // <span class='h'>you remind yourselves</span><a class='f'><sup f=2437>1</sup></a></div>
+                // """,
+                //       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
@@ -313,7 +324,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                         child: Container(
                           height: MediaQuery.of(context).size.height * 0.13,
                           child: Row(
@@ -329,8 +340,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                           scrollDirection: Axis.horizontal,
                                           // shrinkWrap: true,
                                           itemCount: data?.length,
-                                          itemBuilder:
-                                              (BuildContext context, int index) {
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
                                             return Container(
                                               height: 100,
                                               width: 80,
@@ -359,16 +370,15 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                             image: DecorationImage(
                                                                 image:
                                                                     imageProvider,
-                                                                fit:
-                                                                    BoxFit.cover),
+                                                                fit: BoxFit
+                                                                    .cover),
                                                           ),
                                                         ),
                                                         placeholder:
                                                             (context, url) =>
                                                                 CircleAvatar(
                                                           backgroundColor:
-                                                              Color.fromARGB(255,
-                                                                  141, 141, 141),
+                                                              Colors.white,
                                                         ),
                                                         errorWidget: (context,
                                                                 url, error) =>
@@ -379,15 +389,20 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                 Palette.kToDark,
                                                           ),
                                                           backgroundColor:
-                                                              Color.fromARGB(255,
-                                                                  224, 224, 224),
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  224,
+                                                                  224,
+                                                                  224),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                   SizedBox(height: 5),
                                                   Text(
-                                                    data[index].title.toString(),
+                                                    data[index]
+                                                        .title
+                                                        .toString(),
                                                     style:
                                                         TextStyle(fontSize: 12),
                                                   )
@@ -468,7 +483,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                               ),
                               Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.240,
+                                    MediaQuery.of(context).size.height * 0.245,
                                 child: Row(
                                   children: [
                                     FutureBuilder<List<AnimalCat01>>(

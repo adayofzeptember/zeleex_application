@@ -41,7 +41,7 @@ class _StorePageState extends State<StorePage> {
 
   Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
     final response = await http.get(Uri.parse(
-        'https://sanboxapi.zeleex.com/api/stores?per_page=' +
+        'https://api.zeleex.com/api/stores?per_page=' +
             perPage.toString()));
     var jsonResponse = json.decode(response.body);
 
@@ -163,7 +163,7 @@ class _StorePageState extends State<StorePage> {
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.36,
                       ),
-                      itemCount: data!.length + 1,
+                      itemCount: data!.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
                           return Card(
@@ -321,7 +321,7 @@ class _StorePageState extends State<StorePage> {
                   ),
                 );
               } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
+                return Center(child: Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ"+snapshot.error.toString()));
               }
               // By default show a loading spinner.
               return Padding(

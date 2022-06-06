@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zeleex_application/API/Read%20All/animals_API.dart';
+
 import 'API/Read By ID/store_id_api.dart';
 import 'Plate.dart';
 import 'main 6 pages/store_page.dart';
@@ -23,7 +23,7 @@ class Store_Detail extends StatefulWidget {
 
 class _Store_DetailState extends State<Store_Detail> {
   Future<Data_Store> fetchStore_ByID() async {
-    var url = "https://sanboxapi.zeleex.com/api/stores/" + widget.storeID;
+    var url = "https://api.zeleex.com/api/stores/" + widget.storeID;
     var response = await http.get(Uri.parse(url));
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data'];
@@ -99,7 +99,9 @@ class _Store_DetailState extends State<Store_Detail> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Store_CattlePage(  storeID: widget.storeID,)),
+                          builder: (context) => Store_CattlePage(
+                                storeID: widget.storeID,
+                              )),
                     )
                   },
                   child: Row(
@@ -362,42 +364,45 @@ class _Store_DetailState extends State<Store_Detail> {
                                             ],
                                           ),
                                         ),
-                                   //! แก้ไขเพิ่มเติม
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(15,5,0,0),
-                                        child: Row(
-                                          children: <Widget>[
-                                            Text("ประเภทร้านค้า "),
-                                            Container(
-                                              height: 20,
-                                              child: ListView.builder(
-                                                shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount: thisStore_notCoverIMG
-                                                      .types!.length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return Row(
-                                                      children: [
-                                                        Text(
-                                                          thisStore_notCoverIMG
-                                                                  .types![index]
-                                                                  .title
-                                                                  .toString() +
-                                                              ", ",
-                                                          style: TextStyle(
-                                                              color: Palette
-                                                                  .kToDark),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  }),
-                                            ),
-                                          ],
+                                        //! แก้ไขเพิ่มเติม
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              15, 5, 0, 0),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Text("ประเภทร้านค้า "),
+                                              Container(
+                                                height: 20,
+                                                child: ListView.builder(
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount:
+                                                        thisStore_notCoverIMG
+                                                            .types!.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Row(
+                                                        children: [
+                                                          Text(
+                                                            thisStore_notCoverIMG
+                                                                    .types![
+                                                                        index]
+                                                                    .title
+                                                                    .toString() +
+                                                                ", ",
+                                                            style: TextStyle(
+                                                                color: Palette
+                                                                    .kToDark),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    }),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
                                         SizedBox(
                                           height: 10,
                                         ),

@@ -14,10 +14,9 @@ import '../aboutus.dart';
 import 'package:intl/intl.dart';
 import '../from Profile/profile.dart';
 import 'main_page.dart';
-
+//
 class AnimalsPage extends StatefulWidget {
   AnimalsPage({Key? key}) : super(key: key);
-
   @override
   State<AnimalsPage> createState() => _AnimalsPageState();
 }
@@ -38,17 +37,6 @@ class _AnimalsPageState extends State<AnimalsPage> {
     super.initState();
   }
 
-  Future<http.Response> createAlbum(String title) {
-    return http.post(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'title': title,
-      }),
-    );
-  }
 
   Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
     final response = await http.get(Uri.parse(

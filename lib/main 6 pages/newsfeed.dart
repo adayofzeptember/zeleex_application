@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
+import 'package:zeleex_application/API/url.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'dart:async';
@@ -47,7 +48,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
 
   Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
     final response = await http.get(Uri.parse(
-        'https://sanboxapi.zeleex.com/api/blogs?per_page=' +
+        'https://api.zeleex.com/api/blogs?per_page=' +
             perPage.toString()));
     var jsonResponse = json.decode(response.body);
     List jsonCon = jsonResponse['data']['data'];
@@ -155,6 +156,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                               padding: const EdgeInsets.only(bottom: 10),
                               child: InkWell(
                                 onTap: () {
+                                  print(data[index].id.toString());
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => NewsFeedPage_Detail(
                                             blogID: data[index].id.toString(),
@@ -246,7 +248,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      //SizedBox.expand(),
+                                      
                                       Container(
                                         height:
                                             MediaQuery.of(context).size.height *
@@ -257,7 +259,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                               .image!
                                               .main
                                               .toString(),
-                                          // fit: BoxFit.fitWidth,
+                                              width: double.infinity,
+                                          fit: BoxFit.fitWidth,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Container(
@@ -293,7 +296,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         // )
                                       ),
                                       SizedBox(
-                                        height: 20,
+                                        height: 10,
                                       ),
                                       
                                       Padding(
@@ -308,7 +311,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 51, 51, 51),
-                                                  fontSize: 18,
+                                                  fontSize: 13.5,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Container(
@@ -335,7 +338,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 0, 10, 0),
                                         child: Text(
-                                          data[index].seoDescription.toString(),
+                                          data[index].description.toString(),
                                           // "แต่ถ้าเลี้ยงแบบครบวงจร ภาครัฐจัดหาน้ำเชื้อจากพ่อแม่พันธุ์ชั้นดีเกษตรกรนำมาผสมพันธุ์ แล้วเลี้ยงอนุบาลส่งต่อให้เกษตรกรที่พอมีกำลังทรัพย์นำมาขุนต่อด้วยเทคโนโลยีสมัยใหม่ ให้ ได้เนื้อวัวเกรดพรีเมียมมีไขมันแทรก ไม่ต่างจากเนื้อจากต่างประเทศราคาแพง",
                                           style: TextStyle(
                                             fontFamily: 'Kanit',
@@ -377,7 +380,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                 );
               } 
               else if (snapshot.hasError) {
-                return Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ");
+                return Center(child: Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ"));
               }
 
               return Padding(
