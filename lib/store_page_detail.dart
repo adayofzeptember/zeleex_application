@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+//import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
-
 import 'API/Read By ID/store_id_api.dart';
 import 'Plate.dart';
 import 'main 6 pages/store_page.dart';
@@ -24,7 +27,12 @@ class Store_Detail extends StatefulWidget {
 class _Store_DetailState extends State<Store_Detail> {
   Future<Data_Store> fetchStore_ByID() async {
     var url = "https://api.zeleex.com/api/stores/" + widget.storeID;
-    var response = await http.get(Uri.parse(url));
+    var response = await http.get(Uri.parse(url), headers: {
+      //'Accept: application/json'
+
+      'Content-Type': 'application/json',
+      'Charset': 'utf-8'
+    });
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data'];
     Data_Store msg = Data_Store.fromJson(jsonCon);
@@ -123,22 +131,6 @@ class _Store_DetailState extends State<Store_Detail> {
           ),
         ),
         appBar: AppBar(
-            // leading: Builder(
-            //   builder: (context) => IconButton(
-            //     icon: SizedBox(
-            //       child: Padding(
-            //         paddin g: const EdgeInsets.all(8.0),
-            //         child: ImageIcon(
-            //           AssetImage(
-            //             "assets/images/menu-61.png",
-            //           ),
-            //           color: Color.fromARGB(255, 51, 51, 51),
-            //         ),
-            //       ),
-            //     ),
-            //     onPressed: () => Scaffold.of(context).openDrawer(),
-            //   ),
-            // ),
             title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -156,9 +148,6 @@ class _Store_DetailState extends State<Store_Detail> {
                     color: Palette.kToDark, fontWeight: FontWeight.bold)),
             Row(
               children: [
-                // SvgPicture.asset(
-                //   'assets/images/sort.svg',
-                // ),
                 SvgPicture.asset(
                   'assets/images/cart123.svg',
                 )
@@ -179,8 +168,29 @@ class _Store_DetailState extends State<Store_Detail> {
                               AsyncSnapshot<dynamic> snapshot) {
                             if (snapshot.hasData) {
                               Data_Store thisStore = snapshot.data;
-                              return Image.network(
-                                  thisStore.imageCover!.main.toString());
+                              return CachedNetworkImage(
+                                imageUrl: thisStore.imageCover!.main.toString(),
+                                fit: BoxFit.fill,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        Container(
+                                  color: Color.fromARGB(255, 142, 142, 142),
+                                  // height: 200,
+                                ),
+                                errorWidget: (context, url, error) => Center(
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey,
+                                      border: Border.all(
+                                          color: Color.fromARGB(
+                                              255, 211, 204, 204)),
+                                    ),
+                                    alignment: Alignment.center,
+                                  ),
+                                ),
+                              );
                             } else {
                               return Padding(
                                 padding: const EdgeInsets.only(top: 50),
@@ -195,6 +205,10 @@ class _Store_DetailState extends State<Store_Detail> {
                               AsyncSnapshot<dynamic> snapshot) {
                             if (snapshot.hasData) {
                               Data_Store thisStore_notCoverIMG = snapshot.data;
+                              String getContent =
+                                  thisStore_notCoverIMG.content.toString();
+                              var document = parse('<body>Hello world! <a href="www.html5rocks.com">HTML5 rocks!');
+
                               return Container(
                                   child: Padding(
                                 padding:
@@ -409,16 +423,18 @@ class _Store_DetailState extends State<Store_Detail> {
                                         Divider(
                                             color: Color.fromARGB(
                                                 255, 165, 162, 162)),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 10, 0, 0),
-                                          child: Text(
-                                            thisStore_notCoverIMG.content
-                                                .toString(),
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                        ),
+                                       HtmlWidget(document.outerHtml),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.fromLTRB(
+                                        //       0, 10, 0, 0),
+                                        //   child: Text(
+                                        //     // thisStore_notCoverIMG.content
+                                        //     //     .toString(),
+                                        //     document.outerHtml,
+                                        //     style:
+                                        //         TextStyle(color: Colors.grey),
+                                        //   ),
+                                        // ),
                                         SizedBox(
                                           height: 20,
                                         ),

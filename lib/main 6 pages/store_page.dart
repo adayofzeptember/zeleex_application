@@ -41,8 +41,8 @@ class _StorePageState extends State<StorePage> {
 
   Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
     final response = await http.get(Uri.parse(
-        'https://api.zeleex.com/api/stores?per_page=' +
-            perPage.toString()));
+        'https://api.zeleex.com/api/stores?per_page=' + perPage.toString()));
+        
     var jsonResponse = json.decode(response.body);
 
     List jsonCon = jsonResponse['data']['data'];
@@ -185,8 +185,12 @@ class _StorePageState extends State<StorePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.21,
+
                                     width: double.infinity,
                                     child: ClipRRect(
+                                      
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
@@ -229,13 +233,6 @@ class _StorePageState extends State<StorePage> {
                                           ),
                                         ),
                                       ),
-                                      // Image.network(
-                                      //   data![index]
-                                      //       .image!
-                                      //       .thumbnail
-                                      //       .toString(),
-                                      //   fit: BoxFit.fill,
-                                      // )
                                     ),
                                   ),
                                   Padding(
@@ -321,7 +318,10 @@ class _StorePageState extends State<StorePage> {
                   ),
                 );
               } else if (snapshot.hasError) {
-                return Center(child: Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ"+snapshot.error.toString()));
+                return Center(
+                    child: Text(
+                        "ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ" +
+                            snapshot.error.toString()));
               }
               // By default show a loading spinner.
               return Padding(
@@ -335,7 +335,7 @@ class _StorePageState extends State<StorePage> {
       ),
       endDrawer: Theme(
           data: Theme.of(context).copyWith(
-            canvasColor: Colors.white , //desired color
+            canvasColor: Colors.white, //desired color
           ),
           child: Container(
             width: MediaQuery.of(context).size.height * 0.3,
@@ -360,23 +360,26 @@ class _StorePageState extends State<StorePage> {
                       sortMenu(),
                       Spacer(),
                       Container(
-                        //height: double.infinity,
-                        alignment: Alignment.bottomCenter,
+                          //height: double.infinity,
+                          alignment: Alignment.bottomCenter,
                           width: double.infinity,
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 20, bottom: 20),
+                            padding:
+                                const EdgeInsets.only(right: 20, bottom: 20),
                             child: Row(children: <Widget>[
                               Expanded(
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         elevation: 0,
                                         primary: Colors.white,
-                                        side: BorderSide(color: Palette.kToDark),
+                                        side:
+                                            BorderSide(color: Palette.kToDark),
                                       ),
                                       onPressed: () {},
                                       child: Text(
                                         "รีเซ็ต",
-                                        style: TextStyle(color: Palette.kToDark),
+                                        style:
+                                            TextStyle(color: Palette.kToDark),
                                       ))),
                               SizedBox(
                                 width: 10,
@@ -394,8 +397,7 @@ class _StorePageState extends State<StorePage> {
                     ],
                   )),
             ),
-          )
-          ),
+          )),
     );
   }
 }

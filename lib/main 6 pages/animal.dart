@@ -14,6 +14,7 @@ import '../aboutus.dart';
 import 'package:intl/intl.dart';
 import '../from Profile/profile.dart';
 import 'main_page.dart';
+
 //
 class AnimalsPage extends StatefulWidget {
   AnimalsPage({Key? key}) : super(key: key);
@@ -37,26 +38,25 @@ class _AnimalsPageState extends State<AnimalsPage> {
     super.initState();
   }
 
+  // Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
+  //   final response = await http.get(Uri.parse(
+  //       'https://sanboxapi.zeleex.com/api/animals?per_page=' +
+  //           perPage.toString()));
+  //   var jsonResponse = json.decode(response.body);
 
-  Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
-    final response = await http.get(Uri.parse(
-        'https://sanboxapi.zeleex.com/api/animals?per_page=' +
-            perPage.toString()));
-    var jsonResponse = json.decode(response.body);
+  //   List jsonCon = jsonResponse['data']['data'];
 
-    List jsonCon = jsonResponse['data']['data'];
-
-    if (response.statusCode == 200) {
-      if (jsonCon.length < perPage) {
-        setState(() {
-          hasMore = false;
-        });
-      }
-      return jsonCon.map((data) => Data_Animal_ReadAll.fromJson(data)).toList();
-    } else {
-      throw Exception("error...");
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     if (jsonCon.length < perPage) {
+  //       setState(() {
+  //         hasMore = false;
+  //       });
+  //     }
+  //     return jsonCon.map((data) => Data_Animal_ReadAll.fromJson(data)).toList();
+  //   } else {
+  //     throw Exception("error...");
+  //   }
+  // }
 
   bool pressed = true;
   bool pressed2 = true;
@@ -125,90 +125,90 @@ class _AnimalsPageState extends State<AnimalsPage> {
           SizedBox(
             height: 5,
           ),
-          Container(
-            color: Colors.white,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          pressed = !pressed;
-                        });
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        padding: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          color: pressed ? Colors.white : Palette.kToDark,
-                          border: pressed
-                              ? Border.all(color: Colors.grey)
-                              : Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        child: Text(
-                          "โคนม",
-                          style: TextStyle(
-                              color: pressed ? Colors.grey : Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        color: Palette.kToDark,
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Text(
-                        "โคเนื้อ",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Text(
-                        "อาหารและยา",
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   color: Colors.white,
+          //   width: double.infinity,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(10.0),
+          //     child: SingleChildScrollView(
+          //       scrollDirection: Axis.horizontal,
+          //       child: Row(
+          //         children: [
+          //           InkWell(
+          //             onTap: () {
+          //               setState(() {
+          //                 pressed = !pressed;
+          //               });
+          //             },
+          //             child: Container(
+          //               width: MediaQuery.of(context).size.width * 0.35,
+          //               padding: EdgeInsets.all(10.0),
+          //               decoration: BoxDecoration(
+          //                 color: pressed ? Colors.white : Palette.kToDark,
+          //                 border: pressed
+          //                     ? Border.all(color: Colors.grey)
+          //                     : Border.all(color: Colors.white),
+          //                 borderRadius: BorderRadius.circular(30.0),
+          //               ),
+          //               child: Text(
+          //                 "โคนม",
+          //                 style: TextStyle(
+          //                     color: pressed ? Colors.grey : Colors.white,
+          //                     fontSize: 12,
+          //                     fontWeight: FontWeight.bold),
+          //                 textAlign: TextAlign.center,
+          //               ),
+          //             ),
+          //           ),
+          //           SizedBox(
+          //             width: 10,
+          //           ),
+          //           Container(
+          //             width: MediaQuery.of(context).size.width * 0.35,
+          //             padding: EdgeInsets.all(10.0),
+          //             decoration: BoxDecoration(
+          //               color: Palette.kToDark,
+          //               borderRadius: BorderRadius.circular(30.0),
+          //             ),
+          //             child: Text(
+          //               "โคเนื้อ",
+          //               style: TextStyle(
+          //                   color: Colors.white,
+          //                   fontWeight: FontWeight.bold,
+          //                   fontSize: 12),
+          //               textAlign: TextAlign.center,
+          //             ),
+          //           ),
+          //           SizedBox(
+          //             width: 10,
+          //           ),
+          //           Container(
+          //             width: MediaQuery.of(context).size.width * 0.35,
+          //             padding: EdgeInsets.all(10.0),
+          //             decoration: BoxDecoration(
+          //               border: Border.all(color: Colors.grey),
+          //               borderRadius: BorderRadius.circular(30.0),
+          //             ),
+          //             child: Text(
+          //               "อาหารและยา",
+          //               style: TextStyle(
+          //                   fontSize: 12,
+          //                   color: Color.fromARGB(255, 130, 130, 130),
+          //                   fontWeight: FontWeight.bold),
+          //               textAlign: TextAlign.center,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
 
-          FutureBuilder<List<Data_Animal_ReadAll>>(
+          FutureBuilder<List<Data_Animal_All>>(
             future: fetch_AnimalPage_readAll(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<Data_Animal_ReadAll>? data = snapshot.data;
+                List<Data_Animal_All>? data = snapshot.data;
                 return Expanded(
                   child: RawScrollbar(
                     controller: controller,
@@ -246,50 +246,58 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5)),
-                                        child: CachedNetworkImage(
-                                          imageUrl: data[index]
-                                              .image!
-                                              .thumbnail
-                                              .toString(),
-                                          fit: BoxFit.fill,
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              Container(
-                                            color: Color.fromARGB(
-                                                255, 142, 142, 142),
-                                            // height: 200,
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              Center(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      3, 3, 3, 0),
-                                              child: Container(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.22,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              211,
-                                                              204,
-                                                              204)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5))),
-                                                  alignment: Alignment.center,
-                                                  child: Text("ไม่พบรูปภาพ")),
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.22,
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              topRight: Radius.circular(5)),
+                                          child: CachedNetworkImage(
+                                            imageUrl: data[index]
+                                                .image!
+                                                .thumbnail
+                                                .toString(),
+                                     fit: BoxFit.fill,
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                Container(
+                                              color: Color.fromARGB(
+                                                  255, 142, 142, 142),
+                                              // height: 200,
                                             ),
-                                          ),
-                                        )),
+                                            errorWidget:
+                                                (context, url, error) => Center(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        3, 3, 3, 0),
+                                                child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.22,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    211,
+                                                                    204,
+                                                                    204)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    5))),
+                                                    alignment: Alignment.center,
+                                                    child: Text("ไม่พบรูปภาพ")),
+                                              ),
+                                            ),
+                                          )),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
                                           10, 5, 5, 0),
