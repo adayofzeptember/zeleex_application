@@ -471,7 +471,7 @@ class Ads01 {
 
 Future<List<AnimalCat01>> fetch_Home_animals() async {
   final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/home'));
+      await http.get(Uri.parse('https://api.zeleex.com/api/home'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['animal_cat_01'];
@@ -488,7 +488,7 @@ Future<List<AnimalCat01>> fetch_Home_animals() async {
 
 Future<List<ProductCat01>> fetch_Home_products() async {
   final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/home'));
+      await http.get(Uri.parse('https://api.zeleex.com/api/home'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['product_cat_01'];

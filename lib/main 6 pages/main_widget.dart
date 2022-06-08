@@ -146,66 +146,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                   ),
                   Column(
                     children: <Widget>[
-                      // Padding(
-                      //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      //   child: Container(
-                      //     height: 40,
-                      //     decoration: BoxDecoration(
-                      //         color: Colors.white,
-                      //         borderRadius:
-                      //             BorderRadius.all(Radius.circular(40))),
-                      //     child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //       children: [
-                      //         Row(
-                      //           children: [
-                      //             SizedBox(
-                      //               width: 10,
-                      //             ),
-                      //             SvgPicture.asset('assets/images/search.svg'),
-                      //             SizedBox(
-                      //               width: 5,
-                      //             ),
-                      //             Text(
-                      //               "",
-                      //               style: TextStyle(
-                      //                 color: Color.fromARGB(255, 130, 130, 130),
-                      //               ),
-                      //             )
-                      //           ],
-                      //         ),
-                      //         Padding(
-                      //           padding: const EdgeInsets.all(1.0),
-                      //           child: Container(
-                      //             height: 40,
-                      //             alignment: Alignment.center,
-                      //             padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                      //             decoration: BoxDecoration(
-                      //               color: Colors.teal,
-                      //               borderRadius: BorderRadius.circular(40.0),
-                      //             ),
-                      //             child: Text(
-                      //               "ค้นหา",
-                      //               style: TextStyle(
-                      //                   color: Color.fromRGBO(255, 255, 255, 1)),
-                      //               textAlign: TextAlign.center,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                //       Html(
-                //         data: """
-                // <div>Follow<a class='sup'><sup>pl</sup></a> 
-                //   Below hr
-                //     <b>Bold</b>
-                // <h1>what was sent down to you from your Lord</h1>,
-                // and do not follow other guardians apart from Him. Little do 
-                // <span class='h'>you remind yourselves</span><a class='f'><sup f=2437>1</sup></a></div>
-                // """,
-                //       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
@@ -532,41 +472,51 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                 topRight: Radius
                                                                     .circular(
                                                                         5)),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                              imageUrl: data![
-                                                                      index]
-                                                                  .image!
-                                                                  .thumbnail
-                                                                  .toString(),
-                                                              fit: BoxFit.fill,
-                                                              height: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.3,
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.3,
-                                                              progressIndicatorBuilder:
-                                                                  (context, url,
-                                                                          downloadProgress) =>
-                                                                      Container(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        142,
-                                                                        142,
-                                                                        142),
-                                                                height: 200,
+                                                            child: Container(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      231,
+                                                                      231,
+                                                                      231),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                imageUrl: data![
+                                                                        index]
+                                                                    .image!
+                                                                    .thumbnail
+                                                                    .toString(),
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                                height: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    0.3,
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    0.3,
+                                                                progressIndicatorBuilder:
+                                                                    (context,
+                                                                            url,
+                                                                            downloadProgress) =>
+                                                                        Container(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          142,
+                                                                          142,
+                                                                          142),
+                                                                  height: 200,
+                                                                ),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
                                                               ),
-                                                              errorWidget: (context,
-                                                                      url,
-                                                                      error) =>
-                                                                  Icon(Icons
-                                                                      .error),
                                                             ),
                                                           ),
                                                           Padding(
@@ -574,6 +524,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                 const EdgeInsets
                                                                     .all(8.0),
                                                             child: Column(
+                                                              
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
@@ -628,218 +579,218 @@ class _Main_WidgetState extends State<Main_Widget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        child: Container(
-                          decoration: BoxDecoration(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                            10,
-                                            10,
-                                            0,
-                                            0,
-                                          ),
-                                          child: Text(
-                                            "สินค้า",
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 51, 51, 51),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.02),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 10),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Palette.kToDark,
-                                                elevation: 0),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProductPage(),
-                                                ),
-                                              );
-                                            },
-                                            child: Text(
-                                              "ดูทั้งหมด",
-                                              style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      255, 255, 255, 1)),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.240,
-                                      child: Row(
-                                        children: [
-                                          FutureBuilder<
-                                              List<Data_Products_ReadAll>>(
-                                            future: fetch_ProductPage_readAll(),
-                                            builder: (context, snapshot) {
-                                              if (snapshot.hasData) {
-                                                List<Data_Products_ReadAll>?
-                                                    data = snapshot.data;
-                                                return Expanded(
-                                                  child: ListView.builder(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      // shrinkWrap: true,
-                                                      itemCount: 5,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        return Card(
-                                                          child: InkWell(
-                                                            onTap: () {
-                                                              Navigator.of(context).push(
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) =>
-                                                                          Store_Product_Detail(
-                                                                            productName:
-                                                                                data![index].title.toString(),
-                                                                            productID:
-                                                                                data[index].id.toString(),
-                                                                          )));
-                                                            },
-                                                            child: Column(
-                                                              children: [
-                                                                ClipRRect(
-                                                                  borderRadius: BorderRadius.only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              5),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              5)),
-                                                                  child:
-                                                                      CachedNetworkImage(
-                                                                    imageUrl: data![
-                                                                            index]
-                                                                        .image!
-                                                                        .thumbnail
-                                                                        .toString(),
-                                                                    fit: BoxFit
-                                                                        .fill,
-                                                                    height: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.3,
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.3,
-                                                                    progressIndicatorBuilder: (context,
-                                                                            url,
-                                                                            downloadProgress) =>
-                                                                        Container(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          192,
-                                                                          192,
-                                                                          192),
-                                                                      height:
-                                                                          200,
-                                                                    ),
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Icon(Icons
-                                                                            .error),
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      SizedBox(
-                                                                        height:
-                                                                            40,
-                                                                        width:
-                                                                            100,
-                                                                        child:
-                                                                            Text(
-                                                                          data[index]
-                                                                              .title
-                                                                              .toString(),
-                                                                        ),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        height:
-                                                                            3,
-                                                                      ),
-                                                                      Text(
-                                                                        "฿ " +
-                                                                            data[index].price.toString(),
-                                                                        style: TextStyle(
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                255,
-                                                                                17,
-                                                                                0)),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }),
-                                                );
-                                              } else if (snapshot.hasError) {
-                                                return Text(
-                                                    "${snapshot.error}");
-                                              }
-                                              return Container();
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    )
-                                  ],
-                                )),
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      //   child: Container(
+                      //     decoration: BoxDecoration(),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.all(0.0),
+                      //       child: Padding(
+                      //           padding: const EdgeInsets.all(0.0),
+                      //           child: Column(
+                      //             children: [
+                      //               Row(
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.spaceBetween,
+                      //                 crossAxisAlignment:
+                      //                     CrossAxisAlignment.center,
+                      //                 children: [
+                      //                   Padding(
+                      //                     padding: const EdgeInsets.fromLTRB(
+                      //                       10,
+                      //                       10,
+                      //                       0,
+                      //                       0,
+                      //                     ),
+                      //                     child: Text(
+                      //                       "สินค้า",
+                      //                       style: TextStyle(
+                      //                           color: Color.fromARGB(
+                      //                               255, 51, 51, 51),
+                      //                           fontWeight: FontWeight.bold,
+                      //                           fontSize: MediaQuery.of(context)
+                      //                                   .size
+                      //                                   .height *
+                      //                               0.02),
+                      //                     ),
+                      //                   ),
+                      //                   Padding(
+                      //                     padding:
+                      //                         const EdgeInsets.only(right: 10),
+                      //                     child: ElevatedButton(
+                      //                       style: ElevatedButton.styleFrom(
+                      //                           primary: Palette.kToDark,
+                      //                           elevation: 0),
+                      //                       onPressed: () {
+                      //                         Navigator.push(
+                      //                           context,
+                      //                           MaterialPageRoute(
+                      //                             builder: (context) =>
+                      //                                 ProductPage(),
+                      //                           ),
+                      //                         );
+                      //                       },
+                      //                       child: Text(
+                      //                         "ดูทั้งหมด",
+                      //                         style: TextStyle(
+                      //                             color: Color.fromRGBO(
+                      //                                 255, 255, 255, 1)),
+                      //                         textAlign: TextAlign.center,
+                      //                       ),
+                      //                     ),
+                      //                   )
+                      //                 ],
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 5,
+                      //               ),
+                      //               Container(
+                      //                 height:
+                      //                     MediaQuery.of(context).size.height *
+                      //                         0.240,
+                      //                 child: Row(
+                      //                   children: [
+                      //                     FutureBuilder<
+                      //                         List<Data_Products_ReadAll>>(
+                      //                       future: fetch_ProductPage_readAll(),
+                      //                       builder: (context, snapshot) {
+                      //                         if (snapshot.hasData) {
+                      //                           List<Data_Products_ReadAll>?
+                      //                               data = snapshot.data;
+                      //                           return Expanded(
+                      //                             child: ListView.builder(
+                      //                                 scrollDirection:
+                      //                                     Axis.horizontal,
+                      //                                 // shrinkWrap: true,
+                      //                                 itemCount: 5,
+                      //                                 itemBuilder:
+                      //                                     (BuildContext context,
+                      //                                         int index) {
+                      //                                   return Card(
+                      //                                     child: InkWell(
+                      //                                       onTap: () {
+                      //                                         Navigator.of(context).push(
+                      //                                             MaterialPageRoute(
+                      //                                                 builder: (context) =>
+                      //                                                     Store_Product_Detail(
+                      //                                                       productName:
+                      //                                                           data![index].title.toString(),
+                      //                                                       productID:
+                      //                                                           data[index].id.toString(),
+                      //                                                     )));
+                      //                                       },
+                      //                                       child: Column(
+                      //                                         children: [
+                      //                                           ClipRRect(
+                      //                                             borderRadius: BorderRadius.only(
+                      //                                                 topLeft: Radius
+                      //                                                     .circular(
+                      //                                                         5),
+                      //                                                 topRight:
+                      //                                                     Radius.circular(
+                      //                                                         5)),
+                      //                                             child:
+                      //                                                 CachedNetworkImage(
+                      //                                               imageUrl: data![
+                      //                                                       index]
+                      //                                                   .image!
+                      //                                                   .thumbnail
+                      //                                                   .toString(),
+                      //                                               fit: BoxFit
+                      //                                                   .fill,
+                      //                                               height: MediaQuery.of(context)
+                      //                                                       .size
+                      //                                                       .width *
+                      //                                                   0.3,
+                      //                                               width: MediaQuery.of(context)
+                      //                                                       .size
+                      //                                                       .width *
+                      //                                                   0.3,
+                      //                                               progressIndicatorBuilder: (context,
+                      //                                                       url,
+                      //                                                       downloadProgress) =>
+                      //                                                   Container(
+                      //                                                 color: Color.fromARGB(
+                      //                                                     255,
+                      //                                                     192,
+                      //                                                     192,
+                      //                                                     192),
+                      //                                                 height:
+                      //                                                     200,
+                      //                                               ),
+                      //                                               errorWidget: (context,
+                      //                                                       url,
+                      //                                                       error) =>
+                      //                                                   Icon(Icons
+                      //                                                       .error),
+                      //                                             ),
+                      //                                           ),
+                      //                                           Padding(
+                      //                                             padding:
+                      //                                                 const EdgeInsets
+                      //                                                         .all(
+                      //                                                     8.0),
+                      //                                             child: Column(
+                      //                                               crossAxisAlignment:
+                      //                                                   CrossAxisAlignment
+                      //                                                       .start,
+                      //                                               mainAxisAlignment:
+                      //                                                   MainAxisAlignment
+                      //                                                       .start,
+                      //                                               children: [
+                      //                                                 SizedBox(
+                      //                                                   height:
+                      //                                                       40,
+                      //                                                   width:
+                      //                                                       100,
+                      //                                                   child:
+                      //                                                       Text(
+                      //                                                     data[index]
+                      //                                                         .title
+                      //                                                         .toString(),
+                      //                                                   ),
+                      //                                                 ),
+                      //                                                 SizedBox(
+                      //                                                   height:
+                      //                                                       3,
+                      //                                                 ),
+                      //                                                 Text(
+                      //                                                   "฿ " +
+                      //                                                       data[index].price.toString(),
+                      //                                                   style: TextStyle(
+                      //                                                       color: Color.fromARGB(
+                      //                                                           255,
+                      //                                                           255,
+                      //                                                           17,
+                      //                                                           0)),
+                      //                                                 ),
+                      //                                               ],
+                      //                                             ),
+                      //                                           )
+                      //                                         ],
+                      //                                       ),
+                      //                                     ),
+                      //                                   );
+                      //                                 }),
+                      //                           );
+                      //                         } else if (snapshot.hasError) {
+                      //                           return Text(
+                      //                               "${snapshot.error}");
+                      //                         }
+                      //                         return Container();
+                      //                       },
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 10,
+                      //               )
+                      //             ],
+                      //           )),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   )
                 ],

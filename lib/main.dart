@@ -30,10 +30,6 @@ class First_Page extends StatelessWidget {
   }
 }
 
-class DeterMind {
-  
-}
-
 
 class MainAndIcon extends StatefulWidget {
   MainAndIcon({Key? key}) : super(key: key);

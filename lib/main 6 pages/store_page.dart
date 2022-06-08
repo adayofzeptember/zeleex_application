@@ -104,23 +104,6 @@ class _StorePageState extends State<StorePage> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold)),
             ),
 
-            // Container(
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       SvgPicture.asset(
-            //         'assets/images/sort.svg',
-            //       ),
-            //       SizedBox(
-            //         width: 10,
-            //       ),
-            // SvgPicture.asset(
-            //   'assets/images/cart123.svg',
-            //   color: Color.fromARGB(255, 51, 51, 51),
-            // )
-            //     ],
-            //   ),
-            // )
           ],
         ),
         actions: [

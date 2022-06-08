@@ -1,5 +1,10 @@
 import 'dart:ui';
+import 'package:intl/intl.dart';
+// ใช้สำหรับโค้ด initializeDateFormatting()
+import 'package:intl/date_symbol_data_local.dart';
 
+// อันนี้แหละ ส่วนเสริม
+import 'package:buddhist_datetime_dateformat/buddhist_datetime_dateformat.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +41,9 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   // List jsonCon = [];
 
   void initState() {
+    Intl.defaultLocale = "th";
+    initializeDateFormatting();
+
     fetch_Blog_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -152,13 +160,23 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                         itemCount: data!.length + 1,
                         itemBuilder: (BuildContext context, int index) {
                           if (index < data.length) {
-                            final df = new DateFormat('dd-MM-yyyy hh:mm');
-                            String time = data[index].createdAt.toString();
+                            String get_Thetime =
+                                data[index].createdAt.toString();
+                            var tt = DateTime.parse(get_Thetime);
+                            var createdTime = DateFormat('dd MMM yyyy')
+                                .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
+                            var formatter = DateFormat.yMMMMEEEEd();
+                            var dateInBuddhistCalendarFormat =
+                                formatter.formatInBuddhistCalendarThai(tt);
+
+                            // var createdTime = DateFormat.yMMMd()
+                            //     .format(DateTime.parse(get_Thetime));
+
                             String checkNull =
                                 data[index].description.toString();
                             String realDesc;
                             if (checkNull == 'null') {
-                              realDesc = '- อ่านรายละเอียดเพิ่มเติม-';
+                              realDesc = '- อ่านรายละเอียดเพิ่มเติม -';
                             } else {
                               realDesc = data[index].description.toString();
                             }
@@ -230,8 +248,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                           .title
                                                           .toString(),
                                                       style: TextStyle(
-                                            
-                                            
                                                           color: Color.fromARGB(
                                                               255, 51, 51, 51),
                                                           fontWeight:
@@ -240,11 +256,14 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                     height: 5,
                                                   ),
                                                   Text(
-                                                    data[index]
-                                                        .createdAt
-                                                        .toString(),
+                                                    createdTime,
+                                                    // data[index]
+                                                    //     .createdAt
+                                                    //     .toString(),
                                                     style: TextStyle(
-                                                        fontSize: 10,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         color: Color.fromARGB(
                                                             255,
                                                             165,
@@ -401,299 +420,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
           )
         ]),
       ),
-      // drawer: Theme(
-      //     data: Theme.of(context).copyWith(
-      //       canvasColor: Color.fromARGB(232, 36, 28, 28), //desired color
-      //     ),
-      //     child: Container(
-      //       width: 250,
-      //       child: Drawer(
-      //         child: Padding(
-      //           padding: const EdgeInsets.fromLTRB(
-      //             20,
-      //             0,
-      //             0,
-      //             0,
-      //           ),
-      //           child: Container(
-      //             child: Column(
-      //               crossAxisAlignment: CrossAxisAlignment.start,
-      //               children: <Widget>[
-      //                 SizedBox(
-      //                   height: 50,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => ProfilePage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       CircleAvatar(
-      //                         backgroundColor: Colors.white,
-      //                         child: Icon(
-      //                           Icons.person,
-      //                           color: Palette.kToDark,
-      //                         ),
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-      //                         child: Column(
-      //                           crossAxisAlignment: CrossAxisAlignment.start,
-      //                           children: [
-      //                             Text("Name Surname",
-      //                                 style: TextStyle(
-      //                                     color: Palette.kToDark,
-      //                                     fontFamily: 'Kanit')),
-      //                             SizedBox(
-      //                               height: 5,
-      //                             ),
-      //                             Text(
-      //                               "ดูโปรไฟล์",
-      //                               style: TextStyle(
-      //                                   color:
-      //                                       Color.fromARGB(255, 165, 162, 162),
-      //                                   fontFamily: 'Kanit'),
-      //                             ),
-      //                           ],
-      //                         ),
-      //                       ),
-      //                       Icon(
-      //                         Icons.settings,
-      //                         color: Colors.white,
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 50,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.pushReplacement(
-      //                       context,
-      //                       MaterialPageRoute(
-      //                         builder: (context) => Main_Page(),
-      //                       ),
-      //                     );
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/home.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text(
-      //                           "หน้าหลัก",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit'),
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => AboutUs()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/about.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text(
-      //                           "เกี่ยวกับเรา",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit'),
-      //                         ),
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Text("ภายในร้าน",
-      //                     style: TextStyle(
-      //                         color: Color.fromARGB(255, 165, 162, 162),
-      //                         fontFamily: 'Kanit')),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab4.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-      //                       child: Text("สัตว์",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab5.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                       child: Text("สินค้า",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     print("object");
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/tab2.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ร้านค้า",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     SvgPicture.asset(
-      //                       'assets/images/new/tab6.svg',
-      //                       color: Colors.white,
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                       child: Text("น้ำเชื้อ",
-      //                           style: TextStyle(
-      //                               color: Colors.white, fontFamily: 'Kanit')),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Text("การช่วยเหลือ",
-      //                     style: TextStyle(
-      //                         color: Color.fromARGB(255, 165, 162, 162),
-      //                         fontFamily: 'Kanit')),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => HelpCenterPage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/help2.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ศูนย์ช่วยเหลือ",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 20,
-      //                 ),
-      //                 InkWell(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                             builder: (context) => CareerPage()));
-      //                   },
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/us.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ร่วมงานกับเรา",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 100,
-      //                 ),
-      //                 Divider(color: Color.fromARGB(255, 165, 162, 162)),
-      //                 SizedBox(
-      //                   height: 30,
-      //                 ),
-      //                 Padding(
-      //                   padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                   child: Row(
-      //                     children: [
-      //                       SvgPicture.asset(
-      //                         'assets/images/new/logout.svg',
-      //                         color: Colors.white,
-      //                       ),
-      //                       Padding(
-      //                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-      //                         child: Text("ออกจากระบบ",
-      //                             style: TextStyle(
-      //                                 color: Colors.white,
-      //                                 fontFamily: 'Kanit')),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     )),
     );
   }
 }

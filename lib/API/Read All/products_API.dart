@@ -547,7 +547,7 @@ class Links {
 
 Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
   final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/products'));
+      await http.get(Uri.parse('https://api.zeleex.com/api/products'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];

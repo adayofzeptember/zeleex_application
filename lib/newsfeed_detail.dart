@@ -1,7 +1,12 @@
 import 'dart:convert';
+import 'package:buddhist_datetime_dateformat/buddhist_datetime_dateformat.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:html/parser.dart';
+import 'package:intl/intl.dart';
 
 import 'API/Read All/blogs_readall_api.dart';
 import 'API/Read By ID/blog_id_api.dart';
@@ -83,20 +88,39 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.hasData) {
                       Blog blog = snapshot.data;
+                      String blogContent = blog.content.toString();
+                              String get_Thetime =
+                                blog.createdAt.toString();
+                            var tt = DateTime.parse(get_Thetime);
+                            var createdTime = DateFormat('d MMM yyyy')
+                                .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
+                            var formatter = DateFormat.yMMMMEEEEd();
+                            var dateInBuddhistCalendarFormat =
+                                formatter.formatInBuddhistCalendarThai(tt);
+                      var document555;
+                      if (blogContent == 'null') {
+                        document555 = parse('<p>ไม่มีเนื้อหาของข่าวสาร</p>');
+                        ;
+                      } else {
+                        document555 = parse(blogContent);
+                      }
                       return Container(
                         color: Colors.white,
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(15, 20, 15, 0),
+                              padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
                               child: Row(children: [
-                                Text(
-                                  blog.title.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Color.fromARGB(255, 51, 51, 51)),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.85,
+                                  child: Text(
+                                    blog.title.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Color.fromARGB(255, 51, 51, 51)),
+                                  ),
                                 ),
                               ]),
                             ),
@@ -112,9 +136,9 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    blog.updatedAt.toString(),
+                                "วันที่: "+createdTime,
                                     style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 15,
                                         color:
                                             Color.fromARGB(255, 165, 162, 162)),
                                   ),
@@ -135,11 +159,42 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                             SizedBox(
                               height: 20,
                             ),
-                            // Image.asset('assets/images/cows1.png'),
-                            Image.network(
-                              blog.image!.main.toString(),
+                            CachedNetworkImage(
+                              imageUrl: blog.image!.main.toString(),
                               fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Container(
+                                color: Color.fromARGB(255, 142, 142, 142),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                              ),
+                              errorWidget: (context, url, error) => Padding(
+                                padding:
+                                    const EdgeInsets.only(right: 5, left: 5),
+                                child: Center(
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 141, 141, 141))),
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Container(
+                                            width: double.infinity,
+                                            height: 300,
+                                            child: Center(
+                                                child: Text(
+                                                    "ไม่พบรูปภาพของข่าวสารนี้"))),
+                                      )),
+                                ),
+                              ),
                             ),
+
+                            // Image.network(
+                            //   blog.image!.main.toString(),
+                            //   fit: BoxFit.cover,
+                            // ),
                             SizedBox(
                               height: 10,
                             ),
@@ -148,29 +203,9 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    blog.seoDescription.toString(),
-                                  ),
-                                  // Padding(
-                                  //   padding:
-                                  //       const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                  //   child:
-                                  //       Image.asset('assets/images/cows2.png'),
-                                  // ),
-                                  // Text(
-                                  //   blog.content.toString(),
-                                  // ),
-                                  //Image.asset('assets/images/man.png'),
-                                  
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    blog.seoTitle.toString(),
-                                    textAlign: TextAlign.start,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
+                                  // Text(checkContent),
+                                  Center(child: HtmlWidget(document555.outerHtml)),
+                                  //Text(blogContent),
                                   SizedBox(
                                     height: 10,
                                   ),

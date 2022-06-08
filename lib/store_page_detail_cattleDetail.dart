@@ -131,7 +131,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                   style: TextStyle(
                       color: Palette.kToDark,
                       fontWeight: FontWeight.bold,
-                      fontSize: 17)),
+                      fontSize: 15)),
               Row(
                 children: [
                   SvgPicture.asset(
@@ -148,6 +148,8 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               future: fetch_Animal_ByID(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
+
+
                   Animal thisAnimal = snapshot.data;
                   String getContent = thisAnimal.content.toString();
                   var document555 = parse(getContent);
@@ -160,7 +162,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) => Container(
                           color: Color.fromARGB(255, 142, 142, 142),
-                          height: 400,
+                          height: MediaQuery.of(context).size.height * 0.3,
                         ),
                         errorWidget: (context, url, error) => Padding(
                           padding: const EdgeInsets.only(right: 5, left: 5),
@@ -199,7 +201,8 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                       style: TextStyle(
                                           color:
                                               Color.fromARGB(255, 51, 51, 51),
-                                          fontSize: 20),
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SvgPicture.asset('assets/images/love.svg')
                                   ],
@@ -215,7 +218,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                               int.parse(
                                                   thisAnimal.price.toString())),
                                       style: TextStyle(
-                                          color: Colors.red[400], fontSize: 20),
+                                          color: Colors.red[400], fontSize: 17),
                                     ),
                                     SizedBox(
                                       width: 10,
@@ -225,7 +228,9 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                           NumberFormat("#,###,###").format(
                                               int.parse(
                                                   thisAnimal.price.toString())),
-                                      style: TextStyle(decoration: TextDecoration.lineThrough,
+                                      style: TextStyle(
+                                          decoration:
+                                              TextDecoration.lineThrough,
                                           color: Colors.grey),
                                     ),
                                   ],
@@ -400,6 +405,9 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                               ],
                             ))),
                       ),
+                      SizedBox(
+                        height: 70,
+                      )
                     ],
                   );
                 } else {
@@ -414,3 +422,4 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
     );
   }
 }
+
