@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:buddhist_datetime_dateformat/buddhist_datetime_dateformat.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -91,12 +91,14 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                       String blogContent = blog.content.toString();
                               String get_Thetime =
                                 blog.createdAt.toString();
-                            var tt = DateTime.parse(get_Thetime);
-                            var createdTime = DateFormat('d MMM yyyy')
-                                .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
-                            var formatter = DateFormat.yMMMMEEEEd();
-                            var dateInBuddhistCalendarFormat =
-                                formatter.formatInBuddhistCalendarThai(tt);
+                                          var createdTime = DateFormat.yMMMd()
+                                .format(DateTime.parse(get_Thetime));
+                            // var tt = DateTime.parse(get_Thetime);
+                            // var createdTime = DateFormat('d MMM yyyy')
+                            //     .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
+                            // var formatter = DateFormat.yMMMMEEEEd();
+                            // var dateInBuddhistCalendarFormat =
+                            //     formatter.formatInBuddhistCalendarThai(tt);
                       var document555;
                       if (blogContent == 'null') {
                         document555 = parse('<p>ไม่มีเนื้อหาของข่าวสาร</p>');
@@ -136,7 +138,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                "วันที่: "+createdTime,
+                                createdTime,
                                     style: TextStyle(
                                         fontSize: 15,
                                         color:

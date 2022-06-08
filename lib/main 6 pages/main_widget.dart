@@ -231,7 +231,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   alignment: Alignment.center,
-                                                  child: Text("ข้อผิดพลาด: " +
+                                                  child: Text("นามสกุลไฟล์รูปผิดพลาด: " +
                                                       error.toString())),
                                             ),
                                           ),
@@ -487,7 +487,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                     .thumbnail
                                                                     .toString(),
                                                                 fit: BoxFit
-                                                                    .contain,
+                                                                    .fill,
                                                                 height: MediaQuery.of(
                                                                             context)
                                                                         .size

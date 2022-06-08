@@ -1,10 +1,6 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
-// ใช้สำหรับโค้ด initializeDateFormatting()
-import 'package:intl/date_symbol_data_local.dart';
 
-// อันนี้แหละ ส่วนเสริม
-import 'package:buddhist_datetime_dateformat/buddhist_datetime_dateformat.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,9 +37,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   // List jsonCon = [];
 
   void initState() {
-    Intl.defaultLocale = "th";
-    initializeDateFormatting();
-
     fetch_Blog_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -162,15 +155,15 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                           if (index < data.length) {
                             String get_Thetime =
                                 data[index].createdAt.toString();
-                            var tt = DateTime.parse(get_Thetime);
-                            var createdTime = DateFormat('dd MMM yyyy')
-                                .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
-                            var formatter = DateFormat.yMMMMEEEEd();
-                            var dateInBuddhistCalendarFormat =
-                                formatter.formatInBuddhistCalendarThai(tt);
+                            // var tt = DateTime.parse(get_Thetime);
+                            // var createdTime = DateFormat('dd MMM yyyy')
+                            //     .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
+                            // var formatter = DateFormat.yMMMMEEEEd();
+                            // var dateInBuddhistCalendarFormat =
+                            //     formatter.formatInBuddhistCalendarThai(tt);
 
-                            // var createdTime = DateFormat.yMMMd()
-                            //     .format(DateTime.parse(get_Thetime));
+                            var createdTime = DateFormat.yMMMd()
+                                .format(DateTime.parse(get_Thetime));
 
                             String checkNull =
                                 data[index].description.toString();
