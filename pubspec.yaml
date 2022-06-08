@@ -41,8 +41,7 @@ dependencies:
   #http: ^0.13.4
   html: ^0.15.0
   flutter_widget_from_html: ^0.8.5
-
-
+  flutter_facebook_auth: ^4.3.4+1
   intl: ^0.17.0
   cached_network_image: ^3.2.0
   carousel_slider: ^4.1.1

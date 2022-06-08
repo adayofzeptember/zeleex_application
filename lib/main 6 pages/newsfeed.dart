@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/API/url.dart';
@@ -20,7 +21,6 @@ import '../help.dart';
 import '../newsfeed_detail.dart';
 import '../from Profile/profile.dart';
 
-
 class NewsFeedPage extends StatefulWidget {
   NewsFeedPage({Key? key}) : super(key: key);
 
@@ -32,6 +32,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   final controller = ScrollController();
   var perPage = 2; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
+  bool isNull = false;
   // List jsonCon = [];
 
   void initState() {
@@ -48,8 +49,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
 
   Future<List<Data_Blog_Detail>> fetch_Blog_readAll() async {
     final response = await http.get(Uri.parse(
-        'https://api.zeleex.com/api/blogs?per_page=' +
-            perPage.toString()));
+        'https://api.zeleex.com/api/blogs?per_page=' + perPage.toString()));
     var jsonResponse = json.decode(response.body);
     List jsonCon = jsonResponse['data']['data'];
     if (jsonCon.length < perPage) {
@@ -152,6 +152,16 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                         itemCount: data!.length + 1,
                         itemBuilder: (BuildContext context, int index) {
                           if (index < data.length) {
+                            final df = new DateFormat('dd-MM-yyyy hh:mm');
+                            String time = data[index].createdAt.toString();
+                            String checkNull =
+                                data[index].description.toString();
+                            String realDesc;
+                            if (checkNull == 'null') {
+                              realDesc = '- อ่านรายละเอียดเพิ่มเติม-';
+                            } else {
+                              realDesc = data[index].description.toString();
+                            }
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 10),
                               child: InkWell(
@@ -220,6 +230,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                           .title
                                                           .toString(),
                                                       style: TextStyle(
+                                            
+                                            
                                                           color: Color.fromARGB(
                                                               255, 51, 51, 51),
                                                           fontWeight:
@@ -248,7 +260,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      
                                       Container(
                                         height:
                                             MediaQuery.of(context).size.height *
@@ -259,7 +270,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                               .image!
                                               .main
                                               .toString(),
-                                              width: double.infinity,
+                                          width: double.infinity,
                                           fit: BoxFit.fitWidth,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
@@ -298,7 +309,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 0, 10, 0),
@@ -338,7 +348,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 0, 10, 0),
                                         child: Text(
-                                          data[index].description.toString(),
+                                          realDesc,
                                           // "แต่ถ้าเลี้ยงแบบครบวงจร ภาครัฐจัดหาน้ำเชื้อจากพ่อแม่พันธุ์ชั้นดีเกษตรกรนำมาผสมพันธุ์ แล้วเลี้ยงอนุบาลส่งต่อให้เกษตรกรที่พอมีกำลังทรัพย์นำมาขุนต่อด้วยเทคโนโลยีสมัยใหม่ ให้ ได้เนื้อวัวเกรดพรีเมียมมีไขมันแทรก ไม่ต่างจากเนื้อจากต่างประเทศราคาแพง",
                                           style: TextStyle(
                                             fontFamily: 'Kanit',
@@ -355,8 +365,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                 ),
                               ),
                             );
-                          } 
-                          else {
+                          } else {
                             return hasMore
                                 ? Padding(
                                     padding: const EdgeInsets.only(
@@ -378,9 +387,10 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                         }),
                   ),
                 );
-              } 
-              else if (snapshot.hasError) {
-                return Center(child: Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ"));
+              } else if (snapshot.hasError) {
+                return Center(
+                    child:
+                        Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ"));
               }
 
               return Padding(

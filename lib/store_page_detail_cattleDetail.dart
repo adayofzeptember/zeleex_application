@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/parser.dart';
+import 'package:intl/intl.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/animal_id_API.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'Plate.dart';
@@ -209,7 +210,10 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                 Row(
                                   children: [
                                     Text(
-                                      "฿ ${thisAnimal.price}",
+                                      "฿ " +
+                                          NumberFormat("#,###,###").format(
+                                              int.parse(
+                                                  thisAnimal.price.toString())),
                                       style: TextStyle(
                                           color: Colors.red[400], fontSize: 20),
                                     ),
@@ -217,13 +221,13 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "฿ ${thisAnimal.price}",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 130, 130, 130),
-                                          decoration:
-                                              TextDecoration.lineThrough),
-                                    )
+                                      "฿ " +
+                                          NumberFormat("#,###,###").format(
+                                              int.parse(
+                                                  thisAnimal.price.toString())),
+                                      style: TextStyle(decoration: TextDecoration.lineThrough,
+                                          color: Colors.grey),
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
@@ -318,7 +322,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                               pressed = !pressed;
                                             });
                                           },
-                                  
                                           child: Text(
                                             pressed ? "ติดตาม" : "ติดตามแล้ว",
                                             style: TextStyle(
@@ -358,8 +361,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                     header: Text(
                                       "รายละเอียดสินค้า",
                                       style: TextStyle(
-                                          color: Palette.kToDark,
-                                          fontSize: 20),
+                                          color: Palette.kToDark, fontSize: 20),
                                     ),
                                     collapsed: Container(),
                                     expanded: Column(
@@ -406,7 +408,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                     child: Center(child: CircularProgressIndicator()),
                   );
                 }
-                
               }),
         ],
       )),

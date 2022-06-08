@@ -12,9 +12,7 @@ import 'package:zeleex_application/test%20folder/device_info.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(First_Page()));
- 
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(First_Page()));
 }
 
 class First_Page extends StatelessWidget {
@@ -31,6 +29,11 @@ class First_Page extends StatelessWidget {
     );
   }
 }
+
+class DeterMind {
+  
+}
+
 
 class MainAndIcon extends StatefulWidget {
   MainAndIcon({Key? key}) : super(key: key);
