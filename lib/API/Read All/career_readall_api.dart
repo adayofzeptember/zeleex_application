@@ -195,7 +195,7 @@ class Links {
 //ใช้ Data use เพราะเป็นตัวที่เก็บข้อมูลลิสต์
 Future<List<Data_Read_Careers>> fetch_career_readAll() async {
   final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/careers'));
+      await http.get(Uri.parse('https://api.zeleex.com/api/careers'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
