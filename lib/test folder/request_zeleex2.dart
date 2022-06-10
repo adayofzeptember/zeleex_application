@@ -25,48 +25,70 @@ class ResponseModel_zeleex2 {
 class RequestModel_zeleex2 {
   String? email;
   String? password;
+  // List<String>? email;
+  // List<String>? password;
 
   RequestModel_zeleex2({this.email, this.password});
+
+  RequestModel_zeleex2.fromJson(Map<String, dynamic> json) {
+    email = json['email'].cast<String>();
+    password = json['password'].cast<String>();
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['email'] = this.email;
     data['password'] = this.password;
     return data;
   }
+
 }
 
 Future<ResponseModel_zeleex2> login_zeleex2(
     RequestModel_zeleex2 requestModel_zeleex2) async {
-  print(
-      "-------------------------------------------------------------------------------------------------------------");
-  String urlPost = "https://api.zeleex.com/api/login?";
+  print("------------------------------------------------------------------------------------------------------------------------------");
+  String urlPost = "https://api.zeleex.com/api/login";
   final response = await http.post(Uri.parse(urlPost),
-      // headers: {'Accept': 'application/json'},
-      //body: requestModel.toJson()
-      
-      body: jsonEncode(<String, dynamic>{
+      //body: json.encode(requestModel_zeleex2)
+      //headers: {'Content-Type': 'application/json', 'Charset': 'utf-8'},
+      body: json.encode(<String, dynamic>{
         'data': [
           {
             'email': [
-              requestModel_zeleex2.email.toString(),
+              json.encode(requestModel_zeleex2.email.toString()),
             ],
             'password': [
-              requestModel_zeleex2.password.toString(),
+              json.encode(requestModel_zeleex2.password.toString()),
             ]
           }
         ]
-   
       }));
 
-  print("post: " + json.encode(requestModel_zeleex2));
+  print("POST JSON: " + json.encode(requestModel_zeleex2));
   var data = jsonDecode(response.body.toString());
   var jsonCon = data['data'];
-  print(jsonCon);
-
+  print(data);
   if (response.statusCode == 200) {
     return ResponseModel_zeleex2.fromJson(json.decode(response.body));
   } else {
-    throw Exception('FAILED TO LOAD');
+    throw Exception('Failed');
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -241,7 +241,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                   borderRadius: BorderRadius.circular(5.0)),
                               child: InkWell(
                                 onTap: () {
-                                print(data[index].id.toString());
+                                  print(data[index].id.toString());
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
