@@ -341,7 +341,7 @@ class _ProductPageState extends State<ProductPage> {
                 //return Text("${"snapshot.error"}");
                 return Padding(
                   padding: const EdgeInsets.only(top: 50),
-                  child: Center(child: Text("ไม่มีข้อมูลสินค้า")),
+                  child: Center(child: Text("Cumming Soon!")),
                 );
               }
               return Padding(

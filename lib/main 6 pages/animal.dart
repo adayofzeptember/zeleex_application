@@ -209,7 +209,6 @@ class _AnimalsPageState extends State<AnimalsPage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Data_Animal_All>? data = snapshot.data;
-
                 return Expanded(
                   child: RawScrollbar(
                     controller: controller,
@@ -327,7 +326,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                       padding: const EdgeInsets.fromLTRB(
                                           10, 5, 5, 0),
                                       child: Container(
-                                        height: 30,
+                                        height: 33,
                                         child: Text(
                                           animalDesc.toString(),
                                           // data[index].description.toString(),
@@ -340,7 +339,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                     ),
                                     Padding(
                                         padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 0, 0),
+                                            10, 10, 0, 0),
                                         child: Text(
                                           "฿ " +
                                               NumberFormat("#,###,###").format(
