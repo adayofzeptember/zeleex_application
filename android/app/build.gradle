@@ -26,12 +26,14 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+
     compileSdkVersion flutter.compileSdkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 
     kotlinOptions {
         jvmTarget = '1.8'
@@ -64,6 +66,7 @@ android {
 flutter {
     source '../..'
 }
+
 
 dependencies {
     implementation 'com.facebook.android:facebook-login:latest.release'

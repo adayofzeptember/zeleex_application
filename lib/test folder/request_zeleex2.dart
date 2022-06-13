@@ -41,54 +41,41 @@ class RequestModel_zeleex2 {
     data['password'] = this.password;
     return data;
   }
-
 }
 
 Future<ResponseModel_zeleex2> login_zeleex2(
     RequestModel_zeleex2 requestModel_zeleex2) async {
-  print("------------------------------------------------------------------------------------------------------------------------------");
+  print(
+      "------------------------------------------------------------------------------------------------------------------------------");
   String urlPost = "https://api.zeleex.com/api/login";
   final response = await http.post(Uri.parse(urlPost),
       //body: json.encode(requestModel_zeleex2)
-      //headers: {'Content-Type': 'application/json', 'Charset': 'utf-8'},
+
+      headers: {
+        'Content-Type': 'application/json',
+        'Charset': 'utf-8',
+        'Accept': 'application/json'
+      },
       body: json.encode(<String, dynamic>{
         'data': [
           {
-            'email': [
-              json.encode(requestModel_zeleex2.email.toString()),
-            ],
-            'password': [
-              json.encode(requestModel_zeleex2.password.toString()),
+            "email": [
+              json.encode(requestModel_zeleex2.email)
+              ],
+            "password": [
+              json.encode(requestModel_zeleex2.password),
             ]
           }
         ]
       }));
 
-  print("POST JSON: " + json.encode(requestModel_zeleex2));
+  print("------------------" + json.encode(requestModel_zeleex2));
   var data = jsonDecode(response.body.toString());
   var jsonCon = data['data'];
   print(data);
-  if (response.statusCode == 200) {
+  if (response.statusCode == 200 || response.statusCode == 400) {
     return ResponseModel_zeleex2.fromJson(json.decode(response.body));
   } else {
     throw Exception('Failed');
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

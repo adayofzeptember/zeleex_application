@@ -52,9 +52,7 @@ class _Main_WidgetState extends State<Main_Widget> {
         await http.get(Uri.parse('https://api.zeleex.com/api/sliders'));
 
     var jsonResponse = json.decode(response.body);
-
     List jsonCon = jsonResponse['data'];
-    print(jsonCon.length);
 
     setState(() {
       countIMG = jsonCon.length;
@@ -231,8 +229,9 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   alignment: Alignment.center,
-                                                  child: Text("นามสกุลไฟล์รูปผิดพลาด: " +
-                                                      error.toString())),
+                                                  child: Text(
+                                                      "นามสกุลไฟล์รูปผิดพลาด: " +
+                                                          error.toString())),
                                             ),
                                           ),
                                         ),
@@ -486,8 +485,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                     .image!
                                                                     .thumbnail
                                                                     .toString(),
-                                                                fit: BoxFit
-                                                                    .fill,
+                                                                fit:
+                                                                    BoxFit.fill,
                                                                 height: MediaQuery.of(
                                                                             context)
                                                                         .size
@@ -524,7 +523,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                 const EdgeInsets
                                                                     .all(8.0),
                                                             child: Column(
-                                                              
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
