@@ -25,15 +25,10 @@ class ResponseModel_zeleex2 {
 class RequestModel_zeleex2 {
   String? email;
   String? password;
-  // List<String>? email;
-  // List<String>? password;
+  //  List<String>? email;
+  //  List<String>? password;
 
   RequestModel_zeleex2({this.email, this.password});
-
-  RequestModel_zeleex2.fromJson(Map<String, dynamic> json) {
-    email = json['email'].cast<String>();
-    password = json['password'].cast<String>();
-  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -43,39 +38,46 @@ class RequestModel_zeleex2 {
   }
 }
 
+//body: json.encode(requestModel_zeleex2)
+//  'data': [
+//         {
+//           "email": [
+//             json.encode(requestModel_zeleex2.email)
+//             ],
+//           "password": [
+//             json.encode(requestModel_zeleex2.password),
+//           ]
+//         }
+//       ]
+
 Future<ResponseModel_zeleex2> login_zeleex2(
     RequestModel_zeleex2 requestModel_zeleex2) async {
   print(
-      "------------------------------------------------------------------------------------------------------------------------------");
-  String urlPost = "https://api.zeleex.com/api/login";
-  final response = await http.post(Uri.parse(urlPost),
-      //body: json.encode(requestModel_zeleex2)
+      "-----------------------------------------------Log in-----------------------------------------------------------------------");
 
+  String urlPost = "https://api.zeleex.com/api/login";
+  var bodyLogin = json.encode(requestModel_zeleex2.toJson());
+  final response = await http.post(Uri.parse(urlPost),
       headers: {
         'Content-Type': 'application/json',
-        'Charset': 'utf-8',
-        'Accept': 'application/json'
       },
-      body: json.encode(<String, dynamic>{
-        'data': [
-          {
-            "email": [
-              json.encode(requestModel_zeleex2.email)
-              ],
-            "password": [
-              json.encode(requestModel_zeleex2.password),
-            ]
-          }
-        ]
-      }));
+      body: bodyLogin);
 
-  print("------------------" + json.encode(requestModel_zeleex2));
   var data = jsonDecode(response.body.toString());
-  var jsonCon = data['data'];
   print(data);
-  if (response.statusCode == 200 || response.statusCode == 400) {
+  print("--------------{$bodyLogin}---------------");
+
+  // if (response.statusCode == 200 || response.statusCode == 400) {
+  //   return ResponseModel_zeleex2.fromJson(json.decode(response.body));
+  // } else {
+  //   throw Exception(Error);
+  // }
+
+  try {
+    response.statusCode == 200 || response.statusCode == 400;
     return ResponseModel_zeleex2.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed');
+  } on Exception catch (e) {
+    print("throwing new error");
+    throw Exception("Error on server");
   }
 }

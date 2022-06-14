@@ -671,13 +671,13 @@ class AnimalOutStores {
 }
 
 
-// Future<Animal> fetch_Animal_ByID() async {
-//   var url = "https://sanboxapi.zeleex.com/api/animals/2";
-//   var response = await http.get(Uri.parse(url));
-//   var jsonResponse = json.decode(response.body);
-//   var jsonCon = jsonResponse['data']['animal'];
-//   Animal msg = Animal.fromJson(jsonCon);
-//   print(msg.title);
-//   print(msg.id);
-//   return msg;
-// }
+Future<Animal> fetch_Animal_ByID() async {
+  var url = "https://sanboxapi.zeleex.com/api/animals/2";
+  var response = await http.get(Uri.parse(url));
+  var jsonResponse = json.decode(response.body);
+  var jsonCon = jsonResponse['data']['animal'];
+  Animal msg = Animal.fromJson(jsonCon);
+  print(msg.title);
+  print(msg.id);
+  return msg;
+}

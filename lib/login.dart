@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                     TextFormField(
                                       controller: emailController,
                                       onSaved: (input) =>
-                                          requestModel_zeleex2.email = input,
+                                          requestModel_zeleex2.email = input ,
                                       keyboardType: TextInputType.emailAddress,
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.mail_outline),
@@ -228,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                                       controller: passwordController,
                                       onSaved: (input) =>
                                           // requestModel_reqres.password = input,
-                                          requestModel_zeleex2.password = input,
+                                          requestModel_zeleex2.password = input ,
                                           
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.lock_outline),
@@ -282,6 +282,9 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
+                          
+
+
                                           login_zeleex2(requestModel_zeleex2)
                                               .then((value) => {
                                                     if (value.id.isNotEmpty)
@@ -293,20 +296,9 @@ class _LoginPageState extends State<LoginPage> {
                                                         print("error"),
                                                       }
                                                   });
-                                          // login_reqres(requestModel_reqres)
-                                          //     .then((value) => {
-                                          //           if (value.token.isNotEmpty)
-                                          //             {
-                                          //               print("success"),
-                                          //             }
-                                          //           else
-                                          //             {
-                                          //               print("error: "+value.error),
+                                     
 
-                                          //             }
-                                          //         });
-
-                                           print(requestModel_zeleex2.toJson());
+                                          // print("-------input-------"+requestModel_zeleex2.toJson().toString());
                                         }
                                       },
                                       child: Padding(
