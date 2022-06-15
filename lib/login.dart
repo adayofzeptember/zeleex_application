@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
-import 'package:zeleex_application/test%20folder/request_zeleex.dart';
 import 'package:zeleex_application/test%20folder/request_zeleex2.dart';
 import 'Plate.dart';
 
@@ -25,9 +25,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final ScaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, dynamic>? _userData;
   AccessToken? _accessToken2;
-
+  bool isApiCallProcess = false;
   bool _checking = true;
   String? tokenShow;
   final formKey = GlobalKey<FormState>();
@@ -36,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
   late RequestModel_reqres requestModel_reqres;
   late RequestModel_zeleex2 requestModel_zeleex2;
 
-  bool isApiCallprocess = false;
   @override
   void initState() {
     //_checkIfLogin();
@@ -88,6 +88,15 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    return ProgressHUD(
+      child: _uiSetUp(context),
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+    );
+  }
+
+  @override
+  Widget _uiSetUp(BuildContext context) {
     // return MaterialApp(
     //   home: Scaffold(
     //     appBar: AppBar(title: Text("เทส zeleex")),
@@ -129,6 +138,7 @@ class _LoginPageState extends State<LoginPage> {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
+            key: ScaffoldKey,
             appBar: AppBar(
               systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarIconBrightness: Brightness.light,
@@ -194,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                                     TextFormField(
                                       controller: emailController,
                                       onSaved: (input) =>
-                                          requestModel_zeleex2.email = input ,
+                                          requestModel_zeleex2.email = input,
                                       keyboardType: TextInputType.emailAddress,
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.mail_outline),
@@ -228,8 +238,7 @@ class _LoginPageState extends State<LoginPage> {
                                       controller: passwordController,
                                       onSaved: (input) =>
                                           // requestModel_reqres.password = input,
-                                          requestModel_zeleex2.password = input ,
-                                          
+                                          requestModel_zeleex2.password = input,
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.lock_outline),
                                         // suffixIcon:
@@ -282,21 +291,32 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
-                          
-
+                                          // setState(() {
+                                          //   isApiCallProcess = true;
+                                          // });
 
                                           login_zeleex2(requestModel_zeleex2)
                                               .then((value) => {
-                                                    if (value.id.isNotEmpty)
+                                                    // setState(() {
+                                                    //   isApiCallProcess = false;
+                                                    // }),
+                                                    if (value.data!.email!
+                                                        .isNotEmpty)
                                                       {
-                                                        print("success"),
+                                                        print(value.responseCode
+                                                                .toString() +
+                                                            value.responseStatus
+                                                                .toString()+"4444"),
+                                                        // print(
+                                                        //     value.data!.token),
+                                                        print(
+                                                            value.data!.email),
                                                       }
                                                     else
                                                       {
-                                                        print("error"),
+                                                        print("Error"),
                                                       }
                                                   });
-                                     
 
                                           // print("-------input-------"+requestModel_zeleex2.toJson().toString());
                                         }
