@@ -6,22 +6,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 
-// class ResponseModel_zeleex2 {
-
-//   final String id;
-//   final String name;
-
-//   ResponseModel_zeleex2({
-//     required this.id,
-//     required this.name,
-//   });
-
-// factory ResponseModel_zeleex2.fromJson(Map<String, dynamic> json) {
-//   return ResponseModel_zeleex2(
-//       id: json['id'] != null ? json['id'] : "",
-//       name: json['name'] != null ? json['name'] : "");
-// }
-// }
 class Login_Data {
   String? responseCode;
   String? responseStatus;
@@ -98,26 +82,24 @@ class ResponseModel_zeleex2 {
       this.token,
       this.imageProfile,
       this.storeCheck});
-      
+
   factory ResponseModel_zeleex2.fromJson(Map<String, dynamic> json) {
     return ResponseModel_zeleex2(
-      id: json['id'] != null ? json['id'] : "",
-      name: json['name'] != null ? json['name'] : "",
-      email: json['email'] != null ? json['email'] : "",
-            token: json['token'] != null ? json['token'] : "",
-
-      // emailVerifiedAt:
-      //     json['emailVerifiedAt'] != null ? json['emailVerifiedAt'] : "",
-      // phone: json['phone'] != null ? json['phone'] : "",
-      // avatar: json['avatar'] != null ? json['avatar'] : "",
-      // provider: json['provider'] != null ? json['provider'] : "",
-      // providerId: json['providerId'] != null ? json['providerId'] : "",
-      // status: json['status'] != null ? json['status'] : "",
-      // createdAt: json['createdAt'] != null ? json['createdAt'] : "",
-      // updatedAt: json['updatedAt'] != null ? json['updatedAt'] : "",
-      // token: json['token'] != null ? json['token'] : "",
-      // imageProfile: json['imageProfile'] != null ? json['imageProfile'] : "",
-      // storeCheck: json['storeCheck'] != null ? json['storeCheck'] : "",
+      id: json['id'] != null ? json['id'] : null, //! : ""
+      name: json['name'] != null ? json['name'] : null,
+      email: json['email'] != null ? json['email'] : null,
+      emailVerifiedAt:
+          json['emailVerifiedAt'] != null ? json['emailVerifiedAt'] : null,
+      phone: json['phone'] != null ? json['phone'] : null,
+      avatar: json['avatar'] != null ? json['avatar'] : null,
+      provider: json['provider'] != null ? json['provider'] : null,
+      providerId: json['providerId'] != null ? json['providerId'] : null,
+      status: json['status'] != null ? json['status'] : null,
+      createdAt: json['createdAt'] != null ? json['createdAt'] : null,
+      updatedAt: json['updatedAt'] != null ? json['updatedAt'] : null,
+      token: json['token'] != null ? json['token'] : null,
+      imageProfile: json['imageProfile'] != null ? json['imageProfile'] : null,
+      storeCheck: json['storeCheck'] != 0 ? json['storeCheck'] : null,
     );
   }
 }
@@ -153,12 +135,6 @@ Future<Login_Data> login_zeleex2(
   var data = jsonDecode(response.body.toString());
   print(data);
   print("--------------{$bodyLogin}---------------");
-
-  // if (response.statusCode == 200 || response.statusCode == 400) {
-  //   return ResponseModel_zeleex2.fromJson(json.decode(response.body));
-  // } else {
-  //   throw Exception(Error);
-  // }
 
   try {
     response.statusCode == 200 || response.statusCode == 400;

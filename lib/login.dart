@@ -306,11 +306,11 @@ class _LoginPageState extends State<LoginPage> {
                                                         print(value.responseCode
                                                                 .toString() +
                                                             value.responseStatus
-                                                                .toString()+"4444"),
-                                                        // print(
-                                                        //     value.data!.token),
+                                                                .toString()),
+                                                 
                                                         print(
-                                                            value.data!.email),
+                                                            "${value.data!.id} : ${value.data!.email}"),
+                                                     
                                                       }
                                                     else
                                                       {
