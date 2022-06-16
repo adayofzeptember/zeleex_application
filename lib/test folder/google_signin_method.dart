@@ -11,9 +11,8 @@ class GoogoleSignInApi {
 }
 
 Future google_Login() async {
-  var x;
   final userGoogle = await GoogoleSignInApi.google_SignIn();
-  print("------------------------------------------------------------------");
+  print("--------------------------------------------------------------------------------");
   print(userGoogle!.id);
   print(userGoogle.email);
   print(userGoogle.displayName);
@@ -22,14 +21,11 @@ Future google_Login() async {
     result!.authentication.then((googleKey) {
       print("access token: " + googleKey.accessToken.toString());
       print("id token: " + googleKey.idToken.toString());
-      x = googleKey.accessToken;
+      print(userGoogle.email);
     }).catchError((err) {
-      print('xxx');
+      print('error in');
     });
   }).catchError((err) {
-    print('xxxxx');
+    print('error out');
   });
-  print("xxxxxxx"+x.toString());
-
-
 }
