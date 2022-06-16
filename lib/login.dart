@@ -1,17 +1,16 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/API/Post%20Method/post_login.dart';
 import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
-import 'package:zeleex_application/test%20folder/request_zeleex2.dart';
 import 'Plate.dart';
 
 var emailController = TextEditingController();
@@ -283,7 +282,6 @@ class _LoginPageState extends State<LoginPage> {
                                       style: ElevatedButton.styleFrom(
                                           primary: Palette.kToDark,
                                           elevation: 0,
-                                          // side: BorderSide(color: Colors.red),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15),
@@ -295,7 +293,7 @@ class _LoginPageState extends State<LoginPage> {
                                           //   isApiCallProcess = true;
                                           // });
 
-                                          login_zeleex2(requestModel_zeleex2)
+                                          login(requestModel_zeleex2)
                                               .then((value) => {
                                                     // setState(() {
                                                     //   isApiCallProcess = false;
@@ -304,17 +302,18 @@ class _LoginPageState extends State<LoginPage> {
                                                         .isNotEmpty)
                                                       {
                                                         print(value.responseCode
-                                                                .toString() +
+                                                                .toString() +""+
                                                             value.responseStatus
                                                                 .toString()),
-                                                 
                                                         print(
                                                             "${value.data!.id} : ${value.data!.email}"),
-                                                     
+                                                        print(
+                                                            "token : ${value.data!.token}")
                                                       }
                                                     else
                                                       {
-                                                        print("Error"),
+                                                        print(
+                                                            value.data!.error),
                                                       }
                                                   });
 
@@ -507,21 +506,5 @@ class ShapesPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
-  }
-}
-
-Future<void> loginTest() async {
-  var response = await http.post(Uri.parse("https://api.zeleex.com/api/login"),
-      //var responsex = await http.post(Uri.parse("https://reqres.in/api/login"),
-      body: ({
-        'email': emailController.text,
-        'password': passwordController.text
-      }));
-  print((response.body.toString()));
-
-  if (response.statusCode == 200) {
-    print("collect");
-  } else {
-    print("invalid");
   }
 }

@@ -52,7 +52,7 @@ class _MainAndIconState extends State<MainAndIcon> {
         context,
         MaterialPageRoute(
           builder: (context) => SecondPage(
-            name: x,
+            name: x, 
           ),
         ),
       );
