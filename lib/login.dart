@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -27,6 +28,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final ScaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, dynamic>? _userData;
+  late final GoogleSignInAccount gg;
   AccessToken? _accessToken2;
   bool isApiCallProcess = false;
   bool _checking = true;
@@ -409,6 +411,7 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
                                         GoogoleSignInApi.google_LogOut();
+                 
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -450,6 +453,7 @@ class _LoginPageState extends State<LoginPage> {
                                           )),
                                       onPressed: () {
                                         google_Login();
+                           
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
