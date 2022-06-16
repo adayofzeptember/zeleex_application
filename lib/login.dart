@@ -10,6 +10,7 @@ import 'package:zeleex_application/API/Post%20Method/post_login.dart';
 import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/register.dart';
+import 'package:zeleex_application/test%20folder/google_signin_method.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
 import 'Plate.dart';
 
@@ -406,7 +407,8 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        _userData != null ? _logout : _login;
+                                        // _userData != null ? _logout : _login;
+                                        GoogoleSignInApi.google_LogOut();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -446,7 +448,9 @@ class _LoginPageState extends State<LoginPage> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           )),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        google_Login();
+                                      },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
                                         child: Container(
@@ -483,9 +487,16 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-            )));
+            )
+            )
+            );
+            
   }
+  
+  
 }
+
+
 
 const double _kCurveHeight = 25;
 
@@ -508,3 +519,4 @@ class ShapesPainter extends CustomPainter {
     return true;
   }
 }
+
