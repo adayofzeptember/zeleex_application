@@ -12,8 +12,9 @@ import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
-import 'package:zeleex_application/test%20folder/google_signin_api.dart';
+import 'package:zeleex_application/API/Post%20Method/google_signin_api.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
+import 'API/model.dart';
 import 'Plate.dart';
 
 var emailController = TextEditingController();
@@ -31,10 +32,14 @@ class _LoginPageState extends State<LoginPage> {
   bool isApiCallProcess = false;
   final formKey = GlobalKey<FormState>();
   late RequestModel_zeleex2 requestModel_zeleex2;
+  AlreadyIn_Model loggedin = AlreadyIn_Model();
+  //! logged in ลองเอาไปใส่ในข้อมูลส่งไปหน้าอื่น
+  var x;
 
   @override
   void initState() {
     requestModel_zeleex2 = new RequestModel_zeleex2();
+    loggedin = new AlreadyIn_Model();
     super.initState();
   }
 
@@ -146,6 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                                     TextFormField(
                                       controller: emailController,
                                       onSaved: (input) =>
+                             
                                           requestModel_zeleex2.email = input,
                                       keyboardType: TextInputType.emailAddress,
                                       decoration: InputDecoration(
@@ -175,6 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                                     SizedBox(
                                       height: 15,
                                     ),
+                               
                                     TextFormField(
                                       obscureText: true,
                                       controller: passwordController,
@@ -235,7 +242,6 @@ class _LoginPageState extends State<LoginPage> {
                                           // setState(() {
                                           //   isApiCallProcess = true;
                                           // });
-
                                           login(requestModel_zeleex2)
                                               .then((value) => {
                                                     // setState(() {
@@ -244,22 +250,27 @@ class _LoginPageState extends State<LoginPage> {
                                                     if (value.data!.email!
                                                         .isNotEmpty)
                                                       {
+                                                        //x = AlreadyIn_Model(name: "sdf", id: ),
+                                                        loggedin.email = "asdf",
                                                         print(value.responseCode
                                                                 .toString() +
-                                                            "" +
+                                                            " " +
                                                             value.responseStatus
                                                                 .toString()),
                                                         print(
                                                             "${value.data!.id} : ${value.data!.email}"),
                                                         print(
-                                                            "token : ${value.data!.token}")
+                                                            "token : ${value.data!.token}"),
+                                                  
                                                       }
                                                     else
                                                       {
-                                                        print(
-                                                            value.data!.error),
+                                                        print(value.data!.error),
                                                       }
-                                                  });
+                                                  }
+                                                  );
+
+                                               
 
                                           // print("-------input-------"+requestModel_zeleex2.toJson().toString());
                                         }

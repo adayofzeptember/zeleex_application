@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
+import 'API/model.dart';
 import 'Plate.dart';
 import 'payment.dart';
 
@@ -15,6 +16,8 @@ class CartPage extends StatefulWidget {
   @override
   State<CartPage> createState() => _CartPageState();
 }
+
+  AlreadyIn_Model loggedin = AlreadyIn_Model();
 
 class _CartPageState extends State<CartPage> {
   bool isChecked = false;

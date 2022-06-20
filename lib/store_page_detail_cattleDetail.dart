@@ -8,6 +8,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/animal_id_API.dart';
+import 'package:zeleex_application/API/model.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'Plate.dart';
 import 'store_page_detail_cattle.dart';
@@ -16,6 +17,7 @@ import 'package:http/http.dart' as http;
 class Store_Cattle_Detail extends StatefulWidget {
   String? animalID = "";
   String? animalName = "";
+  late AlreadyIn_Model modd;
 
   Store_Cattle_Detail({Key? key, this.animalID, this.animalName})
       : super(key: key);
