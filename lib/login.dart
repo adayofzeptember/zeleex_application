@@ -10,8 +10,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login.dart';
 import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login_model.dart';
+import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
-import 'package:zeleex_application/test%20folder/google_signin_method.dart';
+import 'package:zeleex_application/test%20folder/google_signin_api.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
 import 'Plate.dart';
 
@@ -27,65 +28,42 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final ScaffoldKey = GlobalKey<ScaffoldState>();
-  Map<String, dynamic>? _userData;
-  late final GoogleSignInAccount gg;
-  AccessToken? _accessToken2;
   bool isApiCallProcess = false;
-  bool _checking = true;
-  String? tokenShow;
   final formKey = GlobalKey<FormState>();
-  //late LoginRequestModel requestModel;
-
-  late RequestModel_reqres requestModel_reqres;
   late RequestModel_zeleex2 requestModel_zeleex2;
 
   @override
   void initState() {
-    //_checkIfLogin();
-    requestModel_reqres = new RequestModel_reqres();
     requestModel_zeleex2 = new RequestModel_zeleex2();
     super.initState();
   }
 
-  _checkIfLogin() async {
-    final accessToken = await FacebookAuth.instance.accessToken;
-    setState(() {
-      _checking = false;
-    });
-    if (accessToken != null) {
-      print(accessToken.toJson());
-      final userData = await FacebookAuth.instance.getUserData();
-      _accessToken2 = accessToken;
-      setState(() {
-        tokenShow = _accessToken2.toString();
-        _userData = userData;
+  Future google_Login() async {
+    final userGoogle = await GoogoleSignInApi.google_SignIn();
+    print(
+        "--------------------------------------------------------------------------------");
+
+    GoogoleSignInApi.google_SignIn2().then((result) {
+      result!.authentication.then((googleKey) {
+        print("id token ----------------> " + googleKey.idToken.toString());
+        print("access token ------------------> " +
+            googleKey.accessToken.toString());
+        print("gmail ------------------> " + userGoogle!.email.toString());
+        print("name -------------------> " + userGoogle.displayName.toString());
+        print("image ------------------> " + userGoogle.photoUrl.toString());
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RegisterPage(user: userGoogle),
+          ),
+        );
+      }).catchError((err) {
+        print('error in');
       });
-    } else {
-      _login();
-    }
-  }
-
-  _login() async {
-    final LoginResult result = await FacebookAuth.instance.login();
-    if (result.status == LoginStatus.success) {
-      _accessToken2 = result.accessToken;
-      final userData = await FacebookAuth.instance.getUserData();
-      _userData = userData;
-      print(_userData);
-      print(_accessToken2);
-    } else {
-      print(result.status);
-      print(result.message);
-    }
-    setState(() {
-      _checking = false;
+    }).catchError((err) {
+      print('error out');
     });
-  }
-
-  _logout() async {
-    await FacebookAuth.instance.logOut();
-    _accessToken2 = null;
-    _userData = null;
   }
 
   @override
@@ -99,44 +77,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget _uiSetUp(BuildContext context) {
-    // return MaterialApp(
-    //   home: Scaffold(
-    //     appBar: AppBar(title: Text("เทส zeleex")),
-    //     body: _checking
-    //         ? Center(
-    //             child: CircularProgressIndicator(),
-    //           )
-    //         : Center(
-    //             child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             crossAxisAlignment: CrossAxisAlignment.center,
-    //             children: [
-    //               _userData != null
-    //                   ? Text('name: ${_userData!['name']}')
-    //                   : Container(),
-    //               _userData != null
-    //                   ? Text('email: ${_userData!['email']}')
-    //                   : Container(),
-    //               _userData != null
-    //                   ? Container(
-    //                       child: Image.network(
-    //                           _userData!['picture']['data']['url']),
-    //                     )
-    //                   : Container(),
-    //               SizedBox(
-    //                 height: 20,
-    //               ),
-    //               CupertinoButton(
-    //                   color: Colors.blue,
-    //                   child: Text(
-    //                     _userData != null ? 'ออก' : 'เข้า',
-    //                     style: TextStyle(color: Colors.white),
-    //                   ),
-    //                   onPressed: _userData != null ? _logout : _login)
-    //             ],
-    //           )),
-    //   ),
-    // );
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
@@ -305,7 +245,8 @@ class _LoginPageState extends State<LoginPage> {
                                                         .isNotEmpty)
                                                       {
                                                         print(value.responseCode
-                                                                .toString() +""+
+                                                                .toString() +
+                                                            "" +
                                                             value.responseStatus
                                                                 .toString()),
                                                         print(
@@ -349,15 +290,7 @@ class _LoginPageState extends State<LoginPage> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           )),
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                RegisterPage(),
-                                          ),
-                                        );
-                                      },
+                                      onPressed: () {},
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
                                         child: Container(
@@ -411,7 +344,6 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
                                         GoogoleSignInApi.google_LogOut();
-                 
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -453,7 +385,6 @@ class _LoginPageState extends State<LoginPage> {
                                           )),
                                       onPressed: () {
                                         google_Login();
-                           
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -491,16 +422,9 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-            )
-            )
-            );
-            
+            )));
   }
-  
-  
 }
-
-
 
 const double _kCurveHeight = 25;
 
@@ -523,4 +447,3 @@ class ShapesPainter extends CustomPainter {
     return true;
   }
 }
-

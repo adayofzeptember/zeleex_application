@@ -134,7 +134,7 @@ Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
       body: body_Login);
 
   print(jsonDecode(response.body.toString()));
-
+  
   try {
     response.statusCode == 200 || response.statusCode == 400;
     return Login_Data.fromJson(json.decode(response.body));
@@ -142,3 +142,9 @@ Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
     throw Exception("error on: " + e.toString());
   }
 }
+
+
+
+
+
+

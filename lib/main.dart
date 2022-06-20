@@ -70,7 +70,7 @@ class _MainAndIconState extends State<MainAndIcon> {
             children: [
               Image.asset('assets/images/Frame.png',
                   height: MediaQuery.of(context).size.height * 0.25,
-                  fit: BoxFit.cover),
+                  fit:BoxFit.cover),
             ],
           ),
         ),

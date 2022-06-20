@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'Plate.dart';
 import 'login.dart';
 import 'terms.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
+  final GoogleSignInAccount user;
+  RegisterPage({Key? key, required this.user}) : super(key: key);
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -71,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           Text(
-                            "สมัครสมาชิก",
+                            widget.user.email,
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           Text(
