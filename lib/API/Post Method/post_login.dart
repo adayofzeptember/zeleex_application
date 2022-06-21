@@ -120,28 +120,37 @@ class RequestModel_zeleex2 {
   }
 }
 
-Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
-  print(
-      "-----------------------------------------------Login-----------------------------------------------------------------------");
+// Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
+//   print(
+//       "-----------------------------------------------Login-----------------------------------------------------------------------");
 
-  String urlPost = "https://api.zeleex.com/api/login";
-  var body_Login = json.encode(requestModel_zeleex2.toJson());
-  final response = await http.post(Uri.parse(urlPost),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: body_Login);
+//   String urlPost = "https://api.zeleex.com/api/login";
+//   var body_Login = json.encode(requestModel_zeleex2.toJson());
+//   final response = await http.post(Uri.parse(urlPost),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//       body: body_Login);
 
-  print(jsonDecode(response.body.toString()));
+//   print(jsonDecode(response.body.toString()));
+//   var jsonRes = json.decode(response.body);
   
-  try {
-    response.statusCode == 200 || response.statusCode == 400;
-    return Login_Data.fromJson(json.decode(response.body));
-  } on Exception catch (e) {
-    throw Exception("error on: " + e.toString());
-  }
-}
+//   try {
+//     response.statusCode == 200 || response.statusCode == 400;
+//     print(jsonRes['data']['token']);
+//        Navigator.pushReplacement(
+//           context,
+//           MaterialPageRoute(
+//             builder: (context) => RegisterPage(user: userGoogle),
+//           ),
+//         );
+
+//     return Login_Data.fromJson(json.decode(response.body));
+//   } on Exception catch (e) {
+//     throw Exception("error on: " + e.toString());
+//   }
+// }
 
 
 

@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login.dart';
 import 'package:zeleex_application/ProgressHUD.dart';
+import 'package:zeleex_application/login2_testTOKEN.dart';
 import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
@@ -16,6 +18,12 @@ import 'package:zeleex_application/API/Post%20Method/google_signin_api.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
 import 'API/model.dart';
 import 'Plate.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:http/http.dart' as http;
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
@@ -41,6 +49,46 @@ class _LoginPageState extends State<LoginPage> {
     requestModel_zeleex2 = new RequestModel_zeleex2();
     loggedin = new AlreadyIn_Model();
     super.initState();
+  }
+
+  Future logout() async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.remove('key');
+
+  }
+  Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
+    print(
+        "-----------------------------------------------Login-----------------------------------------------------------------------");
+
+    String urlPost = "https://api.zeleex.com/api/login";
+    var body_Login = json.encode(requestModel_zeleex2.toJson());
+    final response = await http.post(Uri.parse(urlPost),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: body_Login);
+
+    print(jsonDecode(response.body.toString()));
+    var jsonRes = json.decode(response.body);
+
+    try {
+      response.statusCode == 200 || response.statusCode == 400;
+      String tok = jsonRes['data']['token'].toString();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('key', tok);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => XXX(),
+        ),
+      );
+
+      return Login_Data.fromJson(json.decode(response.body));
+    } on Exception catch (e) {
+      throw Exception("error on: " + e.toString());
+    }
   }
 
   Future google_Login() async {
@@ -151,8 +199,12 @@ class _LoginPageState extends State<LoginPage> {
                                     TextFormField(
                                       controller: emailController,
                                       onSaved: (input) =>
-                             
                                           requestModel_zeleex2.email = input,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'โปรดกรอกอีเมล';
+                                        }
+                                      },
                                       keyboardType: TextInputType.emailAddress,
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.mail_outline),
@@ -181,13 +233,17 @@ class _LoginPageState extends State<LoginPage> {
                                     SizedBox(
                                       height: 15,
                                     ),
-                               
                                     TextFormField(
                                       obscureText: true,
                                       controller: passwordController,
                                       onSaved: (input) =>
                                           // requestModel_reqres.password = input,
                                           requestModel_zeleex2.password = input,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'โปรดกรอกรหัสผ่าน';
+                                        }
+                                      },
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.lock_outline),
                                         // suffixIcon:
@@ -261,16 +317,13 @@ class _LoginPageState extends State<LoginPage> {
                                                             "${value.data!.id} : ${value.data!.email}"),
                                                         print(
                                                             "token : ${value.data!.token}"),
-                                                  
                                                       }
                                                     else
                                                       {
-                                                        print(value.data!.error),
+                                                        print(
+                                                            value.data!.error),
                                                       }
-                                                  }
-                                                  );
-
-                                               
+                                                  });
 
                                           // print("-------input-------"+requestModel_zeleex2.toJson().toString());
                                         }
@@ -355,6 +408,7 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
                                         GoogoleSignInApi.google_LogOut();
+                                        logout();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/parser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
@@ -43,9 +44,18 @@ class _MainAndIconState extends State<MainAndIcon> {
     //!onResume
     super.initState();
     Load_AndGo();
+
   }
 
   Future<void> Load_AndGo() async {
+        SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('key');
+    if(x.toString() != 'null' ){
+      print(x.toString());
+    }
+    else{
+      print("emppppppp");
+    }
     await Future.delayed(const Duration(seconds: 3), () {
       var x = "the power of the sun, in the palm of my hand.";
       Navigator.pushReplacement(
@@ -69,7 +79,7 @@ class _MainAndIconState extends State<MainAndIcon> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/images/Frame.png',
-                  height: MediaQuery.of(context).size.height * 0.25,
+                  // height: MediaQuery.of(context).size.height * 0.25,
                   fit:BoxFit.cover),
             ],
           ),

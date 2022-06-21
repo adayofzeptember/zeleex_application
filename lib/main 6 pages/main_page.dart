@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
@@ -28,6 +29,7 @@ class _Main_PageState extends State<Main_Page> {
 
   @override
   void initState() {
+    loginh();
     super.initState();
     controller = ScrollController();
     controller.addListener(() {
@@ -52,6 +54,12 @@ class _Main_PageState extends State<Main_Page> {
     setState(() {
       _index = index2;
     });
+  }
+
+    Future loginh() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('key');
+    print("-----------------------------"+x.toString());
   }
 
   @override
