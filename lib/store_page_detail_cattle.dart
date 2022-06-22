@@ -18,7 +18,6 @@ class Store_CattlePage extends StatefulWidget {
 
 class _Store_CattlePageState extends State<Store_CattlePage> {
   bool pressed = true;
-
   Future<Data_Store> fetchStore_ByID() async {
     var url = "https://sanboxapi.zeleex.com/api/stores/" + widget.storeID;
     var response = await http.get(Uri.parse(url));

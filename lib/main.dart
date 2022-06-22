@@ -13,9 +13,10 @@ import 'package:zeleex_application/test%20folder/device_info.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(First_Page()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(First_Page()));
 }
-       
+
 class First_Page extends StatelessWidget {
   const First_Page({Key? key}) : super(key: key);
   @override
@@ -31,7 +32,6 @@ class First_Page extends StatelessWidget {
   }
 }
 
-
 class MainAndIcon extends StatefulWidget {
   MainAndIcon({Key? key}) : super(key: key);
   @override
@@ -44,26 +44,21 @@ class _MainAndIconState extends State<MainAndIcon> {
     //!onResume
     super.initState();
     Load_AndGo();
-
   }
 
   Future<void> Load_AndGo() async {
-        SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var x = prefs2.get('key');
-    if(x.toString() != 'null' ){
-      print(x.toString());
-    }
-    else{
-      print("emppppppp");
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('keyToken');
+    if (x.toString() != 'null') {
+      print("token: " + x.toString());
+    } else {
+      print("token empty");
     }
     await Future.delayed(const Duration(seconds: 3), () {
-      var x = "the power of the sun, in the palm of my hand.";
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => SecondPage(
-            name: x, 
-          ),
+          builder: (context) => SecondPage(),
         ),
       );
     });
@@ -80,7 +75,7 @@ class _MainAndIconState extends State<MainAndIcon> {
             children: [
               Image.asset('assets/images/Frame.png',
                   // height: MediaQuery.of(context).size.height * 0.25,
-                  fit:BoxFit.cover),
+                  fit: BoxFit.cover),
             ],
           ),
         ),

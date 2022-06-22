@@ -16,7 +16,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool isChecked = false;
   @override
-  Color getColor(Set<MaterialState> states) { 
+  Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
       MaterialState.hovered,
@@ -105,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           BorderSide(color: Colors.white),
                                       borderRadius: BorderRadius.circular(10)),
                                   // focusedBorder: OutlineInputBorder(
-                        
+
                                   filled: true,
                                   fillColor: Color.fromARGB(255, 243, 238, 238),
                                   border: OutlineInputBorder(
@@ -277,7 +277,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               SizedBox(
                                 height: 15,
                               ),
-                            
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -324,9 +323,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           )),
-                                      onPressed: () {
-                                        ;
-                                      },
+                                      onPressed: () {},
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
                                         child: Container(
@@ -356,5 +353,3 @@ class _RegisterPageState extends State<RegisterPage> {
         ));
   }
 }
-
-

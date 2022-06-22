@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -25,6 +26,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 
+import 'main 6 pages/main_page.dart';
+
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
 
@@ -46,16 +49,18 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    requestModel_zeleex2 = new RequestModel_zeleex2();
-    loggedin = new AlreadyIn_Model();
+    requestModel_zeleex2 = RequestModel_zeleex2();
+    loggedin = AlreadyIn_Model();
     super.initState();
   }
 
-  Future logout() async {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.remove('key');
-
+  Future logout_removeToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('keyToken');
+    prefs.remove('keyEmail');
+    prefs.remove('keyID');
   }
+
   Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
     print(
         "-----------------------------------------------Login-----------------------------------------------------------------------");
@@ -72,22 +77,33 @@ class _LoginPageState extends State<LoginPage> {
     print(jsonDecode(response.body.toString()));
     var jsonRes = json.decode(response.body);
 
-    try {
-      response.statusCode == 200 || response.statusCode == 400;
-      String tok = jsonRes['data']['token'].toString();
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('key', tok);
+    if (response.statusCode == 400 || response.statusCode == 200) {
+      var id_toStore = jsonRes['data']['id'].toString();
+      var email_toStore = jsonRes['data']['email'].toString();
+      var token_toStore = jsonRes['data']['token'].toString();
 
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('keyToken', token_toStore.toString());
+      prefs.setString('keyEmail', email_toStore.toString());
+      prefs.setString('keyID', id_toStore.toString());
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => XXX(),
+          builder: (context) => Main_Page(),
         ),
       );
-
       return Login_Data.fromJson(json.decode(response.body));
-    } on Exception catch (e) {
-      throw Exception("error on: " + e.toString());
+    } else {
+      Fluttertoast.showToast(
+          msg:
+              "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromARGB(255, 133, 133, 133),
+          textColor: Colors.white,
+          fontSize: 15);
+      throw Exception("error...");
     }
   }
 
@@ -293,6 +309,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
                                           // setState(() {
@@ -307,7 +326,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         .isNotEmpty)
                                                       {
                                                         //x = AlreadyIn_Model(name: "sdf", id: ),
-                                                        loggedin.email = "asdf",
+                                                        //loggedin.email = "asdf",
                                                         print(value.responseCode
                                                                 .toString() +
                                                             " " +
@@ -321,7 +340,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     else
                                                       {
                                                         print(
-                                                            value.data!.error),
+                                                            "logged in failed")
                                                       }
                                                   });
 
@@ -408,7 +427,7 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
                                         GoogoleSignInApi.google_LogOut();
-                                        logout();
+                                        logout_removeToken();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
