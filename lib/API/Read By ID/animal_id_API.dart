@@ -670,14 +670,22 @@ class AnimalOutStores {
   }
 }
 
-
 Future<Animal> fetch_Animal_ByID() async {
-  var url = "https://sanboxapi.zeleex.com/api/animals/2";
-  var response = await http.get(Uri.parse(url));
+  var url = "https://api.zeleex.com/api/animals/198";
+  final response = await http.get(Uri.parse(url), headers: {
+      //'Accept: application/json'
+
+      'Content-Type': 'application/json',
+      'Charset': 'utf-8'
+    });
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data']['animal'];
   Animal msg = Animal.fromJson(jsonCon);
   print(msg.title);
   print(msg.id);
   return msg;
+}
+
+void main(List<String> args) {
+  fetch_Animal_ByID();
 }

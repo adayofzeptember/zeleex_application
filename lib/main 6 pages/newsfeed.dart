@@ -155,13 +155,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                           if (index < data.length) {
                             String get_Thetime =
                                 data[index].createdAt.toString();
-                            // var tt = DateTime.parse(get_Thetime);
-                            // var createdTime = DateFormat('dd MMM yyyy')
-                            //     .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
-                            // var formatter = DateFormat.yMMMMEEEEd();
-                            // var dateInBuddhistCalendarFormat =
-                            //     formatter.formatInBuddhistCalendarThai(tt);
-
+                  
                             var createdTime = DateFormat.yMMMd()
                                 .format(DateTime.parse(get_Thetime));
 

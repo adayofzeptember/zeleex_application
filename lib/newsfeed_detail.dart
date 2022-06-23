@@ -223,7 +223,8 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                         child: Center(child: CircularProgressIndicator()),
                       );
                     }
-                  }),
+                  }
+                  ),
             ],
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
@@ -27,6 +28,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
   var perPage = 8; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   void initState() {
+    loginh();
     fetch_AnimalPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -38,26 +40,15 @@ class _AnimalsPageState extends State<AnimalsPage> {
     super.initState();
   }
 
-  // Future<List<Data_Animal_ReadAll>> fetch_AnimalPage_readAll() async {
-  //   final response = await http.get(Uri.parse(
-  //       'https://sanboxapi.zeleex.com/api/animals?per_page=' +
-  //           perPage.toString()));
-  //   var jsonResponse = json.decode(response.body);
-
-  //   List jsonCon = jsonResponse['data']['data'];
-
-  //   if (response.statusCode == 200) {
-  //     if (jsonCon.length < perPage) {
-  //       setState(() {
-  //         hasMore = false;
-  //       });
-  //     }
-  //     return jsonCon.map((data) => Data_Animal_ReadAll.fromJson(data)).toList();
-  //   } else {
-  //     throw Exception("error...");
-  //   }
-  // }
-
+  String k = '';
+  Future loginh() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('keyToken');
+    setState(() {
+      k = x.toString();
+    });
+    print("----------------------------kkkkkkk-" + x.toString());
+  }
   bool pressed = true;
   bool pressed2 = true;
 

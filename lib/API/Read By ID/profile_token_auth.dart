@@ -112,21 +112,21 @@ class Data_Profile {
   }
 }
 
-Future<Data_Profile> fetchProfile_Auth(String token) async {
-  var url = "https://api.zeleex.com/api/profile";
-  var response = await http.get(Uri.parse(url), headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
-  });
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data'];
-  Data_Profile user_profileData = Data_Profile.fromJson(jsonCon);
-  print(token);
-  print(user_profileData.email.toString()+user_profileData.id.toString());
-  return user_profileData;
-}
+// Future<Data_Profile> fetchProfile_Auth(String token) async {
+//   var url = "https://api.zeleex.com/api/profile";
+//   var response = await http.get(Uri.parse(url), headers: {
+//     'Content-Type': 'application/json',
+//     'Accept': 'application/json',
+//     'Authorization': 'Bearer $token',
+//   });
+//   var jsonResponse = json.decode(response.body);
+//   var jsonCon = jsonResponse['data'];
+//   Data_Profile user_profileData = Data_Profile.fromJson(jsonCon);
+//   print(token);
+//   print(user_profileData.email.toString()+user_profileData.id.toString());
+//   return user_profileData;
+// }
 
-void main(List<String> args) {
-  fetchProfile_Auth("1087|gjvZRJXl9UBNwLdMeTinp7o4it5gX8zcaR4fLB38E");
-}
+// void main(List<String> args) {
+//   fetchProfile_Auth("1087|gjvZRJXl9UBNwLdMeTinp7o4it5gX8zcaR4fLB38E");
+// }

@@ -24,6 +24,7 @@ class Main_Page extends StatefulWidget {
 
 class _Main_PageState extends State<Main_Page> {
   bool _isVisible = true;
+
   late ScrollController controller;
 
   @override
@@ -55,10 +56,14 @@ class _Main_PageState extends State<Main_Page> {
     });
   }
 
+  String k = '';
   Future loginh() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var x = prefs2.get('key');
-    print("-----------------------------" + x.toString());
+    var x = prefs2.get('keyToken');
+    setState(() {
+      k = x.toString();
+    });
+    print("----------------------------kkkkkkk-" + x.toString());
   }
 
   @override

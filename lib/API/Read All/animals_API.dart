@@ -1047,7 +1047,7 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
   var jsonResponse = json.decode(response.body);
   //print(response.body);
   List jsonCon = jsonResponse['data']['data'];
-  //print(jsonResponse['data']['data'][0]);
+  print(jsonResponse['data']['data'][0]);
   if (response.statusCode == 200) {
     return jsonCon
         .map((data) => new Data_Animal_All.fromJson(data))

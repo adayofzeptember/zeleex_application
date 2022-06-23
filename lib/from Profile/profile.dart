@@ -1,13 +1,21 @@
+import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
+import 'package:zeleex_application/login.dart';
+import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/terms.dart';
+import '../API/Read By ID/blog_id_api.dart';
+import '../API/Read By ID/profile_token_auth.dart';
 import '../Plate.dart';
 import '../cart.dart';
 import 'history/history.dart';
+import 'package:http/http.dart' as http;
 import 'likes/likes.dart';
 import '../payment_address.dart';
 
@@ -19,6 +27,49 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String theTokenOne = '';
+
+  Future logout_removeToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('keyToken');
+         Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+      );
+  }
+
+  Future getToken() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('keyToken');
+    setState(() {
+      theTokenOne = x.toString();
+    });
+  }
+
+  Future<Data_Profile> fetchProfile_Auth(String token) async {
+    var url = "https://api.zeleex.com/api/profile";
+    var response = await http.get(Uri.parse(url), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var jsonResponse = json.decode(response.body);
+    var jsonCon = jsonResponse['data'];
+    Data_Profile user_profileData = Data_Profile.fromJson(jsonCon);
+    print(token);
+    print(user_profileData.email.toString() + user_profileData.id.toString());
+    return user_profileData;
+  }
+
+  @override
+  void initState() {
+    getToken();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,67 +124,96 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: SingleChildScrollView(
           child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                color: Palette.kToDark,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10, left: 20, bottom: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    width: MediaQuery.of(context).size.height * 0.05,
-                    child: CircleAvatar(
-                      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                      child: Icon(
-                        Icons.person,
+        children: <Widget>[
+          FutureBuilder(
+              future: fetchProfile_Auth(theTokenOne),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasData) {
+                  Data_Profile prf = snapshot.data;
+                  return Container(
+                    decoration: BoxDecoration(
                         color: Palette.kToDark,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 0, 5, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Name Surname",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                                fontFamily: 'Kanit',
-                                fontSize: 15,
-                                color: Colors.white)),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "แก้ไขโปรไฟล์",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 51, 51, 51),
-                                fontFamily: 'Kanit',
-                                fontSize: 12,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30))),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10, left: 20, bottom: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CachedNetworkImage(
+                            imageBuilder: (context, imageProvider) => Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover),
                               ),
                             ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
-                          ],
-                        ),
-                      ],
+                            placeholder: (context, url) => CircleAvatar(
+                              backgroundColor:
+                                  Color.fromARGB(255, 141, 141, 141),
+                            ),
+                            errorWidget: (context, url, error) => SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: CircleAvatar(
+                                child: Icon(
+                                  Icons.person,
+                                  color: Palette.kToDark,
+                                ),
+                                backgroundColor:
+                                    Color.fromARGB(255, 224, 224, 224),
+                              ),
+                            ),
+                            imageUrl: prf.avatar.toString(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 5, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(prf.name.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Kanit',
+                                        fontSize: 17,
+                                        color: Colors.white)),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "แก้ไขโปรไฟล์",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 51, 51, 51),
+                                        fontFamily: 'Kanit',
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      size: 15,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                  );
+                } else {
+                  return Container(
+                    decoration: BoxDecoration(color: Palette.kToDark),
+                  );
+                }
+              }),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -443,7 +523,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Row(
                             children: [
                               Text(
-                                "สิ่งที่ถูกใจ",
+                                "สิ่งที่ถูกใจว่ะ",
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
@@ -529,13 +609,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 "นโยบายความเป็นส่วนตัว",
                                 style: TextStyle(
                                     fontSize:
-                                        MediaQuery.of(context).size.height * 0.015,
+                                        MediaQuery.of(context).size.height *
+                                            0.015,
                                     fontWeight: FontWeight.bold),
                               ),
-                                      Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 15,
+                              )
                             ],
                           )
                         ],
@@ -574,13 +655,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 "ศูนย์ช่วยเหลือ",
                                 style: TextStyle(
                                     fontSize:
-                                        MediaQuery.of(context).size.height * 0.015,
+                                        MediaQuery.of(context).size.height *
+                                            0.015,
                                     fontWeight: FontWeight.bold),
                               ),
-                                      Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 15,
+                              )
                             ],
                           )
                         ],
@@ -619,12 +701,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 "ร่วมงานกับเรา",
                                 style: TextStyle(
                                     fontSize:
-                                        MediaQuery.of(context).size.height * 0.015,
+                                        MediaQuery.of(context).size.height *
+                                            0.015,
                                     fontWeight: FontWeight.bold),
-                              ),        Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 15,
+                              )
                             ],
                           )
                         ],
@@ -671,7 +755,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     )),
-                onPressed: () {},
+                onPressed: () {
+                  logout_removeToken();
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(

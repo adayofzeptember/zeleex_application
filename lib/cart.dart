@@ -81,6 +81,7 @@ class _CartPageState extends State<CartPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              
               Slidable(
                 endActionPane: ActionPane(
                   motion: BehindMotion(),

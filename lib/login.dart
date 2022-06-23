@@ -57,8 +57,6 @@ class _LoginPageState extends State<LoginPage> {
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('keyToken');
-    prefs.remove('keyEmail');
-    prefs.remove('keyID');
   }
 
   Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
@@ -78,14 +76,12 @@ class _LoginPageState extends State<LoginPage> {
     var jsonRes = json.decode(response.body);
 
     if (response.statusCode == 400 || response.statusCode == 200) {
-      var id_toStore = jsonRes['data']['id'].toString();
-      var email_toStore = jsonRes['data']['email'].toString();
       var token_toStore = jsonRes['data']['token'].toString();
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', token_toStore.toString());
-      prefs.setString('keyEmail', email_toStore.toString());
-      prefs.setString('keyID', id_toStore.toString());
+      print(token_toStore.toString());
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -94,6 +90,9 @@ class _LoginPageState extends State<LoginPage> {
       );
       return Login_Data.fromJson(json.decode(response.body));
     } else {
+      setState(() {
+        isApiCallProcess = false;
+      });
       Fluttertoast.showToast(
           msg:
               "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
@@ -314,33 +313,25 @@ class _LoginPageState extends State<LoginPage> {
 
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
-                                          // setState(() {
-                                          //   isApiCallProcess = true;
-                                          // });
+                                          setState(() {
+                                            isApiCallProcess = true;
+                                          });
                                           login(requestModel_zeleex2)
                                               .then((value) => {
-                                                    // setState(() {
-                                                    //   isApiCallProcess = false;
-                                                    // }),
                                                     if (value.data!.email!
                                                         .isNotEmpty)
                                                       {
-                                                        //x = AlreadyIn_Model(name: "sdf", id: ),
-                                                        //loggedin.email = "asdf",
-                                                        print(value.responseCode
-                                                                .toString() +
-                                                            " " +
-                                                            value.responseStatus
-                                                                .toString()),
-                                                        print(
-                                                            "${value.data!.id} : ${value.data!.email}"),
-                                                        print(
-                                                            "token : ${value.data!.token}"),
+                                                        setState(() {
+                                                          isApiCallProcess =
+                                                              false;
+                                                        }),
                                                       }
                                                     else
                                                       {
-                                                        print(
-                                                            "logged in failed")
+                                                        setState(() {
+                                                          isApiCallProcess =
+                                                              false;
+                                                        }),
                                                       }
                                                   });
 
@@ -373,7 +364,9 @@ class _LoginPageState extends State<LoginPage> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           )),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        logout_removeToken();
+                                      },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
                                         child: Container(
@@ -427,7 +420,6 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
                                         GoogoleSignInApi.google_LogOut();
-                                        logout_removeToken();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
