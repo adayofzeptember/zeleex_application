@@ -31,13 +31,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     prefs.remove('keyToken');
-         Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LoginPage(),
-        ),
-      );
+    prefs.clear();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ),
+    );
   }
 
   Future getToken() async {

@@ -15,7 +15,6 @@ import 'package:zeleex_application/login2_testTOKEN.dart';
 import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
-import 'package:zeleex_application/API/Post%20Method/google_signin_api.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
 import 'API/model.dart';
 import 'Plate.dart';
@@ -25,7 +24,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
-
 import 'main 6 pages/main_page.dart';
 
 var emailController = TextEditingController();
@@ -104,34 +102,6 @@ class _LoginPageState extends State<LoginPage> {
           fontSize: 15);
       throw Exception("error...");
     }
-  }
-
-  Future google_Login() async {
-    final userGoogle = await GoogoleSignInApi.google_SignIn();
-    print(
-        "--------------------------------------------------------------------------------");
-
-    GoogoleSignInApi.google_SignIn2().then((result) {
-      result!.authentication.then((googleKey) {
-        print("id token ----------------> " + googleKey.idToken.toString());
-        print("access token ------------------> " +
-            googleKey.accessToken.toString());
-        print("gmail ------------------> " + userGoogle!.email.toString());
-        print("name -------------------> " + userGoogle.displayName.toString());
-        print("image ------------------> " + userGoogle.photoUrl.toString());
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RegisterPage(user: userGoogle),
-          ),
-        );
-      }).catchError((err) {
-        print('error in');
-      });
-    }).catchError((err) {
-      print('error out');
-    });
   }
 
   @override
@@ -419,7 +389,7 @@ class _LoginPageState extends State<LoginPage> {
                                           )),
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
-                                        GoogoleSignInApi.google_LogOut();
+                                    
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -460,7 +430,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        google_Login();
+                                       signIN();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -502,8 +472,25 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-const double _kCurveHeight = 25;
+Future signIN() async{
+  await GoogleSignInApi.login();
+}
 
+class GoogleSignInApi {
+  static final _googleSignIn = GoogleSignIn();
+  static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
+}
+
+
+
+
+
+
+
+
+
+
+const double _kCurveHeight = 25;
 class ShapesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

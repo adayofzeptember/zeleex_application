@@ -54,14 +54,14 @@ android {
         versionName flutterVersionName
     }
 
-    signingConfigs{
-        debug{
-            keyAlias 'android'
-            keyPassword 'android'
-            storeFile file('mykeystore.jks')
-            storePassword 'android'
-        }
-    }
+    // signingConfigs{
+    //     debug{
+    //         keyAlias 'android'
+    //         keyPassword 'android'
+    //         storeFile file('mykeystore.jks')
+    //         storePassword 'android'
+    //     }
+    // }
 
     buildTypes {
         //!release
