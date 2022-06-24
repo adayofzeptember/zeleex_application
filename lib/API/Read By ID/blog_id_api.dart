@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
 import '../nested_simple_concept.dart';
 
 class Blog_Detail {

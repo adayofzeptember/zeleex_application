@@ -673,11 +673,11 @@ class AnimalOutStores {
 Future<Animal> fetch_Animal_ByID() async {
   var url = "https://api.zeleex.com/api/animals/198";
   final response = await http.get(Uri.parse(url), headers: {
-      //'Accept: application/json'
+    //'Accept: application/json'
 
-      'Content-Type': 'application/json',
-      'Charset': 'utf-8'
-    });
+    'Content-Type': 'application/json',
+    'Charset': 'utf-8'
+  });
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data']['animal'];
   Animal msg = Animal.fromJson(jsonCon);

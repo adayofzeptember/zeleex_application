@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -430,7 +430,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                       signIN();
+                                       //signIN();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -472,14 +472,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-Future signIN() async{
-  await GoogleSignInApi.login();
-}
+// Future signIN() async{
+//   await GoogleSignInApi.login();
+// }
 
-class GoogleSignInApi {
-  static final _googleSignIn = GoogleSignIn();
-  static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
-}
+// class GoogleSignInApi {
+//   static final _googleSignIn = GoogleSignIn();
+//   static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
+// }
 
 
 
