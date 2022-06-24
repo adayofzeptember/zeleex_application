@@ -75,7 +75,7 @@ class _SecondPageState extends State<SecondPage> {
                       alignment: Alignment.center,
                       child: Text(
                         // widget.name,
-                        "หน้าหลัก",
+                        "หน้าหลักนะ",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),
@@ -103,7 +103,7 @@ class _SecondPageState extends State<SecondPage> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       alignment: Alignment.center,
                       child: Text(
-                        "เข้าสู่ระบบ",
+                        "เข้าสู่ระบบ555",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),
