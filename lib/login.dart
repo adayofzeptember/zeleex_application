@@ -16,6 +16,7 @@ import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
+import 'package:zeleex_application/testLOGINnnnnnnnnnnnnnnnnnnnnnnnn.dart';
 import 'API/model.dart';
 import 'Plate.dart';
 import 'dart:async';
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
     prefs.remove('keyToken');
   }
 
-  Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
+  Future<Login_Data> loginNormal(RequestModel_zeleex2 requestModel_zeleex2) async {
     print(
         "-----------------------------------------------Login-----------------------------------------------------------------------");
 
@@ -286,7 +287,7 @@ class _LoginPageState extends State<LoginPage> {
                                           setState(() {
                                             isApiCallProcess = true;
                                           });
-                                          login(requestModel_zeleex2)
+                                          loginNormal(requestModel_zeleex2)
                                               .then((value) => {
                                                     if (value.data!.email!
                                                         .isNotEmpty)
@@ -335,7 +336,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        logout_removeToken();
+                                    
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -389,7 +390,7 @@ class _LoginPageState extends State<LoginPage> {
                                           )),
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
-                                    
+                        signOut();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -430,7 +431,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                       //signIN();
+                                signIn();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -471,22 +472,6 @@ class _LoginPageState extends State<LoginPage> {
             )));
   }
 }
-
-// Future signIN() async{
-//   await GoogleSignInApi.login();
-// }
-
-// class GoogleSignInApi {
-//   static final _googleSignIn = GoogleSignIn();
-//   static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
-// }
-
-
-
-
-
-
-
 
 
 
