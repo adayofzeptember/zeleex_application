@@ -68,6 +68,12 @@ android {
 
     
        signingConfigs {
+        debug{
+            keyAlias 'googledebugkey'
+            keyPassword 'google'
+            storeFile file('google.jks ')
+            storePassword 'google'
+        }
        release {
            keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
@@ -75,7 +81,12 @@ android {
            storePassword keystoreProperties['storePassword']
        }
    }
+
+
    buildTypes {
+    debug{
+        signingConfig signingConfigs.debug
+    }
        release {
            signingConfig signingConfigs.release
        }

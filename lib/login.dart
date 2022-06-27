@@ -16,7 +16,7 @@ import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
-import 'package:zeleex_application/testLOGINnnnnnnnnnnnnnnnnnnnnnnnn.dart';
+import 'package:zeleex_application/google_login_api.dart';
 import 'API/model.dart';
 import 'Plate.dart';
 import 'dart:async';
@@ -44,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
   late RequestModel_zeleex2 requestModel_zeleex2;
   AlreadyIn_Model loggedin = AlreadyIn_Model();
   //! logged in ลองเอาไปใส่ในข้อมูลส่งไปหน้าอื่น
-  var x;
 
   @override
   void initState() {
@@ -58,7 +57,31 @@ class _LoginPageState extends State<LoginPage> {
     prefs.remove('keyToken');
   }
 
-  Future<Login_Data> loginNormal(RequestModel_zeleex2 requestModel_zeleex2) async {
+  Future<dynamic> loginGoogle() async {
+    final userGoogle = await GoogoleSignInApi.google_SignIn2();
+
+    GoogoleSignInApi.google_SignIn2().then((result) {
+      setState(() {
+        isApiCallProcess = false;
+      });
+      result!.authentication.then((googleKey) {
+        print("id token ----------------> " + googleKey.idToken.toString());
+        print("access token ------------------> " +
+            googleKey.accessToken.toString());
+
+        print("gmail ------------------> " + userGoogle!.email.toString());
+        print("name -------------------> " + userGoogle.displayName.toString());
+        print("image ------------------> " + userGoogle.photoUrl.toString());
+      }).catchError((err) {
+        print('error in');
+      });
+    }).catchError((err) {
+      print('error out');
+    });
+  }
+
+  Future<Login_Data> loginNormal(
+      RequestModel_zeleex2 requestModel_zeleex2) async {
     print(
         "-----------------------------------------------Login-----------------------------------------------------------------------");
 
@@ -335,9 +358,7 @@ class _LoginPageState extends State<LoginPage> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           )),
-                                      onPressed: () {
-                                    
-                                      },
+                                      onPressed: () {},
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
                                         child: Container(
@@ -390,7 +411,7 @@ class _LoginPageState extends State<LoginPage> {
                                           )),
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
-                        signOut();
+                                        GoogoleSignInApi.google_LogOut();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -431,7 +452,10 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                signIn();
+                                        setState(() {
+                                          isApiCallProcess = true;
+                                        });
+                                        loginGoogle();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -473,9 +497,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-
-
 const double _kCurveHeight = 25;
+
 class ShapesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
