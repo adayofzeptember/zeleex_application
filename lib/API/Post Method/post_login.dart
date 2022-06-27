@@ -12,7 +12,7 @@ class Login_Data {
   String? sessionID;
   int? serverDateTimeMS;
   String? serverDatetime;
-  ResponseModel_zeleex2? data;
+  ResponseModel_zeleex? data;
 
   Login_Data(
       {this.responseCode,
@@ -31,7 +31,7 @@ class Login_Data {
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
     data = json['data'] != null
-        ? new ResponseModel_zeleex2.fromJson(json['data'])
+        ? new ResponseModel_zeleex.fromJson(json['data'])
         : null;
   }
 
@@ -50,7 +50,7 @@ class Login_Data {
   }
 }
 
-class ResponseModel_zeleex2 {
+class ResponseModel_zeleex {
   int? id;
   String? name;
   String? email;
@@ -67,7 +67,7 @@ class ResponseModel_zeleex2 {
   int? storeCheck;
   String? error;
 
-  ResponseModel_zeleex2(
+  ResponseModel_zeleex(
       {this.id,
       this.name,
       this.email,
@@ -84,8 +84,8 @@ class ResponseModel_zeleex2 {
       this.storeCheck,
       this.error});
 
-  factory ResponseModel_zeleex2.fromJson(Map<String, dynamic> json) {
-    return ResponseModel_zeleex2(
+  factory ResponseModel_zeleex.fromJson(Map<String, dynamic> json) {
+    return ResponseModel_zeleex(
         id: json['id'] != null ? json['id'] : null, //! : ""
         name: json['name'] != null ? json['name'] : null,
         email: json['email'] != null ? json['email'] : null,
@@ -106,11 +106,11 @@ class ResponseModel_zeleex2 {
   }
 }
 
-class RequestModel_zeleex2 {
+class RequestModel_zeleex {
   String? email;
   String? password;
 
-  RequestModel_zeleex2({this.email, this.password});
+  RequestModel_zeleex({this.email, this.password});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -119,41 +119,6 @@ class RequestModel_zeleex2 {
     return data;
   }
 }
-
-// Future<Login_Data> login(RequestModel_zeleex2 requestModel_zeleex2) async {
-//   print(
-//       "-----------------------------------------------Login-----------------------------------------------------------------------");
-
-//   String urlPost = "https://api.zeleex.com/api/login";
-//   var body_Login = json.encode(requestModel_zeleex2.toJson());
-//   final response = await http.post(Uri.parse(urlPost),
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json'
-//       },
-//       body: body_Login);
-
-//   print(jsonDecode(response.body.toString()));
-//   var jsonRes = json.decode(response.body);
-  
-//   try {
-//     response.statusCode == 200 || response.statusCode == 400;
-//     print(jsonRes['data']['token']);
-//        Navigator.pushReplacement(
-//           context,
-//           MaterialPageRoute(
-//             builder: (context) => RegisterPage(user: userGoogle),
-//           ),
-//         );
-
-//     return Login_Data.fromJson(json.decode(response.body));
-//   } on Exception catch (e) {
-//     throw Exception("error on: " + e.toString());
-//   }
-// }
-
-
-
 
 
 

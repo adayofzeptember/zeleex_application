@@ -41,13 +41,12 @@ class _LoginPageState extends State<LoginPage> {
   final ScaffoldKey = GlobalKey<ScaffoldState>();
   bool isApiCallProcess = false;
   final formKey = GlobalKey<FormState>();
-  late RequestModel_zeleex2 requestModel_zeleex2;
+  late RequestModel_zeleex requestModel_zeleex;
   AlreadyIn_Model loggedin = AlreadyIn_Model();
-  //! logged in ลองเอาไปใส่ในข้อมูลส่งไปหน้าอื่น
 
   @override
   void initState() {
-    requestModel_zeleex2 = RequestModel_zeleex2();
+    requestModel_zeleex = RequestModel_zeleex();
     loggedin = AlreadyIn_Model();
     super.initState();
   }
@@ -73,15 +72,21 @@ class _LoginPageState extends State<LoginPage> {
         print("name -------------------> " + userGoogle.displayName.toString());
         print("image ------------------> " + userGoogle.photoUrl.toString());
       }).catchError((err) {
+        setState(() {
+          isApiCallProcess = false;
+        });
         print('error in');
       });
     }).catchError((err) {
+      setState(() {
+        isApiCallProcess = false;
+      });
       print('error out');
     });
   }
 
   Future<Login_Data> loginNormal(
-      RequestModel_zeleex2 requestModel_zeleex2) async {
+      RequestModel_zeleex requestModel_zeleex2) async {
     print(
         "-----------------------------------------------Login-----------------------------------------------------------------------");
 
@@ -208,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                                     TextFormField(
                                       controller: emailController,
                                       onSaved: (input) =>
-                                          requestModel_zeleex2.email = input,
+                                          requestModel_zeleex.email = input,
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return 'โปรดกรอกอีเมล';
@@ -247,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
                                       controller: passwordController,
                                       onSaved: (input) =>
                                           // requestModel_reqres.password = input,
-                                          requestModel_zeleex2.password = input,
+                                          requestModel_zeleex.password = input,
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return 'โปรดกรอกรหัสผ่าน';
@@ -310,7 +315,7 @@ class _LoginPageState extends State<LoginPage> {
                                           setState(() {
                                             isApiCallProcess = true;
                                           });
-                                          loginNormal(requestModel_zeleex2)
+                                          loginNormal(requestModel_zeleex)
                                               .then((value) => {
                                                     if (value.data!.email!
                                                         .isNotEmpty)
