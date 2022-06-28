@@ -8,7 +8,7 @@ class ProgressHUD extends StatelessWidget {
   final Color color;
 
   ProgressHUD({
-    key,
+   key,
     required this.child,
     required this.inAsyncCall,
     this.opacity = 1,
@@ -27,6 +27,7 @@ class ProgressHUD extends StatelessWidget {
             child: ModalBarrier(dismissible: false, color: color),
           ),
           Center(child: CircularProgressIndicator(color: Colors.white,)),
+       
         ],
       );
       widgetList.add(modal);

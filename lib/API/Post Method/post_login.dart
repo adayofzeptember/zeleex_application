@@ -72,6 +72,7 @@ class ResponseModel_zeleex {
       this.name,
       this.email,
       this.emailVerifiedAt,
+    
       this.phone,
       this.avatar,
       this.provider,

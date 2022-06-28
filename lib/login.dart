@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -12,11 +11,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login.dart';
 import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login2_testTOKEN.dart';
-import 'package:zeleex_application/login_model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
-import 'package:zeleex_application/google_login_api.dart';
+import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
 import 'API/model.dart';
 import 'Plate.dart';
 import 'dart:async';
@@ -67,7 +65,6 @@ class _LoginPageState extends State<LoginPage> {
         print("id token ----------------> " + googleKey.idToken.toString());
         print("access token ------------------> " +
             googleKey.accessToken.toString());
-
         print("gmail ------------------> " + userGoogle!.email.toString());
         print("name -------------------> " + userGoogle.displayName.toString());
         print("image ------------------> " + userGoogle.photoUrl.toString());
@@ -136,10 +133,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return ProgressHUD(
-      child: _uiSetUp(context),
-      inAsyncCall: isApiCallProcess,
-      opacity: 0.3,
-    );
+        child: _uiSetUp(context), inAsyncCall: isApiCallProcess, opacity: 0.3);
   }
 
   @override
@@ -260,8 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                       },
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.lock_outline),
-                                        // suffixIcon:
-                                        //     Icon(Icons.remove_red_eye_sharp),
+                               
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
                                                 BorderSide(color: Colors.white),

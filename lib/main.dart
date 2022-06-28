@@ -11,6 +11,7 @@ import 'package:zeleex_application/test%20folder/device_info.dart';
 
 //* runApp(const First_Page());
 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -48,9 +49,9 @@ class _MainAndIconState extends State<MainAndIcon> {
 
   Future<void> Load_AndGo() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var x = prefs2.get('keyToken');
-    if (x.toString() != 'null') {
-      print("token: " + x.toString());
+    var checkToken = prefs2.get('keyToken');
+    if (checkToken.toString() != 'null') {
+      print("token: " + checkToken.toString());
     } else {
       print("token empty");
     }
