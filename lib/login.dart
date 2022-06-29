@@ -13,7 +13,7 @@ import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login2_testTOKEN.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
-import 'package:zeleex_application/test%20folder/request_reqres.in.dart';
+import 'package:zeleex_application/test%20folder/facebook_login.dart';
 import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
 import 'API/model.dart';
 import 'Plate.dart';
@@ -41,6 +41,8 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   late RequestModel_zeleex requestModel_zeleex;
   AlreadyIn_Model loggedin = AlreadyIn_Model();
+  bool _isLoggedIn = false;
+  Map _userObj = {};
 
   @override
   void initState() {
@@ -254,7 +256,6 @@ class _LoginPageState extends State<LoginPage> {
                                       },
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.lock_outline),
-                               
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
                                                 BorderSide(color: Colors.white),
@@ -280,12 +281,22 @@ class _LoginPageState extends State<LoginPage> {
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    Container(
-                                      child: Text(
-                                        "ลืมรหัสผ่าน?",
-                                        style: TextStyle(
-                                            color: Palette.kToDark,
-                                            fontWeight: FontWeight.bold),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Facebook(),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        child: Text(
+                                          "ลืมรหัสผ่าน?",
+                                          style: TextStyle(
+                                              color: Palette.kToDark,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
