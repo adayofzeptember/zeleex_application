@@ -37,7 +37,6 @@ class _SecondPageState extends State<SecondPage> {
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
-                    // 'assets/images/BG.png',
                     'assets/images/haha2.jpg',
                   ),
                   fit: BoxFit.cover)),
@@ -74,8 +73,7 @@ class _SecondPageState extends State<SecondPage> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       alignment: Alignment.center,
                       child: Text(
-                        // widget.name,
-                        "หน้าหลักนะ",
+                        "หน้าหลัก",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),
@@ -103,7 +101,7 @@ class _SecondPageState extends State<SecondPage> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       alignment: Alignment.center,
                       child: Text(
-                        "เข้าสู่ระบบ555",
+                        "เข้าสู่ระบบ",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),

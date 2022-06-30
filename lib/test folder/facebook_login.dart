@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-
 import '../Plate.dart';
 
 class Facebook extends StatefulWidget {

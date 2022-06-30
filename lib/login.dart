@@ -27,9 +27,11 @@ import 'main 6 pages/main_page.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
+String xCom = TextEditingController().toString();
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
+
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -56,6 +58,24 @@ class _LoginPageState extends State<LoginPage> {
     prefs.remove('keyToken');
   }
 
+  //!------------------------------- เข้าสู่ระบบ ต่าง ๆ-------------------------------------------------------
+
+  Future loginFacebook() async {
+    await FacebookAuth.instance
+        .login(permissions: ["public_profile", "email"]).then((value) {
+      FacebookAuth.instance.getUserData().then((userData) {
+        print("ชื่อเฟซ " + userData["name"]);
+        print("เมล " + userData["email"]);
+        print("รูป " + userData["picture"]["data"]["url"]);
+        ;
+      }).then((x) {
+        print(FacebookAuth.instance.accessToken);
+      });
+    });
+
+    print(FacebookAuth.instance.accessToken);
+  }
+
   Future<dynamic> loginGoogle() async {
     final userGoogle = await GoogoleSignInApi.google_SignIn2();
 
@@ -67,9 +87,9 @@ class _LoginPageState extends State<LoginPage> {
         print("id token ----------------> " + googleKey.idToken.toString());
         print("access token ------------------> " +
             googleKey.accessToken.toString());
-        print("gmail ------------------> " + userGoogle!.email.toString());
-        print("name -------------------> " + userGoogle.displayName.toString());
-        print("image ------------------> " + userGoogle.photoUrl.toString());
+        print("เมล ------------------> " + userGoogle!.email.toString());
+        print("ชื่อ -------------------> " + userGoogle.displayName.toString());
+        print("รูป ------------------> " + userGoogle.photoUrl.toString());
       }).catchError((err) {
         setState(() {
           isApiCallProcess = false;
@@ -84,13 +104,9 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  Future<Login_Data> loginNormal(
-      RequestModel_zeleex requestModel_zeleex2) async {
-    print(
-        "-----------------------------------------------Login-----------------------------------------------------------------------");
-
+  Future<Login_Data> loginNormal(RequestModel_zeleex requestModel_) async {
     String urlPost = "https://api.zeleex.com/api/login";
-    var body_Login = json.encode(requestModel_zeleex2.toJson());
+    var body_Login = json.encode(requestModel_zeleex.toJson());
     final response = await http.post(Uri.parse(urlPost),
         headers: {
           'Content-Type': 'application/json',
@@ -131,6 +147,8 @@ class _LoginPageState extends State<LoginPage> {
       throw Exception("error...");
     }
   }
+
+//!-----------------------------------------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -367,7 +385,17 @@ class _LoginPageState extends State<LoginPage> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           )),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        GoogoleSignInApi.google_LogOut();
+                                        FacebookAuth.instance
+                                            .logOut()
+                                            .then((value) {
+                                          setState(() {
+                                            _isLoggedIn = false;
+                                            _userObj = {};
+                                          });
+                                        });
+                                      },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
                                         child: Container(
@@ -420,7 +448,9 @@ class _LoginPageState extends State<LoginPage> {
                                           )),
                                       onPressed: () {
                                         // _userData != null ? _logout : _login;
-                                        GoogoleSignInApi.google_LogOut();
+                                        // GoogoleSignInApi.google_LogOut();
+
+                                        loginFacebook();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
