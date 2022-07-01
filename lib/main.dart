@@ -16,6 +16,8 @@ void main() {
       .then((value) => runApp(First_Page()));
 }
 
+
+
 class First_Page extends StatelessWidget {
   const First_Page({Key? key}) : super(key: key);
   @override
@@ -26,6 +28,7 @@ class First_Page extends StatelessWidget {
         primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),
       ),
+    
       home: MainAndIcon(),
     );
   }

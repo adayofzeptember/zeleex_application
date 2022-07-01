@@ -27,11 +27,9 @@ import 'main 6 pages/main_page.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
-String xCom = TextEditingController().toString();
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
-
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -64,9 +62,9 @@ class _LoginPageState extends State<LoginPage> {
     await FacebookAuth.instance
         .login(permissions: ["public_profile", "email"]).then((value) {
       FacebookAuth.instance.getUserData().then((userData) {
-        print("ชื่อเฟซ " + userData["name"]);
-        print("เมล " + userData["email"]);
-        print("รูป " + userData["picture"]["data"]["url"]);
+        print(userData["name"]);
+        print(userData["email"]);
+        print(userData["picture"]["data"]["url"]);
         ;
       }).then((x) {
         print(FacebookAuth.instance.accessToken);
@@ -123,7 +121,6 @@ class _LoginPageState extends State<LoginPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', token_toStore.toString());
       print(token_toStore.toString());
-
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -135,9 +132,9 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isApiCallProcess = false;
       });
+
       Fluttertoast.showToast(
-          msg:
-              "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
+          msg: "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
@@ -148,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-//!-----------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +158,6 @@ class _LoginPageState extends State<LoginPage> {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
         home: Scaffold(
-            key: ScaffoldKey,
             appBar: AppBar(
               systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarIconBrightness: Brightness.light,
@@ -193,6 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 InkWell(
+                                
                                   onTap: () {
                                     Navigator.pop(context);
                                   },
@@ -207,12 +204,12 @@ class _LoginPageState extends State<LoginPage> {
                                       color: Colors.white, fontSize: 30),
                                 ),
                                 Text(
-                                  ".",
+                                  "",
                                   style: TextStyle(
                                       color: Palette.kToDark,
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold),
-                                )
+                                ),
                               ],
                             ),
                             SizedBox(
@@ -265,7 +262,7 @@ class _LoginPageState extends State<LoginPage> {
                                       obscureText: true,
                                       controller: passwordController,
                                       onSaved: (input) =>
-                                          // requestModel_reqres.password = input,
+                                          //requestModel_reqres.password = input,
                                           requestModel_zeleex.password = input,
                                       validator: (value) {
                                         if (value!.isEmpty) {
@@ -415,7 +412,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     Row(children: <Widget>[
                                       Expanded(
-                                        child: new Container(
+                                        child: Container(
                                             margin: const EdgeInsets.only(
                                                 left: 10.0, right: 20.0),
                                             child: Divider(
@@ -425,7 +422,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       Text("หรือ"),
                                       Expanded(
-                                        child: new Container(
+                                        child: Container(
                                             margin: const EdgeInsets.only(
                                                 left: 20.0, right: 10.0),
                                             child: Divider(
@@ -447,9 +444,6 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        // _userData != null ? _logout : _login;
-                                        // GoogoleSignInApi.google_LogOut();
-
                                         loginFacebook();
                                       },
                                       child: Padding(
@@ -537,11 +531,14 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 const double _kCurveHeight = 25;
+class afterLoginffff{
 
+}
 class ShapesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final p = Path();
+    final path = Path();
     p.lineTo(0, size.height - _kCurveHeight);
 
     p.relativeQuadraticBezierTo(

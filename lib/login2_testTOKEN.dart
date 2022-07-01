@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/login.dart';
 import 'Plate.dart';
 
 class Test_afterLogin extends StatefulWidget {
@@ -21,6 +22,8 @@ class _Test_afterLoginState extends State<Test_afterLogin> {
     afterLogin();
   }
 
+
+
   Future afterLogin() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var gotToken = prefs2.get('keyToken');
@@ -32,6 +35,8 @@ class _Test_afterLoginState extends State<Test_afterLogin> {
       email = gotMail.toString();
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +64,30 @@ class _Test_afterLoginState extends State<Test_afterLogin> {
             Text(
               id,
             ),
-            Text(email),
-            Text(token)
+            Text(id+" "+email+" "+token),
           ],
         ));
   }
 }
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

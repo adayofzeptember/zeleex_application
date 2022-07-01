@@ -12,7 +12,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 class SecondPage extends StatefulWidget {
   SecondPage({Key? key}) : super(key: key);
-
   @override
   State<SecondPage> createState() => _SecondPageState();
 }
