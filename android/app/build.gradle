@@ -71,7 +71,7 @@ android {
         debug{
             keyAlias 'googledebugkey'
             keyPassword 'google'
-            storeFile file('google.jks ')
+            storeFile file('google.jks')
             storePassword 'google'
         }
        release {
@@ -87,9 +87,9 @@ android {
     debug{
         signingConfig signingConfigs.debug
     }
-       release {
-           signingConfig signingConfigs.release
-       }
+    release{
+        signingConfig signingConfigs.release
+    }
    }
 }
 

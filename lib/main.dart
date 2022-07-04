@@ -9,15 +9,12 @@ import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/test%20folder/device_info.dart';
 
-
 //* runApp(const First_Page());
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(First_Page()));
 }
-
-
 
 class First_Page extends StatelessWidget {
   const First_Page({Key? key}) : super(key: key);
@@ -29,12 +26,10 @@ class First_Page extends StatelessWidget {
         primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),
       ),
-    
       home: MainAndIcon(),
     );
   }
 }
-
 
 class MainAndIcon extends StatefulWidget {
   MainAndIcon({Key? key}) : super(key: key);
