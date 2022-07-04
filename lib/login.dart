@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
- //!------------------------------- เข้าสู่ระบบ ต่าง ๆ-------------------------------------------------------
+ //!------------------------------- เข้าสู่ระบบ-------------------------------------------------------
 
   Future<Login_Data> loginNormal(RequestModel_zeleex requestModel) async {
     String urlPost = "https://api.zeleex.com/api/login";
@@ -175,10 +175,10 @@ class _LoginPageState extends State<LoginPage> {
   );
 
   if (response.statusCode == 400 || response.statusCode == 200) {
-    print(jsonDecode(response.body.toString()));
+    // print(jsonDecode(response.body.toString()));
     var jsonRes = json.decode(response.body);
-    var token_google = jsonRes['data']['token'].toString();
-    print(token_google);
+    var kkk = jsonRes['data']['token'];
+    print(kkk);
     return Login_Social_Data.fromJson(json.decode(response.body));
   } else {
     throw Exception("error");
