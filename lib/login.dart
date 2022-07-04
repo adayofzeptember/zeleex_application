@@ -9,6 +9,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login.dart';
+import 'package:zeleex_application/API/Post%20Method/post_login_social.dart';
 import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login2_testTOKEN.dart';
 import 'package:zeleex_application/payment_confirm.dart';
@@ -40,13 +41,16 @@ class _LoginPageState extends State<LoginPage> {
   bool isApiCallProcess = false;
   final formKey = GlobalKey<FormState>();
   late RequestModel_zeleex requestModel_zeleex;
+  late Request_Social_Provider request_social;
   AlreadyIn_Model loggedin = AlreadyIn_Model();
   bool _isLoggedIn = false;
   Map _userObj = {};
+  String storedToken = "";
 
   @override
   void initState() {
     requestModel_zeleex = RequestModel_zeleex();
+    request_social = Request_Social_Provider();
     loggedin = AlreadyIn_Model();
     super.initState();
   }
@@ -56,9 +60,7 @@ class _LoginPageState extends State<LoginPage> {
     prefs.remove('keyToken');
   }
 
-  //!------------------------------- เข้าสู่ระบบ ต่าง ๆ-------------------------------------------------------
-
-  Future loginFacebook() async {
+  Future useFacebook_toLogin() async {
     await FacebookAuth.instance
         .login(permissions: ["public_profile", "email"]).then((value) {
       FacebookAuth.instance.getUserData().then((userData) {
@@ -74,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
     print(FacebookAuth.instance.accessToken);
   }
 
-  Future<dynamic> loginGoogle() async {
+  Future<dynamic> useGoogle_toLogin() async {
     final userGoogle = await GoogoleSignInApi.google_SignIn2();
 
     GoogoleSignInApi.google_SignIn2().then((result) {
@@ -82,12 +84,21 @@ class _LoginPageState extends State<LoginPage> {
         isApiCallProcess = false;
       });
       result!.authentication.then((googleKey) {
-        print("id token ----------------> " + googleKey.idToken.toString());
+        print("id----------------> " + userGoogle!.id.toString());
         print("access token ------------------> " +
             googleKey.accessToken.toString());
-        print("เมล ------------------> " + userGoogle!.email.toString());
+        print("เมล ------------------> " + userGoogle.email.toString());
         print("ชื่อ -------------------> " + userGoogle.displayName.toString());
         print("รูป ------------------> " + userGoogle.photoUrl.toString());
+
+        request_social.name = userGoogle.displayName.toString();
+        request_social.email = userGoogle.email.toString();
+        request_social.avatar = userGoogle.photoUrl.toString();
+        request_social.provider = "Google";
+        request_social.provider_id = userGoogle.id.toString();
+        login_Social(request_social);
+        
+        // print(json.encode(request_social).toString());
       }).catchError((err) {
         setState(() {
           isApiCallProcess = false;
@@ -102,15 +113,21 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  Future<Login_Data> loginNormal(RequestModel_zeleex requestModel_) async {
+
+
+ //!------------------------------- เข้าสู่ระบบ ต่าง ๆ-------------------------------------------------------
+
+  Future<Login_Data> loginNormal(RequestModel_zeleex requestModel) async {
     String urlPost = "https://api.zeleex.com/api/login";
     var body_Login = json.encode(requestModel_zeleex.toJson());
-    final response = await http.post(Uri.parse(urlPost),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: body_Login);
+    final response = await http.post(
+      Uri.parse(urlPost),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: body_Login,
+    );
 
     print(jsonDecode(response.body.toString()));
     var jsonRes = json.decode(response.body);
@@ -134,7 +151,8 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       Fluttertoast.showToast(
-          msg: "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
+          msg:
+              "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
@@ -145,7 +163,30 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-//-----------------------------------------------------------------------------------------------------------
+
+  Future<Login_Social_Data> login_Social(
+    Request_Social_Provider request_social_provider) async {
+  String urlPost = "https://api.zeleex.com/api/register/social";
+  var bodySocial = json.encode(request_social_provider.toJson());
+  final response = await http.post(
+    Uri.parse(urlPost),
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: bodySocial,
+  );
+
+  if (response.statusCode == 400 || response.statusCode == 200) {
+    print(jsonDecode(response.body.toString()));
+    var jsonRes = json.decode(response.body);
+    var token_google = jsonRes['data']['token'].toString();
+    print(token_google);
+    return Login_Social_Data.fromJson(json.decode(response.body));
+  } else {
+    throw Exception("error");
+  }
+}
+
+
+//!-----------------------------------------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +230,6 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 InkWell(
-                                
                                   onTap: () {
                                     Navigator.pop(context);
                                   },
@@ -444,7 +484,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        loginFacebook();
+                                        useFacebook_toLogin();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -488,7 +528,7 @@ class _LoginPageState extends State<LoginPage> {
                                         setState(() {
                                           isApiCallProcess = true;
                                         });
-                                        loginGoogle();
+                                        useGoogle_toLogin();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
@@ -531,9 +571,7 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 const double _kCurveHeight = 25;
-class afterLoginffff{
 
-}
 class ShapesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

@@ -45,6 +45,7 @@ class NewAPI {
       data['address'] = this.address!.toJson();
     }
     data['phone'] = this.phone;
+    
     data['website'] = this.website;
     if (this.company != null) {
       data['company'] = this.company!.toJson();

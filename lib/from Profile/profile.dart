@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/API/Read%20By%20ID/profile_token.dart';
 import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
@@ -11,7 +12,6 @@ import 'package:zeleex_application/login.dart';
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/terms.dart';
 import '../API/Read By ID/blog_id_api.dart';
-import '../API/Read By ID/profile_token_auth.dart';
 import '../Plate.dart';
 import '../cart.dart';
 import 'history/history.dart';
@@ -48,6 +48,8 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       theTokenOne = x.toString();
     });
+    print("1"+x.toString());
+    print("2"+theTokenOne);
   }
 
   Future<Data_Profile> fetchProfile_Auth(String token) async {
@@ -60,7 +62,6 @@ class _ProfilePageState extends State<ProfilePage> {
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data'];
     Data_Profile user_profileData = Data_Profile.fromJson(jsonCon);
-    print(token);
     print(user_profileData.email.toString() + user_profileData.id.toString());
     return user_profileData;
   }
