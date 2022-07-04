@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/profile_token.dart';
@@ -11,6 +12,7 @@ import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/login.dart';
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/terms.dart';
+import '../API/Post Method/google_login_api.dart';
 import '../API/Read By ID/blog_id_api.dart';
 import '../Plate.dart';
 import '../cart.dart';
@@ -760,6 +762,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     )),
                 onPressed: () {
                   logout_removeToken();
+                  GoogoleSignInApi.google_LogOut();
+                     FacebookAuth.instance
+                                            .logOut()
+                                            .then((value) {
+                                        
+                                        });
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

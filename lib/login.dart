@@ -67,9 +67,15 @@ class _LoginPageState extends State<LoginPage> {
         print(userData["name"]);
         print(userData["email"]);
         print(userData["picture"]["data"]["url"]);
+        
+        request_social.name = userData["name"];
+        request_social.email = userData["email"];
+        request_social.avatar = userData["picture"]["data"]["url"];
+        request_social.provider = "facebook";
+        request_social.provider_id = "1";
+        login_Social(request_social);
+        print(json.encode(request_social).toString());
         ;
-      }).then((x) {
-        print(FacebookAuth.instance.accessToken);
       });
     });
 
@@ -97,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
         request_social.provider = "Google";
         request_social.provider_id = userGoogle.id.toString();
         login_Social(request_social);
-        
+
         // print(json.encode(request_social).toString());
       }).catchError((err) {
         setState(() {
@@ -113,9 +119,7 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-
-
- //!------------------------------- เข้าสู่ระบบ-------------------------------------------------------
+  //!------------------------------- เข้าสู่ระบบ-------------------------------------------------------
 
   Future<Login_Data> loginNormal(RequestModel_zeleex requestModel) async {
     String urlPost = "https://api.zeleex.com/api/login";
@@ -134,10 +138,12 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.statusCode == 400 || response.statusCode == 200) {
       var token_toStore = jsonRes['data']['token'].toString();
-
+      setState(() {
+        storedToken = token_toStore;
+      });
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('keyToken', token_toStore.toString());
-      print(token_toStore.toString());
+      prefs.setString('keyToken', storedToken.toString());
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -163,28 +169,41 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
   Future<Login_Social_Data> login_Social(
-    Request_Social_Provider request_social_provider) async {
-  String urlPost = "https://api.zeleex.com/api/register/social";
-  var bodySocial = json.encode(request_social_provider.toJson());
-  final response = await http.post(
-    Uri.parse(urlPost),
-    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    body: bodySocial,
-  );
+      Request_Social_Provider request_social_provider) async {
+    String urlPost = "https://api.zeleex.com/api/register/social";
+    var bodySocial = json.encode(request_social_provider.toJson());
+    final response = await http.post(
+      Uri.parse(urlPost),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: bodySocial,
+    );
 
-  if (response.statusCode == 400 || response.statusCode == 200) {
-    // print(jsonDecode(response.body.toString()));
-    var jsonRes = json.decode(response.body);
-    var kkk = jsonRes['data']['token'];
-    print(kkk);
-    return Login_Social_Data.fromJson(json.decode(response.body));
-  } else {
-    throw Exception("error");
+    if (response.statusCode == 400 || response.statusCode == 200) {
+      // print(jsonDecode(response.body.toString()));
+      var jsonRes = json.decode(response.body);
+      var kkk = jsonRes['data']['token'];
+      setState(() {
+        storedToken = kkk;
+      });
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('keyToken', storedToken.toString());
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Main_Page(),
+        ),
+      );
+      return Login_Social_Data.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("error");
+    }
   }
-}
-
 
 //!-----------------------------------------------------------------------------------------------------------
 
@@ -423,7 +442,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        GoogoleSignInApi.google_LogOut();
+                                        // GoogoleSignInApi.google_LogOut();
                                         FacebookAuth.instance
                                             .logOut()
                                             .then((value) {
