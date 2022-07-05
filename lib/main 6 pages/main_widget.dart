@@ -50,10 +50,9 @@ class _Main_WidgetState extends State<Main_Widget> {
   Future<List<DataSlider>> fetch_SliderPics() async {
     final response =
         await http.get(Uri.parse('https://api.zeleex.com/api/sliders'));
-
+    
     var jsonResponse = json.decode(response.body);
     List jsonCon = jsonResponse['data'];
-
     setState(() {
       countIMG = jsonCon.length;
     });

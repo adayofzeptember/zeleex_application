@@ -652,8 +652,8 @@ class Data_Animal_All {
   int? speciesId;
   String? speciesType;
   String? sold;
-  Null? seoTitle;
-  Null? seoDescription;
+  String? seoTitle;
+  String? seoDescription;
   int? price;
   int? reads;
   String? description;
@@ -975,7 +975,7 @@ class Store {
     updatedAt = json['updated_at'];
     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
     imageCover = json['image_cover'] != null
-    ? new Image.fromJson(json['image_cover'])
+        ? new Image.fromJson(json['image_cover'])
         : null;
     productCount = json['product_count'];
     animalCount = json['animal_count'];
@@ -1032,31 +1032,4 @@ class Links {
     data['active'] = this.active;
     return data;
   }
-}
-
-Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
-  final response = await http
-      .get(Uri.parse('https://api.zeleex.com/api/animals'), 
-      headers: {
-    //'Accept: application/json'
-    'Content-Type': 'application/json',
-    'Charset': 'utf-8'
-  }
-  );
-
-  var jsonResponse = json.decode(response.body);
-  //print(response.body);
-  List jsonCon = jsonResponse['data']['data'];
-  print(jsonResponse['data']['data'][0]);
-  if (response.statusCode == 200) {
-    return jsonCon
-        .map((data) => new Data_Animal_All.fromJson(data))
-        .toList();
-  } else {
-    throw Exception("error...");
-  }
-}
-
-void main(List<String> args) {
-  fetch_AnimalPage_readAll();
 }

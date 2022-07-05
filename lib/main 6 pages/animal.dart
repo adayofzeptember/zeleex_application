@@ -25,11 +25,29 @@ class AnimalsPage extends StatefulWidget {
 
 class _AnimalsPageState extends State<AnimalsPage> {
   final controller = ScrollController();
-  var perPage = 8; //*ค่าเริ่มต้น แสดง 2 items
+  var perPage = 6; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
+  late Future<List<Data_Animal_All>> futureAnimal;
+
+
+Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
+  final response = await http.get(
+      Uri.parse('https://api.zeleex.com/api/animals?per_page='+perPage.toString()),
+      headers: {'Accept': 'application/json'},
+   );
+
+  var jsonResponse = json.decode(response.body);
+  List jsonCon = jsonResponse['data']['data'];
+  if (response.statusCode == 200) {
+    return jsonCon.map((data) => new Data_Animal_All.fromJson(data)).toList();
+  } else {
+    throw Exception("error...");
+  }
+}
+
+
   void initState() {
-    loginh();
-    fetch_AnimalPage_readAll();
+    futureAnimal = fetch_AnimalPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
@@ -38,16 +56,6 @@ class _AnimalsPageState extends State<AnimalsPage> {
       }
     });
     super.initState();
-  }
-
-  String k = '';
-  Future loginh() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var x = prefs2.get('keyToken');
-    setState(() {
-      k = x.toString();
-    });
-    print("----------------------------kkkkkkk-" + x.toString());
   }
 
   bool pressed = true;
@@ -435,7 +443,7 @@ class Card1 extends StatelessWidget {
 }
 
 class Card2 extends StatelessWidget {
- bool pressed = true;
+  bool pressed = true;
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(

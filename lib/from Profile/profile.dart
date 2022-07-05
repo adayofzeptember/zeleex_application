@@ -50,8 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       theTokenOne = x.toString();
     });
-    print("1"+x.toString());
-    print("2"+theTokenOne);
+    print("1" + x.toString());
+    print("2" + theTokenOne);
   }
 
   Future<Data_Profile> fetchProfile_Auth(String token) async {
@@ -149,8 +149,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           CachedNetworkImage(
                             imageBuilder: (context, imageProvider) => Container(
-                              height: 50,
-                              width: 50,
+                              height: 70,
+                              width: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
@@ -162,8 +162,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Color.fromARGB(255, 141, 141, 141),
                             ),
                             errorWidget: (context, url, error) => SizedBox(
-                              height: 50,
-                              width: 50,
+                              height: 70,
+                              width: 70,
                               child: CircleAvatar(
                                 child: Icon(
                                   Icons.person,
@@ -176,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             imageUrl: prf.avatar.toString(),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 5, 0),
+                            padding: const EdgeInsets.fromLTRB(15, 0, 5, 0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -184,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Kanit',
-                                        fontSize: 17,
+                                        fontSize: 20,
                                         color: Colors.white)),
                                 SizedBox(
                                   height: 5,
@@ -763,11 +763,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () {
                   logout_removeToken();
                   GoogoleSignInApi.google_LogOut();
-                     FacebookAuth.instance
-                                            .logOut()
-                                            .then((value) {
-                                        
-                                        });
+                  FacebookAuth.instance.logOut().then((value) {});
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

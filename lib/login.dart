@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Color.fromARGB(255, 133, 133, 133),
           textColor: Colors.white,
           fontSize: 15);
-      throw Exception("error...");
+      throw Exception("error");
     }
   }
 

@@ -27,12 +27,15 @@ class _StorePageState extends State<StorePage> {
   final controller = ScrollController();
   var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
+
+  late Future<List<Data_Store_ReadALL>> futureStore;
+
   void initState() {
-    fetch_StorePage_readAll();
+    futureStore = fetch_StorePage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
-          perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
+          perPage = perPage + 4; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
       }
     });
@@ -40,13 +43,13 @@ class _StorePageState extends State<StorePage> {
   }
 
   Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
-    final response = await http.get(Uri.parse(
-        'https://api.zeleex.com/api/stores?per_page=' + perPage.toString()));
-        
+    final response = await http.get(
+      Uri.parse(
+          'https://api.zeleex.com/api/stores?per_page=' + perPage.toString()),
+      headers: {'Accept': 'application/json'},
+    );
     var jsonResponse = json.decode(response.body);
-
     List jsonCon = jsonResponse['data']['data'];
-
     if (response.statusCode == 200) {
       if (jsonCon.length < perPage) {
         setState(() {
@@ -103,7 +106,6 @@ class _StorePageState extends State<StorePage> {
                   style: TextStyle(
                       color: Palette.kToDark, fontWeight: FontWeight.bold)),
             ),
-
           ],
         ),
         actions: [
@@ -170,10 +172,8 @@ class _StorePageState extends State<StorePage> {
                                   Container(
                                     height: MediaQuery.of(context).size.height *
                                         0.21,
-
                                     width: double.infinity,
                                     child: ClipRRect(
-                                      
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
@@ -193,27 +193,22 @@ class _StorePageState extends State<StorePage> {
                                         errorWidget: (context, url, error) =>
                                             Center(
                                           child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                3, 3, 3, 0),
-                                            child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.22,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255,
-                                                            211,
-                                                            204,
-                                                            204)),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                5))),
-                                                alignment: Alignment.center,
-                                                child: Text("ไม่พบรูปภาพ")),
-                                          ),
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  3, 3, 3, 0),
+                                              child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.22,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255, 255, 255, 255)),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(5))),
+                                                  alignment: Alignment.center,
+                                                  child: Image.network("https://mpng.subpng.com/20180502/qgq/kisspng-computer-icons-online-shopping-e-commerce-retail-store-icon-5aea5af37f4476.4302633215253081475213.jpg"))),
                                         ),
                                       ),
                                     ),
@@ -340,7 +335,83 @@ class _StorePageState extends State<StorePage> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           )),
-                      sortMenu(),
+                      ExpandableNotifier(
+                          child: Column(
+                        children: <Widget>[
+                          ScrollOnExpand(
+                            scrollOnExpand: true,
+                            scrollOnCollapse: false,
+                            child: ExpandablePanel(
+                              theme: const ExpandableThemeData(
+                                headerAlignment:
+                                    ExpandablePanelHeaderAlignment.center,
+                                tapBodyToCollapse: false,
+                              ),
+                              header: Text(
+                                "ประเภทร้านค้า",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 131, 131, 131)),
+                              ),
+                              collapsed: Container(),
+                              expanded: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {});
+                                    },
+                                    child: Text("ร้านค้าทั่วไป",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Color.fromARGB(
+                                                255, 131, 131, 131))),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {});
+                                    },
+                                    child: Text("ร้านค้าส่งสัตว์",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Color.fromARGB(
+                                                255, 131, 131, 131))),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {});
+                                      initState();
+                                    },
+                                    child: Text("บริการขนส่งน้ำเชื้อ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Color.fromARGB(
+                                                255, 131, 131, 131))),
+                                  ),
+                                ],
+                              ),
+                              builder: (_, collapsed, expanded) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 10),
+                                  child: Expandable(
+                                    collapsed: collapsed,
+                                    expanded: expanded,
+                                    theme: const ExpandableThemeData(
+                                        crossFadePoint: 0),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      )),
                       Spacer(),
                       Container(
                           //height: double.infinity,
@@ -369,7 +440,10 @@ class _StorePageState extends State<StorePage> {
                               ),
                               Expanded(
                                 child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      initState();
+                                    },
                                     child: Text("ตกลง",
                                         style: TextStyle(
                                           color: Colors.white,
@@ -384,68 +458,3 @@ class _StorePageState extends State<StorePage> {
     );
   }
 }
-
-class sortMenu extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ExpandableNotifier(
-        child: Column(
-      children: <Widget>[
-        ScrollOnExpand(
-          scrollOnExpand: true,
-          scrollOnCollapse: false,
-          child: ExpandablePanel(
-            theme: const ExpandableThemeData(
-              headerAlignment: ExpandablePanelHeaderAlignment.center,
-              tapBodyToCollapse: false,
-            ),
-            header: Text(
-              "ประเภทร้านค้า",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 131, 131, 131)),
-            ),
-            collapsed: Container(),
-            expanded: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("ร้านค้าทั่วไป",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("ร้านค้าส่งสัตว์",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("บริการขนส่งน้ำเชื้อ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-              ],
-            ),
-            builder: (_, collapsed, expanded) {
-              return Padding(
-                padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                child: Expandable(
-                  collapsed: collapsed,
-                  expanded: expanded,
-                  theme: const ExpandableThemeData(crossFadePoint: 0),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    ));
-  }
-}
-
-
-
-// 
