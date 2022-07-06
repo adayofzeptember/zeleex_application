@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,10 +9,12 @@ import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/from%20Profile/profile.dart';
 import 'package:expandable/expandable.dart';
+import 'package:zeleex_application/main%206%20pages/store_filtered.dart';
 import '../API/Read All/stores_API.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
+import '../second.dart';
 import '../store_page_detail.dart';
 
 class StorePage extends StatefulWidget {
@@ -27,21 +28,10 @@ class _StorePageState extends State<StorePage> {
   final controller = ScrollController();
   var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
+  bool press = false;
+  String typeID = "";
 
   late Future<List<Data_Store_ReadALL>> futureStore;
-
-  void initState() {
-    futureStore = fetch_StorePage_readAll();
-    controller.addListener(() {
-      if (controller.position.maxScrollExtent == controller.offset) {
-        setState(() {
-          perPage = perPage + 4; //*เลื่อนลง + เพิ่มที่ละ 2 items
-        });
-      }
-    });
-    super.initState();
-  }
-
   Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
     final response = await http.get(
       Uri.parse(
@@ -60,6 +50,18 @@ class _StorePageState extends State<StorePage> {
     } else {
       throw Exception("error...");
     }
+  }
+
+  void initState() {
+    futureStore = fetch_StorePage_readAll();
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        setState(() {
+          perPage = perPage + 4; //*เลื่อนลง + เพิ่มที่ละ 2 items
+        });
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -117,6 +119,7 @@ class _StorePageState extends State<StorePage> {
                 ),
               ),
               onPressed: () => Scaffold.of(context).openEndDrawer(),
+
               // onPressed: () => Scaffold.of(context).openEndDrawer(),
             ),
           ),
@@ -359,34 +362,45 @@ class _StorePageState extends State<StorePage> {
                                 children: <Widget>[
                                   InkWell(
                                     onTap: () {
-                                      setState(() {});
+                                      setState(() {
+                                        press = !press;
+                                        typeID = "1";
+                                      });
                                     },
                                     child: Text("ร้านค้าทั่วไป",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 131, 131, 131))),
+                                            color: press
+                                                ? Palette.kToDark
+                                                : Color.fromARGB(
+                                                    255, 131, 131, 131))),
                                   ),
                                   SizedBox(
                                     height: 5,
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      setState(() {});
+                                      setState(() {
+                                        typeID = "2";
+                                        press = !press;
+                                      });
                                     },
                                     child: Text("ร้านค้าส่งสัตว์",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 131, 131, 131))),
+                                            color: press
+                                                ? Color.fromARGB(
+                                                    255, 131, 131, 131)
+                                                : Palette.kToDark)),
                                   ),
                                   SizedBox(
                                     height: 5,
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      setState(() {});
-                                      initState();
+                                      setState(() {
+                                        press = !press;
+                                      });
                                     },
                                     child: Text("บริการขนส่งน้ำเชื้อ",
                                         style: TextStyle(
@@ -429,7 +443,12 @@ class _StorePageState extends State<StorePage> {
                                         side:
                                             BorderSide(color: Palette.kToDark),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Store_Filtered(typeID: typeID,)));
+                                      },
                                       child: Text(
                                         "รีเซ็ต",
                                         style:

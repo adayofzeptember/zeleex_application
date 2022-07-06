@@ -280,7 +280,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return Container(
-                                              height: 100,
+                                              height: 100,                                         
                                               width: 80,
                                               child: Column(
                                                 children: [

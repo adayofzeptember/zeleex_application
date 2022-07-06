@@ -27,6 +27,14 @@ class Store_Cattle_Detail extends StatefulWidget {
 }
 
 class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
+   late Future<Animal> futureAnimalByID;
+
+  @override
+  void initState() {
+    futureAnimalByID = fetch_Animal_ByID();
+    super.initState();
+  }
+
   Future<Animal> fetch_Animal_ByID() async {
     var url =
         "https://api.zeleex.com/api/animals/" + widget.animalID.toString();
@@ -147,14 +155,13 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
           child: Column(
         children: <Widget>[
           FutureBuilder(
-              future: fetch_Animal_ByID(),
+              future: futureAnimalByID,
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
-
-
                   Animal thisAnimal = snapshot.data;
-                  String getContent = thisAnimal.content.toString();
-                  var document555 = parse(getContent);
+                  // String getContent = thisAnimal.content.toString();
+                  // var document555 = parse(getContent);
+
                   return Column(
                     //! container คลุม column
                     children: <Widget>[
@@ -238,6 +245,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                   ],
                                 ),
                                 SizedBox(
+                                  
                                   height: 10,
                                 ),
                                 SvgPicture.asset('assets/images/groupStar.svg'),
@@ -378,13 +386,13 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        HtmlWidget(document555.outerHtml),
-                                        // Text(
-                                        //   thisAnimal.description.toString(),
-                                        //   style: TextStyle(
-                                        //       color: Color.fromARGB(
-                                        //           255, 130, 130, 130)),
-                                        // ),
+                                        // HtmlWidget(document555.outerHtml),
+                                        Text(
+                                          thisAnimal.description.toString(),
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 130, 130, 130)),
+                                        ),
                                         SizedBox(
                                           height: 80,
                                         ),
@@ -424,4 +432,3 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
     );
   }
 }
-

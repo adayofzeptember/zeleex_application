@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">zeleex_application</string>
+    <!-- <string name="app_name">zeleex_application</string>
     <string name="facebook_app_id">1159637794785577</string>
     <string name="fb_login_protocol_scheme">fb1159637794785577</string>
-    <string name="facebook_client_token">2beac12b4d7aebd801cbae3cefaf9f1b</string>
+    <string name="facebook_client_token">2beac12b4d7aebd801cbae3cefaf9f1b</string> -->
+    <string name="app_name">zeleex_application</string> 
+    <string name="facebook_app_id">422156793150527</string>
+    <string name="fb_login_protocol_scheme">fb422156793150527</string>
+    <string name="facebook_client_token">cefb7a433cbb6ee8d742585f5a839d4d</string>
 </resources>

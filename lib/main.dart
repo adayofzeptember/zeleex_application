@@ -37,16 +37,6 @@ class MainAndIcon extends StatefulWidget {
   State<MainAndIcon> createState() => _MainAndIconState();
 }
 
-
-
-
-
-
-
-
-
-
-
 class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
@@ -63,6 +53,8 @@ class _MainAndIconState extends State<MainAndIcon> {
     } else {
       print("token empty");
     }
+   
+    
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,

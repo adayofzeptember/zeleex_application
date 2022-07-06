@@ -119,5 +119,3 @@ class RequestModel_zeleex {
     return data;
   }
 }
-
-

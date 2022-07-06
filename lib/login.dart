@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
         print(userData["name"]);
         print(userData["email"]);
         print(userData["picture"]["data"]["url"]);
-        
+
         request_social.name = userData["name"];
         request_social.email = userData["email"];
         request_social.avatar = userData["picture"]["data"]["url"];
@@ -157,7 +157,8 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       Fluttertoast.showToast(
-          msg: "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
+          msg:
+              "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
@@ -320,7 +321,6 @@ class _LoginPageState extends State<LoginPage> {
                                       obscureText: true,
                                       controller: passwordController,
                                       onSaved: (input) =>
-                                          //requestModel_reqres.password = input,
                                           requestModel_zeleex.password = input,
                                       validator: (value) {
                                         if (value!.isEmpty) {
@@ -441,15 +441,22 @@ class _LoginPageState extends State<LoginPage> {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterPage(),
+                                          ),
+                                        );
                                         // GoogoleSignInApi.google_LogOut();
-                                        FacebookAuth.instance
-                                            .logOut()
-                                            .then((value) {
-                                          setState(() {
-                                            _isLoggedIn = false;
-                                            _userObj = {};
-                                          });
-                                        });
+                                        // FacebookAuth.instance
+                                        //     .logOut()
+                                        //     .then((value) {
+                                        //   setState(() {
+                                        //     _isLoggedIn = false;
+                                        //     _userObj = {};
+                                        //   });
+                                        // });
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
