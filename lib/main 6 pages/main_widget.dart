@@ -618,7 +618,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                             0,
                                           ),
                                           child: Text(
-                                            "สินค้า",
+                                            "สินค้าอื่น ๆ",
                                             style: TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 51, 51, 51),

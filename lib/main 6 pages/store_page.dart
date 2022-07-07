@@ -45,6 +45,7 @@ class _StorePageState extends State<StorePage> {
         setState(() {
           hasMore = false;
         });
+ 
       }
 
       return jsonCon.map((data) => Data_Store_ReadALL.fromJson(data)).toList();
@@ -148,7 +149,7 @@ class _StorePageState extends State<StorePage> {
                       controller: controller,
                       gridDelegate:
                           new SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 1+1,
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
                         mainAxisExtent:
@@ -280,7 +281,7 @@ class _StorePageState extends State<StorePage> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 5),
+                                  SizedBox(height: 10),
                                   Padding(
                                     padding: const EdgeInsets.only(right: 10),
                                     child: Row(
@@ -291,13 +292,11 @@ class _StorePageState extends State<StorePage> {
                                         SizedBox(
                                           width: 5,
                                         ),
-                                        Text("5.0")
+                                        Text("5 คะแนน")
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 8,
-                                  )
+                                 
                                 ],
                               ),
                             ),

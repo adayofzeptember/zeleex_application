@@ -34,7 +34,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   var perPage = 2; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   bool isNull = false;
-  // List jsonCon = [];
+ 
 
   void initState() {
     fetch_Blog_readAll();
@@ -43,6 +43,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
         setState(() {
           perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
+        fetch_Blog_readAll();
       }
     });
     super.initState();
@@ -335,6 +336,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                               children: [
                                                 SvgPicture.asset(
                                                   'assets/images/love.svg',
+                                                  color: Colors.grey,
                                                 ),
                                                 SizedBox(
                                                   width: 10,

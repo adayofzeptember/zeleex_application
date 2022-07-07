@@ -528,7 +528,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Row(
                             children: [
                               Text(
-                                "สิ่งที่ถูกใจว่ะ",
+                                "สิ่งที่ถูกใจ",
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
