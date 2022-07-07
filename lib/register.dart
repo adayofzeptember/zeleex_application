@@ -35,6 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String allName = "";
   String allSureName = '';
   bool checkIfAgree = false;
+  var storedToken = "";
 
   @override
   void initState() {
@@ -44,45 +45,31 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool isChecked = false;
 
-  _registerNowBitchhhh(){
-       FocusManager.instance.primaryFocus
-                                              ?.unfocus();
-                                          if (formKey_Register.currentState!
-                                              .validate()) {
-                                            formKey_Register.currentState
-                                                ?.save();
+  _registerNowBitchhhh() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    if (formKey_Register.currentState!.validate()) {
+      formKey_Register.currentState?.save();
 
-                                            setState(() {
-                                              isApiCallProcess = true;
-                                            });
-                                            register_model.name =
-                                                allName + " " + allSureName;
+      setState(() {
+        isApiCallProcess = true;
+      });
+      register_model.name = allName + " " + allSureName;
 
-                                            _registerNormal(register_model)
-                                                .then((value) => {
-                                                      if (value.data!.email!
-                                                          .isNotEmpty)
-                                                        {
-                                                          setState(() {
-                                                            isApiCallProcess =
-                                                                false;
-                                                          }),
-                                                        }
-                                                      else
-                                                        {
-                                                          setState(() {
-                                                            isApiCallProcess =
-                                                                false;
-                                                          }),
-                                                        }
-                                                    });
-
-                                            // print("-------input-------" +
-                                            //     register_model
-                                            //         .toJson()
-                                            //         .toString());
-
-                                          }
+      _registerNormal(register_model).then((value) => {
+            if (value.data!.email!.isNotEmpty)
+              {
+                setState(() {
+                  isApiCallProcess = false;
+                }),
+              }
+            else
+              {
+                setState(() {
+                  isApiCallProcess = false;
+                }),
+              }
+          });
+    }
   }
 
   Future<Register> _registerNormal(Register_Model registerModel) async {
@@ -103,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (response.statusCode == 400 || response.statusCode == 200) {
       var response_status = jsonRes['responseStatus'].toString();
       var response_code = jsonRes['responseCode'].toString();
-      print(response_status);
+
       if (response_status == 'false' && response_code == 'UR0101') {
         setState(() {
           isApiCallProcess = false;
@@ -116,10 +103,23 @@ class _RegisterPageState extends State<RegisterPage> {
             backgroundColor: Color.fromARGB(255, 230, 97, 97),
             textColor: Colors.white,
             fontSize: 15);
+      } else {
+        var kkk = jsonRes['data']['token'];
+        setState(() {
+          storedToken = kkk;
+        });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('keyToken', storedToken.toString());
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Main_Page(),
+          ),
+        );
       }
+
       return Register.fromJson(json.decode(response.body));
     } else {
-      
       throw Exception("error");
     }
   }
@@ -219,15 +219,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                             BorderSide(color: Colors.white),
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    // focusedBorder: OutlineInputBorder(
-
                                     filled: true,
                                     fillColor:
                                         Color.fromARGB(255, 243, 238, 238),
                                     border: OutlineInputBorder(
-                                      // borderSide:
-                                      //     BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     labelText: '\t\t\t\tชื่อ',
                                   ),
@@ -392,10 +390,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                               checkIfAgree = !checkIfAgree;
                                             });
                                             if (value == true) {
-                                        
                                               register_model
                                                   .policy_confirmation = 'true';
                                             }
+                                            print(checkIfAgree);
                                           });
                                         }),
                                     Text(
@@ -507,7 +505,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   BorderRadius.circular(15),
                                             )),
                                         onPressed: () {
-                                         _registerNowBitchhhh();
+                                          _registerNowBitchhhh();
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.all(20.0),

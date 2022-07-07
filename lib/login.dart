@@ -185,9 +185,9 @@ class _LoginPageState extends State<LoginPage> {
     if (response.statusCode == 400 || response.statusCode == 200) {
       // print(jsonDecode(response.body.toString()));
       var jsonRes = json.decode(response.body);
-      var kkk = jsonRes['data']['token'];
+      var token555 = jsonRes['data']['token'];
       setState(() {
-        storedToken = kkk;
+        storedToken = token555;
       });
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
