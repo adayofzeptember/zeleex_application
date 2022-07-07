@@ -31,6 +31,7 @@ class _ProductPageState extends State<ProductPage> {
           hasMore = false;
           perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
+        fetch_ProductPage_readAll();
       }
     });
     super.initState();
@@ -38,7 +39,7 @@ class _ProductPageState extends State<ProductPage> {
 
   Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
     final response = await http.get(Uri.parse(
-        'https://sanboxapi.zeleex.com/api/products?per_page=' +
+        'https://api.zeleex.com/api/products?per_page=' +
             perPage.toString()));
     var jsonResponse = json.decode(response.body);
 
@@ -129,84 +130,7 @@ class _ProductPageState extends State<ProductPage> {
           )),
       body: Column(
         children: <Widget>[
-          // SizedBox(
-          //   height: 5,
-          // ),
-          // Container(
-          //   color: Colors.white,
-          //   width: double.infinity,
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(10.0),
-          //     child: SingleChildScrollView(
-          //       scrollDirection: Axis.horizontal,
-          //       child: Row(
-          //         children: [
-          //           InkWell(
-          //             onTap: () {
-          //               print("object");
-          //               //MediaQuery.of(context).size.height * 0.25
-          //             },
-          //             child: Container(
-          //               width: MediaQuery.of(context).size.width * 0.35,
-          //               padding: EdgeInsets.all(10.0),
-          //               decoration: BoxDecoration(
-          //                 border: Border.all(color: Colors.grey),
-          //                 borderRadius: BorderRadius.circular(30.0),
-          //               ),
-          //               child: Text(
-          //                 "อุปกรณ์",
-          //                 style: TextStyle(
-          //                     color: Colors.grey,
-          //                     fontSize: 12,
-          //                     fontWeight: FontWeight.bold),
-          //                 textAlign: TextAlign.center,
-          //               ),
-          //             ),
-          //           ),
-          //           SizedBox(
-          //             width: 10,
-          //           ),
-          //           Container(
-          //             width: MediaQuery.of(context).size.width * 0.35,
-          //             padding: EdgeInsets.all(10.0),
-          //             decoration: BoxDecoration(
-          //               color: Palette.kToDark,
-          //               borderRadius: BorderRadius.circular(30.0),
-          //             ),
-          //             child: Text(
-          //               "อาหารและยา",
-          //               style: TextStyle(
-          //                   color: Colors.white,
-          //                   fontWeight: FontWeight.bold,
-          //                   fontSize: 12),
-          //               textAlign: TextAlign.center,
-          //             ),
-          //           ),
-          //           SizedBox(
-          //             width: 10,
-          //           ),
-          //           Container(
-          //             width: MediaQuery.of(context).size.width * 0.35,
-          //             padding: EdgeInsets.all(10.0),
-          //             decoration: BoxDecoration(
-          //               border: Border.all(color: Colors.grey),
-          //               borderRadius: BorderRadius.circular(30.0),
-          //             ),
-          //             child: Text(
-          //               "น้ำเชื้อและตัวอ่อน",
-          //               style: TextStyle(
-          //                   fontSize: 12,
-          //                   color: Color.fromARGB(255, 130, 130, 130),
-          //                   fontWeight: FontWeight.bold),
-          //               textAlign: TextAlign.center,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
+    
           FutureBuilder<List<Data_Products_ReadAll>>(
             future: fetch_ProductPage_readAll(),
             builder: (context, snapshot) {
@@ -337,12 +261,7 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ),
                 );
-              } else if (snapshot.hasError) {
-                //return Text("${"snapshot.error"}");
-                return Padding(
-                  padding: const EdgeInsets.only(top: 50),
-                  child: Center(child: Text("coming soon.")),
-                );
+              
               }
               return Padding(
                 padding: const EdgeInsets.only(top: 100),

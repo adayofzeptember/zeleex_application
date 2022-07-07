@@ -50,7 +50,7 @@ class _Main_WidgetState extends State<Main_Widget> {
   Future<List<DataSlider>> fetch_SliderPics() async {
     final response =
         await http.get(Uri.parse('https://api.zeleex.com/api/sliders'));
-    
+
     var jsonResponse = json.decode(response.body);
     List jsonCon = jsonResponse['data'];
     setState(() {
@@ -259,7 +259,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                       SizedBox(
                         height: 13,
                       ),
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                         child: Container(
@@ -280,7 +279,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return Container(
-                                              height: 100,                                         
+                                              height: 100,
                                               width: 80,
                                               child: Column(
                                                 children: [
@@ -358,7 +357,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                           ),
                         ),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                         child: Container(
@@ -471,12 +469,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                     .circular(
                                                                         5)),
                                                             child: Container(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      231,
-                                                                      231,
-                                                                      231),
+                                                              color:
+                                                                  Colors.white,
                                                               child:
                                                                   CachedNetworkImage(
                                                                 imageUrl: data![
@@ -509,11 +503,35 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                           142),
                                                                   height: 200,
                                                                 ),
-                                                                errorWidget: (context,
-                                                                        url,
-                                                                        error) =>
-                                                                    Icon(Icons
-                                                                        .error),
+                                                                errorWidget:
+                                                                    (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.fromLTRB(
+                                                                            3,
+                                                                            3,
+                                                                            3,
+                                                                            0),
+                                                                    child: Container(
+                                                                        height: MediaQuery.of(context).size.height *
+                                                                            0.22,
+                                                                        decoration: BoxDecoration(
+                                                                            border: Border.all(
+                                                                                color: Color.fromARGB(255, 211, 204,
+                                                                                    204)),
+                                                                            borderRadius: BorderRadius.all(Radius.circular(
+                                                                                5))),
+                                                                        alignment:
+                                                                            Alignment
+                                                                                .center,
+                                                                        child: Icon(
+                                                                            Icons.error_outline)),
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -576,218 +594,217 @@ class _Main_WidgetState extends State<Main_Widget> {
                           ),
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      //   child: Container(
-                      //     decoration: BoxDecoration(),
-                      //     child: Padding(
-                      //       padding: const EdgeInsets.all(0.0),
-                      //       child: Padding(
-                      //           padding: const EdgeInsets.all(0.0),
-                      //           child: Column(
-                      //             children: [
-                      //               Row(
-                      //                 mainAxisAlignment:
-                      //                     MainAxisAlignment.spaceBetween,
-                      //                 crossAxisAlignment:
-                      //                     CrossAxisAlignment.center,
-                      //                 children: [
-                      //                   Padding(
-                      //                     padding: const EdgeInsets.fromLTRB(
-                      //                       10,
-                      //                       10,
-                      //                       0,
-                      //                       0,
-                      //                     ),
-                      //                     child: Text(
-                      //                       "สินค้า",
-                      //                       style: TextStyle(
-                      //                           color: Color.fromARGB(
-                      //                               255, 51, 51, 51),
-                      //                           fontWeight: FontWeight.bold,
-                      //                           fontSize: MediaQuery.of(context)
-                      //                                   .size
-                      //                                   .height *
-                      //                               0.02),
-                      //                     ),
-                      //                   ),
-                      //                   Padding(
-                      //                     padding:
-                      //                         const EdgeInsets.only(right: 10),
-                      //                     child: ElevatedButton(
-                      //                       style: ElevatedButton.styleFrom(
-                      //                           primary: Palette.kToDark,
-                      //                           elevation: 0),
-                      //                       onPressed: () {
-                      //                         Navigator.push(
-                      //                           context,
-                      //                           MaterialPageRoute(
-                      //                             builder: (context) =>
-                      //                                 ProductPage(),
-                      //                           ),
-                      //                         );
-                      //                       },
-                      //                       child: Text(
-                      //                         "ดูทั้งหมด",
-                      //                         style: TextStyle(
-                      //                             color: Color.fromRGBO(
-                      //                                 255, 255, 255, 1)),
-                      //                         textAlign: TextAlign.center,
-                      //                       ),
-                      //                     ),
-                      //                   )
-                      //                 ],
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 5,
-                      //               ),
-                      //               Container(
-                      //                 height:
-                      //                     MediaQuery.of(context).size.height *
-                      //                         0.240,
-                      //                 child: Row(
-                      //                   children: [
-                      //                     FutureBuilder<
-                      //                         List<Data_Products_ReadAll>>(
-                      //                       future: fetch_ProductPage_readAll(),
-                      //                       builder: (context, snapshot) {
-                      //                         if (snapshot.hasData) {
-                      //                           List<Data_Products_ReadAll>?
-                      //                               data = snapshot.data;
-                      //                           return Expanded(
-                      //                             child: ListView.builder(
-                      //                                 scrollDirection:
-                      //                                     Axis.horizontal,
-                      //                                 // shrinkWrap: true,
-                      //                                 itemCount: 5,
-                      //                                 itemBuilder:
-                      //                                     (BuildContext context,
-                      //                                         int index) {
-                      //                                   return Card(
-                      //                                     child: InkWell(
-                      //                                       onTap: () {
-                      //                                         Navigator.of(context).push(
-                      //                                             MaterialPageRoute(
-                      //                                                 builder: (context) =>
-                      //                                                     Store_Product_Detail(
-                      //                                                       productName:
-                      //                                                           data![index].title.toString(),
-                      //                                                       productID:
-                      //                                                           data[index].id.toString(),
-                      //                                                     )));
-                      //                                       },
-                      //                                       child: Column(
-                      //                                         children: [
-                      //                                           ClipRRect(
-                      //                                             borderRadius: BorderRadius.only(
-                      //                                                 topLeft: Radius
-                      //                                                     .circular(
-                      //                                                         5),
-                      //                                                 topRight:
-                      //                                                     Radius.circular(
-                      //                                                         5)),
-                      //                                             child:
-                      //                                                 CachedNetworkImage(
-                      //                                               imageUrl: data![
-                      //                                                       index]
-                      //                                                   .image!
-                      //                                                   .thumbnail
-                      //                                                   .toString(),
-                      //                                               fit: BoxFit
-                      //                                                   .fill,
-                      //                                               height: MediaQuery.of(context)
-                      //                                                       .size
-                      //                                                       .width *
-                      //                                                   0.3,
-                      //                                               width: MediaQuery.of(context)
-                      //                                                       .size
-                      //                                                       .width *
-                      //                                                   0.3,
-                      //                                               progressIndicatorBuilder: (context,
-                      //                                                       url,
-                      //                                                       downloadProgress) =>
-                      //                                                   Container(
-                      //                                                 color: Color.fromARGB(
-                      //                                                     255,
-                      //                                                     192,
-                      //                                                     192,
-                      //                                                     192),
-                      //                                                 height:
-                      //                                                     200,
-                      //                                               ),
-                      //                                               errorWidget: (context,
-                      //                                                       url,
-                      //                                                       error) =>
-                      //                                                   Icon(Icons
-                      //                                                       .error),
-                      //                                             ),
-                      //                                           ),
-                      //                                           Padding(
-                      //                                             padding:
-                      //                                                 const EdgeInsets
-                      //                                                         .all(
-                      //                                                     8.0),
-                      //                                             child: Column(
-                      //                                               crossAxisAlignment:
-                      //                                                   CrossAxisAlignment
-                      //                                                       .start,
-                      //                                               mainAxisAlignment:
-                      //                                                   MainAxisAlignment
-                      //                                                       .start,
-                      //                                               children: [
-                      //                                                 SizedBox(
-                      //                                                   height:
-                      //                                                       40,
-                      //                                                   width:
-                      //                                                       100,
-                      //                                                   child:
-                      //                                                       Text(
-                      //                                                     data[index]
-                      //                                                         .title
-                      //                                                         .toString(),
-                      //                                                   ),
-                      //                                                 ),
-                      //                                                 SizedBox(
-                      //                                                   height:
-                      //                                                       3,
-                      //                                                 ),
-                      //                                                 Text(
-                      //                                                   "฿ " +
-                      //                                                       data[index].price.toString(),
-                      //                                                   style: TextStyle(
-                      //                                                       color: Color.fromARGB(
-                      //                                                           255,
-                      //                                                           255,
-                      //                                                           17,
-                      //                                                           0)),
-                      //                                                 ),
-                      //                                               ],
-                      //                                             ),
-                      //                                           )
-                      //                                         ],
-                      //                                       ),
-                      //                                     ),
-                      //                                   );
-                      //                                 }),
-                      //                           );
-                      //                         } else if (snapshot.hasError) {
-                      //                           return Text(
-                      //                               "${snapshot.error}");
-                      //                         }
-                      //                         return Container();
-                      //                       },
-                      //                     ),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 10,
-                      //               )
-                      //             ],
-                      //           )),
-                      //     ),
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Container(
+                          decoration: BoxDecoration(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Padding(
+                                padding: const EdgeInsets.all(0.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            10,
+                                            10,
+                                            0,
+                                            0,
+                                          ),
+                                          child: Text(
+                                            "สินค้า",
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 51, 51, 51),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.02),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 10),
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Palette.kToDark,
+                                                elevation: 0),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProductPage(),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              "ดูทั้งหมด",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      255, 255, 255, 1)),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.240,
+                                      child: Row(
+                                        children: [
+                                          FutureBuilder<List<ProductCat01>>(
+                                            future: future_products_cat,
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                List<ProductCat01>? data =
+                                                    snapshot.data;
+                                                return Expanded(
+                                                  child: ListView.builder(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      // shrinkWrap: true,
+                                                      itemCount: data?.length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return Card(
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(context).push(
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                          Store_Product_Detail(
+                                                                            productName:
+                                                                                data![index].title.toString(),
+                                                                            productID:
+                                                                                data[index].id.toString(),
+                                                                          )));
+                                                            },
+                                                            child: Column(
+                                                              children: [
+                                                                ClipRRect(
+                                                                  borderRadius: BorderRadius.only(
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              5),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              5)),
+                                                                  child:
+                                                                      CachedNetworkImage(
+                                                                    imageUrl: data![
+                                                                            index]
+                                                                        .image!
+                                                                        .thumbnail
+                                                                        .toString(),
+                                                                    fit: BoxFit
+                                                                        .fill,
+                                                                    height: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.3,
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.3,
+                                                                    progressIndicatorBuilder: (context,
+                                                                            url,
+                                                                            downloadProgress) =>
+                                                                        Container(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          192,
+                                                                          192,
+                                                                          192),
+                                                                      height:
+                                                                          200,
+                                                                    ),
+                                                                    errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Icon(Icons
+                                                                            .error),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        height:
+                                                                            40,
+                                                                        width:
+                                                                            100,
+                                                                        child:
+                                                                            Text(
+                                                                          data[index]
+                                                                              .title
+                                                                              .toString(),
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
+                                                                      Text(
+                                                                        "฿ " +
+                                                                            data[index].price.toString(),
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                255,
+                                                                                17,
+                                                                                0)),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                                );
+                                              } else if (snapshot.hasError) {
+                                                return Text(
+                                                    "${snapshot.error}");
+                                              }
+                                              return Container();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    )
+                                  ],
+                                )),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],

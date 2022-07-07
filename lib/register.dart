@@ -104,9 +104,9 @@ class _RegisterPageState extends State<RegisterPage> {
             textColor: Colors.white,
             fontSize: 15);
       } else {
-        var kkk = jsonRes['data']['token'];
+        var tokenFromRegister = jsonRes['data']['token'];
         setState(() {
-          storedToken = kkk;
+          storedToken = tokenFromRegister;
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('keyToken', storedToken.toString());

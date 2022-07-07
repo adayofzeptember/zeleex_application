@@ -46,6 +46,7 @@ class _StorePageState extends State<StorePage> {
           hasMore = false;
         });
       }
+
       return jsonCon.map((data) => Data_Store_ReadALL.fromJson(data)).toList();
     } else {
       throw Exception("error...");
@@ -53,12 +54,14 @@ class _StorePageState extends State<StorePage> {
   }
 
   void initState() {
+    fetch_StorePage_readAll();
     futureStore = fetch_StorePage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
           perPage = perPage + 4; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
+        fetch_StorePage_readAll();
       }
     });
     super.initState();
@@ -211,7 +214,28 @@ class _StorePageState extends State<StorePage> {
                                                           BorderRadius.all(
                                                               Radius.circular(5))),
                                                   alignment: Alignment.center,
-                                                  child: Image.network("https://mpng.subpng.com/20180502/qgq/kisspng-computer-icons-online-shopping-e-commerce-retail-store-icon-5aea5af37f4476.4302633215253081475213.jpg"))),
+                                                  child:  Center(
+                                              child: Container(
+                                                  height:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          0.22,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  211,
+                                                                  204,
+                                                                  204)),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5))),
+                                                  alignment: Alignment.center,
+                                                  child: Icon(Icons.error_outline)),
+                                            ),)),
                                         ),
                                       ),
                                     ),
@@ -447,7 +471,9 @@ class _StorePageState extends State<StorePage> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Store_Filtered(typeID: typeID,)));
+                                                    Store_Filtered(
+                                                      typeID: typeID,
+                                                    )));
                                       },
                                       child: Text(
                                         "รีเซ็ต",

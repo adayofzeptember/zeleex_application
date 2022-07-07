@@ -17,7 +17,7 @@ class CartPage extends StatefulWidget {
   State<CartPage> createState() => _CartPageState();
 }
 
-  AlreadyIn_Model loggedin = AlreadyIn_Model();
+AlreadyIn_Model loggedin = AlreadyIn_Model();
 
 class _CartPageState extends State<CartPage> {
   bool isChecked = false;
@@ -81,7 +81,6 @@ class _CartPageState extends State<CartPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              
               Slidable(
                 endActionPane: ActionPane(
                   motion: BehindMotion(),
@@ -681,7 +680,6 @@ class _CartPageState extends State<CartPage> {
               ),
               SizedBox(height: 10,),
               Container(
-                alignment: Alignment.bottomCenter,
                 color: Color.fromARGB(255, 240, 240, 240),
                 height: 70,
                 child: Row(
@@ -728,7 +726,6 @@ class _CartPageState extends State<CartPage> {
                             ],
                           ),
                         ),
-                        
                         InkWell(
                           onTap: () {
                             Navigator.push(

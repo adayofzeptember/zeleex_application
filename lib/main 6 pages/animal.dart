@@ -223,7 +223,7 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
                                                                 Radius.circular(
                                                                     5))),
                                                     alignment: Alignment.center,
-                                                    child: Text("ไม่พบรูปภาพ")),
+                                                    child: Icon(Icons.error_outline)),
                                               ),
                                             ),
                                           )),
