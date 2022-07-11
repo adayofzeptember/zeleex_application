@@ -19,19 +19,21 @@ class ProductPage extends StatefulWidget {
   State<ProductPage> createState() => _ProductPageState();
 }
 
+late Future<List<Data_Products_ReadAll>> future_AllProducts;
+
 class _ProductPageState extends State<ProductPage> {
   final controller = ScrollController();
+  int x = 0;
   var perPage = 8; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   void initState() {
-    fetch_ProductPage_readAll();
+    future_AllProducts = fetch_ProductPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         setState(() {
           hasMore = false;
           perPage = perPage + 2; //*เลื่อนลง + เพิ่มที่ละ 2 items
         });
-        fetch_ProductPage_readAll();
       }
     });
     super.initState();
@@ -39,12 +41,12 @@ class _ProductPageState extends State<ProductPage> {
 
   Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
     final response = await http.get(Uri.parse(
-        'https://api.zeleex.com/api/products?per_page=' +
-            perPage.toString()));
+        'https://api.zeleex.com/api/products?per_page=' + perPage.toString()));
     var jsonResponse = json.decode(response.body);
-
     List jsonCon = jsonResponse['data']['data'];
-
+    setState(() {
+      x = 0;
+    });
     if (response.statusCode == 200) {
       if (jsonCon.length < perPage) {
         setState(() {
@@ -110,29 +112,38 @@ class _ProductPageState extends State<ProductPage> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold),
                 ),
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/sort.svg',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    SvgPicture.asset(
-                      'assets/images/cart123.svg',
-                    )
-                  ],
-                ),
-              )
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/sort.svg',
+                  ),
+                  Stack(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/cart123.svg',
+                      ),
+                      Positioned(
+                          top: 5.0,
+                          right: 4.0,
+                          child: Center(
+                            child: Text(
+                              x.toString(),
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.green,
+                              ),
+                            ),
+                          )),
+                    ],
+                  ),
+                ],
+              ),
             ],
           )),
       body: Column(
         children: <Widget>[
-    
           FutureBuilder<List<Data_Products_ReadAll>>(
-            future: fetch_ProductPage_readAll(),
+            future: future_AllProducts,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Data_Products_ReadAll>? data = snapshot.data;
@@ -144,8 +155,7 @@ class _ProductPageState extends State<ProductPage> {
                     thickness: 5,
                     child: GridView.builder(
                       controller: controller,
-                      gridDelegate:
-                          new SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
@@ -261,7 +271,6 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ),
                 );
-              
               }
               return Padding(
                 padding: const EdgeInsets.only(top: 100),
@@ -270,6 +279,13 @@ class _ProductPageState extends State<ProductPage> {
               );
             },
           ),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  x = x + 1;
+                });
+              },
+              child: Text("data"))
         ],
       ),
     );

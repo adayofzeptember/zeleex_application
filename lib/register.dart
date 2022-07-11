@@ -84,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: body_Register,
     );
 
-    print(jsonDecode(response.body.toString()));
+    print(json.decode(response.body.toString()));
     var jsonRes = json.decode(response.body);
 
     if (response.statusCode == 400 || response.statusCode == 200) {

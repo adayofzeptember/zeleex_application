@@ -16,8 +16,8 @@ void main() {
       .then((value) => runApp(First_Page()));
 }
 
-class First_Page extends StatelessWidget { 
- 
+
+class First_Page extends StatelessWidget {
   const First_Page({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,7 @@ class _MainAndIconState extends State<MainAndIcon> {
     } else {
       print("token empty");
     }
-   
-    
+
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
@@ -70,16 +69,18 @@ class _MainAndIconState extends State<MainAndIcon> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/Frame.png',
-                  // height: MediaQuery.of(context).size.height * 0.25,
-                  fit: BoxFit.cover),
-            ],
-          ),
+      body: Center(
+        child: Column(  
+          
+
+
+       
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [ 
+            Image.asset('assets/images/Frame.png',
+                // height: MediaQuery.of(context).size.height * 0.25,
+                fit: BoxFit.cover),
+          ],
         ),
       ),
     );

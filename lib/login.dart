@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoggedIn = false;
   Map _userObj = {};
   String storedToken = "";
+  String userID = "";
 
   @override
   void initState() {
@@ -74,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
         request_social.provider = "facebook";
         request_social.provider_id = "1";
         login_Social(request_social);
-        print(json.encode(request_social).toString());
+    
         ;
       });
     });
@@ -138,11 +139,14 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.statusCode == 400 || response.statusCode == 200) {
       var token_toStore = jsonRes['data']['token'].toString();
+      var user555 = jsonRes['data']['id'].toString();
       setState(() {
         storedToken = token_toStore;
+        userID = user555;
       });
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', storedToken.toString());
+      prefs.setString('keyUserID', userID.toString());
 
       Navigator.pushReplacement(
         context,
@@ -186,12 +190,15 @@ class _LoginPageState extends State<LoginPage> {
       // print(jsonDecode(response.body.toString()));
       var jsonRes = json.decode(response.body);
       var token555 = jsonRes['data']['token'];
+      var userID555 = jsonRes['data']['id'];
       setState(() {
         storedToken = token555;
+        userID = userID555;
       });
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', storedToken.toString());
+      prefs.setString('keyUserID', userID.toString());
 
       Navigator.pushReplacement(
         context,

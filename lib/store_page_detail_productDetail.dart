@@ -25,6 +25,7 @@ class Store_Product_Detail extends StatefulWidget {
 class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int index = 0;
   int tag = 0;
+  var x = 0;
 
   void _onItemTapped(int index2) {
     setState(() {
@@ -33,6 +34,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   }
 
   bool pressed = true;
+  bool pressed_like = false;
   int _counter = 0;
   void _pluss() {
     setState(() {
@@ -49,15 +51,31 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     });
   }
 
+  late Future<Product> future_ProductByID;
+
+
   Future<Product> fetch_Product_ByID() async {
-    var url = "https://sanboxapi.zeleex.com/api/products/" +
-        widget.productID.toString();
+    var url =
+        "https://api.zeleex.com/api/products/" + widget.productID.toString();
     widget.productID.toString();
-    var response = await http.get(Uri.parse(url));
+    var response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+    );
+
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['product'];
     Product msg = Product.fromJson(jsonCon);
     return msg;
+  }
+
+  @override
+  void initState() {
+    future_ProductByID = fetch_Product_ByID();
+   
   }
 
   @override
@@ -75,7 +93,11 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 heroTag: "btn1",
                 backgroundColor: Colors.white,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-                onPressed: () => {print("object")},
+                onPressed: () => {
+                  setState(() {
+                    x = x + 1;
+                  })
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -116,7 +138,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                     builder: (BuildContext context) {
                       return Container(
                         //height: MediaQuery.of(context).size.height * 0.75,
-
                         child: StatefulBuilder(builder:
                             (BuildContext context, StateSetter stateSetter) {
                           return Padding(
@@ -183,7 +204,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'รุ่น',
+                                      'ตัวเลือกสินค้า',
                                       style: TextStyle(
                                           color:
                                               Color.fromARGB(255, 51, 51, 51),
@@ -264,16 +285,32 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                       color: Palette.kToDark,
                       fontWeight: FontWeight.bold,
                       fontSize: 15)),
-              SvgPicture.asset(
-                'assets/images/cart123.svg',
-              )
+              Stack(
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/cart123.svg',
+                  ),
+                  Positioned(
+                      top: 5.0,
+                      right: 4.0,
+                      child: Center(
+                        child: Text(
+                          x.toString(),
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.green,
+                          ),
+                        ),
+                      )),
+                ],
+              ),
             ],
           )),
       body: SingleChildScrollView(
           child: Column(
         children: <Widget>[
           FutureBuilder(
-              future: fetch_Product_ByID(),
+              future: future_ProductByID,
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
                   Product thisProduct = snapshot.data;
@@ -306,23 +343,11 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                           height: 300,
                                           child: Center(
                                               child:
-                                                  Text("ไม่พบรูปภาพของสัตว์"))),
+                                                  Text("ไม่พบรูปภาพของสินค้า"))),
                                     )),
                               ),
                             ),
 
-                            // errorWidget: (context, url, error) => Padding(
-                            //   padding: const EdgeInsets.only(right: 5, left: 5),
-                            //   child: Center(
-                            //     child: Container(
-                            //         decoration: BoxDecoration(
-                            //             border: Border.all(
-                            //                 color: Color.fromARGB(
-                            //                     255, 141, 141, 141))),
-                            //         alignment: Alignment.center,
-                            //         child: Text("ไม่พบรูปภาพของสินค้า")),
-                            //   ),
-                            // ),
                           ),
                         ),
                         Container(
@@ -343,33 +368,24 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                 Color.fromARGB(255, 51, 51, 51),
                                             fontSize: 18),
                                       ),
-                                      SvgPicture.asset('assets/images/love.svg',
-                                          color: Colors.red)
+                                      InkWell(
+                                        onTap: (() => setState(() {
+                                          pressed_like = !pressed_like;
+                                        })),
+                                        child: SvgPicture.asset('assets/images/love.svg',
+                                        
+                                            color: pressed_like ? Colors.red : Colors.grey),
+                                      )
                                     ],
                                   ),
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "฿ ${thisProduct.price}",
-                                        style: TextStyle(
-                                            color: Colors.red[400],
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "฿ 250",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 130, 130, 130),
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      )
-                                    ],
+                                  Text(
+                                    "฿ ${thisProduct.price}",
+                                    style: TextStyle(
+                                        color: Colors.red[400],
+                                        fontSize: 20),
                                   ),
                                   Row(
                                     mainAxisAlignment:
