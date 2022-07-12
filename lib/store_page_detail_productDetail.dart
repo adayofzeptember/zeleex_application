@@ -4,6 +4,8 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:html/parser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_id_api.dart';
 import 'Plate.dart';
 import 'store_page_detail_product.dart';
@@ -27,40 +29,43 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int tag = 0;
   var x = 0;
   String picked = "";
-  List<bool> _selections = List.generate(3, (_) => false);
-  var TxtBold = FontWeight.normal;
-  var TxtItalic = FontStyle.normal;
-  var TxtUnder = TextDecoration.none;
+  late Future<Product> future_ProductByID;
+  late Future<List<Skus>> future_Product_skus;
   bool _press = false;
   var productImg = "";
   var productPrice = "";
+  bool pressed = true;
+  bool pressed_like = false;
+  int _counter = 0;
+
+  String? cartAdd_userID;
+  String cartAdd_storeID = "";
+  String cartAdd_product_sku_id = "";
+  String cartAdd_unit = "";
+  String cartAdd_token = "";
+  @override
+  void initState() {
+    future_ProductByID = fetch_Product_ByID();
+    future_Product_skus = fetch_skus();
+    getUserID();
+  }
+
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;
     });
   }
 
-  bool pressed = true;
-  bool pressed_like = false;
-  int _counter = 0;
-
-  void _pluss() {
+  Future getUserID() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    String y = prefs2.get('keyID').toString();
+    String x = prefs2.get('keyToken').toString();
     setState(() {
-      _counter++;
+      cartAdd_userID = y;
+      cartAdd_token = x;
     });
+    print(cartAdd_userID);
   }
-
-  void _minus() {
-    setState(() {
-      _counter--;
-      if (_counter <= 0) {
-        _counter = 0;
-      }
-    });
-  }
-
-  late Future<Product> future_ProductByID;
-  late Future<List<Skus>> future_Product_skus;
 
   Future<List<Skus>> fetch_skus() async {
     final response = await http.get(Uri.parse(
@@ -98,12 +103,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
 
     Product msg = Product.fromJson(jsonCon);
     return msg;
-  }
-
-  @override
-  void initState() {
-    future_ProductByID = fetch_Product_ByID();
-    future_Product_skus = fetch_skus();
   }
 
   @override
@@ -218,6 +217,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     List<Skus>? data = snapshot.data;
+
                                     return Expanded(
                                       child: RawScrollbar(
                                         thumbColor: Palette.kToDark,
@@ -243,9 +243,21 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                               child: InkWell(
                                                 onTap: () {
                                                   print(index + 1);
+                                                  setState(() {
+                                                    String sku_id = data![index]
+                                                        .id
+                                                        .toString();
+                                                    cartAdd_product_sku_id =
+                                                        sku_id;
+                                                  });
                                                   myState(() {
+                                                    String sku_id = data![index]
+                                                        .id
+                                                        .toString();
+                                                    cartAdd_product_sku_id =
+                                                        sku_id;
                                                     _press = !_press;
-                                                    picked = data![index]
+                                                    picked = data[index]
                                                         .name
                                                         .toString();
                                                   });
@@ -329,6 +341,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                             onTap: () {
                                               myState(() {
                                                 _counter--;
+                                                if (_counter <= 0) {
+                                                  _counter = 0;
+                                                }
                                               });
                                             },
                                             child: SvgPicture.asset(
@@ -429,6 +444,16 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   setState(() {
                                     x = x + 1;
                                   });
+                                  print(cartAdd_token.toString());
+                                  print(
+                                      "user id: " + cartAdd_userID.toString());
+                                  print("store id: " +
+                                      cartAdd_storeID.toString());
+
+                                  print("sku id: " +
+                                      cartAdd_product_sku_id.toString());
+                                  print(_counter);
+                                 
                                   Navigator.pop(context);
                                 },
                                 child: Padding(
@@ -549,9 +574,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 if (snapshot.hasData) {
                   Product thisProduct = snapshot.data;
                   String k = thisProduct.price.toString();
-
+                  String sid = thisProduct.storeId.toString();
+                  cartAdd_storeID = sid;
                   productPrice = k;
-
                   return Container(
                     child: Column(
                       children: <Widget>[

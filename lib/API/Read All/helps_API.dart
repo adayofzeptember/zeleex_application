@@ -212,7 +212,3 @@ Future<List<Data2>> fetch_HelpCenter() async {
   }
 }
 
-
-// void main(List<String> args) {
-//   fetch_HelpCenter();
-// }

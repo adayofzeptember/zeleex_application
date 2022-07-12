@@ -32,6 +32,14 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
     return msg;
   }
 
+  late Future<Blog> future_BlogID;
+
+  @override
+  void initState() {
+    future_BlogID = fetchBlog_ByID();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,18 +71,6 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                     color: Palette.kToDark, fontWeight: FontWeight.bold),
               ),
               Text("")
-              // Container(
-              //   child: Row(
-              //     children: [
-              //       SizedBox(
-              //         width: 10,
-              //       ),
-              //       SvgPicture.asset(
-              //         'assets/images/cart123.svg',
-              //       ),
-              //     ],
-              //   ),
-              // )
             ],
           )),
       body: SingleChildScrollView(
@@ -83,22 +79,16 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
           child: Column(
             children: <Widget>[
               FutureBuilder(
-                  future: fetchBlog_ByID(),
+                  future: future_BlogID,
                   builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.hasData) {
                       Blog blog = snapshot.data;
                       String blogContent = blog.content.toString();
-                              String get_Thetime =
-                                blog.createdAt.toString();
-                                          var createdTime = DateFormat.yMMMd()
-                                .format(DateTime.parse(get_Thetime));
-                            // var tt = DateTime.parse(get_Thetime);
-                            // var createdTime = DateFormat('d MMM yyyy')
-                            //     .formatInBuddhistCalendarThai(DateTime.parse(get_Thetime));
-                            // var formatter = DateFormat.yMMMMEEEEd();
-                            // var dateInBuddhistCalendarFormat =
-                            //     formatter.formatInBuddhistCalendarThai(tt);
+                      String get_Thetime = blog.createdAt.toString();
+                      var createdTime = DateFormat.yMMMd()
+                          .format(DateTime.parse(get_Thetime));
+
                       var document555;
                       if (blogContent == 'null') {
                         document555 = parse('<p>ไม่มีเนื้อหาของข่าวสาร</p>');
@@ -138,7 +128,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                createdTime,
+                                    createdTime,
                                     style: TextStyle(
                                         fontSize: 15,
                                         color:
@@ -206,7 +196,8 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // Text(checkContent),
-                                  Center(child: HtmlWidget(document555.outerHtml)),
+                                  Center(
+                                      child: HtmlWidget(document555.outerHtml)),
                                   //Text(blogContent),
                                   SizedBox(
                                     height: 10,
@@ -223,8 +214,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                         child: Center(child: CircularProgressIndicator()),
                       );
                     }
-                  }
-                  ),
+                  }),
             ],
           ),
         ),

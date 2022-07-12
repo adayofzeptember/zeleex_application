@@ -54,11 +54,11 @@ class ResponseModel_zeleex {
   int? id;
   String? name;
   String? email;
-  Null? emailVerifiedAt;
-  Null? phone;
-  Null? avatar;
-  Null? provider;
-  Null? providerId;
+  String? emailVerifiedAt;
+  String? phone;
+  String? avatar;
+  String? provider;
+  String? providerId;
   String? status;
   String? createdAt;
   String? updatedAt;

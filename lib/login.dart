@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoggedIn = false;
   Map _userObj = {};
   String storedToken = "";
+  String storedUserID = "";
   @override
   void initState() {
     requestModel_zeleex = RequestModel_zeleex();
@@ -128,11 +129,16 @@ class _LoginPageState extends State<LoginPage> {
     var jsonRes = json.decode(response.body);
     if (response.statusCode == 400 || response.statusCode == 200) {
       var token_toStore = jsonRes['data']['token'].toString();
+      String id_toStore = jsonRes['data']['id'].toString();
       setState(() {
         storedToken = token_toStore;
+        storedUserID = id_toStore;
       });
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', storedToken.toString());
+      prefs.setString('keyID', storedUserID.toString());
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -170,16 +176,19 @@ class _LoginPageState extends State<LoginPage> {
       body: bodySocial,
     );
     if (response.statusCode == 400 || response.statusCode == 200) {
-      // print(jsonDecode(response.body.toString()));
       var jsonRes = json.decode(response.body);
       var kkk = jsonRes['data']['token'];
+      String id_toStore2 = jsonRes['data']['id'].toString();
+
       setState(() {
         storedToken = kkk;
+        storedUserID = id_toStore2;
       });
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       prefs.setString('keyToken', storedToken.toString());
+      prefs.setString('keyID', storedUserID.toString());
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
