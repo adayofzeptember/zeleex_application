@@ -279,13 +279,13 @@ class _ProductPageState extends State<ProductPage> {
               );
             },
           ),
-          ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  x = x + 1;
-                });
-              },
-              child: Text("data"))
+          // ElevatedButton(
+          //     onPressed: () {
+          //       setState(() {
+          //         x = x + 1;
+          //       });
+          //     },
+          //     child: Text("data"))
         ],
       ),
     );

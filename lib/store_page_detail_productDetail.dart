@@ -26,7 +26,14 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int index = 0;
   int tag = 0;
   var x = 0;
-
+  String picked = "";
+  List<bool> _selections = List.generate(3, (_) => false);
+  var TxtBold = FontWeight.normal;
+  var TxtItalic = FontStyle.normal;
+  var TxtUnder = TextDecoration.none;
+  bool _press = false;
+  var productImg = "";
+  var productPrice = "";
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;
@@ -36,6 +43,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   bool pressed = true;
   bool pressed_like = false;
   int _counter = 0;
+
   void _pluss() {
     setState(() {
       _counter++;
@@ -52,12 +60,26 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   }
 
   late Future<Product> future_ProductByID;
+  late Future<List<Skus>> future_Product_skus;
 
+  Future<List<Skus>> fetch_skus() async {
+    final response = await http.get(Uri.parse(
+        'https://api.zeleex.com/api/products/' + widget.productID.toString()));
+
+    var jsonResponse = json.decode(response.body);
+    List jsonCon = jsonResponse['data']['product']['skus'];
+
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => new Skus.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
+  }
 
   Future<Product> fetch_Product_ByID() async {
     var url =
         "https://api.zeleex.com/api/products/" + widget.productID.toString();
-    widget.productID.toString();
+
     var response = await http.get(
       Uri.parse(url),
       headers: {
@@ -68,6 +90,12 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
 
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['product'];
+    var getIMG = jsonResponse['data']['product']['image']['main'];
+    var getPrice = jsonResponse['data']['product']['price'];
+    setState(() {
+      productImg = getIMG;
+    });
+
     Product msg = Product.fromJson(jsonCon);
     return msg;
   }
@@ -75,7 +103,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   @override
   void initState() {
     future_ProductByID = fetch_Product_ByID();
-   
+    future_Product_skus = fetch_skus();
   }
 
   @override
@@ -94,9 +122,333 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 backgroundColor: Colors.white,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {
-                  setState(() {
-                    x = x + 1;
-                  })
+                  showModalBottomSheet(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    )),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                          builder: (BuildContext context, StateSetter myState) {
+                        return Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: Image.network(
+                                      productImg.toString(),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Text(
+                                            "฿ " + productPrice,
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Divider(
+                                    color: Color.fromARGB(255, 206, 206, 206)),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "ตัวเลือกสินค้า: ",
+                                    style: TextStyle(
+                                        color: Palette.kToDark, fontSize: 15),
+                                  ),
+                                  Text(
+                                    picked.toString(),
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 51, 51, 51),
+                                        fontSize: 15),
+                                  ),
+                                  Text(
+                                    " จำนวน: ",
+                                    style: TextStyle(
+                                        color: Palette.kToDark, fontSize: 15),
+                                  ),
+                                  Text(
+                                    _counter.toString(),
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 51, 51, 51),
+                                        fontSize: 15),
+                                  ),
+                                  Text(
+                                    " ชิ้น",
+                                    style: TextStyle(
+                                        color: Palette.kToDark, fontSize: 15),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              FutureBuilder<List<Skus>>(
+                                future: future_Product_skus,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    List<Skus>? data = snapshot.data;
+                                    return Expanded(
+                                      child: RawScrollbar(
+                                        thumbColor: Palette.kToDark,
+                                        thickness: 5,
+                                        child: GridView.builder(
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            mainAxisExtent:
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.09,
+                                          ),
+                                          itemCount: snapshot.data!.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          2.0)),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  print(index + 1);
+                                                  myState(() {
+                                                    _press = !_press;
+                                                    picked = data![index]
+                                                        .name
+                                                        .toString();
+                                                  });
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        data![index]
+                                                            .name
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Color.fromARGB(
+                                                              255, 51, 51, 51),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "จำนวนทีเหลือ: ",
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        131,
+                                                                        131,
+                                                                        131)),
+                                                          ),
+                                                          Text(data[index]
+                                                              .stock
+                                                              .toString())
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 100),
+                                    child: Container(
+                                        child: Center(
+                                            child:
+                                                CircularProgressIndicator())),
+                                  );
+                                },
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 10, bottom: 10),
+                                child: Divider(
+                                    color: Color.fromARGB(255, 206, 206, 206)),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "จำนวน",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 30,
+                                        height: 30,
+                                        child: InkWell(
+                                            onTap: () {
+                                              myState(() {
+                                                _counter--;
+                                              });
+                                            },
+                                            child: SvgPicture.asset(
+                                              'assets/images/minus.svg',
+                                              width: 20,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 130, 130, 130)),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5))),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "${_counter}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                        height: 30,
+                                        child: InkWell(
+                                            onTap: () {
+                                              myState(() {
+                                                _counter++;
+                                              });
+                                            },
+                                            child: SvgPicture.asset(
+                                                'assets/images/pluss.svg')),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              )
+                              // ToggleButtons(
+                              //   children: <Widget>[
+                              //     Container(
+                              //       height: 50,
+                              //       child: Padding(
+                              //         padding: const EdgeInsets.all(10.0),
+                              //         child: Text(
+                              //           "data1",
+                              //           style: TextStyle(
+                              //             fontSize: 20,
+                              //             color:
+                              //                 Color.fromARGB(255, 51, 51, 51),
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Icon(Icons.format_italic),
+                              //     Icon(Icons.format_underlined),
+                              //   ],
+                              //   isSelected: _selections,
+                              //   onPressed: (int index) {
+                              //     myState(() {
+                              //       for (int buttonIndex = 0;
+                              //           buttonIndex < _selections.length;
+                              //           buttonIndex++) {
+                              //         if (buttonIndex == index) {
+                              //           _selections[buttonIndex] =
+                              //               !_selections[buttonIndex];
+                              //         } else {
+                              //           _selections[buttonIndex] = false;
+                              //         }
+                              //       }
+                              //     });
+                              //   },
+                              //   color: Colors.teal,
+                              //   fillColor: Colors.deepPurple,
+                              // ),
+                              ,
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Palette.kToDark,
+                                    elevation: 0,
+                                    // side: BorderSide(color: Colors.red),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    )),
+                                onPressed: () {
+                                  setState(() {
+                                    x = x + 1;
+                                  });
+                                  Navigator.pop(context);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "เพิ่มลงรถเข็น",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      });
+                    },
+                  )
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -127,125 +479,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                 heroTag: "btsdqwn1",
                 backgroundColor: Palette.kToDark,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-                onPressed: () => {
-                  showModalBottomSheet<dynamic>(
-                    // isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    )),
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Container(
-                        //height: MediaQuery.of(context).size.height * 0.75,
-                        child: StatefulBuilder(builder:
-                            (BuildContext context, StateSetter stateSetter) {
-                          return Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 90,
-                                      height: 90,
-                                      child: Image.asset(
-                                        'assets/images/cart_pd.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Text(
-                                              "450",
-                                              style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 30,
-                                            ),
-                                            Text(
-                                              "฿1,300",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 131, 131, 131),
-                                                  fontSize: 15,
-                                                  decoration: TextDecoration
-                                                      .lineThrough,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Divider(
-                                      color:
-                                          Color.fromARGB(255, 206, 206, 206)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      'ตัวเลือกสินค้า',
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                          fontSize: 15),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Palette.kToDark,
-                                      elevation: 0,
-                                      // side: BorderSide(color: Colors.red),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      )),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "เพิ่มลงรถเข็น",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                      );
-                    },
-                  )
-                },
+                onPressed: () => {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -314,6 +548,10 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
                   Product thisProduct = snapshot.data;
+                  String k = thisProduct.price.toString();
+
+                  productPrice = k;
+
                   return Container(
                     child: Column(
                       children: <Widget>[
@@ -342,12 +580,11 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                           width: double.infinity,
                                           height: 300,
                                           child: Center(
-                                              child:
-                                                  Text("ไม่พบรูปภาพของสินค้า"))),
+                                              child: Text(
+                                                  "ไม่พบรูปภาพของสินค้า"))),
                                     )),
                               ),
                             ),
-
                           ),
                         ),
                         Container(
@@ -370,11 +607,13 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                       ),
                                       InkWell(
                                         onTap: (() => setState(() {
-                                          pressed_like = !pressed_like;
-                                        })),
-                                        child: SvgPicture.asset('assets/images/love.svg',
-                                        
-                                            color: pressed_like ? Colors.red : Colors.grey),
+                                              pressed_like = !pressed_like;
+                                            })),
+                                        child: SvgPicture.asset(
+                                            'assets/images/love.svg',
+                                            color: pressed_like
+                                                ? Colors.red
+                                                : Colors.grey),
                                       )
                                     ],
                                   ),
@@ -384,56 +623,56 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   Text(
                                     "฿ ${thisProduct.price}",
                                     style: TextStyle(
-                                        color: Colors.red[400],
-                                        fontSize: 20),
+                                        color: Colors.red[400], fontSize: 20),
                                   ),
+                                  SizedBox(height: 10),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       SvgPicture.asset(
                                           'assets/images/groupStar.svg'),
-                                      Row(
-                                        children: [
-                                          InkWell(
-                                              onTap: () {
-                                                _minus();
-                                              },
-                                              child: SvgPicture.asset(
-                                                'assets/images/minus.svg',
-                                                width: 20,
-                                              )),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Container(
-                                            width: 40,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 130, 130, 130)),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10))),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                "${_counter}",
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          InkWell(
-                                              onTap: () {
-                                                _pluss();
-                                              },
-                                              child: SvgPicture.asset(
-                                                  'assets/images/pluss.svg')),
-                                        ],
-                                      )
+                                      // Row(
+                                      //   children: [
+                                      //     InkWell(
+                                      //         onTap: () {
+                                      //           _minus();
+                                      //         },
+                                      //         child: SvgPicture.asset(
+                                      //           'assets/images/minus.svg',
+                                      //           width: 20,
+                                      //         )),
+                                      //     SizedBox(
+                                      //       width: 10,
+                                      //     ),
+                                      //     Container(
+                                      //       width: 40,
+                                      //       decoration: BoxDecoration(
+                                      //           border: Border.all(
+                                      //               color: Color.fromARGB(
+                                      //                   255, 130, 130, 130)),
+                                      //           borderRadius: BorderRadius.all(
+                                      //               Radius.circular(10))),
+                                      //       child: Padding(
+                                      //         padding:
+                                      //             const EdgeInsets.all(8.0),
+                                      //         child: Text(
+                                      //           "${_counter}",
+                                      //           textAlign: TextAlign.center,
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //     SizedBox(
+                                      //       width: 10,
+                                      //     ),
+                                      //     InkWell(
+                                      //         onTap: () {
+                                      //           _pluss();
+                                      //         },
+                                      //         child: SvgPicture.asset(
+                                      //             'assets/images/pluss.svg')),
+                                      //   ],
+                                      // )
                                     ],
                                   ),
                                 ],

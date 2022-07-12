@@ -16,7 +16,6 @@ void main() {
       .then((value) => runApp(First_Page()));
 }
 
-
 class First_Page extends StatelessWidget {
   const First_Page({Key? key}) : super(key: key);
   @override
@@ -70,13 +69,9 @@ class _MainAndIconState extends State<MainAndIcon> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
-        child: Column(  
-          
-
-
-       
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [ 
+          children: [
             Image.asset('assets/images/Frame.png',
                 // height: MediaQuery.of(context).size.height * 0.25,
                 fit: BoxFit.cover),

@@ -31,7 +31,6 @@ var passwordController = TextEditingController();
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -46,8 +45,6 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoggedIn = false;
   Map _userObj = {};
   String storedToken = "";
-  String userID = "";
-
   @override
   void initState() {
     requestModel_zeleex = RequestModel_zeleex();
@@ -68,24 +65,21 @@ class _LoginPageState extends State<LoginPage> {
         print(userData["name"]);
         print(userData["email"]);
         print(userData["picture"]["data"]["url"]);
-
         request_social.name = userData["name"];
         request_social.email = userData["email"];
         request_social.avatar = userData["picture"]["data"]["url"];
         request_social.provider = "facebook";
         request_social.provider_id = "1";
         login_Social(request_social);
-    
+        print(json.encode(request_social).toString());
         ;
       });
     });
-
     print(FacebookAuth.instance.accessToken);
   }
 
   Future<dynamic> useGoogle_toLogin() async {
     final userGoogle = await GoogoleSignInApi.google_SignIn2();
-
     GoogoleSignInApi.google_SignIn2().then((result) {
       setState(() {
         isApiCallProcess = false;
@@ -97,14 +91,12 @@ class _LoginPageState extends State<LoginPage> {
         print("เมล ------------------> " + userGoogle.email.toString());
         print("ชื่อ -------------------> " + userGoogle.displayName.toString());
         print("รูป ------------------> " + userGoogle.photoUrl.toString());
-
         request_social.name = userGoogle.displayName.toString();
         request_social.email = userGoogle.email.toString();
         request_social.avatar = userGoogle.photoUrl.toString();
         request_social.provider = "Google";
         request_social.provider_id = userGoogle.id.toString();
         login_Social(request_social);
-
         // print(json.encode(request_social).toString());
       }).catchError((err) {
         setState(() {
@@ -121,7 +113,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   //!------------------------------- เข้าสู่ระบบ-------------------------------------------------------
-
   Future<Login_Data> loginNormal(RequestModel_zeleex requestModel) async {
     String urlPost = "https://api.zeleex.com/api/login";
     var body_Login = json.encode(requestModel_zeleex.toJson());
@@ -133,21 +124,15 @@ class _LoginPageState extends State<LoginPage> {
       },
       body: body_Login,
     );
-
     print(jsonDecode(response.body.toString()));
     var jsonRes = json.decode(response.body);
-
     if (response.statusCode == 400 || response.statusCode == 200) {
       var token_toStore = jsonRes['data']['token'].toString();
-      var user555 = jsonRes['data']['id'].toString();
       setState(() {
         storedToken = token_toStore;
-        userID = user555;
       });
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', storedToken.toString());
-      prefs.setString('keyUserID', userID.toString());
-
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -159,7 +144,6 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isApiCallProcess = false;
       });
-
       Fluttertoast.showToast(
           msg:
               "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
@@ -185,21 +169,17 @@ class _LoginPageState extends State<LoginPage> {
       },
       body: bodySocial,
     );
-
     if (response.statusCode == 400 || response.statusCode == 200) {
       // print(jsonDecode(response.body.toString()));
       var jsonRes = json.decode(response.body);
-      var token555 = jsonRes['data']['token'];
-      var userID555 = jsonRes['data']['id'];
+      var kkk = jsonRes['data']['token'];
       setState(() {
-        storedToken = token555;
-        userID = userID555;
+        storedToken = kkk;
       });
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('keyToken', storedToken.toString());
-      prefs.setString('keyUserID', userID.toString());
 
+      prefs.setString('keyToken', storedToken.toString());
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -213,7 +193,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 //!-----------------------------------------------------------------------------------------------------------
-
   @override
   Widget build(BuildContext context) {
     return ProgressHUD(
@@ -393,7 +372,6 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () {
                                         FocusManager.instance.primaryFocus
                                             ?.unfocus();
-
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
                                           setState(() {
@@ -417,7 +395,6 @@ class _LoginPageState extends State<LoginPage> {
                                                         }),
                                                       }
                                                   });
-
                                           // print("-------input-------"+requestModel_zeleex2.toJson().toString());
                                         }
                                       },
@@ -610,12 +587,10 @@ class ShapesPainter extends CustomPainter {
     final p = Path();
     final path = Path();
     p.lineTo(0, size.height - _kCurveHeight);
-
     p.relativeQuadraticBezierTo(
         size.width / 2, 2 * _kCurveHeight, size.width, 0);
     p.lineTo(size.width, 0);
     p.close();
-
     canvas.drawPath(p, Paint()..color = Palette.kToDark);
   }
 
