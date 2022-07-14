@@ -492,7 +492,7 @@ Future<List<ProductCat01>> fetch_Home_products() async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['product_cat_01'];
- // print(jsonResponse['data']['product_cat_01']);
+
 
   if (response.statusCode == 200) {
     // List jsonResponse = json.decode(response.body);

@@ -1,0 +1,400 @@
+// import 'dart:async';
+// import 'dart:convert';
+// import 'package:flutter/material.dart';
+// import 'package:http/http.dart' as http;
+
+// class Cart_Data {
+//   String? responseCode;
+//   String? responseStatus;
+//   String? responseMessage;
+//   String? sessionID;
+//   int? serverDateTimeMS;
+//   String? serverDatetime;
+//   Data? data;
+
+//   Cart_Data(
+//       {this.responseCode,
+//       this.responseStatus,
+//       this.responseMessage,
+//       this.sessionID,
+//       this.serverDateTimeMS,
+//       this.serverDatetime,
+//       this.data});
+
+//   Cart_Data.fromJson(Map<String, dynamic> json) {
+//     responseCode = json['responseCode'];
+//     responseStatus = json['responseStatus'];
+//     responseMessage = json['responseMessage'];
+//     sessionID = json['sessionID'];
+//     serverDateTimeMS = json['serverDateTimeMS'];
+//     serverDatetime = json['serverDatetime'];
+//     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['responseCode'] = this.responseCode;
+//     data['responseStatus'] = this.responseStatus;
+//     data['responseMessage'] = this.responseMessage;
+//     data['sessionID'] = this.sessionID;
+//     data['serverDateTimeMS'] = this.serverDateTimeMS;
+//     data['serverDatetime'] = this.serverDatetime;
+//     if (this.data != null) {
+//       data['data'] = this.data!.toJson();
+//     }
+//     return data;
+//   }
+// }
+
+// class Data {
+//   User? user;
+//   List<Store>? store;
+//   int? productAll;
+
+//   Data({this.user, this.store, this.productAll});
+
+//   Data.fromJson(Map<String, dynamic> json) {
+//     user = json['user'] != null ? new User.fromJson(json['user']) : null;
+//     if (json['store'] != null) {
+//       store = <Store>[];
+//       json['store'].forEach((v) {
+//         store!.add(new Store.fromJson(v));
+//       });
+//     }
+//     productAll = json['product_all'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     if (this.user != null) {
+//       data['user'] = this.user!.toJson();
+//     }
+//     if (this.store != null) {
+//       data['store'] = this.store!.map((v) => v.toJson()).toList();
+//     }
+//     data['product_all'] = this.productAll;
+//     return data;
+//   }
+// }
+
+// class User {
+//   int? id;
+//   String? name;
+//   String? email;
+//   Null? emailVerifiedAt;
+//   Null? phone;
+//   String? avatar;
+//   String? provider;
+//   String? providerId;
+//   String? status;
+//   String? createdAt;
+//   String? updatedAt;
+//   Null? deletedAt;
+//   String? imageProfile;
+//   int? storeCheck;
+
+//   User(
+//       {this.id,
+//       this.name,
+//       this.email,
+//       this.emailVerifiedAt,
+//       this.phone,
+//       this.avatar,
+//       this.provider,
+//       this.providerId,
+//       this.status,
+//       this.createdAt,
+//       this.updatedAt,
+//       this.deletedAt,
+//       this.imageProfile,
+//       this.storeCheck});
+
+//   User.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     name = json['name'];
+//     email = json['email'];
+//     emailVerifiedAt = json['email_verified_at'];
+//     phone = json['phone'];
+//     avatar = json['avatar'];
+//     provider = json['provider'];
+//     providerId = json['provider_id'];
+//     status = json['status'];
+//     createdAt = json['created_at'];
+//     updatedAt = json['updated_at'];
+//     deletedAt = json['deleted_at'];
+//     imageProfile = json['image_profile'];
+//     storeCheck = json['store_check'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['name'] = this.name;
+//     data['email'] = this.email;
+//     data['email_verified_at'] = this.emailVerifiedAt;
+//     data['phone'] = this.phone;
+//     data['avatar'] = this.avatar;
+//     data['provider'] = this.provider;
+//     data['provider_id'] = this.providerId;
+//     data['status'] = this.status;
+//     data['created_at'] = this.createdAt;
+//     data['updated_at'] = this.updatedAt;
+//     data['deleted_at'] = this.deletedAt;
+//     data['image_profile'] = this.imageProfile;
+//     data['store_check'] = this.storeCheck;
+//     return data;
+//   }
+// }
+
+// class Store {
+//   int? id;
+//   String? title;
+//   List<ProductSkus>? productSkus;
+//   int? priceTatal;
+//   int? productSkusCount;
+//   Image? image;
+//   Image? imageCover;
+//   int? productCount;
+//   int? animalCount;
+//   int? blogCount;
+//   int? subscribeCount;
+
+//   Store(
+//       {this.id,
+//       this.title,
+//       this.productSkus,
+//       this.priceTatal,
+//       this.productSkusCount,
+//       this.image,
+//       this.imageCover,
+//       this.productCount,
+//       this.animalCount,
+//       this.blogCount,
+//       this.subscribeCount});
+
+//   Store.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     title = json['title'];
+//     if (json['product_skus'] != null) {
+//       productSkus = <ProductSkus>[];
+//       json['product_skus'].forEach((v) {
+//         productSkus!.add(new ProductSkus.fromJson(v));
+//       });
+//     }
+//     priceTatal = json['price_tatal'];
+//     productSkusCount = json['product_skus_count'];
+//     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
+//     imageCover = json['image_cover'] != null
+//         ? new Image.fromJson(json['image_cover'])
+//         : null;
+//     productCount = json['product_count'];
+//     animalCount = json['animal_count'];
+//     blogCount = json['blog_count'];
+//     subscribeCount = json['subscribe_count'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['title'] = this.title;
+//     if (this.productSkus != null) {
+//       data['product_skus'] = this.productSkus!.map((v) => v.toJson()).toList();
+//     }
+//     data['price_tatal'] = this.priceTatal;
+//     data['product_skus_count'] = this.productSkusCount;
+//     if (this.image != null) {
+//       data['image'] = this.image!.toJson();
+//     }
+//     if (this.imageCover != null) {
+//       data['image_cover'] = this.imageCover!.toJson();
+//     }
+//     data['product_count'] = this.productCount;
+//     data['animal_count'] = this.animalCount;
+//     data['blog_count'] = this.blogCount;
+//     data['subscribe_count'] = this.subscribeCount;
+//     return data;
+//   }
+// }
+
+// class ProductSkus {
+//   int? id;
+//   int? productId;
+//   String? name;
+//   int? price;
+//   int? order;
+//   int? stock;
+//   String? createdAt;
+//   String? updatedAt;
+//   Null? deletedAt;
+//   String? unit;
+//   int? cartId;
+//   Product? product;
+
+//   ProductSkus(
+//       {this.id,
+//       this.productId,
+//       this.name,
+//       this.price,
+//       this.order,
+//       this.stock,
+//       this.createdAt,
+//       this.updatedAt,
+//       this.deletedAt,
+//       this.unit,
+//       this.cartId,
+//       this.product});
+
+//   ProductSkus.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     productId = json['product_id'];
+//     name = json['name'];
+//     price = json['price'];
+//     order = json['order'];
+//     stock = json['stock'];
+//     createdAt = json['created_at'];
+//     updatedAt = json['updated_at'];
+//     deletedAt = json['deleted_at'];
+//     unit = json['unit'];
+//     cartId = json['cart_id'];
+//     product =
+//         json['product'] != null ? new Product.fromJson(json['product']) : null;
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['product_id'] = this.productId;
+//     data['name'] = this.name;
+//     data['price'] = this.price;
+//     data['order'] = this.order;
+//     data['stock'] = this.stock;
+//     data['created_at'] = this.createdAt;
+//     data['updated_at'] = this.updatedAt;
+//     data['deleted_at'] = this.deletedAt;
+//     data['unit'] = this.unit;
+//     data['cart_id'] = this.cartId;
+//     if (this.product != null) {
+//       data['product'] = this.product!.toJson();
+//     }
+//     return data;
+//   }
+// }
+
+// class Product {
+//   int? id;
+//   String? title;
+//   Image? image;
+//   List<Images>? images;
+//   int? favoriteCount;
+//   int? reviewCount;
+//   int? price;
+
+//   Product(
+//       {this.id,
+//       this.title,
+//       this.image,
+//       this.images,
+//       this.favoriteCount,
+//       this.reviewCount,
+//       this.price});
+
+//   Product.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     title = json['title'];
+//     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
+//     if (json['images'] != null) {
+//       images = <Images>[];
+//       json['images'].forEach((v) {
+//         images!.add(new Images.fromJson(v));
+//       });
+//     }
+//     favoriteCount = json['favorite_count'];
+//     reviewCount = json['review_count'];
+//     price = json['price'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['title'] = this.title;
+//     if (this.image != null) {
+//       data['image'] = this.image!.toJson();
+//     }
+//     if (this.images != null) {
+//       data['images'] = this.images!.map((v) => v.toJson()).toList();
+//     }
+//     data['favorite_count'] = this.favoriteCount;
+//     data['review_count'] = this.reviewCount;
+//     data['price'] = this.price;
+//     return data;
+//   }
+// }
+
+// class Image {
+//   String? main;
+//   String? thumbnail;
+
+//   Image({this.main, this.thumbnail});
+
+//   Image.fromJson(Map<String, dynamic> json) {
+//     main = json['main'];
+//     thumbnail = json['thumbnail'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['main'] = this.main;
+//     data['thumbnail'] = this.thumbnail;
+//     return data;
+//   }
+// }
+
+// class Images {
+//   String? title;
+//   String? main;
+//   String? thumbnail;
+
+//   Images({this.title, this.main, this.thumbnail});
+
+//   Images.fromJson(Map<String, dynamic> json) {
+//     title = json['title'];
+//     main = json['main'];
+//     thumbnail = json['thumbnail'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['title'] = this.title;
+//     data['main'] = this.main;
+//     data['thumbnail'] = this.thumbnail;
+//     return data;
+//   }
+// }
+
+
+
+
+
+// Future<List<Store>> fetch_x(String userID, String userToken) async {
+//   final response = await http.get(
+//       Uri.parse(
+//           'https://api.zeleex.com/api/cart/list?user_id=' + userID.toString()),
+//       headers: {
+//         'Accept': 'application/json',
+//         'Authorization': 'Bearer $userToken',
+//       });
+
+//   var jsonResponse = json.decode(response.body);
+//   var jsonCon = jsonResponse['data']['store'];
+
+//   //print(jsonCon);
+//   if (response.statusCode == 200) {
+//     return jsonCon.map((data) => new Store.fromJson(data)).toList();
+//   } else {
+//     throw Exception("error...");
+//   }
+// }
+
+// void main(List<String> args) {
+//   fetch_x("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
+// }

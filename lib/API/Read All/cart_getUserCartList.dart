@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zeleex_application/API/Post%20Method/post_Register.dart';
 
 class Cart_ReadList {
   String? responseCode;
@@ -259,8 +260,9 @@ class ProductSkus {
     deletedAt = json['deleted_at'];
     unit = json['unit'];
     cartId = json['cart_id'];
-    product =
-        json['product'] != null ? new Product_Cart.fromJson(json['product']) : null;
+    product = json['product'] != null
+        ? new Product_Cart.fromJson(json['product'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -373,27 +375,34 @@ class Images {
     data['thumbnail'] = this.thumbnail;
     return data;
   }
+  
 }
 
-Future<List<Cart_ReadList>> fetch_user_cart_list(
+Future<List<Cart_Individual_Data>> fetch_x(
     String userID, String userToken) async {
   final response = await http.get(
+ 
       Uri.parse(
           'https://api.zeleex.com/api/cart/list?user_id=' + userID.toString()),
       headers: {
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $userToken',
       });
 
   var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data']['product_all'];
+  var jsonCon = jsonResponse['data']['store'];
 
   if (response.statusCode == 200) {
     print(jsonCon);
-    return jsonCon.map((data) => new Cart_ReadList.fromJson(data)).toList();
+
+    return jsonCon
+        .map((data) => new Cart_Individual_Data.fromJson(data))
+        .toList();
   } else {
     throw Exception("error...");
   }
 }
 
+void main() {
+  fetch_x("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
+}

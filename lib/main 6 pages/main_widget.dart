@@ -659,144 +659,144 @@ class _Main_WidgetState extends State<Main_Widget> {
                                     SizedBox(
                                       height: 5,
                                     ),
-                                    // Container(
-                                    //   height:
-                                    //       MediaQuery.of(context).size.height *
-                                    //           0.240,
-                                    //   child: Row(
-                                    //     children: [
-                                    //       FutureBuilder<List<ProductCat01>>(
-                                    //         future: future_products_cat,
-                                    //         builder: (context, snapshot) {
-                                    //           if (snapshot.hasData) {
-                                    //             List<ProductCat01>? data =
-                                    //                 snapshot.data;
-                                    //             return Expanded(
-                                    //               child: ListView.builder(
-                                    //                   scrollDirection:
-                                    //                       Axis.horizontal,
-                                    //                   // shrinkWrap: true,
-                                    //                   itemCount: data?.length,
-                                    //                   itemBuilder:
-                                    //                       (BuildContext context,
-                                    //                           int index) {
-                                    //                     return Card(
-                                    //                       child: InkWell(
-                                    //                         onTap: () {
-                                    //                           Navigator.of(context).push(
-                                    //                               MaterialPageRoute(
-                                    //                                   builder: (context) =>
-                                    //                                       Store_Product_Detail(
-                                    //                                         productName:
-                                    //                                             data![index].title.toString(),
-                                    //                                         productID:
-                                    //                                             data[index].id.toString(),
-                                    //                                       )));
-                                    //                         },
-                                    //                         child: Column(
-                                    //                           children: [
-                                    //                             ClipRRect(
-                                    //                               borderRadius: BorderRadius.only(
-                                    //                                   topLeft: Radius
-                                    //                                       .circular(
-                                    //                                           5),
-                                    //                                   topRight:
-                                    //                                       Radius.circular(
-                                    //                                           5)),
-                                    //                               child:
-                                    //                                   CachedNetworkImage(
-                                    //                                 imageUrl: data![
-                                    //                                         index]
-                                    //                                     .image!
-                                    //                                     .thumbnail
-                                    //                                     .toString(),
-                                    //                                 fit: BoxFit
-                                    //                                     .fill,
-                                    //                                 height: MediaQuery.of(context)
-                                    //                                         .size
-                                    //                                         .width *
-                                    //                                     0.3,
-                                    //                                 width: MediaQuery.of(context)
-                                    //                                         .size
-                                    //                                         .width *
-                                    //                                     0.3,
-                                    //                                 progressIndicatorBuilder: (context,
-                                    //                                         url,
-                                    //                                         downloadProgress) =>
-                                    //                                     Container(
-                                    //                                   color: Color.fromARGB(
-                                    //                                       255,
-                                    //                                       192,
-                                    //                                       192,
-                                    //                                       192),
-                                    //                                   height:
-                                    //                                       200,
-                                    //                                 ),
-                                    //                                 errorWidget: (context,
-                                    //                                         url,
-                                    //                                         error) =>
-                                    //                                     Icon(Icons
-                                    //                                         .error),
-                                    //                               ),
-                                    //                             ),
-                                    //                             Padding(
-                                    //                               padding:
-                                    //                                   const EdgeInsets
-                                    //                                           .all(
-                                    //                                       8.0),
-                                    //                               child: Column(
-                                    //                                 crossAxisAlignment:
-                                    //                                     CrossAxisAlignment
-                                    //                                         .start,
-                                    //                                 mainAxisAlignment:
-                                    //                                     MainAxisAlignment
-                                    //                                         .start,
-                                    //                                 children: [
-                                    //                                   SizedBox(
-                                    //                                     height:
-                                    //                                         40,
-                                    //                                     width:
-                                    //                                         100,
-                                    //                                     child:
-                                    //                                         Text(
-                                    //                                       data[index]
-                                    //                                           .title
-                                    //                                           .toString(),
-                                    //                                     ),
-                                    //                                   ),
-                                    //                                   SizedBox(
-                                    //                                     height:
-                                    //                                         5,
-                                    //                                   ),
-                                    //                                   Text(
-                                    //                                     "฿ " +
-                                    //                                         data[index].price.toString(),
-                                    //                                     style: TextStyle(
-                                    //                                         color: Color.fromARGB(
-                                    //                                             255,
-                                    //                                             255,
-                                    //                                             17,
-                                    //                                             0)),
-                                    //                                   ),
-                                    //                                 ],
-                                    //                               ),
-                                    //                             )
-                                    //                           ],
-                                    //                         ),
-                                    //                       ),
-                                    //                     );
-                                    //                   }),
-                                    //             );
-                                    //           } else if (snapshot.hasError) {
-                                    //             return Text(
-                                    //                 "${snapshot.error}");
-                                    //           }
-                                    //           return Container();
-                                    //         },
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.240,
+                                      child: Row(
+                                        children: [
+                                          FutureBuilder<List<ProductCat01>>(
+                                            future: future_products_cat,
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                List<ProductCat01>? data =
+                                                    snapshot.data;
+                                                return Expanded(
+                                                  child: ListView.builder(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      // shrinkWrap: true,
+                                                      itemCount: data?.length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return Card(
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(context).push(
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                          Store_Product_Detail(
+                                                                            productName:
+                                                                                data![index].title.toString(),
+                                                                            productID:
+                                                                                data[index].id.toString(),
+                                                                          )));
+                                                            },
+                                                            child: Column(
+                                                              children: [
+                                                                ClipRRect(
+                                                                  borderRadius: BorderRadius.only(
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              5),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              5)),
+                                                                  child:
+                                                                      CachedNetworkImage(
+                                                                    imageUrl: data![
+                                                                            index]
+                                                                        .image!
+                                                                        .thumbnail
+                                                                        .toString(),
+                                                                    fit: BoxFit
+                                                                        .fill,
+                                                                    height: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.3,
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.3,
+                                                                    progressIndicatorBuilder: (context,
+                                                                            url,
+                                                                            downloadProgress) =>
+                                                                        Container(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          192,
+                                                                          192,
+                                                                          192),
+                                                                      height:
+                                                                          200,
+                                                                    ),
+                                                                    errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Icon(Icons
+                                                                            .error),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        height:
+                                                                            40,
+                                                                        width:
+                                                                            100,
+                                                                        child:
+                                                                            Text(
+                                                                          data[index]
+                                                                              .title
+                                                                              .toString(),
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
+                                                                      Text(
+                                                                        "฿ " +
+                                                                            data[index].price.toString(),
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                255,
+                                                                                17,
+                                                                                0)),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                                );
+                                              } else if (snapshot.hasError) {
+                                                return Text(
+                                                    "${snapshot.error}");
+                                              }
+                                              return Container();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                     SizedBox(
                                       height: 10,
                                     )

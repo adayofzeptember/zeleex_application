@@ -678,6 +678,7 @@ class _CartPageState extends State<CartPage> {
               SizedBox(
                 height: 10,
               ),
+   
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
                 height: 70,

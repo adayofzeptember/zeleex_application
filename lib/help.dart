@@ -57,10 +57,6 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
               InkWell(
                   onTap: () {
                     Navigator.pop(context);
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => Main_Widget()));
                   },
                   child: SvgPicture.asset('assets/images/xcircle.svg')),
             ],
@@ -159,10 +155,10 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
+              
                 return CircularProgressIndicator();
               },
             )
-        
           ],
         ),
       ),
