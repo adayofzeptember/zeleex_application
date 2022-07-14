@@ -124,7 +124,7 @@ Future<List<Data_Collection_Board>> fetch_collection_board() async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data'];
-  // print(jsonCon);
+  
 
   if (response.statusCode == 200) {
     return jsonCon

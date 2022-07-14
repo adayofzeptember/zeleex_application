@@ -8,6 +8,7 @@ import 'package:html/parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/add_to_cart.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_id_api.dart';
+import 'API/Read All/cart_getUserCartList.dart';
 import 'Plate.dart';
 import 'store_page_detail_product.dart';
 import 'dart:async';
@@ -18,7 +19,8 @@ import 'package:http/http.dart' as http;
 class Store_Product_Detail extends StatefulWidget {
   String? productID = "";
   String? productName = "";
-  Store_Product_Detail({Key? key, this.productID, this.productName})
+  String? qty;
+  Store_Product_Detail({Key? key, this.productID, this.productName, this.qty})
       : super(key: key);
 
   @override
@@ -28,7 +30,7 @@ class Store_Product_Detail extends StatefulWidget {
 class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int index = 0;
   int tag = 0;
-  var x = 0;
+  int qtyCart = 0;
   String picked = "";
   late Future<Product> future_ProductByID;
   late Future<List<Skus>> future_Product_skus;
@@ -39,7 +41,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   bool pressed = true;
   bool pressed_like = false;
   int _counter = 0;
-  String? cartAdd_userID;
+  String cartAdd_userID = "";
   String cartAdd_storeID = "";
   String cartAdd_product_sku_id = "";
   String cartAdd_unit = "";
@@ -49,22 +51,13 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     future_ProductByID = fetch_Product_ByID();
     future_Product_skus = fetch_skus();
     request_model_addToCart = AddToCart_Request();
-    getUserID();
+
+    super.initState();
   }
 
   void _onItemTapped(int index2) {
     setState(() {
       index = index2;
-    });
-  }
-
-  Future getUserID() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    String y = prefs2.get('keyID').toString();
-    String x = prefs2.get('keyToken').toString();
-    setState(() {
-      cartAdd_userID = y;
-      cartAdd_token = x;
     });
   }
 
@@ -88,10 +81,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     request_model_addToCart.product_sku_id =
         int.parse(cartAdd_product_sku_id.toString());
     request_model_addToCart.unit = int.parse(_counter.toString());
-    print(jsonEncode(request_model_addToCart).toString());
-    print(cartAdd_token);
     add_to_cart_now(request_model_addToCart, cartAdd_token);
-
   }
 
   Future<Product> fetch_Product_ByID() async {
@@ -455,7 +445,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                     )),
                                 onPressed: () {
                                   setState(() {
-                                    x = x + 1;
+                                    // x = x + 1;
                                   });
 
                                   cartCheckIn();
@@ -559,7 +549,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                       right: 4.0,
                       child: Center(
                         child: Text(
-                          x.toString(),
+                          widget.qty.toString(),
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.green,

@@ -802,7 +802,7 @@ Future<Product> fetch_Product_ByID() async {
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data']['product'];
   Product msg = Product.fromJson(jsonCon);
-  print(msg.skus?[1]);
+  //print(msg.images[0].main);
   return msg;
 }
 

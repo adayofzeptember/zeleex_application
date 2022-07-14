@@ -132,7 +132,6 @@ Future<Cart_Add> add_to_cart_now(
   if (response.statusCode == 400 ||
       response.statusCode >= 200 && response.statusCode <= 299) {
     var jsonRes = json.decode(response.body);
-    print("success");
     print(response.body.toString());
     return Cart_Add.fromJson(json.decode(response.body));
   } else {

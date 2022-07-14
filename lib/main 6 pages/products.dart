@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/API/Read%20All/products_API.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
@@ -20,13 +22,19 @@ class ProductPage extends StatefulWidget {
 }
 
 late Future<List<Data_Products_ReadAll>> future_AllProducts;
+late Future<List<Cart_ReadList>> future_fetchAmountinCart;
+String cartAdd_userID = "";
+String cartAdd_token = "";
 
 class _ProductPageState extends State<ProductPage> {
   final controller = ScrollController();
   int x = 0;
+  int k = 0;
   var perPage = 8; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   void initState() {
+    getUserID();
+    future_fetchAmountinCart = fetch_user_cart_list(cartAdd_userID, cartAdd_token);
     future_AllProducts = fetch_ProductPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -36,7 +44,43 @@ class _ProductPageState extends State<ProductPage> {
         });
       }
     });
+    future_fetchAmountinCart;
     super.initState();
+  }
+
+  Future<List<Cart_ReadList>> fetch_user_cart_list(
+      String userID, String userToken) async {
+    final response = await http.get(
+        Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
+            userID.toString()),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $userToken',
+        });
+
+    var jsonResponse = json.decode(response.body);
+    var jsonCon = jsonResponse['data']['product_all'];
+
+    if (response.statusCode == 200) {
+      print(jsonCon);
+      setState(() {
+        x = int.parse(jsonCon.toString());
+      });
+      return jsonCon.map((data) => new Cart_ReadList.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
+  }
+
+  Future getUserID() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    String y = prefs2.get('keyID').toString();
+    String x = prefs2.get('keyToken').toString();
+    setState(() {
+      cartAdd_userID = y;
+      cartAdd_token = x;
+    });
   }
 
   Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
@@ -44,9 +88,6 @@ class _ProductPageState extends State<ProductPage> {
         'https://api.zeleex.com/api/products?per_page=' + perPage.toString()));
     var jsonResponse = json.decode(response.body);
     List jsonCon = jsonResponse['data']['data'];
-    setState(() {
-      x = 0;
-    });
     if (response.statusCode == 200) {
       if (jsonCon.length < perPage) {
         setState(() {
@@ -175,7 +216,7 @@ class _ProductPageState extends State<ProductPage> {
                                     builder: (context) => Store_Product_Detail(
                                           productName:
                                               data[index].title.toString(),
-                                          productID: data[index].id.toString(),
+                                          productID: data[index].id.toString(), qty: x.toString(),
                                         )));
                               },
                               child: Column(

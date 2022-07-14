@@ -200,6 +200,7 @@ Future<List<Data_Read_Careers>> fetch_career_readAll() async {
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
 
+
   if (response.statusCode == 200) {
     return jsonCon.map((data) => new Data_Read_Careers.fromJson(data)).toList();
   } else {
