@@ -48,11 +48,23 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   String cartAdd_token = "";
   @override
   void initState() {
+    qtyCart = int.parse(widget.qty.toString());
+    getUserID();
     future_ProductByID = fetch_Product_ByID();
     future_Product_skus = fetch_skus();
     request_model_addToCart = AddToCart_Request();
 
     super.initState();
+  }
+
+  Future getUserID() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    String y = prefs2.get('keyID').toString();
+    String x = prefs2.get('keyToken').toString();
+    setState(() {
+      cartAdd_userID = y;
+      cartAdd_token = x;
+    });
   }
 
   void _onItemTapped(int index2) {
@@ -81,6 +93,11 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     request_model_addToCart.product_sku_id =
         int.parse(cartAdd_product_sku_id.toString());
     request_model_addToCart.unit = int.parse(_counter.toString());
+    // request_model_addToCart.user_id = 529;
+    // request_model_addToCart.store_id = 1104;
+    // request_model_addToCart.product_sku_id =
+    //     145;
+    // request_model_addToCart.unit = 2;
     add_to_cart_now(request_model_addToCart, cartAdd_token);
   }
 
@@ -245,7 +262,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                           2.0)),
                                               child: InkWell(
                                                 onTap: () {
-                                                  print(index + 1);
+                                                
                                                   setState(() {
                                                     String sku_id = data![index]
                                                         .id
@@ -446,6 +463,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                 onPressed: () {
                                   setState(() {
                                     // x = x + 1;
+                                    qtyCart = qtyCart + 1;
                                   });
 
                                   cartCheckIn();
@@ -549,7 +567,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                       right: 4.0,
                       child: Center(
                         child: Text(
-                          widget.qty.toString(),
+                          qtyCart.toString(),
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.green,
@@ -780,11 +798,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                 pressed = !pressed;
                                               });
                                             },
-                                            //         style: pressed
-                                            // ? TextStyle(
-                                            //     color: Colors.black)
-                                            // : TextStyle(
-                                            //     color: Color.fromARGB(255, 229, 233, 229)),
+                                        
                                             child: Text(
                                               pressed ? "ติดตาม" : "ติดตามแล้ว",
                                               style: TextStyle(
