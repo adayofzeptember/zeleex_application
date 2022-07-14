@@ -98,16 +98,13 @@ class Response_CartAdd {
 //-------------------------------------------------------------------------------------------------------------------
 
 class AddToCart_Request {
-  int user_id;
-  int store_id;
-  int product_sku_id;
-  int unit;
+  int? user_id;
+  int? store_id;
+  int? product_sku_id;
+  int? unit;
 
   AddToCart_Request(
-      {required this.user_id,
-      required this.store_id,
-      required this.product_sku_id,
-      required this.unit});
+      {this.user_id, this.store_id, this.product_sku_id, this.unit});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
@@ -119,17 +116,24 @@ class AddToCart_Request {
   }
 }
 
-Future<Cart_Add> login_Social(AddToCart_Request request_cartAdd) async {
-  String urlPost = "https://api.zeleex.com/api/register/social";
-  var bodySocial = json.encode(request_cartAdd.toJson());
+Future<Cart_Add> add_to_cart_now(
+    AddToCart_Request request_cartAdd, String userToken) async {
+  String urlPost = "https://api.zeleex.com/api/cart/add";
+  var bodyAddCart = json.encode(request_cartAdd.toJson());
   final response = await http.post(
     Uri.parse(urlPost),
-    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    body: bodySocial,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $userToken'
+    },
+    body: bodyAddCart,
   );
-  if (response.statusCode == 400 || response.statusCode >= 200 && response.statusCode <= 299) {
+  if (response.statusCode == 400 ||
+      response.statusCode >= 200 && response.statusCode <= 299) {
     var jsonRes = json.decode(response.body);
-
+    print("success");
+    print(response.body.toString());
     return Cart_Add.fromJson(json.decode(response.body));
   } else {
     throw Exception("error");

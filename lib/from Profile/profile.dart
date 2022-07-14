@@ -52,9 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       theTokenOne = x.toString();
     });
-    // print("1" + x.toString());
-    // print("2" + theTokenOne);
-    // print(y.toString());
+   
   }
 
   Future<Data_Profile> fetchProfile_Auth(String token) async {

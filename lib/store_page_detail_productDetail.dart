@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/API/Post%20Method/add_to_cart.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_id_api.dart';
 import 'Plate.dart';
 import 'store_page_detail_product.dart';
@@ -31,13 +32,13 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   String picked = "";
   late Future<Product> future_ProductByID;
   late Future<List<Skus>> future_Product_skus;
+  late AddToCart_Request request_model_addToCart;
   bool _press = false;
   var productImg = "";
   var productPrice = "";
   bool pressed = true;
   bool pressed_like = false;
   int _counter = 0;
-
   String? cartAdd_userID;
   String cartAdd_storeID = "";
   String cartAdd_product_sku_id = "";
@@ -47,6 +48,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   void initState() {
     future_ProductByID = fetch_Product_ByID();
     future_Product_skus = fetch_skus();
+    request_model_addToCart = AddToCart_Request();
     getUserID();
   }
 
@@ -64,7 +66,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
       cartAdd_userID = y;
       cartAdd_token = x;
     });
-    print(cartAdd_userID);
   }
 
   Future<List<Skus>> fetch_skus() async {
@@ -79,6 +80,18 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     } else {
       throw Exception("error...");
     }
+  }
+
+  Future cartCheckIn() async {
+    request_model_addToCart.user_id = int.parse(cartAdd_userID.toString());
+    request_model_addToCart.store_id = int.parse(cartAdd_storeID.toString());
+    request_model_addToCart.product_sku_id =
+        int.parse(cartAdd_product_sku_id.toString());
+    request_model_addToCart.unit = int.parse(_counter.toString());
+    print(jsonEncode(request_model_addToCart).toString());
+    print(cartAdd_token);
+    add_to_cart_now(request_model_addToCart, cartAdd_token);
+
   }
 
   Future<Product> fetch_Product_ByID() async {
@@ -283,7 +296,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                       Row(
                                                         children: [
                                                           Text(
-                                                            "จำนวนทีเหลือ: ",
+                                                            "จำนวนคงเหลือ: ",
                                                             style: TextStyle(
                                                                 color: Color
                                                                     .fromARGB(
@@ -444,16 +457,8 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   setState(() {
                                     x = x + 1;
                                   });
-                                  print(cartAdd_token.toString());
-                                  print(
-                                      "user id: " + cartAdd_userID.toString());
-                                  print("store id: " +
-                                      cartAdd_storeID.toString());
 
-                                  print("sku id: " +
-                                      cartAdd_product_sku_id.toString());
-                                  print(_counter);
-                                 
+                                  cartCheckIn();
                                   Navigator.pop(context);
                                 },
                                 child: Padding(
