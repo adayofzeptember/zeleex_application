@@ -200,41 +200,42 @@ class _Main_WidgetState extends State<Main_Widget> {
                                             data![index].link.toString());
                                       }),
                                       child: Container(
-                                        height: 40,
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 3.0),
-                                        decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                167, 216, 216, 216)),
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              data![index].image!.toString(),
-                                          //fit: BoxFit.cover,
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 3.0),
+                                          decoration: BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  167, 216, 216, 216)),
+                                          child: SvgPicture.network(
+                                            data![index].image!.toString(),
+                                          )
 
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              Container(
-                                            color: Color.fromARGB(
-                                                197, 253, 253, 253),
-                                            height: 200,
+                                          // CachedNetworkImage(
+                                          //   imageUrl:
+                                          //       data![index].image!.toString(),
+
+                                          //   progressIndicatorBuilder: (context,
+                                          //           url, downloadProgress) =>
+                                          //       Container(
+                                          //     color: Color.fromARGB(
+                                          //         197, 253, 253, 253),
+                                          //     height: 200,
+                                          //   ),
+                                          //   errorWidget: (context, url, error) =>
+                                          //       Padding(
+                                          //     padding: const EdgeInsets.only(
+                                          //         right: 5, left: 5),
+                                          //     child: Center(
+                                          //       child: Container(
+                                          //           decoration: BoxDecoration(),
+                                          //           width: double.infinity,
+                                          //           height: double.infinity,
+                                          //           alignment: Alignment.center,
+                                          //           child:
+                                          //               Text(error.toString())),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                           ),
-                                          errorWidget: (context, url, error) =>
-                                              Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 5, left: 5),
-                                            child: Center(
-                                              child: Container(
-                                                  decoration: BoxDecoration(),
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                      "นามสกุลไฟล์รูปผิดพลาด: " +
-                                                          error.toString())),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
                                     );
                                   },
                                   options: CarouselOptions(
@@ -770,7 +771,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                       ),
                                                                       Text(
                                                                         "฿ " +
-                                                                            data[index].price.toString(),
+                                                                            NumberFormat("##,###,###").format(int.parse(data[index].price.toString())),
                                                                         style: TextStyle(
                                                                             color: Color.fromARGB(
                                                                                 255,

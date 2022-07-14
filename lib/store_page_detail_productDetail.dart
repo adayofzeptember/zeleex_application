@@ -262,7 +262,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                           2.0)),
                                               child: InkWell(
                                                 onTap: () {
-                                                
                                                   setState(() {
                                                     String sku_id = data![index]
                                                         .id
@@ -798,7 +797,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                 pressed = !pressed;
                                               });
                                             },
-                                        
                                             child: Text(
                                               pressed ? "ติดตาม" : "ติดตามแล้ว",
                                               style: TextStyle(
@@ -883,6 +881,16 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                     ),
                   );
                 } else {
+                  // return Column(
+                  //   children: [
+                  //     Text(snapshot.hasError.toString()),
+                  //                           Text("---------------------------"),
+
+                  //     Text(snapshot.toString()),
+                  //     Text("---------------------------"),
+                  //     Text(snapshot.hashCode.toString()),
+                  //   ],
+                  // );
                   return Padding(
                     padding: const EdgeInsets.only(top: 50),
                     child: Center(child: CircularProgressIndicator()),
@@ -968,7 +976,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                         Padding(
                           padding: const EdgeInsets.only(left: 40),
                           child: Text(
-                              "ดีมากครับ ทดสอบรีวิวววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว"),
+                              "ดีมากครับ ทดสอบรีวิว2"),
                         ),
                         SizedBox(
                           height: 5,
@@ -1039,7 +1047,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                         Padding(
                           padding: const EdgeInsets.only(left: 40),
                           child: Text(
-                              "ดีมากครับ ทดสอบรีวิวววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว"),
+                              "ดีมากครับ ทดสอบรีวิว"),
                         ),
                         SizedBox(
                           height: 5,
