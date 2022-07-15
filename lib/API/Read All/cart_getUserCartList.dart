@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Post%20Method/post_Register.dart';
@@ -65,6 +66,8 @@ class Cart_Individual_Data {
       });
     }
     productAll = json['product_all'];
+
+   
   }
 
   Map<String, dynamic> toJson() {
@@ -375,34 +378,26 @@ class Images {
     data['thumbnail'] = this.thumbnail;
     return data;
   }
-  
 }
 
 Future<List<Cart_Individual_Data>> fetch_x(
     String userID, String userToken) async {
   final response = await http.get(
- 
       Uri.parse(
           'https://api.zeleex.com/api/cart/list?user_id=' + userID.toString()),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $userToken',
       });
-
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data']['store'];
 
-  if (response.statusCode == 200) {
+  if (response.statusCode == 200 || response.statusCode <= 299) {
     print(jsonCon);
-
     return jsonCon
         .map((data) => new Cart_Individual_Data.fromJson(data))
         .toList();
   } else {
-    throw Exception("error...");
+    throw Exception('error response status');
   }
-}
-
-void main() {
-  fetch_x("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
 }

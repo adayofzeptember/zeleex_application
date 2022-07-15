@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/API/url.dart';
 
 class Board {
@@ -54,6 +57,7 @@ class Board {
 
 class Data_Collection_Board {
   int? id;
+
   String? title;
   String? link;
   int? order;
@@ -92,6 +96,7 @@ class Data_Collection_Board {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+
     if (this.image != null) {
       data['image'] = this.image!.toJson();
     }
@@ -119,18 +124,22 @@ class Image {
 }
 
 Future<List<Data_Collection_Board>> fetch_collection_board() async {
-  final response = await http
-      .get(Uri.parse(zeleexAPI_URl.toString()+'collection-boards'));
+  final response =
+      await http.get(Uri.parse(zeleexAPI_URl.toString() + 'collection-boards'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data'];
-  
 
   if (response.statusCode == 200) {
     return jsonCon
         .map((data) => new Data_Collection_Board.fromJson(data))
         .toList();
   } else {
-    throw Exception("error");
+    throw Exception(Exception);
   }
 }
+
+
+
+
+

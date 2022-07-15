@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -317,30 +318,29 @@ class ProductCat01 {
   int? favoriteCount;
   int? reviewCount;
   int? price;
- // List<Categories>? categories;
+  // List<Categories>? categories;
 
-  ProductCat01(
-      {this.id,
-      this.title,
-      this.description,
-      this.content,
-      this.status,
-      this.seoTitle,
-      this.seoDescription,
-      this.reads,
-      this.storeId,
-      this.brandId,
-      this.conditionType,
-      this.createdAt,
-      this.updatedAt,
-      this.image,
-      this.images,
-      this.favoriteCount,
-      this.reviewCount,
-      this.price,
-     // this.categories
-      
-      });
+  ProductCat01({
+    this.id,
+    this.title,
+    this.description,
+    this.content,
+    this.status,
+    this.seoTitle,
+    this.seoDescription,
+    this.reads,
+    this.storeId,
+    this.brandId,
+    this.conditionType,
+    this.createdAt,
+    this.updatedAt,
+    this.image,
+    this.images,
+    this.favoriteCount,
+    this.reviewCount,
+    this.price,
+    // this.categories
+  });
 
   ProductCat01.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -398,7 +398,7 @@ class ProductCat01 {
     data['favorite_count'] = this.favoriteCount;
     data['review_count'] = this.reviewCount;
     data['price'] = this.price;
-    // if (this.categories != null) {
+    // if (this.categories != null) {l
     //   data['categories'] = this.categories!.map((v) => v.toJson()).toList();
     // }
     return data;
@@ -407,6 +407,7 @@ class ProductCat01 {
 
 class Pivot {
   int? productId;
+ 
   int? categoryId;
 
   Pivot({this.productId, this.categoryId});
@@ -470,9 +471,7 @@ class Ads01 {
 }
 
 Future<List<AnimalCat01>> fetch_Home_animals() async {
-  final response =
-      await http.get(Uri.parse('https://api.zeleex.com/api/home'));
-
+  final response = await http.get(Uri.parse('https://api.zeleex.com/api/home'));
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['animal_cat_01'];
   //print(jsonResponse['data']['animal_cat_01']);
@@ -485,19 +484,15 @@ Future<List<AnimalCat01>> fetch_Home_animals() async {
   }
 }
 
-
 Future<List<ProductCat01>> fetch_Home_products() async {
-  final response =
-      await http.get(Uri.parse('https://api.zeleex.com/api/home'));
-
+  final response = await http.get(Uri.parse('https://api.zeleex.com/api/home'));
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['product_cat_01'];
 
-
-  if (response.statusCode == 200) {
+  if (response.statusCode == 200 || response.statusCode <= 299) {
     // List jsonResponse = json.decode(response.body);
     return jsonCon.map((data) => ProductCat01.fromJson(data)).toList();
   } else {
-    throw Exception("error...");
+    throw Exception("get home data error");
   }
 }

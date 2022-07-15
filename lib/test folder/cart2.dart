@@ -391,7 +391,7 @@
 //   if (response.statusCode == 200) {
 //     return jsonCon.map((data) => new Store.fromJson(data)).toList();
 //   } else {
-//     throw Exception("error...");
+//     throw Exception('error response status');
 //   }
 // }
 
