@@ -925,8 +925,8 @@ class Store {
   String? email;
   String? phone;
   String? content;
-  Null? lat;
-  Null? lng;
+  double? lat;
+  double? lng;
   int? reads;
   int? userId;
   String? createdAt;

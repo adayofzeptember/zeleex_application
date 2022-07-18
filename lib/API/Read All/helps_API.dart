@@ -191,6 +191,7 @@ class Links {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['url'] = this.url;
     data['label'] = this.label;
+
     data['active'] = this.active;
     return data;
   }
@@ -203,11 +204,9 @@ Future<List<Data2>> fetch_HelpCenter() async {
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
 
-  if (response.statusCode == 200) {
-
+  if (response.statusCode == 200 || response.statusCode <= 299) {
     return jsonCon.map((data) => new Data2.fromJson(data)).toList();
   } else {
-    throw Exception("error...");
+    throw Exception("error check status code");
   }
 }
-

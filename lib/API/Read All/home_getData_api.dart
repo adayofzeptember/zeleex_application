@@ -4,101 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// class HomeGetData {
-//   String? responseCode;
-//   String? responseStatus;
-//   String? responseMessage;
-//   String? sessionID;
-//   int? serverDateTimeMS;
-//   String? serverDatetime;
-//   Data? data;
-
-//   HomeGetData(
-//       {this.responseCode,
-//       this.responseStatus,
-//       this.responseMessage,
-//       this.sessionID,
-//       this.serverDateTimeMS,
-//       this.serverDatetime,
-//       this.data});
-
-//   HomeGetData.fromJson(Map<String, dynamic> json) {
-//     responseCode = json['responseCode'];
-//     responseStatus = json['responseStatus'];
-//     responseMessage = json['responseMessage'];
-//     sessionID = json['sessionID'];
-//     serverDateTimeMS = json['serverDateTimeMS'];
-//     serverDatetime = json['serverDatetime'];
-//     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['responseCode'] = this.responseCode;
-//     data['responseStatus'] = this.responseStatus;
-//     data['responseMessage'] = this.responseMessage;
-//     data['sessionID'] = this.sessionID;
-//     data['serverDateTimeMS'] = this.serverDateTimeMS;
-//     data['serverDatetime'] = this.serverDatetime;
-//     if (this.data != null) {
-//       data['data'] = this.data!.toJson();
-//     }
-//     return data;
-//   }
-// }
-
-// class Data {
-//   List<AnimalCat01>? animalCat01;
-//   List<ProductCat01>? productCat01;
-
-//   List<Ads01>? ads01;
-
-//   Data({
-//     this.animalCat01,
-//     this.productCat01,
-//     this.ads01,
-//   });
-
-//   Data.fromJson(Map<String, dynamic> json) {
-//     if (json['animal_cat_01'] != null) {
-//       animalCat01 = <AnimalCat01>[];
-//       json['animal_cat_01'].forEach((v) {
-//         animalCat01!.add(new AnimalCat01.fromJson(v));
-//       });
-//     }
-//     if (json['product_cat_01'] != null) {
-//       productCat01 = <ProductCat01>[];
-//       json['product_cat_01'].forEach((v) {
-//         productCat01!.add(new ProductCat01.fromJson(v));
-//       });
-//     }
-
-//     if (json['ads_01'] != null) {
-//       ads01 = <Ads01>[];
-//       json['ads_01'].forEach((v) {
-//         ads01!.add(new Ads01.fromJson(v));
-//       });
-//     }
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     if (this.animalCat01 != null) {
-//       data['animal_cat_01'] = this.animalCat01!.map((v) => v.toJson()).toList();
-//     }
-//     if (this.productCat01 != null) {
-//       data['product_cat_01'] =
-//           this.productCat01!.map((v) => v.toJson()).toList();
-//     }
-
-//     if (this.ads01 != null) {
-//       data['ads_01'] = this.ads01!.map((v) => v.toJson()).toList();
-//     }
-
-//     return data;
-//   }
-// }
-
 class AnimalCat01 {
   int? id;
   String? title;
@@ -486,7 +391,7 @@ Future<List<ProductCat01>> fetch_Home_products() async {
   List jsonCon = jsonResponse['data']['product_cat_01'];
 
   if (response.statusCode == 200 || response.statusCode <= 299) {
-    // List jsonResponse = json.decode(response.body);
+   
     return jsonCon.map((data) => ProductCat01.fromJson(data)).toList();
   } else {
     throw Exception("get home data error");

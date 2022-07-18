@@ -87,7 +87,7 @@ class _CartPageState extends State<CartPage> {
                   motion: BehindMotion(),
                   dismissible: DismissiblePane(onDismissed: () {
                     doNothing(context);
-                    }),
+                  }),
                   children: [
                     SlidableAction(
                       onPressed: doNothing,
@@ -678,7 +678,6 @@ class _CartPageState extends State<CartPage> {
               SizedBox(
                 height: 10,
               ),
-   
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
                 height: 70,
