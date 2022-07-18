@@ -398,16 +398,12 @@ class ProductCat01 {
     data['favorite_count'] = this.favoriteCount;
     data['review_count'] = this.reviewCount;
     data['price'] = this.price;
-    // if (this.categories != null) {l
-    //   data['categories'] = this.categories!.map((v) => v.toJson()).toList();
-    // }
     return data;
   }
 }
 
 class Pivot {
   int? productId;
- 
   int? categoryId;
 
   Pivot({this.productId, this.categoryId});

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Post%20Method/post_Register.dart';
@@ -66,8 +65,6 @@ class Cart_Individual_Data {
       });
     }
     productAll = json['product_all'];
-
-   
   }
 
   Map<String, dynamic> toJson() {
@@ -390,14 +387,20 @@ Future<List<Cart_Individual_Data>> fetch_x(
         'Authorization': 'Bearer $userToken',
       });
   var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data']['store'];
+  List jsonCon = jsonResponse['data']['store'];
+  var x = jsonResponse['data']['product_all'];
 
   if (response.statusCode == 200 || response.statusCode <= 299) {
     print(jsonCon);
+    print(x.toString());
     return jsonCon
-        .map((data) => new Cart_Individual_Data.fromJson(data))
+        .map((data) => Cart_Individual_Data.fromJson(data))
         .toList();
   } else {
     throw Exception('error response status');
   }
+}
+
+void main() {
+  fetch_x("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
 }
