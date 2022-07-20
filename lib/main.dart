@@ -10,6 +10,7 @@ import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/test%20folder/device_info.dart';
 
 //* runApp(const First_Page());
+//! วันนี้ทำ cart
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -49,9 +50,9 @@ class _MainAndIconState extends State<MainAndIcon> {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var checkToken = prefs2.get('keyToken');
     if (checkToken.toString() != 'null') {
-      print("token: " + checkToken.toString());
+      print("--------------> stored token: " + checkToken.toString());
     } else {
-      print("token empty");
+      print("token is empty");
     }
 
     await Future.delayed(const Duration(seconds: 3), () {

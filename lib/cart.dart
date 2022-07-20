@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'package:zeleex_application/register.dart';
 import 'API/model.dart';
@@ -19,6 +20,7 @@ class CartPage extends StatefulWidget {
 }
 
 AlreadyIn_Model loggedin = AlreadyIn_Model();
+late Future<List<Cart_Individual_Data>> future_cart;
 
 class _CartPageState extends State<CartPage> {
   bool isChecked = false;
@@ -36,6 +38,13 @@ class _CartPageState extends State<CartPage> {
         _counter = 0;
       }
     });
+  }
+
+  @override
+  void initState() {
+    future_cart =
+        fetch_cartList("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
+    super.initState();
   }
 
   @override
@@ -82,231 +91,6 @@ class _CartPageState extends State<CartPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Slidable(
-                endActionPane: ActionPane(
-                  motion: BehindMotion(),
-                  dismissible: DismissiblePane(onDismissed: () {
-                    doNothing(context);
-                  }),
-                  children: [
-                    SlidableAction(
-                      onPressed: doNothing,
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      icon: Icons.delete,
-                      label: 'ลบ',
-                    ),
-                  ],
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                              color: Color.fromARGB(255, 223, 222, 222)))),
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 10, bottom: 20),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Checkbox(
-                                  checkColor: Colors.white,
-                                  activeColor: Palette.kToDark,
-                                  value: isChecked,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isChecked = value!;
-                                    });
-                                  }),
-                            ),
-                            SvgPicture.asset(
-                              'assets/images/cart_store.svg',
-                              color: Color.fromARGB(255, 104, 104, 104),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Zeleex Shop",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 51, 51, 51),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.grey,
-                              size: 15,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Checkbox(
-                                  checkColor: Colors.white,
-                                  activeColor: Palette.kToDark,
-                                  value: isChecked,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isChecked = value!;
-                                    });
-                                  }),
-                            ),
-                            Image.asset(
-                              'assets/images/cart_pd.png',
-                              width: 90,
-                              height: 90,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "ยารักษาโรคติดเชื้อแบคทีเรีย",
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                          ),
-                                        ),
-                                        SvgPicture.asset('assets/images/x.svg')
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 40,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "฿ 1,300",
-                                          style: TextStyle(
-                                              color: Palette.kToDark,
-                                              fontSize: 20),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 35,
-                                                  height: 35,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              130,
-                                                              130,
-                                                              130)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10))),
-                                                  child: InkWell(
-                                                      onTap: () {
-                                                        _minus();
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/minus.svg',
-                                                          width: 20,
-                                                        ),
-                                                      )),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                SizedBox(
-                                                  width: 30,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      "${_counter}",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Container(
-                                                  width: 35,
-                                                  height: 35,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              130,
-                                                              130,
-                                                              130)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10))),
-                                                  child: InkWell(
-                                                      onTap: () {
-                                                        _pluss();
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/pluss.svg',
-                                                          width: 20,
-                                                          height: 20,
-                                                        ),
-                                                      )),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
               Container(
                 decoration: BoxDecoration(
                     border: Border(
@@ -339,7 +123,7 @@ class _CartPageState extends State<CartPage> {
                             width: 10,
                           ),
                           Text(
-                            "ศรีไพศาลอาหารสัตว์-เกษตร",
+                            "Zeleex Shop Studio",
                             style: TextStyle(
                                 color: Color.fromARGB(255, 51, 51, 51),
                                 fontWeight: FontWeight.bold),
@@ -357,319 +141,156 @@ class _CartPageState extends State<CartPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Checkbox(
-                                  checkColor: Colors.white,
-                                  activeColor: Palette.kToDark,
-                                  value: isChecked,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isChecked = value!;
-                                    });
-                                  }),
-                            ),
-                            Image.asset(
-                              'assets/images/cart_pd2.png',
-                              width: 90,
-                              height: 90,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "อาหารวัว-อาหารวัวขุน",
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                          ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Transform.scale(
+                            scale: 0.7,
+                            child: Checkbox(
+                                checkColor: Colors.white,
+                                activeColor: Palette.kToDark,
+                                value: isChecked,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked = value!;
+                                  });
+                                }),
+                          ),
+                          Image.asset(
+                            'assets/images/cart_pd.png',
+                            width: 90,
+                            height: 90,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "ยารักษาโรคติดเชื้อแบคทีเรีย",
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
                                         ),
-                                        SvgPicture.asset('assets/images/x.svg')
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 40,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "฿ 500",
-                                          style: TextStyle(
-                                              color: Palette.kToDark,
-                                              fontSize: 20),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 35,
-                                                  height: 35,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              130,
-                                                              130,
-                                                              130)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10))),
-                                                  child: InkWell(
-                                                      onTap: () {
-                                                        _minus();
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/minus.svg',
-                                                          width: 20,
-                                                        ),
-                                                      )),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                SizedBox(
-                                                  width: 30,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      "${_counter}",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+                                      ),
+                                      SvgPicture.asset('assets/images/x.svg')
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "฿ 1,300",
+                                        style: TextStyle(
+                                            color: Palette.kToDark,
+                                            fontSize: 20),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 35,
+                                                height: 35,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            130,
+                                                            130,
+                                                            130)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10))),
+                                                child: InkWell(
+                                                    onTap: () {
+                                                      _minus();
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: SvgPicture.asset(
+                                                        'assets/images/minus.svg',
+                                                        width: 20,
+                                                      ),
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              SizedBox(
+                                                width: 30,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    "${_counter}",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Container(
-                                                  width: 35,
-                                                  height: 35,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              130,
-                                                              130,
-                                                              130)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10))),
-                                                  child: InkWell(
-                                                      onTap: () {
-                                                        _pluss();
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/pluss.svg',
-                                                          width: 20,
-                                                          height: 20,
-                                                        ),
-                                                      )),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Container(
+                                                width: 35,
+                                                height: 35,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            130,
+                                                            130,
+                                                            130)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10))),
+                                                child: InkWell(
+                                                    onTap: () {
+                                                      _pluss();
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: SvgPicture.asset(
+                                                        'assets/images/pluss.svg',
+                                                        width: 20,
+                                                        height: 20,
+                                                      ),
+                                                    )),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Checkbox(
-                                  checkColor: Colors.white,
-                                  activeColor: Palette.kToDark,
-                                  value: isChecked,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isChecked = value!;
-                                    });
-                                  }),
                             ),
-                            Image.asset(
-                              'assets/images/cart_pd3.png',
-                              width: 90,
-                              height: 90,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "รางอาหารวัว พร้อมขาเหล็ก",
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                          ),
-                                        ),
-                                        SvgPicture.asset('assets/images/x.svg')
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 40,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "฿ 500",
-                                          style: TextStyle(
-                                              color: Palette.kToDark,
-                                              fontSize: 20),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 35,
-                                                  height: 35,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              130,
-                                                              130,
-                                                              130)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10))),
-                                                  child: InkWell(
-                                                      onTap: () {
-                                                        _minus();
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/minus.svg',
-                                                          width: 20,
-                                                        ),
-                                                      )),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                SizedBox(
-                                                  width: 30,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      "${_counter}",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Container(
-                                                  width: 35,
-                                                  height: 35,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              130,
-                                                              130,
-                                                              130)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10))),
-                                                  child: InkWell(
-                                                      onTap: () {
-                                                        _pluss();
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/pluss.svg',
-                                                          width: 20,
-                                                          height: 20,
-                                                        ),
-                                                      )),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
                     ],
                   ),

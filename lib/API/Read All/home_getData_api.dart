@@ -392,7 +392,7 @@ Future<List<ProductCat01>> fetch_Home_products() async {
   List jsonCon = jsonResponse['data']['product_cat_01'];
   
   if (response.statusCode == 200 || response.statusCode <= 299) {
-
+    
     return jsonCon.map((data) => ProductCat01.fromJson(data)).toList();
   } else {
     throw Exception("get home data error");
