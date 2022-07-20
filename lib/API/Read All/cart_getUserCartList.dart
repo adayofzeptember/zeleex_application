@@ -288,7 +288,6 @@ class ProductSkus {
   }
 }
 
-
 class Product_Cart {
   int? id;
   String? title;
@@ -381,23 +380,23 @@ class Images {
   }
 }
 
-Future<List<Cart_Individual_Data>> fetch_cartList(
-    String userID, String userToken) async {
+Future<List<Store>> fetch_cartList(String userID, String userToken) async {
   final response = await http.get(
       Uri.parse(
           'https://api.zeleex.com/api/cart/list?user_id=' + userID.toString()),
       headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $userToken',
       });
   var jsonResponse = json.decode(response.body);
-
+  //var jsonConTest = jsonResponse['data']['store'][0];
+  //var x = jsonResponse['data']['product_all'];
   List jsonCon = jsonResponse['data']['store'];
 
-  if (response.statusCode == 200 || response.statusCode <= 299) {
-    print(jsonCon);
-
-    return jsonCon.map((data) => Cart_Individual_Data.fromJson(data)).toList();
+  if (response.statusCode == 200) {
+    // print(jsonCon);
+    return jsonCon.map((data) => Store.fromJson(data)).toList();
   } else {
     throw Exception('error response status');
   }

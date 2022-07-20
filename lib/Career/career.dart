@@ -101,7 +101,9 @@ class _CareerPageState extends State<CareerPage> {
                 future: fetched_data_career_readAll,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                  
                     List<Data_Read_Careers>? data = snapshot.data;
+                 
                     return Expanded(
                       child: ListView.builder(
                           itemCount: data?.length,
@@ -168,142 +170,10 @@ class _CareerPageState extends State<CareerPage> {
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
-                  // By default show a loading spinner.
                   return CircularProgressIndicator();
                 },
               ),
-              // InkWell(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       new MaterialPageRoute(
-              //         builder: (context) => new Career_Detail(),
-              //       ),
-              //     );
-              //   },
-              //   child: Container(
-              //       width: double.infinity,
-              //       padding: EdgeInsets.all(15.0),
-              //       decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(10.0),
-              //           border: Border.all(
-              //               color: Color.fromARGB(255, 206, 206, 206))),
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           Text(
-              //             "ครีเอทีฟ (1 ตำแหน่ง)",
-              //             style: TextStyle(
-              //                 color: Palette.kToDark,
-              //                 fontSize:
-              //                     MediaQuery.of(context).size.width * 0.035,
-              //                 fontWeight: FontWeight.bold),
-              //           ),
-              //           Container(
-              //             padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-              //             decoration: BoxDecoration(
-              //               color: Palette.kToDark,
-              //               borderRadius: BorderRadius.circular(30.0),
-              //             ),
-              //             child: Text(
-              //               "รายละเอียด >",
-              //               style: TextStyle(color: Colors.white),
-              //               textAlign: TextAlign.center,
-              //             ),
-              //           ),
-              //         ],
-              //       )),
-              // ),
-              // SizedBox(
-              //   height: 15,
-              // ),
-              // InkWell(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => Career_Detail(),
-              //       ),
-              //     );
-              //   },
-              //   child: Container(
-              //       width: double.infinity,
-              //       padding: EdgeInsets.all(15.0),
-              //       decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(10.0),
-              //           border: Border.all(
-              //               color: Color.fromARGB(255, 206, 206, 206))),
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           Text(
-              //             "เจ้าหน้าที่ฟาร์มโคนม (2 ตำแหน่ง)",
-              //             style: TextStyle(
-              //                 color: Palette.kToDark,
-              //                 fontSize:
-              //                     MediaQuery.of(context).size.width * 0.035,
-              //                 fontWeight: FontWeight.bold),
-              //           ),
-              //           Container(
-              //             padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-              //             decoration: BoxDecoration(
-              //               color: Palette.kToDark,
-              //               borderRadius: BorderRadius.circular(30.0),
-              //             ),
-              //             child: Text(
-              //               "รายละเอียด >",
-              //               style: TextStyle(color: Colors.white),
-              //               textAlign: TextAlign.center,
-              //             ),
-              //           ),
-              //         ],
-              //       )),
-              // ),
-              // SizedBox(
-              //   height: 15,
-              // ),
-              // InkWell(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => Career_Detail(),
-              //       ),
-              //     );
-              //   },
-              //   child: Container(
-              //       width: double.infinity,
-              //       padding: EdgeInsets.all(15.0),
-              //       decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(10.0),
-              //           border: Border.all(
-              //               color: Color.fromARGB(255, 206, 206, 206))),
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           Text(
-              //             "เจ้าหน้าที่การตลาด (1 ตำแหน่ง)",
-              //             style: TextStyle(
-              //                 color: Palette.kToDark,
-              //                 fontSize:
-              //                     MediaQuery.of(context).size.width * 0.035,
-              //                 fontWeight: FontWeight.bold),
-              //           ),
-              //           Container(
-              //             padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-              //             decoration: BoxDecoration(
-              //               color: Palette.kToDark,
-              //               borderRadius: BorderRadius.circular(30.0),
-              //             ),
-              //             child: Text(
-              //               "รายละเอียด >",
-              //               style: TextStyle(color: Colors.white),
-              //               textAlign: TextAlign.center,
-              //             ),
-              //           ),
-              //         ],
-              //       )),
-              // ),
+           
             ],
           ),
         ));

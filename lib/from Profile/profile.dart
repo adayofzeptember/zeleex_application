@@ -35,28 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
   late Future<Data_Profile> future_Profile;
 
 
-  Future<List<Cart_ReadList>> fetch_user_cart_list(
-    String userID, String userToken) async {
-  final response = await http.get(
-      Uri.parse(
-          'https://api.zeleex.com/api/cart/list?user_id=' + userID.toString()),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $userToken',
-      });
-
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data']['product_all'];
-
-  if (response.statusCode == 200) {
-    print(jsonCon);
-    return jsonCon.map((data) => new Cart_ReadList.fromJson(data)).toList();
-  } else {
-    throw Exception("error...");
-  }
-}
-
 
 
   Future logout_removeToken() async {
@@ -92,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data'];
     Data_Profile user_profileData = Data_Profile.fromJson(jsonCon);
-    // print(user_profileData.email.toString() + user_profileData.id.toString());
+    
     return user_profileData;
   }
 
