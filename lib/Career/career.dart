@@ -17,8 +17,6 @@ class CareerPage extends StatefulWidget {
 }
 
 class _CareerPageState extends State<CareerPage> {
-
-
   @override
   late Future<List<Data_Read_Careers>> fetched_data_career_readAll;
   @override
@@ -101,9 +99,7 @@ class _CareerPageState extends State<CareerPage> {
                 future: fetched_data_career_readAll,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                  
                     List<Data_Read_Careers>? data = snapshot.data;
-                 
                     return Expanded(
                       child: ListView.builder(
                           itemCount: data?.length,
@@ -173,7 +169,6 @@ class _CareerPageState extends State<CareerPage> {
                   return CircularProgressIndicator();
                 },
               ),
-           
             ],
           ),
         ));
