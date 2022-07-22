@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'package:zeleex_application/register.dart';
 import 'API/model.dart';
 import 'Plate.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'payment.dart';
-
-//! วนลูปไล่ sku ไม่หมด มาแค่อย่างละ 2 ชิ้น เพราะ index แรกมีแค่ 2 ตัว
-//* ลอง!!! เก็บค่า all product มาไว้ใน state แล้วเอามาใส่ในวพกวนลูป data snapshot
 
 class CartPage extends StatefulWidget {
   CartPage({Key? key}) : super(key: key);
@@ -21,10 +25,54 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   bool isChecked = false;
+  int totalPrice = 0;
+  late Future<List<Store>> future_cart;
+  String userID = "";
+  String userToken = "";
 
+  Future get_storedToken() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('keyToken');
+    var y = prefs2.get('keyID');
+    setState(() {
+      userID = y.toString();
+      userToken = x.toString();
+    });
+  }
+
+  Future<List<Store>> fetch_cartList(String userID, String userToken) async {
+    final response = await http.get(
+        Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
+            userID.toString()),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $userToken',
+        });
+    var jsonResponse = json.decode(response.body);
+
+    List jsonCon = jsonResponse['data']['store'];
+
+    for (var loop = 0; loop < jsonCon.length; loop++) {
+      int eachStore_totalPrice =
+          jsonResponse['data']['store'][loop]['price_tatal'];
+      int parsed_total = eachStore_totalPrice;
+      setState(() {
+        totalPrice = totalPrice + parsed_total;
+      });
+    }
+
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => Store.fromJson(data)).toList();
+    } else {
+      throw Exception('error response status');
+    }
+  }
 
   @override
   void initState() {
+    future_cart =
+        fetch_cartList("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
     super.initState();
   }
 
@@ -73,8 +121,7 @@ class _CartPageState extends State<CartPage> {
           child: Column(
             children: <Widget>[
               FutureBuilder<List<Store>>(
-                future: fetch_cartList(
-                    "529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS"),
+                future: future_cart,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<Store>? data = snapshot.data;
@@ -134,7 +181,6 @@ class _CartPageState extends State<CartPage> {
                                       ),
                                     ],
                                   ),
-                               
                                   FutureBuilder<List<ProductSkus>>(
                                     future: fetch_cartSku(
                                         "529",
@@ -145,7 +191,7 @@ class _CartPageState extends State<CartPage> {
                                         List<ProductSkus>? data = snapshot.data;
                                         return ListView.builder(
                                             shrinkWrap: true,
-                                             primary: false,
+                                            primary: false,
                                             itemCount: data?.length,
                                             itemBuilder: (BuildContext context,
                                                 int index222) {
@@ -174,7 +220,8 @@ class _CartPageState extends State<CartPage> {
                                                           }),
                                                     ),
                                                     Container(
-                                                      color: Palette.kToDark,
+                                                      color: Color.fromARGB(
+                                                          167, 16, 193, 158),
                                                       child: Image.network(
                                                         data![index222]
                                                             .product!
@@ -252,9 +299,7 @@ class _CartPageState extends State<CartPage> {
                                                                               border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                           child: InkWell(
-                                                                              onTap: () {
-                                                                         
-                                                                              },
+                                                                              onTap: () {},
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: SvgPicture.asset(
@@ -296,9 +341,7 @@ class _CartPageState extends State<CartPage> {
                                                                               border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                           child: InkWell(
-                                                                              onTap: () {
-                                                                          
-                                                                              },
+                                                                              onTap: () {},
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: SvgPicture.asset(
@@ -342,7 +385,6 @@ class _CartPageState extends State<CartPage> {
                   );
                 },
               ),
-      
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
                 height: 70,
@@ -373,12 +415,14 @@ class _CartPageState extends State<CartPage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("รวมทั้งหมด",
+                                    Text("รวมทั้งหมด (บาท)",
                                         style: TextStyle(
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51))),
                                     Text(
-                                      "฿ 1,990",
+                                      // totalPrice.toString(),
+                                      NumberFormat("#,###,###").format(
+                                          int.parse(totalPrice.toString())),
                                       style: TextStyle(
                                           fontSize: 25,
                                           color: Palette.kToDark,
@@ -423,5 +467,3 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-
-void doNothing(BuildContext context) {}

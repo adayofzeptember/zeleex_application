@@ -53,7 +53,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     future_ProductByID = fetch_Product_ByID();
     future_Product_skus = fetch_skus();
     request_model_addToCart = AddToCart_Request();
-
     super.initState();
   }
 
@@ -412,45 +411,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                               ),
                               SizedBox(
                                 height: 10,
-                              )
-                              // ToggleButtons(
-                              //   children: <Widget>[
-                              //     Container(
-                              //       height: 50,
-                              //       child: Padding(
-                              //         padding: const EdgeInsets.all(10.0),
-                              //         child: Text(
-                              //           "data1",
-                              //           style: TextStyle(
-                              //             fontSize: 20,
-                              //             color:
-                              //                 Color.fromARGB(255, 51, 51, 51),
-                              //           ),
-                              //         ),
-                              //       ),
-                              //     ),
-                              //     Icon(Icons.format_italic),
-                              //     Icon(Icons.format_underlined),
-                              //   ],
-                              //   isSelected: _selections,
-                              //   onPressed: (int index) {
-                              //     myState(() {
-                              //       for (int buttonIndex = 0;
-                              //           buttonIndex < _selections.length;
-                              //           buttonIndex++) {
-                              //         if (buttonIndex == index) {
-                              //           _selections[buttonIndex] =
-                              //               !_selections[buttonIndex];
-                              //         } else {
-                              //           _selections[buttonIndex] = false;
-                              //         }
-                              //       }
-                              //     });
-                              //   },
-                              //   color: Colors.teal,
-                              //   fillColor: Colors.deepPurple,
-                              // ),
-                              ,
+                              ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     primary: Palette.kToDark,
@@ -635,12 +596,15 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        thisProduct.title.toString(),
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                            fontSize: 18),
+                                      SizedBox(
+                                        width: 300,
+                                        child: Text(
+                                          thisProduct.title.toString(),
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 51, 51, 51),
+                                              fontSize: 18),
+                                        ),
                                       ),
                                       InkWell(
                                         onTap: (() => setState(() {
@@ -975,8 +939,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 40),
-                          child: Text(
-                              "ดีมากครับ ทดสอบรีวิว2"),
+                          child: Text("ดีมากครับ ทดสอบรีวิว2"),
                         ),
                         SizedBox(
                           height: 5,
@@ -1046,8 +1009,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 40),
-                          child: Text(
-                              "ดีมากครับ ทดสอบรีวิว"),
+                          child: Text("ดีมากครับ ทดสอบรีวิว"),
                         ),
                         SizedBox(
                           height: 5,

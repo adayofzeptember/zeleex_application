@@ -34,9 +34,6 @@ class _ProfilePageState extends State<ProfilePage> {
   String theUserOne = '';
   late Future<Data_Profile> future_Profile;
 
-
-
-
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('keyID');
@@ -57,7 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       theTokenOne = x.toString();
     });
-   
   }
 
   Future<Data_Profile> fetchProfile_Auth(String token) async {
@@ -70,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data'];
     Data_Profile user_profileData = Data_Profile.fromJson(jsonCon);
-    
+
     return user_profileData;
   }
 
@@ -136,658 +132,664 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-        FutureBuilder(
-            future: fetchProfile_Auth(theTokenOne),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.hasData) {
-                Data_Profile prf = snapshot.data;
-                return Container(
-                  decoration: BoxDecoration(
-                      color: Palette.kToDark,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(30),
-                          bottomRight: Radius.circular(30))),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 5, left: 20, bottom: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CachedNetworkImage(
-                          imageBuilder: (context, imageProvider) => Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover),
-                            ),
-                          ),
-                          placeholder: (context, url) => CircleAvatar(
-                            backgroundColor:
-                                Color.fromARGB(255, 141, 141, 141),
-                          ),
-                          errorWidget: (context, url, error) => SizedBox(
-                            height: 60,
-                            width: 60,
-                            child: CircleAvatar(
-                              child: Icon(
-                                Icons.person,
-                                color: Palette.kToDark,
+            FutureBuilder(
+                future: fetchProfile_Auth(theTokenOne),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.hasData) {
+                    Data_Profile prf = snapshot.data;
+                    return Container(
+                      decoration: BoxDecoration(
+                          color: Palette.kToDark,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30))),
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 5, left: 20, bottom: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CachedNetworkImage(
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover),
+                                ),
                               ),
-                              backgroundColor:
-                                  Color.fromARGB(255, 224, 224, 224),
-                            ),
-                          ),
-                          imageUrl: prf.avatar.toString(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 0, 5, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(prf.name.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Kanit',
-                                      fontSize: 20,
-                                      color: Colors.white)),
-                              SizedBox(
-                                height: 5,
+                              placeholder: (context, url) => CircleAvatar(
+                                backgroundColor:
+                                    Color.fromARGB(255, 141, 141, 141),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "แก้ไขโปรไฟล์",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 51, 51, 51),
-                                      fontFamily: 'Kanit',
-                                      fontSize: 12,
-                                    ),
+                              errorWidget: (context, url, error) => SizedBox(
+                                height: 60,
+                                width: 60,
+                                child: CircleAvatar(
+                                  child: Icon(
+                                    Icons.person,
+                                    color: Palette.kToDark,
                                   ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 15,
-                                  )
+                                  backgroundColor:
+                                      Color.fromARGB(255, 224, 224, 224),
+                                ),
+                              ),
+                              imageUrl: prf.avatar.toString(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 5, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(prf.name.toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Kanit',
+                                          fontSize: 20,
+                                          color: Colors.white)),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "แก้ไขโปรไฟล์",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontFamily: 'Kanit',
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        size: 15,
+                                      )
+                                    ],
+                                  ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                );
-              } else {
-                return Container(
-                  decoration: BoxDecoration(color: Palette.kToDark),
-                );
-              }
-            }),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+                      ),
+                    );
+                  } else {
+                    return Container(
+                      decoration: BoxDecoration(color: Palette.kToDark),
+                    );
+                  }
+                }),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/buy.svg',
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text("การสั่งซื้อ",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 51, 51, 51),
-                          fontSize:
-                              MediaQuery.of(context).size.height * 0.015)),
-                ],
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HistoryPage()));
-                },
-                child: Row(
-                  children: [
-                    Text(
-                      "ประวัติการสั่งซื้อ",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 130, 130, 130),
-                          fontSize:
-                              MediaQuery.of(context).size.height * 0.015),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Color.fromARGB(255, 130, 130, 130),
-                      size: 15,
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BuyingListPage(
-                          indexTab: 0,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Column(
+                  Row(
                     children: [
                       SvgPicture.asset(
-                        'assets/images/wallet.svg',
-                        height: MediaQuery.of(context).size.height * 0.035,
+                        'assets/images/buy.svg',
                       ),
                       SizedBox(
-                        height: 3,
+                        width: 5,
                       ),
-                      Text(
-                        "ที่ต้องชำระ",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontFamily: 'Kanit'),
-                      ),
-                    ],
-                  ),
-                ),
-                SvgPicture.asset(
-                  'assets/images/arrowright.svg',
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BuyingListPage(indexTab: 1),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/box.svg',
-                        height: MediaQuery.of(context).size.height * 0.035,
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        "เตรียมจัดส่ง",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontFamily: 'Kanit'),
-                      ),
-                    ],
-                  ),
-                ),
-                SvgPicture.asset(
-                  'assets/images/arrowright.svg',
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BuyingListPage(indexTab: 2),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/shipp.svg',
-                        height: MediaQuery.of(context).size.height * 0.035,
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        "กำลังจัดส่ง",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontFamily: 'Kanit'),
-                      ),
-                    ],
-                  ),
-                ),
-                SvgPicture.asset(
-                  'assets/images/arrowright.svg',
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HistoryPage(),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/score.svg',
-                        height: MediaQuery.of(context).size.height * 0.035,
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        "ให้คะแนน",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            fontFamily: 'Kanit'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Payment_Address(),
-              ),
-            );
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Color.fromARGB(255, 241, 241, 241))),
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset('assets/images/pin.svg'),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "ที่อยู่สำหรับจัดส่ง",
+                      Text("การสั่งซื้อ",
                           style: TextStyle(
+                              color: Color.fromARGB(255, 51, 51, 51),
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.015,
-                              fontWeight: FontWeight.bold),
+                                  MediaQuery.of(context).size.height * 0.015)),
+                    ],
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HistoryPage()));
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "ประวัติการสั่งซื้อ",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 130, 130, 130),
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.015),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: Color.fromARGB(255, 130, 130, 130),
+                          size: 15,
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "ชวันธร วีรจรรยาพันธ์",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.015),
-                              ),
-                              Text(
-                                "\t (ค่าเริ่มต้น)",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.015),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                            ],
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BuyingListPage(
+                              indexTab: 0,
+                            ),
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: Color.fromARGB(255, 130, 130, 130),
-                            size: 15,
-                          )
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/wallet.svg',
+                            height: MediaQuery.of(context).size.height * 0.035,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            "ที่ต้องชำระ",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 130, 130, 130),
+                                fontFamily: 'Kanit'),
+                          ),
                         ],
                       ),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
-                        child: Container(
-                          width: 250,
-                          child: Text(
-                            "087-571-2533",
+                    SvgPicture.asset(
+                      'assets/images/arrowright.svg',
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BuyingListPage(indexTab: 1),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/box.svg',
+                            height: MediaQuery.of(context).size.height * 0.035,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            "เตรียมจัดส่ง",
                             style: TextStyle(
                                 color: Color.fromARGB(255, 130, 130, 130),
-                                fontSize: MediaQuery.of(context).size.height *
-                                    0.015),
+                                fontFamily: 'Kanit'),
                           ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
-                        child: Container(
-                          width: 250,
-                          child: Text(
-                            "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
+                        ],
+                      ),
+                    ),
+                    SvgPicture.asset(
+                      'assets/images/arrowright.svg',
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BuyingListPage(indexTab: 2),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/shipp.svg',
+                            height: MediaQuery.of(context).size.height * 0.035,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            "กำลังจัดส่ง",
                             style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.015,
-                              color: Color.fromARGB(255, 130, 130, 130),
-                            ),
+                                color: Color.fromARGB(255, 130, 130, 130),
+                                fontFamily: 'Kanit'),
                           ),
-                        ))
-                  ],
-                ),
-              )),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LikesPage(),
-              ),
-            );
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          color: Color.fromARGB(255, 241, 241, 241)))),
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset('assets/images/heart.svg'),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "สิ่งที่ถูกใจ",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height *
-                                          0.015,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
-                          ],
-                        )
-                      ],
+                        ],
+                      ),
+                    ),
+                    SvgPicture.asset(
+                      'assets/images/arrowright.svg',
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HistoryPage(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/score.svg',
+                            height: MediaQuery.of(context).size.height * 0.035,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            "ให้คะแนน",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 130, 130, 130),
+                                fontFamily: 'Kanit'),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              )),
-        ),
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  side: BorderSide(color: Palette.kToDark),
-                  primary: Palette.kToDark,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  )),
-              onPressed: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(13.0),
-                child: Container(
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Payment_Address(),
+                  ),
+                );
+              },
+              child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color.fromARGB(255, 241, 241, 241))),
                   width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/images/store2.svg'),
-                      SizedBox(
-                        width: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset('assets/images/pin.svg'),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "ที่อยู่สำหรับจัดส่ง",
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.015,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "ชวันธร วีรจรรยาพันธ์",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.015),
+                                  ),
+                                  Text(
+                                    "\t (ค่าเริ่มต้น)",
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.015),
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                ],
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Color.fromARGB(255, 130, 130, 130),
+                                size: 15,
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                            child: Container(
+                              width: 250,
+                              child: Text(
+                                "087-571-2533",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 130, 130, 130),
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.015),
+                              ),
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                            child: Container(
+                              width: 250,
+                              child: Text(
+                                "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
+                                style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.015,
+                                  color: Color.fromARGB(255, 130, 130, 130),
+                                ),
+                              ),
+                            ))
+                      ],
+                    ),
+                  )),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LikesPage(),
+                  ),
+                );
+              },
+              child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              color: Color.fromARGB(255, 241, 241, 241)))),
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset('assets/images/heart.svg'),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "สิ่งที่ถูกใจ",
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.015,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 15,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      side: BorderSide(color: Palette.kToDark),
+                      primary: Palette.kToDark,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      )),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: Container(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('assets/images/store2.svg'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "เริ่มการขาย ลงทะเบียนฟรี",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        "เริ่มการขาย ลงทะเบียนฟรี",
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TermsConditon()));
+              },
+              child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              color: Color.fromARGB(255, 241, 241, 241)))),
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/edit.svg',
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "นโยบายความเป็นส่วนตัว",
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.015,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 15,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HelpCenterPage()));
+              },
+              child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              color: Color.fromARGB(255, 241, 241, 241)))),
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/Frame.svg',
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "ศูนย์ช่วยเหลือ",
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.015,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 15,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CareerPage()));
+              },
+              child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              color: Color.fromARGB(255, 241, 241, 241)))),
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/images/new/work.svg',
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "ร่วมงานกับเรา",
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.015,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 15,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 1),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      side: BorderSide(color: Color.fromARGB(255, 95, 95, 95)),
+                      primary: Color.fromARGB(255, 255, 255, 255),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      width: double.infinity,
+                      child: Text(
+                        "เปลี่ยนบัญชีผู้ใช้",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 130, 130, 130),
                           fontSize: 15,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TermsConditon()));
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          color: Color.fromARGB(255, 241, 241, 241)))),
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/new/edit.svg',
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "นโยบายความเป็นส่วนตัว",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height *
-                                          0.015,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HelpCenterPage()));
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          color: Color.fromARGB(255, 241, 241, 241)))),
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/new/Frame.svg',
-                        ),
-                        SizedBox(
-                          width: 7,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "ศูนย์ช่วยเหลือ",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height *
-                                          0.015,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CareerPage()));
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          color: Color.fromARGB(255, 241, 241, 241)))),
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/new/work.svg',
-                        ),
-                        SizedBox(
-                          width: 7,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "ร่วมงานกับเรา",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height *
-                                          0.015,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )),
-        ),
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 20, 30, 1),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  side: BorderSide(color: Color.fromARGB(255, 95, 95, 95)),
-                  primary: Color.fromARGB(255, 255, 255, 255),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
-              onPressed: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  width: double.infinity,
-                  child: Text(
-                    "เปลี่ยนบัญชีผู้ใช้",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 130, 130, 130),
-                      fontSize: 15,
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ),
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  side: BorderSide(color: Color.fromARGB(255, 95, 95, 95)),
-                  primary: Color.fromARGB(255, 255, 255, 255),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
-              onPressed: () {
-                logout_removeToken();
-                GoogoleSignInApi.google_LogOut();
-                FacebookAuth.instance.logOut().then((value) {});
-              },
+            Container(
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  width: double.infinity,
-                  child: Text(
-                    "ออกจากระบบ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 130, 130, 130),
-                      fontSize: 15,
+                padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      side: BorderSide(color: Color.fromARGB(255, 95, 95, 95)),
+                      primary: Color.fromARGB(255, 255, 255, 255),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                  onPressed: () {
+                    logout_removeToken();
+                    GoogoleSignInApi.google_LogOut();
+                    FacebookAuth.instance.logOut().then((value) {});
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      width: double.infinity,
+                      child: Text(
+                        "ออกจากระบบ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 130, 130, 130),
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ),
           ],
         ),
       ),
