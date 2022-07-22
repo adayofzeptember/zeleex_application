@@ -14,7 +14,7 @@ import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login2_testTOKEN.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
-import 'package:zeleex_application/test%20folder/facebook_login.dart';
+
 import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
 import 'API/model.dart';
 import 'Plate.dart';
@@ -350,14 +350,7 @@ class _LoginPageState extends State<LoginPage> {
                                       height: 15,
                                     ),
                                     InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Facebook(),
-                                          ),
-                                        );
-                                      },
+                                      onTap: () {},
                                       child: Container(
                                         child: Text(
                                           "ลืมรหัสผ่าน?",

@@ -390,20 +390,18 @@ Future<List<Store>> fetch_cartList(String userID, String userToken) async {
         'Authorization': 'Bearer $userToken',
       });
   var jsonResponse = json.decode(response.body);
-  //var jsonConTest = jsonResponse['data']['store'][0];
-  //var x = jsonResponse['data']['product_all'];
+
   List jsonCon = jsonResponse['data']['store'];
 
   if (response.statusCode == 200) {
-    // print(jsonCon);
     return jsonCon.map((data) => Store.fromJson(data)).toList();
   } else {
     throw Exception('error response status');
   }
 }
 
-//!------------------------------------------------------------------------------------------
-Future<List<ProductSkus>> fetch_cartSku(String userID, String userToken) async {
+Future<List<ProductSkus>> fetch_cartSku(String userID, String userToken, int x) async {
+ 
   final response = await http.get(
       Uri.parse(
           'https://api.zeleex.com/api/cart/list?user_id=' + userID.toString()),
@@ -412,19 +410,23 @@ Future<List<ProductSkus>> fetch_cartSku(String userID, String userToken) async {
         'Accept': 'application/json',
         'Authorization': 'Bearer $userToken',
       });
-  var jsonResponse = json.decode(response.body);
+
+  final jsonResponse = json.decode(response.body) as Map<dynamic, dynamic>;
   //var jsonConTest = jsonResponse['data']['store'][0];
   //var x = jsonResponse['data']['product_all'];
-  List jsonCon = jsonResponse['data']['store']['ProductSkus'];
 
+  List jsonCon = jsonResponse['data']['store'][x]['product_skus'];
+
+  // List jsonCon = jsonResponse['data']['store']['product_skus'];
   if (response.statusCode == 200) {
-    // print(jsonCon);
+
+
     return jsonCon.map((data) => ProductSkus.fromJson(data)).toList();
   } else {
     throw Exception('error response status');
   }
 }
 
-void main() {
-  fetch_cartList("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
+void main(List<String> args) {
+  fetch_cartSku("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS", 0);
 }

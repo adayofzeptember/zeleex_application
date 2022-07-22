@@ -8,9 +8,10 @@ import 'package:zeleex_application/register.dart';
 import 'API/model.dart';
 import 'Plate.dart';
 import 'payment.dart';
-//! วนลูปไล่ sku ไม่หมด มาแค่อย่างละ 2 ชิ้น เพราะ index แรกมีแค่ 2 ตัว 
+
+//! วนลูปไล่ sku ไม่หมด มาแค่อย่างละ 2 ชิ้น เพราะ index แรกมีแค่ 2 ตัว
 //* ลอง!!! เก็บค่า all product มาไว้ใน state แล้วเอามาใส่ในวพกวนลูป data snapshot
- 
+
 class CartPage extends StatefulWidget {
   CartPage({Key? key}) : super(key: key);
 
@@ -20,21 +21,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   bool isChecked = false;
-  int _counter = 0;
-  void _pluss() {
-    setState(() {
-      _counter++;
-    });
-  }
 
-  void _minus() {
-    setState(() {
-      _counter--;
-      if (_counter <= 0) {
-        _counter = 0;
-      }
-    });
-  }
 
   @override
   void initState() {
@@ -93,6 +80,7 @@ class _CartPageState extends State<CartPage> {
                     List<Store>? data = snapshot.data;
                     return ListView.builder(
                         shrinkWrap: true,
+                        primary: false,
                         itemCount: data?.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
@@ -104,7 +92,7 @@ class _CartPageState extends State<CartPage> {
                             width: double.infinity,
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(right: 10, bottom: 20),
+                                  const EdgeInsets.only(right: 10, bottom: 5),
                               child: Column(
                                 children: [
                                   Row(
@@ -146,22 +134,24 @@ class _CartPageState extends State<CartPage> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FutureBuilder<List<Store>>(
-                                    future: fetch_cartList("529",
-                                        "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS"),
+                               
+                                  FutureBuilder<List<ProductSkus>>(
+                                    future: fetch_cartSku(
+                                        "529",
+                                        "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS",
+                                        index),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
-                                        List<Store>? data = snapshot.data;
+                                        List<ProductSkus>? data = snapshot.data;
                                         return ListView.builder(
                                             shrinkWrap: true,
+                                             primary: false,
                                             itemCount: data?.length,
                                             itemBuilder: (BuildContext context,
                                                 int index222) {
                                               return Padding(
-                                                padding: const EdgeInsets.only(bottom: 15),
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 15),
                                                 child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
@@ -178,17 +168,19 @@ class _CartPageState extends State<CartPage> {
                                                           value: isChecked,
                                                           onChanged: (value) {
                                                             setState(() {
-                                                              isChecked = value!;
+                                                              isChecked =
+                                                                  value!;
                                                             });
                                                           }),
                                                     ),
                                                     Container(
                                                       color: Palette.kToDark,
                                                       child: Image.network(
-                                                          data![index]
-                                                                        .productSkus![
-                                                                            index222]
-                                                                        .product!.image!.main.toString(),
+                                                        data![index222]
+                                                            .product!
+                                                            .image!
+                                                            .main
+                                                            .toString(),
                                                         width: 90,
                                                         height: 90,
                                                       ),
@@ -209,9 +201,7 @@ class _CartPageState extends State<CartPage> {
                                                                       .spaceBetween,
                                                               children: [
                                                                 Text(
-                                                                  data[index]
-                                                                      .productSkus![
-                                                                          index222]
+                                                                  data[index222]
                                                                       .name
                                                                       .toString(),
                                                                   style:
@@ -237,10 +227,9 @@ class _CartPageState extends State<CartPage> {
                                                                       .spaceBetween,
                                                               children: [
                                                                 Text(
-                                                                    data[index]
-                                                                      .productSkus![
-                                                                          index222]
-                                                                      .price.toString(),
+                                                                  data[index222]
+                                                                      .price
+                                                                      .toString(),
                                                                   style: TextStyle(
                                                                       color: Palette
                                                                           .kToDark,
@@ -260,12 +249,11 @@ class _CartPageState extends State<CartPage> {
                                                                           height:
                                                                               35,
                                                                           decoration: BoxDecoration(
-                                                                              border:
-                                                                                  Border.all(color: Color.fromARGB(255, 130, 130, 130)),
+                                                                              border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                           child: InkWell(
                                                                               onTap: () {
-                                                                                _minus();
+                                                                         
                                                                               },
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
@@ -288,16 +276,10 @@ class _CartPageState extends State<CartPage> {
                                                                                 const EdgeInsets.all(8.0),
                                                                             child:
                                                                                 Text(
-                                                                                  //!counter
-                                                                                data[index]
-                                                                      .productSkus![
-                                                                          index222]
-                                                                      .unit
-                                                                      .toString(),
-                                                                              textAlign:
-                                                                                  TextAlign.center,
-                                                                              style:
-                                                                                  TextStyle(fontWeight: FontWeight.bold),
+                                                                              //!counter
+                                                                              data[index222].unit.toString(),
+                                                                              textAlign: TextAlign.center,
+                                                                              style: TextStyle(fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -311,12 +293,11 @@ class _CartPageState extends State<CartPage> {
                                                                           height:
                                                                               35,
                                                                           decoration: BoxDecoration(
-                                                                              border:
-                                                                                  Border.all(color: Color.fromARGB(255, 130, 130, 130)),
+                                                                              border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                           child: InkWell(
                                                                               onTap: () {
-                                                                                _pluss();
+                                                                          
                                                                               },
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
@@ -344,7 +325,7 @@ class _CartPageState extends State<CartPage> {
                                       } else if (snapshot.hasError) {
                                         return Text("${snapshot.error}");
                                       }
-                                      return CircularProgressIndicator();
+                                      return Container();
                                     },
                                   ),
                                 ],
@@ -355,161 +336,13 @@ class _CartPageState extends State<CartPage> {
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
-                  return CircularProgressIndicator();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 0, top: 100),
+                    child: CircularProgressIndicator(),
+                  );
                 },
               ),
-
-              //  Row(
-              //                       crossAxisAlignment: CrossAxisAlignment.center,
-              //                       mainAxisAlignment: MainAxisAlignment.start,
-              //                       children: [
-              //                         Transform.scale(
-              //                           scale: 0.7,
-              //                           child: Checkbox(
-              //                               checkColor: Colors.white,
-              //                               activeColor: Palette.kToDark,
-              //                               value: isChecked,
-              //                               onChanged: (value) {
-              //                                 setState(() {
-              //                                   isChecked = value!;
-              //                                 });
-              //                               }),
-              //                         ),
-              //                         Image.asset(
-              //                           'assets/images/cart_pd.png',
-              //                           width: 90,
-              //                           height: 90,
-              //                         ),
-              //                         SizedBox(
-              //                           width: 10,
-              //                         ),
-              //                         Expanded(
-              //                           child: Container(
-              //                             child: Column(
-              //                               crossAxisAlignment: CrossAxisAlignment.stretch,
-              //                               children: [
-              //                                 Row(
-              //                                   mainAxisAlignment:
-              //                                       MainAxisAlignment.spaceBetween,
-              //                                   children: [
-              //                                     Text(
-              //                                       "ยารักษาโรคติดเชื้อแบคทีเรีย",
-              //                                       style: TextStyle(
-              //                                         color:
-              //                                             Color.fromARGB(255, 51, 51, 51),
-              //                                       ),
-              //                                     ),
-              //                                     SvgPicture.asset('assets/images/x.svg')
-              //                                   ],
-              //                                 ),
-              //                                 SizedBox(
-              //                                   height: 40,
-              //                                 ),
-              //                                 Row(
-              //                                   mainAxisAlignment:
-              //                                       MainAxisAlignment.spaceBetween,
-              //                                   children: [
-              //                                     Text(
-              //                                       "฿ 1,300",
-              //                                       style: TextStyle(
-              //                                           color: Palette.kToDark,
-              //                                           fontSize: 20),
-              //                                     ),
-              //                                     Row(
-              //                                       mainAxisAlignment:
-              //                                           MainAxisAlignment.spaceBetween,
-              //                                       children: [
-              //                                         Row(
-              //                                           children: [
-              //                                             Container(
-              //                                               width: 35,
-              //                                               height: 35,
-              //                                               decoration: BoxDecoration(
-              //                                                   border: Border.all(
-              //                                                       color: Color.fromARGB(
-              //                                                           255,
-              //                                                           130,
-              //                                                           130,
-              //                                                           130)),
-              //                                                   borderRadius:
-              //                                                       BorderRadius.all(
-              //                                                           Radius.circular(
-              //                                                               10))),
-              //                                               child: InkWell(
-              //                                                   onTap: () {
-              //                                                     _minus();
-              //                                                   },
-              //                                                   child: Padding(
-              //                                                     padding:
-              //                                                         const EdgeInsets.all(
-              //                                                             8.0),
-              //                                                     child: SvgPicture.asset(
-              //                                                       'assets/images/minus.svg',
-              //                                                       width: 20,
-              //                                                     ),
-              //                                                   )),
-              //                                             ),
-              //                                             SizedBox(
-              //                                               width: 5,
-              //                                             ),
-              //                                             SizedBox(
-              //                                               width: 30,
-              //                                               child: Padding(
-              //                                                 padding:
-              //                                                     const EdgeInsets.all(8.0),
-              //                                                 child: Text(
-              //                                                   "${_counter}",
-              //                                                   textAlign: TextAlign.center,
-              //                                                   style: TextStyle(
-              //                                                       fontWeight:
-              //                                                           FontWeight.bold),
-              //                                                 ),
-              //                                               ),
-              //                                             ),
-              //                                             SizedBox(
-              //                                               width: 5,
-              //                                             ),
-              //                                             Container(
-              //                                               width: 35,
-              //                                               height: 35,
-              //                                               decoration: BoxDecoration(
-              //                                                   border: Border.all(
-              //                                                       color: Color.fromARGB(
-              //                                                           255,
-              //                                                           130,
-              //                                                           130,
-              //                                                           130)),
-              //                                                   borderRadius:
-              //                                                       BorderRadius.all(
-              //                                                           Radius.circular(
-              //                                                               10))),
-              //                                               child: InkWell(
-              //                                                   onTap: () {
-              //                                                     _pluss();
-              //                                                   },
-              //                                                   child: Padding(
-              //                                                     padding:
-              //                                                         const EdgeInsets.all(
-              //                                                             8.0),
-              //                                                     child: SvgPicture.asset(
-              //                                                       'assets/images/pluss.svg',
-              //                                                       width: 20,
-              //                                                       height: 20,
-              //                                                     ),
-              //                                                   )),
-              //                                             ),
-              //                                           ],
-              //                                         )
-              //                                       ],
-              //                                     ),
-              //                                   ],
-              //                                 ),
-              //                               ],
-              //                             ),
-              //                           ),
-              //                         )
-              //                       ],
-              //                     ),
+      
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
                 height: 70,
