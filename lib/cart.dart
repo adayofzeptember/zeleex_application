@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -196,12 +197,20 @@ class _CartPageState extends State<CartPage> {
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         List<ProductSkus>? data = snapshot.data;
+
                                         return ListView.builder(
                                             shrinkWrap: true,
                                             primary: false,
                                             itemCount: data?.length,
                                             itemBuilder: (BuildContext context,
                                                 int index222) {
+                                              int x1 = int.parse(data![index222]
+                                                  .price
+                                                  .toString());
+                                              int x2 = int.parse(data[index222]
+                                                  .unit
+                                                  .toString());
+                                              int unit_price = x1 * x2;
                                               return Padding(
                                                 padding: const EdgeInsets.only(
                                                     bottom: 15),
@@ -230,7 +239,7 @@ class _CartPageState extends State<CartPage> {
                                                       color: Color.fromARGB(
                                                           167, 16, 193, 158),
                                                       child: Image.network(
-                                                        data![index222]
+                                                        data[index222]
                                                             .product!
                                                             .image!
                                                             .main
@@ -260,6 +269,9 @@ class _CartPageState extends State<CartPage> {
                                                                       .toString(),
                                                                   style:
                                                                       TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
                                                                     color: Color
                                                                         .fromARGB(
                                                                             255,
@@ -281,19 +293,16 @@ class _CartPageState extends State<CartPage> {
                                                                       .spaceBetween,
                                                               children: [
                                                                 Text(
-                                                                  data[index222]
-                                                                      .price
-                                                                      .toString(),
+                                                                  '฿ ' +
+                                                                      unit_price
+                                                                          .toString(),
                                                                   style: TextStyle(
                                                                       color: Palette
                                                                           .kToDark,
                                                                       fontSize:
-                                                                          20),
+                                                                          18),
                                                                 ),
                                                                 Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
                                                                   children: [
                                                                     Row(
                                                                       children: [
@@ -386,14 +395,14 @@ class _CartPageState extends State<CartPage> {
                     return Text("${snapshot.error}");
                   }
                   return Padding(
-                    padding: const EdgeInsets.only(bottom: 0, top: 100),
-                    child: CircularProgressIndicator(),
+                    padding: const EdgeInsets.only(bottom: 100, top: 100),
+                    child: Text('โปรดรอสักครู่...'),
                   );
                 },
               ),
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
-                height: 70,
+                height: 90,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -421,7 +430,7 @@ class _CartPageState extends State<CartPage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("รวมทั้งหมด (บาท)",
+                                    Text("รวมทั้งหมด",
                                         style: TextStyle(
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51))),
@@ -434,6 +443,10 @@ class _CartPageState extends State<CartPage> {
                                           color: Palette.kToDark,
                                           fontWeight: FontWeight.bold),
                                     ),
+                                    Text("บาท",
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51))),
                                   ],
                                 ),
                               )

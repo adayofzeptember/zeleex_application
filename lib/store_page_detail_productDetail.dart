@@ -46,6 +46,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   String cartAdd_product_sku_id = "";
   String cartAdd_unit = "";
   String cartAdd_token = "";
+  String priceSKU = "ราคาสินค้า";
   @override
   void initState() {
     qtyCart = int.parse(widget.qty.toString());
@@ -97,7 +98,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     // request_model_addToCart.product_sku_id =
     //     145;
     // request_model_addToCart.unit = 2;
-    add_to_cart_now(request_model_addToCart, cartAdd_token);
+    await add_to_cart_now(request_model_addToCart, cartAdd_token);
   }
 
   Future<Product> fetch_Product_ByID() async {
@@ -176,7 +177,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           Text(
-                                            "฿ " + productPrice,
+                                            "฿ " + priceSKU,
                                             style: TextStyle(
                                                 color: Colors.red,
                                                 fontSize: 20,
@@ -269,11 +270,17 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                         sku_id;
                                                   });
                                                   myState(() {
-                                                    String sku_id = data![index]
+                                                    String sku_price =
+                                                        data![index]
+                                                            .price
+                                                            .toString();
+                                                    priceSKU = sku_price;
+                                                    String sku_id = data[index]
                                                         .id
                                                         .toString();
                                                     cartAdd_product_sku_id =
                                                         sku_id;
+
                                                     _press = !_press;
                                                     picked = data[index]
                                                         .name
@@ -291,6 +298,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                       Text(
                                                         data![index]
                                                             .name
+                                                            //!.price
                                                             .toString(),
                                                         style: TextStyle(
                                                           fontSize: 20,
