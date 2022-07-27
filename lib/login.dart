@@ -130,6 +130,7 @@ class _LoginPageState extends State<LoginPage> {
     if (response.statusCode == 400 || response.statusCode == 200) {
       var token_toStore = jsonRes['data']['token'].toString();
       String id_toStore = jsonRes['data']['id'].toString();
+      print(id_toStore);
       setState(() {
         storedToken = token_toStore;
         storedUserID = id_toStore;
@@ -189,6 +190,7 @@ class _LoginPageState extends State<LoginPage> {
 
       prefs.setString('keyToken', storedToken.toString());
       prefs.setString('keyID', storedUserID.toString());
+      print(storedUserID);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -202,6 +204,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 //!-----------------------------------------------------------------------------------------------------------
+
   @override
   Widget build(BuildContext context) {
     return ProgressHUD(

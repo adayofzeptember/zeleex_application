@@ -53,6 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
     var y = prefs2.get('keyID');
     setState(() {
       theTokenOne = x.toString();
+      theUserOne = y.toString();
     });
   }
 
@@ -73,7 +74,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     getToken();
-
     super.initState();
   }
 

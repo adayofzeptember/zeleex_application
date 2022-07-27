@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -43,7 +44,8 @@ class _Main_WidgetState extends State<Main_Widget> {
   late Future<List<AnimalCat01>> future_anmials_cat;
   late Future<List<ProductCat01>> future_products_cat;
   late Future<List<Data_Products_ReadAll>> future_products_All;
-
+  String userID = "";
+  String userToken = "";
   int activeIndex = 0;
   int countIMG = 0;
 
@@ -63,9 +65,22 @@ class _Main_WidgetState extends State<Main_Widget> {
     }
   }
 
+  Future get_storedToken() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('keyToken');
+    var y = prefs2.get('keyID');
+
+    setState(() {
+      userID = y.toString();
+      userToken = x.toString();
+    });
+  
+  }
+
   @override
   void initState() {
     super.initState();
+    get_storedToken();
     futureData = fetch_SliderPics();
     future_board = fetch_collection_board();
     future_anmials_cat = fetch_Home_animals();
@@ -113,7 +128,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                   ),
                 ),
                 Text(
-                  "หน้าหลัก",
+                 'หน้าหลัก',
                   style: TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                       fontWeight: FontWeight.bold),
@@ -121,7 +136,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartPage()));
+                        MaterialPageRoute(builder: (context) => CartPage(user_id: userID.toString(), user_token: userToken.toString(),)));
                   },
                   child: SvgPicture.asset(
                     'assets/images/cart123.svg',

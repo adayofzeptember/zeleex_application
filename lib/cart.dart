@@ -17,7 +17,9 @@ import 'package:http/http.dart' as http;
 import 'payment.dart';
 
 class CartPage extends StatefulWidget {
-  CartPage({Key? key}) : super(key: key);
+  String? user_id = "";
+  String? user_token = "";
+  CartPage({Key? key, this.user_id, this.user_token}) : super(key: key);
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -34,20 +36,23 @@ class _CartPageState extends State<CartPage> {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var x = prefs2.get('keyToken');
     var y = prefs2.get('keyID');
+
     setState(() {
       userID = y.toString();
       userToken = x.toString();
     });
+    print(userID + " " + userToken);
   }
 
-  Future<List<Store>> fetch_cartList(String userID, String userToken) async {
+  Future<List<Store>> fetch_cartList(
+      String userID222, String userToken222) async {
     final response = await http.get(
         Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
-            userID.toString()),
+            userID222.toString()),
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $userToken',
+          'Accept': 'applicationjson',
+          'Authorization': 'Bearer $userToken222',
         });
     var jsonResponse = json.decode(response.body);
 
@@ -71,8 +76,10 @@ class _CartPageState extends State<CartPage> {
 
   @override
   void initState() {
+    get_storedToken();
+
     future_cart =
-        fetch_cartList("529", "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS");
+        fetch_cartList(widget.user_id.toString(), widget.user_token.toString());
     super.initState();
   }
 
@@ -106,7 +113,7 @@ class _CartPageState extends State<CartPage> {
                 ),
               ),
               Text(
-                "สินค้าในรถเข็น",
+                'ตะกร้าสินค้า',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
@@ -182,10 +189,10 @@ class _CartPageState extends State<CartPage> {
                                     ],
                                   ),
                                   FutureBuilder<List<ProductSkus>>(
-                                    future: fetch_cartSku(
-                                        "529",
-                                        "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS",
-                                        index),
+                                    // "529",
+                                    // "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS",
+                                    future:
+                                        fetch_cartSku(userID, userToken, index),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         List<ProductSkus>? data = snapshot.data;
@@ -321,7 +328,6 @@ class _CartPageState extends State<CartPage> {
                                                                                 const EdgeInsets.all(8.0),
                                                                             child:
                                                                                 Text(
-                                                                              //!counter
                                                                               data[index222].unit.toString(),
                                                                               textAlign: TextAlign.center,
                                                                               style: TextStyle(fontWeight: FontWeight.bold),
