@@ -24,7 +24,6 @@ class _SemensPageState extends State<SemensPage> {
   }
 
   @override
-  
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(

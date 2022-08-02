@@ -358,11 +358,6 @@ class Image_Cart {
   }
 }
 
-class cartList {
-  String? main;
-  String? thumbnail;
-}
-
 class Images {
   String? title;
   String? main;
@@ -375,7 +370,6 @@ class Images {
     main = json['main'];
     thumbnail = json['thumbnail'];
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;

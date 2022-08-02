@@ -641,47 +641,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                     children: [
                                       SvgPicture.asset(
                                           'assets/images/groupStar.svg'),
-                                      // Row(
-                                      //   children: [
-                                      //     InkWell(
-                                      //         onTap: () {
-                                      //           _minus();
-                                      //         },
-                                      //         child: SvgPicture.asset(
-                                      //           'assets/images/minus.svg',
-                                      //           width: 20,
-                                      //         )),
-                                      //     SizedBox(
-                                      //       width: 10,
-                                      //     ),
-                                      //     Container(
-                                      //       width: 40,
-                                      //       decoration: BoxDecoration(
-                                      //           border: Border.all(
-                                      //               color: Color.fromARGB(
-                                      //                   255, 130, 130, 130)),
-                                      //           borderRadius: BorderRadius.all(
-                                      //               Radius.circular(10))),
-                                      //       child: Padding(
-                                      //         padding:
-                                      //             const EdgeInsets.all(8.0),
-                                      //         child: Text(
-                                      //           "${_counter}",
-                                      //           textAlign: TextAlign.center,
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     SizedBox(
-                                      //       width: 10,
-                                      //     ),
-                                      //     InkWell(
-                                      //         onTap: () {
-                                      //           _pluss();
-                                      //         },
-                                      //         child: SvgPicture.asset(
-                                      //             'assets/images/pluss.svg')),
-                                      //   ],
-                                      // )
                                     ],
                                   ),
                                 ],

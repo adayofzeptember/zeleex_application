@@ -434,7 +434,9 @@ class Links {
     return data;
   }
 }
-   
+
+
+
 Future<List<Data_Blog_Detail>> fetch_Blog_readAll555() async {
   final response =
       await http.get(Uri.parse('https://api.zeleex.com/api/blogs'));
@@ -442,14 +444,9 @@ Future<List<Data_Blog_Detail>> fetch_Blog_readAll555() async {
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];
   if (response.statusCode == 200) {
-   
     //print(jsonCon);
     return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
   } else {
     throw Exception("error...");
   }
 }
-
-// void main(List<String> args) {
-//   fetch_Blog_readAll();
-// }

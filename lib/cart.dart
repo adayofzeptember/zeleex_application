@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'package:zeleex_application/register.dart';
@@ -30,6 +31,7 @@ class _CartPageState extends State<CartPage> {
   bool isChecked = false;
   int totalPrice = 0;
   late Future<List<Store>> future_cart;
+  late Provider_CartRemove _provider_cartRemove;
   String userID = "";
   String userToken = "";
 
@@ -78,9 +80,9 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     get_storedToken();
-
     future_cart =
         fetch_cartList(widget.user_id.toString(), widget.user_token.toString());
+    _provider_cartRemove = Provider_CartRemove();
     super.initState();
   }
 
@@ -190,8 +192,6 @@ class _CartPageState extends State<CartPage> {
                                     ],
                                   ),
                                   FutureBuilder<List<ProductSkus>>(
-                                    // "529",
-                                    // "1296|udt2Cew91x169EJ7Iy2TGh01oUagO3xsNaGCwkCS",
                                     future:
                                         fetch_cartSku(userID, userToken, index),
                                     builder: (context, snapshot) {
@@ -280,8 +280,28 @@ class _CartPageState extends State<CartPage> {
                                                                             51),
                                                                   ),
                                                                 ),
-                                                                SvgPicture.asset(
-                                                                    'assets/images/x.svg')
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    _provider_cartRemove
+                                                                            .cart_id =
+                                                                        "1";
+                                                                    print(
+                                                                        userToken);
+                                                                    print(data[
+                                                                            index222]
+                                                                        .cartId
+                                                                        .toString());
+                                                                    //* ส่งไปที่ showDialogcontext  ส่ง ตัว provider ไปจัดการต่อ  พอกดลบแล้วค่อยเรียกฟังชั่น cart_remove
+                                                                    // show_deleteConfirmDialog(
+                                                                    //     context,
+                                                                    //     "55555");
+                                                                  },
+                                                                  child:
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                    'assets/images/x.svg',
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
                                                             SizedBox(
@@ -402,7 +422,7 @@ class _CartPageState extends State<CartPage> {
               ),
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
-                height: 90,
+                height: 85,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -485,4 +505,51 @@ class _CartPageState extends State<CartPage> {
       ),
     );
   }
+}
+
+show_deleteConfirmDialog(
+    BuildContext context, String x, Provider_CartRemove xe) {
+  Widget cancelButton = TextButton(
+    child: Text(
+      "ยกเลิก",
+      style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
+    ),
+    onPressed: () {
+      Navigator.of(context, rootNavigator: true).pop();
+    },
+  );
+  Widget confirmButton = TextButton(
+    child: Text(
+      "ลบ",
+      style: TextStyle(color: Colors.red),
+    ),
+    onPressed: () {
+      // cart_remove(xe, token)
+      print(x);
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text("ลบสินค้าในตะกร้า",
+        style: TextStyle(color: Colors.red, fontSize: 25)),
+    content: Padding(
+      padding: const EdgeInsets.only(top: 0),
+      child: Text(
+        "ต้องการลบสินค้า...ออกจากตะกร้า?",
+        style: TextStyle(fontSize: 13),
+      ),
+    ),
+    actions: [
+      cancelButton,
+      confirmButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

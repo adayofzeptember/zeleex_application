@@ -60,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future useFacebook_toLogin() async {
+    //*ทำก่อน login social
     await FacebookAuth.instance
         .login(permissions: ["public_profile", "email"]).then((value) {
       FacebookAuth.instance.getUserData().then((userData) {
@@ -72,14 +73,13 @@ class _LoginPageState extends State<LoginPage> {
         request_social.provider = "facebook";
         request_social.provider_id = "1";
         login_Social(request_social);
-        print(json.encode(request_social).toString());
-        ;
       });
     });
     print(FacebookAuth.instance.accessToken);
   }
 
   Future<dynamic> useGoogle_toLogin() async {
+    //*ทำก่อน login social
     final userGoogle = await GoogoleSignInApi.google_SignIn2();
     GoogoleSignInApi.google_SignIn2().then((result) {
       setState(() {
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  //!------------------------------- เข้าสู่ระบบ-------------------------------------------------------
+  //*------------------------------- เข้าสู่ระบบ-------------------------------------------------------
   Future<Login_Data> loginNormal(RequestModel_zeleex requestModel) async {
     String urlPost = "https://api.zeleex.com/api/login";
     var body_Login = json.encode(requestModel_zeleex.toJson());
@@ -203,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-//!-----------------------------------------------------------------------------------------------------------
+//*-----------------------------------------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
