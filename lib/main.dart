@@ -27,11 +27,8 @@ class First_Page extends StatelessWidget {
       ),
       home: MainAndIcon(),
     );
-
   }
 }
-
-
 
 class MainAndIcon extends StatefulWidget {
   MainAndIcon({Key? key}) : super(key: key);
@@ -45,7 +42,6 @@ class _MainAndIconState extends State<MainAndIcon> {
     super.initState();
     Load_AndGo();
   }
-
 
   Future<void> Load_AndGo() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();

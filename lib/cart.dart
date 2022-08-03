@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_launcher_icons/utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -34,17 +35,16 @@ class _CartPageState extends State<CartPage> {
   late Provider_CartRemove _provider_cartRemove;
   String userID = "";
   String userToken = "";
+  String? productName_forDialog;
 
   Future get_storedToken() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var x = prefs2.get('keyToken');
     var y = prefs2.get('keyID');
-
     setState(() {
       userID = y.toString();
       userToken = x.toString();
     });
-    print(userID + " " + userToken);
   }
 
   Future<List<Store>> fetch_cartList(
@@ -58,7 +58,6 @@ class _CartPageState extends State<CartPage> {
           'Authorization': 'Bearer $userToken222',
         });
     var jsonResponse = json.decode(response.body);
-
     List jsonCon = jsonResponse['data']['store'];
 
     for (var loop = 0; loop < jsonCon.length; loop++) {
@@ -281,27 +280,47 @@ class _CartPageState extends State<CartPage> {
                                                                   ),
                                                                 ),
                                                                 InkWell(
-                                                                  onTap: () {
-                                                                    _provider_cartRemove
-                                                                            .cart_id =
-                                                                        "1";
-                                                                    print(
-                                                                        userToken);
-                                                                    print(data[
-                                                                            index222]
-                                                                        .cartId
-                                                                        .toString());
-                                                                    //* ส่งไปที่ showDialogcontext  ส่ง ตัว provider ไปจัดการต่อ  พอกดลบแล้วค่อยเรียกฟังชั่น cart_remove
-                                                                    // show_deleteConfirmDialog(
-                                                                    //     context,
-                                                                    //     "55555");
-                                                                  },
-                                                                  child:
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                    'assets/images/x.svg',
-                                                                  ),
-                                                                ),
+                                                                    onTap: () {
+                                                                      setState(
+                                                                          () {
+                                                                        _provider_cartRemove
+                                                                            .cart_id = data[
+                                                                                index222]
+                                                                            .cartId
+                                                                            .toString();
+
+                                                                        productName_forDialog = data[index222]
+                                                                            .name
+                                                                            .toString();
+                                                                      });
+
+                                                                      // print(json
+                                                                      //         .encode(_provider_cartRemove)
+                                                                      //         .toString() +
+                                                                      //     " ---- " +
+                                                                      //     userToken);
+
+                                                                      show_deleteConfirmDialog(
+                                                                          context,
+                                                                          _provider_cartRemove,
+                                                                          userID,
+                                                                          userToken,
+                                                                          productName_forDialog
+                                                                              .toString());
+                                                                    },
+                                                                    child: Text(
+                                                                      'ลบ',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .red,
+                                                                      ),
+                                                                    )
+                                                                    //     SvgPicture
+                                                                    //         .asset(
+                                                                    //   'assets/images/x.svg',
+                                                                    // ),
+                                                                    ),
                                                               ],
                                                             ),
                                                             SizedBox(
@@ -412,13 +431,16 @@ class _CartPageState extends State<CartPage> {
                           );
                         });
                   } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
+                    return Text("ไม่มีสินค้าในตะกร้า ");
                   }
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 100, top: 100),
                     child: Text('โปรดรอสักครู่...'),
                   );
                 },
+              ),
+              SizedBox(
+                height: 5,
               ),
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
@@ -505,51 +527,81 @@ class _CartPageState extends State<CartPage> {
       ),
     );
   }
-}
 
-show_deleteConfirmDialog(
-    BuildContext context, String x, Provider_CartRemove xe) {
-  Widget cancelButton = TextButton(
-    child: Text(
-      "ยกเลิก",
-      style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
-    ),
-    onPressed: () {
-      Navigator.of(context, rootNavigator: true).pop();
-    },
-  );
-  Widget confirmButton = TextButton(
-    child: Text(
-      "ลบ",
-      style: TextStyle(color: Colors.red),
-    ),
-    onPressed: () {
-      // cart_remove(xe, token)
-      print(x);
-    },
-  );
-
-  AlertDialog alert = AlertDialog(
-    title: Text("ลบสินค้าในตะกร้า",
-        style: TextStyle(color: Colors.red, fontSize: 25)),
-    content: Padding(
-      padding: const EdgeInsets.only(top: 0),
+  show_deleteConfirmDialog(
+    BuildContext context,
+    Provider_CartRemove provider_remove_cart,
+    String dialogUserID,
+    String dialogUserToken,
+    String dialogPrdName,
+  ) {
+    Widget cancelButton = TextButton(
       child: Text(
-        "ต้องการลบสินค้า...ออกจากตะกร้า?",
-        style: TextStyle(fontSize: 13),
+        "ยกเลิก",
+        style: TextStyle(color: Color.fromARGB(255, 99, 99, 99)),
       ),
-    ),
-    actions: [
-      cancelButton,
-      confirmButton,
-    ],
-  );
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    Widget confirmButton = TextButton(
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all(Color.fromARGB(117, 244, 67, 54))),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(9, 1, 9, 1),
+        child: Text(
+          "ลบ",
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
+      onPressed: () {
+        cart_remove(provider_remove_cart, dialogUserToken);
+        Navigator.of(context, rootNavigator: true).pop();
+        setState(() {
+          totalPrice = 0;
+        });
+        initState();
+        
 
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+        //  Navigator.of(context).pushReplacement(
+        //       MaterialPageRoute(builder: (context) => CartPage(user_id: dialogUserID, user_token: dialogUserToken,)));
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("ลบสินค้าในตะกร้า",
+          style: TextStyle(color: Colors.red, fontSize: 20)),
+      content: Row(
+        children: [
+          Text(
+            "ต้องการลบสินค้า ",
+            style: TextStyle(
+              fontSize: 15,
+            ),
+          ),
+          Text(dialogPrdName.toString(),
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Palette.kToDark,
+                  fontWeight: FontWeight.bold)),
+          Text(" ออกจากตะกร้า ?",
+              style: TextStyle(
+                fontSize: 15,
+              )),
+        ],
+      ),
+      actions: [
+        cancelButton,
+        confirmButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }

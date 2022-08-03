@@ -98,7 +98,7 @@ class Provider_CartRemove {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.cart_id;
+    data['id'] = this.cart_id;
     return data;
   }
 }
@@ -117,12 +117,10 @@ Future<Cart_Remove_oneItem> cart_remove(
     body: body_cart_remove,
   );
 
-  if (response.statusCode == 400 || response.statusCode == 200 || response.statusCode == 201) {
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    print("remove success");
     return Cart_Remove_oneItem.fromJson(json.decode(response.body));
   } else {
     throw Exception("error");
   }
 }
-
-
-
