@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_launcher_icons/utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
@@ -333,8 +334,10 @@ class _CartPageState extends State<CartPage> {
                                                               children: [
                                                                 Text(
                                                                   '฿ ' +
-                                                                      unit_price
-                                                                          .toString(),
+                                                                      NumberFormat(
+                                                                              "#,###,###")
+                                                                          .format(
+                                                                              int.parse(unit_price.toString())),
                                                                   style: TextStyle(
                                                                       color: Palette
                                                                           .kToDark,
@@ -438,9 +441,6 @@ class _CartPageState extends State<CartPage> {
                     child: Text('โปรดรอสักครู่...'),
                   );
                 },
-              ),
-              SizedBox(
-                height: 5,
               ),
               Container(
                 color: Color.fromARGB(255, 240, 240, 240),
@@ -557,11 +557,20 @@ class _CartPageState extends State<CartPage> {
       ),
       onPressed: () {
         cart_remove(provider_remove_cart, dialogUserToken);
+        Fluttertoast.showToast(
+            msg: "ลบ " + dialogPrdName + ' ออกจากตะกร้าแล้ว',
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color.fromARGB(255, 133, 133, 133),
+            textColor: Colors.white,
+            fontSize: 15);
         Navigator.of(context, rootNavigator: true).pop();
         setState(() {
           totalPrice = 0;
+          initState();
         });
-        initState();
+        //initState();
 
         //  Navigator.of(context).pushReplacement(
         //       MaterialPageRoute(builder: (context) => CartPage(user_id: dialogUserID, user_token: dialogUserToken,)));

@@ -128,6 +128,9 @@ class _HomePageState extends State<HomePage> {
     };
   }
 
+
+
+
   Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
     return <String, dynamic>{
       'name': data.name,
