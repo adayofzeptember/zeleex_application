@@ -562,7 +562,6 @@ class _CartPageState extends State<CartPage> {
           totalPrice = 0;
         });
         initState();
-        
 
         //  Navigator.of(context).pushReplacement(
         //       MaterialPageRoute(builder: (context) => CartPage(user_id: dialogUserID, user_token: dialogUserToken,)));
