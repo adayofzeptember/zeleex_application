@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:html/parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Plate.dart';
@@ -13,6 +14,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(First_Page()));
+      
 }
 
 class First_Page extends StatelessWidget {
@@ -40,16 +42,16 @@ class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
     super.initState();
-    Load_AndGo();
+    _Load_AndGo();
   }
 
-  Future<void> Load_AndGo() async {
+  Future<void> _Load_AndGo() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var checkToken = prefs2.get('keyToken');
     if (checkToken.toString() != 'null') {
-      print("--------------> stored token: " + checkToken.toString());
+      print(" --------------> stored token: " + checkToken.toString());
     } else {
-      print("token is empty");
+      print("no token");
     }
 
     await Future.delayed(const Duration(seconds: 3), () {

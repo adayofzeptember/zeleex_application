@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
+import 'package:zeleex_application/API/Post%20Method/cart_update.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/main%206%20pages/main_widget.dart';
 import 'package:zeleex_application/register.dart';
@@ -34,8 +35,10 @@ class _CartPageState extends State<CartPage> {
   int totalPrice = 0;
   late Future<List<Store>> future_cart;
   late Provider_CartRemove _provider_cartRemove;
+  late Provider_CartUpdate _provider_cartUpdate;
   String userID = "";
   String userToken = "";
+  String realName = "";
   String? productName_forDialog;
 
   Future get_storedToken() async {
@@ -83,6 +86,7 @@ class _CartPageState extends State<CartPage> {
     future_cart =
         fetch_cartList(widget.user_id.toString(), widget.user_token.toString());
     _provider_cartRemove = Provider_CartRemove();
+    _provider_cartUpdate = Provider_CartUpdate();
     super.initState();
   }
 
@@ -169,7 +173,7 @@ class _CartPageState extends State<CartPage> {
                                       SvgPicture.asset(
                                         'assets/images/cart_store.svg',
                                         color:
-                                            Color.fromARGB(255, 104, 104, 104),
+                                            Color.fromARGB(255, 141, 141, 141),
                                       ),
                                       SizedBox(
                                         width: 10,
@@ -186,7 +190,8 @@ class _CartPageState extends State<CartPage> {
                                       ),
                                       Icon(
                                         Icons.arrow_forward_ios_rounded,
-                                        color: Colors.grey,
+                                        color:
+                                            Color.fromARGB(255, 141, 141, 141),
                                         size: 15,
                                       ),
                                     ],
@@ -197,7 +202,6 @@ class _CartPageState extends State<CartPage> {
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         List<ProductSkus>? data = snapshot.data;
-
                                         return ListView.builder(
                                             shrinkWrap: true,
                                             primary: false,
@@ -237,15 +241,15 @@ class _CartPageState extends State<CartPage> {
                                                     ),
                                                     Container(
                                                       color: Color.fromARGB(
-                                                          167, 16, 193, 158),
+                                                          83, 16, 193, 158),
                                                       child: Image.network(
                                                         data[index222]
                                                             .product!
                                                             .image!
                                                             .main
                                                             .toString(),
-                                                        width: 90,
-                                                        height: 90,
+                                                        width: 100,
+                                                        height: 100,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -262,22 +266,28 @@ class _CartPageState extends State<CartPage> {
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  data[index222]
-                                                                      .name
-                                                                      .toString(),
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    color: Color
-                                                                        .fromARGB(
+                                                              children: <
+                                                                  Widget>[
+                                                                Flexible(
+                                                                  child:
+                                                                      SizedBox(
+                                                                    height: 20,
+                                                                    child: Text(
+                                                                      data[index222]
+                                                                          .product!
+                                                                          .title
+                                                                          .toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        color: Color.fromARGB(
                                                                             255,
                                                                             51,
                                                                             51,
                                                                             51),
+                                                                      ),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                                 InkWell(
@@ -289,17 +299,14 @@ class _CartPageState extends State<CartPage> {
                                                                                 index222]
                                                                             .cartId
                                                                             .toString();
-
+                                                                        realName = data[index222]
+                                                                            .product!
+                                                                            .title
+                                                                            .toString();
                                                                         productName_forDialog = data[index222]
                                                                             .name
                                                                             .toString();
                                                                       });
-
-                                                                      // print(json
-                                                                      //         .encode(_provider_cartRemove)
-                                                                      //         .toString() +
-                                                                      //     " ---- " +
-                                                                      //     userToken);
 
                                                                       show_deleteConfirmDialog(
                                                                           context,
@@ -307,6 +314,8 @@ class _CartPageState extends State<CartPage> {
                                                                           userID,
                                                                           userToken,
                                                                           productName_forDialog
+                                                                              .toString(),
+                                                                          realName
                                                                               .toString());
                                                                     },
                                                                     child: Text(
@@ -316,16 +325,41 @@ class _CartPageState extends State<CartPage> {
                                                                         color: Colors
                                                                             .red,
                                                                       ),
-                                                                    )
-                                                                    //     SvgPicture
-                                                                    //         .asset(
-                                                                    //   'assets/images/x.svg',
-                                                                    // ),
-                                                                    ),
+                                                                    )),
                                                               ],
                                                             ),
                                                             SizedBox(
-                                                              height: 40,
+                                                              height: 5,
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  'ตัวเลือกสินค้า: ',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          141,
+                                                                          141,
+                                                                          141)),
+                                                                ),
+                                                                Text(
+                                                                    data[index222]
+                                                                        .name
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            141,
+                                                                            141,
+                                                                            141))),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              height: 27,
                                                             ),
                                                             Row(
                                                               mainAxisAlignment:
@@ -357,7 +391,17 @@ class _CartPageState extends State<CartPage> {
                                                                               border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                           child: InkWell(
-                                                                              onTap: () {},
+                                                                              onTap: () {
+                                                                                _provider_cartUpdate.cart_id = data[index222].cartId.toString();
+                                                                                _provider_cartUpdate.prd_unit = (x2 - 1).toString();
+                                                                                print(json.encode(_provider_cartUpdate));
+                                                                                print(userToken);
+                                                                                update_cartUnit(_provider_cartUpdate, userToken);
+                                                                                setState(() {
+                                                                                  totalPrice = 0;
+                                                                                });
+                                                                                initState();
+                                                                              },
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: SvgPicture.asset(
@@ -398,7 +442,18 @@ class _CartPageState extends State<CartPage> {
                                                                               border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                           child: InkWell(
-                                                                              onTap: () {},
+                                                                              onTap: () {
+                                                                                _provider_cartUpdate.cart_id = data[index222].cartId.toString();
+                                                                                _provider_cartUpdate.prd_unit = (x2 + 1).toString();
+                                                                                print(json.encode(_provider_cartUpdate));
+                                                                                print(userToken);
+                                                                                update_cartUnit(_provider_cartUpdate, userToken);
+                                                                                setState(() {
+                                                                                  totalPrice = 0;
+                                                                                });
+
+                                                                                initState();
+                                                                              },
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                 child: SvgPicture.asset(
@@ -477,7 +532,6 @@ class _CartPageState extends State<CartPage> {
                                             color: Color.fromARGB(
                                                 255, 51, 51, 51))),
                                     Text(
-                                      // totalPrice.toString(),
                                       NumberFormat("#,###,###").format(
                                           int.parse(totalPrice.toString())),
                                       style: TextStyle(
@@ -529,12 +583,12 @@ class _CartPageState extends State<CartPage> {
   }
 
   show_deleteConfirmDialog(
-    BuildContext context,
-    Provider_CartRemove provider_remove_cart,
-    String dialogUserID,
-    String dialogUserToken,
-    String dialogPrdName,
-  ) {
+      BuildContext context,
+      Provider_CartRemove provider_remove_cart,
+      String dialogUserID,
+      String dialogUserToken,
+      String dialogPrdName,
+      String dialogPrdName_main) {
     Widget cancelButton = TextButton(
       child: Text(
         "ยกเลิก",
@@ -552,7 +606,7 @@ class _CartPageState extends State<CartPage> {
         padding: const EdgeInsets.fromLTRB(9, 1, 9, 1),
         child: Text(
           "ลบ",
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         ),
       ),
       onPressed: () {
@@ -571,9 +625,6 @@ class _CartPageState extends State<CartPage> {
           initState();
         });
         //initState();
-
-        //  Navigator.of(context).pushReplacement(
-        //       MaterialPageRoute(builder: (context) => CartPage(user_id: dialogUserID, user_token: dialogUserToken,)));
       },
     );
 
@@ -588,11 +639,13 @@ class _CartPageState extends State<CartPage> {
               fontSize: 15,
             ),
           ),
-          Text(dialogPrdName.toString(),
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Palette.kToDark,
-                  fontWeight: FontWeight.bold)),
+          Flexible(
+            child: Text(dialogPrdName_main.toString(),
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Palette.kToDark,
+                    fontWeight: FontWeight.bold)),
+          ),
           Text(" ออกจากตะกร้า ?",
               style: TextStyle(
                 fontSize: 15,

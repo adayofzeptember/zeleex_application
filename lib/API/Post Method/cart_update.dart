@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 
-class Cart_Remove_oneItem {
+class Cart_Update {
   String? responseCode;
   String? responseStatus;
   String? responseMessage;
@@ -12,7 +11,7 @@ class Cart_Remove_oneItem {
   String? serverDatetime;
   Data? data;
 
-  Cart_Remove_oneItem(
+  Cart_Update(
       {this.responseCode,
       this.responseStatus,
       this.responseMessage,
@@ -21,7 +20,7 @@ class Cart_Remove_oneItem {
       this.serverDatetime,
       this.data});
 
-  Cart_Remove_oneItem.fromJson(Map<String, dynamic> json) {
+  Cart_Update.fromJson(Map<String, dynamic> json) {
     responseCode = json['responseCode'];
     responseStatus = json['responseStatus'];
     responseMessage = json['responseMessage'];
@@ -50,7 +49,7 @@ class Data {
   int? id;
   String? createdAt;
   String? updatedAt;
-  String? deletedAt;
+  Null? deletedAt;
   int? userId;
   int? storeId;
   int? productSkuId;
@@ -91,37 +90,38 @@ class Data {
   }
 }
 
-class Provider_CartRemove {
+class Provider_CartUpdate {
   String? cart_id;
+  String? prd_unit;
 
-  Provider_CartRemove({this.cart_id});
+  Provider_CartUpdate({this.cart_id, this.prd_unit});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.cart_id;
-
+    data['unit'] = this.prd_unit;
     return data;
   }
 }
 
-Future<Cart_Remove_oneItem> cart_remove(
-    Provider_CartRemove provider_cart_remove, String token) async {
-  String urlDelete = "https://api.zeleex.com/api/cart/remove";
-  var body_cart_remove = json.encode(provider_cart_remove.toJson());
- 
-  final response = await http.delete(
-    Uri.parse(urlDelete),
+Future<Cart_Update> update_cartUnit(
+    Provider_CartUpdate provider_cartUpdate, String userToken) async {
+  String urlPost = "https://api.zeleex.com/api/cart/update";
+  var body_UpdateCart = json.encode(provider_cartUpdate.toJson());
+  final response = await http.post(
+    Uri.parse(urlPost),
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer $userToken'
     },
-    body: body_cart_remove,
+    body: body_UpdateCart,
   );
-
-  if (response.statusCode == 200 || response.statusCode == 201) {
-    print("remove success");
-    return Cart_Remove_oneItem.fromJson(json.decode(response.body));
+  if (response.statusCode == 400 ||
+      response.statusCode >= 200 && response.statusCode <= 299) {
+    var jsonRes = json.decode(response.body);
+    print('update success');
+    return Cart_Update.fromJson(json.decode(response.body));
   } else {
     throw Exception("error");
   }

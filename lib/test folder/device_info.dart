@@ -7,34 +7,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../Plate.dart';
-      // 'version.securityPatch': build.version.securityPatch,
-      // 'version.sdkInt': build.version.sdkInt,
-      // 'version.release': build.version.release,
-      // 'version.previewSdkInt': build.version.previewSdkInt,
-      // 'version.incremental': build.version.incremental,
-      // 'version.codename': build.version.codename,
-      // 'version.baseOS': build.version.baseOS,
-      // 'board': build.board,
-      // 'bootloader': build.bootloader,
-      // 'brand': build.brand,
-      // 'device': build.device,
-      // 'display': build.display,
-      // 'fingerprint': build.fingerprint,
-      // 'hardware': build.hardware,
-      // 'host': build.host,
-      // 'id': build.id,
-      // 'manufacturer': build.manufacturer,
-      // 'model': build.model,
-      // 'product': build.product,
-      // 'supported32BitAbis': build.supported32BitAbis,
-      // 'supported64BitAbis': build.supported64BitAbis,
-      // 'supportedAbis': build.supportedAbis,
-      // 'tags': build.tags,
-      // 'type': build.type,
-      // 'isPhysicalDevice': build.isPhysicalDevice,
-      // 'androidId': build.androidId,
-      // 'systemFeatures': build.systemFeatures,
-      
+// 'version.securityPatch': build.version.securityPatch,
+// 'version.sdkInt': build.version.sdkInt,
+// 'version.release': build.version.release,
+// 'version.previewSdkInt': build.version.previewSdkInt,
+// 'version.incremental': build.version.incremental,
+// 'version.codename': build.version.codename,
+// 'version.baseOS': build.version.baseOS,
+// 'board': build.board,
+// 'bootloader': build.bootloader,
+// 'brand': build.brand,
+// 'device': build.device,
+// 'display': build.display,
+// 'fingerprint': build.fingerprint,
+// 'hardware': build.hardware,
+// 'host': build.host,
+// 'id': build.id,
+// 'manufacturer': build.manufacturer,
+// 'model': build.model,
+// 'product': build.product,
+// 'supported32BitAbis': build.supported32BitAbis,
+// 'supported64BitAbis': build.supported64BitAbis,
+// 'supportedAbis': build.supportedAbis,
+// 'tags': build.tags,
+// 'type': build.type,
+// 'isPhysicalDevice': build.isPhysicalDevice,
+// 'androidId': build.androidId,
+// 'systemFeatures': build.systemFeatures,
+
 void main() {
   runApp(const HomePage());
 }
@@ -75,7 +75,6 @@ class _HomePageState extends State<HomePage> {
         'Error:': 'Failed to get platform version.'
       };
     }
-
 
     setState(() {
       _deviceData = deviceData;
@@ -119,7 +118,7 @@ class _HomePageState extends State<HomePage> {
       // 'androidId': build.androidId,
       // 'systemFeatures': build.systemFeatures,
       'version.sdkInt': build.version.sdkInt,
-      'Android Version': build.version.release,     
+      'Android Version': build.version.release,
       'version.release': build.version.release,
       'device': build.device,
       'device id': build.id,
@@ -127,9 +126,6 @@ class _HomePageState extends State<HomePage> {
       'androidId': build.androidId,
     };
   }
-
-
-
 
   Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
     return <String, dynamic>{
@@ -160,20 +156,18 @@ class _HomePageState extends State<HomePage> {
             statusBarBrightness: Brightness.light,
             statusBarColor: Palette.kToDark,
           ),
-          title: Text(
-            "test"            // Platform.isAndroid
-            //     ? 'Android Device Info'
-            //     : Platform.isIOS
-            //         ? 'iOS Device Info'
-            //         : '',
-          ),
+          title: Text("test" // Platform.isAndroid
+              //     ? 'Android Device Info'
+              //     : Platform.isIOS
+              //         ? 'iOS Device Info'
+              //         : '',
+              ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,    
-          
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("zeleex เวอร์ชั่น: "+appVersion),
+            Text("zeleex เวอร์ชั่น: " + appVersion),
             Expanded(
               child: ListView(
                 children: _deviceData.keys.map(
@@ -185,18 +179,16 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             property,
                             style: const TextStyle(
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.bold, 
                             ),
                           ),
                         ),
                         Expanded(
                             child: Container(
-                          padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                          child: Text(
-                            '${_deviceData[property]}',
-                            maxLines: 10,
-                            overflow: TextOverflow.ellipsis
-                          ),
+                          padding:
+                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                          child: Text('${_deviceData[property]}',
+                              maxLines: 10, overflow: TextOverflow.ellipsis),
                         )),
                       ],
                     );
