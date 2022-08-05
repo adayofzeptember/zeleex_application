@@ -436,7 +436,6 @@ class Links {
 }
 
 
-
 Future<List<Data_Blog_Detail>> fetch_Blog_readAll555() async {
   final response =
       await http.get(Uri.parse('https://api.zeleex.com/api/blogs'));
@@ -447,6 +446,6 @@ Future<List<Data_Blog_Detail>> fetch_Blog_readAll555() async {
     //print(jsonCon);
     return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
   } else {
-    throw Exception("error...");
+    throw Exception("error");
   }
 }

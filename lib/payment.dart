@@ -476,121 +476,23 @@ class _PaymentPageState extends State<PaymentPage> {
                                 ),
                               );
                             },
-                            child: Text(
-                              "ช่องทางการชำระเงินทั้งหมด >",
-                              style: TextStyle(
+                            child: Row(
+                              children: [
+                                Text(
+                                  "ช่องทางการชำระเงินทั้งหมด",
+                                  style: TextStyle(
+                                      color: Palette.kToDark,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_right_outlined,
                                   color: Palette.kToDark,
-                                  fontWeight: FontWeight.bold),
+                                )
+                              ],
                             ),
                           )
                         ],
                       ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // Container(
-                      //   width: double.infinity,
-                      //   child: SingleChildScrollView(
-                      //     scrollDirection: Axis.horizontal,
-                      //     child: Row(
-                      //       children: <Widget>[
-                      //         ToggleButtons(
-                      //           color: Colors.grey,
-                      //           borderRadius: BorderRadius.only(
-                      //               topLeft: Radius.circular(10),
-                      //               bottomLeft: Radius.circular(10),
-                      //               topRight: Radius.circular(10),
-                      //               bottomRight: Radius.circular(10)),
-                      //           children: <Widget>[
-                      //             Container(
-                      //               decoration: BoxDecoration(
-                      //                   border: Border.all(
-                      //                       color: Color.fromARGB(
-                      //                           255, 227, 228, 227))),
-                      //               child: Padding(
-                      //                 padding: const EdgeInsets.all(10.0),
-                      //                 child: Column(
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     Row(
-                      //                       children: [
-                      //                         SvgPicture.asset(
-                      //                           'assets/images/cash.svg',
-                      //                         ),
-                      //                         VerticalDivider(
-                      //                           width: 5,
-                      //                         ),
-                      //                         Text(
-                      //                           "ธนาคารกสิกรไทย (*3446)",
-                      //                           style: TextStyle(
-                      //                               color: Color.fromARGB(
-                      //                                   255, 130, 130, 130),
-                      //                               fontWeight:
-                      //                                   FontWeight.bold),
-                      //                         )
-                      //                       ],
-                      //                     ),
-                      //                     SizedBox(
-                      //                       height: 20,
-                      //                     ),
-                      //                     Text("บัตรเครดิต/เดบิต",
-                      //                         style: TextStyle(
-                      //                             color: Color.fromARGB(
-                      //                                 255, 130, 130, 130)))
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             Container(
-                      //               decoration: BoxDecoration(
-                      //                   //
-                      //                   border: Border.all(
-                      //                       color: Color.fromARGB(
-                      //                           255, 227, 228, 227))),
-                      //               child: Padding(
-                      //                 padding: const EdgeInsets.all(10.0),
-                      //                 child: Column(
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     Row(
-                      //                       children: [
-                      //                         SvgPicture.asset(
-                      //                           'assets/images/cash.svg',
-                      //                         ),
-                      //                         VerticalDivider(
-                      //                           width: 5,
-                      //                         ),
-                      //                         Text(
-                      //                           "เก็บเงินปลายทาง",
-                      //                           style: TextStyle(
-                      //                               color: Color.fromARGB(
-                      //                                   255, 130, 130, 130),
-                      //                               fontWeight:
-                      //                                   FontWeight.bold),
-                      //                         )
-                      //                       ],
-                      //                     ),
-                      //                     SizedBox(
-                      //                       height: 20,
-                      //                     ),
-                      //                     Text("ชำระเงินเมื่อได้รับสินค้า",
-                      //                         style: TextStyle(
-                      //                             color: Color.fromARGB(
-                      //                                 255, 130, 130, 130)))
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ],
-                      //           onPressed: switchClick,
-                      //           isSelected: isSelected,
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(
                         height: 10,
                       ),
@@ -627,7 +529,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 15,
+                                  ),
+                                  SizedBox(
+                                    height: 5,
                                   ),
                                   Text("บัตรเครดิต/เดบิต",
                                       style: TextStyle(
@@ -637,7 +542,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             ),
                           )),
-                          VerticalDivider(width: 5.0),
+                          VerticalDivider(width: 5),
                           Expanded(
                               child: Container(
                             decoration: BoxDecoration(
@@ -679,49 +584,41 @@ class _PaymentPageState extends State<PaymentPage> {
                           )),
                         ],
                       ),
-
                       SizedBox(
                         height: 20,
                       ),
                       Container(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.grey[200]),
-                              width: double.infinity,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'กรุณาระบุคูปองส่วนลด',
-                                  // // prefixIcon: ImageIcon(
-                                  // //   AssetImage(
-                                  // //     "assets/images/new/cupon.png",
-                                  // //   ),
-                                  // ),
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: SvgPicture.asset(
-                                        'assets/images/ticket.svg',
-                                        color: Colors.grey),
-                                  ),
-
-                                  hintStyle: TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 214, 214, 214)),
-                                  fillColor: Color.fromARGB(179, 228, 14, 14),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(
-                                        color: Colors.transparent, width: 0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(
-                                        color: Colors.transparent, width: 0),
-                                  ),
-                                ),
-                              ))),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[200]),
+                          width: double.infinity,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'กรุณาระบุคูปองส่วนลด',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: SvgPicture.asset(
+                                    'assets/images/ticket.svg',
+                                    color: Colors.grey),
+                              ),
+                              hintStyle: TextStyle(
+                                  color:
+                                      Color.fromARGB(255, 214, 214, 214)),
+                              fillColor: Color.fromARGB(179, 228, 14, 14),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 0),
+                              ),
+                            ),
+                          )),
                       SizedBox(
                         height: 10,
                       ),

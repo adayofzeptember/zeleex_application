@@ -308,8 +308,7 @@ class _CartPageState extends State<CartPage> {
                                                                             .toString();
                                                                       });
 
-                                                                      show_deleteConfirmDialog(
-                                                                          context,
+                                                                      showDialog(
                                                                           _provider_cartRemove,
                                                                           userID,
                                                                           userToken,
@@ -317,6 +316,16 @@ class _CartPageState extends State<CartPage> {
                                                                               .toString(),
                                                                           realName
                                                                               .toString());
+
+                                                                      // show_deleteConfirmDialog(
+                                                                      //     context,
+                                                                      //     _provider_cartRemove,
+                                                                      //     userID,
+                                                                      //     userToken,
+                                                                      //     productName_forDialog
+                                                                      //         .toString(),
+                                                                      //     realName
+                                                                      //         .toString());
                                                                     },
                                                                     child: Text(
                                                                       'ลบ',
@@ -582,86 +591,144 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  show_deleteConfirmDialog(
-      BuildContext context,
-      Provider_CartRemove provider_remove_cart,
-      String dialogUserID,
-      String dialogUserToken,
-      String dialogPrdName,
-      String dialogPrdName_main) {
-    Widget cancelButton = TextButton(
-      child: Text(
-        "ยกเลิก",
-        style: TextStyle(color: Color.fromARGB(255, 99, 99, 99)),
-      ),
-      onPressed: () {
-        Navigator.of(context, rootNavigator: true).pop();
-      },
-    );
-    Widget confirmButton = TextButton(
-      style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all(Color.fromARGB(117, 244, 67, 54))),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(9, 1, 9, 1),
-        child: Text(
-          "ลบ",
-          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-        ),
-      ),
-      onPressed: () {
-        cart_remove(provider_remove_cart, dialogUserToken);
-        Fluttertoast.showToast(
-            msg: "ลบ " + dialogPrdName + ' ออกจากตะกร้าแล้ว',
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.SNACKBAR,
-            timeInSecForIosWeb: 2,
-            backgroundColor: Color.fromARGB(255, 133, 133, 133),
-            textColor: Colors.white,
-            fontSize: 15);
-        Navigator.of(context, rootNavigator: true).pop();
-        setState(() {
-          totalPrice = 0;
-          initState();
-        });
-        //initState();
-      },
-    );
+//   show_deleteConfirmDialog(
+//       BuildContext context,
+//       Provider_CartRemove provider_remove_cart,
+//       String dialogUserID,
+//       String dialogUserToken,
+//       String dialogPrdName,
+//       String dialogPrdName_main) {
+//     Widget cancelButton = TextButton(
+  // child: Text(
+  //     "ยกเลิก",
+  //     style: TextStyle(color: Color.fromARGB(255, 99, 99, 99)),
+  //   ),
+  //   onPressed: () {
+  //     Navigator.of(context, rootNavigator: true).pop();
+  //   },
+  // );
+  // Widget confirmButton = TextButton(
+  //   style: ButtonStyle(
+  //       backgroundColor:
+  //           MaterialStateProperty.all(Color.fromARGB(117, 244, 67, 54))),
+  //   child: Padding(
+  //     padding: const EdgeInsets.fromLTRB(9, 1, 9, 1),
+  //     child: Text(
+  //       "ลบ",
+  //       style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+  //     ),
+  //   ),
+  //   onPressed: () {
+  //     cart_remove(provider_remove_cart, dialogUserToken);
+  //     Fluttertoast.showToast(
+  //         msg: "ลบ " + dialogPrdName + ' ออกจากตะกร้าแล้ว',
+  //         toastLength: Toast.LENGTH_LONG,
+  //         gravity: ToastGravity.SNACKBAR,
+  //         timeInSecForIosWeb: 2,
+  //         backgroundColor: Color.fromARGB(255, 133, 133, 133),
+  //         textColor: Colors.white,
+  //         fontSize: 15);
+  //     Navigator.of(context, rootNavigator: true).pop();
+  //     setState(() {
+  //       totalPrice = 0;
+  //       initState();
+  //     });
+  //     //initState();
+  //   },
+  // );
 
-    AlertDialog alert = AlertDialog(
-      title: Text("ลบสินค้าในตะกร้า",
-          style: TextStyle(color: Colors.red, fontSize: 20)),
-      content: Row(
-        children: [
-          Text(
-            "ต้องการลบสินค้า ",
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-          Flexible(
-            child: Text(dialogPrdName_main.toString(),
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Palette.kToDark,
-                    fontWeight: FontWeight.bold)),
-          ),
-          Text(" ออกจากตะกร้า ?",
-              style: TextStyle(
-                fontSize: 15,
-              )),
-        ],
-      ),
-      actions: [
-        cancelButton,
-        confirmButton,
-      ],
-    );
+//     AlertDialog alert = AlertDialog(
+//       title: Text("ลบสินค้าในตะกร้า",
+//           style: TextStyle(color: Colors.red, fontSize: 20)),
+//       content: Row(
+//         children: [
+//           Text(
+//             "ต้องการลบสินค้า ",
+//             style: TextStyle(
+//               fontSize: 15,
+//             ),
+//           ),
+//           Flexible(
+//             child: Text(dialogPrdName_main.toString(),
+//                 style: TextStyle(
+//                     fontSize: 15,
+//                     color: Palette.kToDark,
+//                     fontWeight: FontWeight.bold)),
+//           ),
+//           Text(" ออกจากตะกร้า ?",
+//               style: TextStyle(
+//                 fontSize: 15,
+//               )),
+//         ],
+//       ),
+//       actions: [
+//         cancelButton,
+//         confirmButton,
+//       ],
+//     );
 
-    showDialog(
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return alert;
+//       },
+//     );
+//   }
+// }
+
+  void showDialog(Provider_CartRemove provider_remove_cart, String dialogUserID,
+      String dialogUserToken, String dialogPrdName, String dialogPrdName_main) {
+    showCupertinoDialog(
       context: context,
-      builder: (BuildContext context) {
-        return alert;
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CupertinoAlertDialog(
+            title: Text(
+              "ลบสินค้าออกจากตะกร้า",
+            ),
+            content: Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                "ต้องการลบ " + dialogPrdName_main + ' ออกจากตะกร้า ?',
+                style: TextStyle(fontFamily: 'Kanit'),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            actions: [
+              CupertinoDialogAction(
+                  child: Text(
+                    "ยกเลิก",
+                    style: TextStyle(fontFamily: 'Kanit'),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+              CupertinoDialogAction(
+                child: Text(
+                  "ลบ",
+                  style: TextStyle(fontFamily: 'Kanit', color: Colors.red),
+                ),
+                onPressed: () {
+                  cart_remove(provider_remove_cart, dialogUserToken);
+                  Fluttertoast.showToast(
+                      msg: "ลบ " + dialogPrdName_main + ' ออกจากตะกร้าแล้ว',
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.SNACKBAR,
+                      timeInSecForIosWeb: 2,
+                      backgroundColor: Color.fromARGB(255, 133, 133, 133),
+                      textColor: Colors.white,
+                      fontSize: 15);
+                  Navigator.of(context, rootNavigator: true).pop();
+                  setState(() {
+                    totalPrice = 0;
+                    initState();
+                  });
+                },
+              )
+            ],
+          ),
+        );
       },
     );
   }
