@@ -8,8 +8,8 @@ import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/test%20folder/device_info.dart';
- 
-main() {
+
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(First_Page()));
@@ -70,7 +70,7 @@ class _MainAndIconState extends State<MainAndIcon> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/Frame.png',
+        Image.asset('assets/images/Frame.png',
                 // height: MediaQuery.of(context).size.height * 0.25,
                 fit: BoxFit.cover),
           ],

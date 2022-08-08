@@ -602,8 +602,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                     color: Colors.grey),
                               ),
                               hintStyle: TextStyle(
-                                  color:
-                                      Color.fromARGB(255, 214, 214, 214)),
+                                  color: Color.fromARGB(255, 214, 214, 214)),
                               fillColor: Color.fromARGB(179, 228, 14, 14),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:

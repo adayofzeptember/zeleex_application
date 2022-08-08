@@ -45,7 +45,7 @@ class NewAPI {
       data['address'] = this.address!.toJson();
     }
     data['phone'] = this.phone;
-    
+
     data['website'] = this.website;
     if (this.company != null) {
       data['company'] = this.company!.toJson();
@@ -129,6 +129,7 @@ class Company {
 Future<NewAPI> randomDog() async {
   var url = "https://jsonplaceholder.typicode.com/users/1";
   var response = await Http.get(Uri.parse(url));
+
   NewAPI msg = NewAPI.fromJson(json.decode(response.body));
   return msg;
 }
