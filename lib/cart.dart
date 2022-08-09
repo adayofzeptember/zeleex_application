@@ -407,9 +407,10 @@ class _CartPageState extends State<CartPage> {
                                                                                 print(userToken);
                                                                                 update_cartUnit(_provider_cartUpdate, userToken);
                                                                                 setState(() {
-                                                                                  totalPrice = 0;
+                                                                                  totalPrice = totalPrice - x1;
                                                                                 });
-                                                                                initState();
+                                                                                
+                                                                                // initState();
                                                                               },
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
@@ -458,6 +459,7 @@ class _CartPageState extends State<CartPage> {
                                                                                 print(userToken);
                                                                                 update_cartUnit(_provider_cartUpdate, userToken);
                                                                                 setState(() {
+                                                                                  totalPrice = totalPrice + x1;
                                                                                   totalPrice = 0;
                                                                                 });
 
@@ -487,7 +489,7 @@ class _CartPageState extends State<CartPage> {
                                               );
                                             });
                                       } else if (snapshot.hasError) {
-                                        return Text("${snapshot.error}");
+                                        return Container();
                                       }
                                       return Container();
                                     },
@@ -498,7 +500,10 @@ class _CartPageState extends State<CartPage> {
                           );
                         });
                   } else if (snapshot.hasError) {
-                    return Text("ไม่มีสินค้าในตะกร้า ");
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 50, bottom: 50),
+                      child: Text('ไม่มีสินค้าในตะกร้า'),
+                    );
                   }
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 100, top: 100),
@@ -684,7 +689,7 @@ class _CartPageState extends State<CartPage> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: CupertinoAlertDialog(
-            title: Text( 
+            title: Text(
               "ลบสินค้าออกจากตะกร้า",
             ),
             content: Padding(
@@ -722,8 +727,10 @@ class _CartPageState extends State<CartPage> {
                   Navigator.of(context, rootNavigator: true).pop();
                   setState(() {
                     totalPrice = 0;
+
                     initState();
                   });
+                  initState();
                 },
               )
             ],

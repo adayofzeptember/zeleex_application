@@ -168,6 +168,40 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text("zeleex เวอร์ชั่น: " + appVersion),
+            Container(
+              child: SizedBox(
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 20,
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ]),
+              ),
+            ),
             Expanded(
               child: ListView(
                 children: _deviceData.keys.map(
@@ -179,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             property,
                             style: const TextStyle(
-                              fontWeight: FontWeight.bold, 
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),

@@ -74,8 +74,6 @@ class _MainAndIconState extends State<MainAndIcon> {
                 // height: MediaQuery.of(context).size.height * 0.25,
                 fit: BoxFit.cover),
           ],
-
-          
         ),
       ),
     );
