@@ -70,10 +70,12 @@ class _MainAndIconState extends State<MainAndIcon> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-        Image.asset('assets/images/Frame.png',
+            Image.asset('assets/images/Frame.png',
                 // height: MediaQuery.of(context).size.height * 0.25,
                 fit: BoxFit.cover),
           ],
+
+          
         ),
       ),
     );

@@ -684,7 +684,7 @@ class _CartPageState extends State<CartPage> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: CupertinoAlertDialog(
-            title: Text(
+            title: Text( 
               "ลบสินค้าออกจากตะกร้า",
             ),
             content: Padding(
