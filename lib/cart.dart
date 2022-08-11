@@ -61,6 +61,7 @@ class _CartPageState extends State<CartPage> {
           'Accept': 'applicationjson',
           'Authorization': 'Bearer $userToken222',
         });
+
     var jsonResponse = json.decode(response.body);
     List jsonCon = jsonResponse['data']['store'];
 
@@ -76,6 +77,7 @@ class _CartPageState extends State<CartPage> {
     if (response.statusCode == 200) {
       return jsonCon.map((data) => Store.fromJson(data)).toList();
     } else {
+      print('error');
       throw Exception('error response status');
     }
   }
@@ -101,6 +103,7 @@ class _CartPageState extends State<CartPage> {
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Palette.kToDark,
+
           ),
           backgroundColor: Palette.kToDark,
           elevation: 0.0,
@@ -409,7 +412,6 @@ class _CartPageState extends State<CartPage> {
                                                                                 setState(() {
                                                                                   totalPrice = totalPrice - x1;
                                                                                 });
-                                                                                
                                                                                 // initState();
                                                                               },
                                                                               child: Padding(
@@ -430,7 +432,7 @@ class _CartPageState extends State<CartPage> {
                                                                           child:
                                                                               Padding(
                                                                             padding:
-                                                                                const EdgeInsets.all(8.0),
+                                                                                EdgeInsets.all(8.0),
                                                                             child:
                                                                                 Text(
                                                                               data[index222].unit.toString(),
@@ -575,13 +577,12 @@ class _CartPageState extends State<CartPage> {
                             height: double.infinity,
                             color: Palette.kToDark,
                             child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                "ชำระเงิน",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            ),
+                                padding: const EdgeInsets.all(20.0),
+                                child: Text(
+                                  "ชำระเงิน",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                )),
                           ),
                         )
                       ],
@@ -727,7 +728,6 @@ class _CartPageState extends State<CartPage> {
                   Navigator.of(context, rootNavigator: true).pop();
                   setState(() {
                     totalPrice = 0;
-
                     initState();
                   });
                   initState();

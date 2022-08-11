@@ -133,6 +133,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                     height: 10,
                                   ),
                                   Padding(
+                                  
                                     padding:
                                         const EdgeInsets.fromLTRB(25, 0, 0, 0),
                                     child: Row(

@@ -100,6 +100,7 @@ class _HomePageState extends State<HomePage> {
       // 'bootloader': build.bootloader,
       // 'brand': build.brand,
       // 'device': build.device,
+
       // 'display': build.display,
       // 'fingerprint': build.fingerprint,
       // 'hardware': build.hardware,
@@ -126,6 +127,7 @@ class _HomePageState extends State<HomePage> {
       'androidId': build.androidId,
     };
   }
+  
 
   Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
     return <String, dynamic>{
@@ -185,7 +187,6 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           SizedBox(
                                             height: 20,
-                                            
                                           )
                                         ],
                                       )
