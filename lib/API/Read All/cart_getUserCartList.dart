@@ -397,7 +397,6 @@ Future<List<ProductSkus>> fetch_cartSku(
 
   if (response.statusCode == 200) {
     return jsonCon.map((data) => ProductSkus.fromJson(data)).toList();
-    
   } else {
     throw Exception('error response =! 200');
   }
