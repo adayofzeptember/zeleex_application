@@ -19,7 +19,6 @@ class First_Page extends StatelessWidget {
   const First_Page({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Kanit',
@@ -71,10 +70,10 @@ class _MainAndIconState extends State<MainAndIcon> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-  
-            Image.asset('assets/images/Frame.png',
-                // height: MediaQuery.of(context).size.height * 0.25,
-                fit: BoxFit.cover),
+            Image.asset(
+              'assets/images/Frame.png',
+              // height: MediaQuery.of(context).size.height * 0.25,
+            )
           ],
         ),
       ),

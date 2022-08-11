@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:js_util';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -343,7 +342,6 @@ class Product_Cart {
 class Image_Cart {
   String? main;
   String? thumbnail;
-
   Image_Cart({this.main, this.thumbnail});
 
   Image_Cart.fromJson(Map<String, dynamic> json) {
@@ -391,12 +389,15 @@ Future<List<ProductSkus>> fetch_cartSku(
         'Accept': 'application/json',
         'Authorization': 'Bearer $userToken',
       });
+
   final jsonResponse = json.decode(response.body) as Map<dynamic, dynamic>;
   //var jsonConTest = jsonResponse['data']['store'][0];
   //var x = jsonResponse['data']['product_all'];
   List jsonCon = jsonResponse['data']['store'][x]['product_skus'];
+
   if (response.statusCode == 200) {
     return jsonCon.map((data) => ProductSkus.fromJson(data)).toList();
+    
   } else {
     throw Exception('error response =! 200');
   }
