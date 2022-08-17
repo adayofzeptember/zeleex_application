@@ -1,16 +1,15 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'Plate.dart';
-
 import 'address_edit.dart';
 import 'payment.dart';
 
 class Payment_Address extends StatefulWidget {
   Payment_Address({Key? key}) : super(key: key);
-
   @override
   State<Payment_Address> createState() => _Payment_AddressState();
 }
@@ -84,9 +83,6 @@ class _Payment_AddressState extends State<Payment_Address> {
                   strokeCap: StrokeCap.round,
                 ),
               ),
-
-
-              
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -127,7 +123,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "(ค่าเริ่มต้น)",
+                                    "(ค่าเริ่มต้น--)",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
@@ -149,7 +145,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                               padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
                               child: Container(
                                 width: 250,
-                                child: Text("081 545 5755",
+                                child: Text("081 -545 5755",
                                     style: TextStyle(
                                         color: Color.fromARGB(
                                             255, 130, 130, 130))),
