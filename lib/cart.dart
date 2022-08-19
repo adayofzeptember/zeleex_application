@@ -103,7 +103,6 @@ class _CartPageState extends State<CartPage> {
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Palette.kToDark,
-
           ),
           backgroundColor: Palette.kToDark,
           elevation: 0.0,

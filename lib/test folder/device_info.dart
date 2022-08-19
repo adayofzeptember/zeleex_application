@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import '../Plate.dart';
 // 'version.securityPatch': build.version.securityPatch,
 // 'version.sdkInt': build.version.sdkInt,
@@ -23,6 +25,7 @@ import '../Plate.dart';
 // 'hardware': build.hardware,
 // 'host': build.host,
 // 'id': build.id,
+
 // 'manufacturer': build.manufacturer,
 // 'model': build.model,
 // 'product': build.product,
@@ -34,10 +37,6 @@ import '../Plate.dart';
 // 'isPhysicalDevice': build.isPhysicalDevice,
 // 'androidId': build.androidId,
 // 'systemFeatures': build.systemFeatures,
-
-void main() {
-  runApp(const HomePage());
-}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -80,6 +79,7 @@ class _HomePageState extends State<HomePage> {
       _deviceData = deviceData;
       appVersion = version;
     });
+
     print(deviceData['Android Version']);
     print(appName);
     print(packageName);
@@ -127,7 +127,6 @@ class _HomePageState extends State<HomePage> {
       'androidId': build.androidId,
     };
   }
-  
 
   Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
     return <String, dynamic>{

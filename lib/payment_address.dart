@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import 'Plate.dart';
 import 'address_edit.dart';
 import 'payment.dart';
@@ -16,12 +17,34 @@ class Payment_Address extends StatefulWidget {
 }
 
 class _Payment_AddressState extends State<Payment_Address> {
+  late Future<List<Data_Shipping_List>> _fetched_address2;
+  String userID = '';
+  String userToken = '';
+  bool checkDefault = false;
+
+  Future get_storedToken() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('keyToken');
+    var y = prefs2.get('keyID');
+    setState(() {
+      userID = y.toString();
+      userToken = x.toString();
+    });
+  }
+
+  initState() {
+    get_storedToken();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
             // Status bar color
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.light,
             statusBarColor: Palette.kToDark,
           ),
           automaticallyImplyLeading: false,
@@ -56,7 +79,7 @@ class _Payment_AddressState extends State<Payment_Address> {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: [
+            children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: DottedBorder(
@@ -84,91 +107,155 @@ class _Payment_AddressState extends State<Payment_Address> {
                   strokeCap: StrokeCap.round,
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddressEdit_widget(),
-                      ));
+              FutureBuilder<List<Data_Shipping_List>>(
+                future: fetch_shipping_list(userToken),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Data_Shipping_List>? data = snapshot.data;
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var getDf = data[index].default_status;
+                          if (getDf == 1) {
+                            checkDefault = true;
+                          } else {
+                            checkDefault = false;
+                          }
+                          return InkWell(
+                            splashColor: Palette.kToDark,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddressEdit_widget(),
+                                  ));
+                            },
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: Color.fromARGB(
+                                                255, 206, 206, 206)))),
+                                width: double.infinity,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 10, 20, 5),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SvgPicture.asset(
+                                                  'assets/images/pin.svg'),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                data[index].name.toString(),
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 51, 51, 51),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                checkDefault
+                                                    ? '(ค่าเริ่มต้น)'
+                                                    : '',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.red),
+                                              )
+                                            ],
+                                          ),
+                                          Text("แก้ไข >",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color.fromARGB(
+                                                      255, 130, 130, 130)))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              25, 0, 0, 0),
+                                          child: Container(
+                                            width: 250,
+                                            child: Row(
+                                              children: [
+                                                Text('เบอร์โทร: '),
+                                                Text(
+                                                  data[index].phone.toString(),
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                      Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              25, 0, 0, 0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                data[index].address.toString() +
+                                                    " " +
+                                                    data[index]
+                                                        .district
+                                                        .toString(),
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 130, 130, 130)),
+                                              ),
+                                              Text(
+                                                  data[index]
+                                                          .province
+                                                          .toString() +
+                                                      ' ' +
+                                                      data[index]
+                                                          .city
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 130, 130, 130))),
+                                              Text(
+                                                  data[index]
+                                                      .postcode
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 130, 130, 130))),
+                                            ],
+                                          )),
+                                      SizedBox(
+                                        height: 5,
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          );
+                        });
+                  } else if (snapshot.hasError) {
+                    return Container();
+                  }
+                  return Text('กรุณารอสักครู่...');
                 },
-                child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                color: Color.fromARGB(255, 206, 206, 206)))),
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 20, 20, 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset('assets/images/pin.svg'),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "Zep Pelin",
-                                    style: TextStyle(
-                                        color: Color.fromARGB(255, 51, 51, 51),
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "(ค่าเริ่มต้น)",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.red),
-                                  )
-                                  
-                                ],
-                              ),
-                              Text("แก้ไข >",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color:
-                                          Color.fromARGB(255, 130, 130, 130)))
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
-                              child: Container(
-                                width: 250,
-                                child: Text("081 -545 5755",
-                                    style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 130, 130, 130))),
-                              )),
-                          Padding(
-                              padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
-                              child: Container(
-                                width: 250,
-                                child: Text(
-                                  "444/44 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
-                                  style: TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 130, 130, 130)),
-                                ),
-                              )),
-                          SizedBox(
-                            height: 5,
-                          )
-                        ],
-                      ),
-                    )),
               ),
             ],
           ),

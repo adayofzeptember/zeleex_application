@@ -56,8 +56,6 @@ class _PaymentPageState extends State<PaymentPage> {
         }
       }
     });
-
-    print(index);
   }
 
   @override
@@ -74,6 +72,8 @@ class _PaymentPageState extends State<PaymentPage> {
           automaticallyImplyLeading: false,
           systemOverlayStyle: SystemUiOverlayStyle(
             // Status bar color
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.light,
             statusBarColor: Palette.kToDark,
           ),
           backgroundColor: Palette.kToDark,
@@ -114,190 +114,194 @@ class _PaymentPageState extends State<PaymentPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: <Widget>[
-                      Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Palette.kToDark)),
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SvgPicture.asset('assets/images/pin.svg'),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "ที่อยู่สำหรับจัดส่ง",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                FutureBuilder<List<Data_Shipping_List>>(
+                      InkWell(
+                        splashColor: Colors.deepOrange[300],
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Payment_Address()));
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Palette.kToDark)),
+                            width: double.infinity,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SvgPicture.asset('assets/images/pin.svg'),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "ที่อยู่สำหรับจัดส่ง",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  FutureBuilder<List<Data_Shipping_List>>(
                                     future: fetch_shipping_list(userToken),
                                     builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  List<Data_Shipping_List>? data =
-                                      snapshot.data;
-                                  return ListView.builder(
-                                      shrinkWrap: true,
-                                      primary: false,
-                                      itemCount: 1,
-                                      itemBuilder: (BuildContext context,
-                                          int index222) {
-                                        return InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Payment_Address()));
-                                          },
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets
-                                                        .fromLTRB(
-                                                    25, 0, 0, 0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Row(
+                                      if (snapshot.hasData) {
+                                        List<Data_Shipping_List>? data =
+                                            snapshot.data;
+                                        return ListView.builder(
+                                            shrinkWrap: true,
+                                            primary: false,
+                                            itemCount: 1,
+                                            itemBuilder: (BuildContext context,
+                                                int index222) {
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(25, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        Text(
-                                                          data![index]
-                                                              .name
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Text(
-                                                          "เบอร์โทร: " +
-                                                              data[index]
-                                                                  .phone
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              data![index]
+                                                                  .name
                                                                   .toString(),
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text(
+                                                              "เบอร์โทร: " +
+                                                                  data[index]
+                                                                      .phone
+                                                                      .toString(),
+                                                            ),
+                                                          ],
                                                         ),
+                                                        Row(
+                                                          children: [
+                                                            Text('แก้ไข', style: TextStyle(fontSize: 12, color: Colors.red)),
+                                                            Icon(
+                                                              Icons
+                                                                  .arrow_forward_ios_rounded,
+                                                              color: Colors.red,
+                                                              size: 15,
+                                                            ),
+                                                          ],
+                                                        )
                                                       ],
                                                     ),
-                                                    Icon(
-                                                      Icons
-                                                          .arrow_forward_ios_rounded,
-                                                      color:
-                                                          Color.fromARGB(
-                                                              255,
-                                                              130,
-                                                              130,
-                                                              130),
-                                                      size: 15,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets
+                                                  ),
+                                                  Padding(
+                                                      padding: const EdgeInsets
                                                               .fromLTRB(
                                                           25, 0, 0, 0),
-                                                  child: Container(
-                                                    width: 250,
-                                                    child: Row(
-                                                      children: [
-                                                        Text(data[index].address.toString() +
-                                                            " " +
-                                                            data[index]
-                                                                .district
-                                                                .toString() +
-                                                            " " +
-                                                            data[index]
-                                                                .province
-                                                                .toString() +
-                                                            " " +
-                                                            data[index]
-                                                                .city
-                                                                .toString() +
-                                                            " " +
-                                                            data[index]
-                                                                .postcode
+                                                      child: Container(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(data[index]
+                                                                .address
                                                                 .toString()),
-                                                      ],
-                                                    ),
-                                                  )),
-                                            ],
-                                          ),
-                                        );
-                                      });
-                                } else if (snapshot.hasError) {
-                                  return Container();
-                                }
-                                return Container();
+                                                            Text(data[index]
+                                                                .district
+                                                                .toString()),
+                                                            Text(
+                                                              data[index]
+                                                                      .province
+                                                                      .toString() +
+                                                                  ' ' +
+                                                                  data[index]
+                                                                      .city
+                                                                      .toString(),
+                                                            ),
+                                                            Text(
+                                                              data[index]
+                                                                  .postcode
+                                                                  .toString(),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      )),
+                                                ],
+                                              );
+                                            });
+                                      } else if (snapshot.hasError) {
+                                        return Container();
+                                      }
+                                      return Container();
                                     },
                                   ),
-                                // Column(
-                                //   crossAxisAlignment: CrossAxisAlignment.start,
-                                //   children: [
-                                //     Padding(
-                                //       padding: const EdgeInsets.fromLTRB(
-                                //           25, 0, 0, 0),
-                                //       child: Row(
-                                //         mainAxisAlignment:
-                                //             MainAxisAlignment.spaceBetween,
-                                //         children: [
-                                //           Row(
-                                //             children: [
-                                //               Text(
-                                //                 "ชวันธร วีรจรรยาพันธ์",
-                                //                 style: TextStyle(
-                                //                     fontWeight:
-                                //                         FontWeight.bold),
-                                //               ),
-                                //               SizedBox(
-                                //                 width: 15,
-                                //               ),
-                                //               Text(
-                                //                 "086-366-3928",
-                                //               ),
-                                //             ],
-                                //           ),
-                                //           Icon(
-                                //             Icons.arrow_forward_ios_rounded,
-                                //             color: Color.fromARGB(
-                                //                 255, 130, 130, 130),
-                                //             size: 15,
-                                //           )
-                                //         ],
-                                //       ),
-                                //     ),
-                                //     Padding(
-                                //         padding: const EdgeInsets.fromLTRB(
-                                //             25, 0, 0, 0),
-                                //         child: Container(
-                                //           width: 250,
-                                //           child: Text(
-                                //               "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000"),
-                                //         )),
-                                //   ],
-                                // )
-                              ],
-                            ),
-                          )),
+                                  // Column(
+                                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                                  //   children: [
+                                  //     Padding(
+                                  //       padding: const EdgeInsets.fromLTRB(
+                                  //           25, 0, 0, 0),
+                                  //       child: Row(
+                                  //         mainAxisAlignment:
+                                  //             MainAxisAlignment.spaceBetween,
+                                  //         children: [
+                                  //           Row(
+                                  //             children: [
+                                  //               Text(
+                                  //                 "ชวันธร วีรจรรยาพันธ์",
+                                  //                 style: TextStyle(
+                                  //                     fontWeight:
+                                  //                         FontWeight.bold),
+                                  //               ),
+                                  //               SizedBox(
+                                  //                 width: 15,
+                                  //               ),
+                                  //               Text(
+                                  //                 "086-366-3928",
+                                  //               ),
+                                  //             ],
+                                  //           ),
+                                  //           Icon(
+                                  //             Icons.arrow_forward_ios_rounded,
+                                  //             color: Color.fromARGB(
+                                  //                 255, 130, 130, 130),
+                                  //             size: 15,
+                                  //           )
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     Padding(
+                                  //         padding: const EdgeInsets.fromLTRB(
+                                  //             25, 0, 0, 0),
+                                  //         child: Container(
+                                  //           width: 250,
+                                  //           child: Text(
+                                  //               "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000"),
+                                  //         )),
+                                  //   ],
+                                  // )
+                                ],
+                              ),
+                            )),
+                      ),
                       SizedBox(
                         height: 20,
                       ),

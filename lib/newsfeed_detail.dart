@@ -28,7 +28,6 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['blog'];
     Blog msg = Blog.fromJson(jsonCon);
-
     return msg;
   }
 
@@ -75,7 +74,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
           )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(5, 5, 5, 20),
+          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
           child: Column(
             children: <Widget>[
               FutureBuilder(
@@ -183,10 +182,7 @@ class _NewsFeedPage_Detail extends State<NewsFeedPage_Detail> {
                               ),
                             ),
 
-                            // Image.network(
-                            //   blog.image!.main.toString(),
-                            //   fit: BoxFit.cover,
-                            // ),
+                        
                             SizedBox(
                               height: 10,
                             ),
