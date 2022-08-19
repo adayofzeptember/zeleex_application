@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../Plate.dart';
 
 class Order_wait_Detail extends StatefulWidget {

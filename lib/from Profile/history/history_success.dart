@@ -4,7 +4,6 @@ import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/from%20Profile/my%20orders%20detail/ontheway_detail.dart';
 import 'package:zeleex_application/from%20Profile/my%20orders%20detail/shipping_detail.dart';
 import 'package:zeleex_application/from%20Profile/my%20orders%20detail/success_detail.dart';
-
 import '../my orders detail/wait_toPay_detail.dart';
 
 class History_Success extends StatefulWidget {

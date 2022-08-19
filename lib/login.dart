@@ -14,7 +14,6 @@ import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/login2_testTOKEN.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
-
 import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
 import 'API/model.dart';
 import 'Plate.dart';

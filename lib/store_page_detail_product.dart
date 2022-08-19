@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/store_id_api.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-
 import 'dart:convert';
 import 'Plate.dart';
 import 'store_page_detail.dart';

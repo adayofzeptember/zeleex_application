@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../Plate.dart';
+
 //? widget ที่เอาไปใส่ในแท็บ buying list 
 class Wait_Payment extends StatefulWidget {
   Wait_Payment({Key? key}) : super(key: key);
