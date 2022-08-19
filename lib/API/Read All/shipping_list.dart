@@ -51,6 +51,8 @@ class Shipping_List {
   }
 }
 
+ 
+
 class Data_Shipping_List {
   int? id;
   int? userId;
@@ -90,7 +92,7 @@ class Data_Shipping_List {
     district = json['district'];
     province = json['province'];
     postcode = json['postcode'];
-    phone = json['phone'];
+    phone = json['phone']; 
     default_status = json['default'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -128,10 +130,11 @@ Future<List<Data_Shipping_List>> fetch_shipping_list(String userToken) async {
 
   List jsonCon = jsonResponse['data'];
 
-  String x = ''; 
   if (response.statusCode == 200) {
     return jsonCon.map((data) => Data_Shipping_List.fromJson(data)).toList();
   } else {
     throw Exception('error response =! 200');
   }
 }
+
+

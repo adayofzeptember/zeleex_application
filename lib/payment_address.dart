@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'Plate.dart';
 import 'address_edit.dart';
@@ -92,13 +93,10 @@ class _Payment_AddressState extends State<Payment_Address> {
                       ));
                 },
                 child: Container(
-                    decoration:
-                        // Border.all(color: Palette.kToDark)
-                        BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    color:
-                                        Color.fromARGB(255, 206, 206, 206)))),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                                color: Color.fromARGB(255, 206, 206, 206)))),
                     width: double.infinity,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 20, 20, 5),
@@ -116,19 +114,23 @@ class _Payment_AddressState extends State<Payment_Address> {
                                     width: 5,
                                   ),
                                   Text(
-                                    "ชื่อ นามสกุล ",
+                                    "Zep Pelin",
                                     style: TextStyle(
                                         color: Color.fromARGB(255, 51, 51, 51),
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
                                   Text(
-                                    "(ค่าเริ่มต้น--)",
+                                    "(ค่าเริ่มต้น)",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.red),
                                   )
+                                  
                                 ],
                               ),
                               Text("แก้ไข >",
@@ -139,7 +141,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                             ],
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Padding(
                               padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
@@ -155,7 +157,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                               child: Container(
                                 width: 250,
                                 child: Text(
-                                  "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
+                                  "444/44 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
                                   style: TextStyle(
                                       color:
                                           Color.fromARGB(255, 130, 130, 130)),
