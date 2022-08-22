@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class Cart_Remove_oneItem {
+class Address_Delete_Response {
   String? responseCode;
   String? responseStatus;
   String? responseMessage;
   String? sessionID;
   int? serverDateTimeMS;
   String? serverDatetime;
-  Data? data;
+  Data_Address_Delete? data;
 
-  Cart_Remove_oneItem(
+  Address_Delete_Response(
       {this.responseCode,
       this.responseStatus,
       this.responseMessage,
@@ -21,14 +21,16 @@ class Cart_Remove_oneItem {
       this.serverDatetime,
       this.data});
 
-  Cart_Remove_oneItem.fromJson(Map<String, dynamic> json) {
+  Address_Delete_Response.fromJson(Map<String, dynamic> json) {
     responseCode = json['responseCode'];
     responseStatus = json['responseStatus'];
     responseMessage = json['responseMessage'];
     sessionID = json['sessionID'];
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? new Data_Address_Delete.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -46,67 +48,75 @@ class Cart_Remove_oneItem {
   }
 }
 
-class Data {
+class Data_Address_Delete {
   int? id;
+  int? userId;
+  String? name;
+  String? address;
+  String? city;
+  String? district;
+  String? province;
+  String? postcode;
+  String? phone;
+  int? default1;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  int? userId;
-  int? storeId;
-  int? productSkuId;
-  String? unit;
 
-  Data(
+  Data_Address_Delete(
       {this.id,
+      this.userId,
+      this.name,
+      this.address,
+      this.city,
+      this.district,
+      this.province,
+      this.postcode,
+      this.phone,
+      this.default1,
       this.createdAt,
       this.updatedAt,
-      this.deletedAt,
-      this.userId,
-      this.storeId,
-      this.productSkuId,
-      this.unit});
+      this.deletedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Data_Address_Delete.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    userId = json['user_id'];
+    name = json['name'];
+    address = json['address'];
+    city = json['city'];
+    district = json['district'];
+    province = json['province'];
+    postcode = json['postcode'];
+    phone = json['phone'];
+    default1 = json['default1'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
-    userId = json['user_id'];
-    storeId = json['store_id'];
-    productSkuId = json['product_sku_id'];
-    unit = json['unit'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['name'] = this.name;
+    data['address'] = this.address;
+    data['city'] = this.city;
+    data['district'] = this.district;
+    data['province'] = this.province;
+    data['postcode'] = this.postcode;
+    data['phone'] = this.phone;
+    data['default1'] = this.default1;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['deleted_at'] = this.deletedAt;
-    data['user_id'] = this.userId;
-    data['store_id'] = this.storeId;
-    data['product_sku_id'] = this.productSkuId;
-    data['unit'] = this.unit;
     return data;
   }
 }
 
-class Provider_CartRemove {
-  String? cart_id;
-
-  Provider_CartRemove({this.cart_id});
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.cart_id;
-    return data;
-  }
-}
-
-Future<Cart_Remove_oneItem> cart_remove(
-    Provider_CartRemove provider_cart_remove, String token) async {
-  String urlDelete = "https://api.zeleex.com/api/cart/remove";
-  var body_cart_remove = json.encode(provider_cart_remove.toJson());
+Future<Address_Delete_Response> address_remove_function(
+    String address_id, String token) async {
+  String urlDelete = "https://api.zeleex.com/api/address/shipping-delete/" +
+      address_id.toString();
 
   final response = await http.delete(
     Uri.parse(urlDelete),
@@ -115,12 +125,11 @@ Future<Cart_Remove_oneItem> cart_remove(
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     },
-    body: body_cart_remove,
   );
 
   if (response.statusCode == 200 || response.statusCode == 201) {
     print("remove success");
-    return Cart_Remove_oneItem.fromJson(json.decode(response.body));
+    return Address_Delete_Response.fromJson(json.decode(response.body));
   } else {
     throw Exception("error");
   }

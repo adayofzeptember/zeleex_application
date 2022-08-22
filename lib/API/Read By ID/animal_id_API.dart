@@ -685,7 +685,3 @@ Future<Animal> fetch_Animal_ByID() async {
   print(msg.id);
   return msg;
 }
-
-void main(List<String> args) {
-  fetch_Animal_ByID();
-}

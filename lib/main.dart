@@ -47,7 +47,7 @@ class _MainAndIconState extends State<MainAndIcon> {
     super.initState();
   }
 
-  Future<void> _Load_AndGo() async {
+  Future _Load_AndGo() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var checkToken = prefs2.get('keyToken');
     if (checkToken.toString() != 'null') {

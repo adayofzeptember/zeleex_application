@@ -17,7 +17,6 @@ import 'package:http/http.dart' as http;
 class Store_Cattle_Detail extends StatefulWidget {
   String? animalID = "";
   String? animalName = "";
-  late AlreadyIn_Model modd;
 
   Store_Cattle_Detail({Key? key, this.animalID, this.animalName})
       : super(key: key);
@@ -27,7 +26,7 @@ class Store_Cattle_Detail extends StatefulWidget {
 }
 
 class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
-   late Future<Animal> futureAnimalByID;
+  late Future<Animal> futureAnimalByID;
 
   @override
   void initState() {
@@ -245,7 +244,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                   ],
                                 ),
                                 SizedBox(
-                                  
                                   height: 10,
                                 ),
                                 SvgPicture.asset('assets/images/groupStar.svg'),

@@ -33,7 +33,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   var perPage = 2; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   bool isNull = false;
- 
 
   void initState() {
     fetch_Blog_readAll();
@@ -61,7 +60,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
     return jsonCon.map((data) => Data_Blog_Detail.fromJson(data)).toList();
   }
 
-  Future refresh() async {
+  Future refreshqw() async {
     setState(() {
       perPage = 2;
       hasMore = true;
@@ -147,7 +146,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                 List<Data_Blog_Detail>? data = snapshot.data;
                 return Expanded(
                   child: RefreshIndicator(
-                    onRefresh: refresh,
+                    onRefresh: refreshqw,
                     child: ListView.builder(
                         controller: controller,
                         itemCount: data!.length + 1,
@@ -155,7 +154,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                           if (index < data.length) {
                             String get_Thetime =
                                 data[index].createdAt.toString();
-                  
+
                             var createdTime = DateFormat.yMMMd()
                                 .format(DateTime.parse(get_Thetime));
 
