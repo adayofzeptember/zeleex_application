@@ -74,7 +74,6 @@ class _Main_WidgetState extends State<Main_Widget> {
       userID = y.toString();
       userToken = x.toString();
     });
-  
   }
 
   @override
@@ -128,15 +127,20 @@ class _Main_WidgetState extends State<Main_Widget> {
                   ),
                 ),
                 Text(
-                 'หน้าหลัก',
+                  'หน้าหลัก',
                   style: TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                       fontWeight: FontWeight.bold),
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartPage(user_id: userID.toString(), user_token: userToken.toString(),)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CartPage(
+                                  user_id: userID.toString(),
+                                  user_token: userToken.toString(),
+                                )));
                   },
                   child: SvgPicture.asset(
                     'assets/images/cart123.svg',
@@ -434,7 +438,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                               ),
                               Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.245,
+                                    MediaQuery.of(context).size.height * 0.260,
                                 child: Row(
                                   children: [
                                     FutureBuilder<List<AnimalCat01>>(
@@ -468,11 +472,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                               .title
                                                                               .toString(),
                                                                         )));
-                                                        print(
-                                                          data![index]
-                                                              .id
-                                                              .toString(),
-                                                        );
                                                       },
                                                       child: Column(
                                                         children: [
@@ -597,6 +596,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   );
                                                 }),
                                           );
+                                          
                                         } else if (snapshot.hasError) {
                                           return Text("${snapshot.error}");
                                         }
@@ -678,7 +678,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                     Container(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.240,
+                                              0.250,
                                       child: Row(
                                         children: [
                                           FutureBuilder<List<ProductCat01>>(
@@ -778,6 +778,8 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                                           data[index]
                                                                               .title
                                                                               .toString(),
+                                                                          style:
+                                                                              TextStyle(fontSize: 13),
                                                                         ),
                                                                       ),
                                                                       SizedBox(

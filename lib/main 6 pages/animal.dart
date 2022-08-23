@@ -141,7 +141,7 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: MediaQuery.of(context).size.width /
-                            (MediaQuery.of(context).size.height / 1.45),
+                            (MediaQuery.of(context).size.height / 1.35),
                       ),
                       itemCount: data!.length,
                       itemBuilder: (BuildContext context, int index) {

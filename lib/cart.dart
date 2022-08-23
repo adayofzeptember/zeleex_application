@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Post%20Method/cart_update.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
@@ -33,6 +34,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   bool isChecked = false;
   int totalPrice = 0;
+
   late Future<List<Store>> future_cart;
   late Provider_CartRemove _provider_cartRemove;
   late Provider_CartUpdate _provider_cartUpdate;
@@ -505,7 +507,7 @@ class _CartPageState extends State<CartPage> {
                       padding: const EdgeInsets.only(top: 50, bottom: 50),
                       child: Text('ไม่มีสินค้าในตะกร้า'),
                     );
-                  }
+                  } else {}
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 100, top: 100),
                     child: Text('โปรดรอสักครู่...'),

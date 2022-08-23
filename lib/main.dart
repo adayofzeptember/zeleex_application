@@ -13,7 +13,7 @@ import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/test%20folder/device_info.dart';
 
-void main() {
+void main() { 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(First_Page()));

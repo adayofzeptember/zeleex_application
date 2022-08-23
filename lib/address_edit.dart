@@ -496,6 +496,7 @@ class _Address_EditState extends State<Address_Edit> {
         address_remove_function(widget.address_id.toString(), userToken);
         Navigator.of(context).pop();
         Fluttertoast.showToast(
+          
             msg: "ลบที่อยู่เรียบร้อยแล้ว",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.SNACKBAR,

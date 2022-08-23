@@ -124,7 +124,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                 ),
               ),
               FutureBuilder<List<Data_Shipping_List>>(
-                future: _fetched_address2,
+                future: fetch_shipping_list(userToken),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<Data_Shipping_List>? data = snapshot.data;
@@ -238,18 +238,18 @@ class _Payment_AddressState extends State<Payment_Address> {
                                               children: [
                                                 Text(
                                                   data[index]
-                                                          .address
-                                                          .toString() +
-                                                      " " +
-                                                      data[index]
-                                                          .district
-                                                          .toString(),
+                                                      .address
+                                                      .toString(),
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 130, 130, 130)),
                                                 ),
                                                 Text(
                                                     data[index]
+                                                            .district
+                                                            .toString() +
+                                                        ' ' +
+                                                        data[index]
                                                             .province
                                                             .toString() +
                                                         ' ' +

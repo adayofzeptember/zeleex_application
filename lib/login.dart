@@ -236,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                       CustomPaint(
                         painter: ShapesPainter(),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.1),
+                            height: MediaQuery.of(context).size.height),
                       ),
                       Form(
                         key: formKey,
