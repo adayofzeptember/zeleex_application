@@ -11,7 +11,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Post%20Method/cart_update.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
-import 'package:zeleex_application/main%206%20pages/main_widget.dart';
+import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import 'package:zeleex_application/register.dart';
 import 'API/model.dart';
 import 'Plate.dart';

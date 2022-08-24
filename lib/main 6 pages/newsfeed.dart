@@ -9,7 +9,7 @@ import 'package:zeleex_application/API/Read%20All/blogs_readall_api.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/API/url.dart';
 import 'package:zeleex_application/cart.dart';
-import 'package:zeleex_application/main%206%20pages/main_page.dart';
+import 'package:zeleex_application/main%206%20pages/onlyMenuForMainPage_nothing_here.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';

@@ -7,7 +7,7 @@ import 'package:zeleex_application/ProgressHUD.dart';
 import 'API/Post Method/post_Register.dart';
 import 'Plate.dart';
 import 'login.dart';
-import 'main 6 pages/main_page.dart';
+import 'main 6 pages/onlyMenuForMainPage_nothing_here.dart';
 import 'terms.dart';
 import 'dart:async';
 import 'dart:convert';

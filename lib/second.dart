@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/login.dart';
 import 'dart:io';
 import 'Plate.dart';
-import 'main 6 pages/main_page.dart';
+import 'main 6 pages/onlyMenuForMainPage_nothing_here.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
 //MediaQuery.of(context).size.height * 0.25

@@ -13,7 +13,7 @@ import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
 import '../from Profile/profile.dart';
-import 'main_page.dart';
+import 'onlyMenuForMainPage_nothing_here.dart';
 
 class ProductPage extends StatefulWidget {
   ProductPage({Key? key}) : super(key: key);
@@ -34,7 +34,8 @@ class _ProductPageState extends State<ProductPage> {
   bool hasMore = true;
   void initState() {
     getUserID();
-    future_fetchAmountinCart = fetch_user_cart_list(cartAdd_userID, cartAdd_token);
+    future_fetchAmountinCart =
+        fetch_user_cart_list(cartAdd_userID, cartAdd_token);
     future_AllProducts = fetch_ProductPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -170,7 +171,7 @@ class _ProductPageState extends State<ProductPage> {
                             child: Text(
                               x.toString(),
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 0,
                                 color: Colors.green,
                               ),
                             ),
@@ -202,7 +203,7 @@ class _ProductPageState extends State<ProductPage> {
                         //     (MediaQuery.of(context).size.height / 1.55),
 
                         mainAxisExtent:
-                            MediaQuery.of(context).size.height * 0.322,
+                            MediaQuery.of(context).size.height * 0.28,
                       ),
                       itemCount: snapshot.data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
@@ -216,7 +217,8 @@ class _ProductPageState extends State<ProductPage> {
                                     builder: (context) => Store_Product_Detail(
                                           productName:
                                               data[index].title.toString(),
-                                          productID: data[index].id.toString(), qty: x.toString(),
+                                          productID: data[index].id.toString(),
+                                          qty: x.toString(),
                                         )));
                               },
                               child: Column(

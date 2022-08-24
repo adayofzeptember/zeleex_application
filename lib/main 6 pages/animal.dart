@@ -14,7 +14,7 @@ import '../Plate.dart';
 import '../aboutus.dart';
 import 'package:intl/intl.dart';
 import '../from Profile/profile.dart';
-import 'main_page.dart';
+import 'onlyMenuForMainPage_nothing_here.dart';
 
 //
 class AnimalsPage extends StatefulWidget {

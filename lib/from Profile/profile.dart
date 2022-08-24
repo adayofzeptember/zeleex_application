@@ -730,37 +730,37 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   )),
             ),
+            // Container(
+            //   child: Padding(
+            //     padding: const EdgeInsets.fromLTRB(30, 20, 30, 1),
+            //     child: ElevatedButton(
+            //       style: ElevatedButton.styleFrom(
+            //           side: BorderSide(color: Color.fromARGB(255, 95, 95, 95)),
+            //           primary: Color.fromARGB(255, 255, 255, 255),
+            //           shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(10),
+            //           )),
+            //       onPressed: () {},
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(12.0),
+            //         child: Container(
+            //           width: double.infinity,
+            //           child: Text(
+            //             "เปลี่ยนบัญชีผู้ใช้",
+            //             textAlign: TextAlign.center,
+            //             style: TextStyle(
+            //               color: Color.fromARGB(255, 130, 130, 130),
+            //               fontSize: 15,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(30, 20, 30, 1),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      side: BorderSide(color: Color.fromARGB(255, 95, 95, 95)),
-                      primary: Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      )),
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Container(
-                      width: double.infinity,
-                      child: Text(
-                        "เปลี่ยนบัญชีผู้ใช้",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 130, 130, 130),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       side: BorderSide(color: Color.fromARGB(255, 95, 95, 95)),

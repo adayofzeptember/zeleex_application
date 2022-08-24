@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/Career/career_detail.dart';
-import 'package:zeleex_application/main%206%20pages/main_widget.dart';
+import 'package:zeleex_application/main%206%20pages/main_page.dart';
 import '../API/Read All/career_readall_api.dart';
 import '../Plate.dart';
 

@@ -520,11 +520,15 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                   Icons.arrow_back_ios,
                 ),
               ),
-              Text(widget.productName.toString(),
-                  style: TextStyle(
-                      color: Palette.kToDark,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15)),
+              Expanded(
+                child: Text(widget.productName.toString(),
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Palette.kToDark,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15)),
+              ),
               Stack(
                 children: [
                   SvgPicture.asset(
@@ -537,7 +541,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                         child: Text(
                           qtyCart.toString(),
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 0,
                             color: Colors.green,
                           ),
                         ),
@@ -812,16 +816,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                     ),
                   );
                 } else {
-                  // return Column(
-                  //   children: [
-                  //     Text(snapshot.hasError.toString()),
-                  //                           Text("---------------------------"),
-
-                  //     Text(snapshot.toString()),
-                  //     Text("---------------------------"),
-                  //     Text(snapshot.hashCode.toString()),
-                  //   ],
-                  // );
                   return Padding(
                     padding: const EdgeInsets.only(top: 50),
                     child: Center(child: CircularProgressIndicator()),
