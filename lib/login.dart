@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login_social.dart';
 import 'package:zeleex_application/ProgressHUD.dart';
-import 'package:zeleex_application/login2_testTOKEN.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
@@ -37,6 +36,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final ScaffoldKey = GlobalKey<ScaffoldState>();
   bool isApiCallProcess = false;
+
   final formKey = GlobalKey<FormState>();
   late RequestModel_zeleex requestModel_zeleex;
   late Request_Social_Provider request_social;
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future useFacebook_toLogin() async {
-    //*ทำก่อน login social
+    //!ทำก่อน login social
     await FacebookAuth.instance
         .login(permissions: ["public_profile", "email"]).then((value) {
       FacebookAuth.instance.getUserData().then((userData) {
@@ -98,13 +98,13 @@ class _LoginPageState extends State<LoginPage> {
         request_social.provider_id = userGoogle.id.toString();
         login_Social(request_social);
         // print(json.encode(request_social).toString());
-      }).catchError((err) {
+      }).catchError((error1) {
         setState(() {
           isApiCallProcess = false;
         });
         print('error in');
       });
-    }).catchError((err) {
+    }).catchError((error2) {
       setState(() {
         isApiCallProcess = false;
       });
