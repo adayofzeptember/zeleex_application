@@ -144,6 +144,32 @@ class Provider_AddAddress {
   }
 }
 
+Future<AddAddress> edit_address(Provider_AddAddress requestModel_AddAddress,
+    String userToken, String address_table_id) async {
+  String urlPost = "https://api.zeleex.com/api/address/shipping-update/" +
+      address_table_id.toString();
+  var body_AddAddress = json.encode(requestModel_AddAddress.toJson());
+  final response = await http.post(
+    Uri.parse(urlPost),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $userToken',
+    },
+    body: body_AddAddress,
+  );
+
+  var jsonRes = json.decode(response.body);
+  print(response.body.toString());
+  if (response.statusCode == 201) {
+    print(response.body.toString());
+    return AddAddress.fromJson(json.decode(response.body));
+  } else {
+    print(response.body.toString());
+    throw Exception();
+  }
+}
+
 Future<AddAddress> add_new_address(
     Provider_AddAddress requestModel_AddAddress, String userToken) async {
   String urlPost = "https://api.zeleex.com/api/address/shipping-store";
@@ -160,10 +186,8 @@ Future<AddAddress> add_new_address(
   var jsonRes = json.decode(response.body);
   print(response.body.toString());
   if (response.statusCode == 201) {
-    print(response.body.toString());
     return AddAddress.fromJson(json.decode(response.body));
   } else {
-    print(response.body.toString());
     throw Exception();
   }
 }

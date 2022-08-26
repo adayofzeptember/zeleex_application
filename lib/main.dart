@@ -20,7 +20,6 @@ void main() {
 }
 
 class First_Page extends StatelessWidget {
-  
   const First_Page({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -56,7 +55,6 @@ class _MainAndIconState extends State<MainAndIcon> {
     } else {
       print(" --------------> no token");
     }
-
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,

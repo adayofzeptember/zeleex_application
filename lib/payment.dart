@@ -199,7 +199,12 @@ class _PaymentPageState extends State<PaymentPage> {
                                                         ),
                                                         Row(
                                                           children: [
-                                                            Text('แก้ไข', style: TextStyle(fontSize: 12, color: Colors.red)),
+                                                            Text('แก้ไข',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: Colors
+                                                                        .red)),
                                                             Icon(
                                                               Icons
                                                                   .arrow_forward_ios_rounded,
