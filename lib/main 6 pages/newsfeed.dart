@@ -105,6 +105,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
             children: [
               Visibility(
                 visible: false,
+               
                 child: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.black,

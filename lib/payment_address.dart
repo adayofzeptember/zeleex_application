@@ -42,7 +42,6 @@ class _Payment_AddressState extends State<Payment_Address> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,8 +154,8 @@ class _Payment_AddressState extends State<Payment_Address> {
                                                 255, 206, 206, 206)))),
                                 width: double.infinity,
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      10, 10, 20, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 10, 20, 5),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -192,8 +191,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                                                     : '',
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Colors.red),
                                               )
                                             ],
@@ -217,9 +215,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                                               children: [
                                                 Text('เบอร์โทร: '),
                                                 Text(
-                                                  data[index]
-                                                      .phone
-                                                      .toString(),
+                                                  data[index].phone.toString(),
                                                 ),
                                               ],
                                             ),
@@ -232,9 +228,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                data[index]
-                                                    .address
-                                                    .toString(),
+                                                data[index].address.toString(),
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 130, 130, 130)),
@@ -253,20 +247,14 @@ class _Payment_AddressState extends State<Payment_Address> {
                                                           .toString(),
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
-                                                          255,
-                                                          130,
-                                                          130,
-                                                          130))),
+                                                          255, 130, 130, 130))),
                                               Text(
                                                   data[index]
                                                       .postcode
                                                       .toString(),
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
-                                                          255,
-                                                          130,
-                                                          130,
-                                                          130))),
+                                                          255, 130, 130, 130))),
                                             ],
                                           )),
                                       SizedBox(

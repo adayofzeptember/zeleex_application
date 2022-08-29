@@ -68,6 +68,7 @@ class _MainAndIconState extends State<MainAndIcon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
