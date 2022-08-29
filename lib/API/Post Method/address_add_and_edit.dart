@@ -49,8 +49,10 @@ class AddAddress {
 }
 
 class ResponseModel_AddAddress {
+
   String? address;
   String? city;
+  
   String? district;
   String? province;
   String? postcode;
@@ -139,7 +141,6 @@ class Provider_AddAddress {
     data['default'] = this.defaultt;
     data['name'] = this.name;
     data['phone'] = this.phone;
-
     return data;
   }
 }
