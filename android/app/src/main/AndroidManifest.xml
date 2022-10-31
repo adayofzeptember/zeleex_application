@@ -7,16 +7,14 @@
         android:label="Zeleex"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        
         <meta-data
            android:name="com.facebook.sdk.ApplicationId"
            android:value="@string/facebook_app_id" />
        <meta-data 
            android:name="com.facebook.sdk.ClientToken" 
            android:value="@string/facebook_client_token"/>
-
-        
-        
-
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -35,15 +33,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+
         <meta-data
             android:name="flutterEmbedding"
-            
-            android:value="2" />
-
-
-    
+            android:value="2" 
+        />    
     <activity android:name="com.facebook.FacebookActivity"
         android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -58,13 +52,6 @@
             <data android:scheme="@string/fb_login_protocol_scheme" />
         </intent-filter>
     </activity>
-
-
-
-
-
-
-
 
     </application>
 </manifest>

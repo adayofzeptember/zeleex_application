@@ -333,13 +333,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                             Container(
                                                 child: Row(
                                               children: [
-                                                SvgPicture.asset(
-                                                  'assets/images/love.svg',
-                                                  color: Colors.grey,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
+                                             
                                                 SvgPicture.asset(
                                                   'assets/images/sharefeed.svg',
                                                 ),

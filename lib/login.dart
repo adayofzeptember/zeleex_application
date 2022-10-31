@@ -60,12 +60,14 @@ class _LoginPageState extends State<LoginPage> {
 
   Future useFacebook_toLogin() async {
     //!ทำก่อน login social
+
     await FacebookAuth.instance
         .login(permissions: ["public_profile", "email"]).then((value) {
       FacebookAuth.instance.getUserData().then((userData) {
         print(userData["name"]);
         print(userData["email"]);
         print(userData["picture"]["data"]["url"]);
+
         request_social.name = userData["name"];
         request_social.email = userData["email"];
         request_social.avatar = userData["picture"]["data"]["url"];
@@ -175,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       body: bodySocial,
     );
-    if (response.statusCode == 400 || response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonRes = json.decode(response.body);
       var kkk = jsonRes['data']['token'];
       String id_toStore2 = jsonRes['data']['id'].toString();
@@ -236,7 +238,7 @@ class _LoginPageState extends State<LoginPage> {
                       CustomPaint(
                         painter: ShapesPainter(),
                         child: Container(
-                            height: MediaQuery.of(context).size.height),
+                            height: 130),
                       ),
                       Form(
                         key: formKey,

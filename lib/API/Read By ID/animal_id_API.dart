@@ -663,6 +663,7 @@ class AnimalOutStores {
     if (this.images != null) {
       data['images'] = this.images!.map((v) => v.toJson()).toList();
     }
+
     if (this.store != null) {
       data['store'] = this.store!.toJson();
     }

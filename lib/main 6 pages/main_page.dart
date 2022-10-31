@@ -158,7 +158,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                   CustomPaint(
                     painter: ShapesPainter(),
                     child: Container(
-                        height: MediaQuery.of(context).size.height * 0.27),
+                        height: MediaQuery.of(context).size.height * 0.20),
                   ),
                   Column(
                     children: <Widget>[
@@ -219,30 +219,35 @@ class _Main_WidgetState extends State<Main_Widget> {
                                             data![index].link.toString());
                                       }),
                                       child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 3.0),
                                           decoration: BoxDecoration(
                                               color: Color.fromARGB(
                                                   167, 216, 216, 216)),
                                           child: SvgPicture.network(
                                             data![index].image!.toString(),
+                            
                                           )),
                                     );
                                   },
                                   options: CarouselOptions(
+                                      aspectRatio: 16/9,
+                                      
                                       enlargeCenterPage: true,
                                       viewportFraction: 1,
                                       autoPlay: true,
                                       autoPlayInterval: Duration(seconds: 5),
                                       autoPlayAnimationDuration:
+                                    
                                           Duration(seconds: 2),
                                       onPageChanged: (index, reason) =>
                                           setState(
                                             (() => activeIndex = index),
-                                          )));
+                                          ))
+                                          );
                             } else if (snapshot.hasError) {
                               return Text("${snapshot.error}");
                             }
+
+                            
                             return CircularProgressIndicator();
                           },
                         ),

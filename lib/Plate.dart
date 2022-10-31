@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; 
 
+
 class Palette { 
   static const MaterialColor kToDark = const MaterialColor( 
     0xFF10C19F, 
@@ -13,7 +14,7 @@ class Palette {
       600: const Color(0xff451c16),//70% 
       700: const Color(0xff2e130e),//80% 
       800: const Color(0xff170907),//90% 
-      900: const Color(0xff000000),//100% 
+      900: const Color(0xff000000),//100%
     }, 
   ); 
 } // 

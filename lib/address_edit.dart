@@ -473,7 +473,7 @@ class _Address_EditState extends State<Address_Edit> {
   show_deleteAddress_ConfirmDialog(
     BuildContext context,
   ) {
-    Widget cancelButton = TextButton(
+    Widget cancelButton = ElevatedButton(
       child: Text(
         "ยกเลิก",
         style: TextStyle(color: Color.fromARGB(255, 99, 99, 99)),
@@ -482,7 +482,7 @@ class _Address_EditState extends State<Address_Edit> {
         Navigator.of(context, rootNavigator: true).pop();
       },
     );
-    Widget confirmButton = TextButton(
+    Widget confirmButton = ElevatedButton(
       style: ButtonStyle(
           backgroundColor:
               MaterialStateProperty.all(Color.fromARGB(117, 244, 67, 54))),

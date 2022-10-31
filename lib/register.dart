@@ -207,8 +207,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                   controller: _nameController,
                                   onSaved: (input) => setState(() {
                                     allName = input.toString();
+                                    
                                   }),
                                   decoration: InputDecoration(
+                                    
                                     focusedBorder: OutlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white),

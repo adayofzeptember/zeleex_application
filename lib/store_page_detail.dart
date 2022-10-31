@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'API/Post Method/store_subscribe.dart';
 import 'API/Read By ID/store_id_api.dart';
 import 'Plate.dart';
 import 'main 6 pages/store_page.dart';
@@ -24,6 +26,19 @@ class Store_Detail extends StatefulWidget {
 }
 
 class _Store_DetailState extends State<Store_Detail> {
+  late Store_Subscribe_Model request_model_store_subscribe;
+  String cartAdd_userID = "";
+  String cartAdd_token = "";
+  Future getUserID() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    String y = prefs2.get('keyID').toString();
+    String x = prefs2.get('keyToken').toString();
+    setState(() {
+      cartAdd_userID = y;
+      cartAdd_token = x;
+    });
+  }
+
   Future<Data_Store> fetchStore_ByID() async {
     var url = "https://api.zeleex.com/api/stores/" + widget.storeID;
     var response = await http.get(Uri.parse(url), headers: {
@@ -36,6 +51,14 @@ class _Store_DetailState extends State<Store_Detail> {
     var jsonCon = jsonResponse['data'];
     Data_Store msg = Data_Store.fromJson(jsonCon);
     return msg;
+  }
+
+  @override
+  void initState() {
+    getUserID();
+    request_model_store_subscribe = Store_Subscribe_Model();
+
+    super.initState();
   }
 
   bool pressed = true;
@@ -130,6 +153,7 @@ class _Store_DetailState extends State<Store_Detail> {
           ),
         ),
         appBar: AppBar(
+          elevation: 0,
             title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -168,6 +192,7 @@ class _Store_DetailState extends State<Store_Detail> {
                             if (snapshot.hasData) {
                               Data_Store thisStore = snapshot.data;
                               return CachedNetworkImage(
+                                
                                 imageUrl: thisStore.imageCover!.main.toString(),
                                 fit: BoxFit.fill,
                                 progressIndicatorBuilder:
@@ -178,15 +203,16 @@ class _Store_DetailState extends State<Store_Detail> {
                                 ),
                                 errorWidget: (context, url, error) => Center(
                                   child: Container(
+                                    width: double.infinity,
                                     height: MediaQuery.of(context).size.height *
                                         0.2,
                                     decoration: BoxDecoration(
-                                      color: Colors.grey,
+                             
                                       border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 211, 204, 204)),
+                                          color: Color.fromARGB(255, 240, 236, 236)),
                                     ),
-                                    alignment: Alignment.center,
+                                    
+                                    child: Image.asset('assets/images/banner-noimg.jpg', fit: BoxFit.fitWidth,),
                                   ),
                                 ),
                               );
@@ -242,8 +268,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                     0.07,
                                                 child: CircleAvatar(
                                                   backgroundColor:
-                                                      Color.fromARGB(
-                                                          255, 131, 131, 131),
+                                                      Color.fromARGB(255, 196, 196, 196),
                                                   backgroundImage: NetworkImage(
                                                       thisStore_notCoverIMG
                                                           .image!.thumbnail
@@ -356,15 +381,22 @@ class _Store_DetailState extends State<Store_Detail> {
                                                             255, 204, 204, 204),
                                                     elevation: 0),
                                                 onPressed: () {
+                                                  request_model_store_subscribe
+                                                          .user_id =
+                                                      cartAdd_userID.toString();
+
+                                                  request_model_store_subscribe
+                                                          .store_id =
+                                                      thisStore_notCoverIMG.id
+                                                          .toString();
+
+                                                  user_store_subscribe(
+                                                      request_model_store_subscribe,
+                                                      cartAdd_token);
                                                   setState(() {
                                                     pressed = !pressed;
                                                   });
                                                 },
-                                                //         style: pressed
-                                                // ? TextStyle(
-                                                //     color: Colors.black)
-                                                // : TextStyle(
-                                                //     color: Color.fromARGB(255, 229, 233, 229)),
                                                 child: Text(
                                                   pressed
                                                       ? "ติดตาม"
@@ -422,7 +454,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                         Divider(
                                             color: Color.fromARGB(
                                                 255, 165, 162, 162)),
-                                       HtmlWidget(document555.outerHtml),
+                                        HtmlWidget(document555.outerHtml),
                                         // Padding(
                                         //   padding: const EdgeInsets.fromLTRB(
                                         //       0, 10, 0, 0),
@@ -477,218 +509,6 @@ class _Store_DetailState extends State<Store_Detail> {
                               );
                             }
                           })
-                      // Padding(
-                      //   padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
-                      //   child: Container(
-                      //     width: double.infinity,
-                      //     decoration: BoxDecoration(
-                      //         color: Colors.white,
-                      //         borderRadius: BorderRadius.only(
-                      //             topRight: Radius.circular(10),
-                      //             topLeft: Radius.circular(10))),
-                      //     child: Padding(
-                      //       padding: const EdgeInsets.all(20.0),
-                      //       child: Column(
-                      //         mainAxisAlignment: MainAxisAlignment.center,
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: [
-                      //           Row(
-                      //             mainAxisAlignment:
-                      //                 MainAxisAlignment.center,
-                      //             children: [
-                      //               SizedBox(
-                      //                 height: 50,
-                      //                 width: 50,
-                      //                 child: CircleAvatar(
-                      //                     child: Image.asset(
-                      //                         "assets/images/img.png")),
-                      //               ),
-                      //               Padding(
-                      //                 padding: const EdgeInsets.fromLTRB(
-                      //                     10, 0, 5, 0),
-                      //                 child: Column(
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     Text(
-                      //                         "ศรีไพศาลอาหารสัตว์-เกษตรภัณฑ์",
-                      //                         style: TextStyle(
-                      //                             fontWeight:
-                      //                                 FontWeight.bold)),
-                      //                     SizedBox(
-                      //                       height: 5,
-                      //                     ),
-                      //                     Row(
-                      //                       children: [
-                      //                         SvgPicture.asset(
-                      //                             'assets/images/pinnew.svg'),
-                      //                         SizedBox(
-                      //                           width: 10,
-                      //                         ),
-                      //                         Container(
-                      //                           width: 200,
-                      //                           child: Text(
-                      //                             "11/1-23 ม.3 ต.หนองไทร อ.พุมพิน จ. สุราษฎธานี 84100",
-                      //                             style: TextStyle(
-                      //                                 color: Colors.grey,
-                      //                                 fontSize: 13),
-                      //                           ),
-                      //                         ),
-                      //                       ],
-                      //                     ),
-                      //                     SizedBox(
-                      //                       height: 5,
-                      //                     ),
-                      //                     Row(
-                      //                       children: [
-                      //                         SvgPicture.asset(
-                      //                             'assets/images/callnew.svg'),
-                      //                         // ImageIcon(
-                      //                         //   AssetImage(
-                      //                         //     "assets/images/phone.png",
-                      //                         //   ),
-                      //                         //   color: Colors.grey,
-                      //                         // ),
-                      //                         SizedBox(
-                      //                           width: 10,
-                      //                         ),
-                      //                         Container(
-                      //                           child: Text(
-                      //                             "081 235 1234",
-                      //                             style: TextStyle(
-                      //                                 color: Colors.grey,
-                      //                                 fontSize: 13),
-                      //                           ),
-                      //                         ),
-                      //                       ],
-                      //                     ),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //               Icon(
-                      //                 Icons.settings,
-                      //                 color: Colors.white,
-                      //               )
-                      //             ],
-                      //           ),
-                      //           SizedBox(
-                      //             height: 10,
-                      //           ),
-                      //           Padding(
-                      //             padding: const EdgeInsets.fromLTRB(
-                      //                 15, 0, 0, 0),
-                      //             child: Row(
-                      //               children: [
-                      //                 SvgPicture.asset(
-                      //                     'assets/images/star.svg'),
-                      //                 SizedBox(
-                      //                   width: 10,
-                      //                 ),
-                      //                 Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
-                      //                 SizedBox(
-                      //                   width: 10,
-                      //                 ),
-                      //                 ElevatedButton(
-                      //                   style: ElevatedButton.styleFrom(
-                      //                       shape: RoundedRectangleBorder(
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(30),
-                      //                       ),
-                      //                       primary: pressed
-                      //                            Palette.kToDark
-                      //                           : Color.fromARGB(
-                      //                               255, 204, 204, 204),
-                      //                       elevation: 0),
-                      //                   onPressed: () {
-                      //                     setState(() {
-                      //                       pressed = !pressed;
-                      //                     });
-                      //                   },
-                      //                   //         style: pressed
-                      //                   // ? TextStyle(
-                      //                   //     color: Colors.black)
-                      //                   // : TextStyle(
-                      //                   //     color: Color.fromARGB(255, 229, 233, 229)),
-                      //                   child: Text(
-                      //                     pressed ? "ติดตาม" : "ติดตามแล้ว",
-                      //                     style: TextStyle(
-                      //                         color: Color.fromRGBO(
-                      //                             255, 255, 255, 1)),
-                      //                   ),
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ),
-                      //           Padding(
-                      //             padding: const EdgeInsets.fromLTRB(
-                      //                 15, 10, 0, 0),
-                      //             child: Row(
-                      //               children: [
-                      //                 Text(
-                      //                   "ประเภทร้านค้า: ร้านค้าทั่วไป, บริการขนส่งสัตว์",
-                      //                   style: TextStyle(
-                      //                       color: Palette.kToDark),
-                      //                 ),
-                      //                 SizedBox(
-                      //                   width: 10,
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ),
-                      //           SizedBox(
-                      //             height: 10,
-                      //           ),
-                      //           Divider(
-                      //               color:
-                      //                   Color.fromARGB(255, 165, 162, 162)),
-                      //           Padding(
-                      //             padding: const EdgeInsets.fromLTRB(
-                      //                 0, 10, 0, 0),
-                      //             child: Row(
-                      //               children: [
-                      //                 Text(
-                      //                   "อาหารวัวทอง สำหรับโคเนื้อ โคขุน โคเม กินดี อ้วนไว ไม่แพง",
-                      //                   style:
-                      //                       TextStyle(color: Colors.grey),
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ),
-                      //           SizedBox(
-                      //             height: 20,
-                      //           ),
-                      //           ClipRRect(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(8)),
-                      //             child: Image.asset(
-                      //               'assets/images/detail1.png',
-                      //             ),
-                      //           ),
-                      //           SizedBox(
-                      //             height: 5,
-                      //           ),
-                      //           ClipRRect(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(8)),
-                      //             child: Image.asset(
-                      //               'assets/images/detail2.png',
-                      //             ),
-                      //           ),
-                      //           SizedBox(
-                      //             height: 5,
-                      //           ),
-                      //           ClipRRect(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(8)),
-                      //             child: Image.asset(
-                      //               'assets/images/detail3.png',
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // )
                     ],
                   ),
                   SizedBox(

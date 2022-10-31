@@ -45,7 +45,6 @@ class _StorePageState extends State<StorePage> {
         setState(() {
           hasMore = false;
         });
- 
       }
 
       return jsonCon.map((data) => Data_Store_ReadALL.fromJson(data)).toList();
@@ -149,7 +148,7 @@ class _StorePageState extends State<StorePage> {
                       controller: controller,
                       gridDelegate:
                           new SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1+1,
+                        crossAxisCount: 1 + 1,
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
                         mainAxisExtent:
@@ -198,45 +197,16 @@ class _StorePageState extends State<StorePage> {
                                           // height: 200,
                                         ),
                                         errorWidget: (context, url, error) =>
-                                            Center(
-                                          child: Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  3, 3, 3, 0),
-                                              child: Container(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.22,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255, 255, 255, 255)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(5))),
-                                                  alignment: Alignment.center,
-                                                  child:  Center(
-                                              child: Container(
-                                                  height:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height *
-                                                          0.22,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color:
-                                                              Color.fromARGB(
-                                                                  255,
-                                                                  211,
-                                                                  204,
-                                                                  204)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5))),
-                                                  alignment: Alignment.center,
-                                                  child: Icon(Icons.error_outline)),
-                                            ),)),
+                                            Container(
+                                              
+                                              height: double.infinity,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5))),
+                                          child: Image.asset(
+                                            'assets/images/store-noimg.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -296,7 +266,6 @@ class _StorePageState extends State<StorePage> {
                                       ],
                                     ),
                                   ),
-                                 
                                 ],
                               ),
                             ),

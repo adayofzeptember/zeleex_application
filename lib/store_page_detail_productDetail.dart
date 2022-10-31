@@ -8,6 +8,8 @@ import 'package:html/parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/add_to_cart.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_id_api.dart';
+import 'API/Post Method/product_favorite.dart';
+import 'API/Post Method/store_subscribe.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Plate.dart';
 import 'store_page_detail_product.dart';
@@ -15,6 +17,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+String theTokenOne = '';
+String theUserOne = '';
 
 class Store_Product_Detail extends StatefulWidget {
   String? productID = "";
@@ -35,11 +40,13 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   late Future<Product> future_ProductByID;
   late Future<List<Skus>> future_Product_skus;
   late AddToCart_Request request_model_addToCart;
+  late Product_Fave_Model request_model_product_fave;
+  late Store_Subscribe_Model request_model_store_subscribe;
   bool _press = false;
   var productImg = "";
   var productPrice = "";
   bool pressed = true;
-  bool pressed_like = false;
+  bool pressed_like = true;
   int _counter = 0;
   String cartAdd_userID = "";
   String cartAdd_storeID = "";
@@ -53,7 +60,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     getUserID();
     future_ProductByID = fetch_Product_ByID();
     future_Product_skus = fetch_skus();
+    request_model_product_fave = Product_Fave_Model();
     request_model_addToCart = AddToCart_Request();
+    request_model_store_subscribe = Store_Subscribe_Model();
     super.initState();
   }
 
@@ -604,31 +613,51 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: 300,
-                                        child: Text(
-                                          thisProduct.title.toString(),
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 51, 51, 51),
-                                              fontSize: 18),
+                                  InkWell(
+                                    onTap: (() {
+                                      request_model_product_fave.user_id =
+                                          cartAdd_userID.toString();
+                                      request_model_product_fave.product_id =
+                                          thisProduct.id.toString();
+                                    }),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: 300,
+                                          child: Text(
+                                            thisProduct.title.toString(),
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 51, 51, 51),
+                                                fontSize: 18),
+                                          ),
                                         ),
-                                      ),
-                                      InkWell(
-                                        onTap: (() => setState(() {
+                                        InkWell(
+                                          onTap: () {
+                                            request_model_product_fave.user_id =
+                                                cartAdd_userID.toString();
+                                            request_model_product_fave
+                                                    .product_id =
+                                                thisProduct.id.toString();
+                                            setState(() {
                                               pressed_like = !pressed_like;
-                                            })),
-                                        child: SvgPicture.asset(
-                                            'assets/images/love.svg',
-                                            color: pressed_like
-                                                ? Colors.red
-                                                : Colors.grey),
-                                      )
-                                    ],
+                                            });
+                                            user_product_favorite(
+                                                request_model_product_fave,
+                                                cartAdd_token);
+                                            print(cartAdd_userID.toString() +
+                                                thisProduct.id.toString());
+                                          },
+                                          child: SvgPicture.asset(
+                                              'assets/images/love.svg',
+                                              color: pressed_like
+                                                  ? Colors.grey
+                                                  : Colors.red),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 5,
@@ -659,16 +688,58 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                             padding: const EdgeInsets.all(10.0),
                             child: Row(
                               children: [
-                                SizedBox(
+                                CachedNetworkImage(
+                                  imageUrl: thisProduct.store!.image!.main.toString(),
+                                  imageBuilder: (context, imageProvider) =>
+                                        SizedBox(
+                                  width: 60,
+                                  height: 60,
+                                  child: CircleAvatar(
+                                    child: Image.network(
+                                      thisProduct.store!.image!.main.toString(),
+
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                                  placeholder: (context, url) => CircleAvatar(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 141, 141, 141),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      SizedBox(
                                   height: 50,
                                   width: 50,
                                   child: CircleAvatar(
-                                    backgroundImage: NetworkImage(thisProduct
-                                        .store!.image!.main
-                                        .toString()),
-                                    backgroundColor: Colors.transparent,
+                                    backgroundImage: NetworkImage(
+                                      thisProduct.store!.image!.main.toString(),
+                                    ),
+                                    backgroundColor: Colors.grey,
                                   ),
                                 ),
+                                ),
+                                //  SizedBox(
+                                //   width: 50,
+                                //   height: 50,
+                                //   child: CircleAvatar(
+                                //     child: Image.network(
+                                //       thisProduct.store!.image!.main.toString(),
+
+                                //       fit: BoxFit.contain,
+                                //     ),
+                                //   ),
+                                // ),
+
+                                // SizedBox(
+                                //   height: 50,
+                                //   width: 50,
+                                //   child: CircleAvatar(
+                                //     backgroundImage: NetworkImage(
+                                //       thisProduct.store!.image!.main.toString(),
+                                //     ),
+                                //     backgroundColor: Colors.transparent,
+                                //   ),
+                                // ),
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(10, 0, 5, 0),
@@ -728,6 +799,17 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                         255, 204, 204, 204),
                                                 elevation: 0),
                                             onPressed: () {
+                                              request_model_store_subscribe
+                                                      .user_id =
+                                                  cartAdd_userID.toString();
+
+                                              request_model_store_subscribe
+                                                      .store_id =
+                                                  thisProduct.store!.id
+                                                      .toString();
+                                              user_store_subscribe(
+                                                  request_model_store_subscribe,
+                                                  cartAdd_token);
                                               setState(() {
                                                 pressed = !pressed;
                                               });
@@ -755,59 +837,27 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                           width: double.infinity,
                           color: Colors.white,
                           child: Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                              child: ExpandableNotifier(
-                                  child: Column(
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 15, 20, 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  ScrollOnExpand(
-                                    scrollOnExpand: true,
-                                    scrollOnCollapse: false,
-                                    child: ExpandablePanel(
-                                      theme: const ExpandableThemeData(
-                                        headerAlignment:
-                                            ExpandablePanelHeaderAlignment
-                                                .center,
-                                        tapBodyToCollapse: false,
-                                      ),
-                                      header: Text(
-                                        "รายละเอียดสินค้า",
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                            fontSize: 20),
-                                      ),
-                                      collapsed: Container(),
-                                      expanded: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            thisProduct.description.toString(),
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 130, 130, 130)),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                      builder: (_, collapsed, expanded) {
-                                        return Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 10, right: 10, bottom: 10),
-                                          child: Expandable(
-                                            collapsed: collapsed,
-                                            expanded: expanded,
-                                            theme: const ExpandableThemeData(
-                                                crossFadePoint: 0),
-                                          ),
-                                        );
-                                      },
-                                    ),
+                                  Text(
+                                    "รายละเอียด",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    thisProduct.description.toString(),
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 130, 130, 130)),
                                   ),
                                 ],
-                              ))),
+                              )),
                         ),
                         SizedBox(
                           height: 3,
@@ -839,7 +889,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                             color: Color.fromARGB(255, 51, 51, 51),
                             fontSize: 20),
                       ),
-                      Text("ทั้งหมด >",
+                      Text("ดูทั้งหมด",
                           style: TextStyle(
                               color: Color.fromARGB(255, 130, 130, 130)))
                     ],

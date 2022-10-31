@@ -149,7 +149,7 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
                           String isNull = data[index].description.toString();
                           String animalDesc = "";
                           if (isNull == 'null') {
-                            animalDesc = "ดูรายละเอียดเพิ่มเติม";
+                            animalDesc = "- ดูรายละเอียดเพิ่มเติม -";
                           } else {
                             animalDesc = data[index].description.toString();
                           }
