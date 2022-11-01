@@ -16,6 +16,7 @@ import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/terms.dart';
 import '../API/Post Method/google_login_api.dart';
 import '../API/Read By ID/blog_id_api.dart';
+import '../API/Read By ID/product_review.dart';
 import '../Plate.dart';
 import '../cart.dart';
 import 'history/history.dart';
@@ -36,6 +37,7 @@ String theUserOne = '';
 class _ProfilePageState extends State<ProfilePage> {
   late Future<Data_Profile> future_Profile;
   late Future<List<Data_Shipping_List>> fetched_add;
+  late Future<List<Data_Review>> future_review;
 
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -77,6 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     getToken();
+    future_review = fetch_Product_Review();
+
     fetched_add = fetch_shipping_list(theTokenOne);
     future_Profile = fetchProfile_Auth(theTokenOne);
     super.initState();
@@ -137,6 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            
             FutureBuilder(
                 future: fetchProfile_Auth(theTokenOne),
                 builder:
@@ -848,6 +853,7 @@ class _ProfilePageState extends State<ProfilePage> {
             //     ),
             //   ),
             // ),
+          
             Container(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),

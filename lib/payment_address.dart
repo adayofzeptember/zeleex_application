@@ -47,7 +47,6 @@ class _Payment_AddressState extends State<Payment_Address> {
     return Scaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
-            // Status bar color
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
             statusBarColor: Palette.kToDark,

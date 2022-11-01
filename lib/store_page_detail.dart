@@ -153,31 +153,27 @@ class _Store_DetailState extends State<Store_Detail> {
           ),
         ),
         appBar: AppBar(
-          elevation: 0,
+            elevation: 0,
             title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: Color.fromARGB(255, 51, 51, 51),
-              ),
-            ),
-            Text(widget.storeName.toString(),
-                style: TextStyle(
-                    color: Palette.kToDark, fontWeight: FontWeight.bold)),
-            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SvgPicture.asset(
-                  'assets/images/cart123.svg',
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Color.fromARGB(255, 51, 51, 51),
+                  ),
+                ),
+                Text(widget.storeName.toString(),
+                    style: TextStyle(
+                        color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                Row(
+                  children: [Text('')],
                 )
               ],
-            )
-          ],
-        )),
+            )),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -192,7 +188,6 @@ class _Store_DetailState extends State<Store_Detail> {
                             if (snapshot.hasData) {
                               Data_Store thisStore = snapshot.data;
                               return CachedNetworkImage(
-                                
                                 imageUrl: thisStore.imageCover!.main.toString(),
                                 fit: BoxFit.fill,
                                 progressIndicatorBuilder:
@@ -207,12 +202,14 @@ class _Store_DetailState extends State<Store_Detail> {
                                     height: MediaQuery.of(context).size.height *
                                         0.2,
                                     decoration: BoxDecoration(
-                             
                                       border: Border.all(
-                                          color: Color.fromARGB(255, 240, 236, 236)),
+                                          color: Color.fromARGB(
+                                              255, 240, 236, 236)),
                                     ),
-                                    
-                                    child: Image.asset('assets/images/banner-noimg.jpg', fit: BoxFit.fitWidth,),
+                                    child: Image.asset(
+                                      'assets/images/banner-noimg.jpg',
+                                      fit: BoxFit.fitWidth,
+                                    ),
                                   ),
                                 ),
                               );
@@ -261,14 +258,15 @@ class _Store_DetailState extends State<Store_Detail> {
                                                 height: MediaQuery.of(context)
                                                         .size
                                                         .height *
-                                                    0.07,
+                                                    0.08,
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .height *
-                                                    0.07,
+                                                    0.08,
                                                 child: CircleAvatar(
                                                   backgroundColor:
-                                                      Color.fromARGB(255, 196, 196, 196),
+                                                      Color.fromARGB(
+                                                          255, 196, 196, 196),
                                                   backgroundImage: NetworkImage(
                                                       thisStore_notCoverIMG
                                                           .image!.thumbnail
@@ -455,17 +453,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                             color: Color.fromARGB(
                                                 255, 165, 162, 162)),
                                         HtmlWidget(document555.outerHtml),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.fromLTRB(
-                                        //       0, 10, 0, 0),
-                                        //   child: Text(
-                                        //     // thisStore_notCoverIMG.content
-                                        //     //     .toString(),
-                                        //     document.outerHtml,
-                                        //     style:
-                                        //         TextStyle(color: Colors.grey),
-                                        //   ),
-                                        // ),
+
                                         SizedBox(
                                           height: 20,
                                         ),

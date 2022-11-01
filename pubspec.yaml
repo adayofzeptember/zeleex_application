@@ -22,7 +22,7 @@ dependencies:
   flutter_toggle_tab: ^1.1.7
   #http: ^0.13.4
   html: ^0.15.0
-  fwfh_text_style: ^2.7.3
+ 
   fluttertoast: ^8.0.9
   shared_preferences: ^2.0.15
   flutter_widget_from_html: ^0.8.5
@@ -35,11 +35,14 @@ dependencies:
   infinite_scroll_pagination: ^3.1.0
   dotted_border: ^2.0.0+2
   flutter_slidable: 1.2.0
+  fwfh_text_style: ^2.22.8+1
   flutter_launcher_icons: ^0.9.2
   responsive_framework: ^0.1.9
   smooth_page_indicator: ^1.0.0+2
   google_sign_in: ^5.3.3
   cached_network_image: ^3.2.0
+  
+
 
 dev_dependencies:
   flutter_test:

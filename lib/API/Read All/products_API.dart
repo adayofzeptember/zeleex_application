@@ -142,7 +142,7 @@ class Data_Products_ReadAll {
   Image_forAnimal? image;
   List<Images>? images;
   int? favoriteCount;
-  int? reviewCount;
+
   int? price;
   List<Categories>? categories;
   List<Tags>? tags;
@@ -165,7 +165,6 @@ class Data_Products_ReadAll {
       this.image,
       this.images,
       this.favoriteCount,
-      this.reviewCount,
       this.price,
       this.categories,
       this.tags,
@@ -195,7 +194,7 @@ class Data_Products_ReadAll {
       });
     }
     favoriteCount = json['favorite_count'];
-    reviewCount = json['review_count'];
+
     price = json['price'];
     if (json['categories'] != null) {
       categories = <Categories>[];
@@ -234,7 +233,7 @@ class Data_Products_ReadAll {
       data['images'] = this.images!.map((v) => v.toJson()).toList();
     }
     data['favorite_count'] = this.favoriteCount;
-    data['review_count'] = this.reviewCount;
+
     data['price'] = this.price;
     if (this.categories != null) {
       data['categories'] = this.categories!.map((v) => v.toJson()).toList();
@@ -545,18 +544,23 @@ class Links {
   }
 }
 
-Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
-  final response =
-      await http.get(Uri.parse('https://api.zeleex.com/api/products'));
+// Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
+//   final response =
+//       await http.get(Uri.parse('https://api.zeleex.com/api/products'));
 
-  var jsonResponse = json.decode(response.body);
-  List jsonCon = jsonResponse['data']['data'];
+//   var jsonResponse = json.decode(response.body);
+//   List jsonCon = jsonResponse['data']['data'];
+//   //!var jsonConSpecific = jsonResponse['data']['data'][1];
+//   if (response.statusCode == 200) {
+//     //print(jsonConSpecific);
+//     return jsonCon
+//         .map((data) => new Data_Products_ReadAll.fromJson(data))
+//         .toList();
+//   } else {
+//     throw Exception("error...");
+//   }
+// }
 
-  if (response.statusCode == 200) {
-    return jsonCon
-        .map((data) => new Data_Products_ReadAll.fromJson(data))
-        .toList();
-  } else {
-    throw Exception("error...");
-  }
-}
+// void main(List<String> args) {
+//   fetch_ProductPage_readAll();
+// }

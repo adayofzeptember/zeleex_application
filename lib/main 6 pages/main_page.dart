@@ -150,6 +150,7 @@ class _Main_WidgetState extends State<Main_Widget> {
               ],
             )),
         body: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -208,6 +209,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                           future: futureData,
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
+                              
                               List<DataSlider>? data = snapshot.data;
                               return CarouselSlider.builder(
                                   itemCount: data?.length,
@@ -224,30 +226,25 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   167, 216, 216, 216)),
                                           child: SvgPicture.network(
                                             data![index].image!.toString(),
-                            
                                           )),
                                     );
                                   },
                                   options: CarouselOptions(
-                                      aspectRatio: 16/9,
-                                      
+                                      aspectRatio: 16 / 9,
                                       enlargeCenterPage: true,
                                       viewportFraction: 1,
                                       autoPlay: true,
                                       autoPlayInterval: Duration(seconds: 5),
                                       autoPlayAnimationDuration:
-                                    
                                           Duration(seconds: 2),
                                       onPageChanged: (index, reason) =>
                                           setState(
                                             (() => activeIndex = index),
-                                          ))
-                                          );
+                                          )));
                             } else if (snapshot.hasError) {
                               return Text("${snapshot.error}");
                             }
 
-                            
                             return CircularProgressIndicator();
                           },
                         ),

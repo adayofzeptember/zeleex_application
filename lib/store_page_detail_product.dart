@@ -20,7 +20,7 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
   bool pressed = true;
 
   Future<Data_Store> fetchStore_ByID() async {
-    var url = "https://sanboxapi.zeleex.com/api/stores/" + widget.storeID;
+    var url = "https://api.zeleex.com/api/stores/" + widget.storeID;
     var response = await http.get(Uri.parse(url));
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data'];
@@ -31,9 +31,11 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 221, 221, 221),
       appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
+          elevation: 0,
           // leading: Builder(
           //   builder: (context) => IconButton(
           //     icon: SizedBox(
@@ -80,557 +82,216 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Column(
-              children: [
-                Stack(
-                  children: [
-                    FutureBuilder(
-                        future: fetchStore_ByID(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<dynamic> snapshot) {
-                          if (snapshot.hasData) {
-                            Data_Store thisStore = snapshot.data;
-                            return Image.network(
-                                thisStore.imageCover!.main.toString());
-                          } else {
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 50),
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          }
-                        }),
-                    FutureBuilder(
-                        future: fetchStore_ByID(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<dynamic> snapshot) {
-                          if (snapshot.hasData) {
-                            Data_Store thisStore_notCoverIMG = snapshot.data;
-                            return Container(
-                                child: Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10),
-                                        topLeft: Radius.circular(10))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.07,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.07,
-                                              child: CircleAvatar(
-                                                backgroundColor: Color.fromARGB(
-                                                    255, 131, 131, 131),
-                                                backgroundImage: NetworkImage(
-                                                    thisStore_notCoverIMG
-                                                        .image!.thumbnail
-                                                        .toString()),
-                                              )),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                15, 0, 5, 0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                    thisStore_notCoverIMG.title
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                        'assets/images/pinnew.svg'),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Container(
-                                                      width: 200,
-                                                      //width: MediaQuery.of(context).size.width * 0.5,
-                                                      child: Text(
-                                                        thisStore_notCoverIMG
-                                                            .address
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 13),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                        'assets/images/callnew.svg'),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Container(
-                                                      child: Text(
-                                                        thisStore_notCoverIMG
-                                                            .phone
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 13),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.settings,
-                                            color: Colors.white,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 0, 0, 0),
-                                        child: Row(
+            FutureBuilder(
+                future: fetchStore_ByID(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.hasData) {
+                    Data_Store thisStore_notCoverIMG = snapshot.data;
+                    return Container(
+                        child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10),
+                                topLeft: Radius.circular(10))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.07,
+                                      width:
+                                          MediaQuery.of(context).size.height *
+                                              0.07,
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 131, 131, 131),
+                                        backgroundImage: NetworkImage(
+                                            thisStore_notCoverIMG
+                                                .image!.thumbnail
+                                                .toString()),
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(15, 0, 5, 0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            thisStore_notCoverIMG.title
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             SvgPicture.asset(
-                                                'assets/images/star.svg'),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
+                                                'assets/images/pinnew.svg'),
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                  ),
-                                                  primary: pressed
-                                                      ? Palette.kToDark
-                                                      : Color.fromARGB(
-                                                          255, 204, 204, 204),
-                                                  elevation: 0),
-                                              onPressed: () {
-                                                setState(() {
-                                                  pressed = !pressed;
-                                                });
-                                              },
-                                              //         style: pressed
-                                              // ? TextStyle(
-                                              //     color: Colors.black)
-                                              // : TextStyle(
-                                              //     color: Color.fromARGB(255, 229, 233, 229)),
+                                            Container(
+                                              width: 200,
+                                              //width: MediaQuery.of(context).size.width * 0.5,
                                               child: Text(
-                                                pressed
-                                                    ? "ติดตาม"
-                                                    : "ติดตามแล้ว",
+                                                thisStore_notCoverIMG.address
+                                                    .toString(),
                                                 style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        255, 255, 255, 1)),
+                                                    color: Colors.grey,
+                                                    fontSize: 13),
                                               ),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                      //! แก้ไขเพิ่มเติม
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 5, 0, 0),
-                                        child: Row(
-                                          children: <Widget>[
-                                            Text("ประเภทร้านค้า "),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                                'assets/images/callnew.svg'),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
                                             Container(
-                                              height: 20,
-                                              child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount:
-                                                      thisStore_notCoverIMG
-                                                          .types!.length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return Row(
-                                                      children: [
-                                                        Text(
-                                                          thisStore_notCoverIMG
-                                                                  .types![index]
-                                                                  .title
-                                                                  .toString() +
-                                                              ", ",
-                                                          style: TextStyle(
-                                                              color: Palette
-                                                                  .kToDark),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  }),
+                                              child: Text(
+                                                thisStore_notCoverIMG.phone
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 13),
+                                              ),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Divider(
-                                          color: Color.fromARGB(
-                                              255, 165, 162, 162)),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 10, 0, 0),
-                                        child: Text(
-                                          thisStore_notCoverIMG.content
-                                              .toString(),
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
+                                  Icon(
+                                    Icons.settings,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset('assets/images/star.svg'),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          primary: pressed
+                                              ? Palette.kToDark
+                                              : Color.fromARGB(
+                                                  255, 204, 204, 204),
+                                          elevation: 0),
+                                      onPressed: () {
+                                        setState(() {
+                                          pressed = !pressed;
+                                        });
+                                      },
+                                      //         style: pressed
+                                      // ? TextStyle(
+                                      //     color: Colors.black)
+                                      // : TextStyle(
+                                      //     color: Color.fromARGB(255, 229, 233, 229)),
+                                      child: Text(
+                                        pressed ? "ติดตาม" : "ติดตามแล้ว",
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                255, 255, 255, 1)),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ));
-                          } else {
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 50),
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          }
-                        })
-                  ],
-                ),
-                SizedBox(height: 5),
-                Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              print("object");
-                              //MediaQuery.of(context).size.height * 0.25
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(30.0),
+                              //! แก้ไขเพิ่มเติม
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Text("ประเภทร้านค้า "),
+                                    Container(
+                                      height: 20,
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: thisStore_notCoverIMG
+                                              .types!.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Row(
+                                              children: [
+                                                Text(
+                                                  thisStore_notCoverIMG
+                                                          .types![index].title
+                                                          .toString() +
+                                                      ", ",
+                                                  style: TextStyle(
+                                                      color: Palette.kToDark),
+                                                ),
+                                              ],
+                                            );
+                                          }),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Text(
-                                "อุปกรณ์",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
+                              Divider(
+                                  color: Color.fromARGB(255, 165, 162, 162)),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                child: Text(
+                                  thisStore_notCoverIMG.content.toString(),
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              color: Palette.kToDark,
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Text(
-                              "อาหารและยา",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Text(
-                              "น้ำเชื้อและตัวอ่อdน",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color.fromARGB(255, 130, 130, 130),
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 5,
-                ),
-
-                //! ดึงสินค้ามาโชว์ GRID
-
-                Center(
-                  child: Column(
-                    children: [
-                      Wrap(
-                        spacing: 8.0,
-                        runSpacing: 4.0,
-                        children: <Widget>[
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Store_Product_Detail()),
-                              );
-                            },
-                            child: 
-                            Container(
-                              width: 190,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
-                                          child: Image.asset(
-                                            'assets/images/cart_pd.png',
-                                             fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        height: 40,
-                                        child: Text(
-                                          "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 0, 0),
-                                        child: Text(
-                                          "฿ 890",
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    SizedBox(
-                                      height: 8,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                               Container(
-                              width: 190,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
-                                          child: Image.asset(
-                                            'assets/images/cart_pd.png',
-                                             fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        height: 40,
-                                        child: Text(
-                                          "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 0, 0),
-                                        child: Text(
-                                          "฿ 890",
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    SizedBox(
-                                      height: 8,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                                  Container(
-                              width: 190,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
-                                          child: Image.asset(
-                                            'assets/images/cart_pd.png',
-                                             fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        height: 40,
-                                        child: Text(
-                                          "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 0, 0),
-                                        child: Text(
-                                          "฿ 890",
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    SizedBox(
-                                      height: 8,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                                  Container(
-                              width: 190,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5)),
-                                          child: Image.asset(
-                                            'assets/images/cart_pd.png',
-                                             fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 5, 0),
-                                      child: Container(
-                                        height: 40,
-                                        child: Text(
-                                          "อาหารลูกโค ซีพี 973 จีเอ็มขนาด 10 กิโลกรัม สำหรับลูกโคแรกเกิด",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 5, 0, 0),
-                                        child: Text(
-                                          "฿ 890",
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    SizedBox(
-                                      height: 8,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                      
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                    ));
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+                }),
+            SizedBox(height: 5),
           ],
         ),
       ),

@@ -199,7 +199,7 @@ class Links {
 
 Future<List<Data2>> fetch_HelpCenter() async {
   final response =
-      await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/helps'));
+      await http.get(Uri.parse('https://api.zeleex.com/api/helps'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['data'];

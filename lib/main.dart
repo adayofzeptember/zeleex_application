@@ -26,7 +26,7 @@ class First_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-          builder: ((context, child) => ResponsiveWrapper.builder(
+      builder: ((context, child) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, child!),
             maxWidth: 1200,
             minWidth: 450,
@@ -57,6 +57,7 @@ class MainAndIcon extends StatefulWidget {
 
 class _MainAndIconState extends State<MainAndIcon> {
   @override
+
   initState() {
     _Load_AndGo();
     super.initState();
@@ -66,9 +67,9 @@ class _MainAndIconState extends State<MainAndIcon> {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var checkToken = prefs2.get('keyToken');
     if (checkToken.toString() != 'null') {
-      print(" --------------> stored token: " + checkToken.toString());
+      print("--------------> stored token: " + checkToken.toString());
     } else {
-      print(" --------------> no token");
+      print("--------------> no token");
     }
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
