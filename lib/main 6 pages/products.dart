@@ -222,7 +222,7 @@ class _ProductPageState extends State<ProductPage> {
                                           productName:
                                               data[index].title.toString(),
                                           productID: data[index].id.toString(),
-                                          qty: x.toString(),
+                                          //!qty: x.toString(),
                                         )));
                               },
                               child: Column(
@@ -326,13 +326,8 @@ class _ProductPageState extends State<ProductPage> {
               );
             },
           ),
-          // ElevatedButton(
-          //     onPressed: () {
-          //       setState(() {
-          //         x = x + 1;
-          //       });
-          //     },
-          //     child: Text("data"))
+
+        
         ],
       ),
     );

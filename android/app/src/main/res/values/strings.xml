@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">zeleex_application</string> 
-    <string name="facebook_app_id">422156793150527</string>
-    <string name="fb_login_protocol_scheme">fb422156793150527</string>
-    <string name="facebook_client_token">cefb7a433cbb6ee8d742585f5a839d4d</string>
+    <string name="app_name">Zeleex</string> 
+    <string name="facebook_app_id">677004776915064</string>
+    <string name="fb_login_protocol_scheme">fb677004776915064</string>
+    <string name="facebook_client_token">ec7be7f689c62256363e74421755c329</string>
 </resources>

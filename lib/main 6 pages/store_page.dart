@@ -198,8 +198,7 @@ class _StorePageState extends State<StorePage> {
                                         ),
                                         errorWidget: (context, url, error) =>
                                             Container(
-                                              
-                                              height: double.infinity,
+                                          height: double.infinity,
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(5))),
@@ -343,7 +342,7 @@ class _StorePageState extends State<StorePage> {
                                 tapBodyToCollapse: false,
                               ),
                               header: Text(
-                                "ประเภทร้านค้า",
+                                'ประเภทร้านค้า',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Color.fromARGB(255, 131, 131, 131)),
@@ -356,6 +355,7 @@ class _StorePageState extends State<StorePage> {
                                     onTap: () {
                                       setState(() {
                                         press = !press;
+
                                         typeID = "1";
                                       });
                                     },
@@ -391,6 +391,7 @@ class _StorePageState extends State<StorePage> {
                                   InkWell(
                                     onTap: () {
                                       setState(() {
+                                        typeID = "3";
                                         press = !press;
                                       });
                                     },

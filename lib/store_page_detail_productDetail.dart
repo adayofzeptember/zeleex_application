@@ -26,8 +26,8 @@ String theUserOne = '';
 class Store_Product_Detail extends StatefulWidget {
   String? productID = "";
   String? productName = "";
-  String? qty;
-  Store_Product_Detail({Key? key, this.productID, this.productName, this.qty})
+  //String? qty;
+  Store_Product_Detail({Key? key, this.productID, this.productName})
       : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class Store_Product_Detail extends StatefulWidget {
 class _Store_Product_DetailState extends State<Store_Product_Detail> {
   int index = 0;
   int tag = 0;
-  int qtyCart = 0;
+
   String picked = "";
   late Future<Product> future_ProductByID;
   late Future<List<Data_Review>> future_review;
@@ -60,7 +60,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   String priceSKU = "ราคาสินค้า";
   @override
   void initState() {
-    qtyCart = int.parse(widget.qty.toString());
+    
     getUserID();
     print(widget.productID.toString());
     future_review = fetch_Product_Review();
@@ -446,7 +446,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                 onPressed: () {
                                   setState(() {
                                     // x = x + 1;
-                                    qtyCart = qtyCart + 1;
+                                    //qtyCart = qtyCart + 1;
                                   });
 
                                   cartCheckIn();
@@ -554,7 +554,8 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                       right: 4.0,
                       child: Center(
                         child: Text(
-                          qtyCart.toString(),
+                          '1',
+                          //qtyCart.toString(),
                           style: TextStyle(
                             fontSize: 0,
                             color: Colors.green,

@@ -80,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     getToken();
     future_review = fetch_Product_Review();
-
+    print(theTokenOne.toString());
     fetched_add = fetch_shipping_list(theTokenOne);
     future_Profile = fetchProfile_Auth(theTokenOne);
     super.initState();
@@ -98,7 +98,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         backgroundColor: Palette.kToDark,
         elevation: 0.0,
-        title: Row(
+        title: 
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Visibility(
@@ -141,7 +142,6 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            
             FutureBuilder(
                 future: fetchProfile_Auth(theTokenOne),
                 builder:
@@ -642,9 +642,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         );
                       });
                 } else if (snapshot.hasError) {
-                  return Container();
+                  return Text(snapshot.error.toString());
                 }
-                return Container();
+                return Container(child: Text('รอ'),);
               },
             ),
 

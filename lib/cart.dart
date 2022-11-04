@@ -156,6 +156,8 @@ class _CartPageState extends State<CartPage> {
                                             255, 223, 222, 222)))),
                             width: double.infinity,
                             child: Padding(
+                              
+                              
                               padding:
                                   const EdgeInsets.only(right: 10, bottom: 5),
                               child: Column(
@@ -182,6 +184,7 @@ class _CartPageState extends State<CartPage> {
                                       SizedBox(
                                         width: 10,
                                       ),
+                                      
                                       Text(
                                         data![index].title.toString(),
                                         style: TextStyle(
@@ -200,6 +203,7 @@ class _CartPageState extends State<CartPage> {
                                       ),
                                     ],
                                   ),
+                                
                                   FutureBuilder<List<ProductSkus>>(
                                     future:
                                         fetch_cartSku(userID, userToken, index),
@@ -465,7 +469,6 @@ class _CartPageState extends State<CartPage> {
                                                                                   totalPrice = totalPrice + x1;
                                                                                   totalPrice = 0;
                                                                                 });
-
                                                                                 initState();
                                                                               },
                                                                               child: Padding(
@@ -597,91 +600,6 @@ class _CartPageState extends State<CartPage> {
       ),
     );
   }
-
-//   show_deleteConfirmDialog(
-//       BuildContext context,
-//       Provider_CartRemove provider_remove_cart,
-//       String dialogUserID,
-//       String dialogUserToken,
-//       String dialogPrdName,
-//       String dialogPrdName_main) {
-//     Widget cancelButton = TextButton(
-  // child: Text(
-  //     "ยกเลิก",
-  //     style: TextStyle(color: Color.fromARGB(255, 99, 99, 99)),
-  //   ),
-  //   onPressed: () {
-  //     Navigator.of(context, rootNavigator: true).pop();
-  //   },
-  // );
-  // Widget confirmButton = TextButton(
-  //   style: ButtonStyle(
-  //       backgroundColor:
-  //           MaterialStateProperty.all(Color.fromARGB(117, 244, 67, 54))),
-  //   child: Padding(
-  //     padding: const EdgeInsets.fromLTRB(9, 1, 9, 1),
-  //     child: Text(
-  //       "ลบ",
-  //       style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-  //     ),
-  //   ),
-  //   onPressed: () {
-  //     cart_remove(provider_remove_cart, dialogUserToken);
-  //     Fluttertoast.showToast(
-  //         msg: "ลบ " + dialogPrdName + ' ออกจากตะกร้าแล้ว',
-  //         toastLength: Toast.LENGTH_LONG,
-  //         gravity: ToastGravity.SNACKBAR,
-  //         timeInSecForIosWeb: 2,
-  //         backgroundColor: Color.fromARGB(255, 133, 133, 133),
-  //         textColor: Colors.white,
-  //         fontSize: 15);
-  //     Navigator.of(context, rootNavigator: true).pop();
-  //     setState(() {
-  //       totalPrice = 0;
-  //       initState();
-  //     });
-  //     //initState();
-  //   },
-  // );
-
-//     AlertDialog alert = AlertDialog(
-//       title: Text("ลบสินค้าในตะกร้า",
-//           style: TextStyle(color: Colors.red, fontSize: 20)),
-//       content: Row(
-//         children: [
-//           Text(
-//             "ต้องการลบสินค้า ",
-//             style: TextStyle(
-//               fontSize: 15,
-//             ),
-//           ),
-//           Flexible(
-//             child: Text(dialogPrdName_main.toString(),
-//                 style: TextStyle(
-//                     fontSize: 15,
-//                     color: Palette.kToDark,
-//                     fontWeight: FontWeight.bold)),
-//           ),
-//           Text(" ออกจากตะกร้า ?",
-//               style: TextStyle(
-//                 fontSize: 15,
-//               )),
-//         ],
-//       ),
-//       actions: [
-//         cancelButton,
-//         confirmButton,
-//       ],
-//     );
-
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return alert;
-//       },
-//     );
-//   }
-// }
 
   void showDialog(Provider_CartRemove provider_remove_cart, String dialogUserID,
       String dialogUserToken, String dialogPrdName, String dialogPrdName_main) {
