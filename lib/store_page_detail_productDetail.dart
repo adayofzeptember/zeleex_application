@@ -40,9 +40,10 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
 
   String picked = "";
   late Future<Product> future_ProductByID;
+  late Future<List<Skus>> future_Product_skus;
+
   late Future<List<Data_Review>> future_review;
 
-  late Future<List<Skus>> future_Product_skus;
   late AddToCart_Request request_model_addToCart;
   late Product_Fave_Model request_model_product_fave;
   late Store_Subscribe_Model request_model_store_subscribe;
@@ -59,10 +60,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   String cartAdd_token = "";
   String priceSKU = "ราคาสินค้า";
   @override
+
   void initState() {
-    
     getUserID();
-    print(widget.productID.toString());
     future_review = fetch_Product_Review();
     future_ProductByID = fetch_Product_ByID();
     future_Product_skus = fetch_skus();
@@ -107,12 +107,9 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     request_model_addToCart.store_id = int.parse(cartAdd_storeID.toString());
     request_model_addToCart.product_sku_id =
         int.parse(cartAdd_product_sku_id.toString());
+
     request_model_addToCart.unit = int.parse(_counter.toString());
-    // request_model_addToCart.user_id = 529;
-    // request_model_addToCart.store_id = 1104;
-    // request_model_addToCart.product_sku_id =
-    //     145;
-    // request_model_addToCart.unit = 2;
+
     await add_to_cart_now(request_model_addToCart, cartAdd_token);
   }
 
@@ -130,6 +127,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
 
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['product'];
+
     var getIMG = jsonResponse['data']['product']['image']['main'];
     var getPrice = jsonResponse['data']['product']['price'];
     setState(() {
@@ -137,6 +135,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     });
 
     Product msg = Product.fromJson(jsonCon);
+
     return msg;
   }
 
@@ -731,28 +730,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                       ),
                                     ),
                                   ),
-                                  //  SizedBox(
-                                  //   width: 50,
-                                  //   height: 50,
-                                  //   child: CircleAvatar(
-                                  //     child: Image.network(
-                                  //       thisProduct.store!.image!.main.toString(),
-
-                                  //       fit: BoxFit.contain,
-                                  //     ),
-                                  //   ),
-                                  // ),
-
-                                  // SizedBox(
-                                  //   height: 50,
-                                  //   width: 50,
-                                  //   child: CircleAvatar(
-                                  //     backgroundImage: NetworkImage(
-                                  //       thisProduct.store!.image!.main.toString(),
-                                  //     ),
-                                  //     backgroundColor: Colors.transparent,
-                                  //   ),
-                                  // ),
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(10, 0, 5, 0),

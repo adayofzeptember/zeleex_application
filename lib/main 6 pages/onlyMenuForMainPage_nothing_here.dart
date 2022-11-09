@@ -10,6 +10,7 @@ import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
 import 'package:zeleex_application/main%206%20pages/products.dart';
 import 'package:zeleex_application/main%206%20pages/semens.dart';
 import 'package:zeleex_application/main%206%20pages/store_page.dart';
+import 'package:zeleex_application/test%20folder/df.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
@@ -50,13 +51,11 @@ class _Main_PageState extends State<Main_Page> {
   ];
 
   int _index = 2;
-  void _onItemTapped(int index2) {
+  void onItemTapped555(int index2) {
     setState(() {
       _index = index2;
     });
   }
-
-
 
   String k = '';
   Future loginh() async {
@@ -83,7 +82,7 @@ class _Main_PageState extends State<Main_Page> {
         ),
         child: BottomNavigationBar(
           currentIndex: _index,
-          onTap: _onItemTapped,
+          onTap: onItemTapped555,
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(

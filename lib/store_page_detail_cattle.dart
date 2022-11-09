@@ -81,6 +81,11 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 221, 221, 221),
       appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.dark,
+            statusBarColor: Colors.white,
+          ),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,
@@ -244,7 +249,6 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                         pressed = !pressed;
                                       });
                                     },
-                               
                                     child: Text(
                                       pressed ? "ติดตาม" : "ติดตามแล้ว",
                                       style: TextStyle(
@@ -347,7 +351,6 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ClipRRect(
-                      
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(5),
                                       topRight: Radius.circular(5)),

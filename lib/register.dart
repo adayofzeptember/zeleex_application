@@ -139,16 +139,13 @@ class _RegisterPageState extends State<RegisterPage> {
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
               statusBarColor: Palette.kToDark),
-          title: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Center(
-                child: Text(
-              '',
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            )),
-          ),
+          title: Center(
+              child: Text(
+            '',
+            style: TextStyle(color: Colors.white, fontSize: 30),
+          )),
           backgroundColor: Palette.kToDark,
-          elevation: 0,
+     elevation: 0,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -536,6 +533,7 @@ class _RegisterPageState extends State<RegisterPage> {
               )
             ],
           ),
-        ));
+        )
+        );
   }
 }

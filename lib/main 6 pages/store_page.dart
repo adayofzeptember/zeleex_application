@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zeleex_application/API/Read%20All/filters/store_types.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/main%206%20pages/onlyMenuForMainPage_nothing_here.dart';
 import 'package:zeleex_application/from%20Profile/profile.dart';
@@ -17,6 +18,9 @@ import '../aboutus.dart';
 import '../second.dart';
 import '../store_page_detail.dart';
 
+var perPage = 10;
+bool hasMore = true;
+
 class StorePage extends StatefulWidget {
   StorePage({Key? key}) : super(key: key);
 
@@ -26,16 +30,18 @@ class StorePage extends StatefulWidget {
 
 class _StorePageState extends State<StorePage> {
   final controller = ScrollController();
-  var perPage = 10; //*ค่าเริ่มต้น แสดง 2 items
-  bool hasMore = true;
+  //*ค่าเริ่มต้น แสดง 2 items
+
   bool press = false;
+  String test = 'https://api.zeleex.com/api/stores?per_page=';
   String typeID = "";
 
   late Future<List<Data_Store_ReadALL>> futureStore;
+  late Future<List<Data_Store_Types>> futureStore_Types;
+
   Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
     final response = await http.get(
-      Uri.parse(
-          'https://api.zeleex.com/api/stores?per_page=' + perPage.toString()),
+      Uri.parse(test.toString() + perPage.toString()),
       headers: {'Accept': 'application/json'},
     );
     var jsonResponse = json.decode(response.body);
@@ -55,6 +61,7 @@ class _StorePageState extends State<StorePage> {
 
   void initState() {
     fetch_StorePage_readAll();
+    futureStore_Types = fetch_store_types();
     futureStore = fetch_StorePage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -146,8 +153,7 @@ class _StorePageState extends State<StorePage> {
                     thickness: 5,
                     child: GridView.builder(
                       controller: controller,
-                      gridDelegate:
-                          new SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 1 + 1,
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
@@ -270,7 +276,6 @@ class _StorePageState extends State<StorePage> {
                             ),
                           );
                         } else {
-                          // return Container();
                           return hasMore
                               ? Container(
                                   alignment: Alignment.center,
@@ -295,7 +300,6 @@ class _StorePageState extends State<StorePage> {
                         "ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ" +
                             snapshot.error.toString()));
               }
-              // By default show a loading spinner.
               return Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: Container(
@@ -325,100 +329,113 @@ class _StorePageState extends State<StorePage> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.07,
                       ),
-                      Text("ค้นหาแบบละเอียด",
+                      Text("ค้นหาจากหมวดหมู่",
                           style: TextStyle(
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           )),
-                      ExpandableNotifier(
-                          child: Column(
-                        children: <Widget>[
-                          ScrollOnExpand(
-                            scrollOnExpand: true,
-                            scrollOnCollapse: false,
-                            child: ExpandablePanel(
-                              theme: const ExpandableThemeData(
-                                headerAlignment:
-                                    ExpandablePanelHeaderAlignment.center,
-                                tapBodyToCollapse: false,
-                              ),
-                              header: Text(
-                                'ประเภทร้านค้า',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 131, 131, 131)),
-                              ),
-                              collapsed: Container(),
-                              expanded: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        press = !press;
 
-                                        typeID = "1";
-                                      });
-                                    },
-                                    child: Text("ร้านค้าทั่วไป",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: press
-                                                ? Palette.kToDark
-                                                : Color.fromARGB(
-                                                    255, 131, 131, 131))),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        typeID = "2";
-                                        press = !press;
-                                      });
-                                    },
-                                    child: Text("ร้านค้าส่งสัตว์",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: press
-                                                ? Color.fromARGB(
-                                                    255, 131, 131, 131)
-                                                : Palette.kToDark)),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        typeID = "3";
-                                        press = !press;
-                                      });
-                                    },
-                                    child: Text("บริการขนส่งน้ำเชื้อ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 131, 131, 131))),
-                                  ),
-                                ],
-                              ),
-                              builder: (_, collapsed, expanded) {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 10, right: 10, bottom: 10),
-                                  child: Expandable(
-                                    collapsed: collapsed,
-                                    expanded: expanded,
-                                    theme: const ExpandableThemeData(
-                                        crossFadePoint: 0),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      )),
+                      FutureBuilder<List<Data_Store_Types>>(
+                        future: futureStore_Types,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<Data_Store_Types>? data = snapshot.data;
+                            return ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: data!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              typeID =
+                                                  data[index].id.toString();
+                                            });
+                                            print(typeID.toString());
+                                          },
+                                          child: Text(
+                                              data[index].title.toString(),
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color.fromARGB(
+                                                      255, 131, 131, 131))),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                });
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          }
+                          return Container();
+                        },
+                      ),
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: <Widget>[
+
+                      //     InkWell(
+                      //       onTap: () {
+                      //         setState(() {
+                      //           press = !press;
+
+                      //           typeID = "1";
+                      //         });
+                      //       },
+                      //       child: Text("ร้านค้าทั่วไป",
+                      //           style: TextStyle(
+                      //               fontSize: 20,
+                      //               fontWeight: FontWeight.w500,
+                      //               color: press
+                      //                   ? Palette.kToDark
+                      //                   : Color.fromARGB(255, 131, 131, 131))),
+                      //     ),
+                      //     SizedBox(
+                      //       height: 5,
+                      //     ),
+                      //     InkWell(
+                      //       onTap: () {
+                      //         setState(() {
+                      //           typeID = "2";
+                      //           press = !press;
+                      //         });
+                      //       },
+                      //       child: Text("ร้านค้าส่งสัตว์",
+                      //           style: TextStyle(
+                      //               fontSize: 20,
+                      //               fontWeight: FontWeight.w500,
+                      //               color: press
+                      //                   ? Color.fromARGB(255, 131, 131, 131)
+                      //                   : Palette.kToDark)),
+                      //     ),
+                      //     SizedBox(
+                      //       height: 5,
+                      //     ),
+                      //     InkWell(
+                      //       onTap: () {
+                      //         setState(() {
+                      //           typeID = "3";
+                      //           press = !press;
+                      //         });
+                      //       },
+                      //       child: Text("บริการขนส่งน้ำเชื้อ",
+                      //           style: TextStyle(
+                      //               fontSize: 20,
+                      //               fontWeight: FontWeight.w500,
+                      //               color: Color.fromARGB(255, 131, 131, 131))),
+                      //     ),
+                      //   ],
+                      // ),
+
                       Spacer(),
                       Container(
                           //height: double.infinity,
@@ -437,15 +454,15 @@ class _StorePageState extends State<StorePage> {
                                             BorderSide(color: Palette.kToDark),
                                       ),
                                       onPressed: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Store_Filtered(
-                                                      typeID: typeID,
-                                                    )));
+                                        Navigator.pop(context);
+                                        setState(() {
+                                          test =
+                                              'https://api.zeleex.com/api/products?per_page=';
+                                        });
+                                        initState();
                                       },
                                       child: Text(
-                                        "รีเซ็ต",
+                                        "ยกเลิก",
                                         style:
                                             TextStyle(color: Palette.kToDark),
                                       ))),
@@ -455,14 +472,18 @@ class _StorePageState extends State<StorePage> {
                               Expanded(
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      Navigator.pop(context);
-                                      initState();
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Store_Filtered(
+                                                    typeID: typeID,
+                                                  )));
                                     },
                                     child: Text("ตกลง",
                                         style: TextStyle(
                                           color: Colors.white,
                                         ))),
-                              )
+                              ),
                             ]),
                           ))
                     ],

@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
+import '../API/Read All/filters/animals_types.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
@@ -28,25 +29,26 @@ class _AnimalsPageState extends State<AnimalsPage> {
   var perPage = 6; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   late Future<List<Data_Animal_All>> futureAnimal;
+  late Future<List<Data_AnimalCategory>> futureAnimal_types;
 
-
-Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
-  final response = await http.get(
-      Uri.parse('https://api.zeleex.com/api/animals?per_page='+perPage.toString()),
+  Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
+    final response = await http.get(
+      Uri.parse(
+          'https://api.zeleex.com/api/animals?per_page=' + perPage.toString()),
       headers: {'Accept': 'application/json'},
-   );
+    );
 
-  var jsonResponse = json.decode(response.body);
-  List jsonCon = jsonResponse['data']['data'];
-  if (response.statusCode == 200) {
-    return jsonCon.map((data) => new Data_Animal_All.fromJson(data)).toList();
-  } else {
-    throw Exception("error...");
+    var jsonResponse = json.decode(response.body);
+    List jsonCon = jsonResponse['data']['data'];
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => new Data_Animal_All.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
   }
-}
-
 
   void initState() {
+    futureAnimal_types = fetch_animal_cat();
     futureAnimal = fetch_AnimalPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -205,11 +207,10 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
                                                     const EdgeInsets.fromLTRB(
                                                         3, 3, 3, 0),
                                                 child: Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.22,
+                                                    height: MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.22,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color:
@@ -223,7 +224,8 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
                                                                 Radius.circular(
                                                                     5))),
                                                     alignment: Alignment.center,
-                                                    child: Icon(Icons.error_outline)),
+                                                    child:
+                                                        Icon(Icons.error_outline)),
                                               ),
                                             ),
                                           )),
@@ -332,8 +334,50 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           )),
-                      Card1(),
-                      Card2(),
+                      FutureBuilder<List<Data_AnimalCategory>>(
+                        future: futureAnimal_types,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<Data_AnimalCategory>? data = snapshot.data;
+
+                            return ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: data!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Text(
+                                            data[index].title.toString(),
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 131, 131, 131))),
+                                      ),
+                                      Text(
+                                          data[3].children![2].title.toString(),
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromARGB(
+                                                  255, 131, 131, 131))),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                    ],
+                                  );
+                                });
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          }
+                          return Container();
+                        },
+                      ),
                       Spacer(),
                       Container(
                           //height: double.infinity,
@@ -377,129 +421,5 @@ Future<List<Data_Animal_All>> fetch_AnimalPage_readAll() async {
             ),
           )),
     );
-  }
-}
-
-class Card1 extends StatelessWidget {
-  bool press = true;
-  @override
-  Widget build(BuildContext context) {
-    return ExpandableNotifier(
-        child: Column(
-      children: <Widget>[
-        ScrollOnExpand(
-          scrollOnExpand: true,
-          scrollOnCollapse: false,
-          child: ExpandablePanel(
-            theme: const ExpandableThemeData(
-              headerAlignment: ExpandablePanelHeaderAlignment.center,
-              tapBodyToCollapse: false,
-            ),
-            header: Text(
-              "โคและกระบือ",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 131, 131, 131)),
-            ),
-            collapsed: Container(),
-            expanded: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("โคเนื้อ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("โคนม",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("กระบือ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-              ],
-            ),
-            builder: (_, collapsed, expanded) {
-              return Padding(
-                padding: EdgeInsets.only(left: 10, right: 10, bottom: 0),
-                child: Expandable(
-                  collapsed: collapsed,
-                  expanded: expanded,
-                  theme: const ExpandableThemeData(crossFadePoint: 0),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    ));
-  }
-}
-
-class Card2 extends StatelessWidget {
-  bool pressed = true;
-  @override
-  Widget build(BuildContext context) {
-    return ExpandableNotifier(
-        child: Column(
-      children: <Widget>[
-        ScrollOnExpand(
-          scrollOnExpand: true,
-          scrollOnCollapse: false,
-          child: ExpandablePanel(
-            theme: const ExpandableThemeData(
-              headerAlignment: ExpandablePanelHeaderAlignment.center,
-              tapBodyToCollapse: false,
-            ),
-            header: Text(
-              "สัตว์ปีก",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 131, 131, 131)),
-            ),
-            collapsed: Container(),
-            expanded: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("ร้านค้าทั่วไป",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("ร้านค้าส่งสัตว์",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("บริการขนส่งน้ำเชื้อ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 131, 131, 131))),
-              ],
-            ),
-            builder: (_, collapsed, expanded) {
-              return Padding(
-                padding: EdgeInsets.only(left: 10, right: 10, bottom: 0),
-                child: Expandable(
-                  collapsed: collapsed,
-                  expanded: expanded,
-                  theme: const ExpandableThemeData(crossFadePoint: 0),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    ));
   }
 }

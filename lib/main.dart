@@ -16,12 +16,10 @@ import 'package:zeleex_application/main%206%20pages/onlyMenuForMainPage_nothing_
 import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/test%20folder/device_info.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(First_Page()));
-    
 }
 
 class First_Page extends StatelessWidget {
@@ -58,6 +56,7 @@ class MainAndIcon extends StatefulWidget {
   State<MainAndIcon> createState() => _MainAndIconState();
 }
 
+
 class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
@@ -67,6 +66,7 @@ class _MainAndIconState extends State<MainAndIcon> {
 
   Future _Load_AndGo() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
+
     var checkToken = prefs2.get('keyToken');
 
     if (checkToken.toString() != 'null') {
@@ -92,6 +92,7 @@ class _MainAndIconState extends State<MainAndIcon> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+          
             Image.asset(
               'assets/images/Frame.png',
             ),

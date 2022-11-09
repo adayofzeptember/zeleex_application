@@ -8,21 +8,21 @@ import 'package:zeleex_application/API/Read%20All/stores_API.dart';
 import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/store_page_detail.dart';
 
-class Store_Filtered extends StatefulWidget {
+class Product_Filtered extends StatefulWidget {
   String? typeID = "";
-  Store_Filtered({Key? key, this.typeID}) : super(key: key);
+  Product_Filtered({Key? key, this.typeID}) : super(key: key);
 
   @override
-  State<Store_Filtered> createState() => _Store_FilteredState();
+  State<Product_Filtered> createState() => _Product_FilteredState();
 }
 
-class _Store_FilteredState extends State<Store_Filtered> {
+class _Product_FilteredState extends State<Product_Filtered> {
   final controller = ScrollController();
 
   late Future<List<Data_Store_ReadALL>> _futureStoreFiltered;
   Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
     final response = await http.get(
-      Uri.parse('https://admin.zeleex.com/api/stores?type_id=' +
+      Uri.parse('https://admin.zeleex.com/api/product?categories=' +
           widget.typeID.toString()),
       headers: {'Accept': 'application/json'},
     );

@@ -7,22 +7,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/products_API.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Read%20By%20ID/product_review.dart';
+import 'package:zeleex_application/main%206%20pages/store_filtered.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
+import '../API/Read All/filters/product_types.dart';
+
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
 import '../from Profile/profile.dart';
 import 'onlyMenuForMainPage_nothing_here.dart';
+import 'product_filtered.dart';
 
 class ProductPage extends StatefulWidget {
   ProductPage({Key? key}) : super(key: key);
   @override
   State<ProductPage> createState() => _ProductPageState();
 }
-
-
-
+late Future<List<Data_Product_Types>> future_product_types;
 late Future<List<Data_Products_ReadAll>> future_AllProducts;
 //late Future<List<Cart_ReadList>> future_fetchAmountinCart;
 String cartAdd_userID = "";
@@ -35,10 +37,11 @@ class _ProductPageState extends State<ProductPage> {
   var perPage = 8; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
   void initState() {
+    future_product_types = fetch_product_cat();
     getUserID();
     // future_fetchAmountinCart =
     //     fetch_user_cart_list(cartAdd_userID, cartAdd_token);
- 
+
     future_AllProducts = fetch_ProductPage_readAll();
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
@@ -122,33 +125,27 @@ class _ProductPageState extends State<ProductPage> {
               statusBarColor: Colors.white,
               statusBarIconBrightness: Brightness.dark,
               statusBarBrightness: Brightness.dark),
-          leading: Builder(
-            builder: (context) => IconButton(
-              icon: Visibility(
-                visible: false,
-                child: SizedBox(
-                    child: SvgPicture.asset(
-                  'assets/images/menu.svg',
-                  color: Color.fromARGB(255, 51, 51, 51),
-                )),
-              ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ),
           elevation: 0,
+          actions: [
+            Builder(
+              builder: (context) => IconButton(
+                icon: SizedBox(
+                  child: SvgPicture.asset(
+                    'assets/images/sort.svg',
+                  ),
+                ),
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+              ),
+            ),
+          ],
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () {},
-                child: Visibility(
-                  visible: false,
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+              Container(
+                  child: Text('data',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ))),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Text(
@@ -157,32 +154,7 @@ class _ProductPageState extends State<ProductPage> {
                       color: Palette.kToDark, fontWeight: FontWeight.bold),
                 ),
               ),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/sort.svg',
-                  ),
-                  Stack(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/cart123.svg',
-                      ),
-                      Positioned(
-                          top: 5.0,
-                          right: 4.0,
-                          child: Center(
-                            child: Text(
-                              x.toString(),
-                              style: TextStyle(
-                                fontSize: 0,
-                                color: Colors.green,
-                              ),
-                            ),
-                          )),
-                    ],
-                  ),
-                ],
-              ),
+              Container(),
             ],
           )),
       body: Column(
@@ -204,7 +176,7 @@ class _ProductPageState extends State<ProductPage> {
                         crossAxisCount: 2,
                         // childAspectRatio: MediaQuery.of(context).size.width /
                         //     (MediaQuery.of(context).size.height / 1.55),
-      
+
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.28,
                       ),
@@ -326,10 +298,131 @@ class _ProductPageState extends State<ProductPage> {
               );
             },
           ),
-
-        
         ],
       ),
+      //!
+      endDrawer: Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: Colors.white, //desired color
+          ),
+          child: Container(
+            width: MediaQuery.of(context).size.height * 0.3,
+            child: Drawer(
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    20,
+                    0,
+                    0,
+                    0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.07,
+                      ),
+                      Text("ค้นหาจากหมวดหมู่",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
+                          
+                      FutureBuilder<List<Data_Product_Types>>(
+                        future: future_product_types,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<Data_Product_Types>? data = snapshot.data;
+
+                            return ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: data!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        InkWell(
+                                          onTap: () {
+                                            print(data[index].id.toString());
+                                            // setState(() {
+                                            //   typeID =
+                                            //       data[index].id.toString();
+                                            // });
+                                            // print(typeID.toString());
+                                          },
+                                          child: Text(
+                                              data[index].title.toString(),
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color.fromARGB(
+                                                      255, 131, 131, 131))),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                });
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          }
+                          return Container();
+                        },
+                      ),
+                      Spacer(),
+                      Container(
+                          //height: double.infinity,
+                          alignment: Alignment.bottomCenter,
+                          width: double.infinity,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(right: 20, bottom: 20),
+                            child: Row(children: <Widget>[
+                              Expanded(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        primary: Colors.white,
+                                        side:
+                                            BorderSide(color: Palette.kToDark),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        initState();
+                                      },
+                                      child: Text(
+                                        "ยกเลิก",
+                                        style:
+                                            TextStyle(color: Palette.kToDark),
+                                      ))),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Product_Filtered(
+                                                    typeID: 1.toString(),
+                                                  )));
+                                    },
+                                    child: Text("ตกลง",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ))),
+                              )
+                            ]),
+                          ))
+                    ],
+                  )),
+            ),
+          )),
     );
   }
 }

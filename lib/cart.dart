@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_launcher_icons/utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -34,7 +37,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   bool isChecked = false;
   int totalPrice = 0;
-
+  int lol = 0;
   late Future<List<Store>> future_cart;
   late Provider_CartRemove _provider_cartRemove;
   late Provider_CartUpdate _provider_cartUpdate;
@@ -95,6 +98,11 @@ class _CartPageState extends State<CartPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
@@ -138,6 +146,7 @@ class _CartPageState extends State<CartPage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+         
               FutureBuilder<List<Store>>(
                 future: future_cart,
                 builder: (context, snapshot) {
@@ -156,8 +165,6 @@ class _CartPageState extends State<CartPage> {
                                             255, 223, 222, 222)))),
                             width: double.infinity,
                             child: Padding(
-                              
-                              
                               padding:
                                   const EdgeInsets.only(right: 10, bottom: 5),
                               child: Column(
@@ -184,7 +191,6 @@ class _CartPageState extends State<CartPage> {
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      
                                       Text(
                                         data![index].title.toString(),
                                         style: TextStyle(
@@ -203,7 +209,6 @@ class _CartPageState extends State<CartPage> {
                                       ),
                                     ],
                                   ),
-                                
                                   FutureBuilder<List<ProductSkus>>(
                                     future:
                                         fetch_cartSku(userID, userToken, index),
@@ -411,13 +416,13 @@ class _CartPageState extends State<CartPage> {
                                                                               onTap: () {
                                                                                 _provider_cartUpdate.cart_id = data[index222].cartId.toString();
                                                                                 _provider_cartUpdate.prd_unit = (x2 - 1).toString();
-                                                                                print(json.encode(_provider_cartUpdate));
-                                                                                print(userToken);
+
                                                                                 update_cartUnit(_provider_cartUpdate, userToken);
                                                                                 setState(() {
-                                                                                  totalPrice = totalPrice - x1;
+                                                                                  x2 = x2 - 1;
+                                                                                  totalPrice = 0;
                                                                                 });
-                                                                                // initState();
+                                                                                initState();
                                                                               },
                                                                               child: Padding(
                                                                                 padding: const EdgeInsets.all(8.0),
@@ -440,7 +445,7 @@ class _CartPageState extends State<CartPage> {
                                                                                 EdgeInsets.all(8.0),
                                                                             child:
                                                                                 Text(
-                                                                              data[index222].unit.toString(),
+                                                                              x2.toString(),
                                                                               textAlign: TextAlign.center,
                                                                               style: TextStyle(fontWeight: FontWeight.bold),
                                                                             ),
@@ -462,13 +467,14 @@ class _CartPageState extends State<CartPage> {
                                                                               onTap: () {
                                                                                 _provider_cartUpdate.cart_id = data[index222].cartId.toString();
                                                                                 _provider_cartUpdate.prd_unit = (x2 + 1).toString();
-                                                                                print(json.encode(_provider_cartUpdate));
-                                                                                print(userToken);
+
                                                                                 update_cartUnit(_provider_cartUpdate, userToken);
                                                                                 setState(() {
-                                                                                  totalPrice = totalPrice + x1;
+                                                                                  // totalPrice = totalPrice + x1;
+                                                                                  x2 = x2 + 1;
                                                                                   totalPrice = 0;
                                                                                 });
+
                                                                                 initState();
                                                                               },
                                                                               child: Padding(

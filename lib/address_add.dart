@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,11 +14,14 @@ class Address_AddNew extends StatefulWidget {
 }
 
 enum SingingCharacter { lafayette, jefferson }
+
 String chooseSwitch = '0';
-final _formKeyAddAddress = GlobalKey<FormState>();
-late Provider_AddAddress _provider_add_address;
 String? userID = "";
 String? userToken = "";
+
+final _formKeyAddAddress = GlobalKey<FormState>();
+late Provider_AddAddress _provider_add_address;
+
 var addressController = TextEditingController();
 var cityController = TextEditingController();
 var provinceController = TextEditingController(); //!ภูมิภาค
@@ -444,7 +446,6 @@ class _Address_AddNewState extends State<Address_AddNew> {
                   SizedBox(
                     height: 10,
                   ),
-
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         elevation: 0,

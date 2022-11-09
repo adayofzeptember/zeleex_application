@@ -7,10 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:intl/intl.dart';
+import 'package:search_choices/search_choices.dart';
+import 'package:searchfield/searchfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:zeleex_application/API/Read%20All/advance_serch_results.dart';
 import 'package:zeleex_application/API/Read%20All/collection_board.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/API/Read%20All/products_API.dart';
@@ -20,16 +23,21 @@ import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/main%206%20pages/animal.dart';
 import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
 import 'package:zeleex_application/main%206%20pages/products.dart';
+import 'package:zeleex_application/main%206%20pages/search_results_page.dart';
 import 'package:zeleex_application/main%206%20pages/semens.dart';
 import 'package:zeleex_application/newsfeed_detail.dart';
 import 'package:zeleex_application/from%20Profile/profile.dart';
 import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
+import '../API/Read All/advance_search.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
 import '../login.dart';
+import '../payment_address.dart';
+
+var searchController = TextEditingController();
 
 class Main_Widget extends StatefulWidget {
   Main_Widget({Key? key}) : super(key: key);
@@ -48,6 +56,32 @@ class _Main_WidgetState extends State<Main_Widget> {
   String userToken = "";
   int activeIndex = 0;
   int countIMG = 0;
+
+  List<String> suggestions = [];
+
+  Future<List<Data_Search>> fetch_search() async {
+    final response = await http
+        .get(Uri.parse('https://admin.zeleex.com/api/search?keyword=en'));
+
+    var jsonResponse = json.decode(response.body);
+    List jsonCon = jsonResponse['data'];
+    var ee = jsonResponse['data'][0].toString();
+
+    print(suggestions);
+    for (var i = 0; i < jsonCon.length; i++) {
+      var ee = jsonResponse['data'][i]['title'].toString();
+      suggestions.add(ee);
+    }
+    print(suggestions);
+    // print(jsonCon.length);
+    if (response.statusCode == 200) {
+      // print(jsonResponse.toString());
+      // print(ee.toString());
+      return jsonCon.map((data) => Data_Search.fromJson(data)).toList();
+    } else {
+      throw Exception("error");
+    }
+  }
 
   Future<List<DataSlider>> fetch_SliderPics() async {
     final response =
@@ -80,6 +114,7 @@ class _Main_WidgetState extends State<Main_Widget> {
   void initState() {
     super.initState();
     get_storedToken();
+    fetch_search();
     futureData = fetch_SliderPics();
     future_board = fetch_collection_board();
     future_anmials_cat = fetch_Home_animals();
@@ -140,7 +175,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                             builder: (context) => CartPage(
                                   user_id: userID.toString(),
                                   user_token: userToken.toString(),
-
                                 )));
                   },
                   child: SvgPicture.asset(
@@ -149,8 +183,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                   ),
                 )
               ],
-              
-            
             )),
         body: SingleChildScrollView(
           physics: ClampingScrollPhysics(),
@@ -159,9 +191,7 @@ class _Main_WidgetState extends State<Main_Widget> {
             children: <Widget>[
               Stack(
                 children: [
-              
                   CustomPaint(
-                    
                     painter: ShapesPainter(),
                     child: Container(
                         height: MediaQuery.of(context).size.height * 0.20),
@@ -171,18 +201,25 @@ class _Main_WidgetState extends State<Main_Widget> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.057,
-                            width: double.infinity,
-                            child: TextField(
-                              onSubmitted: (value) {
-                                if (value.isEmpty) {
-                                  print("input something.");
-                                } else {
-                                  print(value);
-                                }
+                          width: double.infinity,
+                          child: SearchField(
+                              controller: searchController,
+                              onSuggestionTap: (p0) {
+                                print(p0.toString());
                               },
-                              textInputAction: TextInputAction.search,
-                              decoration: InputDecoration(
+                              onSubmit: ((p0) => {
+                                    print(p0.toString()),
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Search_Results_Page(
+                                                  keyWord: p0.toString(),
+                                                )))
+                                  }),
+                              textInputAction: TextInputAction.done,
+                              hasOverlay: false,
+                              searchInputDecoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
                                 hintText: 'ค้นหา...',
@@ -199,6 +236,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       color: Color.fromARGB(255, 230, 228, 228),
                                       width: 0),
                                 ),
+
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(60.0)),
@@ -206,8 +244,58 @@ class _Main_WidgetState extends State<Main_Widget> {
                                       BorderSide(color: Colors.white, width: 0),
                                 ),
                               ),
-                            )),
+                              suggestionsDecoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              suggestions: suggestions
+                                  .map((e) => SearchFieldListItem(e))
+                                  .toList()),
+                        ),
                       ),
+
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Container(
+                      //       height: MediaQuery.of(context).size.height * 0.057,
+                      //       width: double.infinity,
+                      //       child: TextField(
+                      //         onSubmitted: (value) {
+                      //           if (value.isEmpty) {
+                      //             print("input something.");
+                      //           } else {
+                      //             print(value);
+                      //           }
+                      //         },
+                      //         textInputAction: TextInputAction.search,
+                      //         decoration: InputDecoration(
+                      //           filled: true,
+                      //           fillColor: Colors.white,
+                      //           hintText: 'ค้นหา...',
+                      //           prefixIcon: Icon(
+                      //             Icons.search,
+
+                      //             color: Color.fromARGB(255, 161, 161, 161),
+                      //             size: 25,
+                      //           ),
+                      //           //hintStyle: TextStyle(color: Palette.kToDark),
+                      //           enabledBorder: OutlineInputBorder(
+                      //             borderRadius:
+                      //                 BorderRadius.all(Radius.circular(60.0)),
+                      //             borderSide: BorderSide(
+                      //                 color: Color.fromARGB(255, 230, 228, 228),
+                      //                 width: 0),
+                      //           ),
+                      //           focusedBorder: OutlineInputBorder(
+                      //             borderRadius:
+                      //                 BorderRadius.all(Radius.circular(60.0)),
+                      //             borderSide:
+                      //                 BorderSide(color: Colors.white, width: 0),
+                      //           ),
+                      //         ),
+                      //       )
+                      //       ),
+                      // ),
+
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: FutureBuilder<List<DataSlider>>(
@@ -230,30 +318,25 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                   167, 216, 216, 216)),
                                           child: SvgPicture.network(
                                             data![index].image!.toString(),
-                            
                                           )),
                                     );
                                   },
                                   options: CarouselOptions(
-                                      aspectRatio: 16/9,
-                                      
+                                      aspectRatio: 16 / 9,
                                       enlargeCenterPage: true,
                                       viewportFraction: 1,
                                       autoPlay: true,
                                       autoPlayInterval: Duration(seconds: 5),
                                       autoPlayAnimationDuration:
-                                    
                                           Duration(seconds: 2),
                                       onPageChanged: (index, reason) =>
                                           setState(
                                             (() => activeIndex = index),
-                                          ))
-                                          );
+                                          )));
                             } else if (snapshot.hasError) {
                               return Text("${snapshot.error}");
                             }
 
-                            
                             return CircularProgressIndicator();
                           },
                         ),
@@ -412,7 +495,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               // in cloumn

@@ -72,6 +72,11 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 221, 221, 221),
       appBar: AppBar(
+              systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark,
+              statusBarColor: Colors.white,
+            ),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,

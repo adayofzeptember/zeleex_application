@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -70,6 +71,7 @@ class _Store_DetailState extends State<Store_Detail> {
           primarySwatch: Palette.kToDark,
           appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
       home: Scaffold(
+        
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         floatingActionButton: Padding(
           padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
@@ -153,6 +155,11 @@ class _Store_DetailState extends State<Store_Detail> {
           ),
         ),
         appBar: AppBar(
+             systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark,
+              statusBarColor: Colors.white,
+            ),
             elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -302,6 +309,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                       ),
                                                       Container(
                                                         width: 200,
+
                                                         //width: MediaQuery.of(context).size.width * 0.5,
                                                         child: Text(
                                                           thisStore_notCoverIMG
@@ -331,7 +339,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                               .phone
                                                               .toString(),
                                                           style: TextStyle(
-                                                              color:
+                                                                   color:
                                                                   Colors.grey,
                                                               fontSize: 13),
                                                         ),
@@ -341,6 +349,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                 ],
                                               ),
                                             ),
+                                          
                                             Icon(
                                               Icons.settings,
                                               color: Colors.white,
@@ -350,6 +359,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                         SizedBox(
                                           height: 10,
                                         ),
+
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                               15, 0, 0, 0),

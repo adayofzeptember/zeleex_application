@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/gestures.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +106,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
             children: [
               Visibility(
                 visible: false,
-               
                 child: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.black,
@@ -125,6 +125,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                   child: Row(
                     children: [
                       SizedBox(
+  
                         width: 10,
                       ),
                       SvgPicture.asset(
@@ -234,6 +235,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                           .store!
                                                           .title
                                                           .toString(),
+                                                          
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 51, 51, 51),
@@ -307,7 +309,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                           ),
                                         ),
 
-                                        // Image.network(
+                                        // Image.network(1
+
                                         //   data[index].image!.main.toString(),
                                         //   fit: BoxFit.cover,
                                         // )
@@ -333,7 +336,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                             Container(
                                                 child: Row(
                                               children: [
-                                             
                                                 SvgPicture.asset(
                                                   'assets/images/sharefeed.svg',
                                                 ),
@@ -379,6 +381,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                     padding: const EdgeInsets.only(
                                         top: 5, bottom: 10),
                                     child: Center(
+
+
                                       child: Text("...",
                                           style: TextStyle(
                                               color: Palette.kToDark)),
@@ -388,12 +392,12 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                         }),
                   ),
                 );
-              } else if (snapshot.hasError) {
+              } 
+              else if (snapshot.hasError) {
                 return Center(
                     child:
                         Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ"));
               }
-
               return Padding(
                 padding: const EdgeInsets.only(top: 150),
                 child: Center(child: CircularProgressIndicator()),

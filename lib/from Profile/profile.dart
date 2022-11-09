@@ -37,7 +37,7 @@ String theUserOne = '';
 class _ProfilePageState extends State<ProfilePage> {
   late Future<Data_Profile> future_Profile;
   late Future<List<Data_Shipping_List>> fetched_add;
-  late Future<List<Data_Review>> future_review;
+
 
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -79,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     getToken();
-    future_review = fetch_Product_Review();
+  
     print(theTokenOne.toString());
     fetched_add = fetch_shipping_list(theTokenOne);
     future_Profile = fetchProfile_Auth(theTokenOne);
@@ -463,190 +463,190 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   )),
             ),
-            FutureBuilder<List<Data_Shipping_List>>(
-              future: fetched_add,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<Data_Shipping_List>? data = snapshot.data;
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: 1,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Payment_Address(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 241, 241, 241))),
-                                  width: double.infinity,
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        10, 10, 10, 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SvgPicture.asset(
-                                                'assets/images/pin.svg'),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              "ที่อยู่หลัก",
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height *
-                                                          0.015,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              25, 0, 0, 0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    data![index]
-                                                        .name
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 130, 130, 130),
-                                                        fontSize: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.015),
-                                                  ),
-                                                  Text(
-                                                    "\t (ค่าเริ่มต้น)",
-                                                    style: TextStyle(
-                                                        color: Colors.red,
-                                                        fontSize: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.015),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 15,
-                                                  ),
-                                                ],
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: Color.fromARGB(
-                                                    255, 130, 130, 130),
-                                                size: 15,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                25, 0, 0, 0),
-                                            child: Container(
-                                              width: 250,
-                                              child: Text(
-                                                data[index].phone.toString(),
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 130, 130, 130),
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.015),
-                                              ),
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                25, 0, 0, 0),
-                                            child: Container(
-                                              width: 350,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    data[index]
-                                                            .address
-                                                            .toString() +
-                                                        ' ' +
-                                                        data[index]
-                                                            .district
-                                                            .toString() +
-                                                        ' ' +
-                                                        data[index]
-                                                            .province
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.015,
-                                                      color: Color.fromARGB(
-                                                          255, 130, 130, 130),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    data[index]
-                                                            .city
-                                                            .toString() +
-                                                        ' ' +
-                                                        data[index]
-                                                            .postcode
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.015,
-                                                      color: Color.fromARGB(
-                                                          255, 130, 130, 130),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ))
-                                      ],
-                                    ),
-                                  )),
-                            ),
-                          ],
-                        );
-                      });
-                } else if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                }
-                return Container(child: Text('รอ'),);
-              },
-            ),
+            // FutureBuilder<List<Data_Shipping_List>>(
+            //   future: fetched_add,
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       List<Data_Shipping_List>? data = snapshot.data;
+            //       return ListView.builder(
+            //           shrinkWrap: true,
+            //           primary: false,
+            //           itemCount: data?.length,
+            //           itemBuilder: (BuildContext context, int index) {
+            //             return Column(
+            //               crossAxisAlignment: CrossAxisAlignment.start,
+            //               children: [
+            //                 InkWell(
+            //                   onTap: () {
+            //                     Navigator.push(
+            //                       context,
+            //                       MaterialPageRoute(
+            //                         builder: (context) => Payment_Address(),
+            //                       ),
+            //                     );
+            //                   },
+            //                   child: Container(
+            //                       decoration: BoxDecoration(
+            //                           border: Border.all(
+            //                               color: Color.fromARGB(
+            //                                   255, 241, 241, 241))),
+            //                       width: double.infinity,
+            //                       child: Padding(
+            //                         padding: const EdgeInsets.fromLTRB(
+            //                             10, 10, 10, 10),
+            //                         child: Column(
+            //                           crossAxisAlignment:
+            //                               CrossAxisAlignment.start,
+            //                           children: [
+            //                             Row(
+            //                               crossAxisAlignment:
+            //                                   CrossAxisAlignment.start,
+            //                               children: [
+            //                                 SvgPicture.asset(
+            //                                     'assets/images/pin.svg'),
+            //                                 SizedBox(
+            //                                   width: 5,
+            //                                 ),
+            //                                 Text(
+            //                                   "ที่อยู่หลัก",
+            //                                   style: TextStyle(
+            //                                       fontSize:
+            //                                           MediaQuery.of(context)
+            //                                                   .size
+            //                                                   .height *
+            //                                               0.015,
+            //                                       fontWeight: FontWeight.bold),
+            //                                 )
+            //                               ],
+            //                             ),
+            //                             Padding(
+            //                               padding: const EdgeInsets.fromLTRB(
+            //                                   25, 0, 0, 0),
+            //                               child: Row(
+            //                                 mainAxisAlignment:
+            //                                     MainAxisAlignment.spaceBetween,
+            //                                 children: [
+            //                                   Row(
+            //                                     children: [
+            //                                       Text(
+            //                                         data![index]
+            //                                             .name
+            //                                             .toString(),
+            //                                         style: TextStyle(
+            //                                             color: Color.fromARGB(
+            //                                                 255, 130, 130, 130),
+            //                                             fontSize: MediaQuery.of(
+            //                                                         context)
+            //                                                     .size
+            //                                                     .height *
+            //                                                 0.015),
+            //                                       ),
+            //                                       Text(
+            //                                         "\t (ค่าเริ่มต้น)",
+            //                                         style: TextStyle(
+            //                                             color: Colors.red,
+            //                                             fontSize: MediaQuery.of(
+            //                                                         context)
+            //                                                     .size
+            //                                                     .height *
+            //                                                 0.015),
+            //                                       ),
+            //                                       SizedBox(
+            //                                         width: 15,
+            //                                       ),
+            //                                     ],
+            //                                   ),
+            //                                   Icon(
+            //                                     Icons.arrow_forward_ios_rounded,
+            //                                     color: Color.fromARGB(
+            //                                         255, 130, 130, 130),
+            //                                     size: 15,
+            //                                   )
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Padding(
+            //                                 padding: const EdgeInsets.fromLTRB(
+            //                                     25, 0, 0, 0),
+            //                                 child: Container(
+            //                                   width: 250,
+            //                                   child: Text(
+            //                                     data[index].phone.toString(),
+            //                                     style: TextStyle(
+            //                                         color: Color.fromARGB(
+            //                                             255, 130, 130, 130),
+            //                                         fontSize:
+            //                                             MediaQuery.of(context)
+            //                                                     .size
+            //                                                     .height *
+            //                                                 0.015),
+            //                                   ),
+            //                                 )),
+            //                             Padding(
+            //                                 padding: const EdgeInsets.fromLTRB(
+            //                                     25, 0, 0, 0),
+            //                                 child: Container(
+            //                                   width: 350,
+            //                                   child: Column(
+            //                                     crossAxisAlignment:
+            //                                         CrossAxisAlignment.start,
+            //                                     children: [
+            //                                       Text(
+            //                                         data[index]
+            //                                                 .address
+            //                                                 .toString() +
+            //                                             ' ' +
+            //                                             data[index]
+            //                                                 .district
+            //                                                 .toString() +
+            //                                             ' ' +
+            //                                             data[index]
+            //                                                 .province
+            //                                                 .toString(),
+            //                                         style: TextStyle(
+            //                                           fontSize:
+            //                                               MediaQuery.of(context)
+            //                                                       .size
+            //                                                       .height *
+            //                                                   0.015,
+            //                                           color: Color.fromARGB(
+            //                                               255, 130, 130, 130),
+            //                                         ),
+            //                                       ),
+            //                                       Text(
+            //                                         data[index]
+            //                                                 .city
+            //                                                 .toString() +
+            //                                             ' ' +
+            //                                             data[index]
+            //                                                 .postcode
+            //                                                 .toString(),
+            //                                         style: TextStyle(
+            //                                           fontSize:
+            //                                               MediaQuery.of(context)
+            //                                                       .size
+            //                                                       .height *
+            //                                                   0.015,
+            //                                           color: Color.fromARGB(
+            //                                               255, 130, 130, 130),
+            //                                         ),
+            //                                       )
+            //                                     ],
+            //                                   ),
+            //                                 ))
+            //                           ],
+            //                         ),
+            //                       )),
+            //                 ),
+            //               ],
+            //             );
+            //           });
+            //     } else if (snapshot.hasError) {
+            //       return Text(snapshot.error.toString());
+            //     }
+            //     return Container(child: Text('...'),);
+            //   },
+            // ),
 
             Container(
               child: Padding(
@@ -880,7 +880,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Color.fromARGB(255, 130, 130, 130),
                           fontSize: 15,
                         ),
-                      ),
+                      ),   
+
+                  
                     ),
                   ),
                 ),
