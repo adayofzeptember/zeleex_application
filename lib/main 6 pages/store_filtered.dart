@@ -46,15 +46,36 @@ class _Store_FilteredState extends State<Store_Filtered> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Palette.kToDark,
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Palette.kToDark,
-            statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.light),
-        title: Text("ผลการค้นหาสำหรับ...",
-            style: TextStyle(fontSize: 18, color: Colors.white)),
-      ),
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                ),
+              ),
+              Expanded(
+                child: Text('ผลการค้นหา',
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Palette.kToDark,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              Container(),
+            ],
+          )),
       body: Column(
         children: <Widget>[
           SizedBox(

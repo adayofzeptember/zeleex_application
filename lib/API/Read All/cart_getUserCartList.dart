@@ -374,7 +374,6 @@ class Images {
     data['title'] = this.title;
     data['main'] = this.main;
     data['thumbnail'] = this.thumbnail;
-
     return data;
   }
 }

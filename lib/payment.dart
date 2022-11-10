@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,6 +12,9 @@ import 'cart.dart';
 import 'payment_address.dart';
 import 'payment_method.dart';
 
+String userID = "";
+String userToken = "";
+
 class PaymentPage extends StatefulWidget {
   PaymentPage({Key? key}) : super(key: key);
   @override
@@ -21,8 +26,8 @@ enum SingingCharacter { lafayette, jefferson }
 class _PaymentPageState extends State<PaymentPage> {
   late Future<List<Data_Shipping_List>> fetched_data_shipping_list;
   List<bool> isSelected = [true, false];
-  String userID = "";
-  String userToken = "";
+
+  late Future<List<Store>> future_cart;
 
   Future get_storedToken() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
@@ -35,8 +40,40 @@ class _PaymentPageState extends State<PaymentPage> {
     //!print(userID+userToken);
   }
 
+  Future<List<Store>> fetch_cartList(
+      String userID222, String userToken222) async {
+    final response = await http.get(
+        Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
+            userID222.toString()),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'applicationjson',
+          'Authorization': 'Bearer $userToken222',
+        });
+
+    var jsonResponse = json.decode(response.body);
+    List jsonCon = jsonResponse['data']['store'];
+
+    for (var loop = 0; loop < jsonCon.length; loop++) {
+      int eachStore_totalPrice =
+          jsonResponse['data']['store'][loop]['price_tatal'];
+      int parsed_total = eachStore_totalPrice;
+      setState(() {
+        // totalPrice = totalPrice + parsed_total;
+      });
+    }
+
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => Store.fromJson(data)).toList();
+    } else {
+      print('error');
+      throw Exception('error response status');
+    }
+  }
+
   initState() {
     get_storedToken();
+    future_cart = fetch_cartList(userID.toString(), userToken.toString());
     super.initState();
   }
 
@@ -258,51 +295,6 @@ class _PaymentPageState extends State<PaymentPage> {
                                       return Container();
                                     },
                                   ),
-                                  // Column(
-                                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                                  //   children: [
-                                  //     Padding(
-                                  //       padding: const EdgeInsets.fromLTRB(
-                                  //           25, 0, 0, 0),
-                                  //       child: Row(
-                                  //         mainAxisAlignment:
-                                  //             MainAxisAlignment.spaceBetween,
-                                  //         children: [
-                                  //           Row(
-                                  //             children: [
-                                  //               Text(
-                                  //                 "ชวันธร วีรจรรยาพันธ์",
-                                  //                 style: TextStyle(
-                                  //                     fontWeight:
-                                  //                         FontWeight.bold),
-                                  //               ),
-                                  //               SizedBox(
-                                  //                 width: 15,
-                                  //               ),
-                                  //               Text(
-                                  //                 "086-366-3928",
-                                  //               ),
-                                  //             ],
-                                  //           ),
-                                  //           Icon(
-                                  //             Icons.arrow_forward_ios_rounded,
-                                  //             color: Color.fromARGB(
-                                  //                 255, 130, 130, 130),
-                                  //             size: 15,
-                                  //           )
-                                  //         ],
-                                  //       ),
-                                  //     ),
-                                  //     Padding(
-                                  //         padding: const EdgeInsets.fromLTRB(
-                                  //             25, 0, 0, 0),
-                                  //         child: Container(
-                                  //           width: 250,
-                                  //           child: Text(
-                                  //               "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000"),
-                                  //         )),
-                                  //   ],
-                                  // )
                                 ],
                               ),
                             )),
@@ -310,177 +302,312 @@ class _PaymentPageState extends State<PaymentPage> {
                       SizedBox(
                         height: 20,
                       ),
-                      // FutureBuilder<List<ProductSkus>>(
-                      //   future: fetch_cartSku(userID, userToken, index),
-                      //   builder: (context, snapshot) {
-                      //     if (snapshot.hasData) {
-                      //       List<ProductSkus>? data = snapshot.data;
-                      //       return ListView.builder(
-                      //           shrinkWrap: true,
-                      //           itemCount: data?.length,
-                      //           itemBuilder:
-                      //               (BuildContext context, int index222) {
-                      //             return Padding(
-                      //                 padding:
-                      //                     const EdgeInsets.only(bottom: 15),
-                      //                 child: Column(
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     Padding(
-                      //                       padding: const EdgeInsets.fromLTRB(
-                      //                           25, 0, 0, 0),
-                      //                       child: Row(
-                      //                         mainAxisAlignment:
-                      //                             MainAxisAlignment
-                      //                                 .spaceBetween,
-                      //                         children: [
-                      //                           Row(
-                      //                             children: [
-                      //                               Text(
-                      //                                 "ชวันธร วีรจรรยาพันธ์",
-                      //                                 style: TextStyle(
-                      //                                     fontWeight:
-                      //                                         FontWeight.bold),
-                      //                               ),
-                      //                               SizedBox(
-                      //                                 width: 15,
-                      //                               ),
-                      //                               Text(
-                      //                                 "086-366-3928",
-                      //                               ),
-                      //                             ],
-                      //                           ),
-                      //                           Icon(
-                      //                             Icons
-                      //                                 .arrow_forward_ios_rounded,
-                      //                             color: Color.fromARGB(
-                      //                                 255, 130, 130, 130),
-                      //                             size: 15,
-                      //                           )
-                      //                         ],
-                      //                       ),
-                      //                     ),
-                      //                     Padding(
-                      //                         padding:
-                      //                             const EdgeInsets.fromLTRB(
-                      //                                 25, 0, 0, 0),
-                      //                         child: Container(
-                      //                           width: 250,
-                      //                           child: Text(
-                      //                               "369/11 เดชอุดม ซอย 6 ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000"),
-                      //                         )),
-                      //                   ],
-                      //                 ));
-                      //           });
-                      //     } else if (snapshot.hasError) {
-                      //       return Container();
-                      //     }
-                      //     return Container();
-                      //   },
-                      // ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/cart_store.svg',
-                            color: Color.fromARGB(255, 104, 104, 104),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Zeleex Shop",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 51, 51, 51),
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            'assets/images/cart_pd.png',
-                            width: 90,
-                            height: 90,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "ยารักษาโรคติดเชื้อแบคทีเรีย",
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51),
-                                        ),
-                                      ),
-                                      SvgPicture.asset('assets/images/x.svg')
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "฿ 1,300",
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                            fontSize: 20),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+
+                      FutureBuilder<List<Store>>(
+                        future: future_cart,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<Store>? data = snapshot.data;
+                            return ListView.builder(
+                                shrinkWrap: true,
+                                primary: false,
+                                itemCount: data?.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 223, 222, 222)))),
+                                    width: double.infinity,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 10, bottom: 5),
+                                      child: Column(
                                         children: [
                                           Row(
                                             children: [
-                                              SizedBox(
-                                                width: 5,
+                                              SvgPicture.asset(
+                                                'assets/images/cart_store.svg',
+                                                color: Color.fromARGB(
+                                                    255, 141, 141, 141),
                                               ),
                                               SizedBox(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    "จำนวน: 1",
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
+                                                width: 10,
                                               ),
-                                              SizedBox(
-                                                width: 5,
+                                              Text(
+                                                data![index].title.toString(),
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 51, 51, 51),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ],
-                                          )
+                                          ),
+                                          FutureBuilder<List<ProductSkus>>(
+                                            future: fetch_cartSku(
+                                                userID, userToken, index),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                List<ProductSkus>? data =
+                                                    snapshot.data;
+                                                return ListView.builder(
+                                                    shrinkWrap: true,
+                                                    primary: false,
+                                                    itemCount: data?.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index222) {
+                                                      int x1 = int.parse(
+                                                          data![index222]
+                                                              .price
+                                                              .toString());
+                                                      int x2 = int.parse(
+                                                          data[index222]
+                                                              .unit
+                                                              .toString());
+                                                      int unit_price = x1 * x2;
+                                                      return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 15),
+                                                          child: Column(
+                                                            children: [
+                                                              SizedBox(height: 8,),
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            83,
+                                                                            16,
+                                                                            193,
+                                                                            158),
+                                                                    child: Image
+                                                                        .network(
+                                                                      data[index222]
+                                                                          .product!
+                                                                          .image!
+                                                                          .main
+                                                                          .toString(),
+                                                                      width:
+                                                                          100,
+                                                                      height:
+                                                                          100,
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Container(
+                                                                      child:
+                                                                          Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.stretch,
+                                                                        children: [
+                                                                          Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Flexible(
+                                                                                child: SizedBox(
+                                                                                  height: 20,
+                                                                                  child: Text(
+                                                                                    data[index222].product!.title.toString(),
+                                                                                    style: TextStyle(
+                                                                                      color: Color.fromARGB(255, 51, 51, 51),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              SvgPicture.asset('assets/images/x.svg')
+                                                                            ],
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                30,
+                                                                          ),
+                                                                          Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Text(
+                                                                                '',
+                                                                                style: TextStyle(color: Color.fromARGB(255, 51, 51, 51), fontSize: 20),
+                                                                              ),
+                                                                              Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      SizedBox(
+                                                                                        width: 5,
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        child: Padding(
+                                                                                          padding: const EdgeInsets.all(8.0),
+                                                                                          child: Text(
+                                                                                            'จำนวน: ' + data[index222].unit.toString(),
+                                                                                            textAlign: TextAlign.center,
+                                                                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        width: 5,
+                                                                                      ),
+                                                                                    ],
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ));
+                                                    });
+                                              } else if (snapshot.hasError) {
+                                                return Container();
+                                              }
+                                              return Container();
+                                            },
+                                          ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
+                                    ),
+                                  );
+                                });
+                          } else if (snapshot.hasError) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 50, bottom: 50),
+                              child: Text('ไม่มีสินค้าในตะกร้า'),
+                            );
+                          } else {}
+                          return Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 100, top: 100),
+                            child: Text('โปรดรอสักครู่...'),
+                          );
+                        },
                       ),
+                      // Row(
+                      //   children: [
+                      //     SvgPicture.asset(
+                      //       'assets/images/cart_store.svg',
+                      //       color: Color.fromARGB(255, 104, 104, 104),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 10,
+                      //     ),
+                      //     Text(
+                      //       "Zeleex Shop",
+                      //       style: TextStyle(
+                      //           color: Color.fromARGB(255, 51, 51, 51),
+                      //           fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ],
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     Image.asset(
+                      //       'assets/images/cart_pd.png',
+                      //       width: 90,
+                      //       height: 90,
+                      //     ),
+                      //     SizedBox(
+                      //       width: 10,
+                      //     ),
+                      //     Expanded(
+                      //       child: Container(
+                      //         child: Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.stretch,
+                      //           children: [
+                      //             Row(
+                      //               mainAxisAlignment:
+                      //                   MainAxisAlignment.spaceBetween,
+                      //               children: [
+                      //                 Text(
+                      //                   "ยารักษาโรคติดเชื้อแบคทีเรีย",
+                      //                   style: TextStyle(
+                      //                     color:
+                      //                         Color.fromARGB(255, 51, 51, 51),
+                      //                   ),
+                      //                 ),
+                      //                 SvgPicture.asset('assets/images/x.svg')
+                      //               ],
+                      //             ),
+                      //             SizedBox(
+                      //               height: 30,
+                      //             ),
+                      //             Row(
+                      //               mainAxisAlignment:
+                      //                   MainAxisAlignment.spaceBetween,
+                      //               children: [
+                      //                 Text(
+                      //                   "฿ 1,300",
+                      //                   style: TextStyle(
+                      //                       color:
+                      //                           Color.fromARGB(255, 51, 51, 51),
+                      //                       fontSize: 20),
+                      //                 ),
+                      //                 Row(
+                      //                   mainAxisAlignment:
+                      //                       MainAxisAlignment.spaceBetween,
+                      //                   children: [
+                      //                     Row(
+                      //                       children: [
+                      //                         SizedBox(
+                      //                           width: 5,
+                      //                         ),
+                      //                         SizedBox(
+                      //                           child: Padding(
+                      //                             padding:
+                      //                                 const EdgeInsets.all(8.0),
+                      //                             child: Text(
+                      //                               "จำนวน: 1",
+                      //                               textAlign: TextAlign.center,
+                      //                               style: TextStyle(
+                      //                                   fontWeight:
+                      //                                       FontWeight.bold),
+                      //                             ),
+                      //                           ),
+                      //                         ),
+                      //                         SizedBox(
+                      //                           width: 5,
+                      //                         ),
+                      //                       ],
+                      //                     )
+                      //                   ],
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 20,
                       ),

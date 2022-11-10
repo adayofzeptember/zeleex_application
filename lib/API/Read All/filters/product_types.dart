@@ -133,21 +133,30 @@ class Data_Product_Types {
     data['updated_at'] = this.updatedAt;
     data['deleted_at'] = this.deletedAt;
     data['product_count'] = this.productCount;
+
     return data;
   }
+  
 }
 
-
 Future<List<Data_Product_Types>> fetch_product_cat() async {
-  final response =
-      await http.get(Uri.parse('https://admin.zeleex.com/api/product/categories'));
+  final response = await http
+      .get(Uri.parse('https://admin.zeleex.com/api/product/categories'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['product_category'];
-  // var ee = jsonResponse['data']['product_category'][0].toString();
+  // var ee = jsonResponse['data']['product_category'].toString();
+  //String x = ee + '555';
+  //print(x);
+  List<String> testList = [];
+
+  for (var i = 0; i < jsonCon.length; i++) {
+    var ee = jsonResponse['data']['product_category'][i]['title'].toString();
+    testList.add(ee);
+  }
+  print(testList);
+
   if (response.statusCode == 200) {
-  //    print(jsonResponse.toString());
-  //  print(ee.toString());
     return jsonCon.map((data) => Data_Product_Types.fromJson(data)).toList();
   } else {
     throw Exception("error");

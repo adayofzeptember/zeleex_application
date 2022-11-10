@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,15 +48,36 @@ class _Product_FilteredState extends State<Product_Filtered> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Palette.kToDark,
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Palette.kToDark,
-            statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.light),
-        title: Text("ผลการค้นหาสำหรับ...",
-            style: TextStyle(fontSize: 18, color: Colors.white)),
-      ),
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                ),
+              ),
+              Expanded(
+                child: Text('ผลการค้นหา',
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Palette.kToDark,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              Container(),
+            ],
+          )),
       body: Column(
         children: <Widget>[
           SizedBox(
@@ -224,7 +247,7 @@ class _Product_FilteredState extends State<Product_Filtered> {
                         "ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ" +
                             snapshot.error.toString()));
               }
-              // By default show a loading spinner.
+
               return Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: Container(

@@ -38,6 +38,7 @@ class _CartPageState extends State<CartPage> {
   bool isChecked = false;
   int totalPrice = 0;
   int lol = 0;
+
   late Future<List<Store>> future_cart;
   late Provider_CartRemove _provider_cartRemove;
   late Provider_CartUpdate _provider_cartUpdate;
@@ -146,7 +147,6 @@ class _CartPageState extends State<CartPage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-         
               FutureBuilder<List<Store>>(
                 future: future_cart,
                 builder: (context, snapshot) {
@@ -259,6 +259,7 @@ class _CartPageState extends State<CartPage> {
                                                         data[index222]
                                                             .product!
                                                             .image!
+                                                           
                                                             .main
                                                             .toString(),
                                                         width: 100,
@@ -329,16 +330,6 @@ class _CartPageState extends State<CartPage> {
                                                                               .toString(),
                                                                           realName
                                                                               .toString());
-
-                                                                      // show_deleteConfirmDialog(
-                                                                      //     context,
-                                                                      //     _provider_cartRemove,
-                                                                      //     userID,
-                                                                      //     userToken,
-                                                                      //     productName_forDialog
-                                                                      //         .toString(),
-                                                                      //     realName
-                                                                      //         .toString());
                                                                     },
                                                                     child: Text(
                                                                       'ลบ',
@@ -351,7 +342,10 @@ class _CartPageState extends State<CartPage> {
                                                               ],
                                                             ),
                                                             SizedBox(
-                                                              height: 5,
+                                                              height: 2,
+                                                            ),
+                                                            SizedBox(
+                                                              height: 3,
                                                             ),
                                                             Row(
                                                               children: [
@@ -416,7 +410,6 @@ class _CartPageState extends State<CartPage> {
                                                                               onTap: () {
                                                                                 _provider_cartUpdate.cart_id = data[index222].cartId.toString();
                                                                                 _provider_cartUpdate.prd_unit = (x2 - 1).toString();
-
                                                                                 update_cartUnit(_provider_cartUpdate, userToken);
                                                                                 setState(() {
                                                                                   x2 = x2 - 1;

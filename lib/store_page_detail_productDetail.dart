@@ -60,7 +60,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
   String cartAdd_token = "";
   String priceSKU = "ราคาสินค้า";
   @override
-
   void initState() {
     getUserID();
     future_review = fetch_Product_Review();
@@ -107,16 +106,13 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     request_model_addToCart.store_id = int.parse(cartAdd_storeID.toString());
     request_model_addToCart.product_sku_id =
         int.parse(cartAdd_product_sku_id.toString());
-
     request_model_addToCart.unit = int.parse(_counter.toString());
-
     await add_to_cart_now(request_model_addToCart, cartAdd_token);
   }
 
   Future<Product> fetch_Product_ByID() async {
     var url =
         "https://api.zeleex.com/api/products/" + widget.productID.toString();
-
     var response = await http.get(
       Uri.parse(url),
       headers: {
@@ -124,18 +120,14 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
         'Accept': 'application/json'
       },
     );
-
     var jsonResponse = json.decode(response.body);
     var jsonCon = jsonResponse['data']['product'];
-
     var getIMG = jsonResponse['data']['product']['image']['main'];
     var getPrice = jsonResponse['data']['product']['price'];
     setState(() {
       productImg = getIMG;
     });
-
     Product msg = Product.fromJson(jsonCon);
-
     return msg;
   }
 
@@ -956,10 +948,6 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                 ),
                                                 Row(
                                                   children: [
-                                                    // SvgPicture.asset(
-                                                    //   'assets/images/groupStar.svg',
-                                                    //   height: 10,
-                                                    // ),
                                                     SizedBox(
                                                       width: 5,
                                                     ),
