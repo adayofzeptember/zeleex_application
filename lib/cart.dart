@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -55,6 +54,7 @@ class _CartPageState extends State<CartPage> {
       userID = y.toString();
       userToken = x.toString();
     });
+
   }
 
   Future<List<Store>> fetch_cartList(
@@ -91,6 +91,7 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     get_storedToken();
+   
     future_cart =
         fetch_cartList(widget.user_id.toString(), widget.user_token.toString());
     _provider_cartRemove = Provider_CartRemove();
@@ -573,7 +574,7 @@ class _CartPageState extends State<CartPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PaymentPage()));
+                                    builder: (context) => PaymentPage(user_id: userID, user_token: userToken,)));
                           },
                           child: Container(
                             alignment: Alignment.center,

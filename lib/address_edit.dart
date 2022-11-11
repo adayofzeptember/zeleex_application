@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Delete%20Method/address_delete.dart';
+import 'package:zeleex_application/API/Post%20Method/address_update.dart';
 import 'API/Read By ID/address_read_for_edit.dart';
 import 'Plate.dart';
 import 'dart:async';
@@ -21,6 +22,7 @@ class Address_Edit extends StatefulWidget {
 }
 
 enum SingingCharacter { lafayette, jefferson }
+
 String dumbText = '';
 String user_name = '';
 String user_phone = '';
@@ -32,10 +34,12 @@ String user_province = ''; //! ภูมิภาค
 String user_postCode = '';
 String userID = '';
 String userToken = '';
+final formKey_updateAddress = GlobalKey<FormState>();
 
 class _Address_EditState extends State<Address_Edit> {
   int myVar = 1;
   SingingCharacter? _character = SingingCharacter.lafayette;
+  late Address_Update_Provider request_add_update;
 
   //?----------------------- belongs to address shit ------------------------
 
@@ -74,18 +78,17 @@ class _Address_EditState extends State<Address_Edit> {
       user_postCode = addressDetail.postcode.toString();
     });
 
-    print(addressDetail.default1);
+    print(addressDetail.default1.toString() + '5555555555');
     if (addressDetail.default1 == 1) {
       setState(() {
         status = true;
-        dumbText = '';
       });
     } else {
       setState(() {
         status = false;
-        dumbText = '';
       });
     }
+    request_add_update.default5 = addressDetail.default1.toString();
 
     return addressDetail;
   }
@@ -94,7 +97,10 @@ class _Address_EditState extends State<Address_Edit> {
 
   @override
   void initState() {
+    
     get_storedToken();
+    print(widget.address_id);
+    request_add_update = Address_Update_Provider();
     super.initState();
   }
 
@@ -108,7 +114,6 @@ class _Address_EditState extends State<Address_Edit> {
         home: Scaffold(
           appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
-              // Status bar color
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
               statusBarColor: Palette.kToDark,
@@ -142,43 +147,27 @@ class _Address_EditState extends State<Address_Edit> {
           body: SingleChildScrollView(
               child: Padding(
             padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "\tช่องทางการติดต่อ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 51, 51, 51),
-                      fontSize: 15),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  initialValue: user_name,
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 243, 238, 238),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    labelText: '\t\t\t\tชื่อ - นามสกุล',
+            child: Form(
+              key: formKey_updateAddress,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "\tช่องทางการติดต่อ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 51, 51, 51),
+                        fontSize: 15),
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  initialValue: user_phone,
-                  decoration: InputDecoration(
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    onSaved: (newValue) {
+                      request_add_update.name = newValue.toString();
+                    },
+                    initialValue: user_name,
+                    decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
@@ -191,33 +180,87 @@ class _Address_EditState extends State<Address_Edit> {
                         borderSide: BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      labelText: '\t\t\t\tหมายเลขโทรศัพท์',
-                      labelStyle: TextStyle(fontSize: 15)),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "\tที่อยู่",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 51, 51, 51),
-                      fontSize: 15),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "\tที่อยู่: บ้านเลขที่ ซอย หมู่ ถนน แขวง/ตำบล",
-                  style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-
-                TextFormField(
-                  initialValue: user_address,
-                  decoration: InputDecoration(
+                      labelText: '\t\t\t\tชื่อ - นามสกุล',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    onSaved: (newValue) {
+                      request_add_update.phone = newValue.toString();
+                    },
+                    initialValue: user_phone,
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 243, 238, 238),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        labelText: '\t\t\t\tหมายเลขโทรศัพท์',
+                        labelStyle: TextStyle(fontSize: 15)),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "\tที่อยู่",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 51, 51, 51),
+                        fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "\tที่อยู่: บ้านเลขที่ ซอย หมู่ ถนน แขวง/ตำบล",
+                    style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    onSaved: (newValue) {
+                      request_add_update.address = newValue.toString();
+                    },
+                    initialValue: user_address,
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 243, 238, 238),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        labelStyle:
+                            TextStyle(color: Color.fromARGB(255, 51, 51, 51))),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    onSaved: (newValue) {
+                      request_add_update.district = newValue.toString();
+                    },
+                    initialValue: user_district,
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(
+                        Icons.arrow_drop_down_sharp,
+                        color: Color.fromARGB(255, 121, 120, 120),
+                      ),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
@@ -230,241 +273,164 @@ class _Address_EditState extends State<Address_Edit> {
                         borderSide: BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      labelStyle:
-                          TextStyle(color: Color.fromARGB(255, 51, 51, 51))),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  initialValue: user_district,
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.arrow_drop_down_sharp,
-                      color: Color.fromARGB(255, 121, 120, 120),
+                      labelText: '\t\t\t\tอำเภอ',
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 243, 238, 238),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    labelText: '\t\t\t\tอำเภอ',
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  initialValue: user_city,
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.arrow_drop_down_sharp,
-                      color: Color.fromARGB(255, 121, 120, 120),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 243, 238, 238),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    labelText: '\t\t\t\tจังหวัด',
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  initialValue: user_postCode,
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.arrow_drop_down_sharp,
-                      color: Color.fromARGB(255, 121, 120, 120),
-                    ),
-                    focusedBorder: OutlineInputBorder(
+                  TextFormField(
+                    onSaved: (newValue) {
+                      request_add_update.province = newValue.toString();
+                      request_add_update.city = newValue.toString();
+                    },
+                    initialValue: user_province,
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(
+                        Icons.arrow_drop_down_sharp,
+                        color: Color.fromARGB(255, 121, 120, 120),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(10)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(10)),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 243, 238, 238),
+                      border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 243, 238, 238),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      labelText: '\t\t\t\tจังหวัด',
                     ),
-                    labelText: '\t\t\t\tรหัสไปรษณีย์',
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-
-                // FlutterSwitch(value: status, onToggle: (val) {
-                //   setState(() {
-                //     status = val;
-                //   });
-                // })
-                
-                SizedBox(
-                  height: 10,
-                ),
-                // Text("\tเลขที่อาคาร/ชั้น"),
-                // SizedBox(
-                //   height: 5,
-                // ),
-                // TextField(
-                //   decoration: InputDecoration(
-                //     focusedBorder: OutlineInputBorder(
-                //         borderSide: BorderSide(color: Colors.transparent),
-                //         borderRadius: BorderRadius.circular(10)),
-                //     enabledBorder: OutlineInputBorder(
-                //         borderSide: BorderSide(color: Colors.transparent),
-                //         borderRadius: BorderRadius.circular(10)),
-                //     filled: true,
-                //     fillColor: Color.fromARGB(255, 243, 238, 238),
-                //     border: OutlineInputBorder(
-                //       borderSide: BorderSide(color: Colors.transparent),
-                //       borderRadius: BorderRadius.circular(20.0),
-                //     ),
-                //     labelText: '',
-                //   ),
-                // ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: <Widget>[
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   children: <Widget>[
-                    //     Radio(
-                    //       fillColor: MaterialStateColor.resolveWith(
-                    //           (states) => Palette.kToDark),
-                    //       value: SingingCharacter.lafayette,
-                    //       groupValue: _character,
-                    //       onChanged: (SingingCharacter? value) {
-                    //         setState(() {
-                    //           _character = value;
-                    //         });
-                    //       },
-                    //     ),
-                    //     Text(
-                    //       'บ้าน',
-                    //     ),
-                    //     SizedBox(
-                    //       width: 5,
-                    //     ),
-                    //     Radio(
-                    //       fillColor: MaterialStateColor.resolveWith(
-                    //           (states) => Palette.kToDark),
-                    //       value: SingingCharacter.jefferson,
-                    //       groupValue: _character,
-                    //       onChanged: (SingingCharacter? value) {
-                    //         setState(() {
-                    //           _character = value;
-                    //         });
-                    //       },
-                    //     ),
-                    //     Text(
-                    //       'ที่ทำงาน',
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   width: 20,
-                    // ),
-                    Text("เลือกเป็นที่อยู่หลัก"),
-                    SizedBox(
-                      width: 5,
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    onSaved: (newValue) {
+                      request_add_update.postcode = newValue.toString();
+                    },
+                    initialValue: user_postCode,
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(
+                        Icons.arrow_drop_down_sharp,
+                        color: Color.fromARGB(255, 121, 120, 120),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(10)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(10)),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 243, 238, 238),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      labelText: '\t\t\t\tรหัสไปรษณีย์',
                     ),
-                    FlutterSwitch(
-                        height: 28,
-                        width: 50,
-                        toggleColor: Color.fromRGBO(225, 225, 225, 1),
-                        activeColor: Palette.kToDark,
-                        value: status,
-                        onToggle: (val) {
-                          setState(() {
-                            print(val);
-                            status = val;
-                          });
-                        }),
-
-                    Text(dumbText)
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      // side: BorderSide(color: Colors.red),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      )),
-                  onPressed: () {
-                    ;
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "บันทึก",
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text("เลือกเป็นที่อยู่หลัก"),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      FlutterSwitch(
+                          height: 28,
+                          width: 50,
+                          toggleColor: Color.fromRGBO(225, 225, 225, 1),
+                          activeColor: Palette.kToDark,
+                          value: status,
+                          onToggle: (val) {
+                            setState(() {
+                              print(val);
+                              status = val;
+                              if (status == false) {
+                                request_add_update.default5 = 0.toString();
+                              } else {
+                                request_add_update.default5 = 1.toString();
+                              }
+                            });
+                          }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        // side: BorderSide(color: Colors.red),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        )),
+                    onPressed: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      if (formKey_updateAddress.currentState!.validate()) {
+                        formKey_updateAddress.currentState?.save();
+                        address_update(request_add_update,
+                            widget.address_id.toString(), userToken.toString());
+                      }
+                      print(request_add_update.toJson().toString());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'บันทึก',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      side:
-                          BorderSide(color: Color.fromARGB(255, 255, 119, 119)),
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      )),
-                  onPressed: () {
-                    show_deleteAddress_ConfirmDialog(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: Text(
-                        "ลบที่อยู่",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 119, 119),
-                            fontSize: 15),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        side: BorderSide(
+                            color: Color.fromARGB(255, 255, 119, 119)),
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        )),
+                    onPressed: () {
+                      show_deleteAddress_ConfirmDialog(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: Text(
+                          "ลบที่อยู่",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 119, 119),
+                              fontSize: 15),
+                        ),
                       ),
                     ),
                   ),
-                ),
-
-                SizedBox(
-                  height: 50,
-                ),
-              ],
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
             ),
           )),
         ));
@@ -497,7 +463,6 @@ class _Address_EditState extends State<Address_Edit> {
         address_remove_function(widget.address_id.toString(), userToken);
         Navigator.of(context).pop();
         Fluttertoast.showToast(
-          
             msg: "ลบที่อยู่เรียบร้อยแล้ว",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.SNACKBAR,
