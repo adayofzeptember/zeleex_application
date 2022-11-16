@@ -41,7 +41,6 @@ class First_Page extends StatelessWidget {
             ],
           )),
       theme: ThemeData(
-        
         fontFamily: 'Kanit',
         primarySwatch: Palette.kToDark,
         appBarTheme: AppBarTheme(color: Palette.kToDark),

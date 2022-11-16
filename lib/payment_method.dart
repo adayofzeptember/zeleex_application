@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'Plate.dart';
 import 'payment.dart';
 
@@ -85,11 +86,8 @@ class _Payment_MethodState extends State<Payment_Method> {
                               color: Palette.kToDark,
                               width: 40,
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            SizedBox(width: 10),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "ธนาคารกสิกรไทย (*3456)",

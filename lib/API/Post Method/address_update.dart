@@ -150,16 +150,17 @@ class Address_Update_Provider {
 
 Future<Address_Update> address_update(
     Address_Update_Provider request_addressUpdate_provider,
-    String address_id, String token) async {
+    String address_id,
+    String token) async {
   String urlPost = "https://admin.zeleex.com/api/address/shipping-update/" +
       address_id.toString();
   var bodySocial = json.encode(request_addressUpdate_provider.toJson());
   final response = await http.post(
     Uri.parse(urlPost),
-    headers: {'Content-Type': 'application/json', 
-    'Accept': 'application/json',
-     'Authorization': 'Bearer $token',
-    
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
     },
     body: bodySocial,
   );
