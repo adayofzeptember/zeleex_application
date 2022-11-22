@@ -97,7 +97,6 @@ class _Address_EditState extends State<Address_Edit> {
 
   @override
   void initState() {
-    
     get_storedToken();
     print(widget.address_id);
     request_add_update = Address_Update_Provider();
@@ -152,7 +151,6 @@ class _Address_EditState extends State<Address_Edit> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
                   Text(
                     "\tช่องทางการติดต่อ",
                     style: TextStyle(
@@ -374,7 +372,6 @@ class _Address_EditState extends State<Address_Edit> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         elevation: 0,
-                        // side: BorderSide(color: Colors.red),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         )),

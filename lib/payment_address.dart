@@ -27,6 +27,7 @@ class _Payment_AddressState extends State<Payment_Address> {
 
   Future get_storedToken() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
+
     var x = prefs2.get('keyToken');
     var y = prefs2.get('keyID');
     setState(() {
@@ -118,6 +119,11 @@ class _Payment_AddressState extends State<Payment_Address> {
                   strokeCap: StrokeCap.round,
                 ),
               ),
+
+
+
+
+              
               FutureBuilder<List<Data_Shipping_List>>(
                 future: fetch_shipping_list(userToken),
                 builder: (context, snapshot) {
@@ -195,6 +201,8 @@ class _Payment_AddressState extends State<Payment_Address> {
                                               )
                                             ],
                                           ),
+
+
                                           Text("แก้ไข >",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -202,8 +210,10 @@ class _Payment_AddressState extends State<Payment_Address> {
                                                       255, 130, 130, 130)))
                                         ],
                                       ),
+
+
+                                      
                                       SizedBox(
-                                        
                                         height: 5,
                                       ),
                                       Padding(

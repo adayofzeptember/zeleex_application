@@ -148,7 +148,6 @@ class _PaymentPageState extends State<PaymentPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -386,6 +385,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       //     )
                       //   ],
                       // ),
+        
                       FutureBuilder<List<Store>>(
                         future: future_cart,
                         builder: (context, snapshot) {
@@ -469,6 +469,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                         .start,
                                                                 children: [
                                                                   Container(
+                                                         
                                                                     color: Color
                                                                         .fromARGB(
                                                                             83,

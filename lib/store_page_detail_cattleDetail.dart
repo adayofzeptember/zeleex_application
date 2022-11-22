@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +25,9 @@ String phoneCall = '';
 String user_id = '';
 String user_token = '';
 int activeIndex = 0;
+
+bool pressed = true;
+
 int countIMG = 0;
 
 class Store_Cattle_Detail extends StatefulWidget {
@@ -41,6 +45,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
   late Future<Animal> futureAnimalByID;
   late Store_Subscribe_Model request_model_store_subscribe;
   @override
+  
   void initState() {
     getUserID();
     futureAnimalByID = fetch_Animal_ByID();
@@ -77,8 +82,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
 
     return msg;
   }
-
-  bool pressed = true;
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +162,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
                   Animal thisAnimal = snapshot.data;
-
                   return Column(
                     children: <Widget>[
                       CarouselSlider.builder(
@@ -181,7 +183,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                               autoPlayInterval: Duration(seconds: 5),
                               autoPlayAnimationDuration: Duration(seconds: 2),
                               onPageChanged: (index, reason) => setState(
-                             
                                     (() => activeIndex = index),
                                   ))),
 
@@ -214,6 +215,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                       //   ),
                       // ),
                       // buildIndcator(),
+
                       Container(
                         color: Colors.white,
                         child: Padding(
@@ -249,19 +251,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                       style: TextStyle(
                                           color: Colors.red[400], fontSize: 17),
                                     ),
-                                    // SizedBox(
-                                    //   width: 10,
-                                    // ),
-                                    // Text(
-                                    //   "฿ " +
-                                    //       NumberFormat("#,###,###").format(
-                                    //           int.parse(
-                                    //               thisAnimal.price.toString())),
-                                    //   style: TextStyle(
-                                    //       decoration:
-                                    //           TextDecoration.lineThrough,
-                                    //       color: Colors.grey),
-                                    // ),
                                   ],
                                 ),
                                 SizedBox(
@@ -274,9 +263,11 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                               ],
                             )),
                       ),
+
                       SizedBox(
                         height: 3,
                       ),
+
                       Container(
                         color: Colors.white,
                         child: Padding(
@@ -411,65 +402,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                               ],
                             )),
                       ),
-                      // Container(
-                      //   width: double.infinity,
-                      //   color: Colors.white,
-                      //   child: Padding(
-                      //       padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                      //       child: ExpandableNotifier(
-                      //           child: Column(
-                      //         children: <Widget>[
-                      //           ScrollOnExpand(
-                      //             scrollOnExpand: true,
-                      //             scrollOnCollapse: false,
-                      //             child: ExpandablePanel(
-                      //               theme: const ExpandableThemeData(
-                      //                 headerAlignment:
-                      //                     ExpandablePanelHeaderAlignment.center,
-                      //                 tapBodyToCollapse: false,
-                      //               ),
-                      //               header: Text(
-                      //                 "รายละเอียดสินค้า",
-                      //                 style: TextStyle(
-                      //                     color: Palette.kToDark, fontSize: 20),
-                      //               ),
-                      //               collapsed: Container(),
-                      //               expanded: Column(
-                      //                 crossAxisAlignment:
-                      //                     CrossAxisAlignment.start,
-                      //                 children: <Widget>[
-                      //                   SizedBox(
-                      //                     height: 20,
-                      //                   ),
-                      //                   // HtmlWidget(document555.outerHtml),
-                      // Text(
-                      //   thisAnimal.description.toString(),
-                      //   style: TextStyle(
-                      //       color: Color.fromARGB(
-                      //           255, 130, 130, 130)),
-                      // ),
-                      //                   SizedBox(
-                      //                     height: 80,
-                      //                   ),
-                      //                 ],
-                      //               ),
-                      //               builder: (_, collapsed, expanded) {
-                      //                 return Padding(
-                      //                   padding: EdgeInsets.only(
-                      //                       left: 0, right: 0, bottom: 10),
-                      //                   child: Expandable(
-                      //                     collapsed: collapsed,
-                      //                     expanded: expanded,
-                      //                     theme: const ExpandableThemeData(
-                      //                         crossFadePoint: 0),
-                      //                   ),
-                      //                 );
-                      //               },
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ))),
-                      // ),
+
                       SizedBox(
                         height: 70,
                       )

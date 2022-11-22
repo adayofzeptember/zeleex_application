@@ -15,6 +15,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
 import '../Career/career.dart';
 import '../Plate.dart';
 import '../aboutus.dart';
@@ -125,7 +126,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                   child: Row(
                     children: [
                       SizedBox(
-  
                         width: 10,
                       ),
                       SvgPicture.asset(
@@ -188,7 +188,9 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 20, 0, 0),
                                         child: Row(
+
                                           children: [
+                                            
                                             CachedNetworkImage(
                                               imageUrl: data[index]
                                                   .image!
@@ -235,7 +237,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                           .store!
                                                           .title
                                                           .toString(),
-                                                          
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 51, 51, 51),
@@ -252,20 +253,22 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                     style: TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
-                                                            FontWeight.bold,
+                                                            FontWeight.bold
+                                                            ,
                                                         color: Color.fromARGB(
                                                             255,
                                                             165,
                                                             162,
                                                             162)),
                                                   ),
+                                              
                                                 ],
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
+                                      SizedBox( 
                                         height: 20,
                                       ),
                                       Container(
@@ -281,6 +284,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                           width: double.infinity,
                                           fit: BoxFit.fitWidth,
                                           progressIndicatorBuilder: (context,
+
                                                   url, downloadProgress) =>
                                               Container(
                                             color: Color.fromARGB(
@@ -308,6 +312,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                             ),
                                           ),
                                         ),
+                                        
 
                                         // Image.network(1
 
@@ -347,6 +352,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                       SizedBox(
                                         height: 10,
                                       ),
+                    
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 0, 10, 0),
@@ -381,8 +387,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                     padding: const EdgeInsets.only(
                                         top: 5, bottom: 10),
                                     child: Center(
-
-
                                       child: Text("...",
                                           style: TextStyle(
                                               color: Palette.kToDark)),
@@ -392,8 +396,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                         }),
                   ),
                 );
-              } 
-              else if (snapshot.hasError) {
+              } else if (snapshot.hasError) {
                 return Center(
                     child:
                         Text("ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ"));

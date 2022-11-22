@@ -155,7 +155,6 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
-              
                 return CircularProgressIndicator();
               },
             )

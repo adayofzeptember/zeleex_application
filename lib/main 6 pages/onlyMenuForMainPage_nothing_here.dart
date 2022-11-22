@@ -10,7 +10,7 @@ import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
 import 'package:zeleex_application/main%206%20pages/products.dart';
 import 'package:zeleex_application/main%206%20pages/semens.dart';
 import 'package:zeleex_application/main%206%20pages/store_page.dart';
-import 'package:zeleex_application/test%20folder/df.dart';
+
 import '../Plate.dart';
 import '../aboutus.dart';
 import '../help.dart';
