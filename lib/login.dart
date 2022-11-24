@@ -116,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   //*------------------------------- เข้าสู่ระบบ-------------------------------------------------------
+
   Future<Login_Data> loginNormal(RequestModel_zeleex requestModel) async {
     String urlPost = "https://api.zeleex.com/api/login";
     var body_Login = json.encode(requestModel_zeleex.toJson());
@@ -204,8 +205,6 @@ class _LoginPageState extends State<LoginPage> {
       throw Exception("error");
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {

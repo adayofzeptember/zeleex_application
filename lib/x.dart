@@ -175,7 +175,6 @@ class _StorePageState extends State<StorePage> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           )),
-
                       FutureBuilder<List<Data_Store_Types>>(
                         future: futureStore_Types,
                         builder: (context, snapshot) {
@@ -276,7 +275,6 @@ class _StorePageState extends State<StorePage> {
                       //     ),
                       //   ],
                       // ),
-
                       Spacer(),
                       Container(
                           //height: double.infinity,

@@ -44,7 +44,7 @@ class _StorePageState extends State<StorePage> {
     setState(() {
       x = x + 1;
     });
-    // print(x.toString());
+    print(x.toString());
     final response = await http.get(
       Uri.parse(test.toString() + perPage.toString()),
       headers: {'Accept': 'application/json'},
