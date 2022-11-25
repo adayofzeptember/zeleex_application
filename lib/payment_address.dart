@@ -12,6 +12,8 @@ import 'address_edit.dart';
 import 'payment.dart';
 
 class Payment_Address extends StatefulWidget {
+
+
   Payment_Address({Key? key}) : super(key: key);
   @override
   State<Payment_Address> createState() => _Payment_AddressState();
@@ -119,11 +121,6 @@ class _Payment_AddressState extends State<Payment_Address> {
                   strokeCap: StrokeCap.round,
                 ),
               ),
-
-
-
-
-              
               FutureBuilder<List<Data_Shipping_List>>(
                 future: fetch_shipping_list(userToken),
                 builder: (context, snapshot) {
@@ -201,8 +198,6 @@ class _Payment_AddressState extends State<Payment_Address> {
                                               )
                                             ],
                                           ),
-
-
                                           Text("แก้ไข >",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -210,9 +205,6 @@ class _Payment_AddressState extends State<Payment_Address> {
                                                       255, 130, 130, 130)))
                                         ],
                                       ),
-
-
-                                      
                                       SizedBox(
                                         height: 5,
                                       ),

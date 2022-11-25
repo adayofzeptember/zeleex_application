@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Post%20Method/post_Register.dart';
 import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 import 'package:zeleex_application/main.dart';
+import 'package:zeleex_application/payment.dart';
 
 class Cart_ReadList {
   String? responseCode;
@@ -157,6 +158,7 @@ class Store {
   String? title;
   List<ProductSkus>? productSkus;
   int? priceTatal;
+  //-- shipping อยูู่ในนี้
   int? productSkusCount;
   Image_Cart? image;
   Image_Cart? imageCover;
@@ -399,4 +401,52 @@ Future<List<ProductSkus>> fetch_cartSku(
   } else {
     throw Exception('error response =! 200');
   }
+}
+
+//!-----------------------------------------------------------------------------------
+Future<List<Store>> fetch_cartList2(String userToken222) async {
+  final response = await http
+      .get(Uri.parse('https://admin.zeleex.com/api/cart/list'), headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'applicationjson',
+    'Authorization': 'Bearer $userToken222',
+  });
+  
+  
+  var jsonResponse = json.decode(response.body);
+  List jsonCon = jsonResponse['data']['store']; //?ได้แล้วมี 2
+  List jsonCon2 = jsonResponse['data']['store'][0]['product_skus'];
+  var jsonCon3 = jsonResponse['data']['store'][1]['product_skus'][0]['cart_id'];
+  List<String> testList = [];
+  int total = 0;
+  var productAll = jsonResponse['data']['product_all'].toString();
+  var shippinPrice = jsonResponse['data']['store'][0]['shipping'][0]['rate'][0]
+          ['price']
+      .toString();
+
+  for (var loop = 0; loop < jsonCon.length; loop++) {
+    String cart555 = jsonResponse['data']['store'][loop]['product_skus'][0]
+            ['cart_id']
+        .toString(); //วนcart_id
+    testList.add(cart555);
+
+    // int eachStore_totalPrice =
+    //     jsonResponse['data']['store'][loop]['price_tatal'];
+    // int parsed_total = eachStore_totalPrice;
+    // total = total + parsed_total;
+    // print(eachStore_totalPrice.toString());      วนหาราคารวม
+  }
+  print(testList);
+
+  if (response.statusCode == 200) {
+    return jsonCon.map((data) => Store.fromJson(data)).toList();
+  } else {
+    print('error');
+    throw Exception('error response status');
+  }
+}
+
+//!-----------------------------------------------------------------------------------
+void main(List<String> args) {
+  fetch_cartList2('1876|1c1bAmXEmPft5tSz6E6NZNICH4O5TC22xaC0hXO2');
 }

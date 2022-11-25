@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,9 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
+import 'package:zeleex_application/API/model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
+import 'API/Post Method/post_checkout.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Plate.dart';
 import 'cart.dart';
@@ -31,14 +34,17 @@ SingingCharacter? _character = SingingCharacter.lafayette;
 class _PaymentPageState extends State<PaymentPage> {
   late Future<List<Store>> future_cart;
   late Provider_CartRemove _provider_cartRemove;
-
+  AddressForCheckOut_Model address_checkout = AddressForCheckOut_Model();
+  Cart_CheckOut cart2 = Cart_CheckOut();
   int radioID = 1;
   String gender = 'ไม่ระบุ';
   initState() {
+    cart2 = Cart_CheckOut();
+    address_checkout = AddressForCheckOut_Model();
+ 
     setState(() {
       totalPrice = 0;
     });
-    print(widget.user_token.toString() + widget.user_id.toString());
     future_cart = fetch_cartList2(
         widget.user_id.toString(), widget.user_token.toString());
     super.initState();
@@ -110,7 +116,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 ),
               ),
               Text(
-                "ชำระเงิน",
+                "- ชำระเงิน -",
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
@@ -174,6 +180,20 @@ class _PaymentPageState extends State<PaymentPage> {
                                       if (snapshot.hasData) {
                                         List<Data_Shipping_List>? data =
                                             snapshot.data;
+
+                                        address_checkout.address_id =
+                                            data![0].id;
+                                        address_checkout.address_name =
+                                            data[0].name.toString();
+                                        address_checkout.address_city =
+                                            data[0].city.toString();
+                                        address_checkout.address_district =
+                                            data[0].district.toString();
+                                        ;
+                                        address_checkout.address_province =
+                                            data[0].province.toString();
+                                        address_checkout.address_postcode =
+                                            data[0].postcode.toString();
                                         return ListView.builder(
                                             shrinkWrap: true,
                                             primary: false,
@@ -195,7 +215,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                         Row(
                                                           children: [
                                                             Text(
-                                                              data![0]
+                                                              data[0]
                                                                   .name
                                                                   .toString(),
                                                               style: TextStyle(
@@ -283,109 +303,6 @@ class _PaymentPageState extends State<PaymentPage> {
                         height: 20,
                       ),
 
-                      // Row(
-                      //   children: [
-                      //     SvgPicture.asset(
-                      //       'assets/images/cart_store.svg',
-                      //       color: Color.fromARGB(255, 104, 104, 104),
-                      //     ),
-                      //     SizedBox(
-                      //       width: 10,
-                      //     ),
-                      //     Text(
-                      //       "Zeleex Shop",
-                      //       style: TextStyle(
-                      //           color: Color.fromARGB(255, 51, 51, 51),
-                      //           fontWeight: FontWeight.bold),
-                      //     ),
-                      //   ],
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // Row(
-                      //   crossAxisAlignment: CrossAxisAlignment.center,
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Image.asset(
-                      //       'assets/images/cart_pd.png',
-                      //       width: 90,
-                      //       height: 90,
-                      //     ),
-                      //     SizedBox(
-                      //       width: 10,
-                      //     ),
-                      //     Expanded(
-                      //       child: Container(
-                      //         child: Column(
-                      //           crossAxisAlignment: CrossAxisAlignment.stretch,
-                      //           children: [
-                      //             Row(
-                      //               mainAxisAlignment:
-                      //                   MainAxisAlignment.spaceBetween,
-                      //               children: [
-                      //                 Text(
-                      //                   "ยารักษาโรคติดเชื้อแบคทีเรีย",
-                      //                   style: TextStyle(
-                      //                     color:
-                      //                         Color.fromARGB(255, 51, 51, 51),
-                      //                   ),
-                      //                 ),
-                      //                 SvgPicture.asset('assets/images/x.svg')
-                      //               ],
-                      //             ),
-                      //             SizedBox(
-                      //               height: 30,
-                      //             ),
-                      //             Row(
-                      //               mainAxisAlignment:
-                      //                   MainAxisAlignment.spaceBetween,
-                      //               children: [
-                      //                 Text(
-                      //                   "฿ 1,300",
-                      //                   style: TextStyle(
-                      //                       color:
-                      //                           Color.fromARGB(255, 51, 51, 51),
-                      //                       fontSize: 20),
-                      //                 ),
-                      //                 Row(
-                      //                   mainAxisAlignment:
-                      //                       MainAxisAlignment.spaceBetween,
-                      //                   children: [
-                      //                     Row(
-                      //                       children: [
-                      //                         SizedBox(
-                      //                           width: 5,
-                      //                         ),
-                      //                         SizedBox(
-                      //                           child: Padding(
-                      //                             padding:
-                      //                                 const EdgeInsets.all(8.0),
-                      //                             child: Text(
-                      //                               "จำนวน: 1",
-                      //                               textAlign: TextAlign.center,
-                      //                               style: TextStyle(
-                      //                                   fontWeight:
-                      //                                       FontWeight.bold),
-                      //                             ),
-                      //                           ),
-                      //                         ),
-                      //                         SizedBox(
-                      //                           width: 5,
-                      //                         ),
-                      //                       ],
-                      //                     )
-                      //                   ],
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     )
-                      //   ],
-                      // ),
-        
                       FutureBuilder<List<Store>>(
                         future: future_cart,
                         builder: (context, snapshot) {
@@ -469,7 +386,6 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                         .start,
                                                                 children: [
                                                                   Container(
-                                                         
                                                                     color: Color
                                                                         .fromARGB(
                                                                             83,
@@ -678,49 +594,6 @@ class _PaymentPageState extends State<PaymentPage> {
                                             ),
                                           ],
                                         ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.start,
-                                        //   children: <Widget>[
-                                        //     Radio(
-                                        //       fillColor: MaterialStateColor
-                                        //           .resolveWith((states) =>
-                                        //               Palette.kToDark),
-                                        //       value: SingingCharacter.lafayette,
-                                        //       groupValue: _character,
-                                        //       onChanged:
-                                        //           (SingingCharacter? value) {
-                                        //         stateSetter(() {
-                                        //           print(value);
-                                        //           _character = value;
-                                        //         });
-                                        //       },
-                                        //     ),
-                                        //     Text(
-                                        //       'บ้าน',
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 5,
-                                        //     ),
-                                        //     Radio(
-                                        //       fillColor: MaterialStateColor
-                                        //           .resolveWith((states) =>
-                                        //               Palette.kToDark),
-                                        //       value: SingingCharacter.jefferson,
-                                        //       groupValue: _character,
-                                        //       onChanged:
-                                        //           (SingingCharacter? value) {
-                                        //         print(value);
-                                        //         stateSetter(() {
-                                        //           _character = value;
-                                        //         });
-                                        //       },
-                                        //     ),
-                                        //     Text(
-                                        //       'ที่ทำงาน',
-                                        //     ),
-                                        //   ],
-                                        // ),
                                       ],
                                     ),
                                   );
@@ -1330,12 +1203,23 @@ class _PaymentPageState extends State<PaymentPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Payment_Confirm(),
-                                ),
-                              );
+                              print(address_checkout.address_id);
+                              print(jsonEncode(address_checkout.toString()));
+                              Fluttertoast.showToast(
+                                  msg: address_checkout.address_id.toString(),
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 2,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 230, 97, 97),
+                                  textColor: Colors.white,
+                                  fontSize: 15);
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Payment_Confirm(),
+                              //   ),
+                              // );
                             },
                             child: Container(
                               // alignment: Alignment.center,
