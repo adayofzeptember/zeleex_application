@@ -11,6 +11,7 @@
     "total_amount": 200,
     "total": 200,
     "shipping_cost": 40,
+
     "data": [
         {
             "store_id": 33,
@@ -35,7 +36,7 @@
             ],
             "discount_id": 5,
             "discount": 10,
-            "total": 100,
+            "total": 200,
             "total_amount": 90,
             "shipping_id": 7,
             "shipping_cost": 20

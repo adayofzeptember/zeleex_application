@@ -411,8 +411,7 @@ Future<List<Store>> fetch_cartList2(String userToken222) async {
     'Accept': 'applicationjson',
     'Authorization': 'Bearer $userToken222',
   });
-  
-  
+
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['store']; //?ได้แล้วมี 2
   List jsonCon2 = jsonResponse['data']['store'][0]['product_skus'];
@@ -428,15 +427,15 @@ Future<List<Store>> fetch_cartList2(String userToken222) async {
     String cart555 = jsonResponse['data']['store'][loop]['product_skus'][0]
             ['cart_id']
         .toString(); //วนcart_id
+    
     testList.add(cart555);
-
     // int eachStore_totalPrice =
     //     jsonResponse['data']['store'][loop]['price_tatal'];
     // int parsed_total = eachStore_totalPrice;
     // total = total + parsed_total;
     // print(eachStore_totalPrice.toString());      วนหาราคารวม
   }
-  print(testList);
+  print(jsonEncode(testList));
 
   if (response.statusCode == 200) {
     return jsonCon.map((data) => Store.fromJson(data)).toList();

@@ -148,51 +148,51 @@ class Carts {
 
 
 
-Future<Cart_CheckOut> real_checkOut(String token) async {
-  String urlPost = "https://admin.zeleex.com/api/checkout";
-  // var body_produvtFave = json.encode(faveModel.toJson());
-  final response = await http.post(Uri.parse(urlPost),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token'
-      },
-      body: jsonEncode(<String, dynamic>{
-        "user_address_id": 1.toString(),
-        "temp_address_name":
-            "21256 Emmalee Greens Apt. 906Port Dallin, NY 16084",
-        "temp_address_city": "Heberton",
-        "temp_address_district": "praesentium",
-        "temp_address_province": "2",
-        "payment_method": "null",
-        "temp_address_postcode": ' 4079',
-        "status": "created",
-        "total_discount": '10',
-        "total_amount": '200',
-        "total": '200',
-        "shipping_cost": '40',
-        "data": [
-          {
-            "store_id": 33,
-            "carts": [
-              {"id": 46}
-            ],
-            "discount_id": 5,
-            "discount": 10,
-            "total": 100,
-            "total_amount": 90,
-            "shipping_id": 7,
-            "shipping_cost": 20
-          }
-        ]
-      }));
+// Future<Cart_CheckOut> real_checkOut(String token) async {
+//   String urlPost = "https://admin.zeleex.com/api/checkout";
+//   // var body_produvtFave = json.encode(faveModel.toJson());
+//   final response = await http.post(Uri.parse(urlPost),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json',
+//         'Authorization': 'Bearer $token'
+//       },
+//       body: jsonEncode(<String, dynamic>{
+//         "user_address_id": 1.toString(),
+//         "temp_address_name":
+//             "21256 Emmalee Greens Apt. 906Port Dallin, NY 16084",
+//         "temp_address_city": "Heberton",
+//         "temp_address_district": "praesentium",
+//         "temp_address_province": "2",
+//         "payment_method": "null",
+//         "temp_address_postcode": ' 4079',
+//         "status": "created",
+//         "total_discount": '10',
+//         "total_amount": '200',
+//         "total": '200',
+//         "shipping_cost": '40',
+//         "data": [
+//           {
+//             "store_id": 33,
+//             "carts": [
+//               {"id": 46}
+//             ],
+//             "discount_id": 5,
+//             "discount": 10,
+//             "total": 100,
+//             "total_amount": 90,
+//             "shipping_id": 7,
+//             "shipping_cost": 20
+//           }
+//         ]
+//       }));
 
-  print(json.decode(response.body.toString()));
-  var jsonRes = json.decode(response.body);
+//   print(json.decode(response.body.toString()));
+//   var jsonRes = json.decode(response.body);
 
-  if (response.statusCode == 400 || response.statusCode == 200) {
-    return Cart_CheckOut.fromJson(json.decode(response.body));
-  } else {
-    throw Exception("error");
-  }
-}
+//   if (response.statusCode == 400 || response.statusCode == 200) {
+//     return Cart_CheckOut.fromJson(json.decode(response.body));
+//   } else {
+//     throw Exception("error");
+//   }
+// }
