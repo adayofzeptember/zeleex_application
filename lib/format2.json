@@ -4,8 +4,8 @@
     "temp_address_city": "Korat",
     "temp_address_district": "Mueng",
     "temp_address_province": "KKU",
-    "payment_method": "plai-tang",
     "temp_address_postcode": "30045",
+    "payment_method": "plai-tang",
     "status": "created",
     "total_discount": 0,
     "total_amount": 9,
@@ -13,18 +13,26 @@
     "shipping_cost": 40,
     "data": [
         {
-            "store_id": 0,
+            "store_id": "1019",
             "carts": [
                 {
-                    "id": 0
+                    "id": "406"
+                },
+                {
+                    "id": "407"
                 }
-            ],
-            "discount_id": 5,
-            "discount": 5,
-            "total": 5,
-            "total_amount": 5,
-            "shipping_id": 5,
-            "shipping_cost": 5
+            ]
+        },
+        {
+            "store_id": "1082",
+            "carts": [
+                {
+                    "id": "406"
+                },
+                {
+                    "id": "407"
+                }
+            ]
         }
     ]
 }

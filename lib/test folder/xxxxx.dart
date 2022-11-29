@@ -4,7 +4,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
+import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 import 'package:zeleex_application/address_edit.dart';
+
+import '../API/Post Method/google_login_api.dart';
 
 // Future<void> postCart(String token) async {
 //   var bigdata = {};
@@ -27,21 +30,16 @@ import 'package:zeleex_application/address_edit.dart';
 //   bigdata["total"] = 250;
 //   bigdata["shipping_cost"] = 40;
 
-
-
-
-
-
 //   for (int storeLoop = 0; storeLoop < ['data']['store'].length; storeLoop++) {
- 
+
 //     internalData = {};
 //     internalData["store_id"] = ['data']['store'][storeLoop]['store_id'];
 
 //     for (var cartLoop = 0; cartLoop < ['data']['store'][storeLoop]['product_skus'].length; cartLoop++) {
-   
+
 //       cart_internalData = {};
 //       if (cartLoop < storeLoop) {
-        
+
 //       } else {
 //         cart_internalData["id"] =
 //             ['data']['store'][storeLoop]['product_skus'][cartLoop]['cart_id'];
@@ -59,7 +57,6 @@ import 'package:zeleex_application/address_edit.dart';
 //     internalData["shipping_cost"] = 5;
 //     toAddData.add(internalData);
 //   }
-  
 
 //   bigdata["data"] = toAddData;
 
@@ -83,8 +80,26 @@ import 'package:zeleex_application/address_edit.dart';
 //   }
 // }
 
-Future<void> fetch_cart_list3(String token) async {
+Future<void> fetch_cart_list(String token) async {
+  var bigdata = {};
+  var toAdd_storeData = [];
+  var storeData = {};
+  var toAdd_cartData = [];
+  var cartData = {};
 
+  bigdata["user_address_id"] = 1;
+  bigdata["temp_address_name"] = 'Chawanthon Wira';
+  bigdata["temp_address_city"] = "Korat";
+  bigdata["temp_address_district"] = "Mueng";
+  bigdata["temp_address_province"] = 'KKU';
+  bigdata["temp_address_postcode"] = '30045';
+  bigdata["payment_method"] = 'plai-tang';
+  bigdata["status"] = 'created';
+
+  bigdata["total_discount"] = 0;
+  bigdata["total_amount"] = 9;
+  bigdata["total"] = 250;
+  bigdata["shipping_cost"] = 40;
 
   final response = await http
       .get(Uri.parse('https://admin.zeleex.com/api/cart/list'), headers: {
@@ -94,39 +109,41 @@ Future<void> fetch_cart_list3(String token) async {
   });
 
   var jsonResponse = json.decode(response.body);
-  List count_Store = jsonResponse['data']['store']; //?ได้แล้วมี 2
-  List jsonCon2 = jsonResponse['data']['store'][0]['product_skus'];
-  var jsonCon3 = jsonResponse['data']['store'][1]['product_skus'][0]['cart_id'];
-  List<String> testList = [];
-  int total = 0;
-  var productAll = jsonResponse['data']['product_all'].toString();
-  var shippinPrice = jsonResponse['data']['store'][0]['shipping'][0]['rate'][0]
-          ['price']
-      .toString();
 
-  // for (var loop = 0; loop < jsonCon.length; loop++) {
-  //   String cart555 = jsonResponse['data']['store'][loop]['product_skus'][0]
-  //           ['cart_id']
-  //       .toString(); //วนcart_id
-  
+  List count_Store = jsonResponse['data']['store'];
 
-   // testList.add(cart555);
-
-    // int eachStore_totalPrice =
-    //     jsonResponse['data']['store'][loop]['price_tatal'];
-    // int parsed_total = eachStore_totalPrice;
-    // total = total + parsed_total;
-    // print(eachStore_totalPrice.toString());      วนหาราคารวม
-  
-  
   for (var i = 0; i < count_Store.length; i++) {
-    print(count_Store[i]['id'].toString());
+    storeData = {};
+
+    storeData["store_id"] = count_Store[i]['id'].toString();
+
+    List count_CartinStore = jsonResponse['data']['store'][i]['product_skus'];
+
+    for (var x = 0; x < count_CartinStore.length; x++) {
+      cartData = {};
+
+      cartData["id"] = count_CartinStore[x]['cart_id'].toString();
+
+      print(jsonResponse['data']['store'][i]['product_skus'][x]['id']);
+      print('ร้านที่: ' +
+          count_Store[i]['id'].toString() +
+          '    รหัส: ' +
+          count_CartinStore[x]['cart_id'].toString());
+
+      toAdd_cartData.add(cartData);
+    }
+
+    storeData["carts"] = toAdd_cartData;
+    toAdd_storeData.add(storeData);
   }
+
+  var x = bigdata.toString();
+  bigdata["data"] = toAdd_storeData;
+
+  print(jsonEncode(bigdata));
 }
 
 
-
 void main(List<String> args) {
-  //postCart('1876|1c1bAmXEmPft5tSz6E6NZNICH4O5TC22xaC0hXO2');
-  fetch_cart_list3('1876|1c1bAmXEmPft5tSz6E6NZNICH4O5TC22xaC0hXO2');
+  fetch_cart_list('1876|1c1bAmXEmPft5tSz6E6NZNICH4O5TC22xaC0hXO2');
 }
