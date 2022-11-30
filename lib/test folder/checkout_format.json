@@ -21,7 +21,13 @@
                 {
                     "id": "407"
                 }
-            ]
+            ],
+            "discount_id": 0,
+            "discount": 0,
+            "total": "13410",
+            "total_amount": 5,
+            "shipping_id": 5,
+            "shipping_cost": 5
         },
         {
             "store_id": "1082",
@@ -32,7 +38,13 @@
                 {
                     "id": "407"
                 }
-            ]
+            ],
+            "discount_id": 0,
+            "discount": 0,
+            "total": "500",
+            "total_amount": 5,
+            "shipping_id": 5,
+            "shipping_cost": 5
         }
     ]
 }

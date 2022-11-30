@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'check_model.dart';
+import 'checkBox_model.dart';
 
 void main(List<String> args) {
   runApp(Check_Box());

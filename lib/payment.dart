@@ -10,7 +10,7 @@ import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import 'package:zeleex_application/API/model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
-import 'API/Post Method/post_checkout.dart';
+import 'API/Post Method/post_checkout_IDEA.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Plate.dart';
 import 'cart.dart';
@@ -35,11 +35,10 @@ class _PaymentPageState extends State<PaymentPage> {
   late Future<List<Store>> future_cart;
   late Provider_CartRemove _provider_cartRemove;
   AddressForCheckOut_Model address_checkout = AddressForCheckOut_Model();
-  Cart_CheckOut cart2 = Cart_CheckOut();
+
   int radioID = 1;
   String gender = 'ไม่ระบุ';
   initState() {
-    cart2 = Cart_CheckOut();
     address_checkout = AddressForCheckOut_Model();
  
     setState(() {

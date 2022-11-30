@@ -11,9 +11,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
-import 'package:zeleex_application/test%20folder/forgot_password_reset.dart';
+
 import '../Plate.dart';
 import '../login.dart';
+import 'forgot_password_reset.dart';
 
 var _nameController = TextEditingController();
 var _sureNameController = TextEditingController();

@@ -14,7 +14,7 @@ import 'package:zeleex_application/ProgressHUD.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
-import 'package:zeleex_application/test%20folder/forgot_password_email.dart';
+
 import 'API/model.dart';
 import 'Plate.dart';
 import 'dart:async';
@@ -23,6 +23,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
+import 'forgot_password_email.dart';
 import 'main 6 pages/onlyMenuForMainPage_nothing_here.dart';
 
 var emailController = TextEditingController();
