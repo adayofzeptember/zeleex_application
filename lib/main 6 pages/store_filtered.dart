@@ -102,7 +102,7 @@ class _Store_FilteredState extends State<Store_Filtered> {
                         mainAxisExtent:
                             MediaQuery.of(context).size.height * 0.36,
                       ),
-                      itemCount: data!.length,
+                      itemCount: data!.length ,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
                           return Card(

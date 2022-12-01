@@ -8,7 +8,7 @@
     "payment_method": "plai-tang",
     "status": "created",
     "total_discount": 0,
-    "total_amount": 9,
+    "total_amount": 30,
     "total": 250,
     "shipping_cost": 40,
     "data": [
@@ -16,35 +16,35 @@
             "store_id": "1019",
             "carts": [
                 {
-                    "id": "406"
+                    "id": 394
                 },
                 {
-                    "id": "407"
+                    "id": 284
+                },
+                {
+                    "id": 285
                 }
             ],
             "discount_id": 0,
             "discount": 0,
-            "total": "13410",
-            "total_amount": 5,
-            "shipping_id": 5,
-            "shipping_cost": 5
+            "total": "7450"
         },
         {
-            "store_id": "1082",
+            "store_id": "1046",
             "carts": [
                 {
-                    "id": "406"
+                    "id": 394
                 },
                 {
-                    "id": "407"
+                    "id": 284
+                },
+                {
+                    "id": 285
                 }
             ],
             "discount_id": 0,
             "discount": 0,
-            "total": "500",
-            "total_amount": 5,
-            "shipping_id": 5,
-            "shipping_cost": 5
+            "total": "1200"
         }
     ]
 }

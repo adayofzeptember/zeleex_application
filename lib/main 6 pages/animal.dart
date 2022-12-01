@@ -17,7 +17,7 @@ import 'package:intl/intl.dart';
 import '../from Profile/profile.dart';
 import 'onlyMenuForMainPage_nothing_here.dart';
 
-//
+
 class AnimalsPage extends StatefulWidget {
   AnimalsPage({Key? key}) : super(key: key);
   @override
@@ -145,7 +145,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                         childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.35),
                       ),
-                      itemCount: data!.length,
+                      itemCount: data!.length + 1,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < data.length) {
                           String isNull = data[index].description.toString();

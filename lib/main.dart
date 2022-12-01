@@ -38,6 +38,7 @@ class First_Page extends StatelessWidget {
               const ResponsiveBreakpoint.autoScale(900, name: MOBILE),
               const ResponsiveBreakpoint.resize(1000, name: MOBILE),
               const ResponsiveBreakpoint.resize(1200, name: TABLET),
+              
             ],
           )),
       theme: ThemeData(

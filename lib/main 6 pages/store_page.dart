@@ -18,10 +18,6 @@ import '../aboutus.dart';
 import '../second.dart';
 import '../store_page_detail.dart';
 
-var perPage = 10;
-bool hasMore = true;
-int x = 1;
-
 class StorePage extends StatefulWidget {
   StorePage({Key? key}) : super(key: key);
 
@@ -34,49 +30,20 @@ class _StorePageState extends State<StorePage> {
   //*ค่าเริ่มต้น แสดง 2 items
 
   bool press = false;
-  String test = 'https://api.zeleex.com/api/stores?per_page=';
+  String test = 'https://admin.zeleex.com/api/stores?per_page=15&page=';
   String typeID = "";
+  List data = [];
+  final scrollController = ScrollController();
+  int page = 1;
+  bool isLoadingMore = false;
 
-  late Future<List<Data_Store_ReadALL>> futureStore;
   late Future<List<Data_Store_Types>> futureStore_Types;
 
-  Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
-    setState(() {
-      x = x + 1;
-    });
-    print(x.toString());
-    final response = await http.get(
-      Uri.parse(test.toString() + perPage.toString()),
-      headers: {'Accept': 'application/json'},
-    );
-    var jsonResponse = json.decode(response.body);
-    List jsonCon = jsonResponse['data']['data'];
-    if (response.statusCode == 200) {
-      if (jsonCon.length < perPage) {
-        setState(() {
-          hasMore = false;
-        });
-      }
-
-      return jsonCon.map((data) => Data_Store_ReadALL.fromJson(data)).toList();
-    } else {
-      throw Exception("error...");
-    }
-  }
-
+  @override
   void initState() {
-    fetch_StorePage_readAll();
     futureStore_Types = fetch_store_types();
-    futureStore = fetch_StorePage_readAll();
-    controller.addListener(() {
-      if (controller.position.maxScrollExtent == controller.offset) {
-        setState(() {
-          perPage = perPage + 4; //*เลื่อนลง + เพิ่มที่ละ 2 items
-        });
-        fetch_StorePage_readAll();
-      }
-    });
-    super.initState();
+    fetch_StorePage_readAll();
+    scrollController.addListener(_scrollListener);
   }
 
   @override
@@ -134,41 +101,30 @@ class _StorePageState extends State<StorePage> {
                 ),
               ),
               onPressed: () => Scaffold.of(context).openEndDrawer(),
-
-              // onPressed: () => Scaffold.of(context).openEndDrawer(),
             ),
           ),
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 5,
-          ),
-          FutureBuilder<List<Data_Store_ReadALL>>(
-            future: fetch_StorePage_readAll(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<Data_Store_ReadALL>? data = snapshot.data;
-                return Expanded(
-                  child: RawScrollbar(
-                    controller: controller,
-                    thumbColor: Palette.kToDark,
-                    radius: Radius.circular(50),
-                    thickness: 5,
-                    child: GridView.builder(
-                      controller: controller,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1 + 1,
-                        // childAspectRatio: MediaQuery.of(context).size.width /
-                        //     (MediaQuery.of(context).size.height / 1.55),
-                        mainAxisExtent:
-                            MediaQuery.of(context).size.height * 0.36,
-                      ),
-                      itemCount: data!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index < data.length) {
-                          return Card(
+      body: RawScrollbar(
+        controller: controller,
+        thumbColor: Palette.kToDark,
+        radius: Radius.circular(50),
+        thickness: 5,
+        child: GridView.builder(
+            physics: ClampingScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: MediaQuery.of(context).size.height * 0.36,
+            ),
+            controller: scrollController,
+            itemCount: isLoadingMore ? data.length + 1 : data.length,
+            itemBuilder: (context, index) {
+              if (index < data.length) {
+                final post = data[index];
+                //final stoer_id = post
+                final title = post['title'];
+      
+                      return Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
                             child: InkWell(
@@ -177,9 +133,9 @@ class _StorePageState extends State<StorePage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Store_Detail(
-                                            storeID: data[index].id.toString(),
+                                            storeID: post['id'].toString(),
                                             storeName:
-                                                data[index].title.toString(),
+                                                post['title'].toString(),
                                           )),
                                 );
                               },
@@ -195,9 +151,8 @@ class _StorePageState extends State<StorePage> {
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
                                       child: CachedNetworkImage(
-                                        imageUrl: data[index]
-                                            .image!
-                                            .thumbnail
+                                        imageUrl: post['image']['thumbnail']
+                                       
                                             .toString(),
                                         fit: BoxFit.fill,
                                         progressIndicatorBuilder:
@@ -225,7 +180,7 @@ class _StorePageState extends State<StorePage> {
                                     padding:
                                         const EdgeInsets.fromLTRB(15, 5, 0, 0),
                                     child: Text(
-                                      data[index].title.toString(),
+                                      post['title'].toString(),
                                       style: TextStyle(
                                           fontSize: 15,
                                           color:
@@ -252,7 +207,7 @@ class _StorePageState extends State<StorePage> {
                                           height: 40,
                                           width: 120,
                                           child: Text(
-                                            data[index].address.toString(),
+                                            post['address'].toString(),
                                             style: TextStyle(
                                                 fontSize: 13,
                                                 color: Palette.kToDark),
@@ -280,39 +235,12 @@ class _StorePageState extends State<StorePage> {
                               ),
                             ),
                           );
-                        } else {
-                          return hasMore
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  child: CircularProgressIndicator(),
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: Center(
-                                    child: Text("...",
-                                        style:
-                                            TextStyle(color: Palette.kToDark)),
-                                  ),
-                                );
-                        }
-                      },
-                    ),
-                  ),
-                );
-              } else if (snapshot.hasError) {
+              } else {
                 return Center(
-                    child: Text(
-                        "ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ" +
-                            snapshot.error.toString()));
+                  child: CircularProgressIndicator(),
+                );
               }
-              return Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child: Container(
-                    child: Center(child: CircularProgressIndicator())),
-              );
-            },
-          ),
-        ],
+            }),
       ),
       endDrawer: Theme(
           data: Theme.of(context).copyWith(
@@ -339,7 +267,6 @@ class _StorePageState extends State<StorePage> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           )),
-
                       FutureBuilder<List<Data_Store_Types>>(
                         future: futureStore_Types,
                         builder: (context, snapshot) {
@@ -384,63 +311,6 @@ class _StorePageState extends State<StorePage> {
                           return Container();
                         },
                       ),
-                      // Column(
-                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //   children: <Widget>[
-
-                      //     InkWell(
-                      //       onTap: () {
-                      //         setState(() {
-                      //           press = !press;
-
-                      //           typeID = "1";
-                      //         });
-                      //       },
-                      //       child: Text("ร้านค้าทั่วไป",
-                      //           style: TextStyle(
-                      //               fontSize: 20,
-                      //               fontWeight: FontWeight.w500,
-                      //               color: press
-                      //                   ? Palette.kToDark
-                      //                   : Color.fromARGB(255, 131, 131, 131))),
-                      //     ),
-                      //     SizedBox(
-                      //       height: 5,
-                      //     ),
-                      //     InkWell(
-                      //       onTap: () {
-                      //         setState(() {
-                      //           typeID = "2";
-                      //           press = !press;
-                      //         });
-                      //       },
-                      //       child: Text("ร้านค้าส่งสัตว์",
-                      //           style: TextStyle(
-                      //               fontSize: 20,
-                      //               fontWeight: FontWeight.w500,
-                      //               color: press
-                      //                   ? Color.fromARGB(255, 131, 131, 131)
-                      //                   : Palette.kToDark)),
-                      //     ),
-                      //     SizedBox(
-                      //       height: 5,
-                      //     ),
-                      //     InkWell(
-                      //       onTap: () {
-                      //         setState(() {
-                      //           typeID = "3";
-                      //           press = !press;
-                      //         });
-                      //       },
-                      //       child: Text("บริการขนส่งน้ำเชื้อ",
-                      //           style: TextStyle(
-                      //               fontSize: 20,
-                      //               fontWeight: FontWeight.w500,
-                      //               color: Color.fromARGB(255, 131, 131, 131))),
-                      //     ),
-                      //   ],
-                      // ),
-
                       Spacer(),
                       Container(
                           //height: double.infinity,
@@ -462,7 +332,7 @@ class _StorePageState extends State<StorePage> {
                                         Navigator.pop(context);
                                         setState(() {
                                           test =
-                                              'https://api.zeleex.com/api/products?per_page=';
+                                              'https://admin.zeleex.com/api/products?per_page=';
                                         });
                                         initState();
                                       },
@@ -496,5 +366,38 @@ class _StorePageState extends State<StorePage> {
             ),
           )),
     );
+  }
+
+  Future<void> fetch_StorePage_readAll() async {
+    final response = await http.get(
+      Uri.parse(test+page.toString()),
+      // Uri.parse('https://admin.zeleex.com/api/stores?per_page=15&page=${page}'),
+      headers: {'Accept': 'application/json'},
+    );
+    var jsonResponse = json.decode(response.body);
+    final jsonCon = jsonResponse['data']['data'] as List;
+    if (response.statusCode == 200) {
+      setState(() {
+        data = data + jsonCon;
+      });
+    } else {
+      throw Exception("error...");
+    }
+  }
+
+  Future<void> _scrollListener() async {
+    if (isLoadingMore) return;
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      setState(() {
+        isLoadingMore = true;
+      });
+      page = page + 1;
+
+      await fetch_StorePage_readAll();
+      setState(() {
+        isLoadingMore = false;
+      });
+    }
   }
 }
