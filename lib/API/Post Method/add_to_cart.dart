@@ -107,6 +107,7 @@ class AddToCart_Request {
       {this.user_id, this.store_id, this.product_sku_id, this.unit});
 
   Map<String, dynamic> toJson() {
+    
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['user_id'] = this.user_id;
     data['store_id'] = this.store_id;
@@ -115,9 +116,6 @@ class AddToCart_Request {
     return data;
   }
 }
-
-
-
 
 Future<Cart_Add> add_to_cart_now(
     AddToCart_Request request_cartAdd, String userToken) async {
@@ -132,6 +130,7 @@ Future<Cart_Add> add_to_cart_now(
     },
     body: bodyAddCart,
   );
+
   if (response.statusCode == 400 ||
       response.statusCode >= 200 && response.statusCode <= 299) {
     var jsonRes = json.decode(response.body);
@@ -141,3 +140,5 @@ Future<Cart_Add> add_to_cart_now(
     throw Exception("error");
   }
 }
+
+

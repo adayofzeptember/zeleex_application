@@ -90,7 +90,8 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
           ),
         ],
       ),
-      body: GridView.builder(
+      body: 
+      GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),

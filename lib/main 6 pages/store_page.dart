@@ -123,118 +123,104 @@ class _StorePageState extends State<StorePage> {
                 final post = data[index];
                 //final stoer_id = post
                 final title = post['title'];
-      
-                      return Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Store_Detail(
-                                            storeID: post['id'].toString(),
-                                            storeName:
-                                                post['title'].toString(),
-                                          )),
-                                );
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.21,
-                                    width: double.infinity,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5)),
-                                      child: CachedNetworkImage(
-                                        imageUrl: post['image']['thumbnail']
-                                       
-                                            .toString(),
-                                        fit: BoxFit.fill,
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
-                                                Container(
-                                          color: Color.fromARGB(
-                                              255, 142, 142, 142),
-                                          // height: 200,
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            Container(
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5))),
-                                          child: Image.asset(
-                                            'assets/images/store-noimg.jpg',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                    child: Text(
-                                      post['title'].toString(),
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color:
-                                              Color.fromARGB(255, 51, 51, 51)),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        15, 10, 10, 0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: SvgPicture.asset(
-                                              'assets/images/pinstore.svg'),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Container(
-                                          height: 40,
-                                          width: 120,
-                                          child: Text(
-                                            post['address'].toString(),
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: Palette.kToDark),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SvgPicture.asset(
-                                            'assets/images/star.svg'),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("5 คะแนน")
-                                      ],
-                                    ),
-                                  ),
-                                ],
+
+                return Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Store_Detail(
+                                  storeID: post['id'].toString(),
+                                  storeName: post['title'].toString(),
+                                )),
+                      );
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.21,
+                          width: double.infinity,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5)),
+                            child: CachedNetworkImage(
+                              imageUrl: post['image']['thumbnail'].toString(),
+                              fit: BoxFit.fill,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Container(
+                                color: Color.fromARGB(255, 142, 142, 142),
+                                // height: 200,
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                height: double.infinity,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5))),
+                                child: Image.asset(
+                                  'assets/images/store-noimg.jpg',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          );
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
+                          child: Text(
+                            post['title'].toString(),
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Color.fromARGB(255, 51, 51, 51)),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 10, 10, 0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: SvgPicture.asset(
+                                    'assets/images/pinstore.svg'),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 120,
+                                child: Text(
+                                  post['address'].toString(),
+                                  style: TextStyle(
+                                      fontSize: 13, color: Palette.kToDark),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SvgPicture.asset('assets/images/star.svg'),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text("5 คะแนน")
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               } else {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -300,7 +286,7 @@ class _StorePageState extends State<StorePage> {
                                         ),
                                         SizedBox(
                                           height: 15,
-                                        )
+                                        ),
                                       ],
                                     ),
                                   );
@@ -370,7 +356,7 @@ class _StorePageState extends State<StorePage> {
 
   Future<void> fetch_StorePage_readAll() async {
     final response = await http.get(
-      Uri.parse(test+page.toString()),
+      Uri.parse(test + page.toString()),
       // Uri.parse('https://admin.zeleex.com/api/stores?per_page=15&page=${page}'),
       headers: {'Accept': 'application/json'},
     );

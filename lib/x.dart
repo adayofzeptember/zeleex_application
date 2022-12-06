@@ -156,7 +156,8 @@ class _AnimalsPageState extends State<AnimalsPage> {
                             animalDesc = data[index].description.toString();
                           }
 
-                          return Container(
+                          return 
+                          Container(
                             width: MediaQuery.of(context).size.width * 0.5,
                             child: Card(
                               shape: RoundedRectangleBorder(

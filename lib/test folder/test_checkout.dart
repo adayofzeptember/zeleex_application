@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 import 'package:zeleex_application/address_edit.dart';
-
 import '../API/Post Method/google_login_api.dart';
 
 Future<void> fetch_cart_list(String token) async {
@@ -56,10 +56,9 @@ Future<void> fetch_cart_list(String token) async {
           jsonResponse['data']['store'][i]['product_skus'][x]['cart_id'];
 
       //print(jsonResponse['data']['store'][i]['product_skus'][x]['cart_id']);
-      print('ร้านที่: ' +
-          count_Store[i]['id'].toString() +
-          '    รหัส: ' +
-          count_CartinStore[x]['cart_id'].toString());
+      // print('ร้านที่: ' + count_Store[i]['id'].toString() +
+      //     '    รหัส: ' +
+      //     count_CartinStore[x]['cart_id'].toString());
 
       toAdd_cartData.add(cartData);
     }
@@ -72,19 +71,37 @@ Future<void> fetch_cart_list(String token) async {
     storeData["total"] = count_Store[i]['price_tatal'].toString();
 
     storeData["total_amount"] = 15;
-    storeData["shipping_id"] = '';
+
+    storeData["shipping_id"] = count_Store[i]['shipping'][0]['id'].toString();
+    ;
     //count_Store[i]['shipping'][0]['id'].toString();
-    storeData["shipping_cost"] = '';
-    //count_Store[i]['shipping'][0]['rate'][0]['price'].toString();
+    storeData["shipping_cost"] =
+        count_Store[0]['shipping'][0]['rate'][0]['price'].toString();
 
     toAdd_storeData.add(storeData);
   }
 
   bigdata["data"] = toAdd_storeData;
 
-  print(jsonEncode(bigdata));
+  //print(jsonEncode(bigdata));
+
+  String urlPost = "https://admin.zeleex.com/api/checkout";
+
+  final response3 = await http.post(
+    Uri.parse(urlPost),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    },
+    body: json.encode(bigdata),
+  );
 }
 
 void main(List<String> args) {
   fetch_cart_list('1884|1eEHkQOfgCNZ2jDUCmBhUUMhy4CI7VLKkbT4d2KR');
 }
+
+
+
+

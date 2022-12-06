@@ -31,6 +31,7 @@ class NewsFeedPage extends StatefulWidget {
 }
 
 class _NewsFeedPageState extends State<NewsFeedPage> {
+  
   final controller = ScrollController();
   var perPage = 2; //*ค่าเริ่มต้น แสดง 2 items
   bool hasMore = true;
@@ -159,7 +160,12 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
 
                             var createdTime = DateFormat.yMMMd()
                                 .format(DateTime.parse(get_Thetime));
-
+                            String title;
+                            if (data[index].store.toString() == 'null') {
+                              title = '???';
+                            } else {
+                              title = data[index].store!.title.toString();
+                            }
                             String checkNull =
                                 data[index].description.toString();
                             String realDesc;
@@ -188,9 +194,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 20, 0, 0),
                                         child: Row(
-
                                           children: [
-                                            
                                             CachedNetworkImage(
                                               imageUrl: data[index]
                                                   .image!
@@ -232,11 +236,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                      data[index]
-                                                          .store!
-                                                          .title
-                                                          .toString(),
+                                                  Text(title,
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 51, 51, 51),
@@ -253,22 +253,20 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                                     style: TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
-                                                            FontWeight.bold
-                                                            ,
+                                                            FontWeight.bold,
                                                         color: Color.fromARGB(
                                                             255,
                                                             165,
                                                             162,
                                                             162)),
                                                   ),
-                                              
                                                 ],
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      SizedBox( 
+                                      SizedBox(
                                         height: 20,
                                       ),
                                       Container(
@@ -284,7 +282,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                           width: double.infinity,
                                           fit: BoxFit.fitWidth,
                                           progressIndicatorBuilder: (context,
-
                                                   url, downloadProgress) =>
                                               Container(
                                             color: Color.fromARGB(
@@ -312,13 +309,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                             ),
                                           ),
                                         ),
-                                        
-
-                                        // Image.network(1
-
-                                        //   data[index].image!.main.toString(),
-                                        //   fit: BoxFit.cover,
-                                        // )
                                       ),
                                       SizedBox(
                                         height: 10,
@@ -352,7 +342,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                    
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 0, 10, 0),
