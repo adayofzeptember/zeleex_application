@@ -163,6 +163,7 @@ class _Address_AddNewState extends State<Address_AddNew> {
                   SizedBox(
                     height: 20,
                   ),
+              
                   Text(
                     "\tที่อยู่",
                     style: TextStyle(

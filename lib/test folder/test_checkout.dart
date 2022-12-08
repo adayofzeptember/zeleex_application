@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 import 'package:zeleex_application/address_edit.dart';
 import '../API/Post Method/google_login_api.dart';
 
-Future<void> fetch_cart_list(String token) async {
+Future<void> fetch_checkOut(String token) async {
   var bigdata = {};
   var toAdd_storeData = [];
   var storeData = {};
@@ -47,15 +48,16 @@ Future<void> fetch_cart_list(String token) async {
     storeData["store_id"] = count_Store[i]['id'].toString();
 
     List count_CartinStore = jsonResponse['data']['store'][i]['product_skus'];
-//!----------------------------loop cart--------------------------------------------------------------
+//!----------------------------loop cart-------------------------------------------------------------------
     for (var x = 0; x < count_CartinStore.length; x++) {
       cartData = {};
+
       toAdd_cartData = [];
 
-      cartData["id"] =
-          jsonResponse['data']['store'][i]['product_skus'][x]['cart_id'];
+      cartData["id"] = '394';
 
       //print(jsonResponse['data']['store'][i]['product_skus'][x]['cart_id']);
+
       // print('ร้านที่: ' + count_Store[i]['id'].toString() +
       //     '    รหัส: ' +
       //     count_CartinStore[x]['cart_id'].toString());
@@ -70,9 +72,9 @@ Future<void> fetch_cart_list(String token) async {
 
     storeData["total"] = count_Store[i]['price_tatal'].toString();
 
-    storeData["total_amount"] = 15;
+    storeData["total_amount"] = 1;
 
-    storeData["shipping_id"] = count_Store[i]['shipping'][0]['id'].toString();
+    storeData["shipping_id"] = count_Store[0]['shipping'][0]['id'].toString();
     ;
     //count_Store[i]['shipping'][0]['id'].toString();
     storeData["shipping_cost"] =
@@ -83,9 +85,10 @@ Future<void> fetch_cart_list(String token) async {
 
   bigdata["data"] = toAdd_storeData;
 
-  //print(jsonEncode(bigdata));
+  print(jsonEncode(bigdata));
 
   String urlPost = "https://admin.zeleex.com/api/checkout";
+
 
   final response3 = await http.post(
     Uri.parse(urlPost),
@@ -96,12 +99,10 @@ Future<void> fetch_cart_list(String token) async {
     },
     body: json.encode(bigdata),
   );
+
+  print(response3.body);
 }
 
 void main(List<String> args) {
-  fetch_cart_list('1884|1eEHkQOfgCNZ2jDUCmBhUUMhy4CI7VLKkbT4d2KR');
+  fetch_checkOut('1890|P55xDNUZCpOdDTBfKZNIShjtkZzTj9yztNlZToMG');
 }
-
-
-
-

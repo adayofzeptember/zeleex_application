@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:js_util';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _PaymentPageState extends State<PaymentPage> {
   String gender = 'ไม่ระบุ';
   initState() {
     address_checkout = AddressForCheckOut_Model();
- 
+
     setState(() {
       totalPrice = 0;
     });
@@ -1202,17 +1203,11 @@ class _PaymentPageState extends State<PaymentPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              print(address_checkout.address_id);
-                              print(jsonEncode(address_checkout.toString()));
-                              Fluttertoast.showToast(
-                                  msg: address_checkout.address_id.toString(),
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 2,
-                                  backgroundColor:
-                                      Color.fromARGB(255, 230, 97, 97),
-                                  textColor: Colors.white,
-                                  fontSize: 15);
+                              print('object');
+                              fetch_checkOut(widget.user_token.toString());
+                              // print(address_checkout.address_id);
+                              // print(jsonEncode(address_checkout.toString()));
+
                               // Navigator.push(
                               //   context,
                               //   MaterialPageRoute(
@@ -1227,7 +1222,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Text(
-                                  "ชำระเงิน",
+                                  "ชำระเงิน-",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),
@@ -1245,5 +1240,108 @@ class _PaymentPageState extends State<PaymentPage> {
         ),
       ),
     );
+  }
+
+  Future<void> fetch_checkOut(String token) async {
+    Fluttertoast.showToast(
+        msg: address_checkout.address_id.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Color.fromARGB(255, 230, 97, 97),
+        textColor: Colors.white,
+        fontSize: 15);
+    var bigdata = {};
+    var toAdd_storeData = [];
+    var storeData = {};
+    var toAdd_cartData = [];
+    var cartData = {};
+
+    bigdata["user_address_id"] = address_checkout.address_id.toString();
+    bigdata["temp_address_name"] = address_checkout.address_name.toString();
+    bigdata["temp_address_city"] = address_checkout.address_city.toString();
+    bigdata["temp_address_district"] =
+        address_checkout.address_district.toString();
+    bigdata["temp_address_province"] =
+        address_checkout.address_province.toString();
+    bigdata["temp_address_postcode"] =
+        address_checkout.address_postcode.toString();
+    bigdata["payment_method"] = 'ชำระเงิน';
+    bigdata["status"] = "created";
+
+    bigdata["total_discount"] = 0;
+    bigdata["total_amount"] = '/setstate loop';
+    bigdata["total"] = totalPrice;
+    bigdata["shipping_cost"] = 40;
+
+    final response = await http
+        .get(Uri.parse('https://admin.zeleex.com/api/cart/list'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'applicationjson',
+      'Authorization': 'Bearer $token',
+    });
+
+    var jsonResponse = json.decode(response.body);
+
+    List count_Store = jsonResponse['data']['store'];
+
+    for (var i = 0; i < count_Store.length; i++) {
+      storeData = {};
+
+      storeData["store_id"] = count_Store[i]['id'].toString();
+
+      List count_CartinStore = jsonResponse['data']['store'][i]['product_skus'];
+//!----------------------------loop cart-------------------------------------------------------------------
+      for (var x = 0; x < count_CartinStore.length; x++) {
+        cartData = {};
+
+        toAdd_cartData = [];
+
+        cartData["id"] = '394';
+
+        //print(jsonResponse['data']['store'][i]['product_skus'][x]['cart_id']);
+
+        // print('ร้านที่: ' + count_Store[i]['id'].toString() +
+        //     '    รหัส: ' +
+        //     count_CartinStore[x]['cart_id'].toString());
+
+        toAdd_cartData.add(cartData);
+      }
+
+      storeData["carts"] = toAdd_cartData;
+      storeData["discount_id"] = 0;
+      storeData["discount"] = 0;
+
+      storeData["total"] = count_Store[i]['price_tatal'].toString();
+
+      storeData["total_amount"] = 1;
+
+      storeData["shipping_id"] = count_Store[0]['shipping'][0]['id'].toString();
+      ;
+      //count_Store[i]['shipping'][0]['id'].toString();
+      storeData["shipping_cost"] =
+          count_Store[0]['shipping'][0]['rate'][0]['price'].toString();
+
+      toAdd_storeData.add(storeData);
+    }
+
+    bigdata["data"] = toAdd_storeData;
+
+    print(jsonEncode(bigdata));
+
+    String urlPost = "https://admin.zeleex.com/api/checkout";
+
+    final response3 = await http.post(
+      Uri.parse(urlPost),
+      headers: {
+      
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
+      body: json.encode(bigdata),
+    );
+
+    print(response3.body);
   }
 }
