@@ -116,7 +116,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 ),
               ),
               Text(
-                "- ชำระเงิน -",
+                "ชำระเงิน",
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
@@ -133,10 +133,12 @@ class _PaymentPageState extends State<PaymentPage> {
             padding: const EdgeInsets.only(bottom: 20),
             child: Column(
               children: <Widget>[
+
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: <Widget>[
+                      
                       InkWell(
                         onTap: () {
                           Navigator.push(
@@ -1262,6 +1264,7 @@ class _PaymentPageState extends State<PaymentPage> {
     bigdata["temp_address_city"] = address_checkout.address_city.toString();
     bigdata["temp_address_district"] =
         address_checkout.address_district.toString();
+
     bigdata["temp_address_province"] =
         address_checkout.address_province.toString();
     bigdata["temp_address_postcode"] =
@@ -1334,10 +1337,9 @@ class _PaymentPageState extends State<PaymentPage> {
     final response3 = await http.post(
       Uri.parse(urlPost),
       headers: {
-      
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer $token',
       },
       body: json.encode(bigdata),
     );

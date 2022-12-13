@@ -8,6 +8,7 @@ import 'package:flutter_launcher_icons/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
+import 'package:responsive_framework/responsive_row_column.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -93,6 +94,7 @@ class _MainAndIconState extends State<MainAndIcon> {
           children: [
             Image.asset(
               'assets/images/Frame.png',
+              
             ),
           ],
         ),

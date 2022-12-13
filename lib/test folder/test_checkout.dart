@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:html';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +48,8 @@ Future<void> fetch_checkOut(String token) async {
 
     storeData["store_id"] = count_Store[i]['id'].toString();
 
-    List count_CartinStore = jsonResponse['data']['store'][i]['product_skus'];
-//!----------------------------loop cart-------------------------------------------------------------------
+    List count_CartinStore = jsonResponse['data']['store'][i]['product_skus']; 
+//!----------------------------loop cart--------------------------------- ----------------------------------
     for (var x = 0; x < count_CartinStore.length; x++) {
       cartData = {};
 
@@ -80,12 +81,20 @@ Future<void> fetch_checkOut(String token) async {
     storeData["shipping_cost"] =
         count_Store[0]['shipping'][0]['rate'][0]['price'].toString();
 
+
+
+
     toAdd_storeData.add(storeData);
   }
 
   bigdata["data"] = toAdd_storeData;
 
-  print(jsonEncode(bigdata));
+
+
+   
+  print(jsonEncode(bigdata));     
+
+
 
   String urlPost = "https://admin.zeleex.com/api/checkout";
 
