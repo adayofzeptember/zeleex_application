@@ -46,17 +46,6 @@ class _CartPageState extends State<CartPage> {
   String realName = "";
   String? productName_forDialog;
 
-  Future get_storedToken() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var x = prefs2.get('keyToken');
-    var y = prefs2.get('keyID');
-    setState(() {
-      userID = y.toString();
-      userToken = x.toString();
-    });
-
-  }
-
   Future<List<Store>> fetch_cartList(
       String userID222, String userToken222) async {
         
@@ -89,10 +78,22 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
+  Future get_storedToken() async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var x = prefs2.get('keyToken');
+    var y = prefs2.get('keyID');
+    setState(() {
+      userID = y.toString();
+      userToken = x.toString();
+    });
+  }
+
+
+
   @override
   void initState() {
+
     get_storedToken();
-   
     future_cart =
         fetch_cartList(widget.user_id.toString(), widget.user_token.toString());
     _provider_cartRemove = Provider_CartRemove();
@@ -102,11 +103,15 @@ class _CartPageState extends State<CartPage> {
 
   @override
   void dispose() {
+    
     super.dispose();
   }
-
+ 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
+
+
+    
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Kanit',
@@ -261,7 +266,6 @@ class _CartPageState extends State<CartPage> {
                                                         data[index222]
                                                             .product!
                                                             .image!
-                                                           
                                                             .main
                                                             .toString(),
                                                         width: 100,
@@ -575,7 +579,10 @@ class _CartPageState extends State<CartPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PaymentPage(user_id: userID, user_token: userToken,)));
+                                    builder: (context) => PaymentPage(
+                                          user_id: userID,
+                                          user_token: userToken,
+                                        )));
                           },
                           child: Container(
                             alignment: Alignment.center,
