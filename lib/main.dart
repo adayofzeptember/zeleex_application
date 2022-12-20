@@ -11,6 +11,7 @@ import 'package:html/parser.dart';
 import 'package:responsive_framework/responsive_row_column.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Plate.dart';
 import 'package:zeleex_application/main%206%20pages/onlyMenuForMainPage_nothing_here.dart';
@@ -86,6 +87,7 @@ class _MainAndIconState extends State<MainAndIcon> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -94,7 +96,6 @@ class _MainAndIconState extends State<MainAndIcon> {
           children: [
             Image.asset(
               'assets/images/Frame.png',
-              
             ),
           ],
         ),

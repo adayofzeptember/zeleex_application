@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:html';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +16,13 @@ Future<void> fetch_checkOut(String token) async {
   var toAdd_cartData = [];
   var cartData = {};
 
-  bigdata["user_address_id"] = 1;
+  bigdata["user_address_id"] = '126';
   bigdata["temp_address_name"] = 'Chawanthon Wira';
   bigdata["temp_address_city"] = "Korat";
   bigdata["temp_address_district"] = "Mueng";
   bigdata["temp_address_province"] = 'KKU';
   bigdata["temp_address_postcode"] = '30045';
-  bigdata["payment_method"] = 'plai-tang';
+  bigdata["payment_method"] = 'internet_banking';
   bigdata["status"] = "created";
 
   bigdata["total_discount"] = 0;
@@ -38,6 +36,7 @@ Future<void> fetch_checkOut(String token) async {
     'Accept': 'applicationjson',
     'Authorization': 'Bearer $token',
   });
+  print(response.body);
 
   var jsonResponse = json.decode(response.body);
 
@@ -55,7 +54,7 @@ Future<void> fetch_checkOut(String token) async {
 
       toAdd_cartData = [];
 
-      cartData["id"] = '394';
+      cartData["id"] = jsonResponse['data']['store'][i]['product_skus'][x]['cart_id'];
 
       //print(jsonResponse['data']['store'][i]['product_skus'][x]['cart_id']);
 
@@ -77,7 +76,7 @@ Future<void> fetch_checkOut(String token) async {
 
     storeData["shipping_id"] = count_Store[0]['shipping'][0]['id'].toString();
     ;
-    //count_Store[i]['shipping'][0]['id'].toString();
+ 
     storeData["shipping_cost"] =
         count_Store[0]['shipping'][0]['rate'][0]['price'].toString();
 
@@ -93,11 +92,13 @@ Future<void> fetch_checkOut(String token) async {
   String urlPost = "https://admin.zeleex.com/api/checkout";
 
   final response3 = await http.post(
+    
+
     Uri.parse(urlPost),
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer $token'
+      'Authorization': 'Bearer $token' 
     },
     body: json.encode(bigdata),
   );
@@ -105,6 +106,12 @@ Future<void> fetch_checkOut(String token) async {
   print(response3.body);
 }
 
+
+
 void main(List<String> args) {
-  fetch_checkOut('1890|P55xDNUZCpOdDTBfKZNIShjtkZzTj9yztNlZToMG');
+  fetch_checkOut('1891|bw9t9hPicOAQwjdyXIRLosdUbmC0EGu4hhzuDrwU');
 }
+
+
+
+

@@ -100,6 +100,7 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
           itemBuilder: (context, index) {
             if (index < data.length) {
               final post = data[index];
+          
               //final stoer_id = post
               final title = post['title'];
               return InkWell(

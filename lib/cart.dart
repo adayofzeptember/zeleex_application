@@ -46,8 +46,7 @@ class _CartPageState extends State<CartPage> {
   String realName = "";
   String? productName_forDialog;
 
-  Future<List<Store>> fetch_cartList(
-      String userID222, String userToken222) async {
+  Future<List<Store>> fetch_cartList(String userID222, String userToken222) async {
         
     final response = await http.get(
         Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
@@ -88,8 +87,6 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-
-
   @override
   void initState() {
 
@@ -103,15 +100,11 @@ class _CartPageState extends State<CartPage> {
 
   @override
   void dispose() {
-    
     super.dispose();
   }
  
   @override
   Widget build(BuildContext context) { 
-
-
-    
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Kanit',

@@ -138,7 +138,7 @@ class Data_Products_ReadAll {
   int? brandId;
   String? conditionType;
   String? createdAt;
-  String? updatedAt;
+  String? updatedAt; 
   Image_forAnimal? image;
   List<Images>? images;
   int? favoriteCount;
@@ -533,7 +533,7 @@ class Links {
     url = json['url'];
     label = json['label'];
     active = json['active'];
-  }
+  } 
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
