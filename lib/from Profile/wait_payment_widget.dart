@@ -210,6 +210,8 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                                   ],
                                 ),
                               ),
+                              
+                             
                               Divider(
                                 color: Color.fromARGB(255, 216, 216, 216),
                               ),

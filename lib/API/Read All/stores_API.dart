@@ -147,7 +147,7 @@ class Data_Store_ReadALL {
   int? subscribeCount;
   List<Types>? types;
 
- Data_Store_ReadALL(
+  Data_Store_ReadALL(
       {this.id,
       this.title,
       this.status,
@@ -183,7 +183,8 @@ class Data_Store_ReadALL {
     userId = json['user_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    image = json['image'] != null ? new Image_Stores.fromJson(json['image']) : null;
+    image =
+        json['image'] != null ? new Image_Stores.fromJson(json['image']) : null;
     imageCover = json['image_cover'] != null
         ? new Image_Stores.fromJson(json['image_cover'])
         : null;
@@ -223,6 +224,7 @@ class Data_Store_ReadALL {
     data['product_count'] = this.productCount;
     data['animal_count'] = this.animalCount;
     data['blog_count'] = this.blogCount;
+
     data['subscribe_count'] = this.subscribeCount;
     if (this.types != null) {
       data['types'] = this.types!.map((v) => v.toJson()).toList();
@@ -338,16 +340,17 @@ class Links {
   }
 }
 
+                    SizedBox(
+                      height: 23,              
+                    ),        
 
-// Future<List<Data_Store_ReadALL>> fetch_StorePage_readAll() async {
+// Future< List < Data_Store_ReadALL > > fetch_StorePage_readAll() async {
 //   final response =
 //       await http.get(Uri.parse('https://sanboxapi.zeleex.com/api/stores'));
-
 //   var jsonResponse = json.decode(response.body);
-//   List jsonCon = jsonResponse['data']['data'];
-  
+//   List jsonCon = jsonResponse['data']['data'];  
 //   if (response.statusCode == 200) {
-//     // List jsonResponse = json.decode(response.body);
+//   List jsonResponse = json.decode(response.body);
 //     return jsonCon
 //         .map((data) => new Data_Store_ReadALL.fromJson(data))
 //         .toList();

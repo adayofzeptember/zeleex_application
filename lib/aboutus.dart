@@ -65,6 +65,9 @@ class AboutUs extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
+                    SizedBox(
+                      height: 23,              
+                    ),        
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                       child: Text(

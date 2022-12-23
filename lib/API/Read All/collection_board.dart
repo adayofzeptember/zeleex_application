@@ -95,10 +95,10 @@ class Data_Collection_Board {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-
     if (this.image != null) {
       data['image'] = this.image!.toJson();
     }
+
     return data;
   }
 }
@@ -137,8 +137,3 @@ Future<List<Data_Collection_Board>> fetch_collection_board() async {
     throw Exception(Exception);
   }
 }
-
-
-
-
-

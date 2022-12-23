@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:zeleex_application/API/url.dart';
-
 import '../Read By ID/animal_id_API.dart';
 
 class Order_Wait {
@@ -15,6 +15,7 @@ class Order_Wait {
   String? sessionID;
   int? serverDateTimeMS;
   String? serverDatetime;
+
   List<Data_Order_ToPay>? data;
 
   Order_Wait(
@@ -181,6 +182,7 @@ class Data_Order_ToPay {
     data['user_id'] = this.userId;
     data['store_id'] = this.storeId;
     data['status'] = this.status;
+
     data['temp_user'] = this.tempUser;
     data['total_discount'] = this.totalDiscount;
     data['payment_method'] = this.paymentMethod;
@@ -295,7 +297,6 @@ class Stores {
   String? updatedAt;
   Null? deletedAt;
   int? shippingId;
-
   int? productCount;
   int? animalCount;
   int? blogCount;
@@ -349,6 +350,7 @@ class Stores {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
+    data['title'] = this.deletedAt;
     data['status'] = this.status;
     data['address'] = this.address;
     data['email'] = this.email;
@@ -360,9 +362,9 @@ class Stores {
     data['user_id'] = this.userId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+
     data['deleted_at'] = this.deletedAt;
     data['shipping_id'] = this.shippingId;
-
     data['product_count'] = this.productCount;
     data['animal_count'] = this.animalCount;
     data['blog_count'] = this.blogCount;
@@ -525,6 +527,7 @@ class Sku {
     data['price'] = this.price;
     data['order'] = this.order;
     data['stock'] = this.stock;
+
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['deleted_at'] = this.deletedAt;
@@ -550,13 +553,13 @@ class Product {
   String? conditionType;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+
   String? width;
+
   String? height;
   String? length;
   String? weight;
   Imagee? image;
-
   int? favoriteCount;
   int? reviewCount;
 
@@ -574,7 +577,6 @@ class Product {
       this.conditionType,
       this.createdAt,
       this.updatedAt,
-      this.deletedAt,
       this.width,
       this.height,
       this.length,
@@ -597,21 +599,14 @@ class Product {
     conditionType = json['condition_type'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
+
     width = json['width'];
     height = json['height'];
     length = json['length'];
     weight = json['weight'];
     image = json['image'] != null ? new Imagee.fromJson(json['image']) : null;
     //*-------------------------
- 
     brandId = json['brainID'];
-   
-
-
-
-
-
 
     //*-------------------------
     favoriteCount = json['favorite_count'];
@@ -621,6 +616,7 @@ class Product {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
+
     data['title'] = this.title;
     data['description'] = this.description;
     data['content'] = this.content;
@@ -633,7 +629,7 @@ class Product {
     data['condition_type'] = this.conditionType;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
+
     data['width'] = this.width;
     data['height'] = this.height;
     data['length'] = this.length;
@@ -648,8 +644,8 @@ class Product {
 }
 
 Future<List<OrderItem>> fetch_Order_Topay(String userToken) async {
-  final response = await http
-      .get(Uri.parse('https://admin.zeleex.com/api/orders'), headers: {
+  final response =
+      await http.get(Uri.parse(zeelexAPI_URL_admin + 'orders'), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'Authorization': 'Bearer $userToken',
@@ -659,11 +655,10 @@ Future<List<OrderItem>> fetch_Order_Topay(String userToken) async {
   List jsonCon = jsonResponse['data'][0]['order_item'];
   // var x = jsonResponse['data'][0]['users']['id'].toString();
   // var item = jsonResponse['data'][0]['order_item'][0]['sku']['name'].toString();
-  // print(jsonCon);
+  print(jsonCon);
   //print(item);
   if (response.statusCode == 200) {
     //print(jsonConSpecific);
-
 
     return jsonCon.map((data) => new OrderItem.fromJson(data)).toList();
   } else {
@@ -674,4 +669,3 @@ Future<List<OrderItem>> fetch_Order_Topay(String userToken) async {
 void main(List<String> args) {
   fetch_Order_Topay('1891|bw9t9hPicOAQwjdyXIRLosdUbmC0EGu4hhzuDrwU');
 }
-
