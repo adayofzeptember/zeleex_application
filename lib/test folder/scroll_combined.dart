@@ -1,10 +1,10 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
-import '../API/Read All/stores_API.dart';
-import '../Plate.dart';
+import '../Others/Plate.dart';
 
 void main(List<String> args) {
   runApp(Fix_InfinityLoad());
@@ -34,13 +34,13 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-           appBar: AppBar(
+      appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.dark),  
+            statusBarBrightness: Brightness.dark),
         leading: Builder(
           builder: (context) => IconButton(
             icon: SizedBox(
@@ -72,7 +72,7 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Text("ร้านค้า",
                   style: TextStyle(
-                      color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                      color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -85,13 +85,11 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
                 ),
               ),
               onPressed: () => Scaffold.of(context).openEndDrawer(),
-
             ),
           ),
         ],
       ),
-      body: 
-      GridView.builder(
+      body: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
@@ -100,7 +98,7 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
           itemBuilder: (context, index) {
             if (index < data.length) {
               final post = data[index];
-          
+
               //final stoer_id = post
               final title = post['title'];
               return InkWell(
@@ -109,7 +107,6 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
                 },
                 child: Card(
                   child: ListTile(
-                  
                     title: Text(title),
                     leading: CircleAvatar(child: Text('${index + 1}')),
                   ),
@@ -126,7 +123,8 @@ class _Fix_InfinityLoadState extends State<Fix_InfinityLoad> {
 
   Future<void> fetch_StorePage_readAll() async {
     final response = await http.get(
-      Uri.parse('https://admin.zeleex.com/api/animals?per_page=15&page=${page}'),
+      Uri.parse(
+          'https://admin.zeleex.com/api/animals?per_page=15&page=${page}'),
       headers: {'Accept': 'application/json'},
     );
     var jsonResponse = json.decode(response.body);

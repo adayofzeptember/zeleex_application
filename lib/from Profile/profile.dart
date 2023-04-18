@@ -5,24 +5,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/profile_token.dart';
-import 'package:zeleex_application/Career/career.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/login.dart';
-import 'package:zeleex_application/second.dart';
 import 'package:zeleex_application/terms.dart';
 import '../API/Post Method/google_login_api.dart';
-import '../API/Read By ID/blog_id_api.dart';
-import '../API/Read By ID/product_review.dart';
-import '../Plate.dart';
+import '../Others/Plate.dart';
+import '../career.dart';
 import '../cart.dart';
 import 'history/history.dart';
 import 'package:http/http.dart' as http;
 import 'likes/likes.dart';
-import '../payment_address.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -59,8 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
       theTokenOne = x.toString();
       theUserOne = y.toString();
     });
-    
-
   }
 
   Future<Data_Profile> fetchProfile_Auth(String token) async {
@@ -96,9 +89,9 @@ class _ProfilePageState extends State<ProfilePage> {
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
           statusBarBrightness: Brightness.light,
-          statusBarColor: Palette.kToDark,
+          statusBarColor: ZeleexColor.zeleexGreen,
         ),
-        backgroundColor: Palette.kToDark,
+        backgroundColor: ZeleexColor.zeleexGreen,
         elevation: 0.0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,7 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Data_Profile prf = snapshot.data;
                     return Container(
                       decoration: BoxDecoration(
-                          color: Palette.kToDark,
+                          color: ZeleexColor.zeleexGreen,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30),
                               bottomRight: Radius.circular(30))),
@@ -182,7 +175,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: CircleAvatar(
                                   child: Icon(
                                     Icons.person,
-                                    color: Palette.kToDark,
+                                    color: ZeleexColor.zeleexGreen,
                                   ),
                                   backgroundColor:
                                       Color.fromARGB(255, 224, 224, 224),
@@ -231,7 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     );
                   } else {
                     return Container(
-                      decoration: BoxDecoration(color: Palette.kToDark),
+                      decoration: BoxDecoration(color: ZeleexColor.zeleexGreen),
                     );
                   }
                 }),
@@ -650,8 +643,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      side: BorderSide(color: Palette.kToDark),
-                      primary: Palette.kToDark,
+                      side: BorderSide(color: ZeleexColor.zeleexGreen),
+                      primary: ZeleexColor.zeleexGreen,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       )),

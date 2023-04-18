@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/Read%20All/helps_API.dart';
-import 'package:zeleex_application/main%206%20pages/main_page.dart';
-import 'Plate.dart';
+import 'package:zeleex_application/Main%20Pages/main_page.dart';
+import 'Others/Plate.dart';
 
 class HelpCenterPage extends StatefulWidget {
   HelpCenterPage({Key? key}) : super(key: key);
@@ -78,10 +78,10 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
                       hintText: 'Search...',
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Palette.kToDark,
+                        color: ZeleexColor.zeleexGreen,
                         size: 20,
                       ),
-                      hintStyle: TextStyle(color: Palette.kToDark),
+                      hintStyle: TextStyle(color: ZeleexColor.zeleexGreen),
                       fillColor: Colors.white70,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),

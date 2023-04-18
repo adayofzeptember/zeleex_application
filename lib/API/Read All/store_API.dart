@@ -340,9 +340,6 @@ class Links {
   }
 }
 
-                    SizedBox(
-                      height: 23,              
-                    ),        
 
 // Future< List < Data_Store_ReadALL > > fetch_StorePage_readAll() async {
 //   final response =
@@ -358,4 +355,3 @@ class Links {
 //     throw Exception("error...");
 //   }
 // }
-

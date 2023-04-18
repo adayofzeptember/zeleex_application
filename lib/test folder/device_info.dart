@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
-import '../Plate.dart';
+import '../Others/Plate.dart';
 // 'version.securityPatch': build.version.securityPatch,
 // 'version.sdkInt': build.version.sdkInt,
 // 'version.release': build.version.release,
@@ -150,12 +150,12 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Palette.kToDark,
+          backgroundColor: ZeleexColor.zeleexGreen,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
-            statusBarColor: Palette.kToDark,
+            statusBarColor: ZeleexColor.zeleexGreen,
           ),
           title: Text("test" // Platform.isAndroid
               //     ? 'Android Device Info'

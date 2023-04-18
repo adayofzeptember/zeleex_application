@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/ProgressHUD.dart';
 import 'API/Post Method/post_Register.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
+import 'Others/ProgressHUD.dart';
 import 'login.dart';
-import 'main 6 pages/onlyMenuForMainPage_nothing_here.dart';
+import 'Main Pages/onlyMenuForMainPage_nothing_here.dart';
 import 'terms.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -138,13 +138,13 @@ class _RegisterPageState extends State<RegisterPage> {
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
-              statusBarColor: Palette.kToDark),
+              statusBarColor: ZeleexColor.zeleexGreen),
           title: Center(
               child: Text(
             '',
             style: TextStyle(color: Colors.white, fontSize: 30),
           )),
-          backgroundColor: Palette.kToDark,
+          backgroundColor: ZeleexColor.zeleexGreen,
      elevation: 0,
         ),
         body: SingleChildScrollView(
@@ -178,7 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Text(
                             "   ",
                             style: TextStyle(
-                                color: Palette.kToDark,
+                                color: ZeleexColor.zeleexGreen,
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold),
                           )
@@ -380,7 +380,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   children: [
                                     Checkbox(
                                         checkColor: Colors.white,
-                                        activeColor: Palette.kToDark,
+                                        activeColor: ZeleexColor.zeleexGreen,
                                         value: isChecked,
                                         onChanged: (bool? value) {
                                           setState(() {
@@ -496,7 +496,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         style: ElevatedButton.styleFrom(
                                             elevation: 0,
                                             primary: checkIfAgree
-                                                ? Palette.kToDark
+                                                ? ZeleexColor.zeleexGreen
                                                 : Colors.grey,
                                             // side: BorderSide(color: Colors.red),
                                             shape: RoundedRectangleBorder(

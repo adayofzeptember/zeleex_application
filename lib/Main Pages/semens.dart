@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/help.dart';
-import 'package:zeleex_application/main%206%20pages/onlyMenuForMainPage_nothing_here.dart';
-import '../Career/career.dart';
-import '../Plate.dart';
-import '../aboutus.dart';
+import 'package:zeleex_application/Main%20Pages/onlyMenuForMainPage_nothing_here.dart';
+import '../Others/Plate.dart';
 import '../from Profile/profile.dart';
 
 class SemensPage extends StatefulWidget {
@@ -28,7 +26,7 @@ class _SemensPageState extends State<SemensPage> {
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
+          primarySwatch: ZeleexColor.zeleexGreen,
           appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
       home: Scaffold(
         // drawer: MyDrawyer(),
@@ -66,7 +64,7 @@ class _SemensPageState extends State<SemensPage> {
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text("น้ำเชื้อ",
                       style: TextStyle(
-                          color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                          color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   child: Row(
@@ -130,7 +128,7 @@ class _SemensPageState extends State<SemensPage> {
                           width: MediaQuery.of(context).size.width * 0.35,
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: Palette.kToDark,
+                            color: ZeleexColor.zeleexGreen,
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           child: Text(
@@ -579,7 +577,7 @@ class _SemensPageState extends State<SemensPage> {
         //                         backgroundColor: Colors.white,
         //                         child: Icon(
         //                           Icons.person,
-        //                           color: Palette.kToDark,
+        //                           color: ZeleexColor.zeleexGreen,
         //                         ),
         //                       ),
         //                       Padding(
@@ -589,7 +587,7 @@ class _SemensPageState extends State<SemensPage> {
         //                           children: [
         //                             Text("Name Surname",
         //                                 style: TextStyle(
-        //                                     color: Palette.kToDark,
+        //                                     color: ZeleexColor.zeleexGreen,
         //                                     fontFamily: 'Kanit')),
         //                             SizedBox(
         //                               height: 5,

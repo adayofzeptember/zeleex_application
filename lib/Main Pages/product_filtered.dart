@@ -6,9 +6,11 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:zeleex_application/API/Read%20All/stores_API.dart';
-import 'package:zeleex_application/Plate.dart';
-import 'package:zeleex_application/store_page_detail.dart';
+
+import 'package:zeleex_application/store_info.dart';
+
+import '../API/Read All/store_API.dart';
+import '../Others/Plate.dart';
 
 class Product_Filtered extends StatefulWidget {
   String? typeID = "";
@@ -71,7 +73,7 @@ class _Product_FilteredState extends State<Product_Filtered> {
                     maxLines: 1,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Palette.kToDark,
+                      color: ZeleexColor.zeleexGreen,
                       fontWeight: FontWeight.bold,
                     )),
               ),
@@ -91,7 +93,7 @@ class _Product_FilteredState extends State<Product_Filtered> {
                 return Expanded(
                   child: RawScrollbar(
                     controller: controller,
-                    thumbColor: Palette.kToDark,
+                    thumbColor: ZeleexColor.zeleexGreen,
                     radius: Radius.circular(50),
                     thickness: 5,
                     child: GridView.builder(
@@ -112,15 +114,15 @@ class _Product_FilteredState extends State<Product_Filtered> {
                                 borderRadius: BorderRadius.circular(5.0)),
                             child: InkWell(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Store_Detail(
-                                            storeID: data[index].id.toString(),
-                                            storeName:
-                                                data[index].title.toString(),
-                                          )),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => Store_Detail(
+                                //             storeID: data[index].id.toString(),
+                                //             storeName:
+                                //                 data[index].title.toString(),
+                                //           )),
+                                // );
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +205,7 @@ class _Product_FilteredState extends State<Product_Filtered> {
                                             data[index].address.toString(),
                                             style: TextStyle(
                                                 fontSize: 13,
-                                                color: Palette.kToDark),
+                                                color: ZeleexColor.zeleexGreen),
                                           ),
                                         ),
                                       ],

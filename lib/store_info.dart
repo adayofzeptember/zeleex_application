@@ -11,8 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'API/Post Method/store_subscribe.dart';
 import 'API/Read By ID/store_id_api.dart';
-import 'Plate.dart';
-import 'main 6 pages/store_page.dart';
+import 'Others/Plate.dart';
+import 'Screens/Main Sixx Pages/store_page.dart';
 import 'store_page_detail_cattle.dart';
 import 'store_page_detail_product.dart';
 
@@ -68,10 +68,10 @@ class _Store_DetailState extends State<Store_Detail> {
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
+          primarySwatch: ZeleexColor.zeleexGreen,
           appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
-      home: Scaffold(
-        
+      home: 
+      Scaffold(
         backgroundColor: Color.fromARGB(255, 242, 242, 242),
         floatingActionButton: Padding(
           padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
@@ -101,14 +101,14 @@ class _Store_DetailState extends State<Store_Detail> {
                       children: [
                         SvgPicture.asset(
                           'assets/images/instore.svg',
-                          color: Palette.kToDark,
+                          color: ZeleexColor.zeleexGreen,
                         ),
                         SizedBox(
                           width: 5,
                         ),
                         Text(
                           "สินค้าในร้าน",
-                          style: TextStyle(color: Palette.kToDark),
+                          style: TextStyle(color: ZeleexColor.zeleexGreen),
                         )
                       ],
                     ),
@@ -124,7 +124,7 @@ class _Store_DetailState extends State<Store_Detail> {
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FloatingActionButton(
                   heroTag: "bt1",
-                  backgroundColor: Palette.kToDark,
+                  backgroundColor: ZeleexColor.zeleexGreen,
                   shape:
                       BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                   onPressed: () => {
@@ -155,7 +155,7 @@ class _Store_DetailState extends State<Store_Detail> {
           ),
         ),
         appBar: AppBar(
-             systemOverlayStyle: SystemUiOverlayStyle(
+            systemOverlayStyle: SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.dark,
               statusBarBrightness: Brightness.dark,
               statusBarColor: Colors.white,
@@ -175,13 +175,15 @@ class _Store_DetailState extends State<Store_Detail> {
                 ),
                 Text(widget.storeName.toString(),
                     style: TextStyle(
-                        color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                        color: ZeleexColor.zeleexGreen,
+                        fontWeight: FontWeight.bold)),
                 Row(
                   children: [Text('')],
                 )
               ],
             )),
-        body: SingleChildScrollView(
+        body: 
+        SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Column(
@@ -194,7 +196,8 @@ class _Store_DetailState extends State<Store_Detail> {
                               AsyncSnapshot<dynamic> snapshot) {
                             if (snapshot.hasData) {
                               Data_Store thisStore = snapshot.data;
-                              return CachedNetworkImage(
+                              return 
+                              CachedNetworkImage(
                                 imageUrl: thisStore.imageCover!.main.toString(),
                                 fit: BoxFit.fill,
                                 progressIndicatorBuilder:
@@ -238,7 +241,9 @@ class _Store_DetailState extends State<Store_Detail> {
                                   thisStore_notCoverIMG.content.toString();
                               var document555 = parse(getContent);
 
-                              return Container(
+                              return 
+                              
+                              Container(
                                   child: Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(8, 100, 8, 0),
@@ -339,7 +344,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                               .phone
                                                               .toString(),
                                                           style: TextStyle(
-                                                                   color:
+                                                              color:
                                                                   Colors.grey,
                                                               fontSize: 13),
                                                         ),
@@ -349,7 +354,6 @@ class _Store_DetailState extends State<Store_Detail> {
                                                 ],
                                               ),
                                             ),
-                                          
                                             Icon(
                                               Icons.settings,
                                               color: Colors.white,
@@ -384,7 +388,8 @@ class _Store_DetailState extends State<Store_Detail> {
                                                               30),
                                                     ),
                                                     primary: pressed
-                                                        ? Palette.kToDark
+                                                        ? ZeleexColor
+                                                            .zeleexGreen
                                                         : Color.fromARGB(
                                                             255, 204, 204, 204),
                                                     elevation: 0),
@@ -446,8 +451,8 @@ class _Store_DetailState extends State<Store_Detail> {
                                                                     .toString() +
                                                                 ", ",
                                                             style: TextStyle(
-                                                                color: Palette
-                                                                    .kToDark),
+                                                                color: ZeleexColor
+                                                                    .zeleexGreen),
                                                           ),
                                                         ],
                                                       );

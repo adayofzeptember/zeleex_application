@@ -10,10 +10,9 @@ import 'package:zeleex_application/API/Read%20All/animals_API.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
 import '../API/Read All/filters/animals_types.dart';
-import '../Career/career.dart';
-import '../Plate.dart';
-import '../aboutus.dart';
+
 import 'package:intl/intl.dart';
+import '../Others/Plate.dart';
 import '../from Profile/profile.dart';
 
 class AnimalsPage extends StatefulWidget {
@@ -84,7 +83,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Text("สัตว์",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Palette.kToDark)),
+                      fontWeight: FontWeight.bold, color: ZeleexColor.zeleexGreen)),
             ),
             Container()
           ],
@@ -105,7 +104,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
       ),
       body: RawScrollbar(
         controller: controller,
-        thumbColor: Palette.kToDark,
+        thumbColor: ZeleexColor.zeleexGreen,
         radius: Radius.circular(50),
         thickness: 5,
         child: GridView.builder(
@@ -321,13 +320,13 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                         elevation: 0,
                                         primary: Colors.white,
                                         side:
-                                            BorderSide(color: Palette.kToDark),
+                                            BorderSide(color: ZeleexColor.zeleexGreen),
                                       ),
                                       onPressed: () {},
                                       child: Text(
                                         "รีเซ็ต",
                                         style:
-                                            TextStyle(color: Palette.kToDark),
+                                            TextStyle(color: ZeleexColor.zeleexGreen),
                                       ))),
                               SizedBox(
                                 width: 10,

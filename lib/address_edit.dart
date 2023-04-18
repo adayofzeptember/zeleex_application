@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Delete%20Method/address_delete.dart';
 import 'package:zeleex_application/API/Post%20Method/address_update.dart';
 import 'API/Read By ID/address_read_for_edit.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -108,16 +108,16 @@ class _Address_EditState extends State<Address_Edit> {
     return MaterialApp(
         theme: ThemeData(
             fontFamily: 'Kanit',
-            primarySwatch: Palette.kToDark,
-            appBarTheme: AppBarTheme(color: Palette.kToDark)),
+            primarySwatch: ZeleexColor.zeleexGreen,
+            appBarTheme: AppBarTheme(color: ZeleexColor.zeleexGreen)),
         home: Scaffold(
           appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
-              statusBarColor: Palette.kToDark,
+              statusBarColor: ZeleexColor.zeleexGreen,
             ),
-            backgroundColor: Palette.kToDark,
+            backgroundColor: ZeleexColor.zeleexGreen,
             elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -351,7 +351,7 @@ class _Address_EditState extends State<Address_Edit> {
                           height: 28,
                           width: 50,
                           toggleColor: Color.fromRGBO(225, 225, 225, 1),
-                          activeColor: Palette.kToDark,
+                          activeColor: ZeleexColor.zeleexGreen,
                           value: status,
                           onToggle: (val) {
                             setState(() {

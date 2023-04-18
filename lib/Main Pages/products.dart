@@ -8,12 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/products_API.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Read%20By%20ID/product_review.dart';
-import 'package:zeleex_application/main%206%20pages/store_filtered.dart';
+import 'package:zeleex_application/Main%20Pages/store_filtered.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
 import '../API/Read All/filters/product_types.dart';
-import '../Career/career.dart';
-import '../Plate.dart';
-import '../aboutus.dart';
+
+import '../Others/Plate.dart';
 import '../help.dart';
 import '../from Profile/profile.dart';
 import 'onlyMenuForMainPage_nothing_here.dart';
@@ -92,7 +91,7 @@ class _ProductPageState extends State<ProductPage> {
                 child: Text(
                   "สินค้า",
                   style: TextStyle(
-                      color: Palette.kToDark, fontWeight: FontWeight.bold),
+                      color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold),
                 ),
               ),
               Container(),
@@ -101,8 +100,8 @@ class _ProductPageState extends State<ProductPage> {
       body: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-                          childAspectRatio: MediaQuery.of(context).size.width /
-                            (MediaQuery.of(context).size.height / 1.8),
+            childAspectRatio: MediaQuery.of(context).size.width /
+                (MediaQuery.of(context).size.height / 1.8),
           ),
           controller: scrollController,
           itemCount: isLoadingMore ? data.length + 1 : data.length,
@@ -116,7 +115,6 @@ class _ProductPageState extends State<ProductPage> {
                     borderRadius: BorderRadius.circular(5.0)),
                 child: InkWell(
                   onTap: () {
-                    
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => Store_Product_Detail(
                               productName: post['title'].toString(),
@@ -172,15 +170,14 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                       ),
-                          Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 10, 0, 0),
-                                        child: Text(
-                                          "฿ " +
-                                              NumberFormat("#,###,###").format(
-                                                  int.parse(post['skus_min_price'].toString())),
-                                          style: TextStyle(color: Colors.red),
-                                        )),
+                      Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                          child: Text(
+                            "฿ " +
+                                NumberFormat("#,###,###").format(int.parse(
+                                    post['skus_min_price'].toString())),
+                            style: TextStyle(color: Colors.red),
+                          )),
                       SizedBox(
                         height: 8,
                       )
@@ -281,7 +278,7 @@ class _ProductPageState extends State<ProductPage> {
                                         elevation: 0,
                                         primary: Colors.white,
                                         side:
-                                            BorderSide(color: Palette.kToDark),
+                                            BorderSide(color: ZeleexColor.zeleexGreen),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);
@@ -290,7 +287,7 @@ class _ProductPageState extends State<ProductPage> {
                                       child: Text(
                                         "ยกเลิก",
                                         style:
-                                            TextStyle(color: Palette.kToDark),
+                                            TextStyle(color: ZeleexColor.zeleexGreen),
                                       ))),
                               SizedBox(
                                 width: 10,

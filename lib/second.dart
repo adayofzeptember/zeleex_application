@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/login.dart';
 import 'dart:io';
-import 'Plate.dart';
-import 'main 6 pages/onlyMenuForMainPage_nothing_here.dart';
+import 'Others/Plate.dart';
+import 'Main Pages/onlyMenuForMainPage_nothing_here.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
 //MediaQuery.of(context).size.height * 0.25
@@ -55,35 +55,7 @@ class _SecondPageState extends State<SecondPage> {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Palette.kToDark,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      )),
-                  onPressed: () {
-                    Navigator.pushReplacement(context,
-                        CupertinoPageRoute(builder: (context) {
-                      return Main_Page();
-                    }));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      alignment: Alignment.center,
-                      child: Text(
-                        "หน้าหลัก",
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Palette.kToDark,
+                      primary: ZeleexColor.zeleexGreen,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),

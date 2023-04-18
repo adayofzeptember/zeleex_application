@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'payment.dart';
 
 class Payment_Confirm extends StatefulWidget {
@@ -18,9 +18,9 @@ class _Payment_ConfirmState extends State<Payment_Confirm> {
         automaticallyImplyLeading: false,
         systemOverlayStyle: SystemUiOverlayStyle(
           // Status bar color
-          statusBarColor: Palette.kToDark,
+          statusBarColor: ZeleexColor.zeleexGreen,
         ),
-        backgroundColor: Palette.kToDark,
+        backgroundColor: ZeleexColor.zeleexGreen,
         elevation: 0.0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +44,7 @@ class _Payment_ConfirmState extends State<Payment_Confirm> {
             ),
             Icon(
               Icons.abc_sharp,
-              color: Palette.kToDark,
+              color: ZeleexColor.zeleexGreen,
             )
           ],
         ),
@@ -71,7 +71,7 @@ class _Payment_ConfirmState extends State<Payment_Confirm> {
                   ),
                   Text("฿1,335",
                       style: TextStyle(
-                          color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                          color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -113,8 +113,8 @@ class _Payment_ConfirmState extends State<Payment_Confirm> {
                   padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        side: BorderSide(color: Palette.kToDark),
-                        primary: Palette.kToDark,
+                        side: BorderSide(color: ZeleexColor.zeleexGreen),
+                        primary: ZeleexColor.zeleexGreen,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         )),

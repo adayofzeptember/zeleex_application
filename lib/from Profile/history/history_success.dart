@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/Plate.dart';
+
 import 'package:zeleex_application/from%20Profile/my%20orders%20detail/ontheway_detail.dart';
 import 'package:zeleex_application/from%20Profile/my%20orders%20detail/shipping_detail.dart';
 import 'package:zeleex_application/from%20Profile/my%20orders%20detail/success_detail.dart';
+import '../../Others/Plate.dart';
 import '../my orders detail/wait_toPay_detail.dart';
 
 class History_Success extends StatefulWidget {
@@ -63,7 +64,7 @@ class _History_SuccessState extends State<History_Success> {
                             Text(
                               "สำเร็จ",
                               style: TextStyle(
-                                  color: Palette.kToDark, fontSize: 10),
+                                  color: ZeleexColor.zeleexGreen, fontSize: 10),
                             )
                           ],
                         ),
@@ -111,7 +112,7 @@ class _History_SuccessState extends State<History_Success> {
                                         Text(
                                           "฿ 1,300",
                                           style: TextStyle(
-                                              color: Palette.kToDark,
+                                              color: ZeleexColor.zeleexGreen,
                                               fontSize: 20),
                                         ),
                                         Row(
@@ -164,7 +165,7 @@ class _History_SuccessState extends State<History_Success> {
                         Text("1 สินค้า, รวมทั้งสิ้น: "),
                         Text(
                           " ฿1,335",
-                          style: TextStyle(color: Palette.kToDark),
+                          style: TextStyle(color: ZeleexColor.zeleexGreen),
                         ),
                         SizedBox(
                           width: 5,
@@ -180,8 +181,8 @@ class _History_SuccessState extends State<History_Success> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               elevation: 0,
-                              // side: BorderSide(color: Palette.kToDark),
-                              primary: Palette.kToDark,
+                              // side: BorderSide(color: ZeleexColor.zeleexGreen),
+                              primary: ZeleexColor.zeleexGreen,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               )),

@@ -4,15 +4,15 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/ProgressHUD.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
-import '../Plate.dart';
 import '../login.dart';
+import 'Others/Plate.dart';
+import 'Others/ProgressHUD.dart';
 
 var _nameController = TextEditingController();
 var _sureNameController = TextEditingController();
@@ -86,7 +86,7 @@ class _Forgot_Password_Page_ResetState
                     Text(
                       "   ",
                       style: TextStyle(
-                          color: Palette.kToDark,
+                          color: ZeleexColor.zeleexGreen,
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
@@ -173,7 +173,7 @@ class _Forgot_Password_Page_ResetState
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Palette.kToDark,
+                                primary: ZeleexColor.zeleexGreen,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
                                 )),

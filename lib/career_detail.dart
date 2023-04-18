@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../API/Read All/career_readall_api.dart';
-import '../Plate.dart';
 import 'package:http/http.dart' as http;
+
+import 'Others/Plate.dart';
 
 class Career_Detail extends StatefulWidget {
   String gotText = "";
@@ -41,9 +42,9 @@ class _Career_DetailState extends State<Career_Detail> {
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
-            statusBarColor: Palette.kToDark),
+            statusBarColor: ZeleexColor.zeleexGreen),
         automaticallyImplyLeading: false,
-        backgroundColor: Palette.kToDark,
+        backgroundColor: ZeleexColor.zeleexGreen,
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +68,7 @@ class _Career_DetailState extends State<Career_Detail> {
             ),
             Icon(
               Icons.abc_sharp,
-              color: Palette.kToDark,
+              color: ZeleexColor.zeleexGreen,
             )
           ],
         ),
@@ -105,7 +106,7 @@ class _Career_DetailState extends State<Career_Detail> {
               child: Text(
                 "ไอดี: ${widget.gotText}",
                 // "ครีเอทีฟ (1 ตำแหน่ง)",
-                style: TextStyle(color: Palette.kToDark, fontSize: 20),
+                style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
               ),
             ),
             SizedBox(
@@ -124,7 +125,7 @@ class _Career_DetailState extends State<Career_Detail> {
                   children: [
                     Text(
                       "รายละเอียด",
-                      style: TextStyle(color: Palette.kToDark, fontSize: 20),
+                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
                     SizedBox(
                       height: 10,
@@ -169,7 +170,7 @@ class _Career_DetailState extends State<Career_Detail> {
                   children: [
                     Text(
                       "คุณสมบัติ",
-                      style: TextStyle(color: Palette.kToDark, fontSize: 20),
+                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
                     SizedBox(
                       height: 10,
@@ -214,7 +215,7 @@ class _Career_DetailState extends State<Career_Detail> {
                   children: [
                     Text(
                       "สวัสดิการ",
-                      style: TextStyle(color: Palette.kToDark, fontSize: 20),
+                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
                     SizedBox(
                       height: 10,
@@ -287,7 +288,7 @@ class _Career_DetailState extends State<Career_Detail> {
                   children: [
                     Text(
                       "วิธีีสมัครงาน",
-                      style: TextStyle(color: Palette.kToDark, fontSize: 20),
+                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
                     SizedBox(
                       height: 10,

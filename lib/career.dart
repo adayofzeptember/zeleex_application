@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/Career/career_detail.dart';
-import 'package:zeleex_application/main%206%20pages/main_page.dart';
+import 'package:zeleex_application/Main%20Pages/main_page.dart';
 import '../API/Read All/career_readall_api.dart';
-import '../Plate.dart';
+import 'Others/Plate.dart';
+import 'career_detail.dart';
 
 class CareerPage extends StatefulWidget {
   CareerPage({Key? key}) : super(key: key);
@@ -31,8 +31,8 @@ class _CareerPageState extends State<CareerPage> {
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
-              statusBarColor: Palette.kToDark),
-          backgroundColor: Palette.kToDark,
+              statusBarColor: ZeleexColor.zeleexGreen),
+          backgroundColor: ZeleexColor.zeleexGreen,
           elevation: 0,
           title: InkWell(
             onTap: () {
@@ -55,7 +55,7 @@ class _CareerPageState extends State<CareerPage> {
                 ),
                 Icon(
                   Icons.abc_sharp,
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                 )
               ],
             ),
@@ -134,7 +134,7 @@ class _CareerPageState extends State<CareerPage> {
                                               "\t" +
                                               "(${data[index].id.toString()} ตำแหน่ง)",
                                           style: TextStyle(
-                                              color: Palette.kToDark,
+                                              color: ZeleexColor.zeleexGreen,
                                               fontSize: MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -145,7 +145,7 @@ class _CareerPageState extends State<CareerPage> {
                                           padding:
                                               EdgeInsets.fromLTRB(15, 8, 15, 8),
                                           decoration: BoxDecoration(
-                                            color: Palette.kToDark,
+                                            color: ZeleexColor.zeleexGreen,
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                           ),

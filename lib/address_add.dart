@@ -4,7 +4,8 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'API/Post Method/address_add_and_edit.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
+
 
 class Address_AddNew extends StatefulWidget {
   Address_AddNew({Key? key}) : super(key: key);
@@ -57,17 +58,17 @@ class _Address_AddNewState extends State<Address_AddNew> {
     return MaterialApp(
         theme: ThemeData(
             fontFamily: 'Kanit',
-            primarySwatch: Palette.kToDark,
-            appBarTheme: AppBarTheme(color: Palette.kToDark)),
+            primarySwatch: ZeleexColor.zeleexGreen,
+            appBarTheme: AppBarTheme(color: ZeleexColor.zeleexGreen)),
         home: Scaffold(
           appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle(
               // Status bar color
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
-              statusBarColor: Palette.kToDark,
+              statusBarColor: ZeleexColor.zeleexGreen,
             ),
-            backgroundColor: Palette.kToDark,
+            backgroundColor: ZeleexColor.zeleexGreen,
             elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -337,7 +338,7 @@ class _Address_AddNewState extends State<Address_AddNew> {
                       //   children: <Widget>[
                       //     Radio(
                       //       fillColor: MaterialStateColor.resolveWith(
-                      //           (states) => Palette.kToDark),
+                      //           (states) => ZeleexColor.zeleexGreen),
                       //       value: SingingCharacter.lafayette,
                       //       groupValue: _character,
                       //       onChanged: (SingingCharacter? value) {
@@ -355,7 +356,7 @@ class _Address_AddNewState extends State<Address_AddNew> {
                       //     ),
                       //     Radio(
                       //       fillColor: MaterialStateColor.resolveWith(
-                      //           (states) => Palette.kToDark),
+                      //           (states) => ZeleexColor.zeleexGreen),
                       //       value: SingingCharacter.jefferson,
                       //       groupValue: _character,
                       //       onChanged: (SingingCharacter? value) {
@@ -378,7 +379,7 @@ class _Address_AddNewState extends State<Address_AddNew> {
                           height: 30,
                           width: 50,
                           toggleColor: Color.fromRGBO(225, 225, 225, 1),
-                          activeColor: Palette.kToDark,
+                          activeColor: ZeleexColor.zeleexGreen,
                           value: status,
                           onToggle: (vaxl) {
                             setState(() {
@@ -427,7 +428,7 @@ class _Address_AddNewState extends State<Address_AddNew> {
                             gravity: ToastGravity.SNACKBAR,
                             timeInSecForIosWeb: 2,
                             backgroundColor: Color.fromARGB(255, 235, 235, 235),
-                            textColor: Palette.kToDark,
+                            textColor: ZeleexColor.zeleexGreen,
                             fontSize: 15);
 
                         Navigator.pop(context);
@@ -450,7 +451,7 @@ class _Address_AddNewState extends State<Address_AddNew> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         elevation: 0,
-                        side: BorderSide(color: Palette.kToDark),
+                        side: BorderSide(color: ZeleexColor.zeleexGreen),
                         primary: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -466,7 +467,7 @@ class _Address_AddNewState extends State<Address_AddNew> {
                         child: Text(
                           "ยกเลิก",
                           style:
-                              TextStyle(color: Palette.kToDark, fontSize: 15),
+                              TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 15),
                         ),
                       ),
                     ),

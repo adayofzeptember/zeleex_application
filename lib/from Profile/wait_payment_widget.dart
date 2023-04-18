@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/Read%20All/order_topay.dart';
 import 'package:zeleex_application/main.dart';
-import '../Plate.dart';
+import '../Others/Plate.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -157,7 +158,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                                                               .toString(),
                                                       style: TextStyle(
                                                           color:
-                                                              Palette.kToDark,
+                                                              ZeleexColor.zeleexGreen,
                                                           fontSize: 20),
                                                     ),
                                                     Row(
@@ -210,8 +211,6 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                                   ],
                                 ),
                               ),
-                              
-                             
                               Divider(
                                 color: Color.fromARGB(255, 216, 216, 216),
                               ),
@@ -221,7 +220,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                                   Text("คำสั่งซื้อทั้งหมด (จำนวน 1): "),
                                   Text(
                                     " ฿1,335",
-                                    style: TextStyle(color: Palette.kToDark),
+                                    style: TextStyle(color: ZeleexColor.zeleexGreen),
                                   ),
                                   SizedBox(
                                     width: 5,
@@ -251,8 +250,8 @@ class _Wait_PaymentState extends State<Wait_Payment> {
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           elevation: 0,
-                                          // side: BorderSide(color: Palette.kToDark),
-                                          primary: Palette.kToDark,
+                                          // side: BorderSide(color: ZeleexColor.zeleexGreen),
+                                          primary: ZeleexColor.zeleexGreen,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(5),
@@ -378,7 +377,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
         //                               Text(
         //                                 "฿ 1,300",
         //                                 style: TextStyle(
-        //                                     color: Palette.kToDark,
+        //                                     color: ZeleexColor.zeleexGreen,
         //                                     fontSize: 20),
         //                               ),
         //                               Row(
@@ -430,7 +429,7 @@ class _Wait_PaymentState extends State<Wait_Payment> {
         //             Text("คำสั่งซื้อทั้งหมด (จำนวน 1): "),
         //             Text(
         //               " ฿1,335",
-        //               style: TextStyle(color: Palette.kToDark),
+        //               style: TextStyle(color: ZeleexColor.zeleexGreen),
         //             ),
         //             SizedBox(
         //               width: 5,
@@ -455,8 +454,8 @@ class _Wait_PaymentState extends State<Wait_Payment> {
         //               ElevatedButton(
         //                 style: ElevatedButton.styleFrom(
         //                     elevation: 0,
-        //                     // side: BorderSide(color: Palette.kToDark),
-        //                     primary: Palette.kToDark,
+        //                     // side: BorderSide(color: ZeleexColor.zeleexGreen),
+        //                     primary: ZeleexColor.zeleexGreen,
         //                     shape: RoundedRectangleBorder(
         //                       borderRadius: BorderRadius.circular(5),
         //                     )),

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
-import 'package:zeleex_application/API/url.dart';
+import 'package:zeleex_application/Others/url.dart';
 
 class Board {
   String? responseCode;

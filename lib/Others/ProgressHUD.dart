@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zeleex_application/Plate.dart';
+import 'Plate.dart';
 
 class ProgressHUD extends StatelessWidget {
   final Widget child;
@@ -12,7 +12,7 @@ class ProgressHUD extends StatelessWidget {
     required this.child,
     required this.inAsyncCall,
     this.opacity = 1,
-    this.color =Palette.kToDark,
+    this.color =ZeleexColor.zeleexGreen,
   }) : super(key: key);
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import '../../Plate.dart';
+import '../../Others/Plate.dart';
 import 'history_success.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -22,8 +22,8 @@ class _HistoryPageState extends State<HistoryPage> {
             systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarIconBrightness: Brightness.light,
                 statusBarBrightness: Brightness.light,
-                statusBarColor: Palette.kToDark),
-            backgroundColor: Palette.kToDark,
+                statusBarColor: ZeleexColor.zeleexGreen),
+            backgroundColor: ZeleexColor.zeleexGreen,
             elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,12 +43,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
                 Icon(
                   Icons.abc_sharp,
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                 )
               ],
             ),
             bottom: TabBar(
-                labelColor: Palette.kToDark,
+                labelColor: ZeleexColor.zeleexGreen,
                 unselectedLabelColor: Colors.white,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(

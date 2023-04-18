@@ -1,23 +1,10 @@
-import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:expandable/expandable.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/advance_serch_results.dart';
-import 'package:zeleex_application/API/Read%20All/animals_API.dart';
-import 'package:zeleex_application/API/Read%20By%20ID/product_id_api.dart';
-import 'package:zeleex_application/help.dart';
-import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
-import '../Career/career.dart';
-import '../Plate.dart';
-import '../aboutus.dart';
-import 'package:intl/intl.dart';
-import '../from Profile/profile.dart';
-import 'onlyMenuForMainPage_nothing_here.dart';
+import '../Others/Plate.dart';
+
 
 class Search_Results_Page extends StatefulWidget {
   String keyWord = "";
@@ -64,7 +51,7 @@ class _Search_Results_PageState extends State<Search_Results_Page> {
             Text(
               "ผลการค้นหา",
               style: TextStyle(
-                  color: Palette.kToDark, fontWeight: FontWeight.bold),
+                  color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold),
             ),
             Icon(
               Icons.abc_sharp,
@@ -86,7 +73,7 @@ class _Search_Results_PageState extends State<Search_Results_Page> {
                 return Expanded(
                   child: RawScrollbar(
                     
-                    thumbColor: Palette.kToDark,
+                    thumbColor: ZeleexColor.zeleexGreen,
                     radius: Radius.circular(50),
                     thickness: 5,
                     child: GridView.builder(

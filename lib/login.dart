@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -10,21 +9,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login.dart';
 import 'package:zeleex_application/API/Post%20Method/post_login_social.dart';
-import 'package:zeleex_application/ProgressHUD.dart';
-import 'package:zeleex_application/payment_confirm.dart';
 import 'package:zeleex_application/register.dart';
 import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
-
 import 'API/model.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
+import 'Others/ProgressHUD.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'forgot_password_email.dart';
-import 'main 6 pages/onlyMenuForMainPage_nothing_here.dart';
+import 'Main Pages/onlyMenuForMainPage_nothing_here.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
@@ -129,12 +124,12 @@ class _LoginPageState extends State<LoginPage> {
       },
       body: body_Login,
     );
-    print(jsonDecode(response.body.toString()));
+  
     var jsonRes = json.decode(response.body);
     if (response.statusCode == 400 || response.statusCode == 200) {
       var token_toStore = jsonRes['data']['token'].toString();
       String id_toStore = jsonRes['data']['id'].toString();
-      print(id_toStore);
+     
       setState(() {
         storedToken = token_toStore;
         storedUserID = id_toStore;
@@ -216,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget _uiSetUp(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(fontFamily: 'Kanit', primarySwatch: Palette.kToDark),
+        theme: ThemeData(fontFamily: 'Kanit', primarySwatch: ZeleexColor.zeleexGreen),
         home: Scaffold(
             body: SingleChildScrollView(
           child: Column(
@@ -254,7 +249,7 @@ class _LoginPageState extends State<LoginPage> {
                             Text(
                               "",
                               style: TextStyle(
-                                  color: Palette.kToDark,
+                                  color: ZeleexColor.zeleexGreen,
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -353,7 +348,7 @@ class _LoginPageState extends State<LoginPage> {
                                     child: Text(
                                       "ลืมรหัสผ่าน?",
                                       style: TextStyle(
-                                          color: Palette.kToDark,
+                                          color: ZeleexColor.zeleexGreen,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -363,7 +358,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Palette.kToDark,
+                                      primary: ZeleexColor.zeleexGreen,
                                       elevation: 0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(15),
@@ -413,7 +408,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       elevation: 0,
-                                      side: BorderSide(color: Palette.kToDark),
+                                      side: BorderSide(color: ZeleexColor.zeleexGreen),
                                       primary: Colors.white,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(15),
@@ -443,7 +438,7 @@ class _LoginPageState extends State<LoginPage> {
                                       child: Text(
                                         "สร้างบัญชีใหม่",
                                         style: TextStyle(
-                                            color: Palette.kToDark,
+                                            color: ZeleexColor.zeleexGreen,
                                             fontSize: 15),
                                       ),
                                     ),
@@ -479,7 +474,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       elevation: 0,
-                                      // side: BorderSide(color: Palette.kToDark),
+                                      // side: BorderSide(color: ZeleexColor.zeleexGreen),
                                       primary: Colors.blue,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(15),
@@ -582,7 +577,7 @@ class ShapesPainter extends CustomPainter {
         size.width / 2, 2 * _kCurveHeight, size.width, 0);
     p.lineTo(size.width, 0);
     p.close();
-    canvas.drawPath(p, Paint()..color = Palette.kToDark);
+    canvas.drawPath(p, Paint()..color = ZeleexColor.zeleexGreen);
   }
 
   @override

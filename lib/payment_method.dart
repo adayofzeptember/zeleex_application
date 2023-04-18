@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'payment.dart';
 
 class Payment_Method extends StatefulWidget {
@@ -19,9 +19,9 @@ class _Payment_MethodState extends State<Payment_Method> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Palette.kToDark,
+          statusBarColor: ZeleexColor.zeleexGreen,
         ),
-        backgroundColor: Palette.kToDark,
+        backgroundColor: ZeleexColor.zeleexGreen,
         elevation: 0.0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +45,7 @@ class _Payment_MethodState extends State<Payment_Method> {
             ),
             Icon(
               Icons.abc_sharp,
-              color: Palette.kToDark,
+              color: ZeleexColor.zeleexGreen,
             )
           ],
         ),
@@ -83,7 +83,7 @@ class _Payment_MethodState extends State<Payment_Method> {
                           children: [
                             SvgPicture.asset(
                               'assets/images/testvisa.svg',
-                              color: Palette.kToDark,
+                              color: ZeleexColor.zeleexGreen,
                               width: 40,
                             ),
                             SizedBox(width: 10),

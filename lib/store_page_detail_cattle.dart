@@ -7,24 +7,15 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'API/Read All/products_API.dart';
-import 'Plate.dart';
-import 'store_page_detail.dart';
-import 'dart:convert';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'Others/Plate.dart';
+import 'store_info.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/API/Read%20All/products_API.dart';
-import 'package:http/http.dart' as http;
 import 'package:zeleex_application/API/Read%20By%20ID/product_review.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
-import '../Career/career.dart';
-import '../Plate.dart';
-import '../aboutus.dart';
+
 import '../help.dart';
 import '../from Profile/profile.dart';
-import 'store_page_detail_productDetail.dart';
 
 class Store_CattlePage extends StatefulWidget {
   String storeID = "";
@@ -103,7 +94,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
               ),
               Text("สัตว์ในร้าน",
                   style: TextStyle(
-                      color: Palette.kToDark, fontWeight: FontWeight.bold)),
+                      color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold)),
               Row(
                 children: [
                   SvgPicture.asset(
@@ -240,7 +231,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                               BorderRadius.circular(30),
                                         ),
                                         primary: pressed
-                                            ? Palette.kToDark
+                                            ? ZeleexColor.zeleexGreen
                                             : Color.fromARGB(
                                                 255, 204, 204, 204),
                                         elevation: 0),
@@ -283,7 +274,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                                         .toString() +
                                                     ", ",
                                                 style: TextStyle(
-                                                    color: Palette.kToDark),
+                                                    color: ZeleexColor.zeleexGreen),
                                               ),
                                             ],
                                           );
@@ -323,7 +314,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                 return Expanded(
                   child: RawScrollbar(
                     controller: controller,
-                    thumbColor: Palette.kToDark,
+                    thumbColor: ZeleexColor.zeleexGreen,
                     radius: Radius.circular(50),
                     thickness: 5,
                     child: GridView.builder(

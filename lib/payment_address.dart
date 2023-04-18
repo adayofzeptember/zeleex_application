@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import 'package:zeleex_application/address_add.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'address_edit.dart';
 import 'payment.dart';
 
@@ -52,10 +52,10 @@ class _Payment_AddressState extends State<Payment_Address> {
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
-            statusBarColor: Palette.kToDark,
+            statusBarColor: ZeleexColor.zeleexGreen,
           ),
           automaticallyImplyLeading: false,
-          backgroundColor: Palette.kToDark,
+          backgroundColor: ZeleexColor.zeleexGreen,
           elevation: 0.0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +79,7 @@ class _Payment_AddressState extends State<Payment_Address> {
               ),
               Icon(
                 Icons.abc_sharp,
-                color: Palette.kToDark,
+                color: ZeleexColor.zeleexGreen,
               )
             ],
           ),
@@ -90,7 +90,7 @@ class _Payment_AddressState extends State<Payment_Address> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: DottedBorder(
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                   dashPattern: [8, 4],
                   strokeWidth: 2,
                   child: InkWell(
@@ -106,14 +106,14 @@ class _Payment_AddressState extends State<Payment_Address> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
-                              style: BorderStyle.none, color: Palette.kToDark)),
+                              style: BorderStyle.none, color: ZeleexColor.zeleexGreen)),
                       alignment: Alignment.center,
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: Text(
                           "+ เพิ่มที่อยู่",
                           style:
-                              TextStyle(color: Palette.kToDark, fontSize: 20),
+                              TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
                         ),
                       ),
                     ),
@@ -138,7 +138,7 @@ class _Payment_AddressState extends State<Payment_Address> {
                             checkDefault = false;
                           }
                           return InkWell(
-                            splashColor: Palette.kToDark,
+                            splashColor: ZeleexColor.zeleexGreen,
                             onTap: () {
                               Navigator.push(
                                   context,

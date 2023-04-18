@@ -1,20 +1,14 @@
-//import 'package:chips_choice/chips_choice.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:html/parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/add_to_cart.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_id_api.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_review.dart';
-import 'package:zeleex_application/main%206%20pages/products.dart';
 import 'API/Post Method/product_favorite.dart';
 import 'API/Post Method/store_subscribe.dart';
-import 'API/Read All/cart_getUserCartList.dart';
-import 'Plate.dart';
-import 'store_page_detail_product.dart';
+import 'Others/Plate.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -130,6 +124,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
     Product msg = Product.fromJson(jsonCon);
     return msg;
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +204,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   Text(
                                     "ตัวเลือกสินค้า: ",
                                     style: TextStyle(
-                                        color: Palette.kToDark, fontSize: 15),
+                                        color: ZeleexColor.zeleexGreen, fontSize: 15),
                                   ),
                                   Text(
                                     picked.toString(),
@@ -220,7 +215,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   Text(
                                     " จำนวน: ",
                                     style: TextStyle(
-                                        color: Palette.kToDark, fontSize: 15),
+                                        color: ZeleexColor.zeleexGreen, fontSize: 15),
                                   ),
                                   Text(
                                     _counter.toString(),
@@ -231,7 +226,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                   Text(
                                     " ชิ้น",
                                     style: TextStyle(
-                                        color: Palette.kToDark, fontSize: 15),
+                                        color: ZeleexColor.zeleexGreen, fontSize: 15),
                                   ),
                                 ],
                               ),
@@ -246,7 +241,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
 
                                     return Expanded(
                                       child: RawScrollbar(
-                                        thumbColor: Palette.kToDark,
+                                        thumbColor: ZeleexColor.zeleexGreen,
                                         thickness: 5,
                                         child: GridView.builder(
                                           gridDelegate:
@@ -428,7 +423,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: Palette.kToDark,
+                                    primary: ZeleexColor.zeleexGreen,
                                     elevation: 0,
                                     // side: BorderSide(color: Colors.red),
                                     shape: RoundedRectangleBorder(
@@ -467,14 +462,14 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                   children: [
                     SvgPicture.asset(
                       'assets/images/newcart.svg',
-                      color: Palette.kToDark,
+                      color: ZeleexColor.zeleexGreen,
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     Text(
                       "เพิ่มในตะกร้า",
-                      style: TextStyle(color: Palette.kToDark),
+                      style: TextStyle(color: ZeleexColor.zeleexGreen),
                     )
                   ],
                 ),
@@ -489,7 +484,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
               width: 150,
               child: FloatingActionButton(
                 heroTag: "btsdqwn1",
-                backgroundColor: Palette.kToDark,
+                backgroundColor: ZeleexColor.zeleexGreen,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {},
                 child: Row(
@@ -531,7 +526,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                     maxLines: 1,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Palette.kToDark,
+                        color: ZeleexColor.zeleexGreen,
                         fontWeight: FontWeight.bold,
                         fontSize: 15)),
               ),
@@ -778,7 +773,7 @@ class _Store_Product_DetailState extends State<Store_Product_Detail> {
                                                             30),
                                                   ),
                                                   primary: pressed
-                                                      ? Palette.kToDark
+                                                      ? ZeleexColor.zeleexGreen
                                                       : Color.fromARGB(
                                                           255, 204, 204, 204),
                                                   elevation: 0),

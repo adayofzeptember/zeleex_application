@@ -13,10 +13,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Post%20Method/cart_update.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
-import 'package:zeleex_application/main%206%20pages/main_page.dart';
+import 'package:zeleex_application/Main%20Pages/main_page.dart';
 import 'package:zeleex_application/register.dart';
 import 'API/model.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
@@ -108,14 +108,14 @@ class _CartPageState extends State<CartPage> {
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Kanit',
-          primarySwatch: Palette.kToDark,
-          appBarTheme: AppBarTheme(color: Palette.kToDark)),
+          primarySwatch: ZeleexColor.zeleexGreen,
+          appBarTheme: AppBarTheme(color: ZeleexColor.zeleexGreen)),
       home: Scaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Palette.kToDark,
+            statusBarColor: ZeleexColor.zeleexGreen,
           ),
-          backgroundColor: Palette.kToDark,
+          backgroundColor: ZeleexColor.zeleexGreen,
           elevation: 0.0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +139,7 @@ class _CartPageState extends State<CartPage> {
               ),
               Icon(
                 Icons.abc_sharp,
-                color: Palette.kToDark,
+                color: ZeleexColor.zeleexGreen,
               )
             ],
           ),
@@ -175,7 +175,7 @@ class _CartPageState extends State<CartPage> {
                                         scale: 0.7,
                                         child: Checkbox(
                                             checkColor: Colors.white,
-                                            activeColor: Palette.kToDark,
+                                            activeColor: ZeleexColor.zeleexGreen,
                                             value: isChecked,
                                             onChanged: (value) {
                                               setState(() {
@@ -243,7 +243,7 @@ class _CartPageState extends State<CartPage> {
                                                           checkColor:
                                                               Colors.white,
                                                           activeColor:
-                                                              Palette.kToDark,
+                                                              ZeleexColor.zeleexGreen,
                                                           value: isChecked,
                                                           onChanged: (value) {
                                                             setState(() {
@@ -388,8 +388,7 @@ class _CartPageState extends State<CartPage> {
                                                                           .format(
                                                                               int.parse(unit_price.toString())),
                                                                   style: TextStyle(
-                                                                      color: Palette
-                                                                          .kToDark,
+                                                                      color: ZeleexColor.zeleexGreen,
                                                                       fontSize:
                                                                           18),
                                                                 ),
@@ -525,7 +524,7 @@ class _CartPageState extends State<CartPage> {
                       children: [
                         Checkbox(
                             checkColor: Colors.white,
-                            activeColor: Palette.kToDark,
+                            activeColor: ZeleexColor.zeleexGreen,
                             value: isChecked,
                             onChanged: (value) {
                               setState(() {
@@ -554,7 +553,7 @@ class _CartPageState extends State<CartPage> {
                                           int.parse(totalPrice.toString())),
                                       style: TextStyle(
                                           fontSize: 25,
-                                          color: Palette.kToDark,
+                                          color: ZeleexColor.zeleexGreen,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text("บาท",
@@ -580,7 +579,7 @@ class _CartPageState extends State<CartPage> {
                           child: Container(
                             alignment: Alignment.center,
                             height: double.infinity,
-                            color: Palette.kToDark,
+                            color: ZeleexColor.zeleexGreen,
                             child: Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Text(

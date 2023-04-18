@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart'; 
 
 
-class Palette { 
-  static const MaterialColor kToDark = const MaterialColor( 
+class ZeleexColor { 
+  static const MaterialColor zeleexGreen = const MaterialColor( 
     0xFF10C19F, 
     const <int, Color>{ 
       50: const Color(0xffce5641 ),//10% 

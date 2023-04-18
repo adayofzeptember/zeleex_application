@@ -12,7 +12,7 @@ import 'package:zeleex_application/API/model.dart';
 import 'package:zeleex_application/payment_confirm.dart';
 import 'API/Post Method/post_checkout_IDEA.dart';
 import 'API/Read All/cart_getUserCartList.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'cart.dart';
 import 'payment_address.dart';
 import 'payment_method.dart';
@@ -95,9 +95,9 @@ class _PaymentPageState extends State<PaymentPage> {
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
-            statusBarColor: Palette.kToDark,
+            statusBarColor: ZeleexColor.zeleexGreen,
           ),
-          backgroundColor: Palette.kToDark,
+          backgroundColor: ZeleexColor.zeleexGreen,
           elevation: 0.0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,7 +121,7 @@ class _PaymentPageState extends State<PaymentPage> {
               ),
               Icon(
                 Icons.abc_sharp,
-                color: Palette.kToDark,
+                color: ZeleexColor.zeleexGreen,
               )
             ],
           ),
@@ -148,7 +148,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Palette.kToDark)),
+                                border: Border.all(color: ZeleexColor.zeleexGreen)),
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -548,7 +548,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                 Radio(
                                                   fillColor: MaterialStateColor
                                                       .resolveWith((states) =>
-                                                          Palette.kToDark),
+                                                          ZeleexColor.zeleexGreen),
                                                   value: 1,
                                                   groupValue: radioID,
                                                   onChanged: (val) {
@@ -575,7 +575,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                 Radio(
                                                   fillColor: MaterialStateColor
                                                       .resolveWith((states) =>
-                                                          Palette.kToDark),
+                                                          ZeleexColor.zeleexGreen),
                                                   value: 2,
                                                   groupValue: radioID,
                                                   onChanged: (val) {
@@ -695,7 +695,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
-                                  color: Palette.kToDark),
+                                  color: ZeleexColor.zeleexGreen),
                             )
                           ],
                         ),
@@ -728,12 +728,12 @@ class _PaymentPageState extends State<PaymentPage> {
                                 Text(
                                   "ช่องทางการชำระเงินทั้งหมด",
                                   style: TextStyle(
-                                      color: Palette.kToDark,
+                                      color: ZeleexColor.zeleexGreen,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Icon(
                                   Icons.arrow_right_outlined,
-                                  color: Palette.kToDark,
+                                  color: ZeleexColor.zeleexGreen,
                                 )
                               ],
                             ),
@@ -1056,7 +1056,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       //                   ),
                       //                   ElevatedButton(
                       //                     style: ElevatedButton.styleFrom(
-                      //                         primary: Palette.kToDark,
+                      //                         primary: ZeleexColor.zeleexGreen,
                       //                         elevation: 0,
                       //                         // side: BorderSide(color: Colors.red),
                       //                         shape: RoundedRectangleBorder(
@@ -1089,7 +1089,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       //   },
                       //   child: Text(
                       //     "ออกใบกำกับภาษี",
-                      //     style: TextStyle(color: Palette.kToDark),
+                      //     style: TextStyle(color: ZeleexColor.zeleexGreen),
                       //   ),
                       // ),
                       SizedBox(
@@ -1155,7 +1155,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 Text(
                                   "฿1,345",
                                   style: TextStyle(
-                                      color: Palette.kToDark,
+                                      color: ZeleexColor.zeleexGreen,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
@@ -1193,7 +1193,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                     totalPrice.toString())),
                                         style: TextStyle(
                                             fontSize: 25,
-                                            color: Palette.kToDark,
+                                            color: ZeleexColor.zeleexGreen,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
@@ -1219,7 +1219,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             child: Container(
                               // alignment: Alignment.center,
                               // height: double.infinity,
-                              color: Palette.kToDark,
+                              color: ZeleexColor.zeleexGreen,
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Text(

@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,9 +14,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/animal_id_API.dart';
 import 'package:zeleex_application/API/model.dart';
-import 'package:zeleex_application/main%206%20pages/animal.dart';
+import 'package:zeleex_application/Main%20Pages/animal.dart';
 import 'API/Post Method/store_subscribe.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'store_page_detail_cattle.dart';
 import 'package:http/http.dart' as http;
 
@@ -96,7 +95,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               width: 150,
               child: FloatingActionButton(
                 heroTag: "btn1",
-                backgroundColor: Palette.kToDark,
+                backgroundColor: ZeleexColor.zeleexGreen,
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: () => {
                   launch("tel://${phoneCall}"),
@@ -146,7 +145,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
               ),
               Text(widget.animalName.toString(),
                   style: TextStyle(
-                      color: Palette.kToDark,
+                      color: ZeleexColor.zeleexGreen,
                       fontWeight: FontWeight.bold,
                       fontSize: 15)),
               Row(
@@ -338,7 +337,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                                     BorderRadius.circular(30),
                                               ),
                                               primary: pressed
-                                                  ? Palette.kToDark
+                                                  ? ZeleexColor.zeleexGreen
                                                   : Color.fromARGB(
                                                       255, 204, 204, 204),
                                               elevation: 0),
@@ -388,7 +387,7 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
                                 Text(
                                   "รายละเอียด",
                                   style: TextStyle(
-                                      color: Palette.kToDark, fontSize: 20),
+                                      color: ZeleexColor.zeleexGreen, fontSize: 20),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -427,6 +426,6 @@ class _Store_Cattle_DetailState extends State<Store_Cattle_Detail> {
             dotWidth: 5,
             dotHeight: 5,
             dotColor: Colors.grey,
-            activeDotColor: Palette.kToDark),
+            activeDotColor: ZeleexColor.zeleexGreen),
       );
 }

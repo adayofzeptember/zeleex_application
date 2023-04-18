@@ -201,6 +201,8 @@ class Images {
   }
 }
 
+
+
 Future<List<Data_Search_Result>> fetch_search_results(String keyword) async {
   final response = await http.get(Uri.parse(
       'https://admin.zeleex.com/api/search/products?title=' +

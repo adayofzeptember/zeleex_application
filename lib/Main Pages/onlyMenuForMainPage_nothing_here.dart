@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/Career/career.dart';
-import 'package:zeleex_application/main%206%20pages/animal.dart';
-import 'package:zeleex_application/main%206%20pages/main_page.dart';
-import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
-import 'package:zeleex_application/main%206%20pages/products.dart';
-import 'package:zeleex_application/main%206%20pages/semens.dart';
-import 'package:zeleex_application/main%206%20pages/store_page.dart';
 
-import '../Plate.dart';
-import '../aboutus.dart';
+import 'package:zeleex_application/Main%20Pages/animal.dart';
+import 'package:zeleex_application/Main%20Pages/main_page.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/newsfeed.dart';
+import 'package:zeleex_application/Main%20Pages/products.dart';
+import 'package:zeleex_application/Main%20Pages/semens.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/store_page.dart';
+import '../Others/Plate.dart';
+
 import '../help.dart';
 import '../from Profile/profile.dart';
 
@@ -64,7 +63,7 @@ class _Main_PageState extends State<Main_Page> {
     setState(() {
       k = x.toString();
     });
-    print("----------------------------kkkkkkk-" + x.toString());
+
   }
 
   @override
@@ -89,7 +88,7 @@ class _Main_PageState extends State<Main_Page> {
               activeIcon: SizedBox(
                 child: SvgPicture.asset(
                   "assets/images/new/tab1.svg",
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                 ),
               ),
               icon: SizedBox(
@@ -103,7 +102,7 @@ class _Main_PageState extends State<Main_Page> {
               activeIcon: SizedBox(
                 child: SvgPicture.asset(
                   "assets/images/new/tab2.svg",
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                 ),
               ),
               icon: SizedBox(
@@ -117,7 +116,7 @@ class _Main_PageState extends State<Main_Page> {
               activeIcon: SizedBox(
                 child: SvgPicture.asset(
                   "assets/images/new/tab3.svg",
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                 ),
               ),
               icon: SizedBox(
@@ -136,7 +135,7 @@ class _Main_PageState extends State<Main_Page> {
               activeIcon: SizedBox(
                 child: SvgPicture.asset(
                   "assets/images/new/tab4.svg",
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                 ),
               ),
               label: 'สัตว์',
@@ -144,7 +143,7 @@ class _Main_PageState extends State<Main_Page> {
             BottomNavigationBarItem(
               activeIcon: SvgPicture.asset(
                 "assets/images/new/tab5.svg",
-                color: Palette.kToDark,
+                color: ZeleexColor.zeleexGreen,
               ),
               icon: SvgPicture.asset(
                 "assets/images/new/tab5.svg",
@@ -154,7 +153,7 @@ class _Main_PageState extends State<Main_Page> {
             BottomNavigationBarItem(
               activeIcon: SvgPicture.asset(
                 "assets/images/new/tab6.svg",
-                color: Palette.kToDark,
+                color: ZeleexColor.zeleexGreen,
               ),
               icon: SvgPicture.asset(
                 "assets/images/new/tab6.svg",

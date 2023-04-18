@@ -5,37 +5,26 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:intl/intl.dart';
-import 'package:search_choices/search_choices.dart';
 import 'package:searchfield/searchfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:zeleex_application/API/Read%20All/advance_serch_results.dart';
 import 'package:zeleex_application/API/Read%20All/collection_board.dart';
 import 'package:zeleex_application/API/Read%20All/home_getData_api.dart';
 import 'package:zeleex_application/API/Read%20All/products_API.dart';
 import 'package:zeleex_application/API/Read%20All/slider_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/cart.dart';
-import 'package:zeleex_application/main%206%20pages/animal.dart';
-import 'package:zeleex_application/main%206%20pages/newsfeed.dart';
-import 'package:zeleex_application/main%206%20pages/products.dart';
-import 'package:zeleex_application/main%206%20pages/search_results_page.dart';
-import 'package:zeleex_application/main%206%20pages/semens.dart';
-import 'package:zeleex_application/newsfeed_detail.dart';
-import 'package:zeleex_application/from%20Profile/profile.dart';
+import 'package:zeleex_application/Main%20Pages/animal.dart';
+import 'package:zeleex_application/Main%20Pages/products.dart';
+import 'package:zeleex_application/Main%20Pages/search_results_page.dart';
 import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
 import 'package:zeleex_application/store_page_detail_productDetail.dart';
 import '../API/Read All/advance_search.dart';
-import '../Career/career.dart';
-import '../Plate.dart';
-import '../aboutus.dart';
-import '../help.dart';
+
+import '../Others/Plate.dart';
 import '../login.dart';
-import '../payment_address.dart';
 
 var searchController = TextEditingController();
 
@@ -135,7 +124,7 @@ class _Main_WidgetState extends State<Main_Widget> {
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
-              statusBarColor: Palette.kToDark,
+              statusBarColor: ZeleexColor.zeleexGreen,
             ),
             leading: Builder(
               builder: (context) => IconButton(
@@ -228,7 +217,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   color: Color.fromARGB(255, 161, 161, 161),
                                   size: 25,
                                 ),
-                                //hintStyle: TextStyle(color: Palette.kToDark),
+                                //hintStyle: TextStyle(color: ZeleexColor.zeleexGreen),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(60.0)),
@@ -266,18 +255,17 @@ class _Main_WidgetState extends State<Main_Widget> {
                       //             print(value);
                       //           }
                       //         },
-                      //         textInputAction: TextInputAction.search,
+                      //         textInputAction: TextInputAction.search      ,
                       //         decoration: InputDecoration(
                       //           filled: true,
                       //           fillColor: Colors.white,
                       //           hintText: 'ค้นหา...',
                       //           prefixIcon: Icon(
                       //             Icons.search,
-
                       //             color: Color.fromARGB(255, 161, 161, 161),
                       //             size: 25,
                       //           ),
-                      //           //hintStyle: TextStyle(color: Palette.kToDark),
+                      //              hintStyle: TextStyle(color: ZeleexColor.zeleexGreen),
                       //           enabledBorder: OutlineInputBorder(
                       //             borderRadius:
                       //                 BorderRadius.all(Radius.circular(60.0)),
@@ -294,6 +282,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                       //         ),
                       //       )
                       //       ),
+
                       // ),
 
                       Padding(
@@ -346,13 +335,15 @@ class _Main_WidgetState extends State<Main_Widget> {
                         height: 13,
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                         child: Container(
                           height: MediaQuery.of(context).size.height * 0.13,
                           child: Row(
                             children: [
                               FutureBuilder<List<Data_Collection_Board>>(
                                 future: future_board,
+  
+                                
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     List<Data_Collection_Board>? data =
@@ -408,7 +399,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                           child: Icon(
                                                             Icons.person,
                                                             color:
-                                                                Palette.kToDark,
+                                                                ZeleexColor.zeleexGreen,
                                                           ),
                                                           backgroundColor:
                                                               Color.fromARGB(
@@ -446,7 +437,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                         child: Container(
-                          decoration: BoxDecoration(),
                           child: Column(
                             children: [
                               Row(
@@ -477,7 +467,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                     padding: const EdgeInsets.only(right: 10),
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                          primary: Palette.kToDark,
+                                          primary: ZeleexColor.zeleexGreen,
                                           elevation: 0),
                                       onPressed: () {
                                         Navigator.push(
@@ -498,7 +488,6 @@ class _Main_WidgetState extends State<Main_Widget> {
                                   ),
                                 ],
                               ),
-                              // in cloumn
                               SizedBox(
                                 height: 5,
                               ),
@@ -715,7 +704,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                               const EdgeInsets.only(right: 10),
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                                primary: Palette.kToDark,
+                                                primary: ZeleexColor.zeleexGreen,
                                                 elevation: 0),
                                             onPressed: () {
                                               Navigator.push(
@@ -874,6 +863,7 @@ class _Main_WidgetState extends State<Main_Widget> {
                                                 return Text(
                                                     "${snapshot.error}");
                                               }
+
                                               return Container();
                                             },
                                           ),
@@ -906,6 +896,6 @@ class _Main_WidgetState extends State<Main_Widget> {
             dotWidth: 5,
             dotHeight: 5,
             dotColor: Colors.grey,
-            activeDotColor: Palette.kToDark),
+            activeDotColor: ZeleexColor.zeleexGreen),
       );
 }

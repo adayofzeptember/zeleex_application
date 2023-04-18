@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import 'Plate.dart';
+import 'Others/Plate.dart';
 import 'register.dart';
 
 
@@ -18,7 +18,7 @@ TermsWidget() {
           children: [
             Text("โนยบายความเป็นส่วนตัว",
                 style: TextStyle(
-                    color: Palette.kToDark,
+                    color: ZeleexColor.zeleexGreen,
                     fontSize: 20,
                     fontWeight: FontWeight.bold)),
             Padding(
@@ -47,7 +47,7 @@ ConditionWidget() {
               textAlign: TextAlign.justify,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                   fontSize: 20,
                   fontWeight: FontWeight.bold)),
           Padding(
@@ -81,7 +81,7 @@ class _TermsConditonState extends State<TermsConditon> {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(0),
             child: AppBar(
-              backgroundColor: Palette.kToDark,
+              backgroundColor: ZeleexColor.zeleexGreen,
               elevation: 0,
             ),
           ),
@@ -90,7 +90,7 @@ class _TermsConditonState extends State<TermsConditon> {
               children: [
                 Container(
                   height: 80,
-                  color: Palette.kToDark,
+                  color: ZeleexColor.zeleexGreen,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -115,7 +115,7 @@ class _TermsConditonState extends State<TermsConditon> {
                         selectedBackgroundColors: [Colors.white],
                         // unSelectedBackgroundColors: [],
                         selectedTextStyle: TextStyle(
-                            color: Palette.kToDark,
+                            color: ZeleexColor.zeleexGreen,
                             fontSize: 14,
                             fontWeight: FontWeight.w700),
                         unSelectedTextStyle: TextStyle(
@@ -135,7 +135,7 @@ class _TermsConditonState extends State<TermsConditon> {
                       ),
                       Icon(
                         Icons.abc_sharp,
-                        color: Palette.kToDark,
+                        color: ZeleexColor.zeleexGreen,
                       )
                     ],
                   ),

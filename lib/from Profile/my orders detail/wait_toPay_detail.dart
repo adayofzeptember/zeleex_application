@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../Plate.dart';
+import '../../Others/Plate.dart';
+
 
 class Order_wait_Detail extends StatefulWidget {
   Order_wait_Detail({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
               Text(
                 "รายละเอียดคำสั่งซื้อ",
                 style: TextStyle(
-                    color: Palette.kToDark, fontWeight: FontWeight.bold),
+                    color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold),
               ),
               SvgPicture.asset(
                 'assets/images/392.svg',
@@ -62,7 +63,7 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
                   ),
                   child: Container(
                       decoration: BoxDecoration(
-                          color: Palette.kToDark,
+                          color: ZeleexColor.zeleexGreen,
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20),
                               topLeft: Radius.circular(20))),
@@ -281,7 +282,7 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
                                           Text(
                                             "฿1,300",
                                             style: TextStyle(
-                                                color: Palette.kToDark,
+                                                color: ZeleexColor.zeleexGreen,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -371,7 +372,7 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
                                           Text(
                                             "฿1,300",
                                             style: TextStyle(
-                                                color: Palette.kToDark,
+                                                color: ZeleexColor.zeleexGreen,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -443,12 +444,12 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
                               ),
                               Row(
                                 children: [
-                                  Icon(Icons.copy, color: Palette.kToDark, size: 15,),
+                                  Icon(Icons.copy, color: ZeleexColor.zeleexGreen, size: 15,),
                                   SizedBox(width: 2,),
                                   Text(
                                     "คัดลอก",
                                     style: TextStyle(
-                                        color: Palette.kToDark,
+                                        color: ZeleexColor.zeleexGreen,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -489,7 +490,7 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
                               Text(
                                 "฿12,455",
                                 style: TextStyle(
-                                    color: Palette.kToDark, fontSize: 20),
+                                    color: ZeleexColor.zeleexGreen, fontSize: 20),
                               )
                             ],
                           ),
@@ -507,13 +508,13 @@ class _Order_wait_DetailState extends State<Order_wait_Detail> {
                                           elevation: 0,
                                           primary: Colors.white,
                                           side: BorderSide(
-                                              color: Palette.kToDark),
+                                              color: ZeleexColor.zeleexGreen),
                                         ),
                                         onPressed: () {},
                                         child: Text(
                                           "ยกเลิกคำสั่งซื้อ",
                                           style:
-                                              TextStyle(color: Palette.kToDark),
+                                              TextStyle(color: ZeleexColor.zeleexGreen),
                                         ))),
                                 SizedBox(
                                   width: 10,

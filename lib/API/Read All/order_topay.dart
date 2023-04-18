@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:zeleex_application/API/url.dart';
+import 'package:zeleex_application/Others/url.dart';
 import '../Read By ID/animal_id_API.dart';
 
 class Order_Wait {
