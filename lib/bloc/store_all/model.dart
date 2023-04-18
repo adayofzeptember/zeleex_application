@@ -19,6 +19,7 @@ class StoreInfo_Model {
   String? phone;
   String? content;
   String? image;
+  List? types;
 
   StoreInfo_Model(
       {this.id,
@@ -26,5 +27,6 @@ class StoreInfo_Model {
       this.address,
       this.phone,
       this.content,
+      this.types,
       this.image});
 }

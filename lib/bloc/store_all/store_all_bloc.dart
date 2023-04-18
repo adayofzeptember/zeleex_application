@@ -70,7 +70,7 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
       }
     });
 
-    //! เข้าไปดูร้าน **--**/-/-----------------------
+    //! เข้าไปดูร้าน //*-------------------------------------
 
     on<Load_StoreInfo>((event, emit) async {
       Navigator.push(
@@ -78,7 +78,7 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
         PageTransition(
           duration: const Duration(milliseconds: 250),
           type: PageTransitionType.fade,
-          child: Store_Info(),
+          child: Store_Info(event.title),
         ),
       );
 
@@ -92,11 +92,18 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
             // "Authorization": "Bearer $token",
           }),
         );
+        List getTypes = [];
         dynamic fetched_dataInfo =
             (state.store_info != '') ? state.store_info : '';
         dynamic nestedData = response.data['data'];
         if (response.statusCode == 200) {
           emit(state.copyWith(isLoading: false));
+
+          if (response.data['data']['types'] != []) {
+            for (var element in response.data['data']['types']) {
+              getTypes.add(element['title']);
+            }
+          }
 
           fetched_dataInfo = StoreInfo_Model(
             id: await nestedData['id'],
@@ -105,7 +112,9 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
             content: await nestedData['content'],
             address: await nestedData['address'],
             image: await nestedData['image']['main'],
+            types: getTypes
           );
+       
 
           emit(state.copyWith(store_info: fetched_dataInfo));
         } else {

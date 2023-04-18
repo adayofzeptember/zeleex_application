@@ -5,25 +5,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/parser.dart';
+import 'package:progress_indicators/progress_indicators.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 import '../Others/Plate.dart';
 import '../bloc/store_all/store_all_bloc.dart';
 
 class Store_Info extends StatelessWidget {
   @override
+  String store_title;
+  Store_Info(this.store_title);
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 242, 242, 242),
+      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
           backgroundColor: Colors.white,
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
             statusBarBrightness: Brightness.dark,
             statusBarColor: Colors.white,
           ),
           elevation: 0,
           centerTitle: true,
-          title: const Text(
-            "ร้านค้า",
+          title: Text(
+            store_title.toString(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
@@ -43,14 +47,19 @@ class Store_Info extends StatelessWidget {
                   const SizedBox(
                     height: 60,
                   ),
-                  const Center(
-                    child: Text(
-                      '. . .',
+                  Center(
+                    child: JumpingText(
+                      'กำลังโหลดร้านค้า...',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
+                          fontSize: 25, color: ZeleexColor.zeleexGreen),
                     ),
+                    // Text(
+                    //   '. . .',
+                    //   style: TextStyle(
+                    //     fontWeight: FontWeight.bold,
+                    //     fontSize: 25,
+                    //   ),
+                    // ),
                   ),
                 ],
               );
@@ -92,7 +101,7 @@ class Store_Info extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * 0.3,
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Color.fromARGB(255, 240, 236, 236)),
+                              color: const Color.fromARGB(255, 240, 236, 236)),
                         ),
                         child: Image.asset(
                           'assets/images/banner-noimg.jpg',
@@ -105,7 +114,7 @@ class Store_Info extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
                         child: Container(
                           width: double.infinity,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(10),
@@ -126,7 +135,7 @@ class Store_Info extends StatelessWidget {
                                         width:
                                             MediaQuery.of(context).size.height *
                                                 0.08,
-                                        child: CircleAvatar(
+                                        child: const CircleAvatar(
                                           backgroundColor: Color.fromARGB(
                                               255, 196, 196, 196),
                                           backgroundImage: NetworkImage(
@@ -141,9 +150,9 @@ class Store_Info extends StatelessWidget {
                                         children: [
                                           Text(
                                               state.store_info.title.toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontWeight: FontWeight.bold)),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
@@ -152,7 +161,7 @@ class Store_Info extends StatelessWidget {
                                             children: [
                                               SvgPicture.asset(
                                                   'assets/images/pinnew.svg'),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Container(
@@ -162,28 +171,28 @@ class Store_Info extends StatelessWidget {
                                                 child: Text(
                                                   state.store_info.address
                                                       .toString(),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.grey,
                                                       fontSize: 13),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
                                             children: [
                                               SvgPicture.asset(
                                                   'assets/images/callnew.svg'),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Container(
                                                 child: Text(
                                                   state.store_info.phone
                                                       .toString(),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.grey,
                                                       fontSize: 13),
                                                 ),
@@ -193,13 +202,13 @@ class Store_Info extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.settings,
                                       color: Colors.white,
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
 
@@ -210,11 +219,11 @@ class Store_Info extends StatelessWidget {
                                     children: [
                                       SvgPicture.asset(
                                           'assets/images/star.svg'),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
-                                      Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
-                                      SizedBox(
+                                      const Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       // ElevatedButton(
@@ -261,53 +270,47 @@ class Store_Info extends StatelessWidget {
                                   ),
                                 ),
                                 //! แก้ไขเพิ่มเติม
-                                // Padding(
-                                //   padding: const EdgeInsets.fromLTRB(
-                                //       15, 5, 0, 0),
-                                //   child: Row(
-                                //     children: <Widget>[
-                                //       Text("ประเภทร้านค้า "),
-                                //       Container(
-                                //         height: 20,
-                                //         child: ListView.builder(
-                                //             shrinkWrap: true,
-                                //             scrollDirection:
-                                //                 Axis.horizontal,
-                                //             itemCount:
-                                //                 thisStore_notCoverIMG
-                                //                     .types!.length,
-                                //             itemBuilder:
-                                //                 (BuildContext context,
-                                //                     int index) {
-                                //               return Row(
-                                //                 children: [
-                                //                   Text(
-                                //                     thisStore_notCoverIMG
-                                //                             .types![
-                                //                                 index]
-                                //                             .title
-                                //                             .toString() +
-                                //                         ", ",
-                                //                     style: TextStyle(
-                                //                         color: ZeleexColor
-                                //                             .zeleexGreen),
-                                //                   ),
-                                //                 ],
-                                //               );
-                                //             }),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
-                                SizedBox(
-                                  height: 10,
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text("ประเภทร้านค้า "),
+                                      Container(
+                                        height: 20,
+                                        child: ListView.builder(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount:
+                                                state.store_info.types.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Row(
+                                                children: [
+                                                  Text(
+                                                    state.store_info
+                                                            .types[index]
+                                                            .toString() +
+                                                        ", ",
+                                                    style: TextStyle(
+                                                        color: ZeleexColor
+                                                            .zeleexGreen),
+                                                  ),
+                                                ],
+                                              );
+                                            }),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Divider(
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                const Divider(
                                     color: Color.fromARGB(255, 165, 162, 162)),
                                 HtmlWidget(content.outerHtml),
-                                
 
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 // ClipRRect(

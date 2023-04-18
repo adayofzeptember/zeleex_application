@@ -11,7 +11,8 @@ class Load_AllStores extends StoreAllEvent {}
 
 class Load_StoreInfo extends StoreAllEvent {
   String id;
+  String title;
   var context;
 
-  Load_StoreInfo({required this.id, required this.context});
+  Load_StoreInfo({required this.id, required this.context, required this.title});
 }

@@ -98,7 +98,8 @@ class _StorePageState extends State<StorePage> {
                           state.isLoading == true) {
                         return const Padding(
                           padding: EdgeInsets.all(75.0),
-                          child: Center(
+                          child: 
+                          Center(
                             child: CircularProgressIndicator(
                               color: ZeleexColor.zeleexGreen,
                             ),
@@ -119,6 +120,8 @@ class _StorePageState extends State<StorePage> {
                                       id: state.allstores_data[index].id
                                           .toString(),
                                       context: context,
+                                      title: state.allstores_data[index].title
+                                          .toString()
                                     ),
                                   );
 
