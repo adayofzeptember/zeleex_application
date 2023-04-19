@@ -593,7 +593,7 @@ class _SemensPageState extends State<SemensPage> {
         //                               height: 5,
         //                             ),
         //                             Text(
-        //                               "ดูโปรไฟล์",
+        //                               "ดูโพลไฟล์",
         //                               style: TextStyle(
         //                                   color: Color.fromARGB(
         //                                       255, 165, 162, 162),

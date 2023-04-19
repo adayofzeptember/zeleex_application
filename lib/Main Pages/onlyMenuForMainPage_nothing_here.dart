@@ -4,14 +4,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:zeleex_application/Main%20Pages/animal.dart';
 import 'package:zeleex_application/Main%20Pages/main_page.dart';
-import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/newsfeed.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/newsfeed_page.dart';
 import 'package:zeleex_application/Main%20Pages/products.dart';
 import 'package:zeleex_application/Main%20Pages/semens.dart';
-import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/store_page.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/stores_page.dart';
 import '../Others/Plate.dart';
 
+import '../Screens/Main Sixx Pages/animals_page.dart';
 import '../help.dart';
 import '../from Profile/profile.dart';
 
@@ -158,7 +158,7 @@ class _Main_PageState extends State<Main_Page> {
               icon: SvgPicture.asset(
                 "assets/images/new/tab6.svg",
               ),
-              label: 'โปรไฟล์',
+              label: 'โพลไฟล์',
             ),
           ],
         ),

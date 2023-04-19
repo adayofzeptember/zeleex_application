@@ -16,7 +16,6 @@ import 'package:zeleex_application/API/Read%20All/products_API.dart';
 import 'package:zeleex_application/API/Read%20All/slider_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:zeleex_application/cart.dart';
-import 'package:zeleex_application/Main%20Pages/animal.dart';
 import 'package:zeleex_application/Main%20Pages/products.dart';
 import 'package:zeleex_application/Main%20Pages/search_results_page.dart';
 import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
@@ -24,6 +23,7 @@ import 'package:zeleex_application/store_page_detail_productDetail.dart';
 import '../API/Read All/advance_search.dart';
 
 import '../Others/Plate.dart';
+import '../Screens/Main Sixx Pages/animals_page.dart';
 import '../login.dart';
 
 var searchController = TextEditingController();

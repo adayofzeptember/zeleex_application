@@ -36,7 +36,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
+      backgroundColor: Color.fromARGB(255, 235, 235, 235),
       appBar: AppBar(
           backgroundColor: Colors.white,
           systemOverlayStyle: const SystemUiOverlayStyle(
@@ -108,7 +108,10 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                             );
                       },
                       child: Container(
-                        color: Colors.white,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[

@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             Text(
-              "โปรไฟล์",
+              "โพลไฟล์",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -200,7 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Row(
                                     children: [
                                       Text(
-                                        "แก้ไขโปรไฟล์",
+                                        "แก้ไขโพลไฟล์",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color:

@@ -10,6 +10,7 @@ import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
 import 'package:zeleex_application/Main%20Pages/onlyMenuForMainPage_nothing_here.dart';
 import 'package:zeleex_application/second.dart';
 import 'Others/Plate.dart';
+import 'bloc/animals/animals_bloc.dart';
 import 'bloc/store_all/store_all_bloc.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class First_Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => AnimalsBloc()),
         BlocProvider(create: (context) => StoreAllBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
       ],

@@ -16,6 +16,86 @@ class Store_Info extends StatelessWidget {
   Store_Info(this.store_title);
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: FloatingActionButton(
+                heroTag: "btn1",
+                backgroundColor: Colors.white,
+                shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+                onPressed: () => {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => Store_ProductPage(
+                  //             storeID: widget.storeID,
+                  //           )),
+                  // )
+                },
+                child: Container(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/instore.svg',
+                        color: ZeleexColor.zeleexGreen,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "สินค้าในร้าน",
+                        style: TextStyle(color: ZeleexColor.zeleexGreen),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: FloatingActionButton(
+                heroTag: "bt1",
+                backgroundColor: ZeleexColor.zeleexGreen,
+                shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+                onPressed: () => {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => Store_CattlePage(
+                  //             storeID: widget.storeID,
+                  //           )),
+                  // )
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/malfoot.svg',
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text("หมวดหมู่สัตว์")
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
           backgroundColor: Colors.white,
@@ -28,7 +108,7 @@ class Store_Info extends StatelessWidget {
           centerTitle: true,
           title: Text(
             store_title.toString(),
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold,  color: ZeleexColor.zeleexGreen),
           ),
           leading: IconButton(
             onPressed: () async {
@@ -116,9 +196,8 @@ class Store_Info extends StatelessWidget {
                           width: double.infinity,
                           decoration: const BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(10),
-                                  topLeft: Radius.circular(10))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Column(

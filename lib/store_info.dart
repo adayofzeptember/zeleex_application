@@ -12,7 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'API/Post Method/store_subscribe.dart';
 import 'API/Read By ID/store_id_api.dart';
 import 'Others/Plate.dart';
-import 'Screens/Main Sixx Pages/store_page.dart';
 import 'store_page_detail_cattle.dart';
 import 'store_page_detail_product.dart';
 
@@ -69,10 +68,9 @@ class _Store_DetailState extends State<Store_Detail> {
       theme: ThemeData(
           fontFamily: 'Kanit',
           primarySwatch: ZeleexColor.zeleexGreen,
-          appBarTheme: AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
-      home: 
-      Scaffold(
-        backgroundColor: Color.fromARGB(255, 242, 242, 242),
+          appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 255, 255, 255))),
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 242, 242, 242),
         floatingActionButton: Padding(
           padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
           child: Row(
@@ -84,7 +82,7 @@ class _Store_DetailState extends State<Store_Detail> {
                   heroTag: "btn1",
                   backgroundColor: Colors.white,
                   shape:
-                      BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+                      const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                   onPressed: () => {
                     Navigator.push(
                       context,
@@ -103,10 +101,10 @@ class _Store_DetailState extends State<Store_Detail> {
                           'assets/images/instore.svg',
                           color: ZeleexColor.zeleexGreen,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
-                        Text(
+                        const Text(
                           "สินค้าในร้าน",
                           style: TextStyle(color: ZeleexColor.zeleexGreen),
                         )
@@ -115,18 +113,18 @@ class _Store_DetailState extends State<Store_Detail> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FloatingActionButton(
                   heroTag: "bt1",
                   backgroundColor: ZeleexColor.zeleexGreen,
                   shape:
-                      BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+                      const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
                   onPressed: () => {
                     Navigator.push(
                       context,
@@ -143,10 +141,10 @@ class _Store_DetailState extends State<Store_Detail> {
                         'assets/images/malfoot.svg',
                         color: Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
-                      Text("หมวดหมู่สัตว์")
+                      const Text("หมวดหมู่สัตว์")
                     ],
                   ),
                 ),
@@ -155,7 +153,7 @@ class _Store_DetailState extends State<Store_Detail> {
           ),
         ),
         appBar: AppBar(
-            systemOverlayStyle: SystemUiOverlayStyle(
+            systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.dark,
               statusBarBrightness: Brightness.dark,
               statusBarColor: Colors.white,
@@ -168,22 +166,21 @@ class _Store_DetailState extends State<Store_Detail> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     color: Color.fromARGB(255, 51, 51, 51),
                   ),
                 ),
                 Text(widget.storeName.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: ZeleexColor.zeleexGreen,
                         fontWeight: FontWeight.bold)),
                 Row(
-                  children: [Text('')],
+                  children: [const Text('')],
                 )
               ],
             )),
-        body: 
-        SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Column(
@@ -196,14 +193,13 @@ class _Store_DetailState extends State<Store_Detail> {
                               AsyncSnapshot<dynamic> snapshot) {
                             if (snapshot.hasData) {
                               Data_Store thisStore = snapshot.data;
-                              return 
-                              CachedNetworkImage(
+                              return CachedNetworkImage(
                                 imageUrl: thisStore.imageCover!.main.toString(),
                                 fit: BoxFit.fill,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         Container(
-                                  color: Color.fromARGB(255, 142, 142, 142),
+                                  color: const Color.fromARGB(255, 142, 142, 142),
                                   // height: 200,
                                 ),
                                 errorWidget: (context, url, error) => Center(
@@ -213,7 +209,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                         0.2,
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 240, 236, 236)),
                                     ),
                                     child: Image.asset(
@@ -224,8 +220,8 @@ class _Store_DetailState extends State<Store_Detail> {
                                 ),
                               );
                             } else {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 50),
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
                                 child:
                                     Center(child: CircularProgressIndicator()),
                               );
@@ -241,15 +237,13 @@ class _Store_DetailState extends State<Store_Detail> {
                                   thisStore_notCoverIMG.content.toString();
                               var document555 = parse(getContent);
 
-                              return 
-                              
-                              Container(
+                              return Container(
                                   child: Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(8, 100, 8, 0),
                                 child: Container(
                                   width: double.infinity,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(10),
@@ -277,7 +271,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                     0.08,
                                                 child: CircleAvatar(
                                                   backgroundColor:
-                                                      Color.fromARGB(
+                                                      const Color.fromARGB(
                                                           255, 196, 196, 196),
                                                   backgroundImage: NetworkImage(
                                                       thisStore_notCoverIMG
@@ -296,10 +290,10 @@ class _Store_DetailState extends State<Store_Detail> {
                                                       thisStore_notCoverIMG
                                                           .title
                                                           .toString(),
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold)),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 5,
                                                   ),
                                                   Row(
@@ -309,7 +303,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                     children: [
                                                       SvgPicture.asset(
                                                           'assets/images/pinnew.svg'),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         width: 10,
                                                       ),
                                                       Container(
@@ -320,7 +314,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                           thisStore_notCoverIMG
                                                               .address
                                                               .toString(),
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               color:
                                                                   Colors.grey,
                                                               fontSize: 13),
@@ -328,14 +322,14 @@ class _Store_DetailState extends State<Store_Detail> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 5,
                                                   ),
                                                   Row(
                                                     children: [
                                                       SvgPicture.asset(
                                                           'assets/images/callnew.svg'),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         width: 10,
                                                       ),
                                                       Container(
@@ -343,7 +337,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                           thisStore_notCoverIMG
                                                               .phone
                                                               .toString(),
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               color:
                                                                   Colors.grey,
                                                               fontSize: 13),
@@ -354,13 +348,13 @@ class _Store_DetailState extends State<Store_Detail> {
                                                 ],
                                               ),
                                             ),
-                                            Icon(
+                                            const Icon(
                                               Icons.settings,
                                               color: Colors.white,
                                             )
                                           ],
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
 
@@ -371,12 +365,12 @@ class _Store_DetailState extends State<Store_Detail> {
                                             children: [
                                               SvgPicture.asset(
                                                   'assets/images/star.svg'),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 5,
                                               ),
-                                              Text(
+                                              const Text(
                                                   " 5.0 คะแนน | 5.2K ผู้ติดตาม"),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               ElevatedButton(
@@ -390,7 +384,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                     primary: pressed
                                                         ? ZeleexColor
                                                             .zeleexGreen
-                                                        : Color.fromARGB(
+                                                        : const Color.fromARGB(
                                                             255, 204, 204, 204),
                                                     elevation: 0),
                                                 onPressed: () {
@@ -414,7 +408,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                   pressed
                                                       ? "ติดตาม"
                                                       : "ติดตามแล้ว",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Color.fromRGBO(
                                                           255, 255, 255, 1)),
                                                 ),
@@ -428,7 +422,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                               15, 5, 0, 0),
                                           child: Row(
                                             children: <Widget>[
-                                              Text("ประเภทร้านค้า "),
+                                              const Text("ประเภทร้านค้า "),
                                               Container(
                                                 height: 20,
                                                 child: ListView.builder(
@@ -450,7 +444,7 @@ class _Store_DetailState extends State<Store_Detail> {
                                                                     .title
                                                                     .toString() +
                                                                 ", ",
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                                 color: ZeleexColor
                                                                     .zeleexGreen),
                                                           ),
@@ -461,39 +455,39 @@ class _Store_DetailState extends State<Store_Detail> {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
-                                        Divider(
+                                        const Divider(
                                             color: Color.fromARGB(
                                                 255, 165, 162, 162)),
                                         HtmlWidget(document555.outerHtml),
 
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         ClipRRect(
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(8)),
                                           child: Image.asset(
                                             'assets/images/detail1.png',
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         ClipRRect(
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(8)),
                                           child: Image.asset(
                                             'assets/images/detail2.png',
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         ClipRRect(
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(8)),
                                           child: Image.asset(
                                             'assets/images/detail3.png',
@@ -505,8 +499,8 @@ class _Store_DetailState extends State<Store_Detail> {
                                 ),
                               ));
                             } else {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 50),
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
                                 child:
                                     Center(child: CircularProgressIndicator()),
                               );
@@ -514,7 +508,7 @@ class _Store_DetailState extends State<Store_Detail> {
                           })
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   )
                 ],

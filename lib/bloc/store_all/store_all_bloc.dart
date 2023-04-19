@@ -106,15 +106,13 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
           }
 
           fetched_dataInfo = StoreInfo_Model(
-            id: await nestedData['id'],
-            title: await nestedData['title'],
-            phone: await nestedData['phone'],
-            content: await nestedData['content'],
-            address: await nestedData['address'],
-            image: await nestedData['image']['main'],
-            types: getTypes
-          );
-       
+              id: await nestedData['id'],
+              title: await nestedData['title'],
+              phone: await nestedData['phone'],
+              content: await nestedData['content'],
+              address: await nestedData['address'],
+              image: await nestedData['image']['main'],
+              types: getTypes);
 
           emit(state.copyWith(store_info: fetched_dataInfo));
         } else {

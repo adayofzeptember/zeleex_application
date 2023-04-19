@@ -19,7 +19,9 @@ class NewsFeedBloc extends Bloc<NewsFeedEvent, NewsFeedState> {
             page: 1,
             isLoading: true,
             dataTotal: 0,
-            isAllDataLoaded: false)) {
+            isAllDataLoaded: false
+            
+            )) {
     on<Load_NewsFeed>((event, emit) async {
       try {
         final response = await dio.get(
