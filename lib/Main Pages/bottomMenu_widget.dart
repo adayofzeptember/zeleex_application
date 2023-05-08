@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,10 +9,13 @@ import 'package:zeleex_application/Main%20Pages/main_page.dart';
 import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/newsfeed_page.dart';
 import 'package:zeleex_application/Main%20Pages/products.dart';
 import 'package:zeleex_application/Main%20Pages/semens.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/profile_page.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/starter_main_page.dart';
 import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/stores_page.dart';
 import '../Others/Plate.dart';
-
 import '../Screens/Main Sixx Pages/animals_page.dart';
+import '../Screens/Main Sixx Pages/products_page.dart';
+import '../bloc/profile/profile_bloc.dart';
 import '../help.dart';
 import '../from Profile/profile.dart';
 
@@ -29,6 +33,8 @@ class _Main_PageState extends State<Main_Page> {
 
   @override
   void initState() {
+    context.read<ProfileBloc>().add(Load_Profile());
+    context.read<ProfileBloc>().add(Load_Address());
     loginh();
     super.initState();
     controller = ScrollController();
@@ -43,14 +49,17 @@ class _Main_PageState extends State<Main_Page> {
   List<Widget> _widgetsPages = [
     NewsFeedPage(),
     StorePage(),
-    Main_Widget(),
+    First_MainPage(),
     AnimalsPage(),
-    ProductPage(),
-    ProfilePage()
+    ProductsPage(),
+    ProfilePage2()
   ];
 
   int _index = 2;
   void onItemTapped555(int index2) {
+    // if (index2 == 5) {
+    //   context.read<ProfileBloc>().add(Load_Profile());
+    // }
     setState(() {
       _index = index2;
     });
@@ -63,7 +72,6 @@ class _Main_PageState extends State<Main_Page> {
     setState(() {
       k = x.toString();
     });
-
   }
 
   @override
@@ -158,7 +166,7 @@ class _Main_PageState extends State<Main_Page> {
               icon: SvgPicture.asset(
                 "assets/images/new/tab6.svg",
               ),
-              label: 'โพลไฟล์',
+              label: 'โพรไฟล์',
             ),
           ],
         ),

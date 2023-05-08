@@ -25,7 +25,7 @@ class NewsFeedBloc extends Bloc<NewsFeedEvent, NewsFeedState> {
     on<Load_NewsFeed>((event, emit) async {
       try {
         final response = await dio.get(
-          zeleexAPI_URl + "blogs?page=" + state.page.toString() + '&per_page=5',
+          zeelexAPI_URL_admin + "blogs?page=" + state.page.toString() + '&per_page=5',
           options: Options(headers: {
             "Content-Type": "application/json",
             // "Authorization": "Bearer $token",
@@ -44,7 +44,7 @@ class NewsFeedBloc extends Bloc<NewsFeedEvent, NewsFeedState> {
                   description: (nested['description'] == null)
                       ? "ดูเพิ่มเติม"
                       : await nested['description'],
-                  dateCreated: nested['created_at'],
+                 dateCreated: nested['created_at'],
                   image: await nested['image']['main'],
                 ),
               );
@@ -84,7 +84,7 @@ class NewsFeedBloc extends Bloc<NewsFeedEvent, NewsFeedState> {
       print('blog id: ' + event.id);
       try {
         final response = await dio.get(
-          zeleexAPI_URl + "blogs/" + event.id,
+          zeelexAPI_URL_admin + "blogs/" + event.id,
           options: Options(headers: {
             "Content-Type": "application/json",
             // "Authorization": "Bearer $token",
@@ -104,7 +104,7 @@ class NewsFeedBloc extends Bloc<NewsFeedEvent, NewsFeedState> {
             seoTitle: await nestedData['seoTitle'],
             reads: await nestedData['reads'],
             seoDescription: await nestedData['seoDescription'],
-            image: await nestedData['image']['main'],
+            image: await nestedData['image']['main'], 
           );
 
           emit(state.copyWith(news_info: fetched_dataInfo));

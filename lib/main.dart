@@ -6,8 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
-import 'package:zeleex_application/Main%20Pages/onlyMenuForMainPage_nothing_here.dart';
+import 'package:zeleex_application/Main%20Pages/bottomMenu_widget.dart';
+import 'package:zeleex_application/bloc/products/products_bloc.dart';
+import 'package:zeleex_application/bloc/profile/profile_bloc.dart';
 import 'package:zeleex_application/second.dart';
 import 'Others/Plate.dart';
 import 'bloc/animals/animals_bloc.dart';
@@ -28,7 +31,10 @@ class First_Page extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AnimalsBloc()),
         BlocProvider(create: (context) => StoreAllBloc()),
+        BlocProvider(create: (context) => ProductsBloc()),
+        BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
+        BlocProvider(create: (context) => MainPageCollectionBloc()),
       ],
       child: MaterialApp(
         builder: ((context, child) => ResponsiveWrapper.builder(
@@ -64,6 +70,9 @@ class MainAndIcon extends StatefulWidget {
 class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
+    context.read<MainPageCollectionBloc>().add(Load_SliderPics());
+    context.read<MainPageCollectionBloc>().add(Load_ColeectionBoard());
+     context.read<MainPageCollectionBloc>().add(Load_Aimals_Catalog());
     _Load_AndGo();
     systemOverlayStyle:
     SystemUiOverlayStyle(
@@ -79,7 +88,7 @@ class _MainAndIconState extends State<MainAndIcon> {
     var checkToken = prefs2.get('keyToken');
 
     if (checkToken.toString() != 'null') {
-      print(" --------------> stored token: " + checkToken.toString());
+      print("*** stored token: " + checkToken.toString());
       await Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushReplacement(
           context,
@@ -89,7 +98,7 @@ class _MainAndIconState extends State<MainAndIcon> {
         );
       });
     } else {
-      print(" --------------> no token");
+      print("*** no token");
       await Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushReplacement(
           context,

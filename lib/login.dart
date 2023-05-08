@@ -18,8 +18,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'Others/shape.dart';
 import 'forgot_password_email.dart';
-import 'Main Pages/onlyMenuForMainPage_nothing_here.dart';
+import 'Main Pages/bottomMenu_widget.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
@@ -565,23 +566,4 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-const double _kCurveHeight = 25;
 
-class ShapesPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final p = Path();
-    final path = Path();
-    p.lineTo(0, size.height - _kCurveHeight);
-    p.relativeQuadraticBezierTo(
-        size.width / 2, 2 * _kCurveHeight, size.width, 0);
-    p.lineTo(size.width, 0);
-    p.close();
-    canvas.drawPath(p, Paint()..color = ZeleexColor.zeleexGreen);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
-}

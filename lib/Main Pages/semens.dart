@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/help.dart';
-import 'package:zeleex_application/Main%20Pages/onlyMenuForMainPage_nothing_here.dart';
+import 'package:zeleex_application/Main%20Pages/bottomMenu_widget.dart';
 import '../Others/Plate.dart';
 import '../from Profile/profile.dart';
 
@@ -593,7 +593,7 @@ class _SemensPageState extends State<SemensPage> {
         //                               height: 5,
         //                             ),
         //                             Text(
-        //                               "ดูโพลไฟล์",
+        //                               "ดูโพรไฟล์",
         //                               style: TextStyle(
         //                                   color: Color.fromARGB(
         //                                       255, 165, 162, 162),

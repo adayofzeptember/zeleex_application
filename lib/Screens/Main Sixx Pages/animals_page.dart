@@ -103,7 +103,8 @@ class _AnimalsPageState extends State<AnimalsPage> {
                         ),
                       );
                     } else {
-                      return Container(
+                      return 
+                      Container(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -119,14 +120,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                 title: state.animals_data[index].title.toString(),
                               ),
                             );
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => Store_Cattle_Detail(
-                              //         animalID: post['id'].toString(),
-                              //         animalName: post['title'].toString(),
-                              //       ),
-                              //     ));
+                          
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

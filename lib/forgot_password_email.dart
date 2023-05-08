@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../login.dart';
 import 'Others/Plate.dart';
 import 'Others/ProgressHUD.dart';
+import 'Others/shape.dart';
 import 'forgot_password_reset.dart';
 
 var _nameController = TextEditingController();

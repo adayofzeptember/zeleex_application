@@ -124,7 +124,7 @@ class Image {
 
 Future<List<Data_Collection_Board>> fetch_collection_board() async {
   final response =
-      await http.get(Uri.parse(zeleexAPI_URl.toString() + 'collection-boards'));
+      await http.get(Uri.parse(zeelexAPI_URL_admin.toString() + 'collection-boards'));
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data'];

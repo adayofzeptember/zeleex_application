@@ -11,24 +11,24 @@ import 'package:searchfield/searchfield.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:http/http.dart' as http;
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/products_page.dart';
 import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/cart.dart';
 import 'package:zeleex_application/Main%20Pages/search_results_page.dart';
-import '../API/Read All/advance_search.dart';
-import '../Others/Plate.dart';
-import '../Others/shape.dart';
-import '../Screens/Main Sixx Pages/animals_page.dart';
-import '../Screens/Main Sixx Pages/products_page.dart';
+import '../../Others/Plate.dart';
+import '../../Others/shape.dart';
+import 'animals_page.dart';
+
 
 var searchController = TextEditingController();
 
-class Main_Widget extends StatefulWidget {
-  Main_Widget({Key? key}) : super(key: key);
+class First_MainPage extends StatefulWidget {
+  First_MainPage({Key? key}) : super(key: key);
   @override
-  State<Main_Widget> createState() => _Main_WidgetState();
+  State<First_MainPage> createState() => _First_MainPageState();
 }
 
-class _Main_WidgetState extends State<Main_Widget> {
+class _First_MainPageState extends State<First_MainPage> {
   @override
   
 
@@ -37,35 +37,29 @@ class _Main_WidgetState extends State<Main_Widget> {
 
   List<String> suggestions = [];
 
-  Future<List<Data_Search>> fetch_search() async {
-    final response = await http
-        .get(Uri.parse('https://admin.zeleex.com/api/search?keyword=en'));
+  // Future<List<Data_Search>> fetch_search() async {
+  //   final response = await http
+  //       .get(Uri.parse('https://admin.zeleex.com/api/search?keyword=en'));
 
-    var jsonResponse = json.decode(response.body);
-    List jsonCon = jsonResponse['data'];
-    var ee = jsonResponse['data'][0].toString();
+  //   var jsonResponse = json.decode(response.body);
+  //   List jsonCon = jsonResponse['data'];
+  //   var ee = jsonResponse['data'][0].toString();
 
-    print(suggestions);
-    for (var i = 0; i < jsonCon.length; i++) {
-      var ee = jsonResponse['data'][i]['title'].toString();
-      suggestions.add(ee);
-    }
-    print(suggestions);
+  //   print(suggestions);
+  //   for (var i = 0; i < jsonCon.length; i++) {
+  //     var ee = jsonResponse['data'][i]['title'].toString();
+  //     suggestions.add(ee);
+  //   }
+  //   print(suggestions);
 
-    if (response.statusCode == 200) {
-      return jsonCon.map((data) => Data_Search.fromJson(data)).toList();
-    } else {
-      throw Exception("error");
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     return jsonCon.map((data) => Data_Search.fromJson(data)).toList();
+  //   } else {
+  //     throw Exception("error");
+  //   }
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-
-    fetch_search();
-
-  }
+ 
 
   Widget build(BuildContext context) {
     return GestureDetector(

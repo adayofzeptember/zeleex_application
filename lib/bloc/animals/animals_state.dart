@@ -30,5 +30,6 @@ class AnimalsState extends Equatable {
   }
 
   @override
-  List<Object> get props => [animals_data, animal_info, isLoading , page, dataTotal];
+  List<Object> get props =>
+      [animals_data, animal_info, isLoading, page, dataTotal];
 }

@@ -20,10 +20,11 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
           isLoading: true,
           dataTotal: 0,
         )) {
+
     on<Load_AllAnimals>((event, emit) async {
       try {
         final response = await dio.get(
-          zeleexAPI_URl +
+          zeelexAPI_URL_admin +
               "animals?page=" +
               state.page.toString() +
               '&per_page=10',
@@ -87,7 +88,7 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
 
       try {
         final response = await dio.get(
-          zeleexAPI_URl + "animals/" + event.id,
+          zeelexAPI_URL_admin + "animals/" + event.id,
           options: Options(headers: {
             "Content-Type": "application/json",
             // "Authorization": "Bearer $token",

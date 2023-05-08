@@ -6,7 +6,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:zeleex_application/Screens/store_info.dart';
 import 'package:zeleex_application/bloc/store_all/model.dart';
-
 import '../../Others/url.dart';
 part 'store_all_event.dart';
 part 'store_all_state.dart';
@@ -24,7 +23,7 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
     on<Load_AllStores>((event, emit) async {
       try {
         final response = await dio.get(
-          zeleexAPI_URl +
+          zeelexAPI_URL_admin +
               "stores?page=" +
               state.page.toString() +
               '&per_page=10',
@@ -86,7 +85,7 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
 
       try {
         final response = await dio.get(
-          zeleexAPI_URl + "stores/" + event.id,
+          zeelexAPI_URL_admin + "stores/" + event.id,
           options: Options(headers: {
             "Content-Type": "application/json",
             // "Authorization": "Bearer $token",

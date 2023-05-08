@@ -93,45 +93,68 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         backgroundColor: ZeleexColor.zeleexGreen,
         elevation: 0.0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Visibility(
-              visible: false,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
+        centerTitle: true,
+        title: const Text(
+          "โพรไฟล์",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: SizedBox(
+                child: SvgPicture.asset(
+                  'assets/images/cart123.svg',
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartPage(),
                 ),
               ),
             ),
-            Text(
-              "โพลไฟล์",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CartPage(),
-                  ),
-                );
-              },
-              child: SvgPicture.asset(
-                'assets/images/cart123.svg',
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
+        // title: Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Visibility(
+        //       visible: false,
+        //       child: InkWell(
+        //         onTap: () {
+        //           Navigator.pop(context);
+        //         },
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(10.0),
+        //           child: Icon(
+        //             Icons.arrow_back_ios,
+        //             color: Colors.white,
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //     Text(
+        //       "โพรไฟล์",
+        //       style:
+        //           TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        //     ),
+        //     InkWell(
+        //       onTap: () {
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //             builder: (context) => CartPage(),
+        //           ),
+        //         );
+        //       },
+        //       child: SvgPicture.asset(
+        //         'assets/images/cart123.svg',
+        //         color: Colors.white,
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -200,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Row(
                                     children: [
                                       Text(
-                                        "แก้ไขโพลไฟล์",
+                                        "แก้ไขโพรไฟล์",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color:
@@ -457,17 +480,20 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   )),
             ),
+
             FutureBuilder<List<Data_Shipping_List>>(
               future: fetch_shipping_list(theTokenOne),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<Data_Shipping_List>? data = snapshot.data;
-                  return ListView.builder(
+                  return 
+                  ListView.builder(
                       shrinkWrap: true,
                       primary: false,
                       itemCount: 1,
                       itemBuilder: (BuildContext context, int index) {
-                        return Column(
+                        return 
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             InkWell(
@@ -548,12 +574,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   ),
                                                 ],
                                               ),
-                                              // Icon(
-                                              //   Icons.arrow_forward_ios_rounded,
-                                              //   color: Color.fromARGB(
-                                              //       255, 130, 130, 130),
-                                              //   size: 15,
-                                              // )
                                             ],
                                           ),
                                         ),
