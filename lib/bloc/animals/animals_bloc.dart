@@ -72,7 +72,7 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
     });
 
     on<Load_AnimalInfo>((event, emit) async {
-      print(event.id);
+    
       Navigator.push(
         event.context,
         PageTransition(
@@ -110,9 +110,9 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
 
           fetched_dataInfo = Animal_Info(
               id: await nestedData['id'],
-              image: getImgs
+              image: getImgs,
               //await nestedData['image']['main']
-              ,
+              
               description: await nestedData['description'],
               title: await nestedData['title'],
               price: await nestedData['price'],

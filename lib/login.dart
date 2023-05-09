@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'Others/shape.dart';
 import 'forgot_password_email.dart';
-import 'Main Pages/bottomMenu_widget.dart';
+import 'Screens/Main Sixx Pages/bottomMenu_main_page.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Main_Page(),
+          builder: (context) => BottomMenu_Page(),
         ),
       );
       return Login_Data.fromJson(json.decode(response.body));
@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Main_Page(),
+          builder: (context) => BottomMenu_Page(),
         ),
       );
       return Login_Social_Data.fromJson(json.decode(response.body));

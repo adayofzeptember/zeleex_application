@@ -8,14 +8,23 @@ import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
-import 'package:zeleex_application/Main%20Pages/bottomMenu_widget.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/bottomMenu_main_page.dart';
 import 'package:zeleex_application/bloc/products/products_bloc.dart';
 import 'package:zeleex_application/bloc/profile/profile_bloc.dart';
 import 'package:zeleex_application/second.dart';
 import 'Others/Plate.dart';
 import 'bloc/animals/animals_bloc.dart';
+import 'bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
 import 'bloc/store_all/store_all_bloc.dart';
 
+// Navigator.push(
+//       event.context,
+//       PageTransition(
+//         duration: const Duration(milliseconds: 250),
+//         type: PageTransitionType.fade,
+//         child: NewsFeedPage_Detail(),
+//       ),
+//     );
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -35,6 +44,7 @@ class First_Page extends StatelessWidget {
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
         BlocProvider(create: (context) => MainPageCollectionBloc()),
+        BlocProvider(create: (context) => BottomMenuSwitchBloc()),
       ],
       child: MaterialApp(
         builder: ((context, child) => ResponsiveWrapper.builder(
@@ -71,8 +81,8 @@ class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
     context.read<MainPageCollectionBloc>().add(Load_SliderPics());
-    context.read<MainPageCollectionBloc>().add(Load_ColeectionBoard());
-     context.read<MainPageCollectionBloc>().add(Load_Aimals_Catalog());
+    context.read<MainPageCollectionBloc>().add(Load_ColectionBoard());
+    context.read<MainPageCollectionBloc>().add(Load_Catalog());
     _Load_AndGo();
     systemOverlayStyle:
     SystemUiOverlayStyle(
@@ -88,12 +98,12 @@ class _MainAndIconState extends State<MainAndIcon> {
     var checkToken = prefs2.get('keyToken');
 
     if (checkToken.toString() != 'null') {
-      print("*** stored token: " + checkToken.toString());
+      print("stored token: " + checkToken.toString());
       await Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Main_Page(),
+            builder: (context) => BottomMenu_Page(),
           ),
         );
       });

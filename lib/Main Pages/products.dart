@@ -117,12 +117,12 @@
 //                     borderRadius: BorderRadius.circular(5.0)),
 //                 child: InkWell(
 //                   onTap: () {
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => Store_Product_Detail(
-//                               productName: post['title'].toString(),
-//                               productID: post['id'].toString(),
-//                               //!qty: x.toString(),
-//                             )));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => Store_Product_Detail(
+                    //           productName: post['title'].toString(),
+                    //           productID: post['id'].toString(),
+                    //           //!qty: x.toString(),
+                    //         )));
 //                   },
 //                   child: Column(
 //                     crossAxisAlignment: CrossAxisAlignment.start,

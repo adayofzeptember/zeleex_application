@@ -73,6 +73,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
                 id: await nested['id'].toString(),
                 address: await nested['address'].toString(),
                 province: await nested['province'].toString(),
+                defaultStatus: nested['default'].toString(),
                 postcode: await nested['postcode'].toString(),
                 phone: await nested['phone'].toString(),
                 name: await nested['name'].toString(),

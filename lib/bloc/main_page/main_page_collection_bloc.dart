@@ -13,7 +13,9 @@ class MainPageCollectionBloc
   final dio = Dio();
   MainPageCollectionBloc()
       : super(MainPageCollectionState(
+        slider_index: 0,
             slider_pics: [],
+            search_keyWords: [],
             collection_board: [],
             animals_catalog: [],
             products_catalog: [])) {
@@ -53,9 +55,14 @@ class MainPageCollectionBloc
       }
     });
 
+     on<IndexSlider>((event, emit) {
+      emit(state.copyWith(slider_index: event.index));
+   
+    });
+
     //!
 
-    on<Load_ColeectionBoard>((event, emit) async {
+    on<Load_ColectionBoard>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
       try {
@@ -93,7 +100,60 @@ class MainPageCollectionBloc
 
     //!
 
-    on<Load_Aimals_Catalog>((event, emit) async {
+    on<Load_Catalog>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('keyToken');
+      try {
+        final response = await dio.get(
+          zeelexAPI_URL_admin + 'home',
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          }),
+        );
+
+        var fetched_prdCat =
+            (state.products_catalog != []) ? state.products_catalog : [];
+
+        var fetched_anmCat =
+            (state.animals_catalog != []) ? state.animals_catalog : [];
+        if (response.statusCode == 200) {
+          for (var nested in response.data['data']['animal_cat_01']) {
+            fetched_anmCat.add(
+              Animals_Catalog(
+                id: await nested['id'].toString(),
+                title: await nested['title'].toString(),
+                image: await nested['image']['thumbnail'].toString(),
+                price: await nested['price'].toString(),
+              ),
+            );
+          }
+
+          for (var nested in response.data['data']['product_cat_01']) {
+            fetched_prdCat.add(
+              Products_Catalog(
+                id: await nested['id'].toString(),
+                title: await nested['title'].toString(),
+                image: await nested['image']['thumbnail'].toString(),
+                price: await nested['price'].toString(),
+              ),
+            );
+          }
+
+          emit(state.copyWith(
+              animals_catalog: fetched_anmCat,
+              products_catalog: fetched_prdCat));
+        } else {
+          print('api response error');
+        }
+      } catch (e) {
+        print("*** failed try: $e");
+      }
+    });
+
+    //!
+
+    on<Get_SearchKeyWords>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
       try {

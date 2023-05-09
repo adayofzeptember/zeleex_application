@@ -5,7 +5,6 @@ import 'package:zeleex_application/from%20Profile/likes/likes_product_widget.dar
 import 'package:zeleex_application/from%20Profile/wait_payment_widget.dart';
 import 'package:zeleex_application/from%20Profile/profile.dart';
 import 'package:flutter/services.dart';
-
 import '../../Others/Plate.dart';
 
 class LikesPage extends StatefulWidget {
@@ -22,35 +21,27 @@ class _LikesPageState extends State<LikesPage> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-                  systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarIconBrightness: Brightness.light,
-              statusBarBrightness: Brightness.light,
-              statusBarColor: ZeleexColor.zeleexGreen),
+            systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarIconBrightness: Brightness.light,
+                statusBarBrightness: Brightness.light,
+                statusBarColor: ZeleexColor.zeleexGreen),
             automaticallyImplyLeading: false,
             backgroundColor: ZeleexColor.zeleexGreen,
             elevation: 0,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "สิ่งที่ถูกใจ",
-                  style: TextStyle(color: Colors.white),
-                ),
-                Icon(
-                  Icons.abc_sharp,
-                  color: ZeleexColor.zeleexGreen,
-                )
-              ],
+            centerTitle: true,
+            title: const Text(
+              "สิ่งที่ถูกใจ",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
+            leading: IconButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.white,
+                )),
             bottom: TabBar(
                 labelColor: ZeleexColor.zeleexGreen,
                 unselectedLabelColor: Colors.white,

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
@@ -17,9 +18,10 @@ import '../../career.dart';
 import '../../cart.dart';
 import '../../from Profile/history/history.dart';
 import '../../from Profile/likes/likes.dart';
+import '../../address_manage_page.dart';
 
-class ProfilePage2 extends StatelessWidget {
-  ProfilePage2({Key? key}) : super(key: key);
+class ProfilePage extends StatelessWidget {
+  ProfilePage({Key? key}) : super(key: key);
 
   // Future logout_removeToken() async {
   @override
@@ -27,7 +29,7 @@ class ProfilePage2 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
           statusBarBrightness: Brightness.light,
           statusBarColor: ZeleexColor.zeleexGreen,
@@ -61,7 +63,7 @@ class ProfilePage2 extends StatelessWidget {
       body: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
           if (state.loading == true) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(color: Colors.red),
             );
           }
@@ -75,7 +77,7 @@ class ProfilePage2 extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: ZeleexColor.zeleexGreen,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30),
@@ -86,7 +88,7 @@ class ProfilePage2 extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 60,
                               width: 60,
                               child: CircleAvatar(
@@ -134,17 +136,17 @@ class ProfilePage2 extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(state.profile_data.name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'Kanit',
                                           fontSize: 20,
                                           color: Colors.white)),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Row(
                                     children: [
-                                      Text(
+                                      const Text(
                                         "แก้ไขโพรไฟล์",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -154,7 +156,7 @@ class ProfilePage2 extends StatelessWidget {
                                           fontSize: 12,
                                         ),
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.arrow_forward_ios_rounded,
                                         size: 15,
                                       )
@@ -177,12 +179,13 @@ class ProfilePage2 extends StatelessWidget {
                               SvgPicture.asset(
                                 'assets/images/buy.svg',
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text("การสั่งซื้อ",
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 51, 51, 51),
+                                      color:
+                                          const Color.fromARGB(255, 51, 51, 51),
                                       fontWeight: FontWeight.bold,
                                       fontSize:
                                           MediaQuery.of(context).size.height *
@@ -192,21 +195,26 @@ class ProfilePage2 extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HistoryPage()));
+                                context,
+                                PageTransition(
+                                  duration: const Duration(milliseconds: 250),
+                                  type: PageTransitionType.fade,
+                                  child: HistoryPage(),
+                                ),
+                              );
                             },
                             child: Row(
                               children: [
                                 Text(
                                   "ประวัติการสั่งซื้อ",
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 130, 130, 130),
+                                      color: const Color.fromARGB(
+                                          255, 130, 130, 130),
                                       fontSize:
                                           MediaQuery.of(context).size.height *
                                               0.015),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   color: Color.fromARGB(255, 130, 130, 130),
                                   size: 15,
@@ -217,7 +225,7 @@ class ProfilePage2 extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
@@ -225,7 +233,7 @@ class ProfilePage2 extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -243,10 +251,10 @@ class ProfilePage2 extends StatelessWidget {
                                   height: MediaQuery.of(context).size.height *
                                       0.035,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
-                                Text(
+                                const Text(
                                   "ที่ต้องชำระ",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 130, 130, 130),
@@ -258,7 +266,7 @@ class ProfilePage2 extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/images/arrowright.svg',
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -275,10 +283,10 @@ class ProfilePage2 extends StatelessWidget {
                                   height: MediaQuery.of(context).size.height *
                                       0.035,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
-                                Text(
+                                const Text(
                                   "เตรียมจัดส่ง",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 130, 130, 130),
@@ -290,7 +298,7 @@ class ProfilePage2 extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/images/arrowright.svg',
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -307,10 +315,10 @@ class ProfilePage2 extends StatelessWidget {
                                   height: MediaQuery.of(context).size.height *
                                       0.035,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
-                                Text(
+                                const Text(
                                   "กำลังจัดส่ง",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 130, 130, 130),
@@ -322,7 +330,7 @@ class ProfilePage2 extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/images/arrowright.svg',
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -338,10 +346,10 @@ class ProfilePage2 extends StatelessWidget {
                                   height: MediaQuery.of(context).size.height *
                                       0.035,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
-                                Text(
+                                const Text(
                                   "ให้คะแนน",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 130, 130, 130),
@@ -357,13 +365,15 @@ class ProfilePage2 extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => LikesPage(),
+                          PageTransition(
+                            duration: const Duration(milliseconds: 250),
+                            type: PageTransitionType.fade,
+                            child: LikesPage(),
                           ),
                         );
                       },
                       child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                             top: BorderSide(
                                 color: Color.fromARGB(255, 241, 241, 241)),
@@ -377,7 +387,7 @@ class ProfilePage2 extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SvgPicture.asset('assets/images/heart.svg'),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Row(
@@ -391,7 +401,7 @@ class ProfilePage2 extends StatelessWidget {
                                                   0.015,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        Icon(
+                                        const Icon(
                                           Icons.arrow_forward_ios_rounded,
                                           size: 15,
                                         )
@@ -408,19 +418,20 @@ class ProfilePage2 extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            print('address id: '+ state.address_data[0].id);
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => Payment_Address(),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                duration: const Duration(milliseconds: 250),
+                                type: PageTransitionType.fade,
+                                child: Address_Manage_Page(),
+                              ),
+                            );
                           },
                           child: Container(
                               decoration: BoxDecoration(
                                   border: Border.all(
-                                      color:
-                                          Color.fromARGB(255, 241, 241, 241))),
+                                      color: const Color.fromARGB(
+                                          255, 241, 241, 241))),
                               width: double.infinity,
                               child: Padding(
                                 padding:
@@ -434,7 +445,7 @@ class ProfilePage2 extends StatelessWidget {
                                       children: [
                                         SvgPicture.asset(
                                             'assets/images/pin.svg'),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text(
@@ -460,7 +471,7 @@ class ProfilePage2 extends StatelessWidget {
                                               Text(
                                                 state.address_data[0].name,
                                                 style: TextStyle(
-                                                    color: Color.fromARGB(
+                                                    color: const Color.fromARGB(
                                                         255, 130, 130, 130),
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -478,7 +489,7 @@ class ProfilePage2 extends StatelessWidget {
                                                                 .height *
                                                             0.015),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 15,
                                               ),
                                             ],
@@ -494,7 +505,7 @@ class ProfilePage2 extends StatelessWidget {
                                           child: Text(
                                             state.address_data[0].phone,
                                             style: TextStyle(
-                                                color: Color.fromARGB(
+                                                color: const Color.fromARGB(
                                                     255, 130, 130, 130),
                                                 fontSize: MediaQuery.of(context)
                                                         .size
@@ -525,7 +536,7 @@ class ProfilePage2 extends StatelessWidget {
                                                               .size
                                                               .height *
                                                           0.015,
-                                                  color: Color.fromARGB(
+                                                  color: const Color.fromARGB(
                                                       255, 130, 130, 130),
                                                 ),
                                               ),
@@ -540,7 +551,7 @@ class ProfilePage2 extends StatelessWidget {
                                                               .size
                                                               .height *
                                                           0.015,
-                                                  color: Color.fromARGB(
+                                                  color: const Color.fromARGB(
                                                       255, 130, 130, 130),
                                                 ),
                                               )
@@ -558,7 +569,8 @@ class ProfilePage2 extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              side: BorderSide(color: ZeleexColor.zeleexGreen),
+                              side: const BorderSide(
+                                  color: ZeleexColor.zeleexGreen),
                               primary: ZeleexColor.zeleexGreen,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -572,10 +584,10 @@ class ProfilePage2 extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SvgPicture.asset('assets/images/store2.svg'),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
+                                  const Text(
                                     "เริ่มการขาย ลงทะเบียนฟรี",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -593,12 +605,16 @@ class ProfilePage2 extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TermsConditon()));
+                          context,
+                          PageTransition(
+                            duration: const Duration(milliseconds: 250),
+                            type: PageTransitionType.fade,
+                            child: TermsConditon(),
+                          ),
+                        );
                       },
                       child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                                   top: BorderSide(
                                       color:
@@ -617,7 +633,7 @@ class ProfilePage2 extends StatelessWidget {
                                     SvgPicture.asset(
                                       'assets/images/new/edit.svg',
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Row(
@@ -631,7 +647,7 @@ class ProfilePage2 extends StatelessWidget {
                                                   0.015,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        Icon(
+                                        const Icon(
                                           Icons.arrow_forward_ios_rounded,
                                           size: 15,
                                         )
@@ -646,12 +662,16 @@ class ProfilePage2 extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HelpCenterPage()));
+                          context,
+                          PageTransition(
+                            duration: const Duration(milliseconds: 250),
+                            type: PageTransitionType.fade,
+                            child: HelpCenterPage(),
+                          ),
+                        );
                       },
                       child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
                                       color:
@@ -667,7 +687,7 @@ class ProfilePage2 extends StatelessWidget {
                                     SvgPicture.asset(
                                       'assets/images/new/Frame.svg',
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 7,
                                     ),
                                     Row(
@@ -681,7 +701,7 @@ class ProfilePage2 extends StatelessWidget {
                                                   0.015,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        Icon(
+                                        const Icon(
                                           Icons.arrow_forward_ios_rounded,
                                           size: 15,
                                         )
@@ -696,12 +716,16 @@ class ProfilePage2 extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CareerPage()));
+                          context,
+                          PageTransition(
+                            duration: const Duration(milliseconds: 250),
+                            type: PageTransitionType.fade,
+                            child: CareerPage(),
+                          ),
+                        );
                       },
                       child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
                                       color:
@@ -717,7 +741,7 @@ class ProfilePage2 extends StatelessWidget {
                                     SvgPicture.asset(
                                       'assets/images/new/work.svg',
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 7,
                                     ),
                                     Row(
@@ -731,7 +755,7 @@ class ProfilePage2 extends StatelessWidget {
                                                   0.015,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        Icon(
+                                        const Icon(
                                           Icons.arrow_forward_ios_rounded,
                                           size: 15,
                                         )
@@ -748,9 +772,9 @@ class ProfilePage2 extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color: Color.fromARGB(255, 95, 95, 95)),
-                              primary: Color.fromARGB(255, 255, 255, 255),
+                              primary: const Color.fromARGB(255, 255, 255, 255),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               )),
@@ -763,7 +787,7 @@ class ProfilePage2 extends StatelessWidget {
                             padding: const EdgeInsets.all(12.0),
                             child: Container(
                               width: double.infinity,
-                              child: Text(
+                              child: const Text(
                                 "ออกจากระบบ",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(

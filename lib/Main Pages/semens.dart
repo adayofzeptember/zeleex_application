@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/help.dart';
-import 'package:zeleex_application/Main%20Pages/bottomMenu_widget.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/bottomMenu_main_page.dart';
 import '../Others/Plate.dart';
 import '../from Profile/profile.dart';
 

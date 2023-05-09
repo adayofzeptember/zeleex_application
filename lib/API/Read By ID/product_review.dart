@@ -321,7 +321,7 @@ Future<List<Data_Review>> fetch_Product_Review() async {
   List jsonCon = jsonResponse['data']['data'];
   // var jsonConSpecific = jsonResponse['data']['data'][1];
   if (response.statusCode == 200) {
-    print(jsonResponse);
+
     return jsonCon
         .map((data) => new Data_Review.fromJson(data))
         .toList();

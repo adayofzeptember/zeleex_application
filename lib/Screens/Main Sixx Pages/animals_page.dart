@@ -133,7 +133,8 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
-                                      child: CachedNetworkImage(
+                                      child: 
+                                      CachedNetworkImage(
                                         imageUrl: state
                                             .animals_data[index].image
                                             .toString(),

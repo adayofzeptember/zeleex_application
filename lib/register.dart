@@ -8,7 +8,7 @@ import 'Others/Plate.dart';
 import 'Others/ProgressHUD.dart';
 import 'Others/shape.dart';
 import 'login.dart';
-import 'Main Pages/bottomMenu_widget.dart';
+import 'Screens/Main Sixx Pages/bottomMenu_main_page.dart';
 import 'terms.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -114,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Main_Page(),
+            builder: (context) => BottomMenu_Page(),
           ),
         );
       }

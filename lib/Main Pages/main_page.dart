@@ -62,7 +62,6 @@ class _Main_WidgetState extends State<Main_Widget> {
   @override
   void initState() {
     super.initState();
-
     fetch_search();
 
   }

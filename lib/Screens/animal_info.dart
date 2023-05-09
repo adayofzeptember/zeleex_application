@@ -22,46 +22,7 @@ class Animal_Info_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: Padding(
-      //   padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
-      //   child: Row(
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Container(
-      //         width: 150,
-      //         child: FloatingActionButton(
-      //           heroTag: "btn1",
-      //           backgroundColor: ZeleexColor.zeleexGreen,
-      //           shape: const BeveledRectangleBorder(
-      //               borderRadius: BorderRadius.zero),
-      //           onPressed: () => {
-      //             launch("tel://${1}"),
-      //           },
-      //           child: Container(
-      //             child: Row(
-      //               mainAxisAlignment: MainAxisAlignment.center,
-      //               children: [
-      //                 SvgPicture.asset(
-      //                   'assets/images/call.svg',
-      //                   color: Colors.white,
-      //                 ),
-      //                 const SizedBox(
-      //                   width: 5,
-      //                 ),
-      //                 const Text(
-      //                   "ติดต่อร้านค้า",
-      //                   style: TextStyle(color: Colors.white),
-      //                 )
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-         appBar: AppBar(
+      appBar: AppBar(
           backgroundColor: Colors.white,
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
@@ -72,7 +33,8 @@ class Animal_Info_Page extends StatelessWidget {
           centerTitle: true,
           title: Text(
             animalName.toString(),
-            style: TextStyle(fontWeight: FontWeight.bold, color: ZeleexColor.zeleexGreen),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: ZeleexColor.zeleexGreen),
           ),
           leading: IconButton(
             onPressed: () async {
@@ -96,6 +58,7 @@ class Animal_Info_Page extends StatelessWidget {
                       child: JumpingText(
                         'กำลังโหลด...',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                             fontSize: 25, color: ZeleexColor.zeleexGreen),
                       ),
                     ),
@@ -113,50 +76,19 @@ class Animal_Info_Page extends StatelessWidget {
                                   color: Color.fromARGB(167, 216, 216, 216)),
                               child: Image.network(
                                 state.animal_info.image[index].toString(),
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                               ));
                         },
                         options: CarouselOptions(
-                            enlargeCenterPage: true,
-                            viewportFraction: 1,
-                            autoPlay: true,
-                            autoPlayInterval: const Duration(seconds: 5),
-                            autoPlayAnimationDuration: const Duration(seconds: 2),
-                            // onPageChanged: (index, reason) => setState(
-                            //       (() => activeIndex = index),
-                            //     )
-                                )),
-
-                    // CachedNetworkImage(
-                    //   imageUrl: state.animal_info.image.toString(),
-                    //   fit: BoxFit.cover,
-                    //   progressIndicatorBuilder:
-                    //       (context, url, downloadProgress) => Container(
-                    //     color: Color.fromARGB(255, 142, 142, 142),
-                    //     height: MediaQuery.of(context).size.height * 0.3,
-                    //   ),
-                    //   errorWidget: (context, url, error) => Padding(
-                    //     padding: const EdgeInsets.only(right: 5, left: 5),
-                    //     child: Center(
-                    //       child: Container(
-                    //           decoration: BoxDecoration(
-                    //               border: Border.all(
-                    //                   color:
-                    //                       Color.fromARGB(255, 141, 141, 141))),
-                    //           alignment: Alignment.center,
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.only(top: 10),
-                    //             child: Container(
-                    //                 width: double.infinity,
-                    //                 height: 300,
-                    //                 child: Center(
-                    //                     child: Text("ไม่พบรูปภาพของสัตว์"))),
-                    //           )),
-                    //     ),
-                    //   ),
-                    // ),
-                    // // buildIndcator(),
-
+                          enlargeCenterPage: true,
+                          viewportFraction: 1,
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 5),
+                          autoPlayAnimationDuration: const Duration(seconds: 2),
+                          // onPageChanged: (index, reason) => setState(
+                          //       (() => activeIndex = index),
+                          //     )
+                        )),
                     Container(
                       color: Colors.white,
                       child: Padding(
@@ -203,11 +135,9 @@ class Animal_Info_Page extends StatelessWidget {
                             ],
                           )),
                     ),
-
                     const SizedBox(
                       height: 3,
                     ),
-
                     Container(
                       color: Colors.white,
                       child: Padding(
@@ -324,7 +254,7 @@ class Animal_Info_Page extends StatelessWidget {
                               const Text(
                                 "รายละเอียด",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.bold,
                                     color: ZeleexColor.zeleexGreen,
                                     fontSize: 20),
                               ),
@@ -339,42 +269,38 @@ class Animal_Info_Page extends StatelessWidget {
                             ],
                           )),
                     ),
-
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: ZeleexColor.zeleexGreen,
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
-                        onPressed: () {
-                            launch("tel://${state.animal_info.store_phone}");
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/call.svg',
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                const Text(
-                                  "ติดต่อร้านค้า",
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                                )
-                              ],
-                            ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: ZeleexColor.zeleexGreen,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          )),
+                      onPressed: () {
+                        launch("tel://${state.animal_info.store_phone}");
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/call.svg',
+                                color: Colors.white,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              const Text(
+                                "ติดต่อร้านค้า",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              )
+                            ],
                           ),
                         ),
                       ),

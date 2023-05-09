@@ -14,7 +14,7 @@ import 'API/Post Method/post_checkout_IDEA.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Others/Plate.dart';
 import 'cart.dart';
-import 'payment_address.dart';
+import 'address_manage_page.dart';
 import 'payment_method.dart';
 
 int totalPrice = 0;
@@ -132,23 +132,22 @@ class _PaymentPageState extends State<PaymentPage> {
             padding: const EdgeInsets.only(bottom: 20),
             child: Column(
               children: <Widget>[
-
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: <Widget>[
-                      
                       InkWell(
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Payment_Address()));
+                                  builder: (context) => Address_Manage_Page()));
                         },
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: ZeleexColor.zeleexGreen)),
+                                border:
+                                    Border.all(color: ZeleexColor.zeleexGreen)),
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -548,7 +547,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                                 Radio(
                                                   fillColor: MaterialStateColor
                                                       .resolveWith((states) =>
-                                                          ZeleexColor.zeleexGreen),
+                                                          ZeleexColor
+                                                              .zeleexGreen),
                                                   value: 1,
                                                   groupValue: radioID,
                                                   onChanged: (val) {
@@ -575,7 +575,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                                 Radio(
                                                   fillColor: MaterialStateColor
                                                       .resolveWith((states) =>
-                                                          ZeleexColor.zeleexGreen),
+                                                          ZeleexColor
+                                                              .zeleexGreen),
                                                   value: 2,
                                                   groupValue: radioID,
                                                   onChanged: (val) {

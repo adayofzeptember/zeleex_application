@@ -34,33 +34,22 @@ class _CareerPageState extends State<CareerPage> {
               statusBarColor: ZeleexColor.zeleexGreen),
           backgroundColor: ZeleexColor.zeleexGreen,
           elevation: 0,
-          title: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "ร่วมงานกับเรา",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                Icon(
-                  Icons.abc_sharp,
-                  color: ZeleexColor.zeleexGreen,
-                )
-              ],
+      centerTitle: true,
+            title: const Text(
+              "ร่วมงานกับเรา",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-          ),
-        ),
+            leading: IconButton(
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.white,
+              ),
+            )),
+        
         body: Padding(
           padding: const EdgeInsets.fromLTRB(
             20,

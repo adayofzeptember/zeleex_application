@@ -38,30 +38,22 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
               statusBarBrightness: Brightness.dark,
               statusBarColor: Colors.white),
           backgroundColor: Colors.white,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ),
+          centerTitle: true,
+            title: const Text(
+              "ศูนย์ช่วยเหลือ",
+              style:
+                  TextStyle(color: Color.fromARGB(255, 51, 51, 51), fontWeight: FontWeight.bold),
+            ),
+            leading: IconButton(
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+                color: Color.fromARGB(255, 51, 51, 51),
               ),
-              Text(
-                "ศูนย์ช่วยเหลือ",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 51, 51, 51),
-                    fontWeight: FontWeight.bold),
-              ),
-              InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: SvgPicture.asset('assets/images/xcircle.svg')),
-            ],
-          ),
-        ),
+            )),
+        
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

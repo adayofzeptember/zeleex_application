@@ -129,8 +129,9 @@ class Store_Info extends StatelessWidget {
                   ),
                   Center(
                     child: JumpingText(
-                      'กำลังโหลดร้านค้า...',
+                      'กำลังโหลด...',
                       style: TextStyle(
+                        fontWeight: FontWeight.bold,
                           fontSize: 25, color: ZeleexColor.zeleexGreen),
                     ),
                     // Text(
@@ -387,6 +388,7 @@ class Store_Info extends StatelessWidget {
                                 ),
                                 const Divider(
                                     color: Color.fromARGB(255, 165, 162, 162)),
+                                const SizedBox(height: 15,),
                                 HtmlWidget(content.outerHtml),
 
                                 const SizedBox(

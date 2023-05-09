@@ -25,27 +25,20 @@ class _HistoryPageState extends State<HistoryPage> {
                 statusBarColor: ZeleexColor.zeleexGreen),
             backgroundColor: ZeleexColor.zeleexGreen,
             elevation: 0,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context, rootNavigator: true).pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "ประวัติการสั่งซื้อ",
-                  style: TextStyle(color: Colors.white),
-                ),
-                Icon(
-                  Icons.abc_sharp,
-                  color: ZeleexColor.zeleexGreen,
-                )
-              ],
+            centerTitle: true,
+            title: const Text(
+              "ประวัติการสั่งซื้อ",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            leading: IconButton(
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.white,
+              ),
             ),
             bottom: TabBar(
                 labelColor: ZeleexColor.zeleexGreen,

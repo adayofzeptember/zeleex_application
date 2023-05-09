@@ -29,8 +29,8 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
   final controller = ScrollController();
 
   Future<List<Data_Products_ReadAll>> fetch_ProductPage_readAll() async {
-    final response =
-        await http.get(Uri.parse('https://api.zeleex.com/api/products?store_id='+widget.storeID));
+    final response = await http.get(Uri.parse(
+        'https://api.zeleex.com/api/products?store_id=' + widget.storeID));
     var jsonResponse = json.decode(response.body);
     List jsonCon = jsonResponse['data']['data'];
     if (response.statusCode == 200) {
@@ -62,11 +62,11 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 221, 221, 221),
       appBar: AppBar(
-              systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.dark,
-              statusBarColor: Colors.white,
-            ),
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.dark,
+            statusBarColor: Colors.white,
+          ),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,
@@ -84,7 +84,8 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
               ),
               Text("สินค้าในร้าน",
                   style: TextStyle(
-                      color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold)),
+                      color: ZeleexColor.zeleexGreen,
+                      fontWeight: FontWeight.bold)),
               Row(
                 children: [
                   SvgPicture.asset(
@@ -103,8 +104,7 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
                   Data_Store thisStore_notCoverIMG = snapshot.data;
                   return Container(
                       child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(6, 5, 6, 0),
-
+                    padding: const EdgeInsets.fromLTRB(6, 5, 6, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -269,7 +269,8 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
                                                         .toString() +
                                                     ", ",
                                                 style: TextStyle(
-                                                    color: ZeleexColor.zeleexGreen),
+                                                    color: ZeleexColor
+                                                        .zeleexGreen),
                                               ),
                                             ],
                                           );
@@ -326,13 +327,12 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
                               borderRadius: BorderRadius.circular(5.0)),
                           child: InkWell(
                             onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Store_Product_Detail(
-                                          productName:
-                                              data![index].title.toString(),
-                                          productID: data[index].id.toString(),
-                                  
-                                        )));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Store_Product_Detail(
+                                        productName:
+                                            data![index].title.toString(),
+                                        productID: data[index].id.toString(),
+                                      )));
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -411,8 +411,7 @@ class _Store_ProductPageState extends State<Store_ProductPage> {
               }
               return Padding(
                 padding: const EdgeInsets.only(top: 100),
-                child: Container(
-                 ),
+                child: Container(),
               );
             },
           ),

@@ -12,6 +12,7 @@ class Address_Model {
   String? address;
   String? city;
   String? district;
+  String? defaultStatus;
   String? province;
   String? postcode;
   String? phone;
@@ -20,6 +21,7 @@ class Address_Model {
       {this.address,
       this.city,
       this.district,
+      this.defaultStatus,
       this.id,
       this.name,
       this.phone,

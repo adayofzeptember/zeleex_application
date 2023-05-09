@@ -11,6 +11,7 @@ import '../../Others/Plate.dart';
 import 'package:intl/intl.dart';
 
 import '../../store_page_detail_productDetail.dart';
+import '../product_info.dart';
 
 class ProductsPage extends StatefulWidget {
   ProductsPage({Key? key}) : super(key: key);
@@ -90,7 +91,7 @@ class _ProductsPageState extends State<ProductsPage> {
                   physics: ClampingScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisExtent: MediaQuery.of(context).size.height * 0.28,
+                    mainAxisExtent: MediaQuery.of(context).size.height * 0.35,
                   ),
                   itemCount: (state.isLoading == true)
                       ? state.product_list.length + 1
@@ -107,9 +108,7 @@ class _ProductsPageState extends State<ProductsPage> {
                           //const CupertinoActivityIndicator()
                         ),
                       );
-                    } 
-                  
-                    else {
+                    } else {
                       return Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: Card(
@@ -117,56 +116,74 @@ class _ProductsPageState extends State<ProductsPage> {
                                 borderRadius: BorderRadius.circular(5.0)),
                             child: InkWell(
                               onTap: () {
+                                print('product id: ' +
+                                    state.product_list[index].title.toString());
 
-                                print('product id: '+ state.product_list[index].id.toString());
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) => Store_Product_Detail(
-                                //           productName: state.product_list[index].title.toString(),
-                                //           productID: state.product_list[index].id.toString(),
-
-                                //         )));
+                                context.read<ProductsBloc>().add(
+                                      Load_ProductInfo(
+                                        id: state.product_list[index].id
+                                            .toString(),
+                                        context: context,
+                                        title: state.product_list[index].title
+                                            .toString(),
+                                      ),
+                                    );
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        topRight: Radius.circular(5)),
-                                    child: CachedNetworkImage(
-                                      imageUrl: 'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
-                                      fit: BoxFit.fill,
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: ZeleexColor.zeleexGreen,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(5),
+                                            topRight: Radius.circular(5))),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.22,
+                                    width: double.infinity,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(5),
+                                            topRight: Radius.circular(5)),
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
+                                          fit: BoxFit.contain,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
                                               Container(
-                                        color:
-                                            Color.fromARGB(255, 142, 142, 142),
-                                        // height: 200,
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              3, 3, 3, 0),
-                                          child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.22,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 211, 204, 204),
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5))),
-                                              alignment: Alignment.center,
-                                              child: Text("ไม่พบรูปภาพ")),
-                                        ),
-                                      ),
-                                    ),
-                                    // Image.network(
+                                            color: Color.fromARGB(
+                                                255, 142, 142, 142),
+                                            // height: 200,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Center(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      3, 3, 3, 0),
+                                              child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.22,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              211,
+                                                              204,
+                                                              204)),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5))),
+                                                  alignment: Alignment.center,
+                                                  child:
+                                                      Icon(Icons.error_outline)),
+                                            ),
+                                          ),
+                                        )),
                                   ),
                                   Padding(
                                     padding:
@@ -194,7 +211,8 @@ class _ProductsPageState extends State<ProductsPage> {
                                                 int.parse(state
                                                     .product_list[index].price
                                                     .toString())),
-                                        style: TextStyle(color: Colors.red, fontSize: 17),
+                                        style: TextStyle(
+                                            color: Colors.red, fontSize: 17),
                                       )),
                                   SizedBox(
                                     height: 8,

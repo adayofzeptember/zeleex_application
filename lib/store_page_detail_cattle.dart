@@ -70,9 +70,9 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 221, 221, 221),
+      backgroundColor: const Color.fromARGB(255, 221, 221, 221),
       appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
             statusBarBrightness: Brightness.dark,
             statusBarColor: Colors.white,
@@ -87,12 +87,12 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   color: Color.fromARGB(255, 51, 51, 51),
                 ),
               ),
-              Text("สัตว์ในร้าน",
+              const Text("สัตว์ในร้าน",
                   style: TextStyle(
                       color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold)),
               Row(
@@ -116,7 +116,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                     padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
                     child: Container(
                       width: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
@@ -137,7 +137,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                         0.07,
                                     child: CircleAvatar(
                                       backgroundColor:
-                                          Color.fromARGB(255, 131, 131, 131),
+                                          const Color.fromARGB(255, 131, 131, 131),
                                       backgroundImage: NetworkImage(
                                           thisStore_notCoverIMG.image!.thumbnail
                                               .toString()),
@@ -152,9 +152,9 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                       Text(
                                           thisStore_notCoverIMG.title
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold)),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Row(
@@ -163,7 +163,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                         children: [
                                           SvgPicture.asset(
                                               'assets/images/pinnew.svg'),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           Container(
@@ -172,28 +172,28 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                             child: Text(
                                               thisStore_notCoverIMG.address
                                                   .toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 13),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Row(
                                         children: [
                                           SvgPicture.asset(
                                               'assets/images/callnew.svg'),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           Container(
                                             child: Text(
                                               thisStore_notCoverIMG.phone
                                                   .toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 13),
                                             ),
@@ -203,13 +203,13 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                     ],
                                   ),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.settings,
                                   color: Colors.white,
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Padding(
@@ -217,11 +217,11 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                               child: Row(
                                 children: [
                                   SvgPicture.asset('assets/images/star.svg'),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
-                                  Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
-                                  SizedBox(
+                                  const Text(" 5.0 คะแนน | 5.2K ผู้ติดตาม"),
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   ElevatedButton(
@@ -232,7 +232,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                         ),
                                         primary: pressed
                                             ? ZeleexColor.zeleexGreen
-                                            : Color.fromARGB(
+                                            : const Color.fromARGB(
                                                 255, 204, 204, 204),
                                         elevation: 0),
                                     onPressed: () {
@@ -242,7 +242,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                     },
                                     child: Text(
                                       pressed ? "ติดตาม" : "ติดตามแล้ว",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color:
                                               Color.fromRGBO(255, 255, 255, 1)),
                                     ),
@@ -256,7 +256,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                               padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
                               child: Row(
                                 children: <Widget>[
-                                  Text("ประเภทร้านค้า "),
+                                  const Text("ประเภทร้านค้า "),
                                   Container(
                                     height: 20,
                                     child: ListView.builder(
@@ -273,7 +273,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                                         .types![index].title
                                                         .toString() +
                                                     ", ",
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: ZeleexColor.zeleexGreen),
                                               ),
                                             ],
@@ -283,15 +283,15 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Divider(color: Color.fromARGB(255, 165, 162, 162)),
+                            const Divider(color: Color.fromARGB(255, 165, 162, 162)),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Text(
                                 thisStore_notCoverIMG.content.toString(),
-                                style: TextStyle(color: Colors.grey),
+                                style: const TextStyle(color: Colors.grey),
                               ),
                             ),
                           ],
@@ -300,8 +300,8 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                     ),
                   ));
                 } else {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 50),
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 50),
                     child: Center(child: CircularProgressIndicator()),
                   );
                 }
@@ -315,7 +315,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                   child: RawScrollbar(
                     controller: controller,
                     thumbColor: ZeleexColor.zeleexGreen,
-                    radius: Radius.circular(50),
+                    radius: const Radius.circular(50),
                     thickness: 5,
                     child: GridView.builder(
                       controller: controller,
@@ -342,7 +342,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ClipRRect(
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(5),
                                       topRight: Radius.circular(5)),
                                   child: CachedNetworkImage(
@@ -354,7 +354,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                     progressIndicatorBuilder:
                                         (context, url, downloadProgress) =>
                                             Container(
-                                      color: Color.fromARGB(255, 142, 142, 142),
+                                      color: const Color.fromARGB(255, 142, 142, 142),
                                       // height: 200,
                                     ),
                                     errorWidget: (context, url, error) =>
@@ -369,13 +369,13 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                                 0.22,
                                             decoration: BoxDecoration(
                                                 border: Border.all(
-                                                  color: Color.fromARGB(
+                                                  color: const Color.fromARGB(
                                                       255, 211, 204, 204),
                                                 ),
-                                                borderRadius: BorderRadius.all(
+                                                borderRadius: const BorderRadius.all(
                                                     Radius.circular(5))),
                                             alignment: Alignment.center,
-                                            child: Text("ไม่พบรูปภาพ")),
+                                            child: const Text("ไม่พบรูปภาพ")),
                                       ),
                                     ),
                                   ),
@@ -387,7 +387,7 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                     height: 40,
                                     child: Text(
                                       data[index].title.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 13,
                                         color: Color.fromARGB(255, 51, 51, 51),
                                       ),
@@ -399,9 +399,9 @@ class _Store_CattlePageState extends State<Store_CattlePage> {
                                         const EdgeInsets.fromLTRB(10, 5, 0, 0),
                                     child: Text(
                                       "฿ " + data[index].price.toString(),
-                                      style: TextStyle(color: Colors.red),
+                                      style: const TextStyle(color: Colors.red),
                                     )),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 )
                               ],

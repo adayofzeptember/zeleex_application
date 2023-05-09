@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'Others/Plate.dart';
 import 'register.dart';
-
-
 
 TermsWidget() {
   return Column(
@@ -78,72 +77,74 @@ class _TermsConditonState extends State<TermsConditon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar(
-              backgroundColor: ZeleexColor.zeleexGreen,
-              elevation: 0,
-            ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.light,
+            statusBarColor: ZeleexColor.zeleexGreen,
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: 80,
-                  color: ZeleexColor.zeleexGreen,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      FlutterToggleTab(
-                        // width in percent, to set full width just set to 100
-                        width: 80,
-                        borderRadius: 10,
-                        height: 50,
-                        selectedIndex: startedIndex,
-                        selectedBackgroundColors: [Colors.white],
-                        // unSelectedBackgroundColors: [],
-                        selectedTextStyle: TextStyle(
-                            color: ZeleexColor.zeleexGreen,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
-                        unSelectedTextStyle: TextStyle(
-                            color: Color.fromARGB(255, 131, 131, 131),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                        labels: [
-                          "นโยบายความเป็นส่วนตัว",
-                          "เงื่อนไขการให้บริการ"
-                        ],
-                        selectedLabelIndex: (index) {
-                          print("Selected Index $index");
-                          setState(() {
-                            startedIndex = index;
-                          });
-                        },
-                      ),
-                      Icon(
-                        Icons.abc_sharp,
-                        color: ZeleexColor.zeleexGreen,
-                      )
-                    ],
+          backgroundColor: ZeleexColor.zeleexGreen,
+          elevation: 0,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 80,
+              color: ZeleexColor.zeleexGreen,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                _widgetsPages[startedIndex],
-              ],
+                  SizedBox(
+                    width: 5,
+                  ),
+                  FlutterToggleTab(
+                    // width in percent, to set full width just set to 100
+                    width: 80,
+                    borderRadius: 10,
+                    height: 50,
+                    selectedIndex: startedIndex,
+                    selectedBackgroundColors: [Colors.white],
+                    // unSelectedBackgroundColors: [],
+                    selectedTextStyle: TextStyle(
+                        color: ZeleexColor.zeleexGreen,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700),
+                    unSelectedTextStyle: TextStyle(
+                        color: Color.fromARGB(255, 131, 131, 131),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                    labels: ["นโยบายความเป็นส่วนตัว", "เงื่อนไขการให้บริการ"],
+                    selectedLabelIndex: (index) {
+                      print("Selected Index $index");
+                      setState(() {
+                        startedIndex = index;
+                      });
+                    },
+                  ),
+                  Icon(
+                    Icons.abc_sharp,
+                    color: ZeleexColor.zeleexGreen,
+                  )
+                ],
+              ),
             ),
-          ),
-        );
+            _widgetsPages[startedIndex],
+          ],
+        ),
+      ),
+    );
   }
 }
