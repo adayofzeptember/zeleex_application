@@ -7,9 +7,11 @@ class ProductsState extends Equatable {
   bool isLoading;
   int dataTotal;
 
+
   ProductsState(
       {required this.product_list,
       required this.page,
+    
       required this.product_info,
       required this.dataTotal,
       required this.isLoading});

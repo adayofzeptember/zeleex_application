@@ -18,6 +18,7 @@ class Product_Info {
   String? store_description;
   String? store_address;
   String? store_phone;
+  List? skus;
 
   Product_Info(
       {this.id,
@@ -25,6 +26,7 @@ class Product_Info {
       this.price,
       this.images,
       this.store_img,
+      this.skus,
       this.store_address,
       this.store_phone,
       this.title,

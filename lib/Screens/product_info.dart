@@ -84,19 +84,19 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
     });
   }
 
-  // Future<List<Skus>> fetch_skus() async {
-  //   final response = await http.get(Uri.parse(
-  //       'https://api.zeleex.com/api/products/' + widget.productID.toString()));
+  Future<List<Skus>> fetch_skus() async {
+    final response = await http.get(Uri.parse(
+        'https://api.zeleex.com/api/products/' + widget.productID.toString()));
 
-  //   var jsonResponse = json.decode(response.body);
-  //   List jsonCon = jsonResponse['data']['product']['skus'];
+    var jsonResponse = json.decode(response.body);
+    List jsonCon = jsonResponse['data']['product']['skus'];
 
-  //   if (response.statusCode == 200) {
-  //     return jsonCon.map((data) => new Skus.fromJson(data)).toList();
-  //   } else {
-  //     throw Exception("error...");
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => new Skus.fromJson(data)).toList();
+    } else {
+      throw Exception("error...");
+    }
+  }
 
   Future cartCheckIn() async {
     request_model_addToCart.user_id = int.parse(cartAdd_userID.toString());
@@ -112,8 +112,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
         if (state.isLoading == true) {
-          return 
-          Scaffold(
+          return Scaffold(
               body: Column(
             children: [
               const SizedBox(
@@ -451,6 +450,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                             onPressed: () {
+                              //*--------------------------------------
                               showModalBottomSheet(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.vertical(

@@ -117,7 +117,7 @@ class _ProductsPageState extends State<ProductsPage> {
                             child: InkWell(
                               onTap: () {
                                 print('product id: ' +
-                                    state.product_list[index].title.toString());
+                                    state.product_list[index].id.toString());
 
                                 context.read<ProductsBloc>().add(
                                       Load_ProductInfo(
