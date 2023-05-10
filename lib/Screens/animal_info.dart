@@ -21,51 +21,54 @@ class Animal_Info_Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.dark,
-            statusBarColor: Colors.white,
-          ),
-          elevation: 0,
-          centerTitle: true,
-          title: Text(
-            animalName.toString(),
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: ZeleexColor.zeleexGreen),
-          ),
-          leading: IconButton(
-            onPressed: () async {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-            ),
-          )),
-      body: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
-          child: BlocBuilder<AnimalsBloc, AnimalsState>(
-            builder: (context, state) {
-              if (state.isLoading == true) {
-                return Column(
-                  children: [
-                    const SizedBox(
-                      height: 60,
-                    ),
-                    Center(
-                      child: JumpingText(
-                        'กำลังโหลด...',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                            fontSize: 25, color: ZeleexColor.zeleexGreen),
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return Column(
+    return BlocBuilder<AnimalsBloc, AnimalsState>(
+      builder: (context, state) {
+        if (state.isLoading == true) {
+          return Scaffold(
+              body: Column(
+            children: [
+              const SizedBox(
+                height: 80,
+              ),
+              Center(
+                child: JumpingText(
+                  'กำลังโหลด...',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: ZeleexColor.zeleexGreen,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ));
+        } else
+          return Scaffold(
+            appBar: AppBar(
+                backgroundColor: Colors.white,
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarIconBrightness: Brightness.dark,
+                  statusBarBrightness: Brightness.dark,
+                  statusBarColor: Colors.white,
+                ),
+                elevation: 0,
+                centerTitle: true,
+                title: Text(
+                  animalName.toString(),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: ZeleexColor.zeleexGreen),
+                ),
+                leading: IconButton(
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                  ),
+                )),
+            body: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
+                child: Column(
                   children: <Widget>[
                     CarouselSlider.builder(
                         itemCount: state.animal_info.image.length,
@@ -309,10 +312,9 @@ class Animal_Info_Page extends StatelessWidget {
                       height: 15,
                     ),
                   ],
-                );
-              }
-            },
-          )),
+                )),
+          );
+      },
     );
   }
 }

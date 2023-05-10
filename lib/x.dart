@@ -1,379 +1,186 @@
-// import 'dart:convert';
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:expandable/expandable.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:zeleex_application/API/Read%20All/animals_API.dart';
-// import 'package:zeleex_application/help.dart';
-// import 'package:zeleex_application/store_page_detail_cattleDetail.dart';
-// import '../API/Read All/filters/animals_types.dart';
+import 'dart:ui';
 
-// import 'package:intl/intl.dart';
-// import '../Others/Plate.dart';
-// import '../from Profile/profile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:html/parser.dart';
+import 'package:intl/intl.dart';
+import 'package:progress_indicators/progress_indicators.dart';
+import '../Others/Plate.dart';
+import '../bloc/news_feed/news_feed_bloc.dart';
 
-// class AnimalsPage extends StatefulWidget {
-//   AnimalsPage({Key? key}) : super(key: key);
-//   @override
-//   State<AnimalsPage> createState() => _AnimalsPageState();
-// }
+class NewsFeedPage_Detail extends StatelessWidget {
+  NewsFeedPage_Detail({
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NewsFeedBloc, NewsFeedState>(
+      builder: (context, state) {
+        if (state.isLoading == true) {
+          return Scaffold(
+              body: Column(
+            children: [
+              const SizedBox(
+                height: 80,
+              ),
+              Center(
+                child: JumpingText(
+                  'กำลังโหลด...',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: ZeleexColor.zeleexGreen,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ));
+        } else {
+          var createdTime = DateFormat.yMMMd()
+              .format(DateTime.parse(state.news_info.dateCreated));
+          var parsedHTMLContent;
+          if (state.news_info.content == 'null') {
+            parsedHTMLContent = parse('<p>ไม่มีเนื้อหาของข่าวสาร</p>');
+            ;
+          } else {
+            parsedHTMLContent = parse(state.news_info.content);
+          }
 
-// class _AnimalsPageState extends State<AnimalsPage> {
-
-//   final controller = ScrollController();
-
-
-//   @override
-//   void initState() {
-  
-//     super.initState();
-//   }
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Color.fromARGB(255, 242, 242, 242),
-//       appBar: AppBar(
-//         backgroundColor: Colors.white,
-//         systemOverlayStyle: SystemUiOverlayStyle(
-//             statusBarColor: Colors.white,
-//             statusBarIconBrightness: Brightness.dark,
-//             statusBarBrightness: Brightness.dark),
-//         leading: Visibility(
-//           visible: false,
-//           child: Builder(
-//             builder: (context) => IconButton(
-//               icon: SizedBox(
-//                   child: SvgPicture.asset(
-//                 'assets/images/menu.svg',
-//                 color: Color.fromARGB(255, 51, 51, 51),
-//               )),
-//               onPressed: () => Scaffold.of(context).openDrawer(),
-//             ),
-//           ),
-//         ),
-//         elevation: 0,
-//         title: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             InkWell(
-//               child: Visibility(
-//                 visible: false,
-//                 child: Icon(
-//                   Icons.arrow_back_ios,
-//                   color: Colors.black,
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-//               child: Text("สัตว์",
-//                   style: TextStyle(
-//                       fontWeight: FontWeight.bold, color: ZeleexColor.zeleexGreen)),
-//             ),
-//             Container()
-//           ],
-//         ),
-//         actions: [
-//           Builder(
-//             builder: (context) => IconButton(
-//               icon: SizedBox(
-//                 child: SvgPicture.asset(
-//                   'assets/images/sort.svg',
-//                 ),
-//               ),
-//               onPressed: () => Scaffold.of(context).openEndDrawer(),
-//               // onPressed: () => Scaffold.of(context).openEndDrawer(),
-//             ),
-//           ),
-//         ],
-//       ),
-//       body: 
-      
-      
-//       RawScrollbar(
-//         controller: controller,
-//         thumbColor: ZeleexColor.zeleexGreen,
-//         radius: Radius.circular(50),
-//         thickness: 5,
-//         child: GridView.builder(
-//             physics: ClampingScrollPhysics(),
-//             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//               crossAxisCount: 2,
-//               mainAxisExtent: MediaQuery.of(context).size.height * 0.36,
-//             ),
-//             controller: scrollController,
-//             itemCount: isLoadingMore ? data.length + 1 : data.length,
-//             itemBuilder: (context, index) {
-//               if (index < data.length) {
-//                 final post = data[index];
-//                 //final stoer_id = post
-//                 final title = post['title'];
-
-//                 String isNull = post['description'].toString();
-//                 String animalDesc = "";
-//                 if (isNull == 'null') {
-//                   animalDesc = "- ดูรายละเอียดเพิ่มเติม -";
-//                 } else {
-//                   animalDesc = post['description'].toString();
-//                 }
-
-//                 return 
-//                 Container(
-//                   width: MediaQuery.of(context).size.width * 0.5,
-//                   child: Card(
-//                     shape: RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(5.0)),
-//                     child: InkWell(
-//                       onTap: () {
-//                         print(data[index].id.toString());
-//                         Navigator.push(
-//                             context,
-//                             MaterialPageRoute(
-//                               builder: (context) => Store_Cattle_Detail(
-//                                 animalID: post['id'].toString(),
-//                                 animalName: post['title'].toString(),
-//                               ),
-//                             ));
-//                       },
-//                       child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           Container(
-//                             height: MediaQuery.of(context).size.height * 0.22,
-//                             width: double.infinity,
-//                             child: ClipRRect(
-//                                 borderRadius: BorderRadius.only(
-//                                     topLeft: Radius.circular(5),
-//                                     topRight: Radius.circular(5)),
-//                                 child: CachedNetworkImage(
-//                                   imageUrl:
-//                                       post['image']['thumbnail'].toString(),
-//                                   fit: BoxFit.fill,
-//                                   progressIndicatorBuilder:
-//                                       (context, url, downloadProgress) =>
-//                                           Container(
-//                                     color: Color.fromARGB(255, 142, 142, 142),
-//                                     // height: 200,
-//                                   ),
-//                                   errorWidget: (context, url, error) => Center(
-//                                     child: Padding(
-//                                       padding:
-//                                           const EdgeInsets.fromLTRB(3, 3, 3, 0),
-//                                       child: Container(
-//                                           height: MediaQuery.of(context)
-//                                                   .size
-//                                                   .height *
-//                                               0.22,
-//                                           decoration: BoxDecoration(
-//                                               border: Border.all(
-//                                                   color: Color.fromARGB(
-//                                                       255, 211, 204, 204)),
-//                                               borderRadius: BorderRadius.all(
-//                                                   Radius.circular(5))),
-//                                           alignment: Alignment.center,
-//                                           child: Icon(Icons.error_outline)),
-//                                     ),
-//                                   ),
-//                                 )),
-//                           ),
-//                           Padding(
-//                             padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
-//                             child: Container(
-//                               height: 20,
-//                               child: Text(
-//                                 post['title'].toString(),
-//                                 style: TextStyle(
-//                                     color: Color.fromARGB(255, 51, 51, 51),
-//                                     fontSize: 13,
-//                                     fontWeight: FontWeight.bold),
-//                               ),
-//                             ),
-//                           ),
-//                           Padding(
-//                             padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
-//                             child: Container(
-//                               height: 33,
-//                               child: Text(
-//                                 animalDesc.toString(),
-//                                 // data[index].description.toString(),
-//                                 style: TextStyle(
-//                                     fontSize: 12,
-//                                     color: Color.fromARGB(255, 130, 130, 130)),
-//                               ),
-//                             ),
-//                           ),
-//                           Padding(
-//                               padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-//                               child: Text(
-//                                 "฿ " +
-//                                     NumberFormat("#,###,###").format(
-//                                         int.parse(post['price'].toString())),
-//                                 style: TextStyle(color: Colors.red),
-//                               )),
-//                           SizedBox(
-//                             height: 8,
-//                           ),
-//                           Container()
-//                         ],
-//                       ),
-//                     ),
-//                   ),
-//                 );
-//               } else {
-//                 return Center(
-//                   child: CircularProgressIndicator(),
-//                 );
-//               }
-//             }),
-//       ),
-//       endDrawer: Theme(
-//           data: Theme.of(context).copyWith(
-//             canvasColor: Colors.white, //desired color
-//           ),
-//           child: Container(
-//             width: MediaQuery.of(context).size.height * 0.3,
-//             child: Drawer(
-//               child: Padding(
-//                   padding: const EdgeInsets.fromLTRB(
-//                     20,
-//                     0,
-//                     0,
-//                     0,
-//                   ),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       SizedBox(
-//                         height: MediaQuery.of(context).size.height * 0.07,
-//                       ),
-//                       Text("ค้นหาแบบละเอียด",
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                           )),
-//                       FutureBuilder<List<Data_AnimalCategory>>(
-//                         future: futureAnimal_types,
-//                         builder: (context, snapshot) {
-//                           if (snapshot.hasData) {
-//                             List<Data_AnimalCategory>? data = snapshot.data;
-
-//                             return ListView.builder(
-//                                 physics: NeverScrollableScrollPhysics(),
-//                                 shrinkWrap: true,
-//                                 itemCount: data!.length,
-//                                 itemBuilder: (BuildContext context, int index) {
-//                                   return Column(
-//                                     crossAxisAlignment:
-//                                         CrossAxisAlignment.start,
-//                                     children: <Widget>[
-//                                       InkWell(
-//                                         onTap: () {},
-//                                         child: Text(
-//                                             data[index].title.toString(),
-//                                             style: TextStyle(
-//                                                 fontSize: 17,
-//                                                 fontWeight: FontWeight.w500,
-//                                                 color: Color.fromARGB(
-//                                                     255, 131, 131, 131))),
-//                                       ),
-//                                       // Text(
-//                                       //     data[3].children![2].title.toString(),
-//                                       //     style: TextStyle(
-//                                       //         fontSize: 17,
-//                                       //         fontWeight: FontWeight.w500,
-//                                       //         color: Color.fromARGB(
-//                                       //             255, 131, 131, 131))),
-//                                       SizedBox(
-//                                         height: 15,
-//                                       ),
-//                                     ],
-//                                   );
-//                                 });
-//                           } else if (snapshot.hasError) {
-//                             return Text("${snapshot.error}");
-//                           }
-//                           return Container();
-//                         },
-//                       ),
-//                       Spacer(),
-//                       Container(
-//                           //height: double.infinity,
-//                           alignment: Alignment.bottomCenter,
-//                           width: double.infinity,
-//                           child: Padding(
-//                             padding:
-//                                 const EdgeInsets.only(right: 20, bottom: 20),
-//                             child: Row(children: <Widget>[
-//                               Expanded(
-//                                   child: ElevatedButton(
-//                                       style: ElevatedButton.styleFrom(
-//                                         elevation: 0,
-//                                         primary: Colors.white,
-//                                         side:
-//                                             BorderSide(color: ZeleexColor.zeleexGreen),
-//                                       ),
-//                                       onPressed: () {},
-//                                       child: Text(
-//                                         "รีเซ็ต",
-//                                         style:
-//                                             TextStyle(color: ZeleexColor.zeleexGreen),
-//                                       ))),
-//                               SizedBox(
-//                                 width: 10,
-//                               ),
-//                               Expanded(
-//                                 child: ElevatedButton(
-//                                     onPressed: () {
-//                                       Navigator.of(context).pop();
-//                                     },
-//                                     child: Text("ตกลง",
-//                                         style: TextStyle(
-//                                           color: Colors.white,
-//                                         ))),
-//                               )
-//                             ]),
-//                           ))
-//                     ],
-//                   )),
-//             ),
-//           )),
-//     );
-//   }
-
-//   Future<void> fetch_AnimalPage_readAll() async {
-//     final response = await http.get(
-//       Uri.parse(test + page.toString()),
-//       // Uri.parse('https://admin.zeleex.com/api/stores?per_page=15&page=${page}'),
-//       headers: {'Accept': 'application/json'},
-//     );
-//     var jsonResponse = json.decode(response.body);
-//     final jsonCon = jsonResponse['data']['data'] as List;
-//     if (response.statusCode == 200) {
-//       setState(() {
-//         data = data + jsonCon;
-//       });
-//     } else {
-//       throw Exception("error...");
-//     }
-//   }
-
-//   Future<void> _scrollListener() async {
-//     if (isLoadingMore) return;
-//     if (scrollController.position.pixels ==
-//         scrollController.position.maxScrollExtent) {
-//       setState(() {
-//         isLoadingMore = true;
-//       });
-//       page = page + 1;
-
-//       await fetch_AnimalPage_readAll();
-//       setState(() {
-//         isLoadingMore = false;
-//       });
-//     }
-//   }
-// }
+          return Scaffold(
+              backgroundColor: Colors.white,
+              // backgroundColor: Color.fromARGB(255, 242, 242, 242),
+              appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarIconBrightness: Brightness.dark,
+                    statusBarBrightness: Brightness.dark,
+                    statusBarColor: Colors.white,
+                  ),
+                  automaticallyImplyLeading: false,
+                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  centerTitle: true,
+                  title: const Text(
+                    " ",
+                    style: TextStyle(
+                        color: ZeleexColor.zeleexGreen,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  leading: IconButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: ZeleexColor.zeleexGreen,
+                    ),
+                  )),
+              body: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Container(
+                    color: Colors.white,
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                          child: Row(children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              child: Text(
+                                state.news_info.title.toString(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Color.fromARGB(255, 51, 51, 51)),
+                              ),
+                            ),
+                          ]),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          child: Divider(
+                              color: Color.fromARGB(255, 165, 162, 162)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                createdTime,
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromARGB(255, 165, 162, 162)),
+                              ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.end,
+                              //   children: [
+                              //     SvgPicture.asset(
+                              //       'assets/images/Share.svg',
+                              //     ),
+                              //     SvgPicture.asset(
+                              //       'assets/images/Like.svg',
+                              //     ),
+                              //   ],
+                              // ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CachedNetworkImage(
+                          imageUrl: state.news_info.image.toString(),
+                          fit: BoxFit.cover,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Container(
+                            color: const Color.fromARGB(255, 142, 142, 142),
+                            height: MediaQuery.of(context).size.height * 0.3,
+                          ),
+                          errorWidget: (context, url, error) => Padding(
+                            padding: const EdgeInsets.only(right: 5, left: 5),
+                            child: Center(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 141, 141, 141))),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                        width: double.infinity,
+                                        height: 300,
+                                        child: const Center(
+                                            child: Text(
+                                                "ไม่พบรูปภาพของข่าวสารนี้"))),
+                                  )),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                  child:
+                                      HtmlWidget(parsedHTMLContent.outerHtml)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )));
+        }
+      },
+    );
+  }
+}
