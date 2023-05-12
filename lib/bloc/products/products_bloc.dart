@@ -14,6 +14,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final dio = Dio();
   ProductsBloc()
       : super(ProductsState(
+          show_price: '',
+          product_skus: [],
           product_info: '',
           product_list: [],
           page: 1,
@@ -96,14 +98,15 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
             (state.product_info != '') ? state.product_info : '';
         dynamic nestedData = response.data['data']['product'];
         dynamic nestedStore = response.data['data']['product']['store'];
+        var fetched_sku = (state.product_skus != []) ? state.product_skus : [];
         if (response.statusCode == 200) {
           emit(state.copyWith(isLoading: false));
 
           fetched_dataInfo = Product_Info(
-              id: await nestedData['id'],
+              id: await nestedData['id'].toString(),
               images: await nestedData['image']['main'],
               title: await nestedData['title'],
-              price: await nestedData['price'],
+              price: await nestedData['price'].toString(),
               store_description: await nestedStore['content'],
               store_id: await nestedStore['id'].toString(),
               store_title: await nestedStore['title'].toString(),
@@ -114,16 +117,71 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
                   : await nestedStore['image']['thumbnail'].toString());
 
           emit(state.copyWith(product_info: fetched_dataInfo));
+
+          for (var nestedSKUS in response.data['data']['product']['skus']) {
+            fetched_sku.add(
+              Product_Skus_List(
+                sku_id: await nestedSKUS['id'].toString(),
+                sku_name: await nestedSKUS['name'].toString(),
+                sku_price: await nestedSKUS['price'].toString(),
+                sku_stock: await nestedSKUS['stock'].toString(),
+              ),
+            );
+          }
+          emit(state.copyWith(product_skus: fetched_sku));
         } else {
           emit(state.copyWith(isLoading: false));
           print('loading error');
         }
-
-    
       } catch (e) {
         emit(state.copyWith(isLoading: false));
         print("Exception: $e");
       }
     });
+
+    on<Clear_Sku>((event, emit) {
+      emit(state.copyWith(product_skus: [], show_price: ''));
+    });
+
+    on<Show_SKUPrice>(
+      (event, emit) {
+        print(event.thePrice);
+
+        emit(state.copyWith(show_price: '฿ ${event.thePrice}'));
+      },
+    );
+
+    // on<Load_SKUS>((event, emit) async {
+    //   try {
+    //     final response = await dio.get(
+    //       zeelexAPI_URL_admin + "products/" + event.id,
+    //       options: Options(headers: {
+    //         "Content-Type": "application/json",
+    //         // "Authorization": "Bearer $token",
+    //       }),
+    //     );
+    //     var fetched_sku = (state.product_skus != []) ? state.product_skus : [];
+    //     if (response.statusCode == 200) {
+    //       for (var nestedSKUS in response.data['data']['product']['skus']) {
+    //         fetched_sku.add(
+    //           Product_Skus_List(
+    //             sku_id: await nestedSKUS['id'].toString(),
+    //             sku_name: await nestedSKUS['name'].toString(),
+    //             sku_price: await nestedSKUS['price'].toString(),
+    //             sku_stock: await nestedSKUS['stock'].toString(),
+    //           ),
+    //         );
+    //       }
+
+    //       emit(state.copyWith(product_skus: fetched_sku));
+    //     } else {
+    //       emit(state.copyWith(isLoading: false));
+    //       print('loading error');
+    //     }
+    //   } catch (e) {
+    //     emit(state.copyWith(isLoading: false));
+    //     print("Exception: $e");
+    //   }
+    // });
   }
 }

@@ -6,8 +6,20 @@ abstract class ProductsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class Load_AllProdutcs extends ProductsEvent {}
 
+class Load_SKUS extends ProductsEvent {
+  String id;
+  Load_SKUS({required this.id});
+}
+
+class Show_SKUPrice extends ProductsEvent {
+  String thePrice;
+  Show_SKUPrice({required this.thePrice});
+}
+
+class Clear_Sku extends ProductsEvent {}
 
 class Load_ProductInfo extends ProductsEvent {
   String id;

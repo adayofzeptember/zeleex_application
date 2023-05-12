@@ -55,11 +55,16 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
   String cartAdd_product_sku_id = "";
   String cartAdd_unit = "";
   String cartAdd_token = "";
-  String priceSKU = "ราคาสินค้า";
+
   @override
   void initState() {
     getUserID();
     future_review = fetch_Product_Review();
+    // context.read<ProductsBloc>().add(
+    //       Load_SKUS(
+    //         id: 118.toString(),
+    //       ),
+    //     );
 
     // future_Product_skus = fetch_skus();
     request_model_product_fave = Product_Fave_Model();
@@ -121,7 +126,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
               Center(
                 child: JumpingText(
                   'กำลังโหลด...',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 25,
                       color: ZeleexColor.zeleexGreen,
                       fontWeight: FontWeight.bold),
@@ -131,19 +136,19 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
           ));
         } else
           return Scaffold(
-            backgroundColor: Color.fromARGB(255, 242, 242, 242),
+            backgroundColor: const Color.fromARGB(255, 242, 242, 242),
             appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Colors.white,
                 automaticallyImplyLeading: false,
-                systemOverlayStyle: SystemUiOverlayStyle(
+                systemOverlayStyle: const SystemUiOverlayStyle(
                     statusBarColor: Colors.white,
                     statusBarIconBrightness: Brightness.dark,
                     statusBarBrightness: Brightness.dark),
                 centerTitle: true,
                 title: Text(
                   widget.productName.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: ZeleexColor.zeleexGreen),
                 ),
@@ -159,6 +164,9 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                 ],
                 leading: IconButton(
                   onPressed: () async {
+                    context.read<ProductsBloc>().add(
+                          Clear_Sku(),
+                        );
                     Navigator.pop(context);
                   },
                   icon: const Icon(
@@ -168,7 +176,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
             body:
                 //!
                 SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
                   Container(
@@ -182,7 +190,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, downloadProgress) => Container(
-                              color: Color.fromARGB(255, 142, 142, 142),
+                              color: const Color.fromARGB(255, 142, 142, 142),
                               height: 400,
                             ),
                             errorWidget: (context, url, error) => Padding(
@@ -191,7 +199,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                 child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 141, 141, 141))),
                                     alignment: Alignment.center,
                                     child: Padding(
@@ -199,7 +207,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                       child: Container(
                                           width: double.infinity,
                                           height: 300,
-                                          child: Center(
+                                          child: const Center(
                                               child: Text(
                                                   "ไม่พบรูปภาพของสินค้า"))),
                                     )),
@@ -222,7 +230,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                         width: 300,
                                         child: Text(
                                           state.product_info.title,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Color.fromARGB(
                                                   255, 51, 51, 51),
                                               fontSize: 18),
@@ -253,7 +261,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -264,7 +272,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                 ],
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 3,
                         ),
                         Container(
@@ -331,19 +339,19 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(state.product_info.store_title,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
                                           SvgPicture.asset(
                                             'assets/images/pincat.svg',
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           Container(
                                             child: Text(
                                               state.product_info.store_address,
-                                              style:
-                                                  TextStyle(color: Colors.grey),
+                                              style: const TextStyle(
+                                                  color: Colors.grey),
                                             ),
                                           ),
                                         ],
@@ -357,13 +365,13 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                               SvgPicture.asset(
                                                 'assets/images/telcat.svg',
                                               ),
-                                              SizedBox(width: 10),
+                                              const SizedBox(width: 10),
                                               Text(
                                                 state.product_info.store_phone,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.grey),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 5,
                                               ),
                                             ],
@@ -376,7 +384,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                                 ),
                                                 primary: pressed
                                                     ? ZeleexColor.zeleexGreen
-                                                    : Color.fromARGB(
+                                                    : const Color.fromARGB(
                                                         255, 204, 204, 204),
                                                 elevation: 0),
                                             onPressed: () {
@@ -397,7 +405,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                             },
                                             child: Text(
                                               pressed ? "ติดตาม" : "ติดตามแล้ว",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Color.fromRGBO(
                                                       255, 255, 255, 1)),
                                             ),
@@ -411,7 +419,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 3,
                         ),
                         Container(
@@ -424,16 +432,16 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     "รายละเอียด",
                                     style: TextStyle(fontSize: 20),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Text(
                                     state.product_info.store_description,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color:
                                             Color.fromARGB(255, 130, 130, 130)),
                                   ),
@@ -450,362 +458,312 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                             onPressed: () {
-                              //*--------------------------------------
-                              showModalBottomSheet(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20),
-                                )),
+                              showModalBottomSheet<void>(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return StatefulBuilder(builder:
-                                      (BuildContext context,
-                                          StateSetter myState) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                width: 90,
-                                                height: 90,
-                                                child: Image.network(
-                                                  'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
-                                                    children: [
-                                                      Text(
-                                                        "฿ " + priceSKU,
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
+                                  return StreamBuilder<Object>(
+                                    stream: null,
+                                    builder: (context, snapshot) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: 90,
+                                                  height: 90,
+                                                  child: Image.network(
+                                                    'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 10),
-                                            child: Divider(
-                                                color: Color.fromARGB(
-                                                    255, 206, 206, 206)),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(
-                                                "ตัวเลือกสินค้า: ",
-                                                style: TextStyle(
-                                                    color:
-                                                        ZeleexColor.zeleexGreen,
-                                                    fontSize: 15),
-                                              ),
-                                              Text(
-                                                picked.toString(),
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 51, 51, 51),
-                                                    fontSize: 15),
-                                              ),
-                                              Text(
-                                                " จำนวน: ",
-                                                style: TextStyle(
-                                                    color:
-                                                        ZeleexColor.zeleexGreen,
-                                                    fontSize: 15),
-                                              ),
-                                              Text(
-                                                _counter.toString(),
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 51, 51, 51),
-                                                    fontSize: 15),
-                                              ),
-                                              Text(
-                                                " ชิ้น",
-                                                style: TextStyle(
-                                                    color:
-                                                        ZeleexColor.zeleexGreen,
-                                                    fontSize: 15),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          // FutureBuilder<List<Skus>>(
-                                          //   future: future_Product_skus,
-                                          //   builder: (context, snapshot) {
-                                          //     if (snapshot.hasData) {
-                                          //       List<Skus>? data = snapshot.data;
-
-                                          //       return Expanded(
-                                          //         child: RawScrollbar(
-                                          //           thumbColor: ZeleexColor.zeleexGreen,
-                                          //           thickness: 5,
-                                          //           child: GridView.builder(
-                                          //             gridDelegate:
-                                          //                 SliverGridDelegateWithFixedCrossAxisCount(
-                                          //               crossAxisCount: 2,
-                                          //               mainAxisExtent:
-                                          //                   MediaQuery.of(context)
-                                          //                           .size
-                                          //                           .height *
-                                          //                       0.09,
-                                          //             ),
-                                          //             itemCount: snapshot.data!.length,
-                                          //             itemBuilder:
-                                          //                 (BuildContext context,
-                                          //                     int index) {
-                                          //               return Card(
-                                          //                 shape: RoundedRectangleBorder(
-                                          //                     borderRadius:
-                                          //                         BorderRadius.circular(
-                                          //                             2.0)),
-                                          //                 child: InkWell(
-                                          //                   onTap: () {
-                                          //                     setState(() {
-                                          //                       String sku_id =
-                                          //                           data![index]
-                                          //                               .id
-                                          //                               .toString();
-                                          //                       cartAdd_product_sku_id =
-                                          //                           sku_id;
-                                          //                     });
-                                          //                     myState(() {
-                                          //                       String sku_price =
-                                          //                           data![index]
-                                          //                               .price
-                                          //                               .toString();
-                                          //                       priceSKU = sku_price;
-                                          //                       String sku_id =
-                                          //                           data[index]
-                                          //                               .id
-                                          //                               .toString();
-                                          //                       cartAdd_product_sku_id =
-                                          //                           sku_id;
-
-                                          //                       _press = !_press;
-                                          //                       picked = data[index]
-                                          //                           .name
-                                          //                           .toString();
-                                          //                     });
-                                          //                   },
-                                          //                   child: Padding(
-                                          //                     padding:
-                                          //                         const EdgeInsets.all(
-                                          //                             8.0),
-                                          //                     child: Column(
-                                          //                       crossAxisAlignment:
-                                          //                           CrossAxisAlignment
-                                          //                               .start,
-                                          //                       children: [
-                                          //                         Text(
-                                          //                           data![index]
-                                          //                               .name
-                                          //                               //!.price
-                                          //                               .toString(),
-                                          //                           style: TextStyle(
-                                          //                             fontSize: 20,
-                                          //                             color: Color
-                                          //                                 .fromARGB(
-                                          //                                     255,
-                                          //                                     51,
-                                          //                                     51,
-                                          //                                     51),
-                                          //                           ),
-                                          //                         ),
-                                          //                         Row(
-                                          //                           children: [
-                                          //                             Text(
-                                          //                               "จำนวนคงเหลือ: ",
-                                          //                               style: TextStyle(
-                                          //                                   color: Color
-                                          //                                       .fromARGB(
-                                          //                                           255,
-                                          //                                           131,
-                                          //                                           131,
-                                          //                                           131)),
-                                          //                             ),
-                                          //                             Text(data[index]
-                                          //                                 .stock
-                                          //                                 .toString())
-                                          //                           ],
-                                          //                         )
-                                          //                       ],
-                                          //                     ),
-                                          //                   ),
-                                          //                 ),
-                                          //               );
-                                          //             },
-                                          //           ),
-                                          //         ),
-                                          //       );
-                                          //     }
-                                          //     return Padding(
-                                          //       padding:
-                                          //           const EdgeInsets.only(top: 100),
-                                          //       child: Container(
-                                          //           child: Center(
-                                          //               child:
-                                          //                   CircularProgressIndicator())),
-                                          //     );
-                                          //   },
-                                          // ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10, bottom: 10),
-                                            child: Divider(
-                                                color: Color.fromARGB(
-                                                    255, 206, 206, 206)),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "จำนวน",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InkWell(
-                                                        onTap: () {
-                                                          myState(() {
-                                                            _counter--;
-                                                            if (_counter <= 0) {
-                                                              _counter = 0;
-                                                            }
-                                                          });
-                                                        },
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/minus.svg',
-                                                          width: 20,
-                                                        )),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    width: 40,
-                                                    decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    130,
-                                                                    130,
-                                                                    130)),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5))),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(
-                                                        "${_counter}",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .stretch,
+                                                      children: [
+                                                        Text(
+                                                          state.show_price
+                                                              .toString(),
+                                                          style: const TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight.bold),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InkWell(
-                                                        onTap: () {
-                                                          myState(() {
-                                                            _counter++;
-                                                          });
-                                                        },
-                                                        child: SvgPicture.asset(
-                                                            'assets/images/pluss.svg')),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary:
-                                                    ZeleexColor.zeleexGreen,
-                                                elevation: 0,
-                                                // side: BorderSide(color: Colors.red),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                )),
-                                            onPressed: () {
-                                              setState(() {
-                                                // x = x + 1;
-                                                //qtyCart = qtyCart + 1;
-                                              });
-
-                                              cartCheckIn();
-                                              Navigator.pop(context);
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  "เพิ่มลงรถเข็น",
+                                                )
+                                              ],
+                                            ),
+                                            const Padding(
+                                              padding: EdgeInsets.only(top: 10),
+                                              child: Divider(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 206, 206)),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: <Widget>[
+                                                const Text(
+                                                  "ตัวเลือกสินค้า: ",
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color:
+                                                          ZeleexColor.zeleexGreen,
                                                       fontSize: 15),
+                                                ),
+                                                Text(
+                                                  picked.toString(),
+                                                  style: const TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 51, 51, 51),
+                                                      fontSize: 15),
+                                                ),
+                                                const Text(
+                                                  " จำนวน: ",
+                                                  style: TextStyle(
+                                                      color:
+                                                          ZeleexColor.zeleexGreen,
+                                                      fontSize: 15),
+                                                ),
+                                                Text(
+                                                  _counter.toString(),
+                                                  style: const TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 51, 51, 51),
+                                                      fontSize: 15),
+                                                ),
+                                                const Text(
+                                                  " ชิ้น",
+                                                  style: TextStyle(
+                                                      color:
+                                                          ZeleexColor.zeleexGreen,
+                                                      fontSize: 15),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Expanded(
+                                              child: RawScrollbar(
+                                                thumbColor: ZeleexColor.zeleexGreen,
+                                                thickness: 5,
+                                                child: GridView.builder(
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 2,
+                                                    mainAxisExtent:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.09,
+                                                  ),
+                                                  itemCount:
+                                                      state.product_skus.length,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Card(
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  2.0)),
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          context
+                                                              .read<ProductsBloc>()
+                                                              .add(
+                                                                Show_SKUPrice(
+                                                                    thePrice: state
+                                                                        .product_skus[
+                                                                            index]
+                                                                        .sku_price),
+                                                              );
+                                                          
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                  8.0),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                state
+                                                                    .product_skus[
+                                                                        index]
+                                                                    .sku_name,
+                                                                style: TextStyle(
+                                                                  fontSize: 20,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          51,
+                                                                          51,
+                                                                          51),
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "จำนวนคงเหลือ: ",
+                                                                    style: TextStyle(
+                                                                        color: Color
+                                                                            .fromARGB(
+                                                                                255,
+                                                                                131,
+                                                                                131,
+                                                                                131)),
+                                                                  ),
+                                                                  Text(state
+                                                                      .product_skus[
+                                                                          index]
+                                                                      .sku_stock)
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  });
+                                            const Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 10, bottom: 10),
+                                              child: Divider(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 206, 206)),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                const Text(
+                                                  "จำนวน",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 30,
+                                                      height: 30,
+                                                      child: InkWell(
+                                                          onTap: () {},
+                                                          child: SvgPicture.asset(
+                                                            'assets/images/minus.svg',
+                                                            width: 20,
+                                                          )),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      width: 40,
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color: const Color
+                                                                      .fromARGB(255,
+                                                                  130, 130, 130)),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                      .all(
+                                                                  Radius.circular(
+                                                                      5))),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.all(
+                                                                8.0),
+                                                        child: Text(
+                                                          '2',
+                                                          style: const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight.bold),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 30,
+                                                      height: 30,
+                                                      child: InkWell(
+                                                          onTap: () {},
+                                                          child: SvgPicture.asset(
+                                                              'assets/images/pluss.svg')),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  primary: ZeleexColor.zeleexGreen,
+                                                  elevation: 0,
+                                                  // side: BorderSide(color: Colors.red),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(5),
+                                                  )),
+                                              onPressed: () {
+                                                //  print(state.product_skus[index].sku_id);
+                                                //   print(state
+                                                //       .product_skus[index].sku_name);
+                                                //   print(state
+                                                //       .product_skus[index].sku_price);
+                                                //   print(state
+                                                //       .product_skus[index].sku_stock);
+                                                // cartCheckIn();
+                                                // Navigator.pop(context);
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(10.0),
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  child: const Text(
+                                                    "เพิ่มลงรถเข็น",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                  );
                                 },
                               );
                             },
@@ -819,17 +777,16 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                     SvgPicture.asset(
                                       'assets/images/newcart.svg',
                                       color: Colors.white,
-                                      height: 45,
                                     ),
-                                    SizedBox(
-                                      width: 5,
+                                    const SizedBox(
+                                      width: 8,
                                     ),
-                                    Text(
+                                    const Text(
                                       "เพิ่มลงตะกร้า",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
                                     )
                                   ],
                                 ),

@@ -40,7 +40,7 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
           if (response.data['data']['total'] != fetched_animals_data.length) {
             for (var nested in response.data['data']['data']) {
               fetched_animals_data.add(
-                Animals_Model(
+                Animals_Model( 
                   id: await nested['id'],
                   title: await nested['title'],
                   price: await nested['price'].toString(),

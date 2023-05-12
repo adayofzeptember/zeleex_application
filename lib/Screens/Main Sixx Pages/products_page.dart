@@ -128,6 +128,13 @@ class _ProductsPageState extends State<ProductsPage> {
                                             .toString(),
                                       ),
                                     );
+                                    //  context.read<ProductsBloc>().add(
+                                    //   Load_SKUS(
+                                    //     id: state.product_list[index].id
+                                    //         .toString(),
+                                     
+                                    //   ),
+                                    // );
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
