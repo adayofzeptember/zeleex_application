@@ -49,10 +49,9 @@ class AddAddress {
 }
 
 class ResponseModel_AddAddress {
-
   String? address;
   String? city;
-  
+
   String? district;
   String? province;
   String? postcode;
@@ -173,6 +172,7 @@ Future<AddAddress> edit_address(Provider_AddAddress requestModel_AddAddress,
 
 Future<AddAddress> add_new_address(
     Provider_AddAddress requestModel_AddAddress, String userToken) async {
+      
   String urlPost = "https://api.zeleex.com/api/address/shipping-store";
   var body_AddAddress = json.encode(requestModel_AddAddress.toJson());
   final response = await http.post(

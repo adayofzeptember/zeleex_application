@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/bloc/address%20management/address_management_bloc.dart';
 import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
 import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/bottomMenu_main_page.dart';
@@ -43,6 +44,7 @@ class First_Page extends StatelessWidget {
         BlocProvider(create: (context) => ProductsBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
+        BlocProvider(create: (context) => AddressManagementBloc()),
         BlocProvider(create: (context) => MainPageCollectionBloc()),
         BlocProvider(create: (context) => BottomMenuSwitchBloc()),
       ],

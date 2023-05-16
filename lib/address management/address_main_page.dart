@@ -8,11 +8,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
-import 'package:zeleex_application/address_add.dart';
-import 'Others/Plate.dart';
+import '../Others/Plate.dart';
+import '../bloc/profile/profile_bloc.dart';
+import 'address_add.dart';
 import 'address_edit.dart';
-import 'bloc/profile/profile_bloc.dart';
-import 'payment.dart';
+
 
 class Address_Manage_Page extends StatelessWidget {
   Address_Manage_Page({Key? key}) : super(key: key);
@@ -64,7 +64,7 @@ class Address_Manage_Page extends StatelessWidget {
                             PageTransition(
                               duration: const Duration(milliseconds: 250),
                               type: PageTransitionType.fade,
-                              child: Address_AddNew(),
+                              child: Address_New_Page(),
                             ),
                           );
                         

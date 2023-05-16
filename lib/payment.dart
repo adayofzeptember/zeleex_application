@@ -13,8 +13,8 @@ import 'package:zeleex_application/payment_confirm.dart';
 import 'API/Post Method/post_checkout_IDEA.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Others/Plate.dart';
+import 'address management/address_main_page.dart';
 import 'cart.dart';
-import 'address_manage_page.dart';
 import 'payment_method.dart';
 
 int totalPrice = 0;

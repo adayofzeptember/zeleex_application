@@ -13,12 +13,12 @@ import 'package:zeleex_application/terms.dart';
 import '../../API/Post Method/google_login_api.dart';
 import '../../Others/Plate.dart';
 import '../../Others/shape.dart';
+import '../../address management/address_main_page.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../career.dart';
 import '../../cart.dart';
 import '../../from Profile/history/history.dart';
 import '../../from Profile/likes/likes.dart';
-import '../../address_manage_page.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({Key? key}) : super(key: key);

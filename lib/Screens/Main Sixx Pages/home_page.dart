@@ -215,6 +215,8 @@ class HomePage extends StatelessWidget {
                                 height:
                                     MediaQuery.of(context).size.height * 0.13,
                                 child: ListView.builder(
+                                    key: const PageStorageKey<String>(
+                                        'collection'),
                                     scrollDirection: Axis.horizontal,
                                     shrinkWrap: true,
                                     itemCount: state.collection_board.length,
@@ -323,7 +325,6 @@ class HomePage extends StatelessWidget {
                                             primary: ZeleexColor.zeleexGreen,
                                             elevation: 0),
                                         onPressed: () {
-                                          
                                           context
                                               .read<BottomMenuSwitchBloc>()
                                               .add(TapSwitchIndex(
@@ -350,22 +351,28 @@ class HomePage extends StatelessWidget {
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
+                                      
                                       itemCount: state.animals_catalog.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Card(
                                           child: InkWell(
                                             onTap: () {
-                                            
-                                                  context.read<AnimalsBloc>().add(
-                              Load_AnimalInfo(
-                                id: state.animals_catalog[index].id.toString(),
-                                context: context,
-                                title: state.animals_catalog[index].title.toString(),
-                              ),
-                            );
-                                      
-                                           
+                                              context.read<AnimalsBloc>().add(
+                                                    Load_AnimalInfo(
+                                                      id: state
+                                                          .animals_catalog[
+                                                              index]
+                                                          .id
+                                                          .toString(),
+                                                      context: context,
+                                                      title: state
+                                                          .animals_catalog[
+                                                              index]
+                                                          .title
+                                                          .toString(),
+                                                    ),
+                                                  );
                                             },
                                             child: Column(
                                               children: [
@@ -558,6 +565,9 @@ class HomePage extends StatelessWidget {
                                         const SizedBox(
                                           height: 5,
                                         ),
+                                        const SizedBox(
+                                          width: 0, height: 0,
+                                        ),
                                         Container(
                                           height: MediaQuery.of(context)
                                                   .size
@@ -576,13 +586,23 @@ class HomePage extends StatelessWidget {
                                                     onTap: () {
                                                       print(
                                                           'product id: ${state.products_catalog[index].id}');
-                                                                       context.read<AnimalsBloc>().add(
-                              Load_AnimalInfo(
-                                id: state.products_catalog[index].id.toString(),
-                                context: context,
-                                title: state.products_catalog[index].title.toString(),
-                              ),
-                            );
+                                                      context
+                                                          .read<AnimalsBloc>()
+                                                          .add(
+                                                            Load_AnimalInfo(
+                                                              id: state
+                                                                  .products_catalog[
+                                                                      index]
+                                                                  .id
+                                                                  .toString(),
+                                                              context: context,
+                                                              title: state
+                                                                  .products_catalog[
+                                                                      index]
+                                                                  .title
+                                                                  .toString(),
+                                                            ),
+                                                          );
                                                     },
                                                     child: Column(
                                                       children: [
