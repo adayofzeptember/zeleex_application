@@ -8,6 +8,7 @@ import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/newsfeed_page.dar
 import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/profile_page.dart';
 import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/home_page.dart';
 import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/stores_page.dart';
+import 'package:zeleex_application/bloc/address%20management/address_management_bloc.dart';
 import 'package:zeleex_application/bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
 import '../../Others/Plate.dart';
 import 'animals_page.dart';
@@ -25,7 +26,8 @@ class _BottomMenu_PageState extends State<BottomMenu_Page> {
   @override
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
-    context.read<ProfileBloc>().add(Load_Address());
+    context.read<AddressManagementBloc>().add(Load_Address());
+    
     super.initState();
   }
 
@@ -140,7 +142,7 @@ class _BottomMenu_PageState extends State<BottomMenu_Page> {
                   icon: SvgPicture.asset(
                     "assets/images/new/tab6.svg",
                   ),
-                  label: 'โพรไฟล์',
+                  label: 'โปรไฟล์',
                 ),
               ],
             ),

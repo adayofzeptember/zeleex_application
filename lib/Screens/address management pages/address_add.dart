@@ -6,9 +6,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/bloc/address%20management/address_management_bloc.dart';
 
-import '../API/Post Method/address_add_and_edit.dart';
-import '../Others/Plate.dart';
-import '../bloc/address management/model.dart';
+import '../../API/Post Method/address_add_and_edit.dart';
+import '../../Others/Plate.dart';
+import '../../bloc/address management/model.dart';
 
 class Address_New_Page extends StatefulWidget {
   Address_New_Page({Key? key}) : super(key: key);
@@ -17,37 +17,21 @@ class Address_New_Page extends StatefulWidget {
   State<Address_New_Page> createState() => _Address_New_PageState();
 }
 
-String? userID = "";
-String? userToken = "";
-
-final _formKeyAddAddress = GlobalKey<FormState>();
-late NewAddress_Request _provider_add_address;
-
-var addressController = TextEditingController();
-var cityController = TextEditingController();
-var provinceController = TextEditingController(); //!ภูมิภาค
-var districtController = TextEditingController();
-var postcodeController = TextEditingController();
-var defaultController = TextEditingController();
-var phoneController = TextEditingController();
-var nameController = TextEditingController();
-
 class _Address_New_PageState extends State<Address_New_Page> {
-  bool status = false;
-
-  Future get_storedToken() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var x = prefs2.get('keyToken');
-    var y = prefs2.get('keyID');
-    setState(() {
-      userID = y.toString();
-      userToken = x.toString();
-    });
-  }
+  
+  final _formKeyAddAddress = GlobalKey<FormState>();
+  late NewAddress_Request _provider_add_address;
+  var addressController = TextEditingController();
+  var cityController = TextEditingController();
+  var provinceController = TextEditingController(); //!ภูมิภาค
+  var districtController = TextEditingController();
+  var postcodeController = TextEditingController();
+  var defaultController = TextEditingController();
+  var phoneController = TextEditingController();
+  var nameController = TextEditingController();
 
   @override
   void initState() {
-    get_storedToken();
     _provider_add_address = NewAddress_Request();
     super.initState();
   }
@@ -56,7 +40,7 @@ class _Address_New_PageState extends State<Address_New_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             // Status bar color
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
@@ -88,14 +72,14 @@ class _Address_New_PageState extends State<Address_New_Page> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "\tช่องทางการติดต่อ",
                     style: TextStyle(
                         color: Color.fromARGB(255, 51, 51, 51),
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
@@ -113,20 +97,23 @@ class _Address_New_PageState extends State<Address_New_Page> {
                     },
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         filled: true,
-                        fillColor: Color.fromARGB(255, 243, 238, 238),
+                        fillColor: const Color.fromARGB(255, 243, 238, 238),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         hintText: '\t\t\t\tชื่อ - นามสกุล'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   TextFormField(
@@ -139,32 +126,35 @@ class _Address_New_PageState extends State<Address_New_Page> {
                     },
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         filled: true,
-                        fillColor: Color.fromARGB(255, 243, 238, 238),
+                        fillColor: const Color.fromARGB(255, 243, 238, 238),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         hintText: '\t\t\t\tหมายเลขโทรศัพท์',
-                        labelStyle: TextStyle(fontSize: 15)),
+                        labelStyle: const TextStyle(fontSize: 15)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
 
-                  Text(
+                  const Text(
                     "\tที่อยู่",
                     style: TextStyle(
                         color: Color.fromARGB(255, 51, 51, 51),
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
@@ -181,21 +171,23 @@ class _Address_New_PageState extends State<Address_New_Page> {
                       //   color: Color.fromARGB(255, 121, 120, 120),
                       // ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       filled: true,
-                      fillColor: Color.fromARGB(255, 243, 238, 238),
+                      fillColor: const Color.fromARGB(255, 243, 238, 238),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
+                        borderSide: const BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       hintText: '\t\t\t\tอำเภอ',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
@@ -212,24 +204,25 @@ class _Address_New_PageState extends State<Address_New_Page> {
                       //   color: Color.fromARGB(255, 121, 120, 120),
                       // ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       filled: true,
-                      fillColor: Color.fromARGB(255, 243, 238, 238),
+                      fillColor: const Color.fromARGB(255, 243, 238, 238),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
+                        borderSide: const BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       hintText: '\t\t\t\tจังหวัด',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-
                   TextFormField(
                     controller: postcodeController,
                     onSaved: (input) => _provider_add_address.postcode = input,
@@ -244,28 +237,30 @@ class _Address_New_PageState extends State<Address_New_Page> {
                       //   color: Color.fromARGB(255, 121, 120, 120),
                       // ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       filled: true,
-                      fillColor: Color.fromARGB(255, 243, 238, 238),
+                      fillColor: const Color.fromARGB(255, 243, 238, 238),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
+                        borderSide: const BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       hintText: '\t\t\t\tรหัสไปรษณีย์',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "\t บ้านเลขที่ ซอย หมู่ ถนน แขวง/ตำบล",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   TextFormField(
@@ -282,15 +277,17 @@ class _Address_New_PageState extends State<Address_New_Page> {
                       //   color: Color.fromARGB(255, 121, 120, 120),
                       // ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(10)),
                       filled: true,
-                      fillColor: Color.fromARGB(255, 243, 238, 238),
+                      fillColor: const Color.fromARGB(255, 243, 238, 238),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
+                        borderSide: const BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
@@ -300,7 +297,7 @@ class _Address_New_PageState extends State<Address_New_Page> {
                   //     status = val;
                   //   });
                   // })
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   // Text("\tเลขที่อาคาร/ชั้น"),
@@ -324,7 +321,7 @@ class _Address_New_PageState extends State<Address_New_Page> {
                   //     hintText: '',
                   //   ),
                   // ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
 
@@ -368,17 +365,17 @@ class _Address_New_PageState extends State<Address_New_Page> {
                       //   ],
                       // ),
 
-                      Text(
+                      const Text(
                         "เลือกเป็นที่อยู่หลัก",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       FlutterSwitch(
                           height: 30,
                           width: 50,
-                          toggleColor: Color.fromRGBO(225, 225, 225, 1),
+                          toggleColor: const Color.fromRGBO(225, 225, 225, 1),
                           activeColor: ZeleexColor.zeleexGreen,
                           value: state.address_switch,
                           onToggle: (val) {
@@ -403,7 +400,7 @@ class _Address_New_PageState extends State<Address_New_Page> {
                           })
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   ElevatedButton(
@@ -424,19 +421,8 @@ class _Address_New_PageState extends State<Address_New_Page> {
 
                         context.read<AddressManagementBloc>().add(
                             AddNew_Address(
-                                address_request: _provider_add_address));
-                        // print(_provider_add_address.toJson().toString());
-                        // add_new_address(
-                        //     _provider_add_address, userToken.toString());
-
-                        Fluttertoast.showToast(
-                            msg: "เพิ่มที่อยู่ใหม่แล้ว",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.SNACKBAR,
-                            timeInSecForIosWeb: 2,
-                            backgroundColor: Color.fromARGB(255, 235, 235, 235),
-                            textColor: ZeleexColor.zeleexGreen,
-                            fontSize: 15);
+                                address_request: _provider_add_address,
+                                context: context));
 
                         Navigator.pop(context);
                       }
@@ -445,20 +431,20 @@ class _Address_New_PageState extends State<Address_New_Page> {
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
                         alignment: Alignment.center,
-                        child: Text(
+                        child: const Text(
                           "+ เพิ่มที่อยู่",
                           style: TextStyle(color: Colors.white, fontSize: 15),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         elevation: 0,
-                        side: BorderSide(color: ZeleexColor.zeleexGreen),
+                        side: const BorderSide(color: ZeleexColor.zeleexGreen),
                         primary: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -471,7 +457,7 @@ class _Address_New_PageState extends State<Address_New_Page> {
                       child: Container(
                         width: double.infinity,
                         alignment: Alignment.center,
-                        child: Text(
+                        child: const Text(
                           "ยกเลิก",
                           style: TextStyle(
                               color: ZeleexColor.zeleexGreen, fontSize: 15),
@@ -480,7 +466,7 @@ class _Address_New_PageState extends State<Address_New_Page> {
                     ),
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                 ],

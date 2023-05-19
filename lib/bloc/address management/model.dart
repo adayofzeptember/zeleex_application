@@ -1,4 +1,29 @@
-class NewAddress_Request{
+class Address_Model {
+  String? id;
+  String? name;
+  String? address;
+  String? city;
+  String? district;
+  String? defaultStatus;
+  String? province;
+  String? postcode;
+  String? phone;
+
+  Address_Model(
+      {this.address,
+      this.city,
+      this.district,
+      this.defaultStatus,
+      this.id,
+      this.name,
+      this.phone,
+      this.postcode,
+      this.province});
+}
+
+
+
+class NewAddress_Request {
   String? address;
   String? city;
   String? district;
@@ -31,3 +56,4 @@ class NewAddress_Request{
     return data;
   }
 }
+

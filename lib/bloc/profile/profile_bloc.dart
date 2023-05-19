@@ -11,7 +11,7 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final dio = Dio();
   ProfileBloc()
-      : super(ProfileState(loading: true, profile_data: '', address_data: [])) {
+      : super(ProfileState(loading: true, profile_data: '')) {
     on<Load_Profile>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
@@ -52,46 +52,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     //-
 
-    on<Load_Address>((event, emit) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('keyToken');
-      try {
-        final response = await dio.get(
-          zeelexAPI_URL_admin + 'address/shipping',
-          options: Options(headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer $token",
-          }),
-        );
 
-        var fetched_address =
-            (state.address_data != []) ? state.address_data : [];
-        if (response.statusCode == 200) {
-          for (var nested in response.data['data']) {
-            fetched_address.add(
-              Address_Model(
-                id: await nested['id'].toString(),
-                address: await nested['address'].toString(),
-                province: await nested['province'].toString(),
-                defaultStatus: nested['default'].toString(),
-                postcode: await nested['postcode'].toString(),
-                phone: await nested['phone'].toString(),
-                name: await nested['name'].toString(),
-                district: await nested['district'].toString(),
-                city: await nested['city'].toString(),
-              ),
-            );
-          }
-
-          emit(state.copyWith(
-            address_data: fetched_address,
-          ));
-        } else {
-          print('loading error');
-        }
-      } catch (e) {
-        print("Exception $e");
-      }
-    });
   }
 }

@@ -13,7 +13,8 @@ import 'package:zeleex_application/terms.dart';
 import '../../API/Post Method/google_login_api.dart';
 import '../../Others/Plate.dart';
 import '../../Others/shape.dart';
-import '../../address management/address_main_page.dart';
+import '../../bloc/address management/address_management_bloc.dart';
+import '../address management pages/address_main_page.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../career.dart';
 import '../../cart.dart';
@@ -38,7 +39,7 @@ class ProfilePage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: const Text(
-          "โพรไฟล์",
+          "โปรไฟล์",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -147,7 +148,7 @@ class ProfilePage extends StatelessWidget {
                                   Row(
                                     children: [
                                       const Text(
-                                        "แก้ไขโพรไฟล์",
+                                        "แก้ไขโปรไฟล์",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color:
@@ -413,63 +414,103 @@ class ProfilePage extends StatelessWidget {
                             ),
                           )),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                duration: const Duration(milliseconds: 250),
-                                type: PageTransitionType.fade,
-                                child: Address_Manage_Page(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          255, 241, 241, 241))),
-                              width: double.infinity,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
+                    
+                    BlocBuilder<AddressManagementBloc, AddressManagementState>(
+                      builder: (context, state) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    duration: const Duration(milliseconds: 250),
+                                    type: PageTransitionType.fade,
+                                    child: Address_Manage_Page(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 241, 241, 241))),
+                                  width: double.infinity,
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        10, 10, 10, 10),
+                                    child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        SvgPicture.asset(
-                                            'assets/images/pin.svg'),
-                                        const SizedBox(
-                                          width: 5,
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SvgPicture.asset(
+                                                'assets/images/pin.svg'),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "ที่อยู่หลัก",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          0.015,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
                                         ),
-                                        Text(
-                                          "ที่อยู่หลัก",
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.015,
-                                              fontWeight: FontWeight.bold),
-                                        )
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          25, 0, 0, 0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              25, 0, 0, 0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                state.address_data[0].name,
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    state.address_data[0].name,
+                                                    style: TextStyle(
+                                                        color: const Color
+                                                                .fromARGB(
+                                                            255, 130, 130, 130),
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.015),
+                                                  ),
+                                                  Text(
+                                                    "\t (ค่าเริ่มต้น)",
+                                                    style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.015),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                25, 0, 0, 0),
+                                            child: Container(
+                                              width: 250,
+                                              child: Text(
+                                                state.address_data[0].phone,
                                                 style: TextStyle(
                                                     color: const Color.fromARGB(
                                                         255, 130, 130, 130),
@@ -479,90 +520,68 @@ class ProfilePage extends StatelessWidget {
                                                                 .height *
                                                             0.015),
                                               ),
-                                              Text(
-                                                "\t (ค่าเริ่มต้น)",
-                                                style: TextStyle(
-                                                    color: Colors.red,
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.015),
+                                            )),
+                                        Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                25, 0, 0, 0),
+                                            child: Container(
+                                              width: 350,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    state.address_data[0]
+                                                            .address +
+                                                        ' ' +
+                                                        state.address_data[0]
+                                                            .district +
+                                                        ' ' +
+                                                        state.address_data[0]
+                                                            .province,
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.015,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              130,
+                                                              130,
+                                                              130),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    state.address_data[0].city +
+                                                        ' ' +
+                                                        state.address_data[0]
+                                                            .postcode,
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.015,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              130,
+                                                              130,
+                                                              130),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                            ))
+                                      ],
                                     ),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            25, 0, 0, 0),
-                                        child: Container(
-                                          width: 250,
-                                          child: Text(
-                                            state.address_data[0].phone,
-                                            style: TextStyle(
-                                                color: const Color.fromARGB(
-                                                    255, 130, 130, 130),
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.015),
-                                          ),
-                                        )),
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            25, 0, 0, 0),
-                                        child: Container(
-                                          width: 350,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                state.address_data[0].address +
-                                                    ' ' +
-                                                    state.address_data[0]
-                                                        .district +
-                                                    ' ' +
-                                                    state.address_data[0]
-                                                        .province,
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height *
-                                                          0.015,
-                                                  color: const Color.fromARGB(
-                                                      255, 130, 130, 130),
-                                                ),
-                                              ),
-                                              Text(
-                                                state.address_data[0].city +
-                                                    ' ' +
-                                                    state.address_data[0]
-                                                        .postcode,
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height *
-                                                          0.015,
-                                                  color: const Color.fromARGB(
-                                                      255, 130, 130, 130),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ))
-                                  ],
-                                ),
-                              )),
-                        ),
-                      ],
+                                  )),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                     Container(
                       child: Padding(

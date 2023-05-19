@@ -114,10 +114,12 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductsBloc, ProductsState>(
+    return 
+    BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
         if (state.isLoading == true) {
-          return Scaffold(
+          return
+           Scaffold(
               body: Column(
             children: [
               const SizedBox(

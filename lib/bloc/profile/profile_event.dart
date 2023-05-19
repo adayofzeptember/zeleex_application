@@ -7,7 +7,6 @@ abstract class ProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class Load_Address extends ProfileEvent {}
 
 class Load_Profile extends ProfileEvent {
   // Load_Profile({
