@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,8 +15,10 @@ import 'package:zeleex_application/second.dart';
 import 'Others/Plate.dart';
 import 'bloc/animals/animals_bloc.dart';
 import 'bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
+import 'bloc/check box/check_bloc.dart';
 import 'bloc/store_all/store_all_bloc.dart';
 
+// ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print
 // Navigator.push(
 //       event.context,
 //       PageTransition(
@@ -30,7 +31,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(First_Page()));
+      .then((value) => runApp(const First_Page()));
 }
 
 class First_Page extends StatelessWidget {
@@ -42,6 +43,7 @@ class First_Page extends StatelessWidget {
         BlocProvider(create: (context) => AnimalsBloc()),
         BlocProvider(create: (context) => StoreAllBloc()),
         BlocProvider(create: (context) => ProductsBloc()),
+        BlocProvider(create: (context) => CheckBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
         BlocProvider(create: (context) => AddressManagementBloc()),
@@ -65,7 +67,7 @@ class First_Page extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Kanit',
           primarySwatch: ZeleexColor.zeleexGreen,
-          appBarTheme: AppBarTheme(color: ZeleexColor.zeleexGreen),
+          appBarTheme: const AppBarTheme(color: ZeleexColor.zeleexGreen),
         ),
         home: MainAndIcon(),
       ),
@@ -86,8 +88,7 @@ class _MainAndIconState extends State<MainAndIcon> {
     context.read<MainPageCollectionBloc>().add(Load_ColectionBoard());
     context.read<MainPageCollectionBloc>().add(Load_Catalog());
     _Load_AndGo();
-    systemOverlayStyle:
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.dark,
         statusBarColor: Colors.black);
@@ -101,11 +102,14 @@ class _MainAndIconState extends State<MainAndIcon> {
 
     if (checkToken.toString() != 'null') {
       print("stored token: " + checkToken.toString());
+
       await Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (context) => BottomMenu_Page(),
+          PageTransition(
+            duration: const Duration(milliseconds: 250),
+            type: PageTransitionType.fade,
+            child: BottomMenu_Page(),
           ),
         );
       });
@@ -114,20 +118,14 @@ class _MainAndIconState extends State<MainAndIcon> {
       await Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (context) => SecondPage(),
+          PageTransition(
+            duration: const Duration(milliseconds: 250),
+            type: PageTransitionType.fade,
+            child: SecondPage(),
           ),
         );
       });
     }
-    // await Future.delayed(const Duration(seconds: 3), () {
-    //   Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => SecondPage(),
-    //     ),
-    //   );
-    // });
   }
 
   @override

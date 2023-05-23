@@ -21,6 +21,29 @@ class Address_Model {
       this.province});
 }
 
+class EditAddress_Model {
+  String? id;
+  String? name;
+  String? address;
+  String? city;
+  String? district;
+  bool? defaultStatus;
+  String? province;
+  String? postcode;
+  String? phone;
+
+  EditAddress_Model(
+      {this.address,
+      this.city,
+      this.district,
+      this.defaultStatus,
+      this.id,
+      this.name,
+      this.phone,
+      this.postcode,
+      this.province});
+}
+
 
 
 class NewAddress_Request {

@@ -43,7 +43,7 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
                 Animals_Model( 
                   id: await nested['id'],
                   title: await nested['title'],
-                  price: await nested['price'].toString(),
+                  price: nested['price'].toString(),
                   image: await nested['image']['thumbnail'],
                   description: (nested['description'] == null)
                       ? "- ดูรายละเอียดเพิ่มเติม -"
@@ -95,7 +95,7 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
           }),
         );
         List getImgs = [];
-        dynamic fetched_dataInfo =
+        dynamic fetchedDataInfo =
             (state.animal_info != '') ? state.animal_info : '';
         dynamic nestedData = response.data['data']['animal'];
         dynamic nestedStore = response.data['data']['animal']['store'];
@@ -108,7 +108,7 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
             }
           }
 
-          fetched_dataInfo = Animal_Info(
+          fetchedDataInfo = Animal_Info(
               id: await nestedData['id'],
               image: getImgs,
               //await nestedData['image']['main']
@@ -116,13 +116,13 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState> {
               description: await nestedData['description'],
               title: await nestedData['title'],
               price: await nestedData['price'],
-              store_id: await nestedStore['id'].toString(),
+              store_id: nestedStore['id'].toString(),
               store_title: await nestedStore['title'],
               store_address: await nestedStore['address'],
               store_phone: await nestedStore['phone'],
               store_img: await nestedStore['image']['thumbnail']);
 
-          emit(state.copyWith(animal_info: fetched_dataInfo));
+          emit(state.copyWith(animal_info: fetchedDataInfo));
         } else {
           emit(state.copyWith(isLoading: false));
           print('loading error');

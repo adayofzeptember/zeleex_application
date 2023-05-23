@@ -1,26 +1,17 @@
+// ignore_for_file: camel_case_types, non_constant_identifier_names, prefer_final_fields, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/bloc/address%20management/address_management_bloc.dart';
-
-import '../../API/Post Method/address_add_and_edit.dart';
 import '../../Others/Plate.dart';
 import '../../bloc/address management/model.dart';
 
-class Address_New_Page extends StatefulWidget {
+class Address_New_Page extends StatelessWidget {
   Address_New_Page({Key? key}) : super(key: key);
-
-  @override
-  State<Address_New_Page> createState() => _Address_New_PageState();
-}
-
-class _Address_New_PageState extends State<Address_New_Page> {
-  
   final _formKeyAddAddress = GlobalKey<FormState>();
-  late NewAddress_Request _provider_add_address;
+  late NewAddress_Request _provider_add_address = NewAddress_Request();
   var addressController = TextEditingController();
   var cityController = TextEditingController();
   var provinceController = TextEditingController(); //!ภูมิภาค
@@ -29,12 +20,6 @@ class _Address_New_PageState extends State<Address_New_Page> {
   var defaultController = TextEditingController();
   var phoneController = TextEditingController();
   var nameController = TextEditingController();
-
-  @override
-  void initState() {
-    _provider_add_address = NewAddress_Request();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +109,9 @@ class _Address_New_PageState extends State<Address_New_Page> {
                         return 'กรอกเบอร์ติดต่อ';
                       }
                     },
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                    ],
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -146,7 +134,6 @@ class _Address_New_PageState extends State<Address_New_Page> {
                   const SizedBox(
                     height: 20,
                   ),
-
                   const Text(
                     "\tที่อยู่",
                     style: TextStyle(
@@ -382,21 +369,6 @@ class _Address_New_PageState extends State<Address_New_Page> {
                             context
                                 .read<AddressManagementBloc>()
                                 .add(TapSwitchAddress(getBooleanSwitch: val));
-                            // setState(() {
-                            //   status = vaxl;
-                            //   print(status);
-                            //   if (status.toString() == 'false') {
-                            //     print('ไม่หลัก');
-                            //     setState(() {
-                            //       chooseSwitch = '0';
-                            //     });
-                            //   } else {
-                            //     print('หลัก');
-                            //     setState(() {
-                            //       chooseSwitch = '1';
-                            //     });
-                            //   }
-                            // });
                           })
                     ],
                   ),

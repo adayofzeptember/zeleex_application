@@ -1,34 +1,17 @@
-import 'dart:async';
-import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import 'package:zeleex_application/bloc/address%20management/address_management_bloc.dart';
 import '../../Others/Plate.dart';
-import '../../bloc/profile/profile_bloc.dart';
-import 'address_add.dart';
-import 'address_edit.dart';
-
-class Address_Manage_Page extends StatefulWidget {
+import 'address_add_page.dart';
+// ignore_for_file: type=lint
+class Address_Manage_Page extends StatelessWidget {
   Address_Manage_Page({Key? key}) : super(key: key);
 
-  @override
-  State<Address_Manage_Page> createState() => _Address_Manage_PageState();
-}
-
-class _Address_Manage_PageState extends State<Address_Manage_Page> {
   bool checkDefault = false;
-
-  @override
-  void initState() {
-    // context.read<AddressManagementBloc>().add(Load_Address());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +132,7 @@ class _Address_Manage_PageState extends State<Address_Manage_Page> {
                                             width: 5,
                                           ),
                                           Text(
-                                            checkDefault ? '(ค่าเริ่มต้น)' : '',
+                                            checkDefault ? '(ที่อยู่หลัก)' : '',
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold,
@@ -166,13 +149,15 @@ class _Address_Manage_PageState extends State<Address_Manage_Page> {
                                                       edit_addressID: state
                                                           .address_data[index]
                                                           .id
-                                                          .toString()));
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Address_Edit_Page(),
-                                                  ));
+                                                          .toString(), context: context));
+
+                      
+                                              // Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //       builder: (context) =>
+                                              //           Address_Edit_Page(),
+                                              //     ));
                                             }
                                           },
                                           child: Icon(Icons.more_vert),

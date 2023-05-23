@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, must_be_immutable
+
 part of 'bottom_menu_switch_bloc.dart';
 
 class BottomMenuSwitchState extends Equatable {

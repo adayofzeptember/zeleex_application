@@ -8,11 +8,13 @@ abstract class AddressManagementEvent extends Equatable {
 }
 
 class Load_Address extends AddressManagementEvent {}
-class Load_Address2 extends AddressManagementEvent {}
+
 
 class EditLoad_Address extends AddressManagementEvent {
   String edit_addressID;
-  EditLoad_Address({required this.edit_addressID});
+  var context;
+
+  EditLoad_Address({required this.edit_addressID, required this.context});
 }
 
 class DeleteAddress extends AddressManagementEvent {
@@ -27,9 +29,26 @@ class TapSwitchAddress extends AddressManagementEvent {
   TapSwitchAddress({required this.getBooleanSwitch});
 }
 
+class CheckboxChangeMainAddress extends AddressManagementEvent {
+  bool getCheck;
+
+  CheckboxChangeMainAddress({required this.getCheck});
+}
+
 class AddNew_Address extends AddressManagementEvent {
   NewAddress_Request address_request;
   var context;
 
   AddNew_Address({required this.address_request, required this.context});
+}
+
+class Update_Address extends AddressManagementEvent {
+  NewAddress_Request address_request;
+  var context;
+  String getID;
+
+  Update_Address(
+      {required this.address_request,
+      required this.getID,
+      required this.context});
 }

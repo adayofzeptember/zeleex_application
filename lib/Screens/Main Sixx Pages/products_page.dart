@@ -3,18 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/Main%20Pages/products.dart';
 import 'package:zeleex_application/bloc/products/products_bloc.dart';
-import '../../API/Read All/filters/product_types.dart';
 import '../../Main Pages/product_filtered.dart';
 import '../../Others/Plate.dart';
 import 'package:intl/intl.dart';
 
-import '../../store_page_detail_productDetail.dart';
-import '../product_info.dart';
 
 class ProductsPage extends StatefulWidget {
-  ProductsPage({Key? key}) : super(key: key);
+  const ProductsPage({Key? key}) : super(key: key);
   @override
   State<ProductsPage> createState() => _ProductsPageState();
 }
@@ -37,11 +33,11 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 242, 242, 242),
+      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             statusBarIconBrightness: Brightness.dark,
             statusBarBrightness: Brightness.dark),
@@ -52,7 +48,7 @@ class _ProductsPageState extends State<ProductsPage> {
                 visible: false,
                 child: SvgPicture.asset(
                   'assets/images/menu.svg',
-                  color: Color.fromARGB(255, 51, 51, 51),
+                  color: const Color.fromARGB(255, 51, 51, 51),
                 ),
               ),
             ),
@@ -88,7 +84,7 @@ class _ProductsPageState extends State<ProductsPage> {
               child: GridView.builder(
                   key: const PageStorageKey<String>('animalspage'),
                   controller: scController,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisExtent: MediaQuery.of(context).size.height * 0.35,
@@ -140,7 +136,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: ZeleexColor.zeleexGreen,
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(5),
@@ -149,7 +145,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                         0.22,
                                     width: double.infinity,
                                     child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
+                                        borderRadius: const BorderRadius.only(
                                             topLeft: Radius.circular(5),
                                             topRight: Radius.circular(5)),
                                         child: CachedNetworkImage(
@@ -159,7 +155,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Container(
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 142, 142, 142),
                                             // height: 200,
                                           ),
@@ -176,18 +172,18 @@ class _ProductsPageState extends State<ProductsPage> {
                                                       0.22,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          color: Color.fromARGB(
+                                                          color: const Color.fromARGB(
                                                               255,
                                                               211,
                                                               204,
                                                               204)),
                                                       borderRadius:
-                                                          BorderRadius.all(
+                                                          const BorderRadius.all(
                                                               Radius.circular(
                                                                   5))),
                                                   alignment: Alignment.center,
                                                   child:
-                                                      Icon(Icons.error_outline)),
+                                                      const Icon(Icons.error_outline)),
                                             ),
                                           ),
                                         )),
@@ -200,7 +196,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                       child: Text(
                                         state.product_list[index].title
                                             .toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15,
                                           color:
@@ -218,10 +214,10 @@ class _ProductsPageState extends State<ProductsPage> {
                                                 int.parse(state
                                                     .product_list[index].price
                                                     .toString())),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.red, fontSize: 17),
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   )
                                 ],
@@ -238,7 +234,7 @@ class _ProductsPageState extends State<ProductsPage> {
           data: Theme.of(context).copyWith(
             canvasColor: Colors.white, //desired color
           ),
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.height * 0.3,
             child: Drawer(
               child: Padding(
@@ -254,7 +250,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.07,
                       ),
-                      Text("ค้นหาจากหมวดหมู่",
+                      const Text("ค้นหาจากหมวดหมู่",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -305,7 +301,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       //     return Container();
                       //   },
                       // ),
-                      Spacer(),
+                      const Spacer(),
                       Container(
                           //height: double.infinity,
                           alignment: Alignment.bottomCenter,
@@ -319,19 +315,19 @@ class _ProductsPageState extends State<ProductsPage> {
                                       style: ElevatedButton.styleFrom(
                                         elevation: 0,
                                         primary: Colors.white,
-                                        side: BorderSide(
+                                        side: const BorderSide(
                                             color: ZeleexColor.zeleexGreen),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);
                                         initState();
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         "ยกเลิก",
                                         style: TextStyle(
                                             color: ZeleexColor.zeleexGreen),
                                       ))),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Expanded(
@@ -344,7 +340,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                                     typeID: 1.toString(),
                                                   )));
                                     },
-                                    child: Text("ตกลง",
+                                    child: const Text("ตกลง",
                                         style: TextStyle(
                                           color: Colors.white,
                                         ))),

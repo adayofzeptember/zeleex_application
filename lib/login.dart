@@ -1,9 +1,8 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,8 +15,6 @@ import 'Others/Plate.dart';
 import 'Others/ProgressHUD.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'Others/shape.dart';
 import 'forgot_password_email.dart';
 import 'Screens/Main Sixx Pages/bottomMenu_main_page.dart';
@@ -26,7 +23,7 @@ var emailController = TextEditingController();
 var passwordController = TextEditingController();
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -65,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
         print(userData["name"]);
         print(userData["email"]);
         print(userData["picture"]["data"]["url"]);
-
         request_social.name = userData["name"];
         request_social.email = userData["email"];
         request_social.avatar = userData["picture"]["data"]["url"];
@@ -125,12 +121,13 @@ class _LoginPageState extends State<LoginPage> {
       },
       body: body_Login,
     );
-  
+
     var jsonRes = json.decode(response.body);
+
     if (response.statusCode == 400 || response.statusCode == 200) {
       var token_toStore = jsonRes['data']['token'].toString();
       String id_toStore = jsonRes['data']['id'].toString();
-     
+
       setState(() {
         storedToken = token_toStore;
         storedUserID = id_toStore;
@@ -147,7 +144,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
       return Login_Data.fromJson(json.decode(response.body));
-    } else {
+    } 
+    else {
       setState(() {
         isApiCallProcess = false;
       });
@@ -157,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
-          backgroundColor: Color.fromARGB(255, 133, 133, 133),
+          backgroundColor: const Color.fromARGB(255, 133, 133, 133),
           textColor: Colors.white,
           fontSize: 15);
       throw Exception("error");
@@ -212,7 +210,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget _uiSetUp(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(fontFamily: 'Kanit', primarySwatch: ZeleexColor.zeleexGreen),
+        theme: ThemeData(
+            fontFamily: 'Kanit', primarySwatch: ZeleexColor.zeleexGreen),
         home: Scaffold(
             body: SingleChildScrollView(
           child: Column(
@@ -227,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                     key: formKey,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 80,
                         ),
                         Row(
@@ -239,15 +238,15 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: SvgPicture.asset(
                                 'assets/images/left.svg',
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 255, 255, 255),
                               ),
                             ),
-                            Text(
+                            const Text(
                               "เข้าสู่ระบบ",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 30),
                             ),
-                            Text(
+                            const Text(
                               "",
                               style: TextStyle(
                                   color: ZeleexColor.zeleexGreen,
@@ -256,303 +255,296 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                TextFormField(
-                                  controller: emailController,
-                                  onSaved: (input) =>
-                                      requestModel_zeleex.email = input,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'โปรดกรอกอีเมล';
-                                    }
-                                  },
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.mail_outline),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    filled: true,
-                                    fillColor:
-                                        Color.fromARGB(255, 243, 238, 238),
-                                    border: OutlineInputBorder(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              TextFormField(
+                                controller: emailController,
+                                onSaved: (input) =>
+                                    requestModel_zeleex.email = input,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'โปรดกรอกอีเมล';
+                                  }
+                                },
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.mail_outline),
+                                  focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    labelText: 'อีเมล',
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                TextFormField(
-                                  obscureText: true,
-                                  controller: passwordController,
-                                  onSaved: (input) =>
-                                      requestModel_zeleex.password = input,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'โปรดกรอกรหัสผ่าน';
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.lock_outline),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    filled: true,
-                                    fillColor:
-                                        Color.fromARGB(255, 243, 238, 238),
-                                    border: OutlineInputBorder(
+                                          const BorderSide(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    labelText: 'รหัสผ่าน',
+                                          const BorderSide(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  filled: true,
+                                  fillColor:
+                                      const Color.fromARGB(255, 243, 238, 238),
+                                  border: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
+                                  labelText: 'อีเมล',
                                 ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Forgot_Password_Page()));
-                                  },
-                                  child: Container(
-                                    child: Text(
-                                      "ลืมรหัสผ่าน?",
-                                      style: TextStyle(
-                                          color: ZeleexColor.zeleexGreen,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                obscureText: true,
+                                controller: passwordController,
+                                onSaved: (input) =>
+                                    requestModel_zeleex.password = input,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'โปรดกรอกรหัสผ่าน';
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.lock_outline),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          const BorderSide(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          const BorderSide(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  filled: true,
+                                  fillColor:
+                                      const Color.fromARGB(255, 243, 238, 238),
+                                  border: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
+                                  labelText: 'รหัสผ่าน',
                                 ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: ZeleexColor.zeleexGreen,
-                                      elevation: 0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      )),
-                                  onPressed: () {
-                                    FocusManager.instance.primaryFocus
-                                        ?.unfocus();
-                                    if (formKey.currentState!.validate()) {
-                                      formKey.currentState?.save();
-                                      setState(() {
-                                        isApiCallProcess = true;
-                                      });
-                                      loginNormal(requestModel_zeleex)
-                                          .then((value) => {
-                                                if (value
-                                                    .data!.email!.isNotEmpty)
-                                                  {
-                                                    setState(() {
-                                                      isApiCallProcess = false;
-                                                    }),
-                                                  }
-                                                else
-                                                  {
-                                                    setState(() {
-                                                      isApiCallProcess = false;
-                                                    }),
-                                                  }
-                                              });
-                                      // print("-------input-------"+requestModel_zeleex2.toJson().toString());
-                                    }
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "เข้าสู่ระบบ",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      side: BorderSide(color: ZeleexColor.zeleexGreen),
-                                      primary: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      )),
-                                  onPressed: () {
-                                    Navigator.push(
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => RegisterPage(),
-                                      ),
-                                    );
-                                    // GoogoleSignInApi.google_LogOut();
-                                    // FacebookAuth.instance
-                                    //     .logOut()
-                                    //     .then((value) {
-                                    //   setState(() {
-                                    //     _isLoggedIn = false;
-                                    //     _userObj = {};
-                                    //   });
-                                    // });
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "สร้างบัญชีใหม่",
-                                        style: TextStyle(
-                                            color: ZeleexColor.zeleexGreen,
-                                            fontSize: 15),
-                                      ),
-                                    ),
+                                          builder: (context) =>
+                                              Forgot_Password_Page()));
+                                },
+                                child: Container(
+                                  child: const Text(
+                                    "ลืมรหัสผ่าน?",
+                                    style: TextStyle(
+                                        color: ZeleexColor.zeleexGreen,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 70,
-                                ),
-                                Row(children: <Widget>[
-                                  Expanded(
-                                    child: Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 10.0, right: 20.0),
-                                        child: Divider(
-                                          color: Colors.black,
-                                          height: 36,
-                                        )),
-                                  ),
-                                  Text("หรือ"),
-                                  Expanded(
-                                    child: Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 20.0, right: 10.0),
-                                        child: Divider(
-                                          color: Colors.black,
-                                          height: 36,
-                                        )),
-                                  ),
-                                ]),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      // side: BorderSide(color: ZeleexColor.zeleexGreen),
-                                      primary: Colors.blue,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      )),
-                                  onPressed: () {
-                                    useFacebook_toLogin();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SvgPicture.asset(
-                                                'assets/images/fb.svg'),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Text(
-                                              "ดำเนินการต่อด้วย Facebook",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      side: BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 231, 231, 231)),
-                                      primary: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      )),
-                                  onPressed: () {
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: ZeleexColor.zeleexGreen,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    )),
+                                onPressed: () {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  if (formKey.currentState!.validate()) {
+                                    formKey.currentState?.save();
                                     setState(() {
                                       isApiCallProcess = true;
                                     });
-                                    useGoogle_toLogin();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SvgPicture.asset(
-                                                'assets/images/gg.svg'),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Text(
-                                              "ดำเนินการต่อด้วยบัญชี Google",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 51, 51, 51),
-                                                  fontSize: 15),
-                                            ),
-                                          ],
-                                        )),
+                                    loginNormal(requestModel_zeleex)
+                                        .then((value) => {
+                                              if (value.data!.email!.isNotEmpty)
+                                                {
+                                                  setState(() {
+                                                    isApiCallProcess = false;
+                                                  }),
+                                                }
+                                              else
+                                                {
+                                                  setState(() {
+                                                    isApiCallProcess = false;
+                                                  }),
+                                                }
+                                            });
+                                    // print("-------input-------"+requestModel_zeleex2.toJson().toString());
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      "เข้าสู่ระบบ",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    side: const BorderSide(
+                                        color: ZeleexColor.zeleexGreen),
+                                    primary: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    )),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => RegisterPage(),
+                                    ),
+                                  );
+                                  // GoogoleSignInApi.google_LogOut();
+                                  // FacebookAuth.instance
+                                  //     .logOut()
+                                  //     .then((value) {
+                                  //   setState(() {
+                                  //     _isLoggedIn = false;
+                                  //     _userObj = {};
+                                  //   });
+                                  // });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      "สร้างบัญชีใหม่",
+                                      style: TextStyle(
+                                          color: ZeleexColor.zeleexGreen,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 70,
+                              ),
+                              Row(children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 10.0, right: 20.0),
+                                      child: const Divider(
+                                        color: Colors.black,
+                                        height: 36,
+                                      )),
+                                ),
+                                const Text("หรือ"),
+                                Expanded(
+                                  child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 20.0, right: 10.0),
+                                      child: const Divider(
+                                        color: Colors.black,
+                                        height: 36,
+                                      )),
+                                ),
+                              ]),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    // side: BorderSide(color: ZeleexColor.zeleexGreen),
+                                    primary: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    )),
+                                onPressed: () {
+                                  useFacebook_toLogin();
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/fb.svg'),
+                                          const SizedBox(
+                                            width: 30,
+                                          ),
+                                          const Text(
+                                            "ดำเนินการต่อด้วย Facebook",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    side: const BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 231, 231, 231)),
+                                    primary: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    )),
+                                onPressed: () {
+                                  setState(() {
+                                    isApiCallProcess = true;
+                                  });
+                                  useGoogle_toLogin();
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/images/gg.svg'),
+                                          const SizedBox(
+                                            width: 30,
+                                          ),
+                                          const Text(
+                                            "ดำเนินการต่อด้วยบัญชี Google",
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 51, 51, 51),
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                              ),
+                            ],
                           ),
                         )
                       ],
@@ -565,5 +557,3 @@ class _LoginPageState extends State<LoginPage> {
         )));
   }
 }
-
-

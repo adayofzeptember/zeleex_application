@@ -3,9 +3,11 @@ part of 'address_management_bloc.dart';
 class AddressManagementState extends Equatable {
   bool address_switch;
   bool loading;
+
   int ifDeafult;
   dynamic edit_address_data;
   List address_data;
+
   AddressManagementState(
       {required this.address_switch,
       required this.ifDeafult,
@@ -28,6 +30,11 @@ class AddressManagementState extends Equatable {
   }
 
   @override
-  List<Object> get props =>
-      [address_switch, ifDeafult, address_data, edit_address_data, loading];
+  List<Object> get props => [
+        address_switch,
+        ifDeafult,
+        address_data,
+        edit_address_data,
+        loading,
+      ];
 }

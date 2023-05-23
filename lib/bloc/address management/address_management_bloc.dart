@@ -14,6 +14,7 @@ import 'package:zeleex_application/main.dart';
 import '../../API/Post Method/address_add_and_edit.dart';
 import '../../Others/Plate.dart';
 import '../../Others/url.dart';
+import '../../Screens/address management pages/address_edit_page.dart';
 import '../../Screens/address management pages/address_main_page.dart';
 import '../../store_page_detail_cattleDetail.dart';
 import 'model.dart';
@@ -44,8 +45,7 @@ class AddressManagementBloc
           }),
         );
 
-        var fetched_address = [];
-        // (state.address_data != []) ? state.address_data : [];
+        var fetched_address = (state.address_data != []) ? state.address_data : [];
         if (response.statusCode == 200) {
           for (var nested in response.data['data']) {
             fetched_address.add(
@@ -75,6 +75,14 @@ class AddressManagementBloc
     });
     //!------------------------------------------------------
     on<EditLoad_Address>((event, emit) async {
+      Navigator.push(
+        event.context,
+        PageTransition(
+          duration: const Duration(milliseconds: 250),
+          type: PageTransitionType.fade,
+          child: Address_Edit_Page(),
+        ),
+      );
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
       emit(state.copyWith(
@@ -96,11 +104,12 @@ class AddressManagementBloc
           emit(state.copyWith(
             loading: false,
           ));
-          dataEdit = Address_Model(
+
+          dataEdit = EditAddress_Model(
             id: await nested['id'].toString(),
             address: await nested['address'].toString(),
             province: await nested['province'].toString(),
-            defaultStatus: nested['default'].toString(),
+            defaultStatus: (nested['default'].toString() == '1' ? true : false),
             postcode: await nested['postcode'].toString(),
             phone: await nested['phone'].toString(),
             name: await nested['name'].toString(),
@@ -130,7 +139,7 @@ class AddressManagementBloc
     //!------------------------------------------------------
     on<TapSwitchAddress>((event, emit) {
       emit(state.copyWith(address_switch: event.getBooleanSwitch));
-      print(state.address_switch);
+
       if (state.address_switch == true) {
         emit(state.copyWith(ifDeafult: 1));
       } else {
@@ -196,6 +205,46 @@ class AddressManagementBloc
           add(Load_Address());
           Fluttertoast.showToast(
               msg: "เพิ่มที่อยู่ใหม่แล้ว",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 235, 235, 235),
+              textColor: ZeleexColor.zeleexGreen,
+              fontSize: 15);
+   
+
+          Navigator.pop(event.context);
+        } else {
+          print('error not 200');
+        }
+      } catch (e) {
+        print("Exception: $e");
+      }
+    });
+
+    //*
+    on<Update_Address>((event, emit) async {
+      SharedPreferences prefs2 = await SharedPreferences.getInstance();
+      var user_token = prefs2.get('keyToken');
+      var user_id = prefs2.get('keyID');
+      var body_AddAddress = json.encode(event.address_request.toJson());
+
+      try {
+        final response = await dio.post(
+            zeelexAPI_URL_admin + "address/shipping-update/${event.getID}",
+            options: Options(
+              headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json',
+                "Authorization": "Bearer $user_token",
+              },
+            ),
+            data: body_AddAddress);
+        print(response);
+        if (response.data['responseStatus'].toString() == "true") {
+          add(Load_Address());
+          Fluttertoast.showToast(
+              msg: "แก้ไขที่อยู่แล้ว",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 2,

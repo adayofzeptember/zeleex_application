@@ -27,7 +27,8 @@ class _BottomMenu_PageState extends State<BottomMenu_Page> {
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
     context.read<AddressManagementBloc>().add(Load_Address());
-    
+
+
     super.initState();
   }
 

@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/login.dart';
-import 'dart:io';
 import 'Others/Plate.dart';
-import 'Screens/Main Sixx Pages/bottomMenu_main_page.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 
 //MediaQuery.of(context).size.height * 0.25
 
 class SecondPage extends StatefulWidget {
-  SecondPage({Key? key}) : super(key: key);
+  const SecondPage({Key? key}) : super(key: key);
   @override
   State<SecondPage> createState() => _SecondPageState();
 }

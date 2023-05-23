@@ -1,4 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// ignore_for_file: curly_braces_in_flow_control_structures, must_be_immutable, camel_case_types, avoid_types_as_parameter_names
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,7 +34,7 @@ class Animal_Info_Page extends StatelessWidget {
               Center(
                 child: JumpingText(
                   'กำลังโหลด...',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 25,
                       color: ZeleexColor.zeleexGreen,
                       fontWeight: FontWeight.bold),
@@ -54,7 +55,7 @@ class Animal_Info_Page extends StatelessWidget {
                 centerTitle: true,
                 title: Text(
                   animalName.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: ZeleexColor.zeleexGreen),
                 ),
@@ -67,7 +68,7 @@ class Animal_Info_Page extends StatelessWidget {
                   ),
                 )),
             body: SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: <Widget>[
                     CarouselSlider.builder(
@@ -170,7 +171,7 @@ class Animal_Info_Page extends StatelessWidget {
                                         'assets/images/pincat.svg',
                                       ),
                                       const SizedBox(width: 10),
-                                      Container(
+                                      SizedBox(
                                         width:
                                             MediaQuery.of(context).size.height *
                                                 0.3,
@@ -226,9 +227,9 @@ class Animal_Info_Page extends StatelessWidget {
                                           //   pressed = !pressed;
                                           // });
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "ติดตาม",
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               color: Color.fromRGBO(
                                                   255, 255, 255, 1)),
                                         ),

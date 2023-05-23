@@ -1,26 +1,18 @@
-import 'dart:ffi';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_launcher_icons/utils.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Post%20Method/cart_update.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
-import 'package:zeleex_application/Main%20Pages/main_page.dart';
-import 'package:zeleex_application/register.dart';
-import 'API/model.dart';
 import 'Others/Plate.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'payment.dart';
 

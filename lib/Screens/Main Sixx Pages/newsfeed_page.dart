@@ -1,5 +1,3 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
-import 'package:zeleex_application/cart.dart';
-import 'package:flutter/material.dart';
 import '../../Others/Plate.dart';
-import '../newsfeed_detail.dart';
-
+// ignore_for_file: type=lint
 class NewsFeedPage extends StatefulWidget {
   NewsFeedPage({Key? key}) : super(key: key);
 
