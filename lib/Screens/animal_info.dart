@@ -1,4 +1,3 @@
-// ignore_for_file: curly_braces_in_flow_control_structures, must_be_immutable, camel_case_types, avoid_types_as_parameter_names
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/animal_id_API.dart';
 import 'package:zeleex_application/bloc/animals/animals_bloc.dart';
 import '../Others/Plate.dart';
+
+
+
 
 class Animal_Info_Page extends StatelessWidget {
   String? animalID = "";
@@ -42,7 +44,7 @@ class Animal_Info_Page extends StatelessWidget {
               ),
             ],
           ));
-        } else
+        } else {
           return Scaffold(
             appBar: AppBar(
                 backgroundColor: Colors.white,
@@ -114,7 +116,7 @@ class Animal_Info_Page extends StatelessWidget {
                                   SvgPicture.asset('assets/images/love.svg')
                                 ],
                               ),
-                              const SizedBox(
+                               SizedBox(
                                 height: 5,
                               ),
                               Row(
@@ -315,6 +317,7 @@ class Animal_Info_Page extends StatelessWidget {
                   ],
                 )),
           );
+        }
       },
     );
   }

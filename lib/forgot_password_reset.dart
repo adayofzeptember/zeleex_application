@@ -1,16 +1,8 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:http/http.dart' as http;
-import '../login.dart';
+
 import 'Others/Plate.dart';
 import 'Others/ProgressHUD.dart';
 import 'Others/shape.dart';
@@ -51,7 +43,7 @@ class _Forgot_Password_Page_ResetState
         child: _register(context), inAsyncCall: isApiCallProcess, opacity: 0.3);
   }
 
-  @override
+
   Widget _register(BuildContext context) {
     return Scaffold(
         body: Column(

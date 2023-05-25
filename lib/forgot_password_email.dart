@@ -1,8 +1,7 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter/material.dart';
-import '../login.dart';
 import 'Others/Plate.dart';
 import 'Others/ProgressHUD.dart';
 import 'Others/shape.dart';
@@ -42,7 +41,6 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
         child: _register(context), inAsyncCall: isApiCallProcess, opacity: 0.3);
   }
 
-  @override
   Widget _register(BuildContext context) {
     return Scaffold(
         body: Column(

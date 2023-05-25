@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'address_management_bloc.dart';
 
 abstract class AddressManagementEvent extends Equatable {
@@ -8,7 +10,6 @@ abstract class AddressManagementEvent extends Equatable {
 }
 
 class Load_Address extends AddressManagementEvent {}
-
 
 class EditLoad_Address extends AddressManagementEvent {
   String edit_addressID;

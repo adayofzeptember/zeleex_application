@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/login.dart';
 import 'Others/Plate.dart';
+import 'Screens/Login & Register/login_page.dart';
 
 //MediaQuery.of(context).size.height * 0.25
 

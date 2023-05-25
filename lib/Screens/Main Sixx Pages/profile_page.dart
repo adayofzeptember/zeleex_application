@@ -4,14 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
+import 'package:zeleex_application/second_page_human.dart';
 import 'package:zeleex_application/terms.dart';
 import '../../API/Post Method/google_login_api.dart';
 import '../../Others/Plate.dart';
 import '../../Others/shape.dart';
-import '../../bloc/address management/address_management_bloc.dart';
-import '../address management pages/address_main_page.dart';
+import '../../main.dart';
+import '../Address Management/address_main_page.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../career.dart';
 import '../../cart.dart';
@@ -409,18 +412,59 @@ class ProfilePage extends StatelessWidget {
                           ),
                         )),
                   ),
+
                   InkWell(
-                      onTap: (() {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            duration: const Duration(milliseconds: 250),
-                            type: PageTransitionType.fade,
-                            child: Address_Manage_Page(),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          duration: const Duration(milliseconds: 250),
+                          type: PageTransitionType.fade,
+                          child: Address_Manage_Page(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            border: Border(
+                          top: BorderSide(
+                              color: Color.fromARGB(255, 241, 241, 241)),
+                        )),
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          child: Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SvgPicture.asset('assets/images/pin.svg'),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "ที่อยู่จัดส่ง",
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.015,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        size: 15,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
-                        );
-                      }),
-                      child: Text('ที่อยู่')),
+                        )),
+                  ),
 
                   // BlocBuilder<AddressManagementBloc, AddressManagementState>(
                   //   builder: (context, state) {
@@ -807,10 +851,26 @@ class ProfilePage extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             )),
-                        onPressed: () {
-                          // logout_removeToken();
-                          GoogoleSignInApi.google_LogOut();
-                          FacebookAuth.instance.logOut().then((value) {});
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.remove('keyID');
+                          prefs.remove('keyToken');
+                          prefs.clear();
+                          context
+                              .read<BottomMenuSwitchBloc>()
+                              .add(TapSwitchIndex(indexFromWidget: 2));
+
+                          //  logout_removeToken();
+                          // GoogoleSignInApi.google_LogOut();
+                          // FacebookAuth.instance.logOut().then((value) {});
+
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SecondPage(),
+                            ),
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),

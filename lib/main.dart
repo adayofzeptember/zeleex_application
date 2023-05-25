@@ -6,12 +6,13 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/bloc/address%20management/address_management_bloc.dart';
+import 'package:zeleex_application/bloc/login%20and%20register/login_register_bloc.dart';
 import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
 import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/bottomMenu_main_page.dart';
 import 'package:zeleex_application/bloc/products/products_bloc.dart';
 import 'package:zeleex_application/bloc/profile/profile_bloc.dart';
-import 'package:zeleex_application/second.dart';
+import 'package:zeleex_application/second_page_human.dart';
 import 'Others/Plate.dart';
 import 'bloc/animals/animals_bloc.dart';
 import 'bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
@@ -20,7 +21,7 @@ import 'bloc/store_all/store_all_bloc.dart';
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print
 // Navigator.push(
-//       event.context,
+//       context,
 //       PageTransition(
 //         duration: const Duration(milliseconds: 250),
 //         type: PageTransitionType.fade,
@@ -29,7 +30,6 @@ import 'bloc/store_all/store_all_bloc.dart';
 //     );
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(const First_Page()));
 }
@@ -43,6 +43,7 @@ class First_Page extends StatelessWidget {
         BlocProvider(create: (context) => AnimalsBloc()),
         BlocProvider(create: (context) => StoreAllBloc()),
         BlocProvider(create: (context) => ProductsBloc()),
+        BlocProvider(create: (context) => LoginRegisterBloc()),
         BlocProvider(create: (context) => CheckBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
@@ -95,7 +96,7 @@ class _MainAndIconState extends State<MainAndIcon> {
     super.initState();
   }
 
-  Future _Load_AndGo() async {
+  Future<void> _Load_AndGo() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
 
     var checkToken = prefs2.get('keyToken');

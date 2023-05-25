@@ -28,7 +28,6 @@ class _BottomMenu_PageState extends State<BottomMenu_Page> {
     context.read<ProfileBloc>().add(Load_Profile());
     context.read<AddressManagementBloc>().add(Load_Address());
 
-
     super.initState();
   }
 
@@ -41,12 +40,7 @@ class _BottomMenu_PageState extends State<BottomMenu_Page> {
     ProfilePage()
   ];
 
-  int _index = 2;
-  void onSwitchTab(int index2) {
-    context
-        .read<BottomMenuSwitchBloc>()
-        .add(TapSwitchIndex(indexFromWidget: index2));
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -151,5 +145,11 @@ class _BottomMenu_PageState extends State<BottomMenu_Page> {
         );
       },
     );
+  }
+
+  void onSwitchTab(int index2) {
+    context
+        .read<BottomMenuSwitchBloc>()
+        .add(TapSwitchIndex(indexFromWidget: index2));
   }
 }

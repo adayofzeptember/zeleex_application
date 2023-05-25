@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'Others/Plate.dart';
-import 'register.dart';
+
 
 TermsWidget() {
   return Column(

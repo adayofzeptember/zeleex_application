@@ -1,218 +1,37 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, deprecated_member_use
 
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/API/Post%20Method/post_login.dart';
-import 'package:zeleex_application/API/Post%20Method/post_login_social.dart';
-import 'package:zeleex_application/register.dart';
-import 'package:zeleex_application/API/Post%20Method/google_login_api.dart';
-import 'API/model.dart';
-import 'Others/Plate.dart';
-import 'Others/ProgressHUD.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'Others/shape.dart';
-import 'forgot_password_email.dart';
-import 'Screens/Main Sixx Pages/bottomMenu_main_page.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:zeleex_application/Others/Plate.dart';
+import 'package:zeleex_application/Others/shape.dart';
+import 'package:zeleex_application/Screens/Login%20&%20Register/register_page.dart';
+import 'package:zeleex_application/bloc/login%20and%20register/login_register_bloc.dart';
+import 'package:zeleex_application/forgot_password_email.dart';
+
+import '../../Others/ProgressHUD.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final ScaffoldKey = GlobalKey<ScaffoldState>();
-  bool isApiCallProcess = false;
-
+class LoginPage extends StatelessWidget {
+  LoginPage({Key? key}) : super(key: key);
   final formKey = GlobalKey<FormState>();
-  late RequestModel_zeleex requestModel_zeleex;
-  late Request_Social_Provider request_social;
-  AlreadyIn_Model loggedin = AlreadyIn_Model();
-  bool _isLoggedIn = false;
-  Map _userObj = {};
-  String storedToken = "";
-  String storedUserID = "";
-  @override
-  void initState() {
-    requestModel_zeleex = RequestModel_zeleex();
-    request_social = Request_Social_Provider();
-    loggedin = AlreadyIn_Model();
-    super.initState();
-  }
 
-  Future logout_removeToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('keyToken');
-  }
-
-  Future useFacebook_toLogin() async {
-    //!ทำก่อน login social
-
-    await FacebookAuth.instance
-        .login(permissions: ["public_profile", "email"]).then((value) {
-      FacebookAuth.instance.getUserData().then((userData) {
-        print(userData["name"]);
-        print(userData["email"]);
-        print(userData["picture"]["data"]["url"]);
-        request_social.name = userData["name"];
-        request_social.email = userData["email"];
-        request_social.avatar = userData["picture"]["data"]["url"];
-        request_social.provider = "facebook";
-        request_social.provider_id = "1";
-        login_Social(request_social);
-      });
-    });
-    print(FacebookAuth.instance.accessToken);
-  }
-
-  Future<dynamic> useGoogle_toLogin() async {
-    //*ทำก่อน login social
-    final userGoogle = await GoogoleSignInApi.google_SignIn2();
-    GoogoleSignInApi.google_SignIn2().then((result) {
-      setState(() {
-        isApiCallProcess = false;
-      });
-      result!.authentication.then((googleKey) {
-        print("id----------------> " + userGoogle!.id.toString());
-        print("access token ------------------> " +
-            googleKey.accessToken.toString());
-        print("เมล ------------------> " + userGoogle.email.toString());
-        print("ชื่อ -------------------> " + userGoogle.displayName.toString());
-        print("รูป ------------------> " + userGoogle.photoUrl.toString());
-        request_social.name = userGoogle.displayName.toString();
-        request_social.email = userGoogle.email.toString();
-        request_social.avatar = userGoogle.photoUrl.toString();
-        request_social.provider = "Google";
-        request_social.provider_id = userGoogle.id.toString();
-        login_Social(request_social);
-        // print(json.encode(request_social).toString());
-      }).catchError((error1) {
-        setState(() {
-          isApiCallProcess = false;
-        });
-        print('error in');
-      });
-    }).catchError((error2) {
-      setState(() {
-        isApiCallProcess = false;
-      });
-      print('error out');
-    });
-  }
-
-  //*------------------------------- เข้าสู่ระบบ-------------------------------------------------------
-
-  Future<Login_Data> loginNormal(RequestModel_zeleex requestModel) async {
-    String urlPost = "https://api.zeleex.com/api/login";
-    var body_Login = json.encode(requestModel_zeleex.toJson());
-    final response = await http.post(
-      Uri.parse(urlPost),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: body_Login,
-    );
-
-    var jsonRes = json.decode(response.body);
-
-    if (response.statusCode == 400 || response.statusCode == 200) {
-      var token_toStore = jsonRes['data']['token'].toString();
-      String id_toStore = jsonRes['data']['id'].toString();
-
-      setState(() {
-        storedToken = token_toStore;
-        storedUserID = id_toStore;
-      });
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('keyToken', storedToken.toString());
-      prefs.setString('keyID', storedUserID.toString());
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BottomMenu_Page(),
-        ),
-      );
-      return Login_Data.fromJson(json.decode(response.body));
-    } 
-    else {
-      setState(() {
-        isApiCallProcess = false;
-      });
-      Fluttertoast.showToast(
-          msg:
-              "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบอีเมลและรหัสผ่านอีกครั้ง",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.SNACKBAR,
-          timeInSecForIosWeb: 2,
-          backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-          textColor: Colors.white,
-          fontSize: 15);
-      throw Exception("error");
-    }
-  }
-
-  Future<Login_Social_Data> login_Social(
-      Request_Social_Provider request_social_provider) async {
-    String urlPost = "https://api.zeleex.com/api/register/social";
-    var bodySocial = json.encode(request_social_provider.toJson());
-    final response = await http.post(
-      Uri.parse(urlPost),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: bodySocial,
-    );
-    if (response.statusCode == 200 || response.statusCode == 400) {
-      var jsonRes = json.decode(response.body);
-      var kkk = jsonRes['data']['token'];
-      String id_toStore2 = jsonRes['data']['id'].toString();
-
-      setState(() {
-        storedToken = kkk;
-        storedUserID = id_toStore2;
-      });
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      prefs.setString('keyToken', storedToken.toString());
-      prefs.setString('keyID', storedUserID.toString());
-      print(storedUserID);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BottomMenu_Page(),
-        ),
-      );
-      return Login_Social_Data.fromJson(json.decode(response.body));
-    } else {
-      throw Exception("error");
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ProgressHUD(
-        child: _uiSetUp(context), inAsyncCall: isApiCallProcess, opacity: 0.3);
+    return BlocBuilder<LoginRegisterBloc, LoginRegisterState>(
+      builder: (context, state) {
+        return ProgressHUD(
+            child: _uiLogin(context), inAsyncCall: state.loading, opacity: 0.3);
+      },
+    );
   }
 
-  @override
-  Widget _uiSetUp(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-            fontFamily: 'Kanit', primarySwatch: ZeleexColor.zeleexGreen),
-        home: Scaffold(
+  Widget _uiLogin(BuildContext context) {
+    return BlocBuilder<LoginRegisterBloc, LoginRegisterState>(
+      builder: (context, state) {
+        return Scaffold(
             body: SingleChildScrollView(
           child: Column(
             children: [
@@ -229,31 +48,11 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 80,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: SvgPicture.asset(
-                                'assets/images/left.svg',
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
-                            const Text(
-                              "เข้าสู่ระบบ",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30),
-                            ),
-                            const Text(
-                              "",
-                              style: TextStyle(
-                                  color: ZeleexColor.zeleexGreen,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        Center(
+                          child: const Text(
+                            "เข้าสู่ระบบ",
+                            style: TextStyle(color: Colors.white, fontSize: 30),
+                          ),
                         ),
                         const SizedBox(
                           height: 60,
@@ -265,12 +64,11 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               TextFormField(
                                 controller: emailController,
-                                onSaved: (input) =>
-                                    requestModel_zeleex.email = input,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'โปรดกรอกอีเมล';
                                   }
+                                  return null;
                                 },
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
@@ -291,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                                         const BorderSide(color: Colors.white),
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
-                                  labelText: 'อีเมล',
+                                  hintText: 'อีเมล',
                                 ),
                               ),
                               const SizedBox(
@@ -300,12 +98,11 @@ class _LoginPageState extends State<LoginPage> {
                               TextFormField(
                                 obscureText: true,
                                 controller: passwordController,
-                                onSaved: (input) =>
-                                    requestModel_zeleex.password = input,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'โปรดกรอกรหัสผ่าน';
                                   }
+                                  return null;
                                 },
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(Icons.lock_outline),
@@ -325,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                                         const BorderSide(color: Colors.white),
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
-                                  labelText: 'รหัสผ่าน',
+                                  hintText: 'รหัสผ่าน',
                                 ),
                               ),
                               const SizedBox(
@@ -362,25 +159,14 @@ class _LoginPageState extends State<LoginPage> {
                                   FocusManager.instance.primaryFocus?.unfocus();
                                   if (formKey.currentState!.validate()) {
                                     formKey.currentState?.save();
-                                    setState(() {
-                                      isApiCallProcess = true;
-                                    });
-                                    loginNormal(requestModel_zeleex)
-                                        .then((value) => {
-                                              if (value.data!.email!.isNotEmpty)
-                                                {
-                                                  setState(() {
-                                                    isApiCallProcess = false;
-                                                  }),
-                                                }
-                                              else
-                                                {
-                                                  setState(() {
-                                                    isApiCallProcess = false;
-                                                  }),
-                                                }
-                                            });
-                                    // print("-------input-------"+requestModel_zeleex2.toJson().toString());
+                                    // print(emailController.text +
+                                    //     passwordController.text);
+                                    context.read<LoginRegisterBloc>().add(
+                                        Login_Casual(
+                                            context: context,
+                                            getEmail: emailController.text,
+                                            getPassword:
+                                                passwordController.text));
                                   }
                                 },
                                 child: Padding(
@@ -410,19 +196,13 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => RegisterPage(),
+                                    PageTransition(
+                                      duration:
+                                          const Duration(milliseconds: 250),
+                                      type: PageTransitionType.fade,
+                                      child: RegisterPage(),
                                     ),
                                   );
-                                  // GoogoleSignInApi.google_LogOut();
-                                  // FacebookAuth.instance
-                                  //     .logOut()
-                                  //     .then((value) {
-                                  //   setState(() {
-                                  //     _isLoggedIn = false;
-                                  //     _userObj = {};
-                                  //   });
-                                  // });
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(20.0),
@@ -474,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                                 onPressed: () {
-                                  useFacebook_toLogin();
+                                  // useFacebook_toLogin();
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(20.0),
@@ -514,10 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                                 onPressed: () {
-                                  setState(() {
-                                    isApiCallProcess = true;
-                                  });
-                                  useGoogle_toLogin();
+                                  //  useGoogle_toLogin();
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(20.0),
@@ -554,6 +331,8 @@ class _LoginPageState extends State<LoginPage> {
               )
             ],
           ),
-        )));
+        ));
+      },
+    );
   }
 }
