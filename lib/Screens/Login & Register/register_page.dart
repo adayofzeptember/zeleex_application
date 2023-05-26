@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zeleex_application/Others/Plate.dart';
@@ -119,7 +120,7 @@ class RegisterPage extends StatelessWidget {
                             TextFormField(
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'โปรดกรอกอีเมล';
+                                  return 'โปรดกรอก   อีเมล';
                                 }
                                 return null;
                               },
@@ -142,7 +143,7 @@ class RegisterPage extends StatelessWidget {
                                 hintText: '\tอีเมล',
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             TextFormField(
@@ -180,6 +181,7 @@ class RegisterPage extends StatelessWidget {
                                 if (value!.isEmpty) {
                                   return 'โปรดกรอกยืนยันรหัสผ่าน';
                                 }
+
                                 return null;
                               },
                               controller: _passwordConfirm_Controller,
@@ -201,7 +203,7 @@ class RegisterPage extends StatelessWidget {
                                 hintText: '\tยืนยันรหัสผ่าน',
                               ),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               height: 15,
                             ),
                             BlocBuilder<CheckBloc, CheckState>(
@@ -394,6 +396,8 @@ class RegisterPage extends StatelessWidget {
                                       ],
                                     ),
                                   ],
+            
+            
                                 );
                               },
                             ),
