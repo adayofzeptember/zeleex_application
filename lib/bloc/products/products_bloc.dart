@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:zeleex_application/Others/url.dart';
-import 'package:zeleex_application/Screens/product_info.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/info%20of%20sixx%20pages/product_info.dart';
 import 'package:zeleex_application/bloc/products/model.dart';
 
 part 'products_event.dart';

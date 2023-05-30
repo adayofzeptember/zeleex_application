@@ -1,3 +1,4 @@
+// ignore_for_file: camel_case_types, must_be_immutable
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,8 @@ import 'package:intl/intl.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/animal_id_API.dart';
+import 'package:zeleex_application/Others/Plate.dart';
 import 'package:zeleex_application/bloc/animals/animals_bloc.dart';
-import '../Others/Plate.dart';
-
-
 
 
 class Animal_Info_Page extends StatelessWidget {
@@ -116,7 +115,7 @@ class Animal_Info_Page extends StatelessWidget {
                                   SvgPicture.asset('assets/images/love.svg')
                                 ],
                               ),
-                               SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(

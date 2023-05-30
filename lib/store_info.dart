@@ -176,7 +176,7 @@ class _Store_DetailState extends State<Store_Detail> {
                         color: ZeleexColor.zeleexGreen,
                         fontWeight: FontWeight.bold)),
                 Row(
-                  children: [const Text('')],
+                  children: const [Text('')],
                 )
               ],
             )),

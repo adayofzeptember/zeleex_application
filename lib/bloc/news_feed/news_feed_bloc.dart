@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/info%20of%20sixx%20pages/newsfeed_detail.dart';
 import '../../Others/url.dart';
-import '../../Screens/newsfeed_detail.dart';
 import 'model.dart';
 part 'news_feed_event.dart';
 part 'news_feed_state.dart';
@@ -76,7 +76,7 @@ class NewsFeedBloc extends Bloc<NewsFeedEvent, NewsFeedState> {
         PageTransition(
           duration: const Duration(milliseconds: 250),
           type: PageTransitionType.fade,
-          child: NewsFeedPage_Detail(),
+          child: const NewsFeedPage_Detail(),
         ),
       );
 

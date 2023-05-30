@@ -25,7 +25,7 @@ class _BuyingListPageState extends State<BuyingListPage> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            systemOverlayStyle: SystemUiOverlayStyle(
+            systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
               statusBarColor: ZeleexColor.zeleexGreen,
@@ -41,22 +41,22 @@ class _BuyingListPageState extends State<BuyingListPage> {
                     Navigator.pop(context);
                     // Navigator.of(context, rootNavigator: true).pop(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
                   ),
                 ),
-                Text(
+                const Text(
                   "รายการสั่งซื้อ",
                   style: TextStyle(color: Colors.white),
                 ),
-                Icon(
+                const Icon(
                   Icons.abc_sharp,
                   color: ZeleexColor.zeleexGreen,
                 )
               ],
             ),
-            bottom: TabBar(
+            bottom: const TabBar(
                 labelColor: ZeleexColor.zeleexGreen,
                 unselectedLabelColor: Colors.white,
                 indicatorSize: TabBarIndicatorSize.tab,
@@ -88,10 +88,10 @@ class _BuyingListPageState extends State<BuyingListPage> {
           ),
           body: TabBarView(children: [
             Wait_Payment(),
-            Center(
+            const Center(
               child: Text("data"),
             ),
-            Center(
+            const Center(
               child: Text("data"),
             )
           ]),

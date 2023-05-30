@@ -3,8 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:search_choices/search_choices.dart';
-import 'package:zeleex_application/Screens/store_info.dart';
+import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/info%20of%20sixx%20pages/store_info.dart';
 import 'package:zeleex_application/bloc/store_all/model.dart';
 import '../../Others/url.dart';
 part 'store_all_event.dart';
@@ -14,6 +13,7 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
   final dio = Dio();
   StoreAllBloc()
       : super(StoreAllState(
+          botton: 1,
           allstores_data: [],
           store_info: '',
           page: 1,
@@ -122,6 +122,11 @@ class StoreAllBloc extends Bloc<StoreAllEvent, StoreAllState> {
         emit(state.copyWith(isLoading: false));
         print("Exception $e");
       }
+    });
+
+    //*
+    on<PressBotton>((event, emit) async {
+      emit(state.copyWith(botton: event.getIntBotton));
     });
   }
 }

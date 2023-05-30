@@ -18,6 +18,7 @@ import 'bloc/animals/animals_bloc.dart';
 import 'bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
 import 'bloc/check box/check_bloc.dart';
 import 'bloc/store_all/store_all_bloc.dart';
+import 'bloc/store_indiv_products_animals_bloc/store_indiv_products_animals_bloc.dart';
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print
 // Navigator.push(
@@ -46,6 +47,7 @@ class First_Page extends StatelessWidget {
         BlocProvider(create: (context) => LoginRegisterBloc()),
         BlocProvider(create: (context) => CheckBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => StoreIndivProductsAnimalsBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
         BlocProvider(create: (context) => AddressManagementBloc()),
         BlocProvider(create: (context) => MainPageCollectionBloc()),
@@ -77,7 +79,7 @@ class First_Page extends StatelessWidget {
 }
 
 class MainAndIcon extends StatefulWidget {
-  MainAndIcon({Key? key}) : super(key: key);
+  const MainAndIcon({Key? key}) : super(key: key);
   @override
   State<MainAndIcon> createState() => _MainAndIconState();
 }
@@ -85,6 +87,9 @@ class MainAndIcon extends StatefulWidget {
 class _MainAndIconState extends State<MainAndIcon> {
   @override
   initState() {
+    // context
+    //     .read<StoreIndivProductsAnimalsBloc>()
+    //     .add(Load_ProductsInStore(getStoreID: '1019'));
     context.read<MainPageCollectionBloc>().add(Load_SliderPics());
     context.read<MainPageCollectionBloc>().add(Load_ColectionBoard());
     context.read<MainPageCollectionBloc>().add(Load_Catalog());

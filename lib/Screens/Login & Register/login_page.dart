@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,7 +8,6 @@ import 'package:zeleex_application/Others/shape.dart';
 import 'package:zeleex_application/Screens/Login%20&%20Register/register_page.dart';
 import 'package:zeleex_application/bloc/login%20and%20register/login_register_bloc.dart';
 import 'package:zeleex_application/forgot_password_email.dart';
-
 import '../../Others/ProgressHUD.dart';
 
 var emailController = TextEditingController();
@@ -19,6 +17,7 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final formKey = GlobalKey<FormState>();
 
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginRegisterBloc, LoginRegisterState>(
       builder: (context, state) {
@@ -48,8 +47,8 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(
                           height: 80,
                         ),
-                        Center(
-                          child: const Text(
+                        const Center(
+                          child: Text(
                             "เข้าสู่ระบบ",
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
@@ -75,7 +74,7 @@ class LoginPage extends StatelessWidget {
                                   prefixIcon: const Icon(Icons.mail_outline),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          const BorderSide(color: Colors.white),
+                                         BorderSide(color: Colors.white),
                                       borderRadius: BorderRadius.circular(10)),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide:
@@ -104,6 +103,8 @@ class LoginPage extends StatelessWidget {
                                   }
                                   return null;
                                 },
+
+                                
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(Icons.lock_outline),
                                   focusedBorder: OutlineInputBorder(
@@ -136,13 +137,11 @@ class LoginPage extends StatelessWidget {
                                           builder: (context) =>
                                               Forgot_Password_Page()));
                                 },
-                                child: Container(
-                                  child: const Text(
-                                    "ลืมรหัสผ่าน?",
-                                    style: TextStyle(
-                                        color: ZeleexColor.zeleexGreen,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                child: const Text(
+                                  "ลืมรหัสผ่าน?",
+                                  style: TextStyle(
+                                      color: ZeleexColor.zeleexGreen,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                               const SizedBox(

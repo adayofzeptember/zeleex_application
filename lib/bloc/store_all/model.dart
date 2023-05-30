@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 class AllStores_Model {
   int? id;
   String? title;

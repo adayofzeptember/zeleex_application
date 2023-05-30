@@ -1,3 +1,4 @@
+// ignore_for_file: must_be_immutable, camel_case_types
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,16 +7,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Post%20Method/add_to_cart.dart';
+import 'package:zeleex_application/API/Post%20Method/product_favorite.dart';
+import 'package:zeleex_application/API/Post%20Method/store_subscribe.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_id_api.dart';
 import 'package:zeleex_application/API/Read%20By%20ID/product_review.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../API/Post Method/product_favorite.dart';
-import '../API/Post Method/store_subscribe.dart';
-import '../Others/Plate.dart';
-import '../bloc/products/products_bloc.dart';
+import 'package:zeleex_application/Others/Plate.dart';
+import '../../../bloc/products/products_bloc.dart';
+
 
 String theTokenOne = '';
 String theUserOne = '';
@@ -40,7 +41,6 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
   late AddToCart_Request request_model_addToCart;
   late Product_Fave_Model request_model_product_fave;
   late Store_Subscribe_Model request_model_store_subscribe;
-  bool _press = false;
   var productImg = "";
   var productPrice = "";
   bool pressed = true;
@@ -136,7 +136,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
               ),
             ],
           ));
-        } else
+        } else {
           return Scaffold(
             backgroundColor: const Color.fromARGB(255, 242, 242, 242),
             appBar: AppBar(
@@ -860,6 +860,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
               ),
             ),
           );
+        }
       },
     );
   }

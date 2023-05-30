@@ -74,14 +74,16 @@ class _ProductsPageState extends State<ProductsPage> {
           ),
         ],
       ),
-      body: BlocBuilder<ProductsBloc, ProductsState>(
+      body: 
+      BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
           return Scrollbar(
             thickness: 8,
             radius: const Radius.circular(15),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
-              child: GridView.builder(
+              child: 
+              GridView.builder(
                   key: const PageStorageKey<String>('animalspage'),
                   controller: scController,
                   physics: const ClampingScrollPhysics(),
@@ -105,7 +107,7 @@ class _ProductsPageState extends State<ProductsPage> {
                         ),
                       );
                     } else {
-                      return Container(
+                      return SizedBox(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: Card(
                             shape: RoundedRectangleBorder(

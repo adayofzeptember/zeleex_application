@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, camel_case_types
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,11 +7,12 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import '../Others/Plate.dart';
-import '../bloc/news_feed/news_feed_bloc.dart';
+import 'package:zeleex_application/Others/Plate.dart';
+import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
+
 
 class NewsFeedPage_Detail extends StatelessWidget {
-  NewsFeedPage_Detail({
+  const NewsFeedPage_Detail({
     Key? key,
   }) : super(key: key);
   @override
@@ -27,7 +29,7 @@ class NewsFeedPage_Detail extends StatelessWidget {
               Center(
                 child: JumpingText(
                   'กำลังโหลด...',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 25,
                       color: ZeleexColor.zeleexGreen,
                       fontWeight: FontWeight.bold),
@@ -41,7 +43,6 @@ class NewsFeedPage_Detail extends StatelessWidget {
           var parsedHTMLContent;
           if (state.news_info.content == 'null') {
             parsedHTMLContent = parse('<p>ไม่มีเนื้อหาของข่าวสาร</p>');
-            ;
           } else {
             parsedHTMLContent = parse(state.news_info.content);
           }
@@ -144,12 +145,12 @@ class NewsFeedPage_Detail extends StatelessWidget {
                                           color: const Color.fromARGB(
                                               255, 141, 141, 141))),
                                   alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Container(
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: SizedBox(
                                         width: double.infinity,
                                         height: 300,
-                                        child: const Center(
+                                        child: Center(
                                             child: Text(
                                                 "ไม่พบรูปภาพของข่าวสารนี้"))),
                                   )),
