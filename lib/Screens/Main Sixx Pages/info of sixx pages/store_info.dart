@@ -1,10 +1,13 @@
 // ignore_for_file: must_be_immutable, camel_case_types, deprecated_member_use
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/parser.dart';
+import 'package:intl/intl.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:zeleex_application/Others/Plate.dart';
 import 'package:zeleex_application/bloc/store_all/store_all_bloc.dart';
@@ -451,6 +454,7 @@ class Store_Info extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                            
                               BlocBuilder<StoreIndivProductsAnimalsBloc,
                                   StoreIndivProductsAnimalsState>(
                                 builder: (context, stateDatas) {
@@ -506,8 +510,182 @@ class Store_Info extends StatelessWidget {
                                           itemCount: stateDatas
                                               .products_inStore.length,
                                           itemBuilder: (context, index) {
-                                            return Text(stateDatas
-                                                .products_inStore[index].title);
+                                            return SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.5,
+                                                child: Card(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      print('product id: ' +
+                                                          stateDatas
+                                                              .products_inStore[
+                                                                  index]
+                                                              .id
+                                                              .toString());
+
+                                                      // context.read<ProductsBloc>().add(
+                                                      //       Load_ProductInfo(
+                                                      //         id: state.product_list[index].id
+                                                      //             .toString(),
+                                                      //         context: context,
+                                                      //         title: state.product_list[index].title
+                                                      //             .toString(),
+                                                      //       ),
+                                                      //     );
+                                                      //  context.read<ProductsBloc>().add(
+                                                      //   Load_SKUS(
+                                                      //     id: state.product_list[index].id
+                                                      //         .toString(),
+
+                                                      //   ),
+                                                      // );
+                                                    },
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                          decoration: const BoxDecoration(
+                                                              color: ZeleexColor
+                                                                  .zeleexGreen,
+                                                              borderRadius: BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          5),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          5))),
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.22,
+                                                          width:
+                                                              double.infinity,
+                                                          child: ClipRRect(
+                                                              borderRadius: const BorderRadius
+                                                                      .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          5),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          5)),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                imageUrl:
+                                                                    'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                                progressIndicatorBuilder:
+                                                                    (context,
+                                                                            url,
+                                                                            downloadProgress) =>
+                                                                        Container(
+                                                                  color: const Color
+                                                                          .fromARGB(
+                                                                      255,
+                                                                      142,
+                                                                      142,
+                                                                      142),
+                                                                  // height: 200,
+                                                                ),
+                                                                errorWidget:
+                                                                    (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.fromLTRB(
+                                                                            3,
+                                                                            3,
+                                                                            3,
+                                                                            0),
+                                                                    child: Container(
+                                                                        height: MediaQuery.of(context).size.height *
+                                                                            0.22,
+                                                                        decoration: BoxDecoration(
+                                                                            border: Border.all(
+                                                                                color: const Color.fromARGB(255, 211, 204,
+                                                                                    204)),
+                                                                            borderRadius: const BorderRadius.all(Radius.circular(
+                                                                                5))),
+                                                                        alignment:
+                                                                            Alignment
+                                                                                .center,
+                                                                        child:
+                                                                            const Icon(Icons.error_outline)),
+                                                                  ),
+                                                                ),
+                                                              )),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  10, 10, 5, 0),
+                                                          child: Container(
+                                                            height: 42,
+                                                            child: Text(
+                                                              stateDatas
+                                                                  .products_inStore[
+                                                                      index]
+                                                                  .title
+                                                                  .toString(),
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 15,
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        51,
+                                                                        51,
+                                                                        51),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    10,
+                                                                    10,
+                                                                    0,
+                                                                    0),
+                                                            child: Text(
+                                                              "฿ " +
+                                                                  NumberFormat(
+                                                                          "#,###,###")
+                                                                      .format(int.parse(stateDatas
+                                                                          .products_inStore[
+                                                                              index]
+                                                                          .price
+                                                                          .toString())),
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  fontSize: 17),
+                                                            )),
+                                                        const SizedBox(
+                                                          height: 8,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ));
                                           });
                                       // return
                                       // Text(stateDatas
