@@ -9,12 +9,12 @@ import 'package:zeleex_application/bloc/bottom_menu_switch/bottom_menu_switch_bl
 import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/second_page_human.dart';
-import 'package:zeleex_application/terms.dart';
+import 'package:zeleex_application/Screens/Other%20Pages/terms.dart';
 import '../../API/Post Method/google_login_api.dart';
 import '../../Others/Plate.dart';
 import '../../Others/shape.dart';
 import '../../main.dart';
-import '../Address Management/address_main_page.dart';
+import '../Address Pages/address_main_page.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../career.dart';
 import '../../cart.dart';

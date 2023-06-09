@@ -7,8 +7,8 @@ import 'package:zeleex_application/Others/Plate.dart';
 import 'package:zeleex_application/Others/shape.dart';
 import 'package:zeleex_application/Screens/Login%20&%20Register/register_page.dart';
 import 'package:zeleex_application/bloc/login%20and%20register/login_register_bloc.dart';
-import 'package:zeleex_application/forgot_password_email.dart';
 import '../../Others/ProgressHUD.dart';
+import 'forgot_password_email.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();

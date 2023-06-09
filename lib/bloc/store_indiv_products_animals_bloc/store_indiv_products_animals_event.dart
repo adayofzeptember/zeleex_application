@@ -14,13 +14,14 @@ class Load_ProductsInStore extends StoreIndivProductsAnimalsEvent {
   Load_ProductsInStore({required this.getStoreID});
 }
 
+class ClearList extends StoreIndivProductsAnimalsEvent {}
 
-class ClearList extends StoreIndivProductsAnimalsEvent {
-
+class ChangePrdANDAnm extends StoreIndivProductsAnimalsEvent {
+  String getString;
+  ChangePrdANDAnm({required this.getString});
 }
 
 class Load_AnimalsInStore extends StoreIndivProductsAnimalsEvent {
   String getStoreID;
   Load_AnimalsInStore({required this.getStoreID});
 }
-

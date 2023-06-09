@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zeleex_application/Others/Plate.dart';
 import 'package:zeleex_application/Others/ProgressHUD.dart';
 import 'package:zeleex_application/Others/shape.dart';
-import 'package:zeleex_application/terms.dart';
+import 'package:zeleex_application/Screens/Other%20Pages/terms.dart';
 import '../../bloc/check box/check_bloc.dart';
 import '../../bloc/login and register/login_register_bloc.dart';
 

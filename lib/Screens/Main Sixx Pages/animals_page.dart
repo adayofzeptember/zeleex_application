@@ -31,11 +31,11 @@ class _AnimalsPageState extends State<AnimalsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 242, 242, 242),
+      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             statusBarIconBrightness: Brightness.dark,
             statusBarBrightness: Brightness.dark),
@@ -46,7 +46,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                 visible: false,
                 child: SvgPicture.asset(
                   'assets/images/menu.svg',
-                  color: Color.fromARGB(255, 51, 51, 51),
+                  color: const Color.fromARGB(255, 51, 51, 51),
                 ),
               ),
             ),
@@ -82,7 +82,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
               child: GridView.builder(
                   key: const PageStorageKey<String>('animalspage'),
                   controller: scController,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisExtent: MediaQuery.of(context).size.height * 0.35,
@@ -103,8 +103,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                         ),
                       );
                     } else {
-                      return 
-                      Container(
+                      return Container(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -113,14 +112,15 @@ class _AnimalsPageState extends State<AnimalsPage> {
                             onTap: () {
                               print('animals id: ' +
                                   state.animals_data[index].id.toString());
-                                   context.read<AnimalsBloc>().add(
-                              Load_AnimalInfo(
-                                id: state.animals_data[index].id.toString(),
-                                context: context,
-                                title: state.animals_data[index].title.toString(),
-                              ),
-                            );
-                          
+                              context.read<AnimalsBloc>().add(
+                                    Load_AnimalInfo(
+                                      id: state.animals_data[index].id
+                                          .toString(),
+                                      context: context,
+                                      title: state.animals_data[index].title
+                                          .toString(),
+                                    ),
+                                  );
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,19 +130,18 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                       MediaQuery.of(context).size.height * 0.22,
                                   width: double.infinity,
                                   child: ClipRRect(
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5)),
-                                      child: 
-                                      CachedNetworkImage(
+                                      child: CachedNetworkImage(
                                         imageUrl: state
                                             .animals_data[index].image
                                             .toString(),
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.contain,
                                         progressIndicatorBuilder:
                                             (context, url, downloadProgress) =>
                                                 Container(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 142, 142, 142),
                                           // height: 200,
                                         ),
@@ -158,18 +157,18 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                                     0.22,
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
-                                                        color: Color.fromARGB(
+                                                        color: const Color.fromARGB(
                                                             255,
                                                             211,
                                                             204,
                                                             204)),
                                                     borderRadius:
-                                                        BorderRadius.all(
+                                                        const BorderRadius.all(
                                                             Radius.circular(
                                                                 5))),
                                                 alignment: Alignment.center,
                                                 child:
-                                                    Icon(Icons.error_outline)),
+                                                    const Icon(Icons.error_outline)),
                                           ),
                                         ),
                                       )),
@@ -182,7 +181,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                     child: Text(
                                       state.animals_data[index].title
                                           .toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color:
                                               Color.fromARGB(255, 51, 51, 51),
                                           fontSize: 13,
@@ -190,6 +189,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                     ),
                                   ),
                                 ),
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(10, 5, 5, 0),
@@ -199,13 +199,14 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                       state.animals_data[index].description
                                           .toString(),
                                       // data[index].description.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 12,
                                           color: Color.fromARGB(
                                               255, 130, 130, 130)),
                                     ),
                                   ),
                                 ),
+
                                 Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(10, 10, 0, 0),
@@ -215,9 +216,9 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                               int.parse(state
                                                   .animals_data[index].price
                                                   .toString())),
-                                      style: TextStyle(color: Colors.red),
+                                      style: const TextStyle(color: Colors.red),
                                     )),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 Container()
@@ -252,7 +253,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.07,
                       ),
-                      Text("ค้นหาแบบละเอียด",
+                      const Text("ค้นหาแบบละเอียด",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           )),
@@ -300,7 +301,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                       //     return Container();
                       //   },
                       // ),
-                      Spacer(),
+                      const Spacer(),
                       Container(
                           //height: double.infinity,
                           alignment: Alignment.bottomCenter,
@@ -314,16 +315,16 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                       style: ElevatedButton.styleFrom(
                                         elevation: 0,
                                         primary: Colors.white,
-                                        side: BorderSide(
+                                        side: const BorderSide(
                                             color: ZeleexColor.zeleexGreen),
                                       ),
                                       onPressed: () {},
-                                      child: Text(
+                                      child: const Text(
                                         "รีเซ็ต",
                                         style: TextStyle(
                                             color: ZeleexColor.zeleexGreen),
                                       ))),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Expanded(
@@ -331,7 +332,7 @@ class _AnimalsPageState extends State<AnimalsPage> {
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: Text("ตกลง",
+                                    child: const Text("ตกลง",
                                         style: TextStyle(
                                           color: Colors.white,
                                         ))),

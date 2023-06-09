@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zeleex_application/Main%20Pages/main_page.dart';
 import '../API/Read All/career_readall_api.dart';
 import 'Others/Plate.dart';
 import 'career_detail.dart';
@@ -28,7 +27,7 @@ class _CareerPageState extends State<CareerPage> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light,
               statusBarColor: ZeleexColor.zeleexGreen),
@@ -62,11 +61,11 @@ class _CareerPageState extends State<CareerPage> {
               Row(
                 children: [
                   SvgPicture.asset('assets/images/career.svg',
-                      color: Color.fromARGB(255, 51, 51, 51)),
-                  SizedBox(
+                      color: const Color.fromARGB(255, 51, 51, 51)),
+                  const SizedBox(
                     width: 5,
                   ),
-                  Text(
+                  const Text(
                     "ตำแหน่งงาน",
                     style: TextStyle(
                         color: Color.fromARGB(
@@ -80,7 +79,7 @@ class _CareerPageState extends State<CareerPage> {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               FutureBuilder<List<Data_Read_Careers>>(
@@ -107,12 +106,12 @@ class _CareerPageState extends State<CareerPage> {
                                 },
                                 child: Container(
                                     width: double.infinity,
-                                    padding: EdgeInsets.all(15.0),
+                                    padding: const EdgeInsets.all(15.0),
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                         border: Border.all(
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 206, 206, 206))),
                                     child: Row(
                                       mainAxisAlignment:
@@ -132,13 +131,13 @@ class _CareerPageState extends State<CareerPage> {
                                         ),
                                         Container(
                                           padding:
-                                              EdgeInsets.fromLTRB(15, 8, 15, 8),
+                                              const EdgeInsets.fromLTRB(15, 8, 15, 8),
                                           decoration: BoxDecoration(
                                             color: ZeleexColor.zeleexGreen,
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                           ),
-                                          child: Text(
+                                          child: const Text(
                                             "รายละเอียด >",
                                             style:
                                                 TextStyle(color: Colors.white),
@@ -154,7 +153,7 @@ class _CareerPageState extends State<CareerPage> {
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 },
               ),
             ],

@@ -10,6 +10,8 @@ import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:zeleex_application/Others/Plate.dart';
+import 'package:zeleex_application/bloc/animals/animals_bloc.dart';
+import 'package:zeleex_application/bloc/products/products_bloc.dart';
 import 'package:zeleex_application/bloc/store_all/store_all_bloc.dart';
 import 'package:zeleex_application/bloc/store_indiv_products_animals_bloc/store_indiv_products_animals_bloc.dart';
 
@@ -42,116 +44,6 @@ class Store_Info extends StatelessWidget {
           String getContent = state.store_info.content.toString();
           var content = parse(getContent);
           return Scaffold(
-              floatingActionButton: Padding(
-                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: ZeleexColor.zeleexGreen,
-                            elevation: 0,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20)),
-                            )),
-                        onPressed: (state.botton == 0)
-                            ? (() {
-                                context
-                                    .read<StoreAllBloc>()
-                                    .add(PressBotton(getIntBotton: 1));
-                                context
-                                    .read<StoreIndivProductsAnimalsBloc>()
-                                    .add(ClearList());
-                                context
-                                    .read<StoreIndivProductsAnimalsBloc>()
-                                    .add(Load_ProductsInStore(
-                                        getStoreID:
-                                            state.store_info.id.toString()));
-                              })
-                            : null,
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/instore.svg',
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const Text(
-                                  "สินค้าในร้าน",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: ZeleexColor.zeleexGreen,
-                            elevation: 0,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  bottomRight: Radius.circular(20)),
-                            )),
-                        onPressed: (state.botton == 1)
-                            ? (() {
-                                context
-                                    .read<StoreAllBloc>()
-                                    .add(PressBotton(getIntBotton: 0));
-                                context
-                                    .read<StoreIndivProductsAnimalsBloc>()
-                                    .add(ClearList());
-                                context
-                                    .read<StoreIndivProductsAnimalsBloc>()
-                                    .add(Load_AnimalsInStore(
-                                        getStoreID:
-                                            state.store_info.id.toString()));
-                              })
-                            : null,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/malfoot.svg',
-                                color: Colors.white,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "หมวดหมู่สัตว์",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               backgroundColor: const Color.fromARGB(255, 242, 242, 242),
               appBar: AppBar(
                   backgroundColor: Colors.white,
@@ -169,14 +61,14 @@ class Store_Info extends StatelessWidget {
                         color: ZeleexColor.zeleexGreen),
                   ),
                   leading: IconButton(
-                    onPressed: () async {
+                    onPressed: () {
                       context
                           .read<StoreAllBloc>()
                           .add(PressBotton(getIntBotton: 1));
 
                       context
                           .read<StoreIndivProductsAnimalsBloc>()
-                          .add(ClearList());
+                          .add(ChangePrdANDAnm(getString: 'product'));
 
                       Navigator.pop(context);
                     },
@@ -190,45 +82,42 @@ class Store_Info extends StatelessWidget {
                   children: [
                     Stack(
                       children: [
-                        // CachedNetworkImage(
-                        //         imageUrl: '',
-                        //         fit: BoxFit.fill,
-                        //         progressIndicatorBuilder:
-                        //             (context, url, downloadProgress) =>
-                        //                 Container(
-                        //           color: Color.fromARGB(255, 142, 142, 142),
-                        //           // height: 200,
-                        //         ),
-                        //         errorWidget: (context, url, error) => Center(
-                        //           child: Container(
-                        //             width: double.infinity,
-                        //             height: MediaQuery.of(context).size.height *
-                        //                 0.2,
-                        //             decoration: BoxDecoration(
-                        //               border: Border.all(
-                        //                   color: Color.fromARGB(
-                        //                       255, 240, 236, 236)),
-                        //             ),
-                        //             child: Image.asset(
-                        //               'assets/images/banner-noimg.jpg',
-                        //               fit: BoxFit.fitWidth,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        Container(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color:
-                                    const Color.fromARGB(255, 240, 236, 236)),
+                        CachedNetworkImage(
+                          imageUrl: '',
+                          fit: BoxFit.fill,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Container(
+                            color: Color.fromARGB(255, 142, 142, 142),
+                            // height: 200,
                           ),
-                          child: Image.asset(
-                            'assets/images/banner-noimg.jpg',
-                            fit: BoxFit.fitWidth,
+                          errorWidget: (context, url, error) => Center(
+                            child: Container(
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Color.fromARGB(255, 240, 236, 236)),
+                              ),
+                              child: Image.asset(
+                                'assets/images/banner-noimg.jpg',
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
                           ),
                         ),
+                        // Container(
+                        //   width: double.infinity,
+                        //   height: MediaQuery.of(context).size.height * 0.3,
+                        //   decoration: BoxDecoration(
+                        //     border: Border.all(
+                        //         color:
+                        //             const Color.fromARGB(255, 240, 236, 236)),
+                        //   ),
+                        //   child: Image.asset(
+                        //     'assets/images/banner-noimg.jpg',
+                        //     fit: BoxFit.fitWidth,
+                        //   ),
+                        // ),
                         //! หลังแบนเนอร์
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
@@ -261,11 +150,11 @@ class Store_Info extends StatelessWidget {
                                                       .size
                                                       .height *
                                                   0.08,
-                                              child: const CircleAvatar(
+                                              child: CircleAvatar(
                                                 backgroundColor: Color.fromARGB(
                                                     255, 196, 196, 196),
                                                 backgroundImage: NetworkImage(
-                                                    'https://www.pngitem.com/pimgs/m/9-94800_online-store-icon-png-transparent-png.png'),
+                                                    state.store_info.image),
                                               )),
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
@@ -396,7 +285,7 @@ class Store_Info extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      //! แก้ไขเพิ่มเติม
+
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             15, 10, 0, 0),
@@ -454,7 +343,173 @@ class Store_Info extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'หมวดหมู่',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: SizedBox(
+                                            height: 60,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  primary:
+                                                      ZeleexColor.zeleexGreen,
+                                                  elevation: 0,
+                                                  shape:
+                                                      const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(5),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    5)),
+                                                  )),
+                                              onPressed: (state.botton == 0)
+                                                  ? (() {
+                                                      context
+                                                          .read<
+                                                              StoreIndivProductsAnimalsBloc>()
+                                                          .add(ChangePrdANDAnm(
+                                                              getString:
+                                                                  'product'));
+                                                      context
+                                                          .read<StoreAllBloc>()
+                                                          .add(PressBotton(
+                                                              getIntBotton: 1));
+                                                      // context
+                                                      //     .read<
+                                                      //         StoreIndivProductsAnimalsBloc>()
+                                                      //     .add(ClearList());
+                                                      context
+                                                          .read<
+                                                              StoreIndivProductsAnimalsBloc>()
+                                                          .add(Load_ProductsInStore(
+                                                              getStoreID: state
+                                                                  .store_info.id
+                                                                  .toString()));
+                                                    })
+                                                  : null,
+                                              child: SizedBox(
+                                                width: double.infinity,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      20.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                        'assets/images/instore.svg',
+                                                        color: Colors.white,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      const Text(
+                                                        "สินค้า",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: SizedBox(
+                                            height: 60,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  primary:
+                                                      ZeleexColor.zeleexGreen,
+                                                  elevation: 0,
+                                                  shape:
+                                                      const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topRight: Radius
+                                                                .circular(5),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    5)),
+                                                  )),
+                                              onPressed: (state.botton == 1)
+                                                  ? (() {
+                                                      context
+                                                          .read<StoreAllBloc>()
+                                                          .add(PressBotton(
+                                                              getIntBotton: 0));
+                                                      // context
+                                                      //     .read<
+                                                      //         StoreIndivProductsAnimalsBloc>()
+                                                      //     .add(ClearList());
+
+                                                      context
+                                                          .read<
+                                                              StoreIndivProductsAnimalsBloc>()
+                                                          .add(ChangePrdANDAnm(
+                                                              getString:
+                                                                  'animal'));
+                                                      context
+                                                          .read<
+                                                              StoreIndivProductsAnimalsBloc>()
+                                                          .add(Load_AnimalsInStore(
+                                                              getStoreID: state
+                                                                  .store_info.id
+                                                                  .toString()));
+                                                    })
+                                                  : null,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(20.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                      'assets/images/malfoot.svg',
+                                                      color: Colors.white,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    const Text(
+                                                      "สัตว์",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                               BlocBuilder<StoreIndivProductsAnimalsBloc,
                                   StoreIndivProductsAnimalsState>(
                                 builder: (context, stateDatas) {
@@ -522,29 +577,96 @@ class Store_Info extends StatelessWidget {
                                                               5.0)),
                                                   child: InkWell(
                                                     onTap: () {
-                                                      print('product id: ' +
+                                                      print('id: ' +
                                                           stateDatas
                                                               .products_inStore[
                                                                   index]
                                                               .id
                                                               .toString());
 
-                                                      // context.read<ProductsBloc>().add(
+                                                      if (stateDatas
+                                                              .checkPrdORAnm ==
+                                                          'product') {
+                                                        context
+                                                            .read<
+                                                                ProductsBloc>()
+                                                            .add(
+                                                              Load_ProductInfo(
+                                                                id: stateDatas
+                                                                    .products_inStore[
+                                                                        index]
+                                                                    .id
+                                                                    .toString(),
+                                                                context:
+                                                                    context,
+                                                                title: stateDatas
+                                                                    .products_inStore[
+                                                                        index]
+                                                                    .title
+                                                                    .toString(),
+                                                              ),
+                                                            );
+                                                        context
+                                                            .read<
+                                                                ProductsBloc>()
+                                                            .add(
+                                                              Load_SKUS(
+                                                                id: stateDatas
+                                                                    .products_inStore[
+                                                                        index]
+                                                                    .id
+                                                                    .toString(),
+                                                              ),
+                                                            );
+                                                      } else {
+                                                        context
+                                                            .read<AnimalsBloc>()
+                                                            .add(
+                                                              Load_AnimalInfo(
+                                                                id: stateDatas
+                                                                    .products_inStore[
+                                                                        index]
+                                                                    .id
+                                                                    .toString(),
+                                                                context:
+                                                                    context,
+                                                                title: stateDatas
+                                                                    .products_inStore[
+                                                                        index]
+                                                                    .title
+                                                                    .toString(),
+                                                              ),
+                                                            );
+                                                      }
+
+                                                      // context
+                                                      //     .read<ProductsBloc>()
+                                                      //     .add(
                                                       //       Load_ProductInfo(
-                                                      //         id: state.product_list[index].id
+                                                      //         id: stateDatas
+                                                      //             .products_inStore[
+                                                      //                 index]
+                                                      //             .id
                                                       //             .toString(),
                                                       //         context: context,
-                                                      //         title: state.product_list[index].title
+                                                      //         title: stateDatas
+                                                      //             .products_inStore[
+                                                      //                 index]
+                                                      //             .title
                                                       //             .toString(),
                                                       //       ),
                                                       //     );
-                                                      //  context.read<ProductsBloc>().add(
-                                                      //   Load_SKUS(
-                                                      //     id: state.product_list[index].id
-                                                      //         .toString(),
-
-                                                      //   ),
-                                                      // );
+                                                      // context
+                                                      //     .read<ProductsBloc>()
+                                                      //     .add(
+                                                      //       Load_SKUS(
+                                                      //         id: stateDatas
+                                                      //             .products_inStore[
+                                                      //                 index]
+                                                      //             .id
+                                                      //             .toString(),
+                                                      //       ),
+                                                      //     );
                                                     },
                                                     child: Column(
                                                       crossAxisAlignment:
@@ -580,10 +702,14 @@ class Store_Info extends StatelessWidget {
                                                                           5)),
                                                               child:
                                                                   CachedNetworkImage(
-                                                                imageUrl:
-                                                                    'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
-                                                                fit: BoxFit
-                                                                    .contain,
+                                                                imageUrl: stateDatas
+                                                                    .products_inStore[
+                                                                        index]
+                                                                    .image
+                                                                    .toString(),
+                                                                // 'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
+                                                                fit:
+                                                                    BoxFit.fill,
                                                                 progressIndicatorBuilder:
                                                                     (context,
                                                                             url,

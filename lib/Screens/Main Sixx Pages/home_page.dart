@@ -11,12 +11,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/cart.dart';
-import 'package:zeleex_application/Main%20Pages/search_results_page.dart';
+import 'package:zeleex_application/Screens/Other%20Pages/search_results_page.dart';
 import '../../Others/Plate.dart';
 import '../../Others/shape.dart';
 import '../../bloc/animals/animals_bloc.dart';
 import '../../bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
-import '../../store_page_detail_cattleDetail.dart';
+
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                                     print(p0.toString());
                                   },
                                   onSubmit: ((p0) => {
-                                        print(p0.toString()),
+                                        //print(p0.toString()),
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -351,7 +351,6 @@ class HomePage extends StatelessWidget {
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
-                                      
                                       itemCount: state.animals_catalog.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
@@ -545,6 +544,7 @@ class HomePage extends StatelessWidget {
                                                         ZeleexColor.zeleexGreen,
                                                     elevation: 0),
                                                 onPressed: () {
+                                                  
                                                   context
                                                       .read<
                                                           BottomMenuSwitchBloc>()
@@ -566,7 +566,8 @@ class HomePage extends StatelessWidget {
                                           height: 5,
                                         ),
                                         const SizedBox(
-                                          width: 0, height: 0,
+                                          width: 0,
+                                          height: 0,
                                         ),
                                         Container(
                                           height: MediaQuery.of(context)

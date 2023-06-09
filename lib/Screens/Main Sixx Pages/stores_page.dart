@@ -136,10 +136,12 @@ class _StorePageState extends State<StorePage> {
                                     borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(5),
                                         topRight: Radius.circular(5)),
-                                    child: CachedNetworkImage(
-                                      imageUrl:
-                                          'https://api.zeleex.com/file/497/conversions/image_615362c04cec49738-thumb.jpg',
-                                      fit: BoxFit.fill,
+                                    child: 
+                                    
+                                    CachedNetworkImage(
+                                      imageUrl:state.allstores_data[index].image,
+                                          // 'https://api.zeleex.com/file/497/conversions/image_615362c04cec49738-thumb.jpg',
+                                      fit: BoxFit.cover,
                                       progressIndicatorBuilder:
                                           (context, url, downloadProgress) =>
                                               Container(
@@ -159,6 +161,9 @@ class _StorePageState extends State<StorePage> {
                                         ),
                                       ),
                                     ),
+
+
+                                    
                                   ),
                                 ),
                                 Padding(

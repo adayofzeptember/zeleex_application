@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/API/Read%20All/helps_API.dart';
-import 'package:zeleex_application/Main%20Pages/main_page.dart';
 import 'Others/Plate.dart';
 
 class HelpCenterPage extends StatefulWidget {

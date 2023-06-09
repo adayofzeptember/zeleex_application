@@ -2,8 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zeleex_application/API/Read%20All/advance_serch_results.dart';
-import 'package:zeleex_application/store_page_detail_productDetail.dart';
-import '../Others/Plate.dart';
+import 'package:zeleex_application/Others/Plate.dart';
 
 
 class Search_Results_Page extends StatefulWidget {
@@ -72,7 +71,6 @@ class _Search_Results_PageState extends State<Search_Results_Page> {
                 List<Data_Search_Result>? data = snapshot.data;
                 return Expanded(
                   child: RawScrollbar(
-                    
                     thumbColor: ZeleexColor.zeleexGreen,
                     radius: Radius.circular(50),
                     thickness: 5,
@@ -101,16 +99,16 @@ class _Search_Results_PageState extends State<Search_Results_Page> {
                               child: InkWell(
                                 onTap: () {
                                   print(data[index].id.toString());
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            Store_Product_Detail(
-                                          productID: data[index].id.toString(),
-                                          productName:
-                                              data[index].title.toString(),
-                                        ),
-                                      ));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           Store_Product_Detail(
+                                  //         productID: data[index].id.toString(),
+                                  //         productName:
+                                  //             data[index].title.toString(),
+                                  //       ),
+                                  //     ));
                                 },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

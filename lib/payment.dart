@@ -13,7 +13,7 @@ import 'package:zeleex_application/payment_confirm.dart';
 import 'API/Post Method/post_checkout_IDEA.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Others/Plate.dart';
-import 'Screens/Address Management/address_main_page.dart';
+import 'Screens/Address Pages/address_main_page.dart';
 import 'cart.dart';
 import 'payment_method.dart';
 
@@ -92,7 +92,7 @@ class _PaymentPageState extends State<PaymentPage> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
             statusBarColor: ZeleexColor.zeleexGreen,
@@ -100,26 +100,27 @@ class _PaymentPageState extends State<PaymentPage> {
           backgroundColor: ZeleexColor.zeleexGreen,
           elevation: 0.0,
           title: Row(
+
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
                   ),
                 ),
               ),
-              Text(
+              const Text(
                 "ชำระเงิน",
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              Icon(
+              const Icon(
                 Icons.abc_sharp,
                 color: ZeleexColor.zeleexGreen,
               )
@@ -127,7 +128,7 @@ class _PaymentPageState extends State<PaymentPage> {
           ),
         ),
         body: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: Column(
@@ -159,10 +160,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       SvgPicture.asset('assets/images/pin.svg'),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
-                                      Text(
+                                      const Text(
                                         "ที่อยู่สำหรับจัดส่ง",
                                         style: TextStyle(
                                             fontSize: 15,
@@ -170,7 +171,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                   FutureBuilder<List<Data_Shipping_List>>(
@@ -218,12 +219,12 @@ class _PaymentPageState extends State<PaymentPage> {
                                                               data[0]
                                                                   .name
                                                                   .toString(),
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 8,
                                                             ),
                                                             Text(
@@ -236,13 +237,13 @@ class _PaymentPageState extends State<PaymentPage> {
                                                         ),
                                                         Row(
                                                           children: [
-                                                            Text('แก้ไข',
+                                                            const Text('แก้ไข',
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         12,
                                                                     color: Colors
                                                                         .red)),
-                                                            Icon(
+                                                            const Icon(
                                                               Icons
                                                                   .arrow_forward_ios_rounded,
                                                               color: Colors.red,
@@ -299,7 +300,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
 
@@ -315,7 +316,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 itemBuilder:
                                     (BuildContext context, int index9) {
                                   return Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     width: double.infinity,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
@@ -326,15 +327,15 @@ class _PaymentPageState extends State<PaymentPage> {
                                             children: [
                                               SvgPicture.asset(
                                                 'assets/images/cart_store.svg',
-                                                color: Color.fromARGB(
+                                                color: const Color.fromARGB(
                                                     255, 141, 141, 141),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                 data![index9].title.toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 51, 51, 51),
                                                     fontWeight:
@@ -374,7 +375,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                   bottom: 15),
                                                           child: Column(
                                                             children: [
-                                                              SizedBox(
+                                                              const SizedBox(
                                                                 height: 8,
                                                               ),
                                                               Row(
@@ -386,7 +387,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                         .start,
                                                                 children: [
                                                                   Container(
-                                                                    color: Color
+                                                                    color: const Color
                                                                         .fromARGB(
                                                                             83,
                                                                             16,
@@ -405,7 +406,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                           100,
                                                                     ),
                                                                   ),
-                                                                  SizedBox(
+                                                                  const SizedBox(
                                                                     width: 10,
                                                                   ),
                                                                   Expanded(
@@ -425,7 +426,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                                   height: 20,
                                                                                   child: Text(
                                                                                     data[index222].product!.title.toString(),
-                                                                                    style: TextStyle(
+                                                                                    style: const TextStyle(
                                                                                       color: Color.fromARGB(255, 51, 51, 51),
                                                                                     ),
                                                                                   ),
@@ -434,7 +435,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                               SvgPicture.asset('assets/images/x.svg')
                                                                             ],
                                                                           ),
-                                                                          SizedBox(
+                                                                          const SizedBox(
                                                                             height:
                                                                                 30,
                                                                           ),
@@ -444,14 +445,14 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                             children: [
                                                                               Text(
                                                                                 NumberFormat("#,###,###").format(int.parse(unit_price.toString())) + ' บาท',
-                                                                                style: TextStyle(color: Color.fromARGB(255, 51, 51, 51), fontWeight: FontWeight.bold),
+                                                                                style: const TextStyle(color: Color.fromARGB(255, 51, 51, 51), fontWeight: FontWeight.bold),
                                                                               ),
                                                                               Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                 children: [
                                                                                   Row(
                                                                                     children: [
-                                                                                      SizedBox(
+                                                                                      const SizedBox(
                                                                                         width: 5,
                                                                                       ),
                                                                                       SizedBox(
@@ -460,11 +461,11 @@ class _PaymentPageState extends State<PaymentPage> {
                                                                                           child: Text(
                                                                                             'จำนวน: ' + data[index222].unit.toString(),
                                                                                             textAlign: TextAlign.center,
-                                                                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                            style: const TextStyle(fontWeight: FontWeight.bold),
                                                                                           ),
                                                                                         ),
                                                                                       ),
-                                                                                      SizedBox(
+                                                                                      const SizedBox(
                                                                                         width: 5,
                                                                                       ),
                                                                                     ],
@@ -494,26 +495,26 @@ class _PaymentPageState extends State<PaymentPage> {
                                   );
                                 });
                           } else if (snapshot.hasError) {
-                            return Padding(
+                            return const Padding(
                               padding:
-                                  const EdgeInsets.only(top: 50, bottom: 50),
+                                  EdgeInsets.only(top: 50, bottom: 50),
                               child: Text('ไม่มีสินค้าในตะกร้า'),
                             );
                           } else {}
-                          return Padding(
+                          return const Padding(
                             padding:
-                                const EdgeInsets.only(bottom: 100, top: 100),
+                                EdgeInsets.only(bottom: 100, top: 100),
                             child: Text('โปรดรอสักครู่...'),
                           );
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       InkWell(
                         onTap: () {
                           showModalBottomSheet(
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.vertical(
                               top: Radius.circular(20),
                             )),
@@ -527,13 +528,13 @@ class _PaymentPageState extends State<PaymentPage> {
                                     padding: const EdgeInsets.all(20.0),
                                     child: Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "ตัวเลือกการจัดส่งสินค้า",
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         Row(
@@ -567,7 +568,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Row(
@@ -608,7 +609,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                    color: Color.fromARGB(255, 227, 228, 227))),
+                                    color: const Color.fromARGB(255, 227, 228, 227))),
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -621,10 +622,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                     children: [
                                       SvgPicture.asset(
                                           'assets/images/ship.svg'),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
-                                      Text(
+                                      const Text(
                                         "ตัวเลือกกการจัดส่งสินค้า",
                                         style: TextStyle(
                                             fontSize: 15,
@@ -632,7 +633,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Padding(
@@ -642,15 +643,15 @@ class _PaymentPageState extends State<PaymentPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "ส่งแบบธรรมดา",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 15,
                                         ),
-                                        Text("฿35.00",
+                                        const Text("฿35.00",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold)),
                                       ],
@@ -661,7 +662,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                           35, 5, 0, 0),
                                       child: Container(
                                         width: 250,
-                                        child: Text(
+                                        child: const Text(
                                           "จะได้รับสินค้าในวันที่ 23 มี.ค.",
                                           style: TextStyle(fontSize: 12),
                                         ),
@@ -670,7 +671,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
@@ -679,21 +680,21 @@ class _PaymentPageState extends State<PaymentPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(
+                            const Text(
                               "คำสั่งซื้อทั้งหมด ",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                   color: Color.fromARGB(255, 51, 51, 51)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
                               NumberFormat("#,###,###").format(
                                       int.parse(totalPrice.toString())) +
                                   ' บาท',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                   color: ZeleexColor.zeleexGreen),
@@ -701,17 +702,17 @@ class _PaymentPageState extends State<PaymentPage> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Divider(color: Color.fromARGB(255, 227, 228, 227)),
-                      SizedBox(
+                      const Divider(color: Color.fromARGB(255, 227, 228, 227)),
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "เลือกวิธีชำระเงิน",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -726,13 +727,13 @@ class _PaymentPageState extends State<PaymentPage> {
                             },
                             child: Row(
                               children: [
-                                Text(
+                                const Text(
                                   "ช่องทางการชำระเงินทั้งหมด",
                                   style: TextStyle(
                                       color: ZeleexColor.zeleexGreen,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_right_outlined,
                                   color: ZeleexColor.zeleexGreen,
                                 )
@@ -741,7 +742,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
@@ -752,7 +753,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                    color: Color.fromARGB(255, 227, 228, 227))),
+                                    color: const Color.fromARGB(255, 227, 228, 227))),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
@@ -763,10 +764,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                       SvgPicture.asset(
                                         'assets/images/cash.svg',
                                       ),
-                                      VerticalDivider(
+                                      const VerticalDivider(
                                         width: 5,
                                       ),
-                                      Text(
+                                      const Text(
                                         "ธนาคารกสิกรไทย (*3446)",
                                         style: TextStyle(
                                             color: Color.fromARGB(
@@ -776,13 +777,13 @@ class _PaymentPageState extends State<PaymentPage> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
-                                  Text("บัตรเครดิต/เดบิต",
+                                  const Text("บัตรเครดิต/เดบิต",
                                       style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 130, 130, 130)))
@@ -790,13 +791,13 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             ),
                           )),
-                          VerticalDivider(width: 5),
+                          const VerticalDivider(width: 5),
                           Expanded(
                               child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                    color: Color.fromARGB(255, 227, 228, 227))),
+                                    color: const Color.fromARGB(255, 227, 228, 227))),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
@@ -807,10 +808,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                       SvgPicture.asset(
                                         'assets/images/cash.svg',
                                       ),
-                                      VerticalDivider(
+                                      const VerticalDivider(
                                         width: 5,
                                       ),
-                                      Text(
+                                      const Text(
                                         "เก็บเงินปลายทาง",
                                         style: TextStyle(
                                             color: Color.fromARGB(
@@ -819,10 +820,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
-                                  Text("ชำระเงินเมื่อได้รับสินค้า",
+                                  const Text("ชำระเงินเมื่อได้รับสินค้า",
                                       style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 130, 130, 130)))
@@ -832,7 +833,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           )),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       // Container(
@@ -866,11 +867,11 @@ class _PaymentPageState extends State<PaymentPage> {
                       //         ),
                       //       ),
                       //     )),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       //Divider(color: Color.fromARGB(255, 227, 228, 227)),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       // InkWell(
@@ -1093,7 +1094,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       //     style: TextStyle(color: ZeleexColor.zeleexGreen),
                       //   ),
                       // ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       //Divider(color: Color.fromARGB(255, 227, 228, 227)),
@@ -1104,7 +1105,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   "ยอดการสั่งซื้อ",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 51, 51, 51),
@@ -1114,25 +1115,25 @@ class _PaymentPageState extends State<PaymentPage> {
                                   '฿' +
                                       NumberFormat("#,###,###").format(
                                           int.parse(totalPrice.toString())),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color.fromARGB(255, 51, 51, 51),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   "ยอดค่าจัดส่ง",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 51, 51, 51),
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text(
+                                const Text(
                                   "฿45",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 51, 51, 51),
@@ -1140,20 +1141,20 @@ class _PaymentPageState extends State<PaymentPage> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   "ยอดชำระเงินทั้งหมด",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 51, 51, 51),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
-                                Text(
+                                const Text(
                                   "฿1,345",
                                   style: TextStyle(
                                       color: ZeleexColor.zeleexGreen,
@@ -1169,7 +1170,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   ),
                 ),
                 Container(
-                  color: Color.fromARGB(255, 240, 240, 240),
+                  color: const Color.fromARGB(255, 240, 240, 240),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -1183,7 +1184,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("รวมทั้งหมด",
+                                      const Text("รวมทั้งหมด",
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 51, 51, 51))),
@@ -1192,7 +1193,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                             NumberFormat("#,###,###").format(
                                                 int.parse(
                                                     totalPrice.toString())),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 25,
                                             color: ZeleexColor.zeleexGreen,
                                             fontWeight: FontWeight.bold),
@@ -1221,8 +1222,8 @@ class _PaymentPageState extends State<PaymentPage> {
                               // alignment: Alignment.center,
                               // height: double.infinity,
                               color: ZeleexColor.zeleexGreen,
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
+                              child: const Padding(
+                                padding: EdgeInsets.all(20.0),
                                 child: Text(
                                   "ชำระเงิน-",
                                   style: TextStyle(
@@ -1250,7 +1251,7 @@ class _PaymentPageState extends State<PaymentPage> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 2,
-        backgroundColor: Color.fromARGB(255, 230, 97, 97),
+        backgroundColor: const Color.fromARGB(255, 230, 97, 97),
         textColor: Colors.white,
         fontSize: 15);
     var bigdata = {};

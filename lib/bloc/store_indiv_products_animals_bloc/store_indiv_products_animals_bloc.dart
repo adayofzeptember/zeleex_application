@@ -15,7 +15,10 @@ class StoreIndivProductsAnimalsBloc extends Bloc<StoreIndivProductsAnimalsEvent,
   final dio = Dio();
   StoreIndivProductsAnimalsBloc()
       : super(StoreIndivProductsAnimalsState(
-            loading: false, products_inStore: [], count_Check: '')) {
+            loading: false,
+            products_inStore: [],
+            count_Check: '',
+            checkPrdORAnm: 'product')) {
     //*
     on<Load_ProductsInStore>((event, emit) async {
       try {
@@ -67,7 +70,9 @@ class StoreIndivProductsAnimalsBloc extends Bloc<StoreIndivProductsAnimalsEvent,
       try {
         emit(state.copyWith(loading: true));
         final responseAnimals = await dio.get(
-          zeelexAPI_URL_admin + "animals?per_page=10&store_id=" + event.getStoreID,
+          zeelexAPI_URL_admin +
+              "animals?per_page=10&store_id=" +
+              event.getStoreID,
           options: Options(headers: {
             "Content-Type": "application/json",
             // "Authorization": "Bearer $token",
@@ -88,7 +93,7 @@ class StoreIndivProductsAnimalsBloc extends Bloc<StoreIndivProductsAnimalsEvent,
                 Animals_Model(
                   id: await nested['id'],
                   title: await nested['title'],
-                  price: await nested['skus_min_price'].toString(),
+                  price: await nested['price'].toString(),
                   image: await nested['image']['thumbnail'],
                 ),
               );
@@ -97,7 +102,6 @@ class StoreIndivProductsAnimalsBloc extends Bloc<StoreIndivProductsAnimalsEvent,
             emit(state.copyWith(
               products_inStore: fetched_animals,
             ));
-          
           } else {
             // print('all products is loaded');
           }
@@ -113,6 +117,11 @@ class StoreIndivProductsAnimalsBloc extends Bloc<StoreIndivProductsAnimalsEvent,
 
     on<ClearList>((event, emit) {
       emit(state.copyWith(products_inStore: []));
+    });
+
+    on<ChangePrdANDAnm>((event, emit) {
+      emit(state.copyWith(checkPrdORAnm: event.getString, products_inStore: []));
+      print(state.checkPrdORAnm);
     });
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
 import '../../Others/Plate.dart';
+
 // ignore_for_file: type=lint
 class NewsFeedPage extends StatefulWidget {
   NewsFeedPage({Key? key}) : super(key: key);
@@ -87,6 +88,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                       ),
                     );
                   }
+
                   var createdTime = DateFormat.yMMMd().format(
                       DateTime.parse(state.newsfeed_data[index].dateCreated));
                   return Padding(
@@ -119,6 +121,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                                         .toString(),
                                     imageBuilder: (context, imageProvider) =>
                                         Container(
+                                    
                                       height: 40,
                                       width: 40,
                                       decoration: BoxDecoration(

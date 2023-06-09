@@ -188,7 +188,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                           width: double.infinity,
                           child: CachedNetworkImage(
                             imageUrl:
-                                'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
+                                state.product_info.images,
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, downloadProgress) => Container(
@@ -460,6 +460,7 @@ class _Product_Info_PageState extends State<Product_Info_Page> {
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                             onPressed: () {
+                              //! pop up
                               showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {

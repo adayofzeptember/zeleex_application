@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zeleex_application/bloc/products/products_bloc.dart';
-import '../../Main Pages/product_filtered.dart';
 import '../../Others/Plate.dart';
 import 'package:intl/intl.dart';
 
@@ -107,7 +106,10 @@ class _ProductsPageState extends State<ProductsPage> {
                         ),
                       );
                     } else {
-                      return SizedBox(
+                      return 
+                      
+                      
+                      SizedBox(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: Card(
                             shape: RoundedRectangleBorder(
@@ -147,13 +149,14 @@ class _ProductsPageState extends State<ProductsPage> {
                                         0.22,
                                     width: double.infinity,
                                     child: ClipRRect(
+                                 
                                         borderRadius: const BorderRadius.only(
                                             topLeft: Radius.circular(5),
                                             topRight: Radius.circular(5)),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                              'https://api.zeleex.com/file/534/634e1e245a5d9_275773114_2754272138202414_4661250318203734812_n.jpg',
-                                          fit: BoxFit.contain,
+                                              state.product_list[index].image,
+                                          fit: BoxFit.cover,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Container(
@@ -335,12 +338,7 @@ class _ProductsPageState extends State<ProductsPage> {
                               Expanded(
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Product_Filtered(
-                                                    typeID: 1.toString(),
-                                                  )));
+                                  
                                     },
                                     child: const Text("ตกลง",
                                         style: TextStyle(

@@ -1,10 +1,9 @@
 // ignore_for_file: unused_element
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'Others/Plate.dart';
-import 'Others/ProgressHUD.dart';
-import 'Others/shape.dart';
+import 'package:zeleex_application/Others/Plate.dart';
+import 'package:zeleex_application/Others/ProgressHUD.dart';
+import 'package:zeleex_application/Others/shape.dart';
 import 'forgot_password_reset.dart';
 
 var _nameController = TextEditingController();
@@ -54,7 +53,7 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
             ),
             Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 Row(
@@ -66,14 +65,14 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
                       },
                       child: SvgPicture.asset(
                         'assets/images/left.svg',
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "ลืมรหัสผ่าน",
                       style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
-                    Text(
+                    const Text(
                       "   ",
                       style: TextStyle(
                           color: ZeleexColor.zeleexGreen,
@@ -82,7 +81,7 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Form(
@@ -93,12 +92,12 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'กรอกอีเมล์',
                             style: TextStyle(
                                 color: Color.fromARGB(255, 95, 95, 95)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextFormField(
@@ -113,20 +112,24 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
                             }),
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(10)),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
-                              fillColor: Color.fromARGB(255, 243, 238, 238),
+                              fillColor:
+                                  const Color.fromARGB(255, 243, 238, 238),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           ElevatedButton(
@@ -149,7 +152,7 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
                                 child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text(
+                                  child: const Text(
                                     "ดำเนินการต่อ",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),

@@ -1,11 +1,9 @@
 // ignore_for_file: unused_element
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'Others/Plate.dart';
-import 'Others/ProgressHUD.dart';
-import 'Others/shape.dart';
+import 'package:zeleex_application/Others/Plate.dart';
+import 'package:zeleex_application/Others/ProgressHUD.dart';
+import 'package:zeleex_application/Others/shape.dart';
 
 var _nameController = TextEditingController();
 var _sureNameController = TextEditingController();
@@ -43,7 +41,6 @@ class _Forgot_Password_Page_ResetState
         child: _register(context), inAsyncCall: isApiCallProcess, opacity: 0.3);
   }
 
-
   Widget _register(BuildContext context) {
     return Scaffold(
         body: Column(
@@ -57,7 +54,7 @@ class _Forgot_Password_Page_ResetState
             ),
             Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 Row(
@@ -69,14 +66,14 @@ class _Forgot_Password_Page_ResetState
                       },
                       child: SvgPicture.asset(
                         'assets/images/left.svg',
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "รีเซ็ทรหัสผ่าน",
                       style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
-                    Text(
+                    const Text(
                       "   ",
                       style: TextStyle(
                           color: ZeleexColor.zeleexGreen,
@@ -85,7 +82,7 @@ class _Forgot_Password_Page_ResetState
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Form(
@@ -96,18 +93,19 @@ class _Forgot_Password_Page_ResetState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'กรอกรหัสผ่านใหม่',
                             style: TextStyle(
                                 color: Color.fromARGB(255, 95, 95, 95)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกอีเมล์';
+                                
                               }
                             },
                             controller: _nameController,
@@ -116,22 +114,27 @@ class _Forgot_Password_Page_ResetState
                             }),
                             decoration: InputDecoration(
                               hintText: 'รหัสผ่านใหม่',
-                                            hintStyle: TextStyle(color: Color.fromARGB(255, 156, 156, 156)),
+                              hintStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 156, 156, 156)),
                               focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(10)),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
-                              fillColor: Color.fromARGB(255, 243, 238, 238),
+                              fillColor:
+                                  const Color.fromARGB(255, 243, 238, 238),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextFormField(
@@ -145,23 +148,28 @@ class _Forgot_Password_Page_ResetState
                               allName = input.toString();
                             }),
                             decoration: InputDecoration(
-                               hintText: 'ยืนยันรหัสผ่านใหม่',
-                               hintStyle: TextStyle(color: Color.fromARGB(255, 156, 156, 156)),
+                              hintText: 'ยืนยันรหัสผ่านใหม่',
+                              hintStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 156, 156, 156)),
                               focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(10)),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
-                              fillColor: Color.fromARGB(255, 243, 238, 238),
+                              fillColor:
+                                  const Color.fromARGB(255, 243, 238, 238),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           ElevatedButton(
@@ -176,7 +184,7 @@ class _Forgot_Password_Page_ResetState
                                 child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text(
+                                  child: const Text(
                                     "ยืนยัน",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
