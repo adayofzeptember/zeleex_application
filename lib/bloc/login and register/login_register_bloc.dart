@@ -1,6 +1,5 @@
 // ignore_for_file: unused_local_variable
 import 'package:http/http.dart' as http;
-
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -9,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Others/url.dart';
-import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/bottomMenu_main_page.dart';
+import 'package:zeleex_application/Screens/Main%20Pages/bottomMenu_main_page.dart';
 part 'login_register_event.dart';
 part 'login_register_state.dart';
 

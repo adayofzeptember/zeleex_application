@@ -18,7 +18,7 @@ class _Payment_MethodState extends State<Payment_Method> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: ZeleexColor.zeleexGreen,
         ),
         backgroundColor: ZeleexColor.zeleexGreen,
@@ -30,20 +30,20 @@ class _Payment_MethodState extends State<Payment_Method> {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.white,
                 ),
               ),
             ),
-            Text(
+            const Text(
               "เลือกช่องทางการชำระเงิน",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-            Icon(
+            const Icon(
               Icons.abc_sharp,
               color: ZeleexColor.zeleexGreen,
             )
@@ -55,14 +55,14 @@ class _Payment_MethodState extends State<Payment_Method> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "วิธีการชำระเงิน",
               style: TextStyle(
                   fontSize: 20,
                   color: Color.fromARGB(255, 51, 51, 51),
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
@@ -71,11 +71,11 @@ class _Payment_MethodState extends State<Payment_Method> {
                 onTap: () {},
                 child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Color.fromARGB(255, 206, 206, 206))),
+                            color: const Color.fromARGB(255, 206, 206, 206))),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -86,14 +86,14 @@ class _Payment_MethodState extends State<Payment_Method> {
                               color: ZeleexColor.zeleexGreen,
                               width: 40,
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Column(
                               children: [
-                                Text(
+                                const Text(
                                   "ธนาคารกสิกรไทย (*3456)",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                Text(
+                                const Text(
                                   "บัตรเครดิต/เดบิต",
                                 ),
                               ],
@@ -107,10 +107,10 @@ class _Payment_MethodState extends State<Payment_Method> {
                             //   width: 40,
                             // ),
                             Image.asset('assets/images/visagroup.png'),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: Color.fromARGB(255, 206, 206, 206),
                             )
@@ -126,11 +126,11 @@ class _Payment_MethodState extends State<Payment_Method> {
                 onTap: () {},
                 child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Color.fromARGB(255, 206, 206, 206))),
+                            color: const Color.fromARGB(255, 206, 206, 206))),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -140,17 +140,17 @@ class _Payment_MethodState extends State<Payment_Method> {
                               'assets/images/cash.svg',
                               width: 40,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "ชำระเงินปลายทาง",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                Text(
+                                const Text(
                                   "ชำระเงินเมื่อได้รับสินค้า",
                                 ),
                               ],
@@ -159,7 +159,7 @@ class _Payment_MethodState extends State<Payment_Method> {
                         ),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: Color.fromARGB(255, 206, 206, 206),
                             )
@@ -175,11 +175,11 @@ class _Payment_MethodState extends State<Payment_Method> {
                 onTap: () {},
                 child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Color.fromARGB(255, 206, 206, 206))),
+                            color: const Color.fromARGB(255, 206, 206, 206))),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -189,17 +189,17 @@ class _Payment_MethodState extends State<Payment_Method> {
                               'assets/images/bank.svg',
                               width: 35,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "โอนเงินผ่านธนาคาร",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                Text(
+                                const Text(
                                   "ชำระผ่านหมายเลขอ้างอิง",
                                 ),
                               ],
@@ -211,10 +211,10 @@ class _Payment_MethodState extends State<Payment_Method> {
                             SvgPicture.asset(
                               'assets/images/banks.svg',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: Color.fromARGB(255, 206, 206, 206),
                             )
@@ -230,11 +230,11 @@ class _Payment_MethodState extends State<Payment_Method> {
                 onTap: () {},
                 child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Color.fromARGB(255, 206, 206, 206))),
+                            color: const Color.fromARGB(255, 206, 206, 206))),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -244,17 +244,17 @@ class _Payment_MethodState extends State<Payment_Method> {
                               'assets/images/mobile.svg',
                               width: 25,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "โมบายแบงก์กิ้ง",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                Text(
+                                const Text(
                                   "ชำระในแอปพลิเคชันธนาคาร",
                                 ),
                               ],
@@ -268,10 +268,10 @@ class _Payment_MethodState extends State<Payment_Method> {
                             // SvgPicture.asset(
                             //   'assets/images/banks.svg',
                             // ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: Color.fromARGB(255, 206, 206, 206),
                             )

@@ -9,7 +9,7 @@ import 'package:zeleex_application/bloc/address%20management/address_management_
 import 'package:zeleex_application/bloc/login%20and%20register/login_register_bloc.dart';
 import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
-import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/bottomMenu_main_page.dart';
+import 'package:zeleex_application/Screens/Main%20Pages/bottomMenu_main_page.dart';
 import 'package:zeleex_application/bloc/products/products_bloc.dart';
 import 'package:zeleex_application/bloc/profile/profile_bloc.dart';
 import 'package:zeleex_application/second_page_human.dart';

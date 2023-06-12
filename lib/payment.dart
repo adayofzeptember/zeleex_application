@@ -190,7 +190,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                             data[0].city.toString();
                                         address_checkout.address_district =
                                             data[0].district.toString();
-                                        ;
+                                        
                                         address_checkout.address_province =
                                             data[0].province.toString();
                                         address_checkout.address_postcode =

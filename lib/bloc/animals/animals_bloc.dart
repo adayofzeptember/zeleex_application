@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:zeleex_application/Screens/Main%20Sixx%20Pages/info%20of%20sixx%20pages/animal_info.dart';
+import 'package:zeleex_application/Screens/Main%20Pages/info%20pages/animal_info.dart';
 import 'package:zeleex_application/bloc/animals/model.dart';
 import '../../Others/url.dart';
 part 'animals_event.dart';
