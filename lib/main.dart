@@ -5,7 +5,9 @@ import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zeleex_application/bloc/add%20to%20cart/add_to_cart_bloc.dart';
 import 'package:zeleex_application/bloc/address%20management/address_management_bloc.dart';
+import 'package:zeleex_application/bloc/cart/cart_bloc.dart';
 import 'package:zeleex_application/bloc/login%20and%20register/login_register_bloc.dart';
 import 'package:zeleex_application/bloc/main_page/main_page_collection_bloc.dart';
 import 'package:zeleex_application/bloc/news_feed/news_feed_bloc.dart';
@@ -49,6 +51,8 @@ class First_Page extends StatelessWidget {
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => StoreIndivProductsAnimalsBloc()),
         BlocProvider(create: (context) => NewsFeedBloc()),
+        BlocProvider(create: (context) => AddToCartBloc()),
+        BlocProvider(create: (context) => CartBloc()),
         BlocProvider(create: (context) => AddressManagementBloc()),
         BlocProvider(create: (context) => MainPageCollectionBloc()),
         BlocProvider(create: (context) => BottomMenuSwitchBloc()),
@@ -93,6 +97,7 @@ class _MainAndIconState extends State<MainAndIcon> {
     context.read<MainPageCollectionBloc>().add(Load_SliderPics());
     context.read<MainPageCollectionBloc>().add(Load_ColectionBoard());
     context.read<MainPageCollectionBloc>().add(Load_Catalog());
+    context.read<CartBloc>().add(Load_Cart_Store());
     _Load_AndGo();
     const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,

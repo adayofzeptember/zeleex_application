@@ -22,6 +22,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
           isLoading: true,
           dataTotal: 0,
         )) {
+
+
+          
     on<Load_AllProdutcs>((event, emit) async {
       try {
         final response = await dio.get(

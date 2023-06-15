@@ -13,6 +13,7 @@ part 'add_to_cart_state.dart';
 
 class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
   final dio = Dio();
+  
   AddToCartBloc() : super(AddToCartState()) {
     on<Add_Product_toCart>((event, emit) async {
       SharedPreferences prefs2 = await SharedPreferences.getInstance();

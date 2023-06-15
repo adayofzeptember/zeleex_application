@@ -17,9 +17,7 @@ import 'package:http/http.dart' as http;
 import 'payment.dart';
 
 class CartPage extends StatefulWidget {
-  String? user_id = "";
-  String? user_token = "";
-  CartPage({Key? key, this.user_id, this.user_token}) : super(key: key);
+  CartPage() : super();
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -37,9 +35,9 @@ class _CartPageState extends State<CartPage> {
   String userToken = "";
   String realName = "";
   String? productName_forDialog;
-
-  Future<List<Store>> fetch_cartList(String userID222, String userToken222) async {
-        
+//!---------------------------------------------------------------------------------------
+  Future<List<Store>> fetch_cartList(
+      String userID222, String userToken222) async {
     final response = await http.get(
         Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
             userID222.toString()),
@@ -69,6 +67,30 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
+  Future<List<ProductSkus>> fetch_cartSku(
+      String userID, String userToken, int x) async {
+    final response = await http.get(
+        Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
+            userID.toString()),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $userToken',
+        });
+
+    final jsonResponse = json.decode(response.body) as Map<dynamic, dynamic>;
+    //var jsonConTest = jsonResponse['data']['store'][0];
+    //var x = jsonResponse['data']['product_all'];
+    List jsonCon = jsonResponse['data']['store'][x]['product_skus'];
+
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => ProductSkus.fromJson(data)).toList();
+    } else {
+      throw Exception('error response =! 200');
+    }
+  }
+//!---------------------------------------------------------------------------------------
+
   Future get_storedToken() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var x = prefs2.get('keyToken');
@@ -81,10 +103,8 @@ class _CartPageState extends State<CartPage> {
 
   @override
   void initState() {
-
     get_storedToken();
-    future_cart =
-        fetch_cartList(widget.user_id.toString(), widget.user_token.toString());
+    future_cart = fetch_cartList(userID.toString(), userToken.toString());
     _provider_cartRemove = Provider_CartRemove();
     _provider_cartUpdate = Provider_CartUpdate();
     super.initState();
@@ -94,254 +114,255 @@ class _CartPageState extends State<CartPage> {
   void dispose() {
     super.dispose();
   }
- 
+
   @override
-  Widget build(BuildContext context) { 
-    return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Kanit',
-          primarySwatch: ZeleexColor.zeleexGreen,
-          appBarTheme: AppBarTheme(color: ZeleexColor.zeleexGreen)),
-      home: Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ZeleexColor.zeleexGreen,
-          ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          elevation: 0,
           backgroundColor: ZeleexColor.zeleexGreen,
-          elevation: 0.0,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Text(
-                'ตะกร้าสินค้า',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              Icon(
-                Icons.abc_sharp,
-                color: ZeleexColor.zeleexGreen,
-              )
-            ],
+          automaticallyImplyLeading: false,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: ZeleexColor.zeleexGreen,
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.light),
+          centerTitle: true,
+          title: Text(
+            'ตะกร้าสินค้า',
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white),
           ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              FutureBuilder<List<Store>>(
-                future: future_cart,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<Store>? data = snapshot.data;
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        primary: false,
-                        itemCount: data?.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Color.fromARGB(
-                                            255, 223, 222, 222)))),
-                            width: double.infinity,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 10, bottom: 5),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Transform.scale(
-                                        scale: 0.7,
-                                        child: Checkbox(
-                                            checkColor: Colors.white,
-                                            activeColor: ZeleexColor.zeleexGreen,
-                                            value: isChecked,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                isChecked = value!;
-                                              });
-                                            }),
-                                      ),
-                                      SvgPicture.asset(
-                                        'assets/images/cart_store.svg',
-                                        color:
-                                            Color.fromARGB(255, 141, 141, 141),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        data![index].title.toString(),
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 51, 51, 51),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color:
-                                            Color.fromARGB(255, 141, 141, 141),
-                                        size: 15,
-                                      ),
-                                    ],
-                                  ),
-                                  FutureBuilder<List<ProductSkus>>(
-                                    future:
-                                        fetch_cartSku(userID, userToken, index),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        List<ProductSkus>? data = snapshot.data;
-                                        return ListView.builder(
-                                            shrinkWrap: true,
-                                            primary: false,
-                                            itemCount: data?.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index222) {
-                                              int x1 = int.parse(data![index222]
-                                                  .price
-                                                  .toString());
-                                              int x2 = int.parse(data[index222]
-                                                  .unit
-                                                  .toString());
-                                              int unit_price = x1 * x2;
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 15),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Transform.scale(
-                                                      scale: 0.7,
-                                                      child: Checkbox(
-                                                          checkColor:
-                                                              Colors.white,
-                                                          activeColor:
-                                                              ZeleexColor.zeleexGreen,
-                                                          value: isChecked,
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              isChecked =
-                                                                  value!;
-                                                            });
-                                                          }),
+          leading: IconButton(
+            onPressed: () async {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.white,
+            ),
+          )),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+
+
+
+
+            FutureBuilder<List<Store>>(
+              future: future_cart,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Store>? data = snapshot.data;
+                  return 
+                  ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: data?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 223, 222, 222)))),
+                          width: double.infinity,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(right: 10, bottom: 5),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.7,
+                                      child: Checkbox(
+                                          checkColor: Colors.white,
+                                          activeColor: ZeleexColor.zeleexGreen,
+                                          value: isChecked,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              isChecked = value!;
+                                            });
+                                          }),
+                                    ),
+                                    SvgPicture.asset(
+                                      'assets/images/cart_store.svg',
+                                      color: Color.fromARGB(255, 141, 141, 141),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      data![index].title.toString(),
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color: Color.fromARGB(255, 141, 141, 141),
+                                      size: 15,
+                                    ),
+                                  ],
+                                ),
+                                FutureBuilder<List<ProductSkus>>(
+                                  future:
+                                      fetch_cartSku(userID, userToken, index),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      List<ProductSkus>? data = snapshot.data;
+                                      return ListView.builder(
+                                          shrinkWrap: true,
+                                          primary: false,
+                                          itemCount: data?.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index222) {
+                                            int x1 = int.parse(data![index222]
+                                                .price
+                                                .toString());
+                                            int x2 = int.parse(
+                                                data[index222].unit.toString());
+                                            int unit_price = x1 * x2;
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 15),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Transform.scale(
+                                                    scale: 0.7,
+                                                    child: Checkbox(
+                                                        checkColor:
+                                                            Colors.white,
+                                                        activeColor: ZeleexColor
+                                                            .zeleexGreen,
+                                                        value: isChecked,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            isChecked = value!;
+                                                          });
+                                                        }),
+                                                  ),
+                                                  Container(
+                                                    color: Color.fromARGB(
+                                                        83, 16, 193, 158),
+                                                    child: Image.network(
+                                                      data[index222]
+                                                          .product!
+                                                          .image!
+                                                          .main
+                                                          .toString(),
+                                                      width: 100,
+                                                      height: 100,
                                                     ),
-                                                    Container(
-                                                      color: Color.fromARGB(
-                                                          83, 16, 193, 158),
-                                                      child: Image.network(
-                                                        data[index222]
-                                                            .product!
-                                                            .image!
-                                                            .main
-                                                            .toString(),
-                                                        width: 100,
-                                                        height: 100,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Expanded(
-                                                      child: Container(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .stretch,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: <
-                                                                  Widget>[
-                                                                Flexible(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    height: 20,
-                                                                    child: Text(
-                                                                      data[index222]
-                                                                          .product!
-                                                                          .title
-                                                                          .toString(),
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            51,
-                                                                            51,
-                                                                            51),
-                                                                      ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .stretch,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: <Widget>[
+                                                              Flexible(
+                                                                child: SizedBox(
+                                                                  height: 20,
+                                                                  child: Text(
+                                                                    data[index222]
+                                                                        .product!
+                                                                        .title
+                                                                        .toString(),
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          51,
+                                                                          51,
+                                                                          51),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                InkWell(
-                                                                    onTap: () {
-                                                                      setState(
-                                                                          () {
-                                                                        _provider_cartRemove
-                                                                            .cart_id = data[
-                                                                                index222]
-                                                                            .cartId
-                                                                            .toString();
-                                                                        realName = data[index222]
-                                                                            .product!
-                                                                            .title
-                                                                            .toString();
-                                                                        productName_forDialog = data[index222]
-                                                                            .name
-                                                                            .toString();
-                                                                      });
+                                                              ),
+                                                              InkWell(
+                                                                  onTap: () {
+                                                                    setState(
+                                                                        () {
+                                                                      _provider_cartRemove
+                                                                          .cart_id = data[
+                                                                              index222]
+                                                                          .cartId
+                                                                          .toString();
+                                                                      realName = data[
+                                                                              index222]
+                                                                          .product!
+                                                                          .title
+                                                                          .toString();
+                                                                      productName_forDialog = data[
+                                                                              index222]
+                                                                          .name
+                                                                          .toString();
+                                                                    });
 
-                                                                      showDialog(
-                                                                          _provider_cartRemove,
-                                                                          userID,
-                                                                          userToken,
-                                                                          productName_forDialog
-                                                                              .toString(),
-                                                                          realName
-                                                                              .toString());
-                                                                    },
-                                                                    child: Text(
-                                                                      'ลบ',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .red,
-                                                                      ),
-                                                                    )),
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              height: 2,
-                                                            ),
-                                                            SizedBox(
-                                                              height: 3,
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  'ตัวเลือกสินค้า: ',
+                                                                    showDialog(
+                                                                        _provider_cartRemove,
+                                                                        userID,
+                                                                        userToken,
+                                                                        productName_forDialog
+                                                                            .toString(),
+                                                                        realName
+                                                                            .toString());
+                                                                  },
+                                                                  child: Text(
+                                                                    'ลบ',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .red,
+                                                                    ),
+                                                                  )),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 2,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 3,
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                'ตัวเลือกสินค้า: ',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            141,
+                                                                            141,
+                                                                            141)),
+                                                              ),
+                                                              Text(
+                                                                  data[index222]
+                                                                      .name
+                                                                      .toString(),
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           13,
@@ -349,245 +370,236 @@ class _CartPageState extends State<CartPage> {
                                                                           255,
                                                                           141,
                                                                           141,
-                                                                          141)),
-                                                                ),
-                                                                Text(
-                                                                    data[index222]
-                                                                        .name
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            13,
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            141,
-                                                                            141,
-                                                                            141))),
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              height: 27,
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  '฿ ' +
-                                                                      NumberFormat(
-                                                                              "#,###,###")
-                                                                          .format(
-                                                                              int.parse(unit_price.toString())),
-                                                                  style: TextStyle(
-                                                                      color: ZeleexColor.zeleexGreen,
-                                                                      fontSize:
-                                                                          18),
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        Container(
-                                                                          width:
-                                                                              35,
-                                                                          height:
-                                                                              35,
-                                                                          decoration: BoxDecoration(
-                                                                              border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
-                                                                              borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                                          child: InkWell(
-                                                                              onTap: () {
-                                                                                _provider_cartUpdate.cart_id = data[index222].cartId.toString();
-                                                                                _provider_cartUpdate.prd_unit = (x2 - 1).toString();
-                                                                                update_cartUnit(_provider_cartUpdate, userToken);
-                                                                                setState(() {
-                                                                                  x2 = x2 - 1;
-                                                                                  totalPrice = 0;
-                                                                                });
-                                                                                initState();
-                                                                              },
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: SvgPicture.asset(
-                                                                                  'assets/images/minus.svg',
-                                                                                  width: 20,
-                                                                                ),
-                                                                              )),
-                                                                        ),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              5,
-                                                                        ),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              30,
+                                                                          141))),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 27,
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                '฿ ' +
+                                                                    NumberFormat(
+                                                                            "#,###,###")
+                                                                        .format(
+                                                                            int.parse(unit_price.toString())),
+                                                                style: TextStyle(
+                                                                    color: ZeleexColor
+                                                                        .zeleexGreen,
+                                                                    fontSize:
+                                                                        18),
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            35,
+                                                                        height:
+                                                                            35,
+                                                                        decoration: BoxDecoration(
+                                                                            border:
+                                                                                Border.all(color: Color.fromARGB(255, 130, 130, 130)),
+                                                                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                        child: InkWell(
+                                                                            onTap: () {
+                                                                              _provider_cartUpdate.cart_id = data[index222].cartId.toString();
+                                                                              _provider_cartUpdate.prd_unit = (x2 - 1).toString();
+                                                                              update_cartUnit(_provider_cartUpdate, userToken);
+                                                                              setState(() {
+                                                                                x2 = x2 - 1;
+                                                                                totalPrice = 0;
+                                                                              });
+                                                                              initState();
+                                                                            },
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets.all(8.0),
+                                                                              child: SvgPicture.asset(
+                                                                                'assets/images/minus.svg',
+                                                                                width: 20,
+                                                                              ),
+                                                                            )),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            5,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            30,
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              EdgeInsets.all(8.0),
                                                                           child:
-                                                                              Padding(
-                                                                            padding:
-                                                                                EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                Text(
-                                                                              x2.toString(),
-                                                                              textAlign: TextAlign.center,
-                                                                              style: TextStyle(fontWeight: FontWeight.bold),
-                                                                            ),
+                                                                              Text(
+                                                                            x2.toString(),
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            style:
+                                                                                TextStyle(fontWeight: FontWeight.bold),
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              5,
-                                                                        ),
-                                                                        Container(
-                                                                          width:
-                                                                              35,
-                                                                          height:
-                                                                              35,
-                                                                          decoration: BoxDecoration(
-                                                                              border: Border.all(color: Color.fromARGB(255, 130, 130, 130)),
-                                                                              borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                                          child: InkWell(
-                                                                              onTap: () {
-                                                                                _provider_cartUpdate.cart_id = data[index222].cartId.toString();
-                                                                                _provider_cartUpdate.prd_unit = (x2 + 1).toString();
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            5,
+                                                                      ),
+                                                                      Container(
+                                                                        width:
+                                                                            35,
+                                                                        height:
+                                                                            35,
+                                                                        decoration: BoxDecoration(
+                                                                            border:
+                                                                                Border.all(color: Color.fromARGB(255, 130, 130, 130)),
+                                                                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                        child: InkWell(
+                                                                            onTap: () {
+                                                                              _provider_cartUpdate.cart_id = data[index222].cartId.toString();
+                                                                              _provider_cartUpdate.prd_unit = (x2 + 1).toString();
 
-                                                                                update_cartUnit(_provider_cartUpdate, userToken);
-                                                                                setState(() {
-                                                                                  // totalPrice = totalPrice + x1;
-                                                                                  x2 = x2 + 1;
-                                                                                  totalPrice = 0;
-                                                                                });
+                                                                              update_cartUnit(_provider_cartUpdate, userToken);
+                                                                              setState(() {
+                                                                                // totalPrice = totalPrice + x1;
+                                                                                x2 = x2 + 1;
+                                                                                totalPrice = 0;
+                                                                              });
 
-                                                                                initState();
-                                                                              },
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: SvgPicture.asset(
-                                                                                  'assets/images/pluss.svg',
-                                                                                  width: 20,
-                                                                                  height: 20,
-                                                                                ),
-                                                                              )),
-                                                                        ),
-                                                                      ],
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
+                                                                              initState();
+                                                                            },
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets.all(8.0),
+                                                                              child: SvgPicture.asset(
+                                                                                'assets/images/pluss.svg',
+                                                                                width: 20,
+                                                                                height: 20,
+                                                                              ),
+                                                                            )),
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
-                                              );
-                                            });
-                                      } else if (snapshot.hasError) {
-                                        return Container();
-                                      }
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    } else if (snapshot.hasError) {
                                       return Container();
-                                    },
+                                    }
+                                    return Container();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                } else if (snapshot.hasError) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 50, bottom: 50),
+                    child: Text('ไม่มีสินค้าในตะกร้า'),
+                  );
+                } else {}
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 100, top: 100),
+                  child: Text('โปรดรอสักครู่...'),
+                );
+              },
+            ),
+            Container(
+              color: Color.fromARGB(255, 240, 240, 240),
+              height: 85,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                          checkColor: Colors.white,
+                          activeColor: ZeleexColor.zeleexGreen,
+                          value: isChecked,
+                          onChanged: (value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          }),
+                      Text("ทั้งหมด")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: Row(
+                          children: [
+                            Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("รวมทั้งหมด",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51))),
+                                  Text(
+                                    NumberFormat("#,###,###").format(
+                                        int.parse(totalPrice.toString())),
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        color: ZeleexColor.zeleexGreen,
+                                        fontWeight: FontWeight.bold),
                                   ),
+                                  Text("บาท",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 51, 51, 51))),
                                 ],
                               ),
-                            ),
-                          );
-                        });
-                  } else if (snapshot.hasError) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 50, bottom: 50),
-                      child: Text('ไม่มีสินค้าในตะกร้า'),
-                    );
-                  } else {}
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 100, top: 100),
-                    child: Text('โปรดรอสักครู่...'),
-                  );
-                },
-              ),
-              Container(
-                color: Color.fromARGB(255, 240, 240, 240),
-                height: 85,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                            checkColor: Colors.white,
-                            activeColor: ZeleexColor.zeleexGreen,
-                            value: isChecked,
-                            onChanged: (value) {
-                              setState(() {
-                                isChecked = value!;
-                              });
-                            }),
-                        Text("ทั้งหมด")
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("รวมทั้งหมด",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 51, 51, 51))),
-                                    Text(
-                                      NumberFormat("#,###,###").format(
-                                          int.parse(totalPrice.toString())),
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          color: ZeleexColor.zeleexGreen,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text("บาท",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 51, 51, 51))),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PaymentPage(
-                                          user_id: userID,
-                                          user_token: userToken,
-                                        )));
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: double.infinity,
-                            color: ZeleexColor.zeleexGreen,
-                            child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Text(
-                                  "ชำระเงิน",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                )),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentPage(
+                                        user_id: userID,
+                                        user_token: userToken,
+                                      )));
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: double.infinity,
+                          color: ZeleexColor.zeleexGreen,
+                          child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                "ชำระเงิน",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              )),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

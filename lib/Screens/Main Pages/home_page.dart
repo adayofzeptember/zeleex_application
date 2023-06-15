@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:searchfield/searchfield.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -16,7 +17,6 @@ import '../../Others/Plate.dart';
 import '../../Others/shape.dart';
 import '../../bloc/animals/animals_bloc.dart';
 import '../../bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
-
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -73,12 +73,13 @@ class HomePage extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CartPage(
-                                // user_id: userID.toString(),
-                                // user_token: userToken.toString(),
-                                )));
+                      context,
+                      PageTransition(
+                        duration: const Duration(milliseconds: 250),
+                        type: PageTransitionType.fade,
+                        child: CartPage(),
+                      ),
+                    );
                   },
                   child: SvgPicture.asset(
                     'assets/images/cart123.svg',
@@ -544,7 +545,6 @@ class HomePage extends StatelessWidget {
                                                         ZeleexColor.zeleexGreen,
                                                     elevation: 0),
                                                 onPressed: () {
-                                                  
                                                   context
                                                       .read<
                                                           BottomMenuSwitchBloc>()

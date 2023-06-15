@@ -45,19 +45,19 @@ class ProfilePage extends StatelessWidget {
         actions: [
           Builder(
             builder: (context) => IconButton(
-              icon: SizedBox(
-                child: SvgPicture.asset(
-                  'assets/images/cart123.svg',
-                  color: Colors.white,
+                icon: SizedBox(
+                  child: SvgPicture.asset(
+                    'assets/images/cart123.svg',
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CartPage(),
-                ),
-              ),
-            ),
+                onPressed: () => Navigator.push(
+                      context,
+                      PageTransition(
+                          duration: const Duration(milliseconds: 250),
+                          type: PageTransitionType.fade,
+                          child: CartPage()),
+                    )),
           ),
         ],
       ),
