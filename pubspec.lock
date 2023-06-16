@@ -457,34 +457,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.3"
-  in_app_purchase:
-    dependency: "direct main"
-    description:
-      name: in_app_purchase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.7"
-  in_app_purchase_android:
-    dependency: transitive
-    description:
-      name: in_app_purchase_android
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0+5"
-  in_app_purchase_platform_interface:
-    dependency: transitive
-    description:
-      name: in_app_purchase_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.3.4"
-  in_app_purchase_storekit:
-    dependency: transitive
-    description:
-      name: in_app_purchase_storekit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.6+4"
   infinite_scroll_pagination:
     dependency: "direct main"
     description:
@@ -506,13 +478,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-  json_annotation:
-    dependency: transitive
-    description:
-      name: json_annotation
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.8.0"
   just_audio:
     dependency: transitive
     description:
@@ -1128,5 +1093,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
-  flutter: ">=3.3.0"
+  dart: ">=2.17.0-0 <3.0.0"
+  flutter: ">=3.1.0-0"

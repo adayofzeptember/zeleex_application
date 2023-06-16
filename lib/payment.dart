@@ -14,7 +14,7 @@ import 'API/Post Method/post_checkout_IDEA.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Others/Plate.dart';
 import 'Screens/Address Pages/address_main_page.dart';
-import 'cart.dart';
+import 'cart_page.dart';
 import 'payment_method.dart';
 
 int totalPrice = 0;

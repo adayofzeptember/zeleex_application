@@ -17,7 +17,7 @@ import '../../main.dart';
 import '../Address Pages/address_main_page.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../career.dart';
-import '../../cart.dart';
+import '../../cart_page.dart';
 import '../../from Profile/history/history.dart';
 import '../../from Profile/likes/likes.dart';
 

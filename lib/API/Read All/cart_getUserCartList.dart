@@ -370,7 +370,7 @@ class Images {
     title = json['title'];
     main = json['main'];
     thumbnail = json['thumbnail'];
-  }
+  } 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;
@@ -427,7 +427,7 @@ Future<List<Store>> fetch_cartList2(String userToken222) async {
     String cart555 = jsonResponse['data']['store'][loop]['product_skus'][0]
             ['cart_id']
         .toString(); //วนcart_id
-    
+
     testList.add(cart555);
     // int eachStore_totalPrice =
     //     jsonResponse['data']['store'][loop]['price_tatal'];
@@ -442,8 +442,6 @@ Future<List<Store>> fetch_cartList2(String userToken222) async {
   } else {
     print('error');
     throw Exception('error response status');
-    
-    
   }
 }
 
