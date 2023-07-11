@@ -21,7 +21,8 @@ class _Career_DetailState extends State<Career_Detail> {
     var blogID = widget.gotText.toString();
     var url = "https://sanboxapi.zeleex.com/api/careers/" + blogID;
     var response = await http.get(Uri.parse(url));
-    Data_Read_Careers careerDetail = Data_Read_Careers.fromJson(json.decode(response.body));
+    Data_Read_Careers careerDetail =
+        Data_Read_Careers.fromJson(json.decode(response.body));
     return careerDetail;
   }
 
@@ -39,7 +40,7 @@ class _Career_DetailState extends State<Career_Detail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
             statusBarColor: ZeleexColor.zeleexGreen),
@@ -55,18 +56,18 @@ class _Career_DetailState extends State<Career_Detail> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   color: Colors.white,
                 ),
               ),
             ),
-            Text(
+            const Text(
               "รายละเอียดตำแหน่งงาน",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-            Icon(
+            const Icon(
               Icons.abc_sharp,
               color: ZeleexColor.zeleexGreen,
             )
@@ -95,6 +96,7 @@ class _Career_DetailState extends State<Career_Detail> {
         //         //   width: 300,
         //         //   height: 200,
         //         // );
+
         //       } else {
         //         return CircularProgressIndicator();
         //       }
@@ -106,16 +108,17 @@ class _Career_DetailState extends State<Career_Detail> {
               child: Text(
                 "ไอดี: ${widget.gotText}",
                 // "ครีเอทีฟ (1 ตำแหน่ง)",
-                style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
+                style: const TextStyle(
+                    color: ZeleexColor.zeleexGreen, fontSize: 20),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color.fromARGB(226, 243, 243, 243),
+                color: const Color.fromARGB(226, 243, 243, 243),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
@@ -123,30 +126,31 @@ class _Career_DetailState extends State<Career_Detail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "รายละเอียด",
-                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
+                      style: TextStyle(
+                          color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       "• คิดริเริ่มสร้างสรรค์ นำเสนอไอเดียใหม่ๆ ในการผลิตรายการโทรทัศน์",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• หาข้อมูล, จดทำสคริปต์",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• หาโลเคชัน นำเสนอโปรดิวเซอร์",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
-                      "• ออกกองควบคุมการถ่ายและกำำับพิธีกร",
+                    const Text(
+                      "• ออกกองควบคุมการถ่ายและกำกับพิธีกร",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• ควบคุมงานกราฟฟิคและงานตัดต่อที่ได้รับมอบหมาย",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
@@ -154,13 +158,13 @@ class _Career_DetailState extends State<Career_Detail> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color.fromARGB(226, 243, 243, 243),
+                color: const Color.fromARGB(226, 243, 243, 243),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
@@ -168,30 +172,31 @@ class _Career_DetailState extends State<Career_Detail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "คุณสมบัติ",
-                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
+                      style: TextStyle(
+                          color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       "• มีประสบการณ์อย่างน้อย 1-3 ปี ในงานครีเอทีฟ",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• วุฒิการศึกษาปริญญาตรี สาขาวิชา นิเทศศาสตร์ วารสารศาสตร์ มนุษย์ศาสตร์ ศิลปศาสตร์ หรือสาขาอื่นๆที่เกี่ยวข้อง",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• มีความคิดริเริ่มสร้างสรรค์",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• มีความรับผิดชอบและสามารถปรับเวลาการทำงานให้เข้ากับรายการที่ได้รับมอบหมายได",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• สามารถปรับตัวได้ดีและอดทนต่อความกดดันในการทำงาน,การสร้างเรตติ้งและรายได้",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
@@ -199,13 +204,13 @@ class _Career_DetailState extends State<Career_Detail> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color.fromARGB(226, 243, 243, 243),
+                color: const Color.fromARGB(226, 243, 243, 243),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
@@ -213,58 +218,59 @@ class _Career_DetailState extends State<Career_Detail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "สวัสดิการ",
-                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
+                      style: TextStyle(
+                          color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       "• เงินเดือน ตามข้อตกลงของบริษัท",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• ประกันชีวิตและอุบัติเหตุ",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• ค่ารักษาพยาบาล",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• กองทุนสำรองเลี้ยงชีพ",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• เงินช่วยเหลือสมรส",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• ทุนการศึกษาบุตรพนักงาน",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• ตรวจสุขภาพประจำปี",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• เงินช่วยเหลือสมรส",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• เครื่องแบบพนักงาน",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• เงินโบนัสประจำปี",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• ประกันสังคม",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
-                    Text(
+                    const Text(
                       "• กองทุนเงินทดแทน",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),
@@ -272,13 +278,13 @@ class _Career_DetailState extends State<Career_Detail> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color.fromARGB(226, 243, 243, 243),
+                color: const Color.fromARGB(226, 243, 243, 243),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
@@ -286,14 +292,15 @@ class _Career_DetailState extends State<Career_Detail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "วิธีีสมัครงาน",
-                      style: TextStyle(color: ZeleexColor.zeleexGreen, fontSize: 20),
+                      style: TextStyle(
+                          color: ZeleexColor.zeleexGreen, fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       "• รับสมัครงานผ่านทาง อีเมล สามารถส่ง Resume มาได้ที่ zeleex@gmail.com",
                       style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),
                     ),

@@ -1,8 +1,9 @@
 class Cart_Stores_Model {
   int? id;
   String? title;
+  List<Cart_SKU_Model>? sku;
 
-  Cart_Stores_Model({this.id, this.title});
+  Cart_Stores_Model({this.id, this.title, this.sku});
 }
 
 class Cart_SKU_Model {
@@ -84,14 +85,14 @@ class Cart_SKU_Model {
 //           ));
 
 //           // for (var i = 0; i < state.cart_list_sku.length; i++) {
-//           //   print(state.cart_list_sku[i].titlex);
+//           //   print(state.cart_l+ist_sku[i].titlex);
 //           // }
 //         } else {
-//           emit(state.copyWith(
-//             isLoading: false,
-//           ));
-//           print('error not 200');
-//         }
+//           emit(stasdgdfgte.copyWith(
+//             isLoadsdgdfging: false,
+//           ));sdgdfg
+//           prisdgdfgnt('error not 200');
+//         }sdgdfg
 //       } catch (e) {
 //         emit(state.copyWith(
 //           isLoading: false,

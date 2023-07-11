@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Post%20Method/cart_update.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
@@ -36,7 +35,31 @@ class _CartPageState extends State<CartPage> {
   String userToken = "";
   String realName = "";
   String? productName_forDialog;
-//!---------------------------------------------------------------------------------------
+
+  Future<List<ProductSkus>> fetch_cartSku(
+      String userID, String userToken, int x) async {
+    final response = await http.get(
+        Uri.parse(
+            'https://api.zeleex.com/api/car                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     t/list?user_id=' +
+                userID.toString()),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $userToken',
+        });
+
+    final jsonResponse = json.decode(response.body) as Map<dynamic, dynamic>;
+    //var jsonConTest = jsonResponse['data']['store'][0];
+    //var x = jsonResponse['data']['product_all'];
+    List jsonCon = jsonResponse['data']['store'][x]['product_skus'];
+
+    if (response.statusCode == 200) {
+      return jsonCon.map((data) => ProductSkus.fromJson(data)).toList();
+    } else {
+      throw Exception('error response =! 200');
+    }
+  }
+
   Future<List<Store>> fetch_cartList(
       String userID222, String userToken222) async {
     final response = await http.get(
@@ -63,34 +86,10 @@ class _CartPageState extends State<CartPage> {
     if (response.statusCode == 200) {
       return jsonCon.map((data) => Store.fromJson(data)).toList();
     } else {
-      print('error');
+      //return [];
       throw Exception('error response status');
     }
   }
-
-  Future<List<ProductSkus>> fetch_cartSku(
-      String userID, String userToken, int x) async {
-    final response = await http.get(
-        Uri.parse('https://api.zeleex.com/api/cart/list?user_id=' +
-            userID.toString()),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $userToken',
-        });
-
-    final jsonResponse = json.decode(response.body) as Map<dynamic, dynamic>;
-    //var jsonConTest = jsonResponse['data']['store'][0];
-    //var x = jsonResponse['data']['product_all'];
-    List jsonCon = jsonResponse['data']['store'][x]['product_skus'];
-
-    if (response.statusCode == 200) {
-      return jsonCon.map((data) => ProductSkus.fromJson(data)).toList();
-    } else {
-      throw Exception('error response =! 200');
-    }
-  }
-//!---------------------------------------------------------------------------------------
 
   @override
   void initState() {
@@ -118,10 +117,9 @@ class _CartPageState extends State<CartPage> {
               statusBarIconBrightness: Brightness.light,
               statusBarBrightness: Brightness.light),
           centerTitle: true,
-          title: Text(
+          title: const Text(
             'ตะกร้าสินค้า',
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
           leading: IconButton(
             onPressed: () async {
@@ -136,7 +134,7 @@ class _CartPageState extends State<CartPage> {
         child: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
             if (state.isLoading == true) {
-              return Center(
+              return const Center(
                 child:
                     CircularProgressIndicator(color: ZeleexColor.zeleexGreen),
               );
@@ -149,9 +147,11 @@ class _CartPageState extends State<CartPage> {
                     primary: false,
                     itemCount: state.cart_list.length,
                     itemBuilder: (BuildContext context, int index) {
-                      // context.read<CartBloc>().add(Load_Cart_Store_SKU(getStoreIndex: index));
+                      context
+                          .read<CartBloc>()
+                          .add(Load_Cart_Store_SKU(getStoreIndex: index));
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(
                                     color:
@@ -177,9 +177,10 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                   SvgPicture.asset(
                                     'assets/images/cart_store.svg',
-                                    color: Color.fromARGB(255, 141, 141, 141),
+                                    color: const Color.fromARGB(
+                                        255, 141, 141, 141),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   GestureDetector(
@@ -189,16 +190,16 @@ class _CartPageState extends State<CartPage> {
                                     }),
                                     child: Text(
                                       state.cart_list[index].title.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color:
                                               Color.fromARGB(255, 51, 51, 51),
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_forward_ios_rounded,
                                     color: Color.fromARGB(255, 141, 141, 141),
                                     size: 15,
@@ -211,8 +212,17 @@ class _CartPageState extends State<CartPage> {
                                   itemCount: state.cart_list_sku.length,
                                   itemBuilder:
                                       (BuildContext context, int index_sku) {
-                                              // context.read<CartBloc>().add(Load_Cart_Store_SKU(getStoreIndex: index));
 
+
+
+
+
+
+
+                            
+                                    // context.read<CartBloc>().add(
+                                    //     Load_Cart_Store_SKU(
+                                    //         getStoreIndex: index));
                                     return Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 15),
@@ -222,7 +232,7 @@ class _CartPageState extends State<CartPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           Expanded(
@@ -244,7 +254,8 @@ class _CartPageState extends State<CartPage> {
                                                                 .cart_list_sku[
                                                                     index_sku]
                                                                 .sku_title,
-                                                            style: TextStyle(
+                                                            style:
+                                                                const TextStyle(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -287,7 +298,7 @@ class _CartPageState extends State<CartPage> {
                                                             //     realName
                                                             //         .toString());
                                                           },
-                                                          child: Text(
+                                                          child: const Text(
                                                             'ลบ',
                                                             style: TextStyle(
                                                               color: Colors.red,
@@ -295,15 +306,12 @@ class _CartPageState extends State<CartPage> {
                                                           )),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 2,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 3,
+                                                  const SizedBox(
+                                                    height: 5,
                                                   ),
                                                   Row(
                                                     children: [
-                                                      Text(
+                                                      const Text(
                                                         'ตัวเลือกสินค้า: ',
                                                         style: TextStyle(
                                                             fontSize: 13,
@@ -314,7 +322,7 @@ class _CartPageState extends State<CartPage> {
                                                                     141,
                                                                     141)),
                                                       ),
-                                                      Text('sdfsdf',
+                                                      const Text('sdfsdf',
                                                           style: TextStyle(
                                                               fontSize: 13,
                                                               color: Color
@@ -339,7 +347,7 @@ class _CartPageState extends State<CartPage> {
                       );
                     }),
                 Container(
-                  color: Color.fromARGB(255, 240, 240, 240),
+                  color: const Color.fromARGB(255, 240, 240, 240),
                   height: 85,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -355,10 +363,13 @@ class _CartPageState extends State<CartPage> {
                                   isChecked = value!;
                                 });
                               }),
-                          Text("ทั้งหมด")
+                          const Text("ทั้งหมด")
                         ],
                       ),
                       Row(
+                        ///*
+                        //?
+
                         children: [
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
@@ -368,19 +379,19 @@ class _CartPageState extends State<CartPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("รวมทั้งหมด",
+                                      const Text("รวมทั้งหมด",
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 51, 51, 51))),
                                       Text(
                                         NumberFormat("#,###,###").format(
                                             int.parse(totalPrice.toString())),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 25,
                                             color: ZeleexColor.zeleexGreen,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text("บาท",
+                                      const Text("บาท",
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 51, 51, 51))),
@@ -404,8 +415,8 @@ class _CartPageState extends State<CartPage> {
                               alignment: Alignment.center,
                               height: double.infinity,
                               color: ZeleexColor.zeleexGreen,
-                              child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
+                              child: const Padding(
+                                  padding: EdgeInsets.all(20.0),
                                   child: Text(
                                     "ชำระเงิน",
                                     style: TextStyle(
@@ -434,20 +445,20 @@ class _CartPageState extends State<CartPage> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: CupertinoAlertDialog(
-            title: Text(
+            title: const Text(
               "ลบสินค้าออกจากตะกร้า",
             ),
             content: Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
                 "ต้องการลบ " + dialogPrdName_main + ' ออกจากตะกร้า ?',
-                style: TextStyle(fontFamily: 'Kanit'),
+                style: const TextStyle(fontFamily: 'Kanit'),
                 textAlign: TextAlign.start,
               ),
             ),
             actions: [
               CupertinoDialogAction(
-                  child: Text(
+                  child: const Text(
                     "ยกเลิก",
                     style: TextStyle(fontFamily: 'Kanit'),
                   ),
@@ -455,7 +466,7 @@ class _CartPageState extends State<CartPage> {
                     Navigator.of(context).pop();
                   }),
               CupertinoDialogAction(
-                child: Text(
+                child: const Text(
                   "ลบ",
                   style: TextStyle(fontFamily: 'Kanit', color: Colors.red),
                 ),
@@ -466,7 +477,7 @@ class _CartPageState extends State<CartPage> {
                       toastLength: Toast.LENGTH_LONG,
                       gravity: ToastGravity.SNACKBAR,
                       timeInSecForIosWeb: 2,
-                      backgroundColor: Color.fromARGB(255, 133, 133, 133),
+                      backgroundColor: const Color.fromARGB(255, 133, 133, 133),
                       textColor: Colors.white,
                       fontSize: 15);
                   Navigator.of(context, rootNavigator: true).pop();
