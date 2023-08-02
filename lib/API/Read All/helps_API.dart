@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class HelpCenter {
@@ -54,10 +53,10 @@ class Data {
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  Null? nextPageUrl;
+  Null nextPageUrl;
   String? path;
   int? perPage;
-  Null? prevPageUrl;
+  Null prevPageUrl;
   int? to;
   int? total;
 

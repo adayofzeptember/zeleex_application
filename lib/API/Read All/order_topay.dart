@@ -1,12 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:zeleex_application/Others/url.dart';
-import '../Read By ID/animal_id_API.dart';
 
 class Order_Wait {
   String? responseCode;
@@ -60,7 +55,7 @@ class Order_Wait {
 class Data_Order_ToPay {
   int? id;
   int? userAddressId;
-  Null? userAddressTaxId;
+  Null userAddressTaxId;
   String? tempAddressName;
   String? tempAddressCity;
   String? tempAddressDistrict;
@@ -76,17 +71,17 @@ class Data_Order_ToPay {
   String? totalAmount;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   String? total;
   String? shippingCost;
   int? shippingId;
-  Null? trackingId;
+  Null trackingId;
   int? orderGroupId;
-  Null? withdrawId;
+  Null withdrawId;
   String? discountId;
   bool? review;
   Address? address;
-  Null? addressTax;
+  Null addressTax;
   Stores? stores;
   Shipping? shipping;
   List<OrderItem>? orderItem;
@@ -229,7 +224,7 @@ class Address {
   int? default1;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
 
   Address(
       {this.id,
@@ -289,13 +284,13 @@ class Stores {
   String? email;
   String? phone;
   String? content;
-  Null? lat;
-  Null? lng;
+  Null lat;
+  Null lng;
   int? reads;
   int? userId;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   int? shippingId;
   int? productCount;
   int? animalCount;
@@ -421,10 +416,10 @@ class OrderItem {
   String? unit;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
-  Null? reviewId;
+  Null deletedAt;
+  Null reviewId;
   Sku? sku;
-  Null? review;
+  Null review;
 
   OrderItem(
       {this.id,
@@ -487,8 +482,8 @@ class Sku {
   int? stock;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
-  Null? afterPrice;
+  Null deletedAt;
+  Null afterPrice;
   Product? product;
 
   Sku(
@@ -549,7 +544,7 @@ class Product {
   String? seoDescription;
   int? reads;
   int? storeId;
-  Null? brandId;
+  Null brandId;
   String? conditionType;
   String? createdAt;
   String? updatedAt;

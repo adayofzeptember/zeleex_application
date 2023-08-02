@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class Profile {
   String? responseCode;
@@ -50,15 +46,15 @@ class Data_Profile {
   int? id;
   String? name;
   String? email;
-  Null? emailVerifiedAt;
-  Null? phone;
+  Null emailVerifiedAt;
+  Null phone;
   String? avatar;
   String? provider;
   String? providerId;
   String? status;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   String? imageProfile;
   int? storeCheck;
 

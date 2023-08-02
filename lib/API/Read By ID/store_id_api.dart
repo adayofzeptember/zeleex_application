@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class Store_Detail {
   String? responseCode;
@@ -54,8 +50,8 @@ class Data_Store {
   String? email;
   String? phone;
   String? content;
-  Null? lat;
-  Null? lng;
+  Null lat;
+  Null lng;
   int? reads;
   int? userId;
   String? createdAt;
@@ -179,8 +175,8 @@ class Types {
   String? description;
   String? status;
   String? order;
-  Null? createdAt;
-  Null? updatedAt;
+  Null createdAt;
+  Null updatedAt;
   Pivot? pivot;
 
   Types(

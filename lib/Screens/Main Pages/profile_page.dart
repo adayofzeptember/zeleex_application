@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,10 +9,8 @@ import 'package:zeleex_application/from%20Profile/buying_list.dart';
 import 'package:zeleex_application/help.dart';
 import 'package:zeleex_application/second_page_human.dart';
 import 'package:zeleex_application/Screens/Other%20Pages/terms.dart';
-import '../../API/Post Method/google_login_api.dart';
 import '../../Others/Plate.dart';
 import '../../Others/shape.dart';
-import '../../main.dart';
 import '../Address Pages/address_main_page.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../career.dart';
@@ -141,12 +138,12 @@ class ProfilePage extends StatelessWidget {
                                         fontFamily: 'Kanit',
                                         fontSize: 20,
                                         color: Colors.white)),
-                                const SizedBox(
+                             const SizedBox(
                                   height: 5,
                                 ),
-                                Row(
+                                const Row(
                                   children: [
-                                    const Text(
+                                    Text(
                                       "แก้ไขโปรไฟล์",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -155,7 +152,7 @@ class ProfilePage extends StatelessWidget {
                                         fontSize: 12,
                                       ),
                                     ),
-                                    const Icon(
+                                    Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       size: 15,
                                     )
@@ -683,7 +680,7 @@ class ProfilePage extends StatelessWidget {
                         PageTransition(
                           duration: const Duration(milliseconds: 250),
                           type: PageTransitionType.fade,
-                          child: TermsConditon(),
+                          child: const TermsConditon(),
                         ),
                       );
                     },
@@ -868,7 +865,7 @@ class ProfilePage extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SecondPage(),
+                              builder: (context) => const SecondPage(),
                             ),
                           );
                         },

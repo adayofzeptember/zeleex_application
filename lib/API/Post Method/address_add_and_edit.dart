@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class AddAddress {
@@ -159,7 +158,6 @@ Future<AddAddress> edit_address(Provider_AddAddress requestModel_AddAddress,
     body: body_AddAddress,
   );
 
-  var jsonRes = json.decode(response.body);
   print(response.body.toString());
   if (response.statusCode == 201) {
     print(response.body.toString());
@@ -184,7 +182,7 @@ Future<AddAddress> add_new_address(
     },
     body: body_AddAddress,
   );
-  var jsonRes = json.decode(response.body);
+
   print(response.body.toString());
   if (response.statusCode == 201) {
     return AddAddress.fromJson(json.decode(response.body));

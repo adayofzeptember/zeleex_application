@@ -21,7 +21,7 @@ class Wait_Payment extends StatefulWidget {
 }
 
 class _Wait_PaymentState extends State<Wait_Payment> {
-  late Future<List<OrderItem>> futureOrderToPay;
+ // Future<List<OrderItem>> futureOrderToPay;
   @override
   void initState() {
     super.initState();

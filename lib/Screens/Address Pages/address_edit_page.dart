@@ -109,6 +109,7 @@ class Address_Edit_Page extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'กรอกชื่อ';
                             }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -140,6 +141,7 @@ class Address_Edit_Page extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'กรอกเบอร์ติดต่อ';
                             }
+                            return null;
                           },
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(10),
@@ -185,6 +187,7 @@ class Address_Edit_Page extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'กรอกอำเภอ';
                             }
+                            return null;
                           },
                           decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
@@ -295,6 +298,7 @@ class Address_Edit_Page extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'กรอกรายละเอียดที่อยู่';
                             }
+                            return null;
                           },
                           decoration: InputDecoration(
                             // suffixIcon: Icon(

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Filter_Store_Types {
@@ -57,9 +56,9 @@ class Data_Store_Types {
   String? description;
   String? status;
   String? order;
-  Null? createdAt;
-  Null? updatedAt;
-  Null? deletedAt;
+  Null createdAt;
+  Null updatedAt;
+  Null deletedAt;
   int? storesCount;
 
   Data_Store_Types(

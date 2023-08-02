@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'main_page_collection_bloc.dart';
 
 abstract class MainPageCollectionEvent extends Equatable {

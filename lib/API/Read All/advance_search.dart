@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Advance_Search {
@@ -76,9 +75,6 @@ Future<List<Data_Search>> fetch_search() async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data'];
-  var ee = jsonResponse['data'][0].toString();
- 
- 
 
   // print(jsonCon.length);
   if (response.statusCode == 200) {
@@ -89,6 +85,3 @@ Future<List<Data_Search>> fetch_search() async {
     throw Exception("error");
   }
 }
-
-
-

@@ -1,12 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zeleex_application/API/Post%20Method/post_Register.dart';
-import 'package:zeleex_application/API/Read%20All/animals_API.dart';
-import 'package:zeleex_application/main.dart';
-import 'package:zeleex_application/payment.dart';
 
 class Cart_ReadList {
   String? responseCode;
@@ -414,14 +408,14 @@ Future<List<Store>> fetch_cartList2(String userToken222) async {
 
   var jsonResponse = json.decode(response.body);
   List jsonCon = jsonResponse['data']['store']; //?ได้แล้วมี 2
-  List jsonCon2 = jsonResponse['data']['store'][0]['product_skus'];
-  var jsonCon3 = jsonResponse['data']['store'][1]['product_skus'][0]['cart_id'];
+  // List jsonCon2 = jsonResponse['data']['store'][0]['product_skus'];
+  // var jsonCon3 = jsonResponse['data']['store'][1]['product_skus'][0]['cart_id'];
   List<String> testList = [];
-  int total = 0;
-  var productAll = jsonResponse['data']['product_all'].toString();
-  var shippinPrice = jsonResponse['data']['store'][0]['shipping'][0]['rate'][0]
-          ['price']
-      .toString();
+  // int total = 0;
+  // var productAll = jsonResponse['data']['product_all'].toString();
+  // var shippinPrice = jsonResponse['data']['store'][0]['shipping'][0]['rate'][0]
+  //         ['price']
+  //     .toString();
 
   for (var loop = 0; loop < jsonCon.length; loop++) {
     String cart555 = jsonResponse['data']['store'][loop]['product_skus'][0]

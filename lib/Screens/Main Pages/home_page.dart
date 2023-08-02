@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -20,7 +22,7 @@ import '../../bloc/bottom_menu_switch/bottom_menu_switch_bloc.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-  @override
+ 
   var searchController = TextEditingController();
   List<String> suggestions = [];
 

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import '../Others/Plate.dart';
 // 'version.securityPatch': build.version.securityPatch,
 // 'version.sdkInt': build.version.sdkInt,

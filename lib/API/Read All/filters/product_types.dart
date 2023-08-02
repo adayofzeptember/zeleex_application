@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Product_Types {
@@ -84,10 +83,10 @@ class Data_Product_Types {
   int? order;
   int? iLft;
   int? iRgt;
-  Null? parentId;
+  Null parentId;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   int? productCount;
 
   Data_Product_Types(

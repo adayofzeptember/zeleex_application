@@ -49,7 +49,7 @@ class Data {
   int? id;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   int? userId;
   int? storeId;
   int? productSkuId;
@@ -119,7 +119,7 @@ Future<Cart_Update> update_cartUnit(
   );
   if (response.statusCode == 400 ||
       response.statusCode >= 200 && response.statusCode <= 299) {
-    var jsonRes = json.decode(response.body);
+   
     print('update success');
     return Cart_Update.fromJson(json.decode(response.body));
   } else {

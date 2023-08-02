@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'animals_bloc.dart';
 
 class AnimalsState extends Equatable {

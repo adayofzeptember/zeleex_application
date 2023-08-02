@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:zeleex_application/from%20Profile/likes/likes_product_widget.dart';
-import 'package:zeleex_application/from%20Profile/wait_payment_widget.dart';
-import 'package:zeleex_application/from%20Profile/profile.dart';
 import 'package:flutter/services.dart';
 import '../../Others/Plate.dart';
 

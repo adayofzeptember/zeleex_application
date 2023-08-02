@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:zeleex_application/main.dart';
+
 
 
 class Shipping_List {
@@ -65,7 +65,7 @@ class Data_Shipping_List {
   int? default_status;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
 
   Data_Shipping_List(
       {this.id,

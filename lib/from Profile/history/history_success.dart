@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'package:zeleex_application/from%20Profile/my%20orders%20detail/ontheway_detail.dart';
-import 'package:zeleex_application/from%20Profile/my%20orders%20detail/shipping_detail.dart';
 import 'package:zeleex_application/from%20Profile/my%20orders%20detail/success_detail.dart';
 import '../../Others/Plate.dart';
-import '../my orders detail/wait_toPay_detail.dart';
 
 class History_Success extends StatefulWidget {
   History_Success({Key? key}) : super(key: key);

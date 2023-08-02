@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Animal_Types {
@@ -84,10 +83,10 @@ class Data_AnimalCategory {
   String? order;
   int? iLft;
   int? iRgt;
-  Null? parentId;
+  Null parentId;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   int? animalCount;
   int? depth;
   List<Children>? children;
@@ -163,7 +162,7 @@ class Children {
   int? parentId;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   int? animalCount;
   int? depth;
 

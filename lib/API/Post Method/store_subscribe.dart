@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 
 class Store_Subscribe {
@@ -97,7 +94,7 @@ Future<Store_Subscribe> user_store_subscribe(
   );
 
   print(json.decode(response.body.toString()));
-  var jsonRes = json.decode(response.body);
+
 
   if (response.statusCode == 400 || response.statusCode == 200) {
     return Store_Subscribe.fromJson(json.decode(response.body));

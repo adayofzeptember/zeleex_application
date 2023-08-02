@@ -1,11 +1,11 @@
+// ignore_for_file: camel_case_types, must_be_immutable
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../API/Read All/career_readall_api.dart';
-import 'package:http/http.dart' as http;
-
 import 'Others/Plate.dart';
 
 class Career_Detail extends StatefulWidget {

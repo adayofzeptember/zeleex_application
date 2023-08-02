@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'address_management_bloc.dart';
 
 class AddressManagementState extends Equatable {
@@ -20,7 +22,7 @@ class AddressManagementState extends Equatable {
       int? ifDeafult,
       bool? loading,
       List? address_data,
-      dynamic? edit_address_data}) {
+      dynamic edit_address_data}) {
     return AddressManagementState(
         edit_address_data: edit_address_data ?? edit_address_data,
         ifDeafult: ifDeafult ?? this.ifDeafult,

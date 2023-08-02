@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Search_Results {
@@ -65,7 +64,7 @@ class Data_Search_Result {
   String? conditionType;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   String? width;
   String? height;
   String? length;

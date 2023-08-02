@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Others/url.dart';
 import 'package:zeleex_application/bloc/main_page/model.dart';

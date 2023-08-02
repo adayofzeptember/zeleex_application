@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Review_Product {
@@ -54,10 +53,10 @@ class Data {
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  Null? nextPageUrl;
+  Null nextPageUrl;
   String? path;
   int? perPage;
-  Null? prevPageUrl;
+  Null prevPageUrl;
   int? to;
   int? total;
 
@@ -130,10 +129,10 @@ class Data {
 class Data_Review {
   int? id;
   int? rating;
-  Null? customerServiceRating;
-  Null? qualityRating;
-  Null? friendlyRating;
-  Null? pricingRating;
+  Null customerServiceRating;
+  Null qualityRating;
+  Null friendlyRating;
+  Null pricingRating;
   String? recommend;
   String? department;
   String? title;
@@ -145,7 +144,7 @@ class Data_Review {
   int? authorId;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   Author? author;
 
   Data_Review(
@@ -223,16 +222,16 @@ class Author {
   int? id;
   String? name;
   String? email;
-  Null? emailVerifiedAt;
-  Null? phone;
-  Null? avatar;
-  Null? provider;
-  Null? providerId;
+  Null emailVerifiedAt;
+  Null phone;
+  Null avatar;
+  Null provider;
+  Null providerId;
   String? status;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
-  Null? wallet;
+  Null deletedAt;
+  Null wallet;
   String? imageProfile;
   int? storeCheck;
 

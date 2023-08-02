@@ -105,6 +105,7 @@ class _Forgot_Password_PageState extends State<Forgot_Password_Page> {
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกอีเมล์';
                               }
+                              return null;
                             },
                             controller: _nameController,
                             onSaved: (input) => setState(() {

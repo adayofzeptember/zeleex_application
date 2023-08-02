@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
@@ -77,7 +76,7 @@ class Store_Info extends StatelessWidget {
                     ),
                   )),
               body: SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: [
                     Stack(
@@ -87,7 +86,7 @@ class Store_Info extends StatelessWidget {
                           fit: BoxFit.fill,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) => Container(
-                            color: Color.fromARGB(255, 142, 142, 142),
+                            color: const Color.fromARGB(255, 142, 142, 142),
                             // height: 200,
                           ),
                           errorWidget: (context, url, error) => Center(
@@ -96,7 +95,7 @@ class Store_Info extends StatelessWidget {
                               height: MediaQuery.of(context).size.height * 0.2,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Color.fromARGB(255, 240, 236, 236)),
+                                    color: const Color.fromARGB(255, 240, 236, 236)),
                               ),
                               child: Image.asset(
                                 'assets/images/banner-noimg.jpg',
@@ -151,7 +150,7 @@ class Store_Info extends StatelessWidget {
                                                       .height *
                                                   0.08,
                                               child: CircleAvatar(
-                                                backgroundColor: Color.fromARGB(
+                                                backgroundColor: const Color.fromARGB(
                                                     255, 196, 196, 196),
                                                 backgroundImage: NetworkImage(
                                                     state.store_info.image),
@@ -178,7 +177,7 @@ class Store_Info extends StatelessWidget {
                                                   children: [
                                                     SvgPicture.asset(
                                                         'assets/images/pinnew.svg'),
-                                                    const SizedBox(
+                                                  const SizedBox(
                                                       width: 10,
                                                     ),
                                                     SizedBox(
@@ -349,12 +348,12 @@ class Store_Info extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'หมวดหมู่',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 3,
                                     ),
                                     Row(
@@ -514,11 +513,11 @@ class Store_Info extends StatelessWidget {
                                   StoreIndivProductsAnimalsState>(
                                 builder: (context, stateDatas) {
                                   if (stateDatas.loading == true) {
-                                    return Center(
+                                    return const Center(
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: const [
+                                        children: [
                                           SizedBox(
                                             height: 50,
                                           ),
@@ -551,7 +550,7 @@ class Store_Info extends StatelessWidget {
                                       );
                                     } else {
                                       return GridView.builder(
-                                          physics: ClampingScrollPhysics(),
+                                          physics: const ClampingScrollPhysics(),
                                           shrinkWrap: true,
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(

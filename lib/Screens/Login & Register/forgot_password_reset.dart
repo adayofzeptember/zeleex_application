@@ -107,6 +107,7 @@ class _Forgot_Password_Page_ResetState
                                 return 'โปรดกรอกอีเมล์';
                                 
                               }
+                              return null;
                             },
                             controller: _nameController,
                             onSaved: (input) => setState(() {
@@ -142,6 +143,7 @@ class _Forgot_Password_Page_ResetState
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกอีเมล์';
                               }
+                              return null;
                             },
                             controller: _nameController,
                             onSaved: (input) => setState(() {

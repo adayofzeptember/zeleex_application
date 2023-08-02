@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -44,7 +41,6 @@ Future<void> add_to_cart_now(
 
   if (response.statusCode == 400 ||
       response.statusCode >= 200 && response.statusCode <= 299) {
-    var jsonRes = json.decode(response.body);
     print(response.body.toString());
 
   } else {

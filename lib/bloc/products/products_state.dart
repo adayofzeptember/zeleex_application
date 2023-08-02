@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'products_bloc.dart';
 
 class ProductsState extends Equatable {
@@ -24,7 +26,7 @@ class ProductsState extends Equatable {
     List? product_skus,
     String? show_price,
     int? page,
-    dynamic? product_info,
+    dynamic product_info,
     bool? isLoading,
     int? dataTotal,
   }) {

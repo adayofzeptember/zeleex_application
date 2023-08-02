@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class Product_Detail {
   String? responseCode;
@@ -367,8 +363,8 @@ class Store {
   String? email;
   String? phone;
   String? content;
-  Null? lat;
-  Null? lng;
+  Null lat;
+  Null lng;
   int? reads;
   int? userId;
   String? createdAt;

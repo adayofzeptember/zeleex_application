@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ShippingAddress_forEditing {
@@ -60,7 +59,7 @@ class Data_Address {
   int? default1;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
 
   Data_Address(
       {this.id,

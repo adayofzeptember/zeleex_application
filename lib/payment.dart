@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -5,16 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
 import 'package:zeleex_application/API/Read%20All/shipping_list.dart';
 import 'package:zeleex_application/API/model.dart';
-import 'package:zeleex_application/payment_confirm.dart';
-import 'API/Post Method/post_checkout_IDEA.dart';
 import 'API/Read All/cart_getUserCartList.dart';
 import 'Others/Plate.dart';
 import 'Screens/Address Pages/address_main_page.dart';
-import 'cart_page.dart';
 import 'payment_method.dart';
 
 int totalPrice = 0;
@@ -33,7 +30,6 @@ SingingCharacter? _character = SingingCharacter.lafayette;
 
 class _PaymentPageState extends State<PaymentPage> {
   late Future<List<Store>> future_cart;
-  late Provider_CartRemove _provider_cartRemove;
   AddressForCheckOut_Model address_checkout = AddressForCheckOut_Model();
 
   int radioID = 1;

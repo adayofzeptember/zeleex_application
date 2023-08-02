@@ -7,17 +7,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/bloc/address%20management/model.dart';
-import 'package:http/http.dart' as http;
-import 'package:zeleex_application/bloc/profile/profile_bloc.dart';
-import 'package:zeleex_application/from%20Profile/profile.dart';
-import 'package:zeleex_application/main.dart';
-import '../../API/Post Method/address_add_and_edit.dart';
 import '../../Others/Plate.dart';
 import '../../Others/url.dart';
 import '../../Screens/Address Pages/address_edit_page.dart';
-import '../../Screens/Address Pages/address_main_page.dart';
-import 'model.dart';
-import 'model.dart';
 part 'address_management_event.dart';
 part 'address_management_state.dart';
 
@@ -150,7 +142,6 @@ class AddressManagementBloc
     on<DeleteAddress>((event, emit) async {
       SharedPreferences prefs2 = await SharedPreferences.getInstance();
       var user_token = prefs2.get('keyToken');
-      var user_id = prefs2.get('keyID');
 
       try {
         final response = await dio.delete(
@@ -185,7 +176,8 @@ class AddressManagementBloc
     on<AddNew_Address>((event, emit) async {
       SharedPreferences prefs2 = await SharedPreferences.getInstance();
       var user_token = prefs2.get('keyToken');
-      var user_id = prefs2.get('keyID');
+
+   
       var body_AddAddress = json.encode(event.address_request.toJson());
 
       try {
@@ -225,7 +217,7 @@ class AddressManagementBloc
     on<Update_Address>((event, emit) async {
       SharedPreferences prefs2 = await SharedPreferences.getInstance();
       var user_token = prefs2.get('keyToken');
-      var user_id = prefs2.get('keyID');
+    
       var body_AddAddress = json.encode(event.address_request.toJson());
 
       try {

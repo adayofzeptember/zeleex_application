@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_final_fields
-
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zeleex_application/Others/Plate.dart';

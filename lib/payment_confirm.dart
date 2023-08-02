@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Others/Plate.dart';
-import 'payment.dart';
 
 class Payment_Confirm extends StatefulWidget {
   Payment_Confirm({Key? key}) : super(key: key);
@@ -58,18 +57,18 @@ class _Payment_ConfirmState extends State<Payment_Confirm> {
             decoration: const BoxDecoration(
               color: Color.fromARGB(255, 255, 255, 255),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(25.0),
+            child: const Padding(
+              padding: EdgeInsets.all(25.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "รวมการสั่งซื้อ",
                     style: TextStyle(
                         color: Color.fromARGB(255, 51, 51, 51),
                         fontWeight: FontWeight.bold),
                   ),
-                  const Text("฿1,335",
+                  Text("฿1,335",
                       style: TextStyle(
                           color: ZeleexColor.zeleexGreen, fontWeight: FontWeight.bold)),
                 ],
@@ -82,18 +81,18 @@ class _Payment_ConfirmState extends State<Payment_Confirm> {
                 border: Border(
                     top:
                         BorderSide(color: Color.fromARGB(255, 230, 230, 230)))),
-            child: Padding(
-              padding: const EdgeInsets.all(25.0),
+            child: const Padding(
+              padding: EdgeInsets.all(25.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "วิธีการชำระเงิน",
                     style: TextStyle(
                         color: Color.fromARGB(255, 51, 51, 51),
                         fontWeight: FontWeight.bold),
                   ),
-                  const Text("ธนาคารกสิกรไทย (*3446)",
+                  Text("ธนาคารกสิกรไทย (*3446)",
                       style: TextStyle(
                         color: Color.fromARGB(255, 130, 130, 130),
                       )),

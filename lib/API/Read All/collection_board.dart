@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'package:zeleex_application/Others/url.dart';
 
 class Board {
@@ -56,12 +53,11 @@ class Board {
 
 class Data_Collection_Board {
   int? id;
-
   String? title;
   String? link;
   int? order;
   String? status;
-  Null? createdAt;
+  Null createdAt;
   String? updatedAt;
   Image? image;
 

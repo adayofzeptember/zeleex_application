@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeleex_application/Others/url.dart';
 import 'model.dart';
@@ -30,7 +28,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           }),
         );
         var fetched_storesInCart = [];
-        var fetched_prdSKUInStore = [];
 
         if (response.data['responseStatus'].toString() == "true") {
           emit(state.copyWith(

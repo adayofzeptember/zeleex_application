@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, must_be_immutable
+
 part of 'cart_bloc.dart';
 
 abstract class CartEvent extends Equatable {

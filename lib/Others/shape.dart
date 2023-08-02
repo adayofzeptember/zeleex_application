@@ -7,7 +7,6 @@ class ShapesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final p = Path();
-    final path = Path();
     p.lineTo(0, size.height - _kCurveHeight);
     p.relativeQuadraticBezierTo(
         size.width / 2, 2 * _kCurveHeight, size.width, 0);

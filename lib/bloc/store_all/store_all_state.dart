@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'store_all_bloc.dart';
 
 class StoreAllState extends Equatable {

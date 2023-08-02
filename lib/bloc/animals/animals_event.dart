@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, must_be_immutable
+
 part of 'animals_bloc.dart';
 
 abstract class AnimalsEvent extends Equatable {

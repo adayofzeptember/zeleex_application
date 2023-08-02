@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'bottom_menu_switch_bloc.dart';
 
 abstract class BottomMenuSwitchEvent extends Equatable {

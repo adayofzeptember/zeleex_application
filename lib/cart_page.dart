@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:zeleex_application/API/Delete%20Method/Cart_Remove.dart';
-import 'package:zeleex_application/API/Post%20Method/cart_update.dart';
 import 'package:zeleex_application/API/Read%20All/cart_getUserCartList.dart';
 import 'Others/Plate.dart';
 import 'dart:async';
@@ -29,8 +28,6 @@ class _CartPageState extends State<CartPage> {
   int totalPrice = 0;
   int lol = 0;
   late Future<List<Store>> future_cart;
-  late Provider_CartRemove _provider_cartRemove;
-  late Provider_CartUpdate _provider_cartUpdate;
   String userID = "";
   String userToken = "";
   String realName = "";

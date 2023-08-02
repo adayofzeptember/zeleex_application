@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'profile_bloc.dart';
 
 class ProfileState extends Equatable {
@@ -10,7 +12,7 @@ class ProfileState extends Equatable {
   });
 
   ProfileState copyWith({
-    dynamic? profile_data,
+    dynamic profile_data,
     bool? loading,
   }) {
     return ProfileState(

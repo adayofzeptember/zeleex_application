@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +13,6 @@ class CareerPage extends StatefulWidget {
 }
 
 class _CareerPageState extends State<CareerPage> {
-  @override
   late Future<List<Data_Read_Careers>> fetched_data_career_readAll;
   @override
   void initState() {
@@ -99,7 +96,7 @@ class _CareerPageState extends State<CareerPage> {
                                     context,
                                     new MaterialPageRoute(
                                       builder: (context) => new Career_Detail(
-                                        gotText: data![index].id.toString(),
+                                        gotText: data[index].id.toString(),
                                       ),
                                     ),
                                   );
